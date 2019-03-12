@@ -8,8 +8,23 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { Booking1Component } from './booking1/booking1.component';
+import { Booking2Component } from './booking2/booking2.component';
+import { FooterComponent } from './footer/footer.component';
 
 export const routes: Routes = [
+  {
+    path: 'booking1',
+    component: Booking1Component
+  },
+  {
+    path: 'booking2',
+    component: Booking2Component
+  },
+  {
+    path: 'footer',
+    component: FooterComponent
+  },
   {
     path: '',
     redirectTo: 'dashboard',

@@ -43,3 +43,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/.vs/flip/v15/.suo
+/.vs/config/applicationhost.config
