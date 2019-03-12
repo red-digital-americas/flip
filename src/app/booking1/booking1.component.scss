@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding:0;
+}
+
+.app-body {
+
+}
+
+.booking-background {
+  display: flex;
+  position: absolute;
+}
+
+.background1 {
+  width: 100vw;
+  height: 100vh;
+}
+
+.filmclik {
+  position: absolute;
+  z-index: 1;
+  width: 8vw;
+  height: 4vh;
+}
+
+.content-box {
+  background-color: #ffffff;
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+  //z-index: 1;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 40vw;
+  height: 100vh;
+  justify-content: flex-end;
+}
+
+/*.title {
+  justify-content:center;
+}
+
+.select-month {
+  justify-content: center;
+}
+
+.month {
+  justify-content: center;
+}*/
+
+.col-lg-12 {
+  justify-content: flex-end;
+}

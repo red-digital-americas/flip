@@ -1,0 +1,45 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 25vh;
+  align-items: center;
+  /* margin: 0 3%; */
+  padding: 0 5%;
+}
+
+img {
+  margin-right: 3%;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  margin-right: 3%;
+}
+
+.opt-left {
+  display: flex;
+  padding: 5%;
+  list-style: none;
+  align-items: center;
+  margin: auto
+  //justify-content:space-between;
+}
+
+.opt-right {
+  display: flex;
+  padding: 5%;
+  list-style: none;
+  align-items: center;
+  margin: auto
+}
+
+li a {
+  margin: 0, 20px;
+}
+
+
+.networks {
+
+}

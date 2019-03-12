@@ -40,6 +40,9 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { Booking1Component } from './booking1/booking1.component';
+import { Booking2Component } from './booking2/booking2.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -62,7 +65,10 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    Booking1Component,
+    Booking2Component,
+    FooterComponent
   ],
   providers: [{
     provide: LocationStrategy,
