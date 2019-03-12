@@ -1,11 +1,11 @@
 .footer {
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   width: 100vw;
   height: 25vh;
   align-items: center;
-  /* margin: 0 3%; */
-  padding: 0 5%;
+  padding: 0 8%;
 }
 
 img {
@@ -16,30 +16,34 @@ img {
   display: flex;
   justify-content: center;
   margin-right: 3%;
+  height: 100%;
 }
 
 .opt-left {
   display: flex;
-  padding: 5%;
+  padding: 2%;
   list-style: none;
   align-items: center;
-  margin: auto
-  //justify-content:space-between;
+  margin: auto;
+  justify-content: space-between;
 }
 
 .opt-right {
   display: flex;
-  padding: 5%;
+  padding: 2%;
   list-style: none;
   align-items: center;
-  margin: auto
+  margin: auto;
+  justify-content: space-between;
+  border-left: solid 1px lightgray;
+  height: 70%;
 }
 
-li a {
-  margin: 0, 20px;
+.opt-left li a {
+  font-weight: 700;
 }
-
 
 .networks {
-
+  display: flex;
+  margin-left:2%;
 }
