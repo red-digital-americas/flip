@@ -45,3 +45,4 @@ testem.log
 Thumbs.db
 /.vs/flip/v15/.suo
 /.vs/config/applicationhost.config
+/.vs/VSWorkspaceState.json

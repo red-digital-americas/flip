@@ -40,8 +40,11 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { Booking1Component } from './booking1/booking1.component';
-import { Booking2Component } from './booking2/booking2.component';
+import { Wizard1Component } from './views/wizard1/wizard1.component';
+import { Wizard2aComponent } from './views/wizard2a/wizard2a.component';
+import { Wizard2bComponent } from './views/wizard2b/wizard2b.component';
+import { Wizard3Component } from './views/wizard3/wizard3.component';
+import { Wizard4Component } from './views/wizard4/wizard4.component';
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
@@ -66,8 +69,11 @@ import { FooterComponent } from './footer/footer.component';
     P500Component,
     LoginComponent,
     RegisterComponent,
-    Booking1Component,
-    Booking2Component,
+    Wizard1Component,
+    Wizard2aComponent,
+    Wizard2bComponent,
+    Wizard3Component,
+    Wizard4Component,
     FooterComponent
   ],
   providers: [{
