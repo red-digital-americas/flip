@@ -1,0 +1,188 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app-body {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+.app-body .main {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+.main .container-fluid {
+  padding: 0 0;
+}
+
+.container-fluid {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: aliceblue;
+}
+
+.fadeIn {
+  background-image: url('https://picsum.photos/1335/650');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: auto;
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.booking-form {
+  background-color: rgba(239, 227, 208, 0.73);
+}
+
+.step {
+  border-top: solid 5px black;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.step div {
+  border-radius: 0 0 50% 50%;
+  border: solid 1px black;
+  border-top: 0;
+  width: 45%;
+  height: 30px;
+  font-size: 15px;
+}
+
+.logo-section {
+  padding: 35px;
+}
+
+.active-step {
+  border-color: rgb(83, 173, 213);
+}
+
+.active-step div {
+  border-color: rgb(83, 173, 213);
+  background-color: rgb(83, 173, 213);
+  color: white;
+}
+
+.text-center {
+  margin-bottom: 3%;
+}
+
+.row-select-date {
+  display: flex;
+  justify-content: center;
+}
+
+.col-button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5%;
+}
+
+.btn {
+  width: auto;
+  padding: 8px 15px;
+}
+
+///// footer
+.footer {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 25vh;
+  align-items: center;
+}
+/////
+
+//// footer GAB
+.footer {
+  background-color: #fff;
+  padding: 0px;
+  text-align: left;
+  font-family: Gotham-Black;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.hiddens {
+  display: none;
+}
+
+.footer_menu li {
+  display: inline-block;
+  padding-left: 5px;
+}
+
+.footer img {
+  height: auto;
+  width: auto;
+  max-width: 264px;
+  max-height: 160px;
+}
+
+img {
+  vertical-align: middle;
+}
+
+.footer_menu li a {
+  color: #1c1c1c;
+  font-size: 14px;
+  margin: 10px 16px;
+  letter-spacing: 1px;
+  display: block;
+  font-weight: 500;
+  font-family: Gotham;
+}
+
+a, a:hover, a:active, a:focus {
+  text-decoration: none;
+  color: #000;
+}
+
+.footer hr {
+  border: none;
+  border-left: 1px solid hsla(0, 0%, 27%, 1);
+  height: 10vh;
+  width: 1px;
+  margin-bottom: 0px;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+}
+
+.fa-facebook-f:before, .fa-facebook:before {
+  content: "\f09a";
+}
+
+.fa-twitter:before {
+  content: "\f099";
+}
+
+.fa-youtube:before {
+  content: "\f167";
+}
+
+.fa-instagram:before {
+  content: "\f16d";
+}
+/////

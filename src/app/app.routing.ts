@@ -8,18 +8,33 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-import { Booking1Component } from './booking1/booking1.component';
-import { Booking2Component } from './booking2/booking2.component';
+import { Wizard1Component } from './views/wizard1/wizard1.component';
+import { Wizard2aComponent } from './views/wizard2a/wizard2a.component';
+import { Wizard2bComponent } from './views/wizard2b/wizard2b.component';
+import { Wizard3Component } from './views/wizard3/wizard3.component';
+import { Wizard4Component } from './views/wizard4/wizard4.component';
 import { FooterComponent } from './footer/footer.component';
 
 export const routes: Routes = [
   {
-    path: 'booking1',
-    component: Booking1Component
+    path: 'wizard1',
+    component: Wizard1Component
   },
   {
-    path: 'booking2',
-    component: Booking2Component
+    path: 'wizard2a',
+    component: Wizard2aComponent
+  },
+  {
+    path: 'wizard2b',
+    component: Wizard2bComponent
+  },
+  {
+    path: 'wizard3',
+    component: Wizard3Component
+  },
+  {
+    path: 'wizard4',
+    component: Wizard4Component
   },
   {
     path: 'footer',

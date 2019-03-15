@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { getStyle, rgbToHex } from '@coreui/coreui-pro/dist/js/coreui-utilities';
 
 @Component({
-  templateUrl: 'colors.component.html'
+  selector: 'app-wizard1',
+  templateUrl: './wizard1.component.html',
+  styleUrls: ['./wizard1.component.scss']
 })
-export class ColorsComponent implements OnInit {
+export class Wizard1Component implements OnInit {
   public themeColors(): void {
-    Array.from(document.querySelectorAll('.theme-color')).forEach(function(el) {
+    Array.from(document.querySelectorAll('.theme-color')).forEach(function (el) {
       const elem = document.getElementsByClassName(el.classList[0])[0];
       const background = getStyle('background-color', elem);
+
       const table = document.createElement('table');
       table.innerHTML = `
         <table class="w-100">
@@ -24,10 +27,12 @@ export class ColorsComponent implements OnInit {
       `;
       el.parentNode.appendChild(table);
     });
-
   }
 
-  ngOnInit(): void {
+  constructor() { }
+
+  ngOnInit() {
     this.themeColors();
   }
+
 }
