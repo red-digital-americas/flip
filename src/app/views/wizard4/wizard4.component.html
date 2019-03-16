@@ -73,7 +73,7 @@
                     <div class="form-group">
                       <label for="location">Location</label>
                       <select class="form-control" id="location">
-                        <option>a</option>
+                        <option *ngFor="let item of states" [value]="item.id">{{item.name}}</option>
                         <option>b</option>
                         <option>c</option>
                         </select>
