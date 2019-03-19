@@ -29,7 +29,7 @@
 }
 
 .fadeIn {
-  background-image: url('https://picsum.photos/1335/650');
+  background-image: url('/assets/img/MORE/shutter/shutterstock_1052015711.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -55,9 +55,9 @@
   border-radius: 0 0 50% 50%;
   border: solid 1px black;
   border-top: 0;
-  width: 45%;
-  height: 30px;
-  font-size: 15px;
+  width: 50%;
+  height: 38px;
+  font-size: 20px;
 }
 
 .logo-section {
@@ -93,7 +93,7 @@
 }
 
 .btn {
-  width: auto;
+  width: 100%;
   padding: 8px 15px;
 }
 
@@ -189,4 +189,13 @@ a, a:hover, a:active, a:focus {
   content: "\f16d";
 }
 
-/////
+.step-container {
+  flex-wrap: nowrap;
+}
+
+@media (min-width: 240px) and (max-width: 575px) {
+
+  .step div {
+    width: 65%;
+  }
+}
