@@ -3,44 +3,40 @@
     <div class="container-fluid  animated fadeIn">
       <div class="row">
         <!-- Logo section starts -->
-        <div class="col-sm-7 full-height logo-section">
-          <div class="row">
-            <div class="col-sm-2">
-              <img class="logo-flip img-fluid" src="assets/img/FLIP.png" />
-            </div>
-          </div>
+        <div class="d-none d-sm-block col-sm-6 col-md-6 col-lg-7 full-height logo-section">
+          <img class="logo-flip img-fluid" src="assets/img/FLIP.png" />
         </div>
         <!-- Logo section ends -->
         <!-- Booking-form starts -->
-        <div class="d-flex flex-column col-sm-5 full-height booking-form ">
+        <div class="d-flex flex-column col-sm-6 col-md-6 col-lg-5 full-height booking-form">
           <!-- Steper starts -->
-          <div class="row steper">
-            <div class="col-sm-2 step active-step">
+          <div class="row step-container">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step active-step">
               <div>
                 1
               </div>
             </div>
-            <div class="col-sm-2 step active-step">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step active-step">
               <div>
                 2
               </div>
             </div>
-            <div class="col-sm-2 step">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step">
               <div>
                 3
               </div>
             </div>
-            <div class="col-sm-2 step">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step">
               <div>
                 4
               </div>
             </div>
-            <div class="col-sm-2 step">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step">
               <div>
                 5
               </div>
             </div>
-            <div class="col-sm-2 step">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step">
               <div>
                 6
               </div>
@@ -56,7 +52,7 @@
                 </div>
               </div>
               <div class="col-sm-12 text-center">
-                <div class="row row-select-date">
+                <div class="row row-select-date justify-content-center">
                   <div class="col-sm-8 form-group">
                     <div class="col-sm-12 input-group">
                       <input bsdaterangepicker class="form-control ng-pristine ng-valid ng-touched" separator="-" min-date="2019-03-01" max-date="2029-03-01" placeholder="Fecha Inicio - Fecha Final" ng-reflect-model="" />
@@ -65,15 +61,13 @@
                           <i class="fa fa-calendar"></i>
                         </span>
                       </span>
-
                     </div>
                   </div>
-
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-12 col-button">
-                  <button aria-pressed="true" class="btn btn-pill btn-block btn-dark active" type="button">SIGUIENTE  ></button>
+              <div class="row justify-content-end">
+                <div class="col-12 col-sm-6 col-md-5 col-button">
+                  <button aria-pressed="true" class="btn btn-pill btn-block btn-dark active" type="button" routerLink="/wizard3">SIGUIENTE  ></button>
                 </div>
               </div>
             </div>
