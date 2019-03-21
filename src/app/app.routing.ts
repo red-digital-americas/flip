@@ -13,7 +13,9 @@ import { Wizard2aComponent } from './views/wizard2a/wizard2a.component';
 import { Wizard2bComponent } from './views/wizard2b/wizard2b.component';
 import { Wizard3Component } from './views/wizard3/wizard3.component';
 import { Wizard4Component } from './views/wizard4/wizard4.component';
+import { Wizard5Component } from './views/wizard5/wizard5.component';
 import { FooterComponent } from './footer/footer.component';
+import { CommunitiesComponent } from './views/communities/communities.component';
 
 export const routes: Routes = [
   {
@@ -37,8 +39,16 @@ export const routes: Routes = [
     component: Wizard4Component
   },
   {
+    path: 'wizard5',
+    component: Wizard5Component
+  },
+  {
     path: 'footer',
     component: FooterComponent
+  },
+  {
+    path: 'communities',
+    component: CommunitiesComponent
   },
   {
     path: '',

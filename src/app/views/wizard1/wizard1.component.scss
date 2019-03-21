@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Gotham-brand;
+  src: url('/assets/fonts/gotham_bold_regular-webfont.woff'), url('/assets/fonts/gotham_book_regular-webfont.woff'), url('/assets/fonts/gotham_regular-webfont.woff'), url('/assets/fonts/gothammedium_regular-webfont.woff');
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -41,7 +46,11 @@
 }
 
 .booking-form {
-  background-color: rgba(239, 227, 208, 0.73);
+  background-color: rgba(214, 215, 217, 0.8);
+}
+
+.step-container {
+  flex-wrap: nowrap;
 }
 
 .step {
@@ -78,6 +87,11 @@
   margin-bottom: 3%;
 }
 
+h5 {
+  margin-left: 13.5%;
+}
+
+
 #form-check-long {
   margin-left: 27%;
 }
@@ -95,6 +109,28 @@
 .btn {
   width: 100%;
   padding: 8px 15px;
+}
+
+.brand-text {
+  font-family: Gotham-brand;
+  letter-spacing: -1.1px;
+  top: 11.5%;
+  bottom: 0;
+  left: 3%;
+  margin-left: 3%;
+  width: auto;
+  font-size: 20px;
+  color: #fff;
+  height: 5%;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,1 );
+}
+
+@media (min-width: 240px) and (max-width: 575px) {
+
+  .step div {
+    width: 65%;
+  }
 }
 
 ///// footer
@@ -187,15 +223,4 @@ a, a:hover, a:active, a:focus {
 
 .fa-instagram:before {
   content: "\f16d";
-}
-
-.step-container {
-  flex-wrap: nowrap;
-}
-
-@media (min-width: 240px) and (max-width: 575px) {
-
-  .step div {
-    width: 65%;
-  }
 }
