@@ -5,7 +5,6 @@
         <!-- Logo section starts -->
         <div class="d-none d-sm-block col-sm-6 col-md-6 col-lg-7 full-height logo-section">
           <img class="logo-flip img-fluid" src="assets/img/F.png" />
-          <span class="brand-text">BOOKING</span>
         </div>
         <!-- Logo section ends -->
         <!-- Booking-form starts -->
@@ -22,17 +21,17 @@
                 2
               </div>
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step active-step">
               <div>
                 3
               </div>
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step active-step">
               <div>
                 4
               </div>
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 step active-step">
               <div>
                 5
               </div>
@@ -45,30 +44,36 @@
           </div>
           <!-- Steper ends -->
           <!-- Form Section starts -->
-          <div class="row flex-fill  align-items-center">
-            <div class="col">
-              <div class="row ">
-                <div class="col-sm-12 text-center">
-                  <h5>HOW LONG ARE YOU PLANING TO STAY?</h5>
+          <div class="row flex-fill align-items-center">
+            <div class="col-12">
+              <div class="card1">
+                <div class="carousel slide" id="carouselExampleIndicators" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li class="data-target=#carouselExampleIndicators" data-slide-to="0"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  </ol>
                 </div>
               </div>
-              <div class="col-sm-12 text-center">
-                <div class="row row-select-date justify-content-center">
-                  <div class="col-sm-8 form-group">
-                    <div class="col-sm-12 input-group">
-                      <input bsdaterangepicker class="form-control ng-pristine ng-valid ng-touched" separator="-" min-date="2019-03-01" max-date="2029-03-01" placeholder="Fecha Inicio - Fecha Final" ng-reflect-model="" />
-                      <span class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="fa fa-calendar"></i>
-                        </span>
-                      </span>
-                    </div>
-                  </div>
+            </div>
+          </div>
+          <div class="row flex-fill  align-items-center">
+            <div class="col-12" >
+              <div class="row">
+                <div class="col-sm-12 text-center">
+                  <h5>ROOM A - PARIS 903</h5>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed.</p>
+                </div>
+              </div>
+              <div class="row flex-fill justify-content-center">
+                <div class="col-11 text-center">
+
+
                 </div>
               </div>
               <div class="row justify-content-end">
                 <div class="col-12 col-sm-6 col-md-5 col-button">
-                  <button aria-pressed="true" class="btn btn-pill btn-block btn-dark active" type="button" routerLink="/wizard3">SIGUIENTE  ></button>
+                  <button aria-pressed="true" class="btn btn-pill btn-block btn-dark active" type="button" routerLink="/wizard4">SIGUIENTE  ></button>
                 </div>
               </div>
             </div>
@@ -124,3 +129,4 @@
     <!-- Footer ends -->
   </main>
 </div>
+

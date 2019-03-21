@@ -4,7 +4,8 @@
       <div class="row">
         <!-- Logo section starts -->
         <div class="d-none d-sm-block col-sm-6 col-md-6 col-lg-7 full-height logo-section">
-          <img class="logo-flip img-fluid" src="assets/img/FLIP.png" />
+          <img class="logo-flip img-fluid" src="assets/img/F.png" />
+          <span class="brand-text">BOOKING</span>
         </div>
         <!-- Logo section ends -->
         <!-- Booking-form starts -->
@@ -44,49 +45,129 @@
           </div>
           <!-- Steper ends -->
           <!-- Form Section starts -->
-          <div class="row flex-fill  align-items-center">
-            <div class="col-12">
+          <div class="row flex-fill  align-items-center justify-content-center">
+            <div class="col-10 form-content">
               <div class="row">
-                <div class="col-sm-12 text-center">
-                  <h5>DO YOU WANT TO LIVE...</h5>
+                <div class="col-12 form-title">
+                  Do you want to live...
                 </div>
               </div>
-              <div class="row flex-fill justify-content-center">
-                <div class="col-11 text-center">
-                  <div class="card">
-                    <div class="card-header">
-                      <strong>Companies </strong>
-                      <small> Form</small>
+
+              <div class="row d-flex justify-content-between">
+                <div class="col-3 text-center tab tab-active" [class.tab-active]="(selectedTab === 'alone')" (click)="setSelectedTab('alone')">
+                  Alone
+                </div>
+                <div class="col-3 text-center tab" [class.tab-active]="(selectedTab === 'flip-roomate')" (click)="setSelectedTab('flip-roomate')">
+                  Flip roomate
+                </div>
+                <div class="col-3 text-center tab" [class.tab-active]="(selectedTab === 'roomates')" (click)="setSelectedTab('roomates')">
+                  My roomates
+                </div>
+              </div>
+              <!-- alone content -->
+              <div class="row tab-content-form" *ngIf="selectedTab === 'alone'">
+                <div class="col-12">
+                  Content alone
+                </div>
+              </div>
+              <!-- flip roomates content -->
+              <div class="row tab-content-form" *ngIf="selectedTab === 'flip-roomate'">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12 form-input-title">
+                      Número maximo de roomates
                     </div>
-                    <div class="card-body">
-                      <div class="form-group">
-                        <label for="company">Company</label>
-                        <select class="form-control" id="company">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                        </select>
+                  </div>
+                  <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3 text-center">
+                        <div class="circle">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                      <div class="circle">
+                        <i class="fa fa-users" aria-hidden="true"></i>
                       </div>
-                      <div class="form-group">
-                        <label for="location">Location</label>
-                        <select class="form-control" id="location">
-                          <option *ngFor="let item of states" [value]="item.id">{{item.name}}</option>
-                          <option>b</option>
-                          <option>c</option>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 form-input-title">
+                      Preferencia de sexo roomate
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="select">
+                        <select class="select-text" required>
+                          <option value="" selected>Choose one</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
                         </select>
+                        <span class="select-highlight"></span>
+                        <span class="select-bar"></span>
                       </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-5 form-input-title">
+                      fumas?
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-5 form-input-title">
+                      mascotas?
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="select">
+                        <select class="select-text" required>
+                          <option value="" selected>Choose one</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <span class="select-highlight"></span>
+                        <span class="select-bar"></span>
+                      </div>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                      <div class="select">
+                        <select class="select-text" required>
+                          <option value="" selected>Choose one</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <span class="select-highlight"></span>
+                        <span class="select-bar"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 pick-flip">
+                      FEFEsanvodanuvroñvfbi  vuvauiveui
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row justify-content-end">
-                <div class="col-12 col-sm-6 col-md-5 col-button">
-                  <button aria-pressed="true" class="btn btn-pill btn-block btn-dark active" type="button" routerLink="/wizard4">SIGUIENTE  ></button>
+
+              <!-- my roomates content -->
+              <div class="row tab-content-form" *ngIf="selectedTab === 'roomates'">
+                <div class="col-12">
+                  Content my roomates
                 </div>
               </div>
             </div>
           </div>
           <!-- Form Section ends -->
+          <div class="row justify-content-end">
+            <div class="col-12 col-sm-6 col-md-5 col-button">
+              <button aria-pressed="true" class="btn btn-pill btn-block btn-dark active" type="button" routerLink="/wizard4">SIGUIENTE  ></button>
+            </div>
+          </div>
         </div>
         <!-- Booking-form ends -->
       </div>

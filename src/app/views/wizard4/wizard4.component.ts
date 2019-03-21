@@ -14,6 +14,8 @@ export class Wizard4Component implements OnInit {
 
   catalogos_promo = new cat_promos();
   promocion = new promocion();
+  tabs = ['alone', 'flip-roomate', 'roomates'];
+  selectedTab = 'alone'
 
   constructor(private heroService: DatosServiceService, private router: Router) { }
 
@@ -67,6 +69,10 @@ export class Wizard4Component implements OnInit {
         }
       }, 400);
     });
+  }
+
+  setSelectedTab(tab) {
+    this.selectedTab = tab
   }
 
 }
