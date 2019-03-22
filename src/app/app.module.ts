@@ -49,7 +49,7 @@ import { Wizard3Component } from './views/wizard3/wizard3.component';
 import { Wizard4Component } from './views/wizard4/wizard4.component';
 import { Wizard5Component } from './views/wizard5/wizard5.component';
 import { FooterComponent } from './footer/footer.component';
-import { CommunitiesComponent } from './views/communities/communities.component';
+import { CommunitiesComponent } from './admin/communities/communities.component';
 
 @NgModule({
   imports: [
