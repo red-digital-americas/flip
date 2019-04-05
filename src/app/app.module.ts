@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Http } from '@angular/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -17,6 +18,7 @@ import { AppComponent } from './app.component';
 
 // Import containers
 import { DefaultLayoutComponent } from './containers';
+import { AppLayoutComponent } from './container-app';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -26,6 +28,11 @@ import { RegisterComponent } from './views/register/register.component';
 const APP_CONTAINERS = [
   DefaultLayoutComponent
 ];
+
+const APP_CONTAIN = [
+  AppLayoutComponent
+];
+
 
 import {
   AppAsideModule,
@@ -49,11 +56,13 @@ import { Wizard3Component } from './views/wizard3/wizard3.component';
 import { Wizard4Component } from './views/wizard4/wizard4.component';
 import { Wizard5Component } from './views/wizard5/wizard5.component';
 import { FooterComponent } from './footer/footer.component';
-import { CommunitiesComponent } from './admin/communities/communities.component';
+//import { CommunitiesComponent } from './admin/communities/communities.component';
+//import { AppLayoutComponent } from './container-app/app-layout/app-layout.component';
 
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     HttpModule,
@@ -71,6 +80,7 @@ import { CommunitiesComponent } from './admin/communities/communities.component'
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
+    ...APP_CONTAIN,
     P404Component,
     P500Component,
     LoginComponent,
@@ -82,7 +92,7 @@ import { CommunitiesComponent } from './admin/communities/communities.component'
     Wizard4Component,
     Wizard5Component,
     FooterComponent,
-    CommunitiesComponent
+ //  AppLayoutComponent
   ],
   providers: [{
     provide: LocationStrategy,

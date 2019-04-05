@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
+import { AppLayoutComponent } from './container-app';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -15,7 +16,6 @@ import { Wizard3Component } from './views/wizard3/wizard3.component';
 import { Wizard4Component } from './views/wizard4/wizard4.component';
 import { Wizard5Component } from './views/wizard5/wizard5.component';
 import { FooterComponent } from './footer/footer.component';
-import { CommunitiesComponent } from './admin/communities/communities.component';
 
 export const routes: Routes = [
   {
@@ -46,10 +46,7 @@ export const routes: Routes = [
     path: 'footer',
     component: FooterComponent
   },
-  {
-    path: 'communities',
-    component: CommunitiesComponent
-  },
+ 
   {
     path: '',
     redirectTo: 'dashboard',
@@ -83,8 +80,22 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
+
   {
     path: '',
+    component: AppLayoutComponent,
+    data: {
+      title: 'Home'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './admin/admin.module#AdminModule'
+      },
+    ]
+  },
+  {
+    path: 'demo',
     component: DefaultLayoutComponent,
     data: {
       title: 'Home'

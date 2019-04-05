@@ -21,14 +21,17 @@ app-header .sidebarToggler {
 
 .background-card {
   //background-color: cornflowerblue;
-  background-image: url('assets/img/MORE/shutter/shutterstock_1052015711.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-
-#card1 {
-
+.img-size-build{
+  height:100%;
+  width:100%; 
 }
-
-
+.main .container-fluid {
+  padding:0px;
+}
+.card-body {
+  padding: 0px;
+}

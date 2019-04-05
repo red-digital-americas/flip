@@ -1,25 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { navItems } from './../../_nav';
-import { Router } from '@angular/router';
+
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './default-layout.component.html'
+  selector: 'app-app-layout',
+  templateUrl: './app-layout.component.html',
 })
-export class DefaultLayoutComponent  {
-
-
-
-
-  
-
+export class AppLayoutComponent {
+  public navItems = navItems;
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
-  public navItems =  navItems
 
-  constructor(private router: Router, ) {
-
+  constructor() {
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
     });
@@ -28,5 +21,6 @@ export class DefaultLayoutComponent  {
       attributes: true
     });
   }
-  
+
+
 }
