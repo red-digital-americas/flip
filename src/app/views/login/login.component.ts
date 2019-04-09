@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("id", value.user.id);
             localStorage.setItem("buildingid", value.user.buildingId);
             localStorage.setItem("SystemTypeId", value.user.SystemTypeId);
-            window.location.href = "/FlipApp/communities";
+            window.location.href = "/#/communities";
 
           }
 

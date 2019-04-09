@@ -7,6 +7,7 @@ import {
 import { CommunitiesComponent } from './communities/communities.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { BuildingComponent } from './building/building.component';
+import { EditcommentComponent } from './editcomment/editcomment.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       title: 'Dashboard'
     },
     children: [
+        {
+          path: '',
+        redirectTo: 'communities'
+        },
       {
         path: 'newsfeed/:id',
         component: NewsfeedComponent,
@@ -31,6 +36,11 @@ const routes: Routes = [
         path: 'building/:id',
         component: BuildingComponent,
         data: {title:'Building'}
+      },
+      {
+        path: 'editcomment/:id',
+        component: EditcommentComponent,
+        data: { title: 'Building' }
       },
 
     ]

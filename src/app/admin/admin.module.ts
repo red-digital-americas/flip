@@ -8,6 +8,7 @@ import { CommunitiesComponent } from './communities/communities.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { BuildingComponent } from './building/building.component';
+import { EditcommentComponent } from './editcomment/editcomment.component';
 
 
 
@@ -20,6 +21,6 @@ import { BuildingComponent } from './building/building.component';
     AdminRoutingModule,
     CommonModule,
   ],
-  declarations: [CommunitiesComponent, NewsfeedComponent, BuildingComponent]
+  declarations: [CommunitiesComponent, NewsfeedComponent, BuildingComponent, EditcommentComponent]
 })
 export class AdminModule { }

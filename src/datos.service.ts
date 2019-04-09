@@ -16,10 +16,13 @@ import { Observable } from 'rxjs';
 export class DatosService {
 
 
-    public heroesUrl = 'http://localhost:49314/api/';  // URL to web api 
-    //public heroesUrl = 'http://23.253.173.64/api/';  // URL to web api 
-    //private url: string = 'http://23.253.173.64/'; // URL api server 
+    //public heroesUrl = 'http://localhost:49314/api/';  // URL to web api 
+    public heroesUrl = 'http://23.253.173.64:8088/api/';  // URL to web api 
+  private url: string = 'http://23.253.173.64:8088/'; // URL api server 
 
+  getURL() {
+    return this.url;
+  }
 
     constructor(private http: HttpClient, private https: Http) { }
     getAPI() {
@@ -55,4 +58,12 @@ export class DatosService {
 
     return this.http.post(this.heroesUrl + 'Building/' + url, parametros);
   }
+  UploadImgSuc(fileToUpload: any): any {
+
+    let input = new FormData();
+    input.append("file", fileToUpload);
+    debugger;
+    return this.http.post(this.heroesUrl + "Post/UploadImg", input);
+  }
+
 }

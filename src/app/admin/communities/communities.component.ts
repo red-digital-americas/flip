@@ -74,53 +74,7 @@ posts: any[] ;
 
   }
 
-  /* openImage(src, id) {
-    //debugger;
-    let imageDOM = <HTMLImageElement>document.getElementById(id);
-    let width = 600;
-    if (Utils.isDefined(imageDOM)) {
-      width = imageDOM.naturalWidth;
 
-      let dialogConfig = new MatDialogConfig();
-      dialogConfig.width = width + 'px';
-      dialogConfig.data = { src: src }
-      dialogConfig.scrollStrategy = this.overlay.scrollStrategies.noop();
-
-      let dialogRef = this.dialog.open(ImageDetailComponents, dialogConfig);
-
-      return false;
-    }
-  }
-
-  prepareImages(e) {
-
-    if (Utils.isDefined(e.srcElement.files)) {
-      for (let f of e.srcElement.files) {
-
-        this.newImages.push(f);
-      }
-    }
-  }
-
-
- addImages() {
-    let url: string = '';
-    if (!Utils.isEmpty(this.newImages)) {
-      for (let f of this.newImages) {
-        this.heroService.UploadImgSuc(f).subscribe((r) => {
-          if (Utils.isDefined(r)) {
-            url = <string>r.response;
-
-            url = url.replace('/Imagenes', this.heroService.getURL() + 'mieletickets');
-            this.Cat_Suc.url_logo = url;
-            this.newImages = [];
-          }
-        })
-      }
-    }
-  }
-
-*/
 }
 
 

@@ -17,10 +17,16 @@ export class AppLayoutComponent {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
     });
 
+   
     this.changes.observe(<Element>this.element, {
       attributes: true
     });
   }
+  salir(): void {
 
+    localStorage.clear();
+    window.location.href = "/login";
+    
+  }
 
 }

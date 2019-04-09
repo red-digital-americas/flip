@@ -1,7 +1,7 @@
 
-var permisos = JSON.parse(localStorage.getItem("id"));
+var permisos = JSON.parse(localStorage.getItem("buildingid"));
 var  menu = []; 
-if (permisos == 1) {
+if (permisos == 2) {
 
   menu = [
     {
@@ -420,12 +420,12 @@ else {
   menu = [{
     name: 'Commutinities',
     url: '/communities',
-   
+    icon: 'icon-drop',
   },
     {
       name: 'Newsfeed',
       url: '/newsfeed',
-
+      icon: 'icon-drop',
     }
   ] 
 }
