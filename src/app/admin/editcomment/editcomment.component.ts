@@ -28,6 +28,8 @@ export class EditcommentComponent implements OnInit {
   posttext: string = "";
   posttitle: string = "";
   comment: string = "";
+  idbuilding: number;
+
 
   public newImages: any[] = [];
 
@@ -98,6 +100,7 @@ export class EditcommentComponent implements OnInit {
           if (value.result == "Success") {
             // debugger;
             //this.posts = value.item;
+            this.idbuilding = value.item[0].idbuilding; 
             this.posttext = value.item[0].posttext; 
             this.posttitle = value.item[0].posttitle; 
             this.postphoto = value.item[0].postphoto; 
@@ -146,7 +149,9 @@ export class EditcommentComponent implements OnInit {
           debugger;
           if (value.result == "Success") {
             this.get_post();
-            window.location.href = "/communities";
+
+            debugger; 
+            this.router.navigate(['/newsfeed/' + this.idbuilding]); 
 
           }
       }

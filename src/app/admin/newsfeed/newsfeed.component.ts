@@ -156,7 +156,7 @@ export class NewsfeedComponent implements OnInit {
 
 
   editPost(id: number) {
-    debugger; 
+   // debugger; 
     this.router.navigate(['/editcomment/' + id])
 
   }
