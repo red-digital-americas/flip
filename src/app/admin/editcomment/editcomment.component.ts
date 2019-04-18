@@ -222,7 +222,7 @@ export class EditcommentComponent implements OnInit {
 
   addComment() {
     // debugger;
-    var creadoobj = { Id: 0, PostId: this.route.snapshot.params['id'], UserId: 1, Comment1: this.posttext };
+    var creadoobj = { Id: 0, PostId: this.route.snapshot.params['id'], UserId: this.IDUSR , Comment1: this.comment };
     debugger;
     /*public int Id { get; set; }
     public int UserId { get; set; }

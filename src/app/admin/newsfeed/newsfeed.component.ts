@@ -148,6 +148,7 @@ export class NewsfeedComponent implements OnInit {
       }
     }
     this.addImages();
+
   }
 
 
