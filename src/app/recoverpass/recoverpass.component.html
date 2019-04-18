@@ -1,0 +1,39 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <form #loginForm="ngForm" autocomplete="off">
+
+                  <h1>Recover Password</h1>
+                  <p class="text-muted">Put your email to recover your password</p>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="user" [(ngModel)]="email" placeholder="Email" autocomplete="username" required>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
+                      <button type="button" data-style="expand-right" class="btn btn-success btn-ladda" [disabled]="!loginForm.form.valid" (click)="RecoverPass()">
+                        Recover Password
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>

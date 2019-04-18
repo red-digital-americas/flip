@@ -1,7 +1,7 @@
 
-var permisos = JSON.parse(localStorage.getItem("buildingid"));
+var permisos = JSON.parse(localStorage.getItem("SystemTypeId"));
 var  menu = []; 
-if (permisos == 2) {
+if (permisos == 1) {
 
   menu = [
     {
@@ -421,12 +421,7 @@ else {
     name: 'Commutinities',
     url: '/communities',
     icon: 'icon-drop',
-  },
-    {
-      name: 'Newsfeed',
-      url: '/newsfeed',
-      icon: 'icon-drop',
-    }
+  }
   ] 
 }
 export const navItems = menu;

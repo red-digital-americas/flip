@@ -32,7 +32,7 @@ export class DatosService {
     ServicioPostLogin(url, parametros): Observable<any> {
         let headers = new HttpHeaders();
       console.log(parametros);
-      debugger;
+    //  debugger;
         headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
         return this.http.post(this.heroesUrl + 'Login/' + url, parametros);

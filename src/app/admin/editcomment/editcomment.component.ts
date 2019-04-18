@@ -1,19 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { FormsModule } from '@angular/forms';
 import { Utils } from '../../utils/utils';
+import { ToasterService, ToasterConfig } from 'angular2-toaster';
 
 
 
 @Component({
   selector: 'app-editcomment',
   templateUrl: './editcomment.component.html',
-  styleUrls: ['./editcomment.component.scss']
+  styleUrls: ['./editcomment.component.scss', '../../../scss/vendors/toastr/toastr.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [ToasterService]
 })
 export class EditcommentComponent implements OnInit {
 
-  constructor(private router: Router, private heroService: DatosService, private route: ActivatedRoute, ) { }
+  constructor(private router: Router,
+    private heroService: DatosService,
+    private route: ActivatedRoute,
+    toasterService: ToasterService, ) {
+    this.toasterService = toasterService;
+  }
   posts: any[];
   email: string;
   password: string;
@@ -53,11 +61,40 @@ export class EditcommentComponent implements OnInit {
     }
   }
 
+  private toasterService: ToasterService;
+
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 3000,
+      positionClass: "toast-top-center",
+    });
+
   validar_permisos() {
 
     this.permisos_edicion = true;
   }
 
+
+  showSuccess() {
+    this.toasterService.pop('success', 'Updated Post ', 'Your post was updated correctly ');
+
+  }
+
+  showWarning() {
+    this.toasterService.pop('warning', 'Comment Deleted', 'The comment was deleted');
+  }
+
+  showError() {
+    this.toasterService.pop('error', 'Error ', 'An unexpected error occurred ');
+  }
+  showInfo() {
+    this.toasterService.pop('info', 'Comment', 'Your comment was posted ');
+  }
+
+  goback() {
+    window.history.back();
+}
   get_comments() {
     // debugger;
     var creadoobj = { idpost: this.route.snapshot.params['id'] , userid: this.IDUSR };
@@ -117,11 +154,13 @@ export class EditcommentComponent implements OnInit {
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
+          this.showError();
           break;
         default:
           if (value.result == "Success") {
             this.get_comments();
-            this.get_post(); 
+            this.get_post();
+            this.showWarning();
           }
       }
     });
@@ -144,13 +183,15 @@ export class EditcommentComponent implements OnInit {
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
+          this.showError();
           break;
         default:
           debugger;
           if (value.result == "Success") {
             this.get_post();
+           
+            this.showSuccess();
 
-            debugger; 
             this.router.navigate(['/newsfeed/' + this.idbuilding]); 
 
           }
@@ -178,6 +219,35 @@ export class EditcommentComponent implements OnInit {
     }
   }
   */
+
+  addComment() {
+    // debugger;
+    var creadoobj = { Id: 0, PostId: this.route.snapshot.params['id'], UserId: 1, Comment1: this.posttext };
+    debugger;
+    /*public int Id { get; set; }
+    public int UserId { get; set; }
+    public int PostId { get; set; }
+    public string Comment1 { get; set; }*/
+    this.heroService.ServicioPostPost("PostComment", creadoobj).subscribe((value) => {
+
+
+      switch (value.result) {
+        case "Error":
+          console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
+          this.showError(); 
+          break;
+        default:
+          debugger;
+          if (value.result == "Success") {
+            this.get_comments();
+            this.comment = ""; 
+            this.showInfo();
+            this.get_post();
+
+          }
+      }
+    });
+  }
   prepareImages(e) {
 
     if (Utils.isDefined(e.srcElement.files)) {
@@ -186,6 +256,8 @@ export class EditcommentComponent implements OnInit {
         this.newImages.push(f);
       }
     }
+
+    this.addImages();
   }
 
 

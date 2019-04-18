@@ -6,6 +6,8 @@ import { HttpModule, Http } from '@angular/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { ToasterModule, ToasterService } from 'angular2-toaster/angular2-toaster';
+
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -56,6 +58,7 @@ import { Wizard3Component } from './views/wizard3/wizard3.component';
 import { Wizard4Component } from './views/wizard4/wizard4.component';
 import { Wizard5Component } from './views/wizard5/wizard5.component';
 import { FooterComponent } from './footer/footer.component';
+import { RecoverpassComponent } from './recoverpass/recoverpass.component';
 //import { CommunitiesComponent } from './admin/communities/communities.component';
 //import { AppLayoutComponent } from './container-app/app-layout/app-layout.component';
 
@@ -75,7 +78,8 @@ import { FooterComponent } from './footer/footer.component';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    ToasterModule,
   ],
   declarations: [
     AppComponent,
@@ -92,6 +96,7 @@ import { FooterComponent } from './footer/footer.component';
     Wizard4Component,
     Wizard5Component,
     FooterComponent,
+    RecoverpassComponent,
  //  AppLayoutComponent
   ],
   providers: [{

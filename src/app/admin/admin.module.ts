@@ -8,6 +8,8 @@ import { CommunitiesComponent } from './communities/communities.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { BuildingComponent } from './building/building.component';
+import { ToasterModule, ToasterService } from 'angular2-toaster/angular2-toaster';
+
 import { EditcommentComponent } from './editcomment/editcomment.component';
 
 
@@ -20,7 +22,9 @@ import { EditcommentComponent } from './editcomment/editcomment.component';
     ButtonsModule.forRoot(),
     AdminRoutingModule,
     CommonModule,
+    
+    ToasterModule,
   ],
-  declarations: [CommunitiesComponent, NewsfeedComponent, BuildingComponent, EditcommentComponent]
+  declarations: [CommunitiesComponent,  NewsfeedComponent, BuildingComponent, EditcommentComponent]
 })
 export class AdminModule { }

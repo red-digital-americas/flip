@@ -25,21 +25,30 @@
                   <div class="row">
                     <div class="col-6">
                       <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-                      <button type="button" [disabled]="!loginForm.form.valid" (click)="Login()">
+
+                      <button type="button" data-style="expand-right" class="btn btn-success btn-ladda" [disabled]="!loginForm.form.valid" (click)="Login()">
                         Login
                       </button>
                     </div>
                     <div class="col-6 text-right">
-                      <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                      <button type="button" (click)="recoverpass()" class="btn btn-link px-0">Forgot password?</button>
                     </div>
                   </div>
+                  <!--<button class="btn btn-success" (click)="showSuccess()">Try Success</button>
+  <button class="btn btn-danger" (click)="showError()">Try Error</button>
+  <button class="btn btn-warning" (click)="showWarning()">Try Warning</button>
+  <button class="btn btn-info" (click)="showInfo()">Try Info</button>
+  <button class="btn btn-primary" (click)="showPrimary()">Try Primary</button>
+      -->
                 </form>
               </div>
             </div>
-        
+
           </div>
         </div>
       </div>
     </div>
   </main>
 </div>
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+

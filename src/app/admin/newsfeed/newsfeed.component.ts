@@ -1,17 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
+import { ToasterService, ToasterConfig } from 'angular2-toaster';
 
 @Component({
   selector: 'app-newsfeed',
   templateUrl: './newsfeed.component.html',
-  styleUrls: ['./newsfeed.component.scss']
+  styleUrls: ['./newsfeed.component.scss', '../../../scss/vendors/toastr/toastr.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [ToasterService]
 })
+
 export class NewsfeedComponent implements OnInit {
 
 
-  constructor(private router: Router, private heroService: DatosService, private route: ActivatedRoute, ) { }
+  constructor(private router: Router,
+    private heroService: DatosService,
+    private route: ActivatedRoute,
+    toasterService: ToasterService,) {
+    this.toasterService = toasterService;
+  }
   posts: any[];
   email: string;
   password: string;
@@ -26,7 +35,8 @@ export class NewsfeedComponent implements OnInit {
   posttitle: string = "";
   public user: string[];
 
-  postphoto: string;
+  postphoto: string = "assets/img/Coliving.jpg";
+  
 
   comment: string = "";
 
@@ -42,10 +52,34 @@ export class NewsfeedComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem("user"));
       console.log(this.user);
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
+      this.IDBUILD = this.route.snapshot.params['id']; 
       this.get_posts();
       
 
     }
+  }
+  private toasterService: ToasterService;
+
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 3000,
+      positionClass: "toast-top-center",
+    });
+
+
+
+  showSuccess() {
+    this.toasterService.pop('success', 'Success ', 'Your post was published correctly ');
+    
+  }
+
+  showWarning() {
+    this.toasterService.pop('warning', 'Post Deleted', 'The post was deleted');
+  }
+
+  showError() {
+    this.toasterService.pop('error', 'Error ', 'An unexpected error occurred ');
   }
 
   get_posts() {
@@ -69,33 +103,9 @@ export class NewsfeedComponent implements OnInit {
     });
   }
 
-  addComment() {
-    // debugger;
-    var creadoobj = { Id: 0, PostId: this.PostId, UserId: 1, Comment1: this.posttext };
-    debugger;
-    /*public int Id { get; set; }
-    public int UserId { get; set; }
-    public int PostId { get; set; }
-    public string Comment1 { get; set; }*/
-    this.heroService.ServicioPostPost("PostComment", creadoobj).subscribe((value) => {
-
-
-      switch (value.result) {
-        case "Error":
-          console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-          break;
-        default:
-          debugger;
-          if (value.result == "Success") {
-
-            this.get_posts();
-
-          }
-      }
-    });
-  }
   addPost() {
-    // debugger;
+    debugger;
+    
     var creadoobj = { id: 0, title: this.posttitle, userid: this.IDUSR, PostText: this.posttext, photo: this.postphoto, BuildingId: this.route.snapshot.params['id'] };
     debugger;
     /*
@@ -111,12 +121,17 @@ export class NewsfeedComponent implements OnInit {
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
+          this.showError(); 
           break;
         default:
           debugger;
           if (value.result == "Success") {
             this.get_posts();
-            window.location.href = "/newsfeed";
+            debugger; 
+            this.postphoto = "assets/img/Coliving.jpg";
+            this.posttext = "";
+            this.posttitle = "";
+            this.showSuccess();
 
 
           }
@@ -125,13 +140,14 @@ export class NewsfeedComponent implements OnInit {
   }
 
   prepareImages(e) {
-
+    debugger; 
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
         debugger;
         this.newImages.push(f);
       }
     }
+    this.addImages();
   }
 
 
@@ -175,12 +191,14 @@ export class NewsfeedComponent implements OnInit {
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
+          this.showError();
           break;
+
         default:
           debugger;
           if (value.result == "Success") {
             this.get_posts();
-
+            this.showWarning();
           }
       }
     }); }

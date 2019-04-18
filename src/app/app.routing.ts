@@ -15,12 +15,18 @@ import { Wizard2bComponent } from './views/wizard2b/wizard2b.component';
 import { Wizard3Component } from './views/wizard3/wizard3.component';
 import { Wizard4Component } from './views/wizard4/wizard4.component';
 import { Wizard5Component } from './views/wizard5/wizard5.component';
+import { RecoverpassComponent } from './recoverpass/recoverpass.component';
+
 import { FooterComponent } from './footer/footer.component';
 
 export const routes: Routes = [
   {
     path: 'wizard1',
     component: Wizard1Component
+  },
+  {
+    path: 'recoverpass',
+    component: RecoverpassComponent
   },
   {
     path: 'wizard2a',

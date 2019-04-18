@@ -1,46 +1,70 @@
-
+<ul class="nav navbar-nav d-md-down-none" style="    flex-direction: row;">
+  <li class="nav-item px-3">
+    <a class="nav-link" style="cursor:pointer;" (click)="goback()">Newsfeed</a>
+  </li>
+  <!-- <li class="nav-item px-3">
+     <a class="nav-link" href="#">Faqs Terms & Conditions</a>
+   </li>
+   <li class="nav-item px-3">
+     <a class="nav-link" href="#">Admin Users</a>
+   </li>-->
+</ul>
 
 <div class="card card-height-newsfeed" style="">
 
   <div class="card-body">
     <h5 class="card-title">Update Post </h5>
 
-    <div class="form-row">
-      <div class="col-12">
-        <input type="text" [(ngModel)]="posttitle" class="form-control" placeholder="Title">
+    <form #loginForm="ngForm" autocomplete="off">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 ">
+          <div class="form-row ">
+            <div class="col-12  margin-gral">
+              <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
+            </div>
+          </div>
+
+          <!-- <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>-->
+          <div class="custom-file margin-gral ">
+            <input type="file" accept="image/*"
+                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+
+          </div>
+
+          <!-- <input class="pull-center btn btn-default btn-default"
+          style="float:left; padding-left: 0px; padding-right: 5px;"
+          #fileInput multiple
+          type="file"
+          accept="image/*"
+          (change)="prepareImages($event)" />-->
+          <!--<button id="btncomp"
+                  name="btncomp"
+                  style="float:left;"
+                  type="submit"
+                  class="btn btn-outline-success"
+                  (click)="addImages()"
+                  [disabled]="newImages.lenght == 0">
+            Upload Foto
+          </button>-->
+
+          <div class="input-group margin-gral ">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Write Post</span>
+            </div>
+            <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="posttext" aria-label="With textarea" required></textarea>
+          </div>
+          <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid">Update Post</button>
+        </div>
+        <div class="col-md-6 col-sm-6 ">
+          <img class="img-size" src="{{postphoto}}" />
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <input class="pull-center btn btn-default btn-default"
-             style="float:left; padding-left: 0px; padding-right: 5px;"
-             #fileInput multiple
-             type="file"
-             accept="image/*"
-             (change)="prepareImages($event)" />
 
-      <button id="btncomp"
-              name="btncomp"
-              style="float:left;"
-              type="submit"
-              class="btn btn-outline-success"
-              (click)="addImages()"
-              [disabled]="newImages.lenght == 0">
-        Upload Foto
-      </button>
-    </div>
-    <!--<div class="custom-file">
-
-    <input type="file" class="custom-file-input" id="customFile">
-
-      <label class="custom-file-label" for="customFile">Choose file</label>
-  </div>-->
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Write Post</span>
-      </div>
-      <textarea class="form-control" [(ngModel)]="posttext" aria-label="With textarea"></textarea>
-    </div>
-    <button (click)="addPost()" type="button" class="btn btn-outline-dark">Update Post</button>
+    </form>
   </div>
 
   <div class="card-body">
@@ -52,8 +76,8 @@
       </div>
     </div>
 
-    
-    
+
+
     <button (click)="addComment()" type="button" class="btn btn-outline-dark">Add comment</button>
   </div>
 
@@ -77,5 +101,4 @@
     </div>
   </div>
 </div>
-
-
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
