@@ -1,7 +1,51 @@
-
 var permisos = JSON.parse(localStorage.getItem("SystemTypeId"));
 var  menu = []; 
 if (permisos == 1) {
+  menu = [{
+    name: 'Index',
+    url: '/webadmin',
+    icon: 'icon-drop',
+  },  {
+  name: 'More',
+      type: 1,
+      url: '/',
+      icon: 'icon-puzzle',
+      children: [  
+  {
+    name: 'Team',
+    url: '/webadmin/team',
+    icon: 'icon-drop'
+  },
+  {
+    name: 'Jobs',
+    url: '/webadmin/jobs',
+    icon: 'icon-drop'
+  },
+  {
+    name: 'Press',
+    url: '/webadmin/press',
+    icon: 'icon-drop'
+  },]},
+  ] 
+} 
+ else if (permisos == 2 ){
+  menu = [{
+    name: 'Commutinities',
+    url: '/communities',
+    icon: 'icon-drop',
+  }
+  ] 
+}
+
+else if (permisos == 3){
+  menu = [{
+    name: 'Commutinities',
+    url: '/communities',
+    icon: 'icon-drop',
+  }
+  ] 
+}
+else {
 
   menu = [
     {
@@ -415,13 +459,5 @@ if (permisos == 1) {
     }
   ];
 
-}
-else {
-  menu = [{
-    name: 'Commutinities',
-    url: '/communities',
-    icon: 'icon-drop',
-  }
-  ] 
 }
 export const navItems = menu;

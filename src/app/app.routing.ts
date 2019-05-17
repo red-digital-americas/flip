@@ -98,8 +98,13 @@ export const routes: Routes = [
         path: '',
         loadChildren: './admin/admin.module#AdminModule'
       },
+      {
+        path: 'webadmin',
+        loadChildren: './webadmin/webadmin.module#WebadminModule'
+      },
     ]
   },
+
   {
     path: 'demo',
     component: DefaultLayoutComponent,

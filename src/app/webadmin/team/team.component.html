@@ -1,0 +1,88 @@
+<div class="row">
+    <div class=" col  " *ngFor="let post of posts" >
+      <div class="card text-white bg-primary">
+        <div class="card-body pb-0">
+          <div class="col-sm-12 col-md-12" >
+            <strong> Nombre : </strong>{{post.name}} {{post.lastname}}
+            <br>
+           <strong> Desc :  </strong> {{post.desc}}
+            <br>
+           <strong> Link :  </strong>  {{post.link}}
+            <br> 
+          </div>
+          <div class="btn-group float-right" dropdown>
+
+            <div class="row">
+                <div  class="col-sm-6 col-md-4">
+                    <img style="margin-right: 10px;" class="img-size" src="{{post.frontphoto}}">
+                  </div> 
+            </div>
+           
+            <div class="row">
+              
+           <div class="col-sm-6 col-md-4">
+              <img  class="img-size" src="{{post.backphoto}}">
+            </div> 
+               </div>
+          </div>
+          <button type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+              Editar
+            </button>        
+        </div>
+        <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
+          
+        </div>
+      </div>
+    </div><!--/.col-->
+  </div><!--/.row-->
+  
+  <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <div class="col-12  margin-gral">
+            Name:
+              <input type="text" [(ngModel)]="Name" class="form-control" name="postitle" id="postitle"  placeholder="Nombre" required>
+            </div>
+            <div class="col-12  margin-gral">
+                Desc:
+                  <input type="text" [(ngModel)]="Desc" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
+                </div>
+                <div class="col-12  margin-gral">
+                    Link:
+                      <input type="text" [(ngModel)]="Link" class="form-control" name="postitle" id="postitle" placeholder="Link" required>
+                    </div>
+
+
+            Imagen 1:
+          <div class="custom-file margin-gral ">
+           
+            <input type="file" accept="image/*"
+                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+  
+          </div>
+          Imagen 2: 
+          <div class="custom-file margin-gral ">
+           
+            <input type="file" accept="image/*"
+                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+  
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="updatephoto()" >Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  
+  
