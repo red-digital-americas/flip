@@ -21,6 +21,8 @@ import { AppComponent } from './app.component';
 // Import containers
 import { DefaultLayoutComponent } from './containers';
 import { AppLayoutComponent } from './container-app';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -81,10 +83,11 @@ import { RecoverpassComponent } from './recoverpass/recoverpass.component';
     TabsModule.forRoot(),
     ChartsModule,
     ToasterModule,
+    ImageCropperModule,
   ],
   declarations: [
     AppComponent,
-    ...APP_CONTAINERS,
+    ...APP_CONTAINERS, 
     ...APP_CONTAIN,
     P404Component,
     P500Component,

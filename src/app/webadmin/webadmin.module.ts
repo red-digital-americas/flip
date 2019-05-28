@@ -11,6 +11,15 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TeamComponent } from './team/team.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { PressComponent } from './press/press.component';
+import { DesignComponent } from './design/design.component';
+import { DesignindexComponent } from './designindex/designindex.component';
+import { MoreindexComponent } from './moreindex/moreindex.component';
+import { HomeindexComponent } from './homeindex/homeindex.component';
+import { HomeservicesComponent } from './homeservices/homeservices.component';
+import { HomeammenitiesComponent } from './homeammenities/homeammenities.component';
+import { HomeroomsComponent } from './homerooms/homerooms.component';
+import { HomegeneralComponent } from './homegeneral/homegeneral.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 
@@ -25,10 +34,10 @@ import { PressComponent } from './press/press.component';
     WebadminRoutingModule,
     CommonModule,
     ModalModule.forRoot(),
-    
+    ImageCropperModule,
     
     ToasterModule,
   ],
-  declarations: [WebadminComponent, TeamComponent, JobsComponent, PressComponent]
+  declarations: [WebadminComponent, TeamComponent, JobsComponent, PressComponent, DesignComponent, DesignindexComponent, MoreindexComponent, HomeindexComponent, HomeservicesComponent, HomeammenitiesComponent, HomeroomsComponent, HomegeneralComponent]
 })
 export class WebadminModule { }

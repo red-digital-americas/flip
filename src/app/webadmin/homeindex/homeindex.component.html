@@ -1,22 +1,25 @@
+
 <div class="row">
-  <div class=" col  " *ngFor="let post of posts" >
+  <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts" >
     <div class="card ">
       <div class="card-body ">
-        <div class="btn-group float-right" dropdown>
-          <div class="row">
-              <div  class="col-sm-6 col-md-4">
+        <div class="btn-group margin-gral" dropdown>
+            <div class="col-sm-6 col-md-6" >
+                <strong> Title : </strong>{{post.title}} 
+                <br>
+               <strong> Direction :  </strong> {{post.direction}}
+                <br>
+              </div>
+
+          <div class="col-sm-6 col-md-6">
+              <div  class="col-sm-6 col-md-6">
                   <img style="margin-right: 10px;" class="img-size" src="{{post.frontphoto}}">
                 </div> 
           </div>
          
-          <div class="row">
-            
-         <div class="col-sm-6 col-md-4">
-            <img  class="img-size" src="{{post.backphoto}}">
-          </div> 
-             </div>
+          
         </div>
-        <button   style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+        <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
             Editar
           </button>        
       </div>
@@ -37,22 +40,24 @@
         </button>
       </div>
       <div class="modal-body">
-          Imagen 1:
+          Imagen :
         <div class="custom-file margin-gral ">
-         
-          <input type="file" accept="image/*"
-                 (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-          <label class="custom-file-label" for="customFile">Choose file</label>
+            <input type="file" accept="image/*"
+            (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
+     <label class="custom-file-label" for="customFile">Choose file</label>
 
-        </div>
-        Imagen 2: 
-        <div class="custom-file margin-gral ">
+   </div>
+            <div class="col-12  margin-gral">
+                Title:
+                  <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle"  placeholder="Nombre" required>
+                </div>
+                <div class="col-12  margin-gral">
+                    Direction:
+                      <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
+                    </div>
+                 
          
-          <input type="file" accept="image/*"
-                 (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-          <label class="custom-file-label" for="customFile">Choose file</label>
-
-        </div>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>

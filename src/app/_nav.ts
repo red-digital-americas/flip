@@ -3,29 +3,73 @@ var  menu = [];
 if (permisos == 1) {
   menu = [{
     name: 'Index',
-    url: '/webadmin',
+    url: '/webadmin/webadmin',
     icon: 'icon-drop',
+    children: [  
+      { name: 'Index',
+      url: '/webadmin/webadmin',
+      icon: 'icon-drop'
+      }, 
+      { name: 'Desgin Index',
+      url: '/webadmin/designindex',
+      icon: 'icon-drop'
+    }, 
+    { name: 'More Index',
+    url: '/webadmin/moreindex',
+    icon: 'icon-drop'
+  },
+  { name: 'Home Index',
+  url: '/webadmin/homeindex',
+  icon: 'icon-drop'
+  }]
   },  {
-  name: 'More',
+  name: 'Home',
       type: 1,
       url: '/',
       icon: 'icon-puzzle',
       children: [  
   {
-    name: 'Team',
-    url: '/webadmin/team',
+    name: 'Home Services',
+    url: '/webadmin/homeservices',
     icon: 'icon-drop'
   },
   {
-    name: 'Jobs',
-    url: '/webadmin/jobs',
+    name: 'Home Ammenities',
+    url: '/webadmin/homeammenities',
     icon: 'icon-drop'
   },
   {
-    name: 'Press',
-    url: '/webadmin/press',
+    name: 'Home General',
+    url: '/webadmin/homegeneral',
     icon: 'icon-drop'
-  },]},
+  },
+  {
+    name: 'Home Room',
+    url: '/webadmin/homeroom ',
+    icon: 'icon-drop'
+  },
+]},
+  {
+    name: 'More',
+        type: 1,
+        url: '/',
+        icon: 'icon-cursor',
+        children: [  
+    {
+      name: 'Team',
+      url: '/webadmin/team',
+      icon: 'icon-cursor'
+    },
+    {
+      name: 'Jobs',
+      url: '/webadmin/jobs',
+      icon: 'icon-cursor'
+    },
+    {
+      name: 'Press',
+      url: '/webadmin/press',
+      icon: 'icon-cursor'
+    },]},
   ] 
 } 
  else if (permisos == 2 ){

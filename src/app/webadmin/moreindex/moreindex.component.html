@@ -1,22 +1,41 @@
+<div class="modal-body">
+  <div class="col-12  margin-gral">
+      Facebook:
+        <input type="text" [(ngModel)]="Facebook" class="form-control" name="postitle" id="postitle"  placeholder="Facebook" required>
+      </div>
+      <div class="col-12  margin-gral">
+          Twitter:
+          <input type="text" [(ngModel)]="Twitter" class="form-control" name="postitle" id="postitle" placeholder="Twitter" required>
+          </div>
+          <div class="col-12  margin-gral">
+          Instagram:
+         <input type="text" [(ngModel)]="Instagram" class="form-control" name="postitle" id="postitle" placeholder="Instagram" required>
+         </div>
+        <div class="col-12  margin-gral">
+           Youtube:
+                  <input type="text" [(ngModel)]="Youtube" class="form-control" name="postitle" id="postitle" placeholder="Youtube" required>
+                </div>
+
+                <button type="button" style="
+                margin-left: 20px;
+                margin-top: 20px;" class="btn btn-primary" (click)="updatesn()" >Save changes</button>
+</div>
+
+
 <div class="row">
-  <div class=" col  " *ngFor="let post of posts" >
+  <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts" >
     <div class="card ">
       <div class="card-body ">
-        <div class="btn-group float-right" dropdown>
+        <div class="btn-group margin-gral" dropdown>
           <div class="row">
-              <div  class="col-sm-6 col-md-4">
+              <div  class="col-sm-6 col-md-6">
                   <img style="margin-right: 10px;" class="img-size" src="{{post.frontphoto}}">
                 </div> 
           </div>
          
-          <div class="row">
-            
-         <div class="col-sm-6 col-md-4">
-            <img  class="img-size" src="{{post.backphoto}}">
-          </div> 
-             </div>
+          
         </div>
-        <button   style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+        <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
             Editar
           </button>        
       </div>
@@ -45,14 +64,7 @@
           <label class="custom-file-label" for="customFile">Choose file</label>
 
         </div>
-        Imagen 2: 
-        <div class="custom-file margin-gral ">
-         
-          <input type="file" accept="image/*"
-                 (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-          <label class="custom-file-label" for="customFile">Choose file</label>
-
-        </div>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
