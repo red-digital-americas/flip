@@ -1,3 +1,64 @@
-<p>
-  design works!
-</p>
+
+<div class="row">
+    <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts" >
+      <div class="card ">
+        <div class="card-body ">
+          <div class="btn-group float-right" dropdown>
+            <div class="row">
+              Section : {{post.posdesc}}
+              <br>
+              Description: {{post.desc}}
+                <div  class="col-sm-6 col-md-6">
+                    <img style="margin-right: 10px;" class="img-size" src="{{post.frontphoto}}">
+                  </div> 
+            </div>
+           
+            
+          </div>
+          <button   style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+              Editar
+            </button>        
+        </div>
+        <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
+          
+        </div>
+      </div>
+    </div><!--/.col-->
+  </div><!--/.row-->
+  
+  <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Imagen 1:
+          <div class="custom-file margin-gral ">
+           
+            <input type="file" accept="image/*"
+                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+  
+          </div>
+          <div class="col-12  margin-gral">
+              Category:
+                <input type="text" [(ngModel)]="posdesc" class="form-control" name="postitle" id="postitle"  placeholder="Name" required>
+              </div>
+              <div class="col-12  margin-gral">
+                  Description:
+                    <input type="text" [(ngModel)]="desc" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
+                  </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="updatephoto()" >Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  
+  

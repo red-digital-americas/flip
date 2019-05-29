@@ -1,3 +1,125 @@
-<p>
-  homerooms works!
-</p>
+
+<div class="row">
+    <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts " >
+      <div class="card ">
+        <div class="card-body ">
+          <div class="btn-group margin-gral col-sm-12 col-md-12">
+            <div class="row">
+                <div  class="col-sm-12 col-md-12">
+                 <strong> Title :  </strong> {{post.title}}
+                 </div>
+                 <div  class="col-sm-12 col-md-12">
+                    <strong> Description :  </strong> {{post.desc}}
+                    </div>
+                    <div  class="col-sm-12 col-md-12">
+                        <strong> Price :  </strong> {{post.price}}
+                        </div>
+                        <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="infoModal.show();passdata(post.id);">
+                            Editar info 
+                          </button>
+                      <div  class="col-sm-12 col-md-12" *ngFor="let photo of photos " >
+                         Photo: <img style="margin-right: 10px;" class="img-size" style="margin-left: 26%; margin-top: 5%;" src="{{photo.photo}}">
+                        
+                          Mobile Photo:<img style="margin-left: 17%; margin-top: 5%; " class="img-size" src="{{photo.photoMobile}}">
+                          <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(photo.id);passnumroom(post.id);">
+                              Editar
+                            </button>
+                        </div> 
+                         
+          </div>
+            
+          </div>
+                
+        </div>
+        <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
+          
+        </div>
+      </div>
+    </div><!--/.col-->
+   
+  </div><!--/.row-->
+  
+  <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Imagen :
+          <div class="custom-file margin-gral ">
+              <input type="file"   accept="image/*"  class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event);" />
+    
+      
+              <div>
+                  <image-cropper
+                      [imageChangedEvent]="imageChangedEvent"
+                      [maintainAspectRatio]="true"
+                      [aspectRatio]="1/ 2"
+                      [resizeToWidth]="600"
+                      [cropperMinWidth]="128"
+                      [onlyScaleDown]="true"
+                      [roundCropper]="false"
+                      format="png"
+                      outputType="both"
+                      imageQuality="100"
+                      (imageCropped)="imageCropped($event)"
+                      (imageLoaded)="imageLoaded()"
+                      (cropperReady)="cropperReady()"
+                      (loadImageFailed)="loadImageFailed()"
+                      [style.display]="showCropper ? null : 'none'"
+                  ></image-cropper>
+                  Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage" />
+                  <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer()" >Upload Images</button>
+
+                </div>
+               
+       <label class="custom-file-label" for="customFile">Choose file</label>
+  
+     </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+          <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()" >Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+            <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="col-12  margin-gral">
+                  Title:
+                    <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="title" required>
+                  </div>
+                  <div class="col-12  margin-gral">
+                      Description:
+                        <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
+                      </div>
+                      <div class="col-12  margin-gral">
+                          Price:
+                            <input type="text" [(ngModel)]="price" class="form-control" name="postitle" id="postitle" placeholder="price" required>
+                          </div>
+                          
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="infoModal.hide()">Close</button>
+            <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updateindo()" >Save changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    
+  

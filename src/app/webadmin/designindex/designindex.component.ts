@@ -138,11 +138,11 @@ export class DesignindexComponent implements OnInit {
           this.heroService.UploadImgSuc(f).subscribe((r) => {
             if (Utils.isDefined(r)) {
               url = <string>r.message;
-              debugger;
+            //  debugger;
               url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-              debugger;
+              //debugger;
               this.postphoto = url;
-              debugger;
+              //debugger;
               this.newImages = [];
             }
           })

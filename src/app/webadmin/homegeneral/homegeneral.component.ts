@@ -48,7 +48,7 @@ export class HomegeneralComponent implements OnInit {
   direction: string = "";
   public user: string[];
 
-  postphoto: string = "assets/img/Coliving.jpg";
+  postphoto: any[]=[];
   
 
   comment: string = "";
@@ -61,6 +61,7 @@ export class HomegeneralComponent implements OnInit {
       this.router.navigate(['/login']);
     }
     else {
+      this.postphoto.push("assets/img/Coliving.jpg");
 
       this.user = JSON.parse(localStorage.getItem("user"));
       console.log(this.user);
@@ -85,7 +86,7 @@ export class HomegeneralComponent implements OnInit {
     console.log(event);
     console.log(this.croppedImage);
     this.blob = this.dataURItoBlob(this.croppedImage);
-    this.uploadAttachmentToServer();
+    //this.uploadAttachmentToServer();
   }
   dataURItoBlob(dataURI): Blob {
     const byteString = atob(dataURI.split(',')[1]);
@@ -104,6 +105,8 @@ export class HomegeneralComponent implements OnInit {
     const fileToUpload: File = new File([this.blob], 'filename.png');
     this.newImages.push(fileToUpload);
     this.addImages();
+   // debugger;
+   // console.log(this.newImages);
   }
 
 
@@ -173,9 +176,9 @@ export class HomegeneralComponent implements OnInit {
 
    
    updatephoto() {
-    // debugger;
-    var creadoobj = { id: this.PostId, Photo: this.postphoto, Title: this.title , Direction: this.direction ,  Position: this.PostId};
-    debugger;
+     //debugger;
+    var creadoobj = { id: this.PostId, Photo: this.postphoto[1], PhotoMobile: this.postphoto[2] , Description: this.direction};
+    //debugger;
 
     this.heroService.ServicioPostPost("UpdateHomeGeneral", creadoobj).subscribe((value) => {
 
@@ -186,9 +189,10 @@ export class HomegeneralComponent implements OnInit {
          
           break;
         default:
-          debugger;
+          //debugger;
           if (value.result == "Success") {
             this.get_photos();
+            this.postphoto=[]; 
            
            
 
@@ -198,14 +202,14 @@ export class HomegeneralComponent implements OnInit {
   }
    
   prepareImages(e) {
-    debugger; 
+   // debugger; 
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
-        debugger;
+     //   debugger;
         this.newImages.push(f);
       }
     }
-    this.addImages();
+    //this.addImages();
 
   }
 
@@ -213,15 +217,17 @@ export class HomegeneralComponent implements OnInit {
   addImages() {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
-      for (let f of this.newImages) {
+      for (let f of this.newImages ) {
+        
+        
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
             
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-           
-            this.postphoto = url;
-           
+          
+            this.postphoto.push(url);
+            console.log(this.newImages);
             this.newImages = [];
           }
         })

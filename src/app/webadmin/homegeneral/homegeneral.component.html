@@ -1,60 +1,33 @@
 
 <div class="row">
-    <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts" >
+    <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts" >
       <div class="card ">
         <div class="card-body ">
-          <div class="btn-group margin-gral" dropdown>
-              <div class="col-sm-6 col-md-6" >
-                  <strong> Title : </strong>{{post.title}} 
+          <div class="btn-group margin-gral col-sm-12 col-md-12">
+            <div class="row">
+                  
+                 <strong> Description :  </strong> {{post.desc}}
                   <br>
-                 <strong> Direction :  </strong> {{post.direction}}
-                  <br>
-                </div>
-  
-            <div class="col-sm-6 col-md-6">
-                <div  class="col-sm-6 col-md-6">
-                    <img style="margin-right: 10px;" class="img-size" src="{{post.frontphoto}}">
-                  </div> 
-            </div>
-           
+                      <div  class="col-sm-12 col-md-12">
+                         Photo: <img style="margin-right: 10px;" class="img-size" style="margin-left: 26%;" src="{{post.frontphoto}}">
+                        </div> 
+                        <div  style="    margin-top: 5%;   " class="col-sm-12 col-md-12">
+                          Mobile Photo:<img style="margin-left: 17%; " class="img-size" src="{{post.photomobile}}">
+                        </div> 
+                        <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+                            Editar
+                          </button>  
+          </div>
             
           </div>
-          <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
-              Editar
-            </button>        
+                
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
           
         </div>
       </div>
     </div><!--/.col-->
-    <input type="file" (change)="fileChangeEvent($event)" />
-    <button (click)="rotateLeft()">Rotate left</button>
-    <button (click)="rotateRight()">Rotate right</button>
-    <button (click)="flipHorizontal()">Flip horizontal</button>
-    <button (click)="flipVertical()">Flip vertical</button>
-    
-      
-    <div>
-        <image-cropper
-            [imageChangedEvent]="imageChangedEvent"
-            [maintainAspectRatio]="true"
-            [aspectRatio]="1/ 2"
-            [resizeToWidth]="600"
-            [cropperMinWidth]="128"
-            [onlyScaleDown]="true"
-            [roundCropper]="false"
-            format="png"
-            outputType="both"
-            imageQuality="100"
-            (imageCropped)="imageCropped($event)"
-            (imageLoaded)="imageLoaded()"
-            (cropperReady)="cropperReady()"
-            (loadImageFailed)="loadImageFailed()"
-            [style.display]="showCropper ? null : 'none'"
-        ></image-cropper>
-      </div>
-      <img [src]="croppedImage" />
+   
   </div><!--/.row-->
   
   <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -69,17 +42,38 @@
         <div class="modal-body">
             Imagen :
           <div class="custom-file margin-gral ">
-              <input type="file" accept="image/*"
-              (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
+              <input type="file"   accept="image/*"  class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event);" />
+    
+      
+              <div>
+                  <image-cropper
+                      [imageChangedEvent]="imageChangedEvent"
+                      [maintainAspectRatio]="true"
+                      [aspectRatio]="1/ 2"
+                      [resizeToWidth]="600"
+                      [cropperMinWidth]="128"
+                      [onlyScaleDown]="true"
+                      [roundCropper]="false"
+                      format="png"
+                      outputType="both"
+                      imageQuality="100"
+                      (imageCropped)="imageCropped($event)"
+                      (imageLoaded)="imageLoaded()"
+                      (cropperReady)="cropperReady()"
+                      (loadImageFailed)="loadImageFailed()"
+                      [style.display]="showCropper ? null : 'none'"
+                  ></image-cropper>
+                  Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage" />
+                  <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer()" >Upload Images</button>
+
+                </div>
+               
        <label class="custom-file-label" for="customFile">Choose file</label>
   
      </div>
-              <div class="col-12  margin-gral">
-                  Title:
-                    <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle"  placeholder="Nombre" required>
-                  </div>
+            
                   <div class="col-12  margin-gral">
-                      Direction:
+                      Description:
                         <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
                       </div>
                    
@@ -87,8 +81,8 @@
           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-          <button type="button" class="btn btn-primary" (click)="updatephoto()" >Save changes</button>
+          <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+          <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()" >Save changes</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

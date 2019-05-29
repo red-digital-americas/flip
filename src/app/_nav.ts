@@ -45,10 +45,16 @@ if (permisos == 1) {
   },
   {
     name: 'Home Room',
-    url: '/webadmin/homeroom ',
+    url: '/webadmin/homeroom',
     icon: 'icon-drop'
   },
 ]},
+{
+  name: 'Design',
+  type: 1,
+  url:'/webadmin/design',
+  icon: 'icon-cursor',
+},
   {
     name: 'More',
         type: 1,
