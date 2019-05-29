@@ -7,7 +7,9 @@
             <br>
            <strong> Desc :  </strong> {{post.desc}}
             <br>
-           <strong> Link :  </strong>  {{post.link}}
+           <strong> Linkedin :  </strong>  {{post.link}}
+            <br> 
+            <strong> Twitter :  </strong>  {{post.twitter}}
             <br> 
           </div>
           <div class="btn-group float-right" dropdown>
@@ -56,8 +58,12 @@
                 </div>
                 <div class="col-12  margin-gral">
                     Link:
-                      <input type="text" [(ngModel)]="Link" class="form-control" name="postitle" id="postitle" placeholder="Link" required>
+                      <input type="text" [(ngModel)]="Link" class="form-control" name="postitle" id="postitle" placeholder="Linkedin" required>
                     </div>
+                    <div class="col-12  margin-gral">
+                        Twitter:
+                          <input type="text" [(ngModel)]="tt" class="form-control" name="postitle" id="postitle" placeholder="Twitter" required>
+                        </div>
 
 
             Imagen 1:

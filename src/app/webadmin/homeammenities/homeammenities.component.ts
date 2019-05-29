@@ -246,6 +246,7 @@ export class HomeammenitiesComponent implements OnInit {
             if (value.result == "Success") {
               this.get_photos();
               this.postphoto=[]; 
+              this.postphoto.push("assets/img/Coliving.jpg");
              
              
   

@@ -41,8 +41,8 @@ export class WebadminComponent implements OnInit {
   posttext: string = "";
   posttitle: string = "";
   public user: string[];
+  postphoto: any[]=[];
 
-  postphoto: string = "assets/img/Coliving.jpg";
   
 
   comment: string = "";
@@ -55,6 +55,8 @@ export class WebadminComponent implements OnInit {
       this.router.navigate(['/login']);
     }
     else {
+      this.postphoto.push("assets/img/Coliving.jpg");
+
 
       this.user = JSON.parse(localStorage.getItem("user"));
       console.log(this.user);
@@ -95,7 +97,7 @@ export class WebadminComponent implements OnInit {
    
    updatephoto() {
     // debugger;
-    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto, FrontPhoto: this.postphoto, Position: this.PostId };
+    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[2], FrontPhoto: this.postphoto[1], Position: this.PostId };
     debugger;
 
     this.heroService.ServicioPostPost("UpdateIndex", creadoobj).subscribe((value) => {
@@ -112,6 +114,8 @@ export class WebadminComponent implements OnInit {
             this.get_photos();
            
            
+            this.postphoto=[]; 
+            this.postphoto.push("assets/img/Coliving.jpg");
 
           }
       }
@@ -141,7 +145,7 @@ export class WebadminComponent implements OnInit {
             debugger;
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
             debugger;
-            this.postphoto = url;
+            this.postphoto.push(url);
             debugger;
             this.newImages = [];
           }

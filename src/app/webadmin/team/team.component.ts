@@ -42,11 +42,10 @@ export class TeamComponent implements OnInit {
   Name: string ="";
   Desc: string ="";
   Link: string ="";
-
-
-  postphoto: string = "assets/img/Coliving.jpg";
+  tt: string ="";
   
 
+  postphoto: any[]=[];
   comment: string = "";
 
   public newImages: any[] = [];
@@ -57,6 +56,8 @@ export class TeamComponent implements OnInit {
       this.router.navigate(['/login']);
     }
     else {
+      this.postphoto.push("assets/img/Coliving.jpg");
+
 
       this.user = JSON.parse(localStorage.getItem("user"));
       console.log(this.user);
@@ -97,7 +98,8 @@ export class TeamComponent implements OnInit {
    
    updatephoto() {
     // debugger;
-    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto, FrontPhoto: this.postphoto, Name : this.Name , Description: this.Desc, Link: this.Link};
+    var apellido = this.Name.split(" ");
+    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[2], FrontPhoto: this.postphoto[1], Name : apellido[0] , LastName: apellido[1], Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
     debugger;
 
     this.heroService.ServicioPostPost("UpdateTeam", creadoobj).subscribe((value) => {
@@ -112,6 +114,9 @@ export class TeamComponent implements OnInit {
           debugger;
           if (value.result == "Success") {
             this.get_photos();
+            
+            this.postphoto=[]; 
+            this.postphoto.push("assets/img/Coliving.jpg");
            
            
 
@@ -143,8 +148,9 @@ export class TeamComponent implements OnInit {
             debugger;
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
             debugger;
-            this.postphoto = url;
+            this.postphoto.push(url);
             debugger;
+
             this.newImages = [];
           }
         })

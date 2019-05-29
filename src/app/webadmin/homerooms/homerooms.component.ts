@@ -232,7 +232,9 @@ export class HomeroomsComponent implements OnInit {
          //debugger;
          if (value.result == "Success") {
            this.get_photos();
+           
            this.postphoto=[]; 
+           this.postphoto.push("assets/img/Coliving.jpg");
           
           
 
