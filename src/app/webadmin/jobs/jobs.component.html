@@ -1,5 +1,5 @@
 <div class="row">
-    <div class=" col  " *ngFor="let post of posts" >
+    <div class=" col-sm-12 col-md-12  " *ngFor="let post of posts" >
       <div class="card ">
         <div class="card-body pb-0">
             <div class="col-sm-12 col-md-12" >
@@ -30,6 +30,8 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        
+        <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
             <div class="col-12  margin-gral">
                 Title:
@@ -45,9 +47,10 @@
                         </div>
           
         </div>
+      </form>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-          <button type="button" class="btn btn-primary" (click)="updatephoto()" >Save changes</button>
+          <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Save changes</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

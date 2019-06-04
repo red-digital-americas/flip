@@ -16,8 +16,8 @@ import { Observable } from 'rxjs';
 export class DatosService {
 
 
-  // public heroesUrl = 'http://localhost:49314/api/';  // URL to web api 
-  public heroesUrl = 'http://23.253.173.64:8088/api/';  // URL to web api 
+   public heroesUrl = 'http://localhost:49314/api/';  // URL to web api 
+  //public heroesUrl = 'http://23.253.173.64:8088/api/';  // URL to web api 
   private url: string = 'http://23.253.173.64:8088/'; // URL api server 
 
   getURL() {

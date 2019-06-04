@@ -47,6 +47,8 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <form #loginForm="ngForm" autocomplete="off">
+
         <div class="modal-body">
          <div class="col-12  margin-gral">
             Name:
@@ -83,10 +85,14 @@
   
           </div>
         </div>
+        
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-          <button type="button" class="btn btn-primary" (click)="updatephoto()" >Save changes</button>
+          <button type="button" class="btn btn-primary"   [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Save changes</button>
         </div>
+          </form>
+
+    
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->

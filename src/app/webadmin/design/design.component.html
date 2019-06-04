@@ -35,12 +35,13 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
             Imagen 1:
           <div class="custom-file margin-gral ">
            
             <input type="file" accept="image/*"
-                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
+                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
             <label class="custom-file-label" for="customFile">Choose file</label>
   
           </div>
@@ -53,9 +54,10 @@
                     <input type="text" [(ngModel)]="desc" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
                   </div>
         </div>
+      </form>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-          <button type="button" class="btn btn-primary" (click)="updatephoto()" >Save changes</button>
+          <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid"  (click)="updatephoto()" >Save changes</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
