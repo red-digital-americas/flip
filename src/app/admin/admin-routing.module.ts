@@ -8,6 +8,8 @@ import { CommunitiesComponent } from './communities/communities.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { BuildingComponent } from './building/building.component';
 import { EditcommentComponent } from './editcomment/editcomment.component';
+import { ActivitiesComponent } from './activities/activities.component';
+import { ReservationsComponent } from './reservations/reservations.component';
 
 const routes: Routes = [
   {
@@ -17,10 +19,10 @@ const routes: Routes = [
       title: 'Dashboard'
     },
     children: [
-        {
-          path: '',
-        redirectTo: 'communities'
-        },
+      {
+        path: '',
+      redirectTo: 'communities'
+      },
       {
         path: 'newsfeed/:id',
         component: NewsfeedComponent,
@@ -42,7 +44,16 @@ const routes: Routes = [
         component: EditcommentComponent,
         data: { title: 'Building' }
       },
-
+      {
+        path: 'activities/:id',
+        component: ActivitiesComponent,
+        data: { title: 'Activities' }
+      },
+      {
+        path: 'reservations/:id',
+        component: ReservationsComponent,
+        data: { title: 'Reservations' }
+      },
     ]
   }
 ];
