@@ -7,18 +7,9 @@ import { startOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addWe
 import { CalendarEvent, CalendarEventAction } from 'angular-calendar'; // import should be from `angular-calendar` in your app
 
 const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  }
+  red: { primary: '#ad2121', secondary: '#FAE3E3'},
+  blue: { primary: '#1e90ff', secondary: '#D1E8FF'},
+  yellow: { primary: '#e3bc08', secondary: '#FDF1BA'}
 };
 
 @Component({
@@ -63,15 +54,18 @@ export class ReservationsComponent implements OnInit {
   }        
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  CALENDAR
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
   view: string = 'month';
-
-  viewDate: Date = new Date();
+  viewDate: Date = new Date();  
 
   actions: CalendarEventAction[] = [{
     label: '<i class="fa fa-fw fa-pencil"></i>',
     onClick: ({event}: {event: CalendarEvent}): void => {
-      console.log('Edit event', event);
+      console.log('Edit event', event);      
     }
   }, {
     label: '<i class="fa fa-fw fa-times"></i>',
@@ -101,7 +95,6 @@ export class ReservationsComponent implements OnInit {
   activeDayIsOpen: boolean = true;
 
   increment(): void {
-
     const addFn: any = {
       day: addDays,
       week: addWeeks,
@@ -109,11 +102,9 @@ export class ReservationsComponent implements OnInit {
     }[this.view];
 
     this.viewDate = addFn(this.viewDate, 1);
-
   }
 
   decrement(): void {
-
     const subFn: any = {
       day: subDays,
       week: subWeeks,
@@ -121,7 +112,6 @@ export class ReservationsComponent implements OnInit {
     }[this.view];
 
     this.viewDate = subFn(this.viewDate, 1);
-
   }
 
   today(): void {
@@ -131,10 +121,7 @@ export class ReservationsComponent implements OnInit {
   dayClicked({date, events}: {date: Date, events: CalendarEvent[]}): void {
 
     if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
+      if ( (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
         this.activeDayIsOpen = false;
       } else {
         this.activeDayIsOpen = true;
@@ -142,8 +129,5 @@ export class ReservationsComponent implements OnInit {
       }
     }
   }
-
-
-
 
 }
