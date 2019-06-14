@@ -15,6 +15,7 @@ import { EditcommentComponent } from './editcomment/editcomment.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 
+import { CalendarModule } from 'angular-calendar';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ReservationsComponent } from './reservations/reservations.component';
     AdminRoutingModule,
     CommonModule,    
     ToasterModule,
+    CalendarModule.forRoot()
   ],
   declarations: [
     CommunitiesComponent,  

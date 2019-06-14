@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CalendarModule } from 'angular-calendar';
-
 import { ReservationsComponent } from './reservations.component';
+// import { CalendarModule } from 'angular-calendar';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    CalendarModule.forRoot()
+    // CalendarModule.forRoot()
   ],
-  declarations: [ReservationsComponent],    
+  declarations: [ReservationsComponent],  
+  // exports: [ReservationsComponent],  
 })
 export class ReservationsModule { }

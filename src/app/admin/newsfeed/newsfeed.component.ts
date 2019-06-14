@@ -7,7 +7,7 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 @Component({
   selector: 'app-newsfeed',
   templateUrl: './newsfeed.component.html',
-  styleUrls: ['./newsfeed.component.scss', '../../../scss/vendors/toastr/toastr.scss'],  
+  styleUrls: ['./newsfeed.component.scss'],  
   providers: [ToasterService]
 })
 
