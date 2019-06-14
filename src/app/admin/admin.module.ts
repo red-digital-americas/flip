@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+// import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ToasterModule, ToasterService } from 'angular2-toaster/angular2-toaster';
@@ -16,6 +16,9 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 
 import { CalendarModule } from 'angular-calendar';
+import { ChartsModule } from 'ng2-charts';
+
+
 
 @NgModule({
   imports: [

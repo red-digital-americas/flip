@@ -23,7 +23,7 @@ const defaults = {
   templateUrl: 'code-editors.component.html'
 })
 export class CodeEditorsComponent implements AfterViewInit {
-  @ViewChild('editor') editor;
+  // @ViewChild('editor') editor;
 
   text: string = defaults.markdown;
   options: any = {
@@ -33,18 +33,18 @@ export class CodeEditorsComponent implements AfterViewInit {
   };
 
   ngAfterViewInit () {
-    this.editor.setMode('markdown');
-    this.editor.setTheme('monokai');
+    // this.editor.setMode('markdown');
+    // this.editor.setTheme('monokai');
   }
 
   onThemeChange (e) {
     const theme = e.target.value;
-    this.editor.setTheme(theme);
+    // this.editor.setTheme(theme);
   }
 
   onModeChange (e) {
     const mode = e.target.value;
     this.text = defaults[mode];
-    this.editor.setMode(mode);
+    // this.editor.setMode(mode);
   }
 }

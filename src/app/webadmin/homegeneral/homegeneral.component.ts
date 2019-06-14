@@ -14,7 +14,7 @@ import { ImageCropperModule, ImageCroppedEvent, ImageCropperComponent } from 'ng
   
 export class HomegeneralComponent implements OnInit {
 
-  @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
+  // @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
 
   public myModal;
   public largeModal;
@@ -136,16 +136,16 @@ export class HomegeneralComponent implements OnInit {
     console.log('Load failed');
   }
   rotateLeft() {
-    this.imageCropper.rotateLeft();
+    // this.imageCropper.rotateLeft();
   }
   rotateRight() {
-    this.imageCropper.rotateRight();
+    // this.imageCropper.rotateRight();
   }
   flipHorizontal() {
-    this.imageCropper.flipHorizontal();
+    // this.imageCropper.flipHorizontal();
   }
   flipVertical() {
-    this.imageCropper.flipVertical();
+    // this.imageCropper.flipVertical();
   }
 
   get_photos() {
