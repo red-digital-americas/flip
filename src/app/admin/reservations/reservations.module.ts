@@ -8,7 +8,7 @@ import { ReservationsComponent } from './reservations.component';
 @NgModule({
   imports: [
     CommonModule,
-    // CalendarModule.forRoot()
+    // CalendarModule.forRoot()    
   ],
   declarations: [ReservationsComponent],  
   // exports: [ReservationsComponent],  

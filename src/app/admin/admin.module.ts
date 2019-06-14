@@ -17,6 +17,7 @@ import { ReservationsComponent } from './reservations/reservations.component';
 
 import { CalendarModule } from 'angular-calendar';
 import { ChartsModule } from 'ng2-charts';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 
@@ -29,7 +30,8 @@ import { ChartsModule } from 'ng2-charts';
     AdminRoutingModule,
     CommonModule,    
     ToasterModule,
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    FullCalendarModule
   ],
   declarations: [
     CommunitiesComponent,  
