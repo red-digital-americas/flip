@@ -14,10 +14,9 @@ import { ImageCropperModule, ImageCroppedEvent, ImageCropperComponent } from 'ng
 })
 export class HomeammenitiesComponent implements OnInit {
 
-
-  // @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
-
-  // @ViewChild(ImageCropperComponent) imageCropper1: ImageCropperComponent;
+  
+  @ViewChild(ImageCropperComponent, {read: ImageCropperComponent, static: true}) imageCropper: ImageCropperComponent;
+  @ViewChild(ImageCropperComponent, {read: ImageCropperComponent, static: true}) imageCropper1: ImageCropperComponent;
 
 
   
@@ -160,16 +159,16 @@ export class HomeammenitiesComponent implements OnInit {
       console.log('Load failed');
     }
     rotateLeft1() {
-      // this.imageCropper1.rotateLeft();
+      this.imageCropper1.rotateLeft();
     }
     rotateRight1() {
-      // this.imageCropper1.rotateRight();
+      this.imageCropper1.rotateRight();
     }
     flipHorizontal1() {
-      // this.imageCropper1.flipHorizontal();
+      this.imageCropper1.flipHorizontal();
     }
     flipVertical1() {
-      // this.imageCropper1.flipVertical();
+      this.imageCropper1.flipVertical();
     }
   
   
@@ -184,16 +183,16 @@ export class HomeammenitiesComponent implements OnInit {
       console.log('Load failed');
     }
     rotateLeft() {
-      // this.imageCropper.rotateLeft();
+      this.imageCropper.rotateLeft();
     }
     rotateRight() {
-      // this.imageCropper.rotateRight();
+      this.imageCropper.rotateRight();
     }
     flipHorizontal() {
-      // this.imageCropper.flipHorizontal();
+      this.imageCropper.flipHorizontal();
     }
     flipVertical() {
-      // this.imageCropper.flipVertical();
+      this.imageCropper.flipVertical();
     }
   
     get_photos() {

@@ -50,9 +50,45 @@
   <div class="card">    
     <div class="card-body">
       <!-- <h5 class="card-title">Calendar</h5> -->
+      <div (click)="VerDetalle();">Some Method</div>
+      <div (click)="AddEvent();">Add Event</div>
      
-      <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins"></full-calendar>
+      <!-- <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins"></full-calendar> -->      
+      <!-- <full-calendar defaultView="dayGridDay" [plugins]="calendarPlugins" [weekends]="false"
+        [events]="[ { title: 'event 1', date: '2019-04-01' }, { title: 'event 2', date: '2019-04-02' }]"
+        (dateClick)="handleDateClick($event)" timeZone='Europe/Moscow' 
+      ></full-calendar> -->
 
+      <full-calendar
+        #calendar
+        defaultView="dayGridMonth"
+        [header]="{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        }"
+        [plugins]="calendarPlugins"
+        [weekends]="calendarWeekends"        
+        eventLimit= "false"
+        locale="es"
+        nowIndicator="true"        
+
+        [events]="calendarEvents"
+
+        selectable="true" 
+        (select)="handleSelect($event)"
+
+        (eventClick)="handleEventClick($event)"
+        (dateClick)="handleDateClick($event)"   
+        (eventDrop)="handleEventDrop($event)"
+        
+      ></full-calendar>
+      <!-- selectable="false" 
+      (select)="handleSelect($event)" -->      
+
+      <!-- [events]="calendarEvents" -->
+
+      <!-- x (eventOverlap)="handleEventOverlap($event, $event)" -->
   </div>
 </div>
 

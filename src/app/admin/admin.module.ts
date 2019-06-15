@@ -19,6 +19,8 @@ import { CalendarModule } from 'angular-calendar';
 import { ChartsModule } from 'ng2-charts';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { DetalleComponent } from './modals/detalle/detalle.component';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     CommonModule,    
     ToasterModule,
     CalendarModule.forRoot(),
-    FullCalendarModule
+    FullCalendarModule,
+    ModalModule.forRoot()
   ],
   declarations: [
     CommunitiesComponent,  
@@ -39,7 +42,11 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     BuildingComponent, 
     EditcommentComponent, 
     ActivitiesComponent,
-    ReservationsComponent
+    ReservationsComponent,
+    DetalleComponent
+  ],
+  entryComponents: [
+    DetalleComponent
   ]
 })
 export class AdminModule { }
