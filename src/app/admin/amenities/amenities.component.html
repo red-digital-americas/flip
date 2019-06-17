@@ -1,0 +1,62 @@
+<app-nav></app-nav>
+  
+<div class="card card-height-newsfeed">  
+    <div class="card-body">
+      <h5 class="card-title">Add Amenity</h5>
+      
+      <form #loginForm="ngForm" autocomplete="off">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 ">
+
+            <div class="form-row">
+              <div class="col-12  margin-gral">
+                <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Name" required>
+              </div>
+            </div>
+              
+            <div class="custom-file margin-gral ">
+              <input type="file" accept="image/*"
+                     (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
+              <label class="custom-file-label" for="customFile">Choose file</label>  
+            </div>                    
+                
+            <div class="input-group margin-gral ">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Description</span>
+              </div>
+              <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="posttext" aria-label="With textarea" required></textarea>
+            </div>
+
+            <!-- <button (click)="AddAmenity()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Add Amenity</button> -->
+            <button (click)="AddAmenity()" type="button" class="btn btn-outline-dark margin-gral">Add Amenity</button>
+          </div>
+
+          <div class="col-md-6 col-sm-6 ">
+            <img class="img-size" src="{{postphoto}}" />
+          </div>
+          
+        </div>  
+      </form>
+    </div>
+  
+    <div class="row">
+      <div class="col-sm-6 col-md-4" *ngFor="let amenity of amenitiesArray">
+        <div class="card">
+          <div class="card-header">{{amenity.name}}</div>
+  
+          <div class="card-body">
+            <label> {{amenity.description}}  </label>
+            <div class="col-sm-6 col-md-4">
+              <img class="img-size" src="{{amenity.photo}}">
+            </div>
+          </div>
+
+          <button (click)="EditAmenity(amenity.id)" type="button" class="btn btn-outline-primary">Edit Amenity</button>
+          <button (click)="DeleteAmenity(amenity.id)" type="button" class="btn  btn-outline-danger">Delete Amenity</button>  
+        </div>
+      </div>
+    </div>
+
+</div>
+  
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>    

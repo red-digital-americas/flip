@@ -1,29 +1,19 @@
+<div class="animated fadeIn">
+  <div class="container-fluid">      
+    <button class="btn btn-dark margintop-button" (click)="AddBuilding"> Agregar Nueva Comunidad </button>
+    
+    <div class="row">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4" *ngFor="let post of posts">
+        <div class="card">
+          <a (click)="gotonewsfeed(post.idbuild)" style="cursor:pointer; color:inherit">
 
-
-<button class="btn btn-dark margintop-button" (click)="AddBuilding"> Agregar Nueva Comunidad </button>
-
-
-<div class="app-body principalcontainer">
-
-  <!-- Main content -->
-  <div class="main">
-    <div class="container-fluid">
-      <div class="animated fadeIn">
-        <div class="row">
-          <div class="col-sm-6 col-md-6" *ngFor="let post of posts">
-            <div class="card">
-              <a (click)="gotonewsfeed(post.idbuild)" style="cursor:pointer; color:inherit">
-
-                <div class="card-body">
-                  <img class="img-size-build" src="assets/img/Builds/altata6.jpg" />
-                </div>
-                <div class="card-footer">{{post.name}}</div>
-                </a>
+            <div class="card-body">
+              <img class="img-size-build" src="assets/img/Builds/altata6.jpg" />
             </div>
-          </div><!--/.col-->
-
-        </div><!--/.row-->
-      </div>
-    </div><!-- /.container-fluid -->
-  </div>
+            <div class="card-footer">{{post.name}}</div>
+            </a>
+        </div>
+      </div><!--/.col-->
+    </div><!--/.row-->      
+  </div><!-- /.container-fluid -->
 </div>

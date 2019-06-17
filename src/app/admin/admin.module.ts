@@ -8,6 +8,8 @@ import { ToasterModule, ToasterService } from 'angular2-toaster/angular2-toaster
 
 import { AdminRoutingModule } from './admin-routing.module';
 
+
+
 import { CommunitiesComponent } from './communities/communities.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { BuildingComponent } from './building/building.component';
@@ -21,6 +23,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DetalleComponent } from './modals/detalle/detalle.component';
+import { AmenitiesComponent } from './amenities/amenities.component';
+import { NavModule } from './shared/nav/nav.module';
 
 
 @NgModule({
@@ -34,7 +38,8 @@ import { DetalleComponent } from './modals/detalle/detalle.component';
     ToasterModule,
     CalendarModule.forRoot(),
     FullCalendarModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NavModule
   ],
   declarations: [
     CommunitiesComponent,  
@@ -42,6 +47,7 @@ import { DetalleComponent } from './modals/detalle/detalle.component';
     BuildingComponent, 
     EditcommentComponent, 
     ActivitiesComponent,
+    AmenitiesComponent,
     ReservationsComponent,
     DetalleComponent
   ],

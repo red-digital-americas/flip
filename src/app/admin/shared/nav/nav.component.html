@@ -1,0 +1,6 @@
+<ul class="nav navbar-nav" style="flex-direction: row;">    
+    <li class="nav-item px-3" *ngFor="let nav of navRoutes">
+      <a class="nav-link" [routerLink]="[ nav.route, IDBUILD]">{{nav.title}}</a>
+      <!-- <a class="nav-link" [routerLink]="['/'+route, IDBUILD]">{{route}}</a> -->
+    </li>     
+</ul>

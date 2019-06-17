@@ -10,6 +10,7 @@ import { BuildingComponent } from './building/building.component';
 import { EditcommentComponent } from './editcomment/editcomment.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { AmenitiesComponent } from './amenities/amenities.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,11 @@ const routes: Routes = [
         path: 'activities/:id',
         component: ActivitiesComponent,
         data: { title: 'Activities' }
+      },
+      {
+        path: 'amenities/:id',
+        component: AmenitiesComponent,
+        data: { title: 'Amenities' }
       },
       {
         path: 'reservations/:id',
