@@ -4,33 +4,30 @@ import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 
+class AmenityRequestModel {
+  public Name: string = "";
+  public Description: string = "";  
+  public Photo: string = "assets/img/Coliving.jpg"; 
+  public BuildingId:number;
+  constructor(buildingid) {
+    this.BuildingId = buildingid;
+  }
+}
+
 @Component({
   selector: 'app-amenities',
   templateUrl: './amenities.component.html',
   styleUrls: ['./amenities.component.scss'],
   providers: [ToasterService]
 })
-
 export class AmenitiesComponent implements OnInit {
   
-  posts: any[];
-  email: string;
-  password: string;
-  token: boolean;
-  message: {};
-  validar: boolean = false;
-  idpost: any;
   IDUSR: string = "0";
-  IDBUILD: string = "0";
-  PostId: number ;
-  posttext: string = "";
-  posttitle: string = "";
+  IDBUILD: string = "0";  
   public user: string[];
 
-  postphoto: string = "assets/img/Coliving.jpg";
-  comment: string = "";
+  amenityRequestModel:AmenityRequestModel;     
   public newImages: any[] = [];
-
 
   amenitiesArray = [];
 
@@ -53,6 +50,7 @@ export class AmenitiesComponent implements OnInit {
       console.log(this.user);
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
       this.IDBUILD = this.route.snapshot.params['id']; 
+      this.amenityRequestModel = new AmenityRequestModel(this.IDBUILD);
       this.GetAmenities();        
     }
   }  
@@ -77,18 +75,20 @@ export class AmenitiesComponent implements OnInit {
   }
 
   AddAmenity() {    
-    var params = {
-      "Name": "aaa",
-      "Description": "description lorem",
-      "BuildingId": this.route.snapshot.params['id'],
-      "Photo": "ruta"
-    }
-    this.heroService.service_general_post("Amenity", params).subscribe(
+    // var params = {
+    //   "Name": "aaa",
+    //   "Description": "description lorem",
+    //   "BuildingId": this.route.snapshot.params['id'],
+    //   "Photo": this.postphoto
+    // }
+    console.log(this.amenityRequestModel);
+    this.heroService.service_general_post("Amenity", this.amenityRequestModel).subscribe(
       (res)=> {
         if(res.result === "Success"){          
           // console.log(res.item);
           this.toasterService.pop('success', 'Success ', 'Your amenity was created correctly.');   
           this.GetAmenities();
+          this.amenityRequestModel = new AmenityRequestModel(this.IDBUILD);
         } else if(res.result === "Error") {
           console.log("Ocurrio un error" + res.detalle);
           this.toasterService.pop('danger', 'Error ', 'An error has been ocurred.');
@@ -104,8 +104,7 @@ export class AmenitiesComponent implements OnInit {
   prepareImages(e) {
     debugger; 
     if (Utils.isDefined(e.srcElement.files)) {
-      for (let f of e.srcElement.files) {
-        debugger;
+      for (let f of e.srcElement.files) {        
         this.newImages.push(f);
       }
     }
@@ -118,12 +117,9 @@ export class AmenitiesComponent implements OnInit {
       for (let f of this.newImages) {
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
-            url = <string>r.message;
-            debugger;
-            url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-            debugger;
-            this.postphoto = url;
-            debugger;
+            url = <string>r.message;            
+            url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');            
+            this.amenityRequestModel.Photo = url;            
             this.newImages = [];
           }
         })
@@ -131,8 +127,7 @@ export class AmenitiesComponent implements OnInit {
     }
   }
 
-
-  EditAmenity(id: number) {this.router.navigate(['/editcomment/' + id])}
+  EditAmenity(id: number) {this.router.navigate(['/editamenity/' + id])}
 
   DeleteAmenity(id: number) {        
     this.heroService.service_general_delete(`Amenity/${id}`).subscribe(

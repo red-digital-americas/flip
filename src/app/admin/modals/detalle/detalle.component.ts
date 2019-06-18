@@ -1,59 +1,50 @@
 import { Component, OnInit, ViewChild, Input, forwardRef, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-// import { ApiServices } from '../../../services/api.services';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { DatosService } from '../../../../datos.service';
 
-const INLINE_EDIT_CONTROL_VALUE_ACCESSOR = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => DetalleComponent),
-  multi: true
-};
 @Component({
   selector: 'app-detalle',
   templateUrl: './detalle.component.html',
-  styleUrls: ['./detalle.component.scss'],
-  providers: [
-    // ApiServices,
-    INLINE_EDIT_CONTROL_VALUE_ACCESSOR
-  ]
+  styleUrls: ['./detalle.component.scss']  
 })
 export class DetalleComponent implements OnInit {    
   /////////////////////////////////////////////////////////
   // passed in initialState from reservations.component.ts
-  id;  
-  title;
+  idProps;    
   responseData;
-  // @Output() action = new EventEmitter();
-  
-  // modalRef2: BsModalRef;
 
-  constructor( public modalRef: BsModalRef, private modalService: BsModalService, 
-    // private apiservices: ApiServices
+  eventDetail;
+
+  constructor( public modalRef: BsModalRef, private modalService: BsModalService, private heroService: DatosService    
   ) { }
 
   ngOnInit() {
-    console.log(this.id, this.title);
-    // this.apiservices.service_general_get("/AdministracionCuentas/GetAccountById/"+this.cveCliente).subscribe((res)=>{
-    //   console.log(res);      
-    // });
+    console.log(this.idProps);
+    // TODO Change this for the real service that brings info of events   
+    var params = { "iduser": 4, "id": 2 };
+    this.heroService.service_general_post("Activity/GetListActivities", params).subscribe(
+      (res)=> {
+        if(res.result === "Success"){                    
+          this.eventDetail = res.item[1];
+        } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
+        else { console.log("Error");}
+      },
+      (err)=> {console.log(err);}
+    );    
   }
   
-  public onClickOK() {
-    // this.action.emit(true); //Can send your required data here instead of true
+  public Edit() {    
+    // TODO Servicio para editar evento
+
     this.responseData = {id:1, name:'aaaaa', time:new Date()};
     this.modalRef.hide();
   }
-  public onClickCANCEL() {
-    // this.action.emit(false); //Can send your required data here instead of true
+  public Delete() {    
+    if (!confirm('Would you like to delete this event?')) { return;}    
+
+    // TODO Servicio eliminar evento
+
     this.responseData = false;
     this.modalRef.hide();    
-  }
-
-  // For another Modal
-  // actualiza(template: TemplateRef<any>) {
-  //   this.modalRef2 = this.modalService.show(template, { class: 'second' });
-  //   this.modalRef.hide();
-  //   this.modalRef = null;
-  // }
-
+  }  
 }

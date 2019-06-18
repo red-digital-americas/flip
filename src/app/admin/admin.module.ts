@@ -1,34 +1,43 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-// import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { ToasterModule, ToasterService } from 'angular2-toaster/angular2-toaster';
+import { ToasterModule } from 'angular2-toaster/angular2-toaster';
 
 import { AdminRoutingModule } from './admin-routing.module';
-
-
-
-import { CommunitiesComponent } from './communities/communities.component';
-import { NewsfeedComponent } from './newsfeed/newsfeed.component';
-import { BuildingComponent } from './building/building.component';
-import { EditcommentComponent } from './editcomment/editcomment.component';
-import { ActivitiesComponent } from './activities/activities.component';
-import { ReservationsComponent } from './reservations/reservations.component';
 
 import { CalendarModule } from 'angular-calendar';
 import { ChartsModule } from 'ng2-charts';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { DetalleComponent } from './modals/detalle/detalle.component';
-import { AmenitiesComponent } from './amenities/amenities.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+
+
 import { NavModule } from './shared/nav/nav.module';
+import { CommunitiesComponent } from './communities/communities.component';
+import { BuildingComponent } from './building/building.component';
+////////////////////////////////////////////////////////////////////////////
+import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import { EditcommentComponent } from './editcomment/editcomment.component';
+////////////////////////////////////////////////////////////////////////////
+import { AmenitiesComponent } from './amenities/amenities.component';
+import { EditAmenitiesComponent } from './amenities/edit/edit-amenities.component';
+///////////////////////////////////////////////////////////////////////////
+import { ActivitiesComponent } from './activities/activities.component';
+///////////////////////////////////////////////////////////////////////////
+import { ReservationsComponent } from './reservations/reservations.component';
+import { DetalleComponent } from './modals/detalle/detalle.component';
+import { CrearComponent } from './modals/crear/crear.component';
+
 
 
 @NgModule({
-  imports: [
+  imports: [    
+    BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     FormsModule,
     ChartsModule,
     BsDropdownModule,
@@ -39,7 +48,7 @@ import { NavModule } from './shared/nav/nav.module';
     CalendarModule.forRoot(),
     FullCalendarModule,
     ModalModule.forRoot(),
-    NavModule
+    NavModule    
   ],
   declarations: [
     CommunitiesComponent,  
@@ -48,11 +57,14 @@ import { NavModule } from './shared/nav/nav.module';
     EditcommentComponent, 
     ActivitiesComponent,
     AmenitiesComponent,
+    EditAmenitiesComponent,
     ReservationsComponent,
-    DetalleComponent
+    DetalleComponent,
+    CrearComponent
   ],
   entryComponents: [
-    DetalleComponent
+    DetalleComponent,
+    CrearComponent
   ]
 })
 export class AdminModule { }

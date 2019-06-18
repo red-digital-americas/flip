@@ -68,6 +68,7 @@
         (eventClick)="handleEventClick($event)"
         (dateClick)="handleDateClick($event)"   
         (eventDrop)="handleEventDrop($event)"
+        (eventResize)="handleEventResize($event)"
         
       ></full-calendar>
       <!-- selectable="false" 
@@ -78,4 +79,6 @@
       <!-- x (eventOverlap)="handleEventOverlap($event, $event)" -->
   </div>
 </div>
+
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>    
 

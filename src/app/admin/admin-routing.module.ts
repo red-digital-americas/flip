@@ -11,6 +11,7 @@ import { EditcommentComponent } from './editcomment/editcomment.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { AmenitiesComponent } from './amenities/amenities.component';
+import { EditAmenitiesComponent } from './amenities/edit/edit-amenities.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,11 @@ const routes: Routes = [
       {
         path: 'amenities/:id',
         component: AmenitiesComponent,
+        data: { title: 'Amenities' }
+      },
+      {
+        path: 'editamenity/:id',
+        component: EditAmenitiesComponent,
         data: { title: 'Amenities' }
       },
       {

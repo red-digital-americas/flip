@@ -10,7 +10,7 @@
 
             <div class="form-row">
               <div class="col-12  margin-gral">
-                <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Name" required>
+                <input type="text" [(ngModel)]="amenityRequestModel.Name" class="form-control" name="postitle" id="postitle" placeholder="Name" required>
               </div>
             </div>
               
@@ -24,15 +24,14 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">Description</span>
               </div>
-              <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="posttext" aria-label="With textarea" required></textarea>
+              <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="amenityRequestModel.Description" aria-label="With textarea" required></textarea>
             </div>
-
-            <!-- <button (click)="AddAmenity()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Add Amenity</button> -->
-            <button (click)="AddAmenity()" type="button" class="btn btn-outline-dark margin-gral">Add Amenity</button>
+            
+            <button (click)="AddAmenity()" type="button" [disabled]="!loginForm.form.valid" class="btn btn-outline-dark margin-gral">Add Amenity</button>
           </div>
 
           <div class="col-md-6 col-sm-6 ">
-            <img class="img-size" src="{{postphoto}}" />
+            <img class="img-size" src="{{amenityRequestModel.Photo}}" />
           </div>
           
         </div>  
