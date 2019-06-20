@@ -26,7 +26,7 @@
   <div class="card">    
     <div class="card-body">
       <!-- <h5 class="card-title">Calendar</h5> -->
-      <div (click)="someMethod();">Refresh</div>      
+      <button (click)="Refresh()" type="button" class="btn btn-outline-dark margin-gral">Refresh</button>           
 
       <div class="form-row">
         <div class="col-12 margin-gral">
@@ -67,13 +67,13 @@
         (eventClick)="handleEventClick($event)"
         (dateClick)="handleDateClick($event)"   
         (eventDrop)="handleEventDrop($event)"
-        (eventResize)="handleEventResize($event)"
+        (eventResize)="handleEventResize($event)"        
                 
       ></full-calendar>
       <!-- selectable="false" 
       (select)="handleSelect($event)" -->      
 
-      <!-- [events]="calendarEvents" -->
+      <!-- [events]="calendarEvents" -->      
 
       <!-- x (eventOverlap)="handleEventOverlap($event, $event)" -->
   </div>

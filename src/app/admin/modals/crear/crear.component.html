@@ -19,7 +19,7 @@
                         <div class="custom-file">
                             <input type="file" accept="image/*"
                                 (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
-                            <label class="custom-file-label" for="customFile">Choose file</label>        
+                            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>        
                         </div>
                     </div>
                     
@@ -32,12 +32,17 @@
                         </div>
                     </div>           
                     
-                    <div class="col-12 margin-gral">
-                        <select class="form-control" [(ngModel)]="acitivyModel.UserId" name="activityUserId" id="activityUserId">
-                            <option *ngFor="let user of usersArray" [value]="user.id" >
-                                {{user.name}}
-                            </option>                            
-                        </select>
+                    <div class="col-12 mb-2">                        
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Host</span>
+                            </div>  
+                            <select class="form-control" [(ngModel)]="acitivyModel.UserId" name="activityUserId" id="activityUserId">
+                                <option *ngFor="let user of usersArray" [value]="user.id" >
+                                    {{user.name}}
+                                </option>                            
+                            </select>                           
+                        </div>
                     </div> 
 
                     <!-- <div class="col-12 mb-2">

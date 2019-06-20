@@ -58,6 +58,7 @@ export class ReservationsComponent implements OnInit {
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
       this.IDBUILD = this.route.snapshot.params['id'];       
       this.GetAmenities();         
+      this.InitCalendarSetup();
     }
   }        
 
@@ -100,8 +101,8 @@ export class ReservationsComponent implements OnInit {
   ];
 
   schedulesArray = [];
-  scheduleModel:ScheduleModel;    // For Modifications through Calendar handles Events
-
+  scheduleModel:ScheduleModel;    // For Modifications through Calendar handles Events  
+  
   GetEvents() {  
     let params = {buildingId: this.IDBUILD, amenityId: this.amenitySelect};
     this.heroService.service_general_get_with_params("Schedules", params).subscribe(
@@ -120,9 +121,26 @@ export class ReservationsComponent implements OnInit {
     );  
   }
 
-  handleDateClick(arg) {      
-    // console.log(arg.date, arg.dateStr);
-    this.Crear(arg.date);    
+  /////////////////////////////////// FULL CALENDAR INPUTS /////////////////////////////////////////////////////////////////  
+  // https://github.com/fullcalendar/fullcalendar-angular/blob/master/projects/fullcalendar/src/lib/fullcalendar-options.ts
+  private InitCalendarSetup () {
+    this.calendarComponent.eventAllow = this.handleEventAllow;
+  }
+
+  handleEventAllow(dropLocation, draggedEvent) {          
+    // console.log(draggedEvent.title , draggedEvent.id ,draggedEvent.start, draggedEvent.end); 
+    //////// No permite mover eventos pasados ///////////////////////////////////////////////
+    if (moment(draggedEvent.start).isBefore(moment(), 'day')) { return false; }
+    //////// Eventos con duración solo de un dia ////////////////////////////////////////////
+    if (moment(dropLocation.end).isAfter(moment(dropLocation.start), 'day')) { return false; }
+    //////// Fecha destino a mover debe ser hoy o posterior /////////////////////////////////
+    return moment(dropLocation.start).isSameOrAfter(moment(), 'day');    
+  }  
+
+  /////////////////////////////////// FULL CALENDAR OUTPUS/HANDLERS /////////////////////////////////////////////////////////
+  handleDateClick(arg) {       
+    console.log(arg.date, arg.dateStr, arg.view.type); //"dayGridMonth" "timeGridWeek" "timeGridDay"
+    this.Crear(arg);    
   }
 
   handleEventClick(arg) {
@@ -130,14 +148,8 @@ export class ReservationsComponent implements OnInit {
     this.VerDetalle(arg.event.id);
   }
 
-  handleEventDrop(arg) {        
-    // console.log(arg.event.title, arg.event.id, arg.event.start, arg.event.end);  
-    if (moment(arg.event.start).isBefore(moment(), 'day')) { 
-      this.toasterService.pop('danger', 'Error', 'Previous Date not Allowed');
-      this.GetEvents();      
-      return;
-    }
-
+  handleEventDrop(arg) {          
+    // console.log(arg.event.title, arg.event.id, arg.event.start, arg.event.end);     
     this.GetScheudleById(arg);
   }
 
@@ -150,38 +162,26 @@ export class ReservationsComponent implements OnInit {
   handleSelect(arg) {
     // console.log(arg);
     // this.VerDetalle();
-  }
+  }     
 
-  handleEventAllow(dropLocation, draggedEvent) {   
-    console.log(dropLocation, draggedEvent);
-    if (draggedEvent.id === '999') {
-      return dropLocation.start < new Date(2016, 0, 1); // a boolean
-    }
-    else {
-      return true;
-    }
-  }   
-
-  someMethod() {        
-    // let calendarApi = this.calendarComponent.getApi();    
-    // calendarApi.next();    
+  Refresh() {            
     this.GetEvents();
   }
 
-  AddEvent () {
-    let newEvent = { id: 20, title: 'Evento B', start: new Date(), startEditable:true, durationEditable:true, overlap: false };
-    // this.calendarEvents = this.calendarEvents.concat(newEvent);        
+  // AddEvent () {
+  //   let newEvent = { id: 20, title: 'Evento B', start: new Date(), startEditable:true, durationEditable:true, overlap: false };
+  //   // this.calendarEvents = this.calendarEvents.concat(newEvent);        
 
-    this.calendarComponent.getApi().addEvent(newEvent);    // no lo borra al agregar uno nuevo pero no el arreglo
+  //   this.calendarComponent.getApi().addEvent(newEvent);    // no lo borra al agregar uno nuevo pero no el arreglo
     
-    // this.calendarEvents.push(newEvent);        
-    // this.calendarComponent.getApi().removeAllEvents();
-    // this.calendarComponent.getApi().addEventSource(this.calendarEvents);
+  //   // this.calendarEvents.push(newEvent);        
+  //   // this.calendarComponent.getApi().removeAllEvents();
+  //   // this.calendarComponent.getApi().addEventSource(this.calendarEvents);
 
-    console.log(this.calendarEvents);    
-    console.log(this.calendarComponent.getApi().getEvents());          
-    console.log("AddEvent");
-  }  
+  //   console.log(this.calendarEvents);    
+  //   console.log(this.calendarComponent.getApi().getEvents());          
+  //   console.log("AddEvent");
+  // }  
 
   private LoadEventsToCalendar(events:any) {
     this.calendarComponent.getApi().removeAllEvents();
@@ -193,9 +193,7 @@ export class ReservationsComponent implements OnInit {
     // this.calendarComponent.getApi().refetchEvents();
   }
 
-  private ParseEvent(event:any) {        
-    // let startDate = moment(`${event.year}-${event.month+1}-${event.day} ${event.timeStart}`, 'YYYY-MM-DD HH').toDate();
-    // let endDate = moment(`${event.year}-${event.month+1}-${event.day} ${event.timeEnd}`, 'YYYYMMDD HH').toDate();    
+  private ParseEvent(event:any) {            
     let newEvent = { id: event.id, title: event.activity.name, start: event.timeStart, end: event.timeEnd, startEditable:true, durationEditable:true, overlap: false };
     return newEvent;
   }
@@ -223,9 +221,12 @@ export class ReservationsComponent implements OnInit {
           // console.log(res.item);    
           this.scheduleModel = new ScheduleModel();
           this.scheduleModel = res.item[0];
-          this.scheduleModel.Date = moment(arg.event.start).startOf('day').subtract(5, 'hour').toDate();
-          this.scheduleModel.TimeStart = moment(arg.event.start).subtract(5, 'hour').toDate();
-          this.scheduleModel.TimeEnd = moment(arg.event.end).subtract(5, 'hour').toDate();      
+          // this.scheduleModel.Date = moment(arg.event.start).startOf('day').subtract(5, 'hour').toDate();
+          // this.scheduleModel.TimeStart = moment(arg.event.start).subtract(5, 'hour').toDate();
+          //this.scheduleModel.TimeEnd = moment(arg.event.end).subtract(5, 'hour').toDate(); 
+          this.scheduleModel.Date = moment(arg.event.start).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+          this.scheduleModel.TimeStart = moment(arg.event.start).format('YYYY-MM-DDTHH:mm:ss');
+          this.scheduleModel.TimeEnd = moment(arg.event.end).format('YYYY-MM-DDTHH:mm:ss');
           this.scheduleModel.ActivityId = res.item[0].activity.id;
           // console.log(this.scheduleModel);
           this.UpdateSchedule(this.scheduleModel);
@@ -264,11 +265,11 @@ export class ReservationsComponent implements OnInit {
     });      
   }  
 
-  Crear (date) {
-    if(moment(date).isBefore(moment(new Date()), 'day')) { this.calendarComponent.getApi().unselect(); return; }    
+  Crear (arg) {
+    if(moment(arg.date).isBefore(moment(new Date()), 'day')) { this.calendarComponent.getApi().unselect(); return; }    
 
     this.modalRef = this.modalService.show(CrearComponent, {
-      initialState: { dateProps: date, amenityIdProps: this.amenitySelect, buildingIdProps: this.IDBUILD, responseData: {} },
+      initialState: { dateProps: arg, amenityIdProps: this.amenitySelect, buildingIdProps: this.IDBUILD, responseData: {} },
       class: 'modal-lg'
     });
     this.modalRef.content.closeBtnName = 'Close';  

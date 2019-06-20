@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input, forwardRef, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
+import { Utils } from '../../../utils/utils';
 import { DatosService } from '../../../../datos.service';
 import * as moment from 'moment';
 
@@ -48,6 +49,7 @@ export class DetalleComponent implements OnInit {
   isEditVisible = false;
     ////////////////////////////////////////////////////////
     // CONFIGURATION
+    imageInputLabel = "Choose file";
     showMin: boolean = false;
     showSec: boolean = false;
     isMeridian:boolean = false;
@@ -74,12 +76,12 @@ export class DetalleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.idProps);    
+    // console.log(this.idProps);    
     this.responseData = {action:'None'};
     var params = { "id": this.idProps };
     this.heroService.service_general_get_with_params("Schedules", params).subscribe(
       (res)=> {
-        console.log(res.item);
+        // console.log(res.item);
         if(res.result === "Success"){          
           if (res.item.length < 0) { return; }
           this.eventDetail = res.item[0];
@@ -113,7 +115,7 @@ export class DetalleComponent implements OnInit {
     ///////// Servidor le aumenta +5 horas por la zona horaria ////////////////////
     let date = moment(this.datePicker).format('YYYY/MM/DD');
     let startHour = moment(this.startTime).format('HH');
-    let endHour = moment(this.endTime).format('HH');
+    let endHour = moment(this.endTime).format('HH');    
     
     this.scheduleModel.Date = moment(this.datePicker).startOf('day').subtract(5, 'hour').toDate();
     this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
@@ -158,5 +160,31 @@ export class DetalleComponent implements OnInit {
       },
       () => { this.modalRef.hide(); }      
     );
-  }  
+  } 
+  
+  prepareImages(e) {    
+    if (Utils.isDefined(e.srcElement.files)) {
+      for (let f of e.srcElement.files) {        
+        this.newImages.push(f);
+      }
+    }
+    this.addImages();
+  }
+
+  addImages() {
+    let url: string = '';
+    if (!Utils.isEmpty(this.newImages)) {
+      for (let f of this.newImages) {        
+        this.imageInputLabel = f.name;
+        this.heroService.UploadImgSuc(f).subscribe((r) => {
+          if (Utils.isDefined(r)) {
+            url = <string>r.message;            
+            url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');            
+            this.acitivyModel.Photo = url;            
+            this.newImages = [];
+          }
+        })
+      }
+    }
+  }
 }

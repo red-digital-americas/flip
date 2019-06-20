@@ -37,13 +37,14 @@ class ActivityModel {
 export class CrearComponent implements OnInit {    
   /////////////////////////////////////////////////////////
   // passed in initialState from reservations.component.ts
-  dateProps;
+  dateProps;  //dateProps.date, dateProps.dateStr, dateProps.view.type = "dayGridMonth" | "timeGridWeek" | "timeGridDay"
   amenityIdProps;
   buildingIdProps;
   responseData;  
 
   ////////////////////////////////////////////////////////
   // CONFIGURATION
+  imageInputLabel = "Choose file";
   showMin: boolean = false;
   showSec: boolean = false;
   isMeridian:boolean = false;
@@ -54,8 +55,8 @@ export class CrearComponent implements OnInit {
   ////////////////////////////////////////////////////////
   // Form
   datePicker;
-  startTime:Date = moment(new Date()).add(1, 'hour').toDate();
-  endTime: Date = moment(new Date()).add(2, 'hour').toDate();
+  startTime;
+  endTime;
 
   scheduleModel:ScheduleModel = new ScheduleModel();    // For this moment only supports 1 schedule
   acitivyModel:ActivityModel = new ActivityModel();
@@ -73,7 +74,15 @@ export class CrearComponent implements OnInit {
   ) { }
 
   ngOnInit() {    
-    this.datePicker = this.dateProps; 
+    this.datePicker = this.dateProps.date; 
+    if (this.dateProps.view.type === 'timeGridWeek' || this.dateProps.view.type === 'timeGridDay') {
+      this.startTime = moment(this.dateProps.dateStr).toDate();
+      this.endTime = moment(this.startTime).add(1, 'hour').toDate();
+    } else {
+      this.startTime = moment(new Date()).add(1, 'hour').toDate();
+      this.endTime = moment(new Date()).add(2, 'hour').toDate();
+    }
+    
     this.responseData = {result:false};    
     this.GetUsers();
   }
@@ -146,7 +155,8 @@ export class CrearComponent implements OnInit {
   addImages() {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
-      for (let f of this.newImages) {
+      for (let f of this.newImages) {        
+        this.imageInputLabel = f.name;
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;            
