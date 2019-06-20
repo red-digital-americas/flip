@@ -9,54 +9,81 @@
     <div class="container clearfix">
        <form #loginForm="ngForm" autocomplete="off">
         <div class="row">                      
+            <div class="col-8">
+                <div class="row">                
+                    <div class="col-12 mb-2">
+                        <input type="text" [(ngModel)]="acitivyModel.Name" class="form-control" name="activityName" id="activityName" placeholder="Title" required>
+                    </div>          
+                
+                    <div class="col-12 mb-2">
+                        <div class="custom-file">
+                            <input type="file" accept="image/*"
+                                (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
+                            <label class="custom-file-label" for="customFile">Choose file</label>        
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Description</span>
+                            </div>
+                            <textarea name="activityDescription" id="activityDescription" class="form-control" [(ngModel)]="acitivyModel.Description" aria-label="With textarea" required></textarea>
+                        </div>
+                    </div>           
+                    
+                    <div class="col-12 margin-gral">
+                        <select class="form-control" [(ngModel)]="acitivyModel.UserId" name="activityUserId" id="activityUserId">
+                            <option *ngFor="let user of usersArray" [value]="user.id" >
+                                {{user.name}}
+                            </option>                            
+                        </select>
+                    </div> 
 
-            <div class="col-12 mb-2">
-                <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
-            </div>          
-            
-            <div class="col-12 mb-2">
-                <div class="custom-file">
-                    <input type="file" accept="image/*"
-                        (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="customFile">Choose file</label>        
+                    <!-- <div class="col-12 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Cupo</span>
+                            </div>
+                            <input type="number" [(ngModel)]="acitivyModel.QuoteMax" class="form-control" name="activityQuoteMax" id="activityQuoteMax" min="1" placeholder="Cupo" required>
+                        </div>                        
+                    </div>    -->
+
+
+
+                    <!-- <div class="col-6 mb-2">                
+                        <div class="form-check form-check-inline mr-1">
+                            <label class="form-check-label" for="inline-checkbox3">Private?</label>
+                            <input class="form-check-input" id="inline-checkbox3" type="checkbox" value="check3">                    
+                        </div>
+                    </div> -->                        
+                            
+                    <div class="col-12 mb-2">
+                        <input type="text" name="date" [(ngModel)]="datePicker" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" placeholder="Datepicker" class="form-control" bsDatepicker>
+                    </div>     
+
+                    <div class="col-6 mb-2">
+                        Desde
+                        <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
+                    </div>     
+                    <div class="col-6">
+                        Hasta
+                        <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
+                    </div>  
                 </div>
             </div>
-            
-            <div class="col-12 mb-2">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Description</span>
-                    </div>
-                    <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="posttext" aria-label="With textarea" required></textarea>
-                </div>
-            </div>           
-            
-            <!-- <div class="col-12 mb-2">
-                <input type="number" class="form-control" name="postitle" id="postitle" min="1" placeholder="Cupo" required>
-            </div>    -->
 
-            <!-- <div class="col-6 mb-2">                
-                <div class="form-check form-check-inline mr-1">
-                    <label class="form-check-label" for="inline-checkbox3">Private?</label>
-                    <input class="form-check-input" id="inline-checkbox3" type="checkbox" value="check3">                    
-                </div>
-            </div> -->                        
-                    
-            <div class="col-12 mb-2">
-                <input type="text"name="date" [(ngModel)]="datePicker" placeholder="Datepicker" class="form-control" bsDatepicker>
-            </div>     
-            <div class="col-6 mb-2">
-                Desde
-                <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-            </div>     
-            <div class="col-6">
-                Hasta
-                <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-            </div>    
-                        
-            <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Reservar</button>
+            <div class="col-4">
+                <img style="width:100%" class="img-size" [src]="acitivyModel.Photo" />
+            </div>                                    
+                      
+            <div class="col-12">
+                <button (click)="AddActivity()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Add Activity</button>
+            </div>            
                   
         </div>  
       </form>
     </div>
 </div>
+
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>    

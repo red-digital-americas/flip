@@ -1,5 +1,6 @@
 <div class="modal-header">
-    <h4 class="modal-title pull-left">IdProps {{idProps}}</h4>
+    <h4 class="modal-title pull-left">{{ !isEditVisible ? eventDetail?.activity.name : 'Editar Actividad'}}</h4>               
+    <!-- <h4 class="modal-title pull-left">IdProps {{idProps}}</h4> -->
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -8,36 +9,98 @@
 <div class="modal-body">
 
     <!-- DETAIL -->
-    <div class="container clearfix">
+    <div class="container clearfix" *ngIf="!isEditVisible">
         <div class="row">
-            <div class="col-12">
-                {{eventDetail?.name}}
-            </div>
-             
-            <div class="col-12">
-                {{eventDetail?.description}}
-            </div>
+            <div class="col-6">
+                <div class="row">                                            
+                    <div class="col-12">
+                        {{eventDetail?.activity.description}}
+                    </div>
+        
+                    <hr class="divider"> 
+                    <div class="col-12">
+                        HORARIO
+                    </div>
+                    <div class="col-12">
+                        {{eventDetail?.date | date:'yyyy/MM/dd'}} {{eventDetail?.timeStart | date:'HH:mm'}} - {{eventDetail?.timeEnd | date:'HH:mm'}}
+                    </div>                    
+                </div>
+            </div>            
 
-            <div class="col-12">
-                2019-06-17 12Hrs - 13Hrs
-            </div>
-
-            <div class="col-12">
-                <img [src]="eventDetail?.photo" alt="Event Photo">
+            <div class="col-6">
+                <img style="width:100%" [src]="eventDetail?.activity.photo" alt="Event Photo">
             </div>
             
+            <button type="button" class="btn btn-outline-dark" (click)="Edit()">Editar</button>
+            <button type="button" class="btn btn-outline-danger" (click)="Delete()">Eliminar</button>
         </div>        
     </div>
 
     <!-- EDTI -->
+    <div class="container" *ngIf="isEditVisible">
+        <form #loginForm="ngForm" autocomplete="off">
+            <div class="row">                      
+                <div class="col-8">
+                    <div class="row">  
+                        <div class="col-12 mb-2">
+                                <input type="text" [(ngModel)]="acitivyModel.Name" class="form-control" name="activityName" id="activityName" placeholder="Title" required>
+                        </div>          
+                        
+                        <div class="col-12 mb-2">
+                            <div class="custom-file">
+                                <input type="file" accept="image/*"
+                                    (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
+                                <label class="custom-file-label" for="customFile">Choose file</label>        
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Description</span>
+                                </div>
+                                <textarea name="activityDescription" id="activityDescription" class="form-control" [(ngModel)]="acitivyModel.Description" aria-label="With textarea" required></textarea>
+                            </div>
+                        </div>           
+                        
+                        <!-- <div class="col-12 mb-2">
+                            <input type="number" class="form-control" name="postitle" id="postitle" min="1" placeholder="Cupo" required>
+                        </div>    -->                                      
+                                
+                        <div class="col-12 mb-2">
+                            <input type="text" name="date" [(ngModel)]="datePicker" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" placeholder="Datepicker" class="form-control" bsDatepicker>
+                        </div>     
+                        <div class="col-6 mb-2">
+                            Desde
+                            <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
+                        </div>     
+                        <div class="col-6">
+                            Hasta
+                            <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
+                        </div>  
+                    </div>
+                </div>  
 
+                <div class="col-4">
+                    <img style="width:100%" class="img-size" [src]="acitivyModel.Photo" />
+                </div>                                                                                    
+                      
+                <div class="col">
+                    <button (click)="Update()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="!loginForm.form.valid" >Update</button>
+                    <button (click)="isEditVisible=!isEditVisible" type="button" class="btn btn-outline-danger margin-gral">Cancelar</button>                
+                </div>                
+            </div>  
+        </form>
+    </div>
 
 </div>
 
-<div class="modal-footer">    
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>  
+
+<!-- <div class="modal-footer">    
     <button type="button" class="btn btn-outline-dark" (click)="Edit()">Editar</button>
     <button type="button" class="btn btn-outline-danger" (click)="Delete()">Eliminar</button>
-</div>
+</div> -->
 
 <ng-template #editTemplate>
     <div class="modal-header">
@@ -47,59 +110,7 @@
     </div>
 
     <div class="modal-body">
-        <div class="container">
-            <form #loginForm="ngForm" autocomplete="off">
-                <div class="row">                      
-
-                    <div class="col-12 mb-2">
-                        <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
-                    </div>          
-                    
-                    <div class="col-12 mb-2">
-                        <div class="custom-file">
-                            <input type="file" accept="image/*"
-                                (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
-                            <label class="custom-file-label" for="customFile">Choose file</label>        
-                        </div>
-                    </div>
-                    
-                    <div class="col-12 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Description</span>
-                            </div>
-                            <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="posttext" aria-label="With textarea" required></textarea>
-                        </div>
-                    </div>           
-                    
-                    <!-- <div class="col-12 mb-2">
-                        <input type="number" class="form-control" name="postitle" id="postitle" min="1" placeholder="Cupo" required>
-                    </div>    -->
-
-                    <!-- <div class="col-6 mb-2">                
-                        <div class="form-check form-check-inline mr-1">
-                            <label class="form-check-label" for="inline-checkbox3">Private?</label>
-                            <input class="form-check-input" id="inline-checkbox3" type="checkbox" value="check3">                    
-                        </div>
-                    </div> -->                        
-                            
-                    <div class="col-12 mb-2">
-                        <input type="text"name="date" [(ngModel)]="datePicker" placeholder="Datepicker" class="form-control" bsDatepicker>
-                    </div>     
-                    <div class="col-6 mb-2">
-                        Desde
-                        <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-                    </div>     
-                    <div class="col-6">
-                        Hasta
-                        <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-                    </div>    
-                                
-                    <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Reservar</button>
-                  
-                </div>  
-            </form>
-        </div>
+        
     </div>
 
     <div class="modal-footer">

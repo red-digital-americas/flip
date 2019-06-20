@@ -1,6 +1,6 @@
 <app-nav></app-nav>
   
-<div class="card card-height-newsfeed">  
+<!-- <div class="card card-height-newsfeed">  
     <div class="card-body">
       <h5 class="card-title">Add Reservation </h5>
       
@@ -12,18 +12,7 @@
               <div class="col-12  margin-gral">
                 <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
               </div>
-            </div>                         
-
-            <!-- <div class="form-row">
-              <div class="col-12 margin-gral">
-                <select class="form-control" id="select1" name="select1" required>                  
-                  <option disabled selected>Seleccione un Amenity</option>
-                  <option value="1">Option #1</option>
-                  <option value="2">Option #2</option>
-                  <option value="3">Option #3</option>
-                </select>
-              </div>              
-            </div> -->
+            </div>                                     
 
             <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Reservar</button>
 
@@ -31,14 +20,23 @@
         </div>  
       </form>
     </div>      
-</div>  
+</div>   -->
 
 <div class="animated fadeIn">
   <div class="card">    
     <div class="card-body">
       <!-- <h5 class="card-title">Calendar</h5> -->
-      <div (click)="VerDetalle();">Some Method</div>
-      <div (click)="AddEvent();">Add Event</div>
+      <div (click)="someMethod();">Refresh</div>      
+
+      <div class="form-row">
+        <div class="col-12 margin-gral">
+          <select class="form-control" [(ngModel)]="amenitySelect" (change)="GetEvents();">
+            <option *ngFor="let amenity of amenitiesArray" [value]="amenity.id" >
+              {{amenity.name}}
+            </option>                  
+          </select>
+        </div>            
+      </div>
      
       <!-- <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins"></full-calendar> -->      
       <!-- <full-calendar defaultView="dayGridDay" [plugins]="calendarPlugins" [weekends]="false"
@@ -58,7 +56,8 @@
         [weekends]="calendarWeekends"        
         eventLimit= "false"
         locale="es"
-        nowIndicator="true"        
+        nowIndicator="true"     
+        slotDuration='01:00'   
 
         [events]="calendarEvents"
 
@@ -69,7 +68,7 @@
         (dateClick)="handleDateClick($event)"   
         (eventDrop)="handleEventDrop($event)"
         (eventResize)="handleEventResize($event)"
-        
+                
       ></full-calendar>
       <!-- selectable="false" 
       (select)="handleSelect($event)" -->      
