@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title pull-left">{{ !isEditVisible ? eventDetail?.activity.name : 'Editar Actividad'}}</h4>               
+    <h4 class="modal-title pull-left">{{ !isEditVisible ? eventDetail?.activity.name : 'Editar'}}</h4>               
     <!-- <h4 class="modal-title pull-left">IdProps {{idProps}}</h4> -->
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
@@ -11,15 +11,22 @@
     <!-- DETAIL -->
     <div class="container clearfix" *ngIf="!isEditVisible">
         <div class="row">
-            <div class="col-6">
+            <div class="col-8">
                 <div class="row">                                            
                     <div class="col-12">
-                        {{eventDetail?.activity.description}}
+                        <h5>Description</h5>
+                        <div>{{eventDetail?.activity.description}}</div>
                     </div>
+
+                    <!-- <div class="col-12">
+                        <img [src]="eventDetail?.user.avatar" alt="">
+                        <h5>{{eventDetail?.user.name}}</h5>
+                    </div> -->
         
-                    <hr class="divider"> 
+                    <hr style="width:100%;">
+                     
                     <div class="col-12">
-                        HORARIO
+                        <h5>Schedule</h5>
                     </div>
                     <div class="col-12">
                         {{eventDetail?.date | date:'yyyy/MM/dd'}} {{eventDetail?.timeStart | date:'HH:mm'}} - {{eventDetail?.timeEnd | date:'HH:mm'}}
@@ -27,13 +34,51 @@
                 </div>
             </div>            
 
-            <div class="col-6">
+            <div class="col-4">
                 <img style="width:100%" [src]="eventDetail?.activity.photo" alt="Event Photo">
             </div>
+        </div>
+
+        <div class="row" *ngIf="!eventDetail?.activity.private">
+            <div class="col-6">
+                <h5>Books</h5>                   
+                <div *ngIf="!booksArray.length">No books for this event</div>            
+                
+                <div class="section-books">
+                    <div class="book" *ngFor="let bookElement of booksArray">                        
+                        <img class="book__avatar" src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">                        
+                        <div class="book__username">{{bookElement.user.name}} {{bookElement.user.lastName}}</div>                                                            
+                    </div>                        
+                </div>                                                          
+            </div>    
             
-            <button type="button" class="btn btn-outline-dark" (click)="Edit()">Editar</button>
-            <button type="button" class="btn btn-outline-danger" (click)="Delete()">Eliminar</button>
-        </div>        
+            <div class="col-6">
+                <h5>Invite</h5>
+                <!-- <fieldset class="form-group">
+                    <ng-select class="bootstrap ng-valid ng-dirty ng-touched" placeholder="Choose your favorite country">
+                        <div class="below" tabindex="0">
+                            <div class="multiple">
+                                <div class="option">
+                                    <span class="deselect-option"> ✕ </span> Belgium 
+                                </div>
+                                <div class="option">
+                                    <span class="deselect-option"> ✕ </span> Netherlands 
+                                </div>
+                                <input autocomplete="off" tabindex="-1" placeholder="" style="width: 1px;">
+                            </div>
+                        </div>
+                    </ng-select>
+                </fieldset> -->
+            </div>
+        </div>  
+        
+        <div class="row">
+            <div class="col mt-2">
+                <button *ngIf="!eventDetail?.activity.private" type="button" class="btn btn-outline-dark" (click)="Invite()" >Invite</button>                                         
+                <button type="button" class="btn btn-outline-dark" (click)="Edit()">Editar</button>
+                <button type="button" class="btn btn-outline-danger" (click)="Delete()">Eliminar</button>
+            </div>            
+        </div>
     </div>
 
     <!-- EDTI -->
@@ -43,6 +88,7 @@
                 <div class="col-8">
                     <div class="row">  
                         <div class="col-12 mb-2">
+                                <!-- <input type="text" [(ngModel)]="acitivyModel.Name" [disabled]="acitivyModel.Private" class="form-control" name="activityName" id="activityName" placeholder="Title" required> -->
                                 <input type="text" [(ngModel)]="acitivyModel.Name" class="form-control" name="activityName" id="activityName" placeholder="Title" required>
                         </div>          
                         
@@ -50,7 +96,7 @@
                             <div class="custom-file">
                                 <input type="file" accept="image/*"
                                     (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
-                                <label class="custom-file-label" for="customFile">Choose file</label>        
+                                <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>        
                             </div>
                         </div>
                         
@@ -68,14 +114,19 @@
                         </div>    -->                                      
                                 
                         <div class="col-12 mb-2">
-                            <input type="text" name="date" [(ngModel)]="datePicker" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" placeholder="Datepicker" class="form-control" bsDatepicker>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Date</span>
+                                </div>  
+                                <input type="text" name="date" [(ngModel)]="datePicker" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" placeholder="Datepicker" class="form-control" bsDatepicker>
+                            </div>                             
                         </div>     
-                        <div class="col-6 mb-2">
-                            Desde
+                        <div class="col-6 mb-2 aaa">
+                            <div>Desde</div>
                             <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
                         </div>     
-                        <div class="col-6">
-                            Hasta
+                        <div class="col-6 aaa">
+                            <div>Hasta</div>
                             <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
                         </div>  
                     </div>

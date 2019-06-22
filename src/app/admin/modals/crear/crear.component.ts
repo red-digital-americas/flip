@@ -109,15 +109,14 @@ export class CrearComponent implements OnInit {
     let date = moment(this.datePicker).format('YYYY/MM/DD');
     let startHour = moment(this.startTime).format('HH');
     let endHour = moment(this.endTime).format('HH');
-    //this.scheduleModel.Date = this.datePicker;
-    //this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').toDate();
-    //this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').toDate();
     
-    ///////// Servidor le aumenta +5 horas por la zona horaria ////////////////////
-    //this.scheduleModel.Date = moment(date).subtract(5, 'hour').toDate();
-    this.scheduleModel.Date = moment(this.datePicker).startOf('day').subtract(5, 'hour').toDate();
-    this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
-    this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
+    ///////// Servidor le aumenta +5 horas por la zona horaria ////////////////////    
+    // this.scheduleModel.Date = moment(this.datePicker).startOf('day').subtract(5, 'hour').toDate();
+    // this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
+    // this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
+    this.scheduleModel.Date = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+    this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+    this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
     
     ///////// Adding the complementaryData to the activityModel ///////////////////
     this.acitivyModel.Schedules = [];
@@ -142,6 +141,8 @@ export class CrearComponent implements OnInit {
       (err)=> {console.log(err);}      
     );             
   }  
+
+  TipoReservacion(tipoReservacion) { this.acitivyModel.Private = tipoReservacion; }
 
   prepareImages(e) {    
     if (Utils.isDefined(e.srcElement.files)) {

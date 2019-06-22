@@ -1,0 +1,28 @@
+.aaa {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.section-books {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book {
+    display: flex;
+    align-items: center;
+    margin: .5rem 1rem;
+
+    &__avatar {
+        width: 2rem;
+        height: 2rem;  
+        margin-right: .5rem;      
+        border-radius: 50%;
+        object-fit: cover;        
+    }
+    
+    &__username {
+        font-weight: 300;
+    }
+}

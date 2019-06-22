@@ -124,22 +124,25 @@ export class ReservationsComponent implements OnInit {
   /////////////////////////////////// FULL CALENDAR INPUTS /////////////////////////////////////////////////////////////////  
   // https://github.com/fullcalendar/fullcalendar-angular/blob/master/projects/fullcalendar/src/lib/fullcalendar-options.ts
   private InitCalendarSetup () {
-    this.calendarComponent.eventAllow = this.handleEventAllow;
+    this.calendarComponent.eventAllow = this.handleEventAllow;  
   }
 
   handleEventAllow(dropLocation, draggedEvent) {          
     // console.log(draggedEvent.title , draggedEvent.id ,draggedEvent.start, draggedEvent.end); 
+    
     //////// No permite mover eventos pasados ///////////////////////////////////////////////
-    if (moment(draggedEvent.start).isBefore(moment(), 'day')) { return false; }
+    // if (moment(draggedEvent.start).isBefore(moment(), 'day')) { return false; }
+    if (moment(draggedEvent.start).isSameOrBefore(moment(), 'hour')) { return false; }
     //////// Eventos con duración solo de un dia ////////////////////////////////////////////
     if (moment(dropLocation.end).isAfter(moment(dropLocation.start), 'day')) { return false; }
-    //////// Fecha destino a mover debe ser hoy o posterior /////////////////////////////////
-    return moment(dropLocation.start).isSameOrAfter(moment(), 'day');    
-  }  
+    //////// Fecha destino a mover debe ser hoy o posterior /////////////////////////////////                   
+    // return moment(dropLocation.start).isSameOrAfter(moment(), 'day');    
+    return moment(dropLocation.start).isAfter(moment(), 'hour');  
+  }    
 
   /////////////////////////////////// FULL CALENDAR OUTPUS/HANDLERS /////////////////////////////////////////////////////////
   handleDateClick(arg) {       
-    console.log(arg.date, arg.dateStr, arg.view.type); //"dayGridMonth" "timeGridWeek" "timeGridDay"
+    console.log(arg.date, arg.dateStr, arg.view.type); //"dayGridMonth" "timeGridWeek" "timeGridDay"    
     this.Crear(arg);    
   }
 
@@ -164,7 +167,15 @@ export class ReservationsComponent implements OnInit {
     // this.VerDetalle();
   }     
 
-  Refresh() {            
+  handleDatesRender(info) {
+    // console.log(info.view.type);
+    // console.log(info.view.activeEnd, info.view.activeStart, info.view.currentEnd, info.view.currentStart);         
+  }
+
+  Refresh() {       
+    console.log(this.calendarComponent.getApi().view.type);
+    console.log(this.calendarComponent.getApi().view.activeEnd, this.calendarComponent.getApi().view.activeStart, 
+                this.calendarComponent.getApi().view.currentEnd, this.calendarComponent.getApi().view.currentStart);     
     this.GetEvents();
   }
 
@@ -194,8 +205,20 @@ export class ReservationsComponent implements OnInit {
   }
 
   private ParseEvent(event:any) {            
-    let newEvent = { id: event.id, title: event.activity.name, start: event.timeStart, end: event.timeEnd, startEditable:true, durationEditable:true, overlap: false };
+    let newEvent = { id: event.id, title: event.activity.name, start: event.timeStart, end: event.timeEnd, startEditable:true, durationEditable:true, overlap: false, backgroundColor: event.activity.private ? '#d8209e' : '#3788d8' };
     return newEvent;
+  }
+
+  private ValidDateUpdate(date):boolean {
+    if(moment(date).isBefore(moment(), 'day') && this.calendarComponent.getApi().view.type === 'dayGridMonth') { 
+      return false; 
+    }   
+    if( moment(date).isSameOrBefore(moment(), 'hour') && 
+        (this.calendarComponent.getApi().view.type === 'timeGridWeek' || 
+        this.calendarComponent.getApi().view.type === 'timeGridDay' ) ) { 
+      return false; 
+    }
+    return true;
   }
 
   ///////////////////////////////////////////////// SERVICIOS //////////////////////////////////////////////////////////////
@@ -221,9 +244,7 @@ export class ReservationsComponent implements OnInit {
           // console.log(res.item);    
           this.scheduleModel = new ScheduleModel();
           this.scheduleModel = res.item[0];
-          // this.scheduleModel.Date = moment(arg.event.start).startOf('day').subtract(5, 'hour').toDate();
-          // this.scheduleModel.TimeStart = moment(arg.event.start).subtract(5, 'hour').toDate();
-          //this.scheduleModel.TimeEnd = moment(arg.event.end).subtract(5, 'hour').toDate(); 
+          
           this.scheduleModel.Date = moment(arg.event.start).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
           this.scheduleModel.TimeStart = moment(arg.event.start).format('YYYY-MM-DDTHH:mm:ss');
           this.scheduleModel.TimeEnd = moment(arg.event.end).format('YYYY-MM-DDTHH:mm:ss');
@@ -265,8 +286,16 @@ export class ReservationsComponent implements OnInit {
     });      
   }  
 
-  Crear (arg) {
-    if(moment(arg.date).isBefore(moment(new Date()), 'day')) { this.calendarComponent.getApi().unselect(); return; }    
+  Crear (arg) {    
+    //"dayGridMonth" "timeGridWeek" "timeGridDay"
+    if(moment(arg.date).isBefore(moment(new Date()), 'day') && this.calendarComponent.getApi().view.type === 'dayGridMonth') { 
+      this.calendarComponent.getApi().unselect(); return; 
+    }   
+    if( moment(arg.date).isSameOrBefore(moment(new Date()), 'hour') && 
+        (this.calendarComponent.getApi().view.type === 'timeGridWeek' || 
+        this.calendarComponent.getApi().view.type === 'timeGridDay' ) ) { 
+      this.calendarComponent.getApi().unselect(); return; 
+    }     
 
     this.modalRef = this.modalService.show(CrearComponent, {
       initialState: { dateProps: arg, amenityIdProps: this.amenitySelect, buildingIdProps: this.IDBUILD, responseData: {} },

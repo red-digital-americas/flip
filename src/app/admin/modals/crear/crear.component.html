@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title pull-left">Nueva Actividad</h4>
+    <h4 class="modal-title pull-left">Nueva Reservación</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -10,7 +10,20 @@
        <form #loginForm="ngForm" autocomplete="off">
         <div class="row">                      
             <div class="col-8">
-                <div class="row">                
+                <div class="row">      
+                    
+                    <div class="col-12 mb-3">
+                        <div class="reservacion__text">Tipo de reservación:</div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" (change)="TipoReservacion('false')" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="customRadioInline1">Actividad</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" (change)="TipoReservacion('true')" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline2">Espacio</label>
+                        </div>
+                    </div>
+                    
                     <div class="col-12 mb-2">
                         <input type="text" [(ngModel)]="acitivyModel.Name" class="form-control" name="activityName" id="activityName" placeholder="Title" required>
                     </div>          
@@ -52,29 +65,54 @@
                             </div>
                             <input type="number" [(ngModel)]="acitivyModel.QuoteMax" class="form-control" name="activityQuoteMax" id="activityQuoteMax" min="1" placeholder="Cupo" required>
                         </div>                        
-                    </div>    -->
-
-
-
-                    <!-- <div class="col-6 mb-2">                
-                        <div class="form-check form-check-inline mr-1">
-                            <label class="form-check-label" for="inline-checkbox3">Private?</label>
-                            <input class="form-check-input" id="inline-checkbox3" type="checkbox" value="check3">                    
-                        </div>
-                    </div> -->                        
+                    </div> -->
                             
                     <div class="col-12 mb-2">
-                        <input type="text" name="date" [(ngModel)]="datePicker" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" placeholder="Datepicker" class="form-control" bsDatepicker>
-                    </div>     
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Date</span>
+                            </div>  
+                            <input type="text" name="date" [(ngModel)]="datePicker" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" placeholder="Datepicker" class="form-control" bsDatepicker>
+                        </div>                        
+                    </div>   
+                    
+                    <!-- <div class="col-12 mb-2 schedule">
+                        <div class="schedule__datetime">
+                             <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Start</span>
+                                </div>  
+                                <input type="text" name="dateZZ"  [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', timePicker: true }" placeholder="Datepicker" class="form-control" bsDatepicker>
+                            </div> 
+                            <timepicker name="startTimeZZZZZ" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
+                        </div>   
+                        <div class="schedule__datetime">
+                             <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">End</span>
+                                </div>  
+                                <input type="text" name="dateZZ"  [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', timePicker: true }" placeholder="Datepicker" class="form-control" bsDatepicker>
+                            </div> 
+                            <timepicker name="startTimeZZZZZ" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
+                        </div>                                            
+                    </div>
 
-                    <div class="col-6 mb-2">
-                        Desde
+                    <div class="col-12 mb-2 allDay">
+                        <label class="switch switch-sm switch-3d switch-dark">
+                            <input class="switch-input" type="checkbox">
+                            <span class="switch-slider"></span>                            
+                        </label>                         
+                        <div class="allDay__text">All day event</div>
+                    </div> -->
+
+                    <div class="col-6 mb-2 aaa">                        
+                        <div>Desde</div>
                         <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
                     </div>     
-                    <div class="col-6">
-                        Hasta
+                    <div class="col-6 aaa">
+                        <div>Hasta</div>
                         <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-                    </div>  
+                    </div>                      
                 </div>
             </div>
 

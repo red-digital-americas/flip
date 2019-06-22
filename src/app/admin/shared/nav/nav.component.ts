@@ -12,7 +12,7 @@ export class NavComponent implements OnInit {
   IDBUILD:number;
   navRoutes = [
     {title: "Newsfeed", route: "/newsfeed"}, 
-    {title: "Activities", route: "/activities"}, 
+    // {title: "Activities", route: "/activities"}, 
     {title: "Amenities", route: "/amenities"}, 
     {title: "Reservations", route: "/reservations"}
   ]

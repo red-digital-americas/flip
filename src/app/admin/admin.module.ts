@@ -16,6 +16,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 
+
 import { NavModule } from './shared/nav/nav.module';
 import { CommunitiesComponent } from './communities/communities.component';
 import { BuildingComponent } from './building/building.component';
@@ -31,8 +32,7 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { DetalleComponent } from './modals/detalle/detalle.component';
 import { CrearComponent } from './modals/crear/crear.component';
-
-
+import { InviteComponent } from './modals/invite/invite.component';
 
 @NgModule({
   imports: [    
@@ -60,11 +60,13 @@ import { CrearComponent } from './modals/crear/crear.component';
     EditAmenitiesComponent,
     ReservationsComponent,
     DetalleComponent,
-    CrearComponent
+    CrearComponent,
+    InviteComponent
   ],
   entryComponents: [
     DetalleComponent,
-    CrearComponent
+    CrearComponent,
+    InviteComponent
   ]
 })
 export class AdminModule { }

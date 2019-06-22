@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../../utils/utils';
 import { DatosService } from '../../../../datos.service';
+import { InviteComponent } from '../invite/invite.component';
 import * as moment from 'moment';
 
 class ScheduleModel {
@@ -43,6 +44,7 @@ export class DetalleComponent implements OnInit {
   ///////////////////////////////////////////
   // DETALLE VIEW
   eventDetail;  
+  booksArray = [];
 
   ///////////////////////////////////////////
   // EDIT VIEW
@@ -75,9 +77,9 @@ export class DetalleComponent implements OnInit {
                private toasterService: ToasterService
   ) { }
 
-  ngOnInit() {
-    // console.log(this.idProps);    
+  ngOnInit() {    
     this.responseData = {action:'None'};
+
     var params = { "id": this.idProps };
     this.heroService.service_general_get_with_params("Schedules", params).subscribe(
       (res)=> {
@@ -89,7 +91,19 @@ export class DetalleComponent implements OnInit {
         else { console.log("Error");}
       },
       (err)=> {console.log(err);}
-    );    
+    );   
+        
+    this.heroService.service_general_get_with_params("Books", {scheduleId: this.idProps}).subscribe(
+      (res)=> {
+        // console.log(res.item);
+        if(res.result === "Success"){                    
+          this.booksArray = res.item;
+          // this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);
+        } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
+        else { console.log("Error");}
+      },
+      (err)=> {console.log(err);}
+    ); 
   }
 
   public Edit() {
@@ -117,9 +131,12 @@ export class DetalleComponent implements OnInit {
     let startHour = moment(this.startTime).format('HH');
     let endHour = moment(this.endTime).format('HH');    
     
-    this.scheduleModel.Date = moment(this.datePicker).startOf('day').subtract(5, 'hour').toDate();
-    this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
-    this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
+    // this.scheduleModel.Date = moment(this.datePicker).startOf('day').subtract(5, 'hour').toDate();
+    // this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
+    // this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
+    this.scheduleModel.Date = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+    this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+    this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
     
     ///////// Adding the complementaryData to the activityModel ///////////////////
     this.acitivyModel.Schedules = [];        
@@ -187,4 +204,27 @@ export class DetalleComponent implements OnInit {
       }
     }
   }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  MODAL INVITE
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+  inviteModal:BsModalRef
+
+  Invite () {    
+    this.inviteModal = this.modalService.show(InviteComponent, {
+      initialState: { idProps: 9999, responseData: {} },
+      class: 'modal-lg'
+    });
+    this.inviteModal.content.closeBtnName = 'Close';           
+  
+    // let newSubscriber = this.modalService.onHide.subscribe(r=>{
+    //   newSubscriber.unsubscribe();
+    //   console.log('InviteResponse',this.inviteModal.content.responseData);
+    //   // if(this.inviteModal.content.responseData.action === 'Delete') {
+    //   //   this.toasterService.pop('success', 'Success ', 'Your Activity was deleted correctly.');          
+    //   // } else if (this.inviteModal.content.responseData.action === 'Edit') {
+    //   //   this.toasterService.pop('success', 'Success ', 'Your Activity was modified correctly.');          
+    //   // }
+    // });      
+  }  
 }

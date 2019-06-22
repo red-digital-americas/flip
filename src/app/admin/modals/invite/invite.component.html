@@ -1,0 +1,25 @@
+<div class="modal-header">    
+    <h4 class="modal-title pull-left">Invite</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">    
+    <div class="container clearfix" *ngIf="!isEditVisible">
+        <div class="row">
+            <div class="col-12">
+                <h5>Description</h5>
+                <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius excepturi, illo repellendus atque, repudiandae blanditiis beatae aspernatur molestias tempore quo vel soluta est? Excepturi soluta sed laborum id, doloribus nisi?</div>
+            </div>                        
+        </div>
+
+        <div class="row">
+            <div class="col mt-2">                
+                <button type="button" class="btn btn-outline-dark" (click)="Invitar()">Invitar</button>                
+            </div>            
+        </div>
+    </div>
+</div>
+
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>  
