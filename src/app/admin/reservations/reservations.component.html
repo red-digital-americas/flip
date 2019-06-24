@@ -1,0 +1,84 @@
+<app-nav></app-nav>
+  
+<!-- <div class="card card-height-newsfeed">  
+    <div class="card-body">
+      <h5 class="card-title">Add Reservation </h5>
+      
+      <form #loginForm="ngForm" autocomplete="off">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 ">
+
+            <div class="form-row">
+              <div class="col-12  margin-gral">
+                <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
+              </div>
+            </div>                                     
+
+            <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Reservar</button>
+
+          </div>          
+        </div>  
+      </form>
+    </div>      
+</div>   -->
+
+<div class="animated fadeIn">
+  <div class="card">    
+    <div class="card-body">
+      <!-- <h5 class="card-title">Calendar</h5> -->
+      <button (click)="Refresh()" type="button" class="btn btn-outline-dark margin-gral">Refresh</button>           
+
+      <div class="form-row">
+        <div class="col-12 margin-gral">
+          <select class="form-control" [(ngModel)]="amenitySelect" (change)="GetEvents();">
+            <option *ngFor="let amenity of amenitiesArray" [value]="amenity.id" >
+              {{amenity.name}}
+            </option>                  
+          </select>
+        </div>            
+      </div>
+     
+      <!-- <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins"></full-calendar> -->      
+      <!-- <full-calendar defaultView="dayGridDay" [plugins]="calendarPlugins" [weekends]="false"
+        [events]="[ { title: 'event 1', date: '2019-04-01' }, { title: 'event 2', date: '2019-04-02' }]"
+        (dateClick)="handleDateClick($event)" timeZone='Europe/Moscow' 
+      ></full-calendar> -->
+
+      <full-calendar
+        #calendar
+        defaultView="dayGridMonth"
+        [header]="{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        }"
+        [plugins]="calendarPlugins"
+        [weekends]="calendarWeekends"        
+        eventLimit= "false"
+        locale="es"
+        nowIndicator="true"     
+        slotDuration='01:00'   
+
+        [events]="calendarEvents"
+
+        selectable="true" 
+        (select)="handleSelect($event)"
+
+        (eventClick)="handleEventClick($event)"
+        (dateClick)="handleDateClick($event)"   
+        (eventDrop)="handleEventDrop($event)"
+        (eventResize)="handleEventResize($event)" 
+        (datesRender)="handleDatesRender($event)"
+                
+      ></full-calendar>
+      <!-- selectable="false" 
+      (select)="handleSelect($event)" -->      
+
+      <!-- [events]="calendarEvents" -->      
+
+      <!-- x (eventOverlap)="handleEventOverlap($event, $event)" -->
+  </div>
+</div>
+
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>    
+

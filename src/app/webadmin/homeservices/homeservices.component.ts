@@ -17,9 +17,9 @@ export class HomeservicesComponent implements OnInit {
 
 
 
-  @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
+  @ViewChild(ImageCropperComponent, {read: ImageCropperComponent, static: true}) imageCropper: ImageCropperComponent;
 
-  @ViewChild(ImageCropperComponent) imageCropper1: ImageCropperComponent;
+  @ViewChild(ImageCropperComponent, {read: ImageCropperComponent, static: true}) imageCropper1: ImageCropperComponent;
 
 
   

@@ -1,25 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 
 @Component({
-  selector: 'app-newsfeed',
-  templateUrl: './newsfeed.component.html',
-  styleUrls: ['./newsfeed.component.scss'],  
+  selector: 'app-activities',
+  templateUrl: './activities.component.html',
+  styleUrls: ['./activities.component.scss', '../../../scss/vendors/toastr/toastr.scss'],    
   providers: [ToasterService]
 })
 
-export class NewsfeedComponent implements OnInit {
-
-
-  constructor(private router: Router,
-    private heroService: DatosService,
-    private route: ActivatedRoute,
-    toasterService: ToasterService,) {
-    this.toasterService = toasterService;
-  }
+export class ActivitiesComponent implements OnInit {
+  
   posts: any[];
   email: string;
   password: string;
@@ -35,104 +28,74 @@ export class NewsfeedComponent implements OnInit {
   public user: string[];
 
   postphoto: string = "assets/img/Coliving.jpg";
-  
-
   comment: string = "";
-
   public newImages: any[] = [];
 
+  public toasterconfig: ToasterConfig = new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 3000,
+      positionClass: "toast-top-center",
+  });
+
+  constructor(  private router: Router, private heroService: DatosService, private route: ActivatedRoute,
+                private toasterService: ToasterService
+                ) 
+  { }
 
   ngOnInit() {
     if (localStorage.getItem("user") == undefined) {
       this.router.navigate(['/login']);
     }
     else {
-
       this.user = JSON.parse(localStorage.getItem("user"));
       console.log(this.user);
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
       this.IDBUILD = this.route.snapshot.params['id']; 
-      this.get_posts();
-      
-
+      // this.get_posts();          
     }
+  }  
+
+  showSuccess() { 
+    this.toasterService.pop('success', 'Success ', 'Your post was published correctly '); 
   }
-  private toasterService: ToasterService;
-
-  public toasterconfig: ToasterConfig =
-    new ToasterConfig({
-      tapToDismiss: true,
-      timeout: 3000,
-      positionClass: "toast-top-center",
-    });
-
-
-
-  showSuccess() {
-    this.toasterService.pop('success', 'Success ', 'Your post was published correctly ');
-    
-  }
-
   showWarning() {
-    this.toasterService.pop('warning', 'Post Deleted', 'The post was deleted');
+    // this.toasterService.pop('warning', 'Post Deleted', 'The post was deleted'); 
+  }
+  showError() { 
+    // this.toasterService.pop('error', 'Error ', 'An unexpected error occurred '); 
   }
 
-  showError() {
-    this.toasterService.pop('error', 'Error ', 'An unexpected error occurred ');
-  }
-
-  get_posts() {
-   // debugger;
-    var creadoobj = { buildingid: this.route.snapshot.params['id'] , userid: this.IDUSR };
-    // debugger;
+  get_posts() {   
+    var creadoobj = { buildingid: this.route.snapshot.params['id'] , userid: this.IDUSR };    
     this.heroService.ServicioPostPost("SeePost", creadoobj).subscribe((value) => {
-
-
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
           break;
-        default:
-          //debugger; 
+        default:          
           if (value.result == "Success") {
-             debugger;
             this.posts = value.item;
           }
       }
     });
   }
 
-  addPost() {
-    debugger;
-    
-    var creadoobj = { id: 0, title: this.posttitle, userid: this.IDUSR, PostText: this.posttext, photo: this.postphoto, BuildingId: this.route.snapshot.params['id'] };
-    debugger;
-    /*
-     public int id { get; set; }
-            public int userid { get; set; }
-            public string title  { get; set; }
-            public string comment { get; set; }
-
-*/
+  addPost() {    
+    var creadoobj = { id: 0, title: this.posttitle, userid: this.IDUSR, PostText: this.posttext, photo: this.postphoto, BuildingId: this.route.snapshot.params['id'] };        
     this.heroService.ServicioPostPost("PostPosts", creadoobj).subscribe((value) => {
-
-
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
           this.showError(); 
           break;
-        default:
-          debugger;
+        default:          
           if (value.result == "Success") {
             this.get_posts();
             debugger; 
             this.postphoto = "assets/img/Coliving.jpg";
             this.posttext = "";
             this.posttitle = "";
-            this.showSuccess();
-
-
+            // this.showSuccess();
           }
       }
     });
@@ -147,9 +110,7 @@ export class NewsfeedComponent implements OnInit {
       }
     }
     this.addImages();
-
   }
-
 
   addImages() {
     let url: string = '';
@@ -171,22 +132,11 @@ export class NewsfeedComponent implements OnInit {
   }
 
 
-  editPost(id: number) {
-   // debugger; 
-    this.router.navigate(['/editcomment/' + id])
+  editPost(id: number) {this.router.navigate(['/editcomment/' + id])}
 
-  }
   deletePost(idpost: number) {
-    debugger;
     var creadoobj = { id: idpost, title: "", userid: this.IDUSR, PostText: "", photo: "", BuildingId: this.route.snapshot.params['id'] };
-    debugger;
-    /*
-     public int id { get; set; }
-            public int userid { get; set; }
-            public string title  { get; set; }
-            public string comment { get; set; }
-
-*/
+    
     this.heroService.ServicioPostPost("DeletePost", creadoobj).subscribe((value) => {
       switch (value.result) {
         case "Error":
@@ -194,12 +144,13 @@ export class NewsfeedComponent implements OnInit {
           this.showError();
           break;
 
-        default:
-          debugger;
+        default:          
           if (value.result == "Success") {
             this.get_posts();
             this.showWarning();
           }
       }
-    }); }
+    }); 
+  }
+
 }

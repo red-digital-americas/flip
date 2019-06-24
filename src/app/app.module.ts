@@ -52,7 +52,7 @@ import { AppRoutingModule } from './app.routing';
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+// import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Wizard1Component } from './views/wizard1/wizard1.component';
 import { Wizard2aComponent } from './views/wizard2a/wizard2a.component';
 import { Wizard2bComponent } from './views/wizard2b/wizard2b.component';
@@ -64,6 +64,8 @@ import { RecoverpassComponent } from './recoverpass/recoverpass.component';
 //import { WebadminComponent } from './webadmin/webadmin.component';
 //import { CommunitiesComponent } from './admin/communities/communities.component';
 //import { AppLayoutComponent } from './container-app/app-layout/app-layout.component';
+
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [

@@ -8,6 +8,10 @@ import { CommunitiesComponent } from './communities/communities.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { BuildingComponent } from './building/building.component';
 import { EditcommentComponent } from './editcomment/editcomment.component';
+import { ActivitiesComponent } from './activities/activities.component';
+import { ReservationsComponent } from './reservations/reservations.component';
+import { AmenitiesComponent } from './amenities/amenities.component';
+import { EditAmenitiesComponent } from './amenities/edit/edit-amenities.component';
 
 const routes: Routes = [
   {
@@ -17,10 +21,10 @@ const routes: Routes = [
       title: 'Dashboard'
     },
     children: [
-        {
-          path: '',
-        redirectTo: 'communities'
-        },
+      {
+        path: '',
+      redirectTo: 'communities'
+      },
       {
         path: 'newsfeed/:id',
         component: NewsfeedComponent,
@@ -42,7 +46,26 @@ const routes: Routes = [
         component: EditcommentComponent,
         data: { title: 'Building' }
       },
-
+      {
+        path: 'activities/:id',
+        component: ActivitiesComponent,
+        data: { title: 'Activities' }
+      },
+      {
+        path: 'amenities/:id',
+        component: AmenitiesComponent,
+        data: { title: 'Amenities' }
+      },
+      {
+        path: 'editamenity/:id',
+        component: EditAmenitiesComponent,
+        data: { title: 'Amenities' }
+      },
+      {
+        path: 'reservations/:id',
+        component: ReservationsComponent,
+        data: { title: 'Reservations' }
+      },
     ]
   }
 ];

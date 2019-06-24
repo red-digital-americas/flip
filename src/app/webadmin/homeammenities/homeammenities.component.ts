@@ -14,10 +14,9 @@ import { ImageCropperModule, ImageCroppedEvent, ImageCropperComponent } from 'ng
 })
 export class HomeammenitiesComponent implements OnInit {
 
-
-  @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
-
-  @ViewChild(ImageCropperComponent) imageCropper1: ImageCropperComponent;
+  
+  @ViewChild(ImageCropperComponent, {read: ImageCropperComponent, static: true}) imageCropper: ImageCropperComponent;
+  @ViewChild(ImageCropperComponent, {read: ImageCropperComponent, static: true}) imageCropper1: ImageCropperComponent;
 
 
   

@@ -11,3 +11,19 @@
 
 // If you want to add something do it here
 @import "custom";
+
+// CALENDAR
+@import "../../node_modules/angular-calendar/css/angular-calendar.css";
+
+// TOAST
+@import '../scss/vendors/toastr/toastr.scss';
+
+// FULLCALENDAR
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/list/main.css';
+// @import '~@fullcalendar/interaction/main.css';
+@import '~@fullcalendar/timegrid/main.css';
+
+// DATEPICKER
+@import '../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss';

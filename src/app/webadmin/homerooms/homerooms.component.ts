@@ -14,7 +14,7 @@ import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
 export class HomeroomsComponent implements OnInit {
 
 
-  @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
+  @ViewChild(ImageCropperComponent, {read: ImageCropperComponent, static: true}) imageCropper: ImageCropperComponent;
   
   public myModal;
   public largeModal;

@@ -1,0 +1,73 @@
+<app-nav></app-nav>
+  
+<div class="card card-height-newsfeed">  
+    <div class="card-body">
+      <h5 class="card-title">Add Activity </h5>
+      
+      <form #loginForm="ngForm" autocomplete="off">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 ">
+
+            <div class="form-row">
+              <div class="col-12  margin-gral">
+                <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
+              </div>
+            </div>
+              
+            <div class="custom-file margin-gral ">
+              <input type="file" accept="image/*"
+                     (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
+              <label class="custom-file-label" for="customFile">Choose file</label>  
+            </div>
+
+            <div class="form-row">
+              <div class="col-12 margin-gral">
+                <select class="form-control" id="select1" name="select1" required>
+                  <!-- <option value="0">Please select</option> -->
+                  <option disabled selected>Seleccione un Amenity</option>
+                  <option value="1">Terrace</option>
+                  <option value="2">Gym</option>
+                  <option value="3">Roof Garden</option>
+                </select>
+              </div>              
+            </div>            
+                
+            <div class="input-group margin-gral ">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Write Post</span>
+              </div>
+              <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="posttext" aria-label="With textarea" required></textarea>
+            </div>
+
+            <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Add Post</button>
+          </div>
+
+          <div class="col-md-6 col-sm-6 ">
+            <img class="img-size" src="{{postphoto}}" />
+          </div>
+          
+        </div>  
+      </form>
+    </div>
+  
+    <div class="row">
+      <div class="col-sm-6 col-md-4" *ngFor="let post of posts">
+        <div class="card">
+          <div class="card-header">{{post.posttitle}}</div>
+  
+          <div class="card-body">
+            <label> {{post.posttext}}  </label>
+            <div class="col-sm-6 col-md-4">
+              <img class="img-size" src="{{post.photo}}">
+            </div>
+          </div>
+
+          <button (click)="editPost(post.idpost)" type="button" class="btn btn-outline-primary">Edit Post</button>
+          <button (click)="deletePost(post.idpost)" type="button" class="btn  btn-outline-danger">Delete Post</button>  
+        </div>
+      </div>
+    </div>
+
+</div>
+  
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>    

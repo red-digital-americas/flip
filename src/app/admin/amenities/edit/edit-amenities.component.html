@@ -1,0 +1,42 @@
+  
+<div class="card card-height-newsfeed">  
+    <div class="card-body">
+      <h5 class="card-title">Edit Amenity</h5>
+      
+      <form #loginForm="ngForm" autocomplete="off">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 ">
+
+            <div class="form-row">
+              <div class="col-12  margin-gral">
+                <input type="text" [(ngModel)]="amenityRequestModel.name" class="form-control" name="postitle" id="postitle" placeholder="Name" required>
+              </div>
+            </div>
+              
+            <div class="custom-file margin-gral ">
+              <input type="file" accept="image/*"
+                     (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
+              <label class="custom-file-label" for="customFile">Choose file</label>  
+            </div>                    
+                
+            <div class="input-group margin-gral ">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Description</span>
+              </div>
+              <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="amenityRequestModel.description" aria-label="With textarea" required></textarea>
+            </div>
+            
+            <button (click)="EditAmenity()" type="button" [disabled]="!loginForm.form.valid" class="btn btn-outline-dark margin-gral">Edit Amenity</button>
+          </div>
+
+          <div class="col-md-6 col-sm-6 ">
+            <img class="img-size" src="{{amenityRequestModel.photo}}" />
+          </div>
+          
+        </div>  
+      </form>
+    </div>      
+
+</div>
+  
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>    
