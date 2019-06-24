@@ -48,7 +48,6 @@ export class DatosService {
         let headers = new HttpHeaders();
         console.log(parametros);
         headers = headers.set('Content-Type', 'application/json; charset=utf-8');
-
         return this.http.post(this.heroesUrl + 'Post/' + url, parametros);
     }
   ServicioPostBuilds(url, parametros): Observable<any> {
