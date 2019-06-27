@@ -7,6 +7,8 @@
 .section-books {
     display: flex;
     flex-wrap: wrap;
+    max-height: 10rem;
+    overflow-y: auto;
 }
 
 .book {
