@@ -135,7 +135,12 @@ export class ReservationsComponent implements OnInit {
     // if (moment(draggedEvent.start).isBefore(moment(), 'day')) { return false; }
     if (moment(draggedEvent.start).isSameOrBefore(moment(), 'hour')) { return false; }
     //////// Eventos con duración solo de un dia ////////////////////////////////////////////
-    if (moment(dropLocation.end).isAfter(moment(dropLocation.start), 'day')) { return false; }
+    // if (moment(dropLocation.end).isAfter(moment(dropLocation.start), 'day')) { return false; }    
+    if(moment(dropLocation.end).isAfter(moment(dropLocation.start), 'day')) {
+      if (moment(dropLocation.end).isAfter(moment(dropLocation.start).startOf('day').add(1, 'day').add(1, 'second'), 'second')) { 
+        return false; 
+      }    
+    }    
     //////// Fecha destino a mover debe ser hoy o posterior /////////////////////////////////                   
     // return moment(dropLocation.start).isSameOrAfter(moment(), 'day');    
     return moment(dropLocation.start).isAfter(moment(), 'hour');  
