@@ -46,35 +46,50 @@
                 
                 <div class="section-books">
                     <div class="book" *ngFor="let bookElement of booksArray">                        
-                        <img class="book__avatar" src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">                        
+                        <!-- <img class="book__avatar" src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">                         -->
+                        <img class="book__avatar" [src]="bookElement.user.avatar" alt="">       
                         <div class="book__username">{{bookElement.user.name}} {{bookElement.user.lastName}}</div>                                                            
                     </div>                        
                 </div>                                                          
             </div>    
             
-            <div class="col-6">
+            <div class="col-6" *ngIf="showInvite">
                 <h5>Invite</h5>
-                <!-- <fieldset class="form-group">
-                    <ng-select class="bootstrap ng-valid ng-dirty ng-touched" placeholder="Choose your favorite country">
-                        <div class="below" tabindex="0">
-                            <div class="multiple">
-                                <div class="option">
-                                    <span class="deselect-option"> ✕ </span> Belgium 
-                                </div>
-                                <div class="option">
-                                    <span class="deselect-option"> ✕ </span> Netherlands 
-                                </div>
-                                <input autocomplete="off" tabindex="-1" placeholder="" style="width: 1px;">
-                            </div>
-                        </div>
+                <fieldset class="form-group">
+                    <ng-select 
+                        placeholder="Invite people"
+                        [multiple]="true"
+                        [items]="usersBuildingArray"
+                        usersBuildingArray                         
+                        [(ngModel)]="selectedUsers" 
+                        bindLabel="name" 
+                        bindValue="id">
+
+                        <ng-template ng-header-tmp>
+                            <button (click)="selectAll()" class="btn btn-sm btn-secondary">Select all</button>
+                            <button (click)="unselectAll()" class="btn btn-sm btn-secondary">Unselect all</button>
+                        </ng-template>                        
+                        
+                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                            <span class="ng-value-label"><img [src]="item.avatar" style="border-radius: 50%;" width="20px" height="20px"> {{item.name}}</span>                            
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        </ng-template>
+                    
+                        <ng-template ng-option-tmp let-item="item">
+                            <img [src]="item.avatar" style="border-radius: 50%;" width="20px" height="20px"> {{item.name}} {{item.lastName}}
+                        </ng-template>     
+                                                
+                        <!-- <ng-template ng-footer-tmp>
+                            Selected count: {{selectedCity.length}}
+                        </ng-template> -->
                     </ng-select>
-                </fieldset> -->
+                </fieldset>
+                <button *ngIf="!eventDetail?.activity.private" type="button" class="btn btn-outline-dark" (click)="Invite()" >Invite</button>                                         
             </div>
         </div>  
         
-        <div class="row">
-            <div class="col mt-2">
-                <button *ngIf="!eventDetail?.activity.private" type="button" class="btn btn-outline-dark" (click)="Invite()" >Invite</button>                                         
+        <div class="row" *ngIf="showEditBtn">
+            <div class="col mt-2">                
                 <button type="button" class="btn btn-outline-dark" (click)="Edit()">Editar</button>
                 <button type="button" class="btn btn-outline-danger" (click)="Delete()">Eliminar</button>
             </div>            
@@ -147,24 +162,3 @@
 </div>
 
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>  
-
-<!-- <div class="modal-footer">    
-    <button type="button" class="btn btn-outline-dark" (click)="Edit()">Editar</button>
-    <button type="button" class="btn btn-outline-danger" (click)="Delete()">Eliminar</button>
-</div> -->
-
-<ng-template #editTemplate>
-    <div class="modal-header">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
-    <div class="modal-body">
-        
-    </div>
-
-    <div class="modal-footer">
-        <button *ngIf="modalRef" type="button" class="btn btn-danger" (click)="modalRef2.hide()">Entendido</button>
-    </div>
-</ng-template>

@@ -5,6 +5,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ToasterModule } from 'angular2-toaster/angular2-toaster';
 
+
 import { AdminRoutingModule } from './admin-routing.module';
 
 import { CalendarModule } from 'angular-calendar';
@@ -15,7 +16,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { NavModule } from './shared/nav/nav.module';
 import { CommunitiesComponent } from './communities/communities.component';
@@ -34,6 +35,7 @@ import { DetalleComponent } from './modals/detalle/detalle.component';
 import { CrearComponent } from './modals/crear/crear.component';
 import { InviteComponent } from './modals/invite/invite.component';
 
+
 @NgModule({
   imports: [    
     BsDatepickerModule.forRoot(),
@@ -48,7 +50,9 @@ import { InviteComponent } from './modals/invite/invite.component';
     CalendarModule.forRoot(),
     FullCalendarModule,
     ModalModule.forRoot(),
-    NavModule    
+    NavModule,
+    NgSelectModule,  
+    FormsModule
   ],
   declarations: [
     CommunitiesComponent,  
