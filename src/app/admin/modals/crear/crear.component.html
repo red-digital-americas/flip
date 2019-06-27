@@ -119,19 +119,20 @@
                         </div>                                            
                     </div> -->
 
+                    <!-- Uncomment for all day feature -->
                     <!-- <div class="col-12 mb-2 allDay">
                         <label class="switch switch-sm switch-3d switch-dark">
-                            <input class="switch-input" type="checkbox">
+                            <input class="switch-input" type="checkbox" name="allDaySwitch" [(ngModel)]="allDaySwitch">
                             <span class="switch-slider"></span>                            
                         </label>                         
-                        <div class="allDay__text">All day event</div>
+                        <div class="allDay__text">All day event</div>                        
                     </div> -->
 
-                    <div class="col-6 mb-2 aaa">                        
+                    <div class="col-6 mb-2 aaa" *ngIf="!allDaySwitch">                        
                         <div>Desde</div>
                         <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
                     </div>     
-                    <div class="col-6 aaa">
+                    <div class="col-6 aaa" *ngIf="!allDaySwitch">
                         <div>Hasta</div>
                         <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
                     </div>                      

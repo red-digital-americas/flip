@@ -71,6 +71,7 @@ export class DetalleComponent implements OnInit {
     datePicker;
     startTime:Date;
     endTime:Date;
+    allDaySwitch = false;
 
     scheduleModel:ScheduleModel = new ScheduleModel();    // For this moment only supports 1 schedule
     acitivyModel:ActivityModel = new ActivityModel();
@@ -99,6 +100,7 @@ export class DetalleComponent implements OnInit {
           this.eventDetail = res.item[0];
 
           this.isPastEvent();
+          // this.isAllDayEvent();
         } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
         else { console.log("Error");}
       },
@@ -149,6 +151,11 @@ export class DetalleComponent implements OnInit {
     this.scheduleModel.Date = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+
+    if (this.allDaySwitch) {
+      this.scheduleModel.TimeStart = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+      this.scheduleModel.TimeEnd = moment(this.datePicker).startOf('day').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
+    }
     
     ///////// Adding the complementaryData to the activityModel ///////////////////
     this.acitivyModel.Schedules = [];        
@@ -193,8 +200,17 @@ export class DetalleComponent implements OnInit {
 
   private isPastEvent () {
     this.showEditBtn = moment(this.eventDetail.timeStart).isAfter(moment(), 'hour');
-    this.showInvite = moment(this.eventDetail.timeStart).isAfter(moment(), 'hour')    
+    this.showInvite = moment(this.eventDetail.timeStart).isAfter(moment(), 'hour');
   } 
+
+  private isAllDayEvent () {
+    this.allDaySwitch = true;
+    if(moment(this.eventDetail.timeEnd).isAfter(moment(this.eventDetail.timeStart), 'day')) {
+      if (moment(this.eventDetail.timeEnd).isAfter(moment(this.eventDetail.timeStart).startOf('day').add(1, 'day').add(1, 'second'), 'second')) {         
+        this.allDaySwitch = false;
+      }    
+    } else {this.allDaySwitch = false;}      
+  }
 
   prepareImages(e) {    
     if (Utils.isDefined(e.srcElement.files)) {

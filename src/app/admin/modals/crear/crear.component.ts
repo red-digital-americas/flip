@@ -57,6 +57,7 @@ export class CrearComponent implements OnInit {
   datePicker;
   startTime;
   endTime;
+  allDaySwitch = false;
 
   scheduleModel:ScheduleModel = new ScheduleModel();    // For this moment only supports 1 schedule
   acitivyModel:ActivityModel = new ActivityModel();
@@ -113,6 +114,11 @@ export class CrearComponent implements OnInit {
     this.scheduleModel.Date = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+
+    if (this.allDaySwitch) {
+      this.scheduleModel.TimeStart = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+      this.scheduleModel.TimeEnd = moment(this.datePicker).startOf('day').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
+    }
     
     ///////// Adding the complementaryData to the activityModel ///////////////////
     this.acitivyModel.Schedules = [];

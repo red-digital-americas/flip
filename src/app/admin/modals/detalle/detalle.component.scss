@@ -1,3 +1,10 @@
+.allDay {
+    display: flex;
+    &__text{
+        margin-left: 1rem;
+    }
+}
+
 .aaa {
     display: flex;
     align-items: center;
