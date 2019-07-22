@@ -29,6 +29,7 @@ export class RecoverpassComponent implements OnInit {
   ngOnInit() {
   }
 
+  error = null;
 
   email: string;
   password: string;

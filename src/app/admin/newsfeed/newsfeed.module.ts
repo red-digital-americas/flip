@@ -8,8 +8,8 @@ import { ToasterModule, ToasterService } from 'angular2-toaster/angular2-toaster
   imports: [
     CommonModule,
     ToasterModule,
-    ToasterService,
+    // ToasterService,
   ],
-  declarations: [NewsfeedComponent]
+  // declarations: [NewsfeedComponent]
 })
 export class NewsfeedModule { }

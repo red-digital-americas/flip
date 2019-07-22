@@ -10,7 +10,7 @@ import { ReservationsComponent } from './reservations.component';
     CommonModule,
     // CalendarModule.forRoot()    
   ],
-  declarations: [ReservationsComponent],  
+  // declarations: [ReservationsComponent],  
   // exports: [ReservationsComponent],  
 })
 export class ReservationsModule { }

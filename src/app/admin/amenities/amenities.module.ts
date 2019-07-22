@@ -8,6 +8,6 @@ import { EditAmenitiesComponent } from './edit/edit-amenities.component';
   imports: [
     CommonModule
   ],
-  declarations: [AmenitiesComponent, EditAmenitiesComponent]
+  // declarations: [AmenitiesComponent, EditAmenitiesComponent]
 })
 export class AmenitiesModule { }

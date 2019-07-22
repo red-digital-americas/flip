@@ -18,6 +18,7 @@
                         <div>{{eventDetail?.activity.description}}</div>
                     </div>
 
+                    <!-- Uncomment for Host, uncomment on service user display, or fetch from User service -->
                     <!-- <div class="col-12">
                         <img [src]="eventDetail?.user.avatar" alt="">
                         <h5>{{eventDetail?.user.name}}</h5>
@@ -35,7 +36,7 @@
             </div>            
 
             <div class="col-4">
-                <img style="width:100%" [src]="eventDetail?.activity.photo" alt="Event Photo">
+                <img class="event__photo" [src]="eventDetail?.activity.photo" alt="Event Photo">
             </div>
         </div>
 
@@ -124,6 +125,7 @@
                             </div>
                         </div>                                                               
                         
+                        <!-- Uncomment for Edit Cupo feature -->
                         <!-- <div class="col-12 mb-2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
