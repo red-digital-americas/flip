@@ -39,12 +39,12 @@
       <form #loginForm="ngForm" autocomplete="off">
 
       <div class="modal-body">
-          Imagen 1:
+          Imagen 1 : *La imagen deberá de ser de 350px * 350px; 
         <div class="custom-file margin-gral ">
          
           <input type="file" accept="image/*"
                  (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-          <label class="custom-file-label" for="customFile">Choose file</label>
+          <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
 
         </div>
         Imagen 2: 

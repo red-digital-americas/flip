@@ -43,7 +43,8 @@ export class WebadminComponent implements OnInit {
   public user: string[];
   postphoto: any[]=[];
 
-  
+  imageInputLabel = "Choose file";
+
 
   comment: string = "";
 
@@ -139,6 +140,7 @@ export class WebadminComponent implements OnInit {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
       for (let f of this.newImages) {
+        this.imageInputLabel = f.name;
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
