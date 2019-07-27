@@ -47,14 +47,36 @@
                     
                     <div class="col-12 mb-2">                        
                         <div class="input-group">
-                            <div class="input-group-prepend">
+                            <div class="input-group-prepend" style="position: relative; z-index:1;">
                                 <span class="input-group-text">Host</span>
                             </div>  
-                            <select class="form-control" [(ngModel)]="acitivyModel.UserId" name="activityUserId" id="activityUserId">
+                            <!-- <select class="form-control" [(ngModel)]="acitivyModel.UserId" name="activityUserId" id="activityUserId">
                                 <option *ngFor="let user of usersArray" [value]="user.id" >
                                     {{user.name}}
                                 </option>                            
-                            </select>                           
+                            </select> -->
+
+                            <!-- <fieldset class="form-control"> -->
+                                <ng-select    
+                                    style="flex: 1"
+                                    name="activityUserId" 
+                                    id="activityUserId"
+                                
+                                    [clearable]="false"
+                                    [items]="usersArray"                                                          
+                                    [(ngModel)]="acitivyModel.UserId" 
+                                    bindLabel="name" 
+                                    bindValue="id">
+
+                                    <ng-template ng-label-tmp let-item="item">
+                                        <span class="ng-value-label"><img [src]="item.avatar" style="border-radius: 50%;" width="20px" height="20px"> {{item.name}} {{item.lastName}} </span>                                                                
+                                    </ng-template>
+
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <img [src]="item.avatar" style="border-radius: 50%;" width="20px" height="20px"> {{item.name}} {{item.lastName}}
+                                    </ng-template>  
+                                </ng-select>
+                            <!-- </fieldset> -->
                         </div>
                     </div> 
 
@@ -95,21 +117,22 @@
                             </div> 
                             <timepicker name="startTimeZZZZZ" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
                         </div>                                            
-                    </div>
-
-                    <div class="col-12 mb-2 allDay">
-                        <label class="switch switch-sm switch-3d switch-dark">
-                            <input class="switch-input" type="checkbox">
-                            <span class="switch-slider"></span>                            
-                        </label>                         
-                        <div class="allDay__text">All day event</div>
                     </div> -->
 
-                    <div class="col-6 mb-2 aaa">                        
+                    <!-- Uncomment for all day feature -->
+                    <!-- <div class="col-12 mb-2 allDay">
+                        <label class="switch switch-sm switch-3d switch-dark">
+                            <input class="switch-input" type="checkbox" name="allDaySwitch" [(ngModel)]="allDaySwitch">
+                            <span class="switch-slider"></span>                            
+                        </label>                         
+                        <div class="allDay__text">All day event</div>                        
+                    </div> -->
+
+                    <div class="col-6 mb-2 aaa" *ngIf="!allDaySwitch">                        
                         <div>Desde</div>
                         <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
                     </div>     
-                    <div class="col-6 aaa">
+                    <div class="col-6 aaa" *ngIf="!allDaySwitch">
                         <div>Hasta</div>
                         <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
                     </div>                      

@@ -1,3 +1,10 @@
+.allDay {
+    display: flex;
+    &__text{
+        margin-left: 1rem;
+    }
+}
+
 .aaa {
     display: flex;
     align-items: center;
@@ -7,6 +14,8 @@
 .section-books {
     display: flex;
     flex-wrap: wrap;
+    max-height: 10rem;
+    overflow-y: auto;
 }
 
 .book {

@@ -49,6 +49,7 @@
     "@fullcalendar/interaction": "^4.2.0",
     "@fullcalendar/list": "^4.2.0",
     "@fullcalendar/timegrid": "^4.2.0",
+    "@ng-select/ng-select": "^2.20.1",
     "angular-calendar": "^0.25.2",
     "angular2-datatable": "^0.6.0",
     "angular2-ladda": "2.0.0",

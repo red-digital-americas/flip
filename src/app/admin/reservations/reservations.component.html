@@ -26,7 +26,7 @@
   <div class="card">    
     <div class="card-body">
       <!-- <h5 class="card-title">Calendar</h5> -->
-      <button (click)="Refresh()" type="button" class="btn btn-outline-dark margin-gral">Refresh</button>           
+      <!-- <button (click)="Refresh()" type="button" class="btn btn-outline-dark margin-gral">Refresh</button>  -->
 
       <div class="form-row">
         <div class="col-12 margin-gral">
@@ -36,13 +36,7 @@
             </option>                  
           </select>
         </div>            
-      </div>
-     
-      <!-- <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins"></full-calendar> -->      
-      <!-- <full-calendar defaultView="dayGridDay" [plugins]="calendarPlugins" [weekends]="false"
-        [events]="[ { title: 'event 1', date: '2019-04-01' }, { title: 'event 2', date: '2019-04-02' }]"
-        (dateClick)="handleDateClick($event)" timeZone='Europe/Moscow' 
-      ></full-calendar> -->
+      </div>           
 
       <full-calendar
         #calendar
@@ -71,6 +65,11 @@
         (datesRender)="handleDatesRender($event)"
                 
       ></full-calendar>
+      <!-- [header]="{
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      }" -->
       <!-- selectable="false" 
       (select)="handleSelect($event)" -->      
 

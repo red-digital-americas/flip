@@ -29,6 +29,13 @@ class ActivityModel {
   constructor() {}
 }
 
+class InviteModel {
+  public userid:number;
+  public inviteidList:number[];
+  public idActivity:number;
+  public inviteMessage:string = "";
+}
+
 @Component({
   selector: 'app-detalle',
   templateUrl: './detalle.component.html',
@@ -38,17 +45,20 @@ class ActivityModel {
 export class DetalleComponent implements OnInit {    
   /////////////////////////////////////////////////////////
   // passed in initialState from reservations.component.ts
-  idProps;    
+  idProps;  
+  buildingIdProps;  
   responseData;
   
   ///////////////////////////////////////////
   // DETALLE VIEW
-  eventDetail;  
+  eventDetail;    
   booksArray = [];
 
   ///////////////////////////////////////////
   // EDIT VIEW
   isEditVisible = false;
+  showEditBtn = false;
+  showInvite = false;
     ////////////////////////////////////////////////////////
     // CONFIGURATION
     imageInputLabel = "Choose file";
@@ -61,6 +71,7 @@ export class DetalleComponent implements OnInit {
     datePicker;
     startTime:Date;
     endTime:Date;
+    allDaySwitch = false;
 
     scheduleModel:ScheduleModel = new ScheduleModel();    // For this moment only supports 1 schedule
     acitivyModel:ActivityModel = new ActivityModel();
@@ -87,6 +98,9 @@ export class DetalleComponent implements OnInit {
         if(res.result === "Success"){          
           if (res.item.length < 0) { return; }
           this.eventDetail = res.item[0];
+
+          this.isPastEvent();
+          // this.isAllDayEvent();
         } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
         else { console.log("Error");}
       },
@@ -95,15 +109,18 @@ export class DetalleComponent implements OnInit {
         
     this.heroService.service_general_get_with_params("Books", {scheduleId: this.idProps}).subscribe(
       (res)=> {
-        // console.log(res.item);
+        console.log(res.item);
         if(res.result === "Success"){                    
           this.booksArray = res.item;
+          this.LoadInvitableUsers();
           // this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);
         } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
         else { console.log("Error");}
       },
       (err)=> {console.log(err);}
     ); 
+
+       
   }
 
   public Edit() {
@@ -130,13 +147,15 @@ export class DetalleComponent implements OnInit {
     let date = moment(this.datePicker).format('YYYY/MM/DD');
     let startHour = moment(this.startTime).format('HH');
     let endHour = moment(this.endTime).format('HH');    
-    
-    // this.scheduleModel.Date = moment(this.datePicker).startOf('day').subtract(5, 'hour').toDate();
-    // this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
-    // this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
+        
     this.scheduleModel.Date = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+
+    if (this.allDaySwitch) {
+      this.scheduleModel.TimeStart = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+      this.scheduleModel.TimeEnd = moment(this.datePicker).startOf('day').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
+    }
     
     ///////// Adding the complementaryData to the activityModel ///////////////////
     this.acitivyModel.Schedules = [];        
@@ -177,8 +196,22 @@ export class DetalleComponent implements OnInit {
       },
       () => { this.modalRef.hide(); }      
     );
+  }     
+
+  private isPastEvent () {
+    this.showEditBtn = moment(this.eventDetail.timeStart).isAfter(moment(), 'hour');
+    this.showInvite = moment(this.eventDetail.timeStart).isAfter(moment(), 'hour');
   } 
-  
+
+  private isAllDayEvent () {
+    this.allDaySwitch = true;
+    if(moment(this.eventDetail.timeEnd).isAfter(moment(this.eventDetail.timeStart), 'day')) {
+      if (moment(this.eventDetail.timeEnd).isAfter(moment(this.eventDetail.timeStart).startOf('day').add(1, 'day').add(1, 'second'), 'second')) {         
+        this.allDaySwitch = false;
+      }    
+    } else {this.allDaySwitch = false;}      
+  }
+
   prepareImages(e) {    
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {        
@@ -208,23 +241,64 @@ export class DetalleComponent implements OnInit {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //  MODAL INVITE
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-  inviteModal:BsModalRef
+// https://ng-select.github.io/ng-select#/templates    
+
+// inviteModal:BsModalRef  
+ // Invite () {    
+  //   this.inviteModal = this.modalService.show(InviteComponent, {
+  //     initialState: { idProps: 9999, responseData: {} },
+  //     class: 'modal-lg'
+  //   });
+  //   this.inviteModal.content.closeBtnName = 'Close';                   
+  // }  
+
+  usersBuildingArray = [];    
+  selectedUsers = [];
+  inviteModel:InviteModel = new InviteModel();
+  
+  selectAll() { this.selectedUsers = this.usersBuildingArray.map(x => x.id); }
+  unselectAll() { this.selectedUsers = []; }
 
   Invite () {    
-    this.inviteModal = this.modalService.show(InviteComponent, {
-      initialState: { idProps: 9999, responseData: {} },
-      class: 'modal-lg'
-    });
-    this.inviteModal.content.closeBtnName = 'Close';           
-  
-    // let newSubscriber = this.modalService.onHide.subscribe(r=>{
-    //   newSubscriber.unsubscribe();
-    //   console.log('InviteResponse',this.inviteModal.content.responseData);
-    //   // if(this.inviteModal.content.responseData.action === 'Delete') {
-    //   //   this.toasterService.pop('success', 'Success ', 'Your Activity was deleted correctly.');          
-    //   // } else if (this.inviteModal.content.responseData.action === 'Edit') {
-    //   //   this.toasterService.pop('success', 'Success ', 'Your Activity was modified correctly.');          
-    //   // }
-    // });      
+    if (this.selectedUsers.length <= 0) { return; }
+
+    this.inviteModel.idActivity = this.eventDetail.activity.id;
+    this.inviteModel.inviteidList = this.selectedUsers;
+    this.inviteModel.userid = this.eventDetail.activity.userId;        
+    this.SentInvites();
+  }   
+
+  LoadInvitableUsers() {       
+    this.heroService.service_general_get_with_params("Users", {buildingId: this.buildingIdProps}).subscribe(
+      (res)=> {
+        // console.log(res.item);
+        if(res.result === "Success"){                    
+          this.usersBuildingArray = res.item;                       
+          
+          this.usersBuildingArray = this.usersBuildingArray.filter(user => {                        
+            return !this.booksArray.map(book => book.user.id).includes(user.id); 
+          });          
+        } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
+        else { console.log("Error");}
+      },
+      (err)=> {console.log(err);}
+    );  
   }  
+
+  private SentInvites() {
+    this.heroService.service_general_post("Message/SentInviteActivity", this.inviteModel).subscribe(
+      (res)=> {
+        console.log(res);
+        if(res.result === "Success"){                    
+          this.selectedUsers = [];
+          this.toasterService.pop('success', 'Success', 'Invitations sent.');
+        } else if (res.result === "Error") { 
+          console.log("Ocurrio un error" + res.detalle); 
+          this.toasterService.pop('danger', 'Error', 'Error Sending invites.');
+        } 
+        else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'Error Sending invites.');}
+      },
+      (err)=> {console.log(err); this.toasterService.pop('danger', 'Error', 'Error Sending invites.');}
+    );
+  }
 }

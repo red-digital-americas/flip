@@ -52,9 +52,7 @@ export class ReservationsComponent implements OnInit {
     if (localStorage.getItem("user") == undefined) {
       this.router.navigate(['/login']);
     }
-    else {
-      // this.user = JSON.parse(localStorage.getItem("user"));
-      // console.log(this.user);
+    else {      
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
       this.IDBUILD = this.route.snapshot.params['id'];       
       this.GetAmenities();         
@@ -86,6 +84,8 @@ export class ReservationsComponent implements OnInit {
 
   calendarPlugins = [dayGridPlugin, listPlugin, interactionPlugin, timeGridPlugin];      
   calendarWeekends = true;  
+  activeStart;
+  activeEnd;
 
   calendarEvents: EventInput[] = [
     // { id: 10, title: 'Event Now', start: new Date() },
@@ -104,7 +104,8 @@ export class ReservationsComponent implements OnInit {
   scheduleModel:ScheduleModel;    // For Modifications through Calendar handles Events  
   
   GetEvents() {  
-    let params = {buildingId: this.IDBUILD, amenityId: this.amenitySelect};
+    // let params = {buildingId: this.IDBUILD, amenityId: this.amenitySelect};        
+    let params = {buildingId: this.IDBUILD, amenityId: this.amenitySelect, startDate: this.activeStart, endDate: this.activeEnd};      
     this.heroService.service_general_get_with_params("Schedules", params).subscribe(
       (res)=> {
         if(res.result === "Success"){   
@@ -124,7 +125,7 @@ export class ReservationsComponent implements OnInit {
   /////////////////////////////////// FULL CALENDAR INPUTS /////////////////////////////////////////////////////////////////  
   // https://github.com/fullcalendar/fullcalendar-angular/blob/master/projects/fullcalendar/src/lib/fullcalendar-options.ts
   private InitCalendarSetup () {
-    this.calendarComponent.eventAllow = this.handleEventAllow;  
+    this.calendarComponent.eventAllow = this.handleEventAllow;        
   }
 
   handleEventAllow(dropLocation, draggedEvent) {          
@@ -134,7 +135,12 @@ export class ReservationsComponent implements OnInit {
     // if (moment(draggedEvent.start).isBefore(moment(), 'day')) { return false; }
     if (moment(draggedEvent.start).isSameOrBefore(moment(), 'hour')) { return false; }
     //////// Eventos con duración solo de un dia ////////////////////////////////////////////
-    if (moment(dropLocation.end).isAfter(moment(dropLocation.start), 'day')) { return false; }
+    // if (moment(dropLocation.end).isAfter(moment(dropLocation.start), 'day')) { return false; }    
+    if(moment(dropLocation.end).isAfter(moment(dropLocation.start), 'day')) {
+      if (moment(dropLocation.end).isAfter(moment(dropLocation.start).startOf('day').add(1, 'day').add(1, 'second'), 'second')) { 
+        return false; 
+      }    
+    }    
     //////// Fecha destino a mover debe ser hoy o posterior /////////////////////////////////                   
     // return moment(dropLocation.start).isSameOrAfter(moment(), 'day');    
     return moment(dropLocation.start).isAfter(moment(), 'hour');  
@@ -142,7 +148,7 @@ export class ReservationsComponent implements OnInit {
 
   /////////////////////////////////// FULL CALENDAR OUTPUS/HANDLERS /////////////////////////////////////////////////////////
   handleDateClick(arg) {       
-    console.log(arg.date, arg.dateStr, arg.view.type); //"dayGridMonth" "timeGridWeek" "timeGridDay"    
+    // console.log(arg.date, arg.dateStr, arg.view.type); //"dayGridMonth" "timeGridWeek" "timeGridDay"    
     this.Crear(arg);    
   }
 
@@ -159,7 +165,7 @@ export class ReservationsComponent implements OnInit {
   handleEventResize(arg) {        
     // console.log(arg.event.title, arg.event.id, arg.event.start, arg.event.end);           
     this.GetScheudleById(arg);
-    //this.GetEvents();    
+    //this.GetEvents();             // Not necesary, already added in the NativeCalendarModel, refresh only needed when change amenity or calendarView(getDates with start/end filter)
   }
 
   handleSelect(arg) {
@@ -169,7 +175,26 @@ export class ReservationsComponent implements OnInit {
 
   handleDatesRender(info) {
     // console.log(info.view.type);
-    // console.log(info.view.activeEnd, info.view.activeStart, info.view.currentEnd, info.view.currentStart);         
+    // console.log(info.view.activeEnd, info.view.activeStart, info.view.currentEnd, info.view.currentStart); 
+    this.activeStart = moment(info.view.activeStart).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+    this.activeEnd = moment(info.view.activeEnd).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+
+    let fcNextBtn = document.getElementsByClassName('fc-next-button')[0];
+    let fcPrevBtn = document.getElementsByClassName('fc-prev-button')[0];
+    
+    if (moment(info.view.activeStart).isBefore(moment(), 'month')) { 
+      fcPrevBtn != undefined ? fcPrevBtn.setAttribute('disabled', 'true') : null;
+    } else {
+      fcPrevBtn != undefined ? fcPrevBtn.removeAttribute('disabled') : null;
+    }
+
+    if (moment(info.view.activeEnd).isAfter(moment().add(1, 'month'), 'month')) { 
+      fcNextBtn != undefined ? fcNextBtn.setAttribute('disabled', 'true') : null;
+    } else {
+      fcNextBtn != undefined ? fcNextBtn.removeAttribute('disabled') : null;
+    }
+
+    if (this.amenitySelect != undefined) {this.GetEvents();}    // Avoid error first time
   }
 
   Refresh() {       
@@ -177,22 +202,7 @@ export class ReservationsComponent implements OnInit {
     console.log(this.calendarComponent.getApi().view.activeEnd, this.calendarComponent.getApi().view.activeStart, 
                 this.calendarComponent.getApi().view.currentEnd, this.calendarComponent.getApi().view.currentStart);     
     this.GetEvents();
-  }
-
-  // AddEvent () {
-  //   let newEvent = { id: 20, title: 'Evento B', start: new Date(), startEditable:true, durationEditable:true, overlap: false };
-  //   // this.calendarEvents = this.calendarEvents.concat(newEvent);        
-
-  //   this.calendarComponent.getApi().addEvent(newEvent);    // no lo borra al agregar uno nuevo pero no el arreglo
-    
-  //   // this.calendarEvents.push(newEvent);        
-  //   // this.calendarComponent.getApi().removeAllEvents();
-  //   // this.calendarComponent.getApi().addEventSource(this.calendarEvents);
-
-  //   console.log(this.calendarEvents);    
-  //   console.log(this.calendarComponent.getApi().getEvents());          
-  //   console.log("AddEvent");
-  // }  
+  }  
 
   private LoadEventsToCalendar(events:any) {
     this.calendarComponent.getApi().removeAllEvents();
@@ -207,19 +217,7 @@ export class ReservationsComponent implements OnInit {
   private ParseEvent(event:any) {            
     let newEvent = { id: event.id, title: event.activity.name, start: event.timeStart, end: event.timeEnd, startEditable:true, durationEditable:true, overlap: false, backgroundColor: event.activity.private ? '#d8209e' : '#3788d8' };
     return newEvent;
-  }
-
-  private ValidDateUpdate(date):boolean {
-    if(moment(date).isBefore(moment(), 'day') && this.calendarComponent.getApi().view.type === 'dayGridMonth') { 
-      return false; 
-    }   
-    if( moment(date).isSameOrBefore(moment(), 'hour') && 
-        (this.calendarComponent.getApi().view.type === 'timeGridWeek' || 
-        this.calendarComponent.getApi().view.type === 'timeGridDay' ) ) { 
-      return false; 
-    }
-    return true;
-  }
+  }  
 
   ///////////////////////////////////////////////// SERVICIOS //////////////////////////////////////////////////////////////
   private UpdateSchedule(scheduleModel:ScheduleModel) {      
@@ -229,7 +227,7 @@ export class ReservationsComponent implements OnInit {
           //console.log(res.item);                        
           this.toasterService.pop('success', 'Success ', 'Your Activity was modified correctly.'); 
         } else if(res.result === "Error") {
-          console.log(res.detalle);
+          // console.log(res.detalle);
           this.toasterService.pop('danger', 'Error', res.detalle);
         } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
       },
@@ -252,7 +250,7 @@ export class ReservationsComponent implements OnInit {
           // console.log(this.scheduleModel);
           this.UpdateSchedule(this.scheduleModel);
         } else if(res.result === "Error") {
-          console.log(res.detalle);
+          // console.log(res.detalle);
           this.toasterService.pop('danger', 'Error', res.detalle);
         } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
       },
@@ -268,7 +266,7 @@ export class ReservationsComponent implements OnInit {
 
   VerDetalle (id) {
     this.modalRef = this.modalService.show(DetalleComponent, {
-      initialState: { idProps: id, responseData: {} },
+      initialState: { idProps: id, buildingIdProps: this.IDBUILD, responseData: {} },
       class: 'modal-lg'
     });
     this.modalRef.content.closeBtnName = 'Close';  

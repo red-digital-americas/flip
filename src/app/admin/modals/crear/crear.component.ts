@@ -57,6 +57,7 @@ export class CrearComponent implements OnInit {
   datePicker;
   startTime;
   endTime;
+  allDaySwitch = false;
 
   scheduleModel:ScheduleModel = new ScheduleModel();    // For this moment only supports 1 schedule
   acitivyModel:ActivityModel = new ActivityModel();
@@ -110,18 +111,19 @@ export class CrearComponent implements OnInit {
     let startHour = moment(this.startTime).format('HH');
     let endHour = moment(this.endTime).format('HH');
     
-    ///////// Servidor le aumenta +5 horas por la zona horaria ////////////////////    
-    // this.scheduleModel.Date = moment(this.datePicker).startOf('day').subtract(5, 'hour').toDate();
-    // this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
-    // this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').subtract(5, 'hour').toDate();
     this.scheduleModel.Date = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+
+    if (this.allDaySwitch) {
+      this.scheduleModel.TimeStart = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+      this.scheduleModel.TimeEnd = moment(this.datePicker).startOf('day').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
+    }
     
     ///////// Adding the complementaryData to the activityModel ///////////////////
     this.acitivyModel.Schedules = [];
     this.acitivyModel.Schedules.push(this.scheduleModel);
-    //this.acitivyModel.UserId = 4;           // Change to select with user
+    //this.acitivyModel.UserId = 4;                             // ALREADY ASOCIATED WITH NGMODEL, ONLY FOR REMINDER
     this.acitivyModel.AmenityId = this.amenityIdProps;
     
     console.log(this.acitivyModel);
