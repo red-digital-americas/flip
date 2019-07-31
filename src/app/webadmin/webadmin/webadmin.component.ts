@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
-import { ToasterService } from 'angular2-toaster';
+import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
 
 
@@ -26,8 +26,9 @@ export class WebadminComponent implements OnInit {
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
-   ) {
-  }
+    toasterService: ToasterService) {
+      this.toasterService = toasterService;
+    }
   posts: any[];
   email: string;
   password: string;
@@ -44,7 +45,16 @@ export class WebadminComponent implements OnInit {
   postphoto: any[]=[];
 
   imageInputLabel = "Choose file";
+  imageInputLabeltwo = "Choose file";
 
+  private toasterService: ToasterService;
+
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 3000,
+      positionClass: "toast-top-center",
+    });
 
   comment: string = "";
 
@@ -98,58 +108,83 @@ export class WebadminComponent implements OnInit {
    
    updatephoto() {
     // debugger;
-    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[2], FrontPhoto: this.postphoto[1], Position: this.PostId };
-    debugger;
 
-    this.heroService.ServicioPostPost("UpdateIndex", creadoobj).subscribe((value) => {
+    if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"){
+      var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[1], FrontPhoto: this.postphoto[0], Position: this.PostId };
+      debugger;
+  
+      this.heroService.ServicioPostPost("UpdateIndex", creadoobj).subscribe((value) => {
+  
+  
+        switch (value.result) {
+          case "Error":
+            console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
+            this.showError(); 
+            break;
+          default:
+            debugger;
+            if (value.result == "Success") {
+              this.get_photos();
+             
+             
+              this.postphoto=[]; 
+              this.postphoto.push("assets/img/Coliving.jpg");
+              this.showSuccess();
+            }
+        }
+      });    
+    }
+    else {
+      this.showWarning();
+    }
+  
 
 
-      switch (value.result) {
-        case "Error":
-          console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-         
-          break;
-        default:
-          debugger;
-          if (value.result == "Success") {
-            this.get_photos();
-           
-           
-            this.postphoto=[]; 
-            this.postphoto.push("assets/img/Coliving.jpg");
+  }
 
-          }
-      }
-    });
+  
+  showSuccess() {
+    this.toasterService.pop('success', 'Success ', 'Publicación Actualizada Correctamente ');
+  }
+
+  showError() {
+    this.toasterService.pop('error', 'Error ', 'Por favor completa todos los campos ');
+  }
+  showWarning() {
+    this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
   }
    
-  prepareImages(e) {
-    debugger; 
+  prepareImages(e,indice ) {
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
-        debugger;
-        this.newImages.push(f);
+        this.newImages[indice]=(f);
       }
     }
-    this.addImages();
+    this.addImages(indice);
 
   }
 
 
-  addImages() {
+  addImages(indice) {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
       for (let f of this.newImages) {
-        this.imageInputLabel = f.name;
+        debugger;
+        if(indice==0){
+          this.imageInputLabel = f.name;
+        }
+        if(indice==1)
+        {
+        this.imageInputLabeltwo = f.name;
+        }
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
             debugger;
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
             debugger;
-            this.postphoto.push(url);
+            this.postphoto[indice]=(url);
             debugger;
-            this.newImages = [];
           }
         })
       }

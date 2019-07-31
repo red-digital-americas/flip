@@ -17,14 +17,7 @@
                         <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="infoModal.show();passdata(post.id);">
                             Editar info 
                           </button>
-                      <div  class="col-sm-12 col-md-12" *ngFor="let photo of photos " >
-                         Photo: <img style="margin-right: 10px;" class="img-size" style="margin-left: 26%; margin-top: 5%;" src="{{photo.photo}}">
-                        
-                          Mobile Photo:<img style="margin-left: 17%; margin-top: 5%; " class="img-size" src="{{photo.photoMobile}}">
-                          <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(photo.id);passnumroom(post.id);">
-                              Editar
-                            </button>
-                        </div> 
+                 
                          
           </div>
             
@@ -38,7 +31,37 @@
     </div><!--/.col-->
    
   </div><!--/.row-->
+  <div class="row">
+      <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts " >
+        <div class="card " *ngFor="let photo of photos " >
+          <div class="card-body ">
+  <div  class="col-sm-12 col-md-12" >
+      Photo: <img style="height: 400px; width: 600px;" class="img-size" src="../../../assets/webtmp.png">
+       <img  class="img-size" style="
+       position: absolute; 
+       left: 56px;
+       height: 375px;
+       width: 475px;
+       top: 22px;" src="{{post.photo}}">
+  </div>
+  <div  class="col-sm-12 col-md-12" >
+
   
+       Mobile Photo:
+       <img style="height: 400px; width: 300px;" class="img-size" src="../../../assets/phone.png">
+         <img style="position: absolute;
+                           left: 166px;
+                           height: 293px;
+                           width: 180px;
+                           top: 49px;" class="img-size" src="{{post.photoMobile}}">
+                           </div>
+<button   style="margin: 5%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(photo.id);passnumroom(post.id);">
+           Editar
+         </button>
+     </div>
+     </div>
+     </div>
+  </div>
   <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
       <div class="modal-content">
@@ -51,9 +74,9 @@
         
       <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
-            Imagen :
+            Imagen   la resolución debe de ser 1920px*1080px:
           <div class="custom-file margin-gral ">
-              <input type="file"   accept="image/*"  class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event);" />
+              <input type="file"   accept="image/*"  class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event,0);" />
     
       
               <div>
@@ -75,18 +98,18 @@
                       [style.display]="showCropper ? null : 'none'"
                   ></image-cropper>
                   Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage" />
-                  <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer()" >Upload Images</button>
+                  <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(1)" >Subir Imagen </button>
 
                 </div>
                
-       <label class="custom-file-label" for="customFile">Choose file</label>
+       <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
   
      </div>
           
         </div>
         <div class="modal-footer">
           <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-          <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid"  (click)="updatephoto()" >Save changes</button>
+          <button type="button" style="z-index: 9999;" class="btn btn-primary"   (click)="updatephoto()" >Guardar Cambios </button>
         </div>
       </form>
       </div><!-- /.modal-content -->
@@ -120,8 +143,8 @@
             
           </div>
           <div class="modal-footer">
-            <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="infoModal.hide()">Close</button>
-            <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid"  (click)="updateindo()" >Save changes</button>
+            <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="infoModal.hide()">Cerrar</button>
+            <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid"  (click)="updateindo()" >Guardar Cambios</button>
           </div>
         </form>
         </div><!-- /.modal-content -->
@@ -129,3 +152,4 @@
     </div><!-- /.modal -->
     
   
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>

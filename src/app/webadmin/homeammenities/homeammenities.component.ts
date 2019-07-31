@@ -2,7 +2,7 @@ import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
-import { ToasterService } from 'angular2-toaster';
+import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
 import { ImageCropperModule, ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 
@@ -32,7 +32,9 @@ export class HomeammenitiesComponent implements OnInit {
     constructor(private router: Router,
       private heroService: DatosService,
       private route: ActivatedRoute,
-     ) {
+     
+    toasterService: ToasterService) {
+      this.toasterService = toasterService;
     }
     posts: any[];
     email: string;
@@ -57,7 +59,21 @@ export class HomeammenitiesComponent implements OnInit {
   
     comment: string = "";
   
+    imageInputLabel = "Choose file";
+    imageInputLabeltwo = "Choose file";
+    imageInputLabelthree = "Choose file";
+    imageInputLabelfour = "Choose file";
+    imageInputLabelfive="Choose file";
+    imageInputLabelsix="Choose file";
     public newImages: any[] = [];
+    private toasterService: ToasterService;
+  
+    public toasterconfig: ToasterConfig =
+      new ToasterConfig({
+        tapToDismiss: true,
+        timeout: 3000,
+        positionClass: "toast-top-center",
+      });
   
   
     ngOnInit() {
@@ -110,18 +126,24 @@ export class HomeammenitiesComponent implements OnInit {
     }
   
   
-    uploadAttachmentToServer() {
+    uploadAttachmentToServer(indice) {
+      debugger; 
+      if (indice==3){
       const fileToUpload: File = new File([this.blob], 'filename.png');
-      const fileToUpload1: File = new File([this.blob1], 'filename1.png');
 
-      this.newImages.push(fileToUpload);
-      this.newImages.push(fileToUpload1);
+      this.newImages[indice]=(fileToUpload);
+      this.imageInputLabelfour="movil"; 
+      }
+      if(indice==5){
+        const fileToUpload: File = new File([this.blob], 'filename.png');
 
-      this.addImages();
+        this.newImages[indice]=(fileToUpload);
+        this.imageInputLabelsix="movil"; 
+      }
+      this.addImages(indice);
      // debugger;
      // console.log(this.newImages);
     }
-  
   
     prepareImagesblob(e) {
   
@@ -131,7 +153,7 @@ export class HomeammenitiesComponent implements OnInit {
           this.newImages.push(f);
         }
       }
-      this.addImages();
+      //this.addImages();
   
     }
 
@@ -223,8 +245,12 @@ export class HomeammenitiesComponent implements OnInit {
   
      
      updatephoto() {
-       debugger;
-      var creadoobj = { id: this.PostId, Photo: this.postphoto[4], PhotoMobile: this.postphoto[5] , Description: this.direction , Title:this.title, Icon:this.postphoto[1], PhotoBuild:this.postphoto[2] , PhotoBuilMobile:this.postphoto[3] };
+        debugger;
+        if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"&&this.imageInputLabelthree!="Choose file"&&this.imageInputLabelfive!="Choose file"){
+ 
+        if(this.imageInputLabelfour!="Choose file"&&this.imageInputLabelsix!="Choose file"){
+ 
+      var creadoobj = { id: this.PostId, Photo: this.postphoto[2], PhotoMobile: this.postphoto[5] , Description: this.direction , Title:this.title, Icon:this.postphoto[0],Icon2:this.postphoto[1], PhotoBuild:this.postphoto[4] , PhotoBuilMobile:this.postphoto[3] };
       debugger;
   /**  post.Photo = item.Photo;
                         post.Description = item.Description;
@@ -238,50 +264,95 @@ export class HomeammenitiesComponent implements OnInit {
         switch (value.result) {
           case "Error":
             console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-           
+            this.showError();
             break;
           default:
             //debugger;
             if (value.result == "Success") {
+              debugger;
               this.get_photos();
               this.postphoto=[]; 
               this.postphoto.push("assets/img/Coliving.jpg");
              
-             
-  
+              this.showSuccess();
+              this.imageInputLabel="Choose file";
+              this.imageInputLabelfour="Choose file";
+              this.imageInputLabelfive="Choose file";
+              this.imageInputLabelthree="Choose file";
+              this.imageInputLabeltwo="Choose file";
+              this.title="";
+              this.direction="";
+
+
+
+
+
+
             }
         }
-      });
+      });    
     }
+    else {
      
-    prepareImages(e) {
-     // debugger; 
+      alert("Sube la imagen móvil, por favor ")
+    }
+  
+  }
+else {
+  this.showWarning();
+}
+    }
+  
+  
+    showSuccess() {
+      this.toasterService.pop('success', 'Success ', 'Publicación Actualizada Correctamente ');
+    }
+  
+    showError() {
+      this.toasterService.pop('error', 'Error ', 'Por favor completa todos los campos ');
+    }
+    showWarning() {
+      this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
+    }
+    prepareImages(e,indice ) {
       if (Utils.isDefined(e.srcElement.files)) {
         for (let f of e.srcElement.files) {
-       //   debugger;
-          this.newImages.push(f);
+          this.newImages[indice]=(f);
         }
       }
-      //this.addImages();
-  
+      debugger; 
+      this.addImages(indice);
     }
   
   
-    addImages() {
+    addImages(indice) {
       let url: string = '';
       if (!Utils.isEmpty(this.newImages)) {
-        for (let f of this.newImages ) {
-          
-          
+        for (let f of this.newImages) {
+          debugger;
+          if(indice==0){
+            this.imageInputLabel = f.name;
+          }
+          if(indice==1)
+          {
+          this.imageInputLabeltwo = f.name;
+          }
+          if(indice==2)
+          {
+          this.imageInputLabelthree = f.name;
+          }
+          if(indice==4)
+          {
+          this.imageInputLabelfive = f.name;
+          }
           this.heroService.UploadImgSuc(f).subscribe((r) => {
             if (Utils.isDefined(r)) {
               url = <string>r.message;
-              
+              debugger;
               url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-            
-              this.postphoto.push(url);
-              console.log(this.newImages);
-              this.newImages = [];
+              debugger;
+              this.postphoto[indice]=(url);
+              debugger;
             }
           })
         }

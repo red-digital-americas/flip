@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
-import { ToasterService } from 'angular2-toaster';
+import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
 @Component({
   selector: 'app-design',
@@ -23,8 +23,9 @@ export class DesignComponent implements OnInit {
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
-   ) {
-  }
+    toasterService: ToasterService) {
+      this.toasterService = toasterService;
+    }
   posts: any[];
   email: string;
   password: string;
@@ -38,6 +39,7 @@ export class DesignComponent implements OnInit {
   posttext: string = "";
   posttitle: string = "";
   public user: string[];
+  imageInputLabel = "Choose file";
 
   postphoto: string = "assets/img/Coliving.jpg";
   desc:string=""; 
@@ -47,6 +49,15 @@ export class DesignComponent implements OnInit {
 
   public newImages: any[] = [];
 
+
+  private toasterService: ToasterService;
+
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 3000,
+      positionClass: "toast-top-center",
+    });
 
   ngOnInit() {
     if (localStorage.getItem("user") == undefined) {
@@ -62,6 +73,19 @@ export class DesignComponent implements OnInit {
       
 
     }
+  }
+
+
+   
+  showSuccess() {
+    this.toasterService.pop('success', 'Success ', 'Publicación Actualizada Correctamente ');
+  }
+
+  showError() {
+    this.toasterService.pop('error', 'Error ', 'Por favor completa todos los campos ');
+  }
+  showWarning() {
+    this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
   }
 
   get_photos() {
@@ -93,6 +117,8 @@ export class DesignComponent implements OnInit {
    
    updatephoto() {
     // debugger;
+    if(this.imageInputLabel!="Choose file"){
+
     var creadoobj = { id: this.PostId, Photo: this.postphoto,  Position: this.PostId , Description: this.desc , PositionDescription:this.posdesc };
     debugger;
 
@@ -102,18 +128,23 @@ export class DesignComponent implements OnInit {
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-         
+          this.showError(); 
           break;
         default:
           debugger;
           if (value.result == "Success") {
             this.get_photos();
            
-           
-
+            this.showSuccess();
           }
       }
-    });
+    });    
+  }
+  else {
+    this.showWarning();
+  }
+
+
   }
    
   prepareImages(e) {
@@ -133,6 +164,7 @@ export class DesignComponent implements OnInit {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
       for (let f of this.newImages) {
+        this.imageInputLabel = f.name;
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;

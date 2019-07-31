@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
-import { ToasterService } from 'angular2-toaster';
+import { ToasterService ,ToasterConfig} from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
 
 @Component({
@@ -25,8 +25,9 @@ export class HomeindexComponent implements OnInit {
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
-   ) {
-  }
+    toasterService: ToasterService) {
+      this.toasterService = toasterService;
+    }
   posts: any[];
   email: string;
   password: string;
@@ -41,6 +42,7 @@ export class HomeindexComponent implements OnInit {
   posttitle: string = "";
 
   title: string = "";
+  imageInputLabel = "Choose file";
 
   direction: string = "";
   public user: string[];
@@ -67,6 +69,28 @@ export class HomeindexComponent implements OnInit {
       
 
     }
+  }
+
+  
+  private toasterService: ToasterService;
+
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 3000,
+      positionClass: "toast-top-center",
+    });
+
+      
+  showSuccess() {
+    this.toasterService.pop('success', 'Success ', 'Publicación Actualizada Correctamente ');
+  }
+
+  showError() {
+    this.toasterService.pop('error', 'Error ', 'Por favor completa todos los campos ');
+  }
+  showWarning() {
+    this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
   }
 
   get_photos() {
@@ -98,6 +122,7 @@ export class HomeindexComponent implements OnInit {
    
    updatephoto() {
     // debugger;
+    if(this.imageInputLabel!="Choose file"){
     var creadoobj = { id: this.PostId, Photo: this.postphoto, Title: this.title , Direction: this.direction ,  Position: this.PostId};
     debugger;
 
@@ -107,18 +132,21 @@ export class HomeindexComponent implements OnInit {
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-         
+          this.showError(); 
           break;
         default:
           debugger;
           if (value.result == "Success") {
             this.get_photos();
-           
-           
-
+            this.showSuccess();
           }
       }
-    });
+    });    
+  }
+  else {
+    this.showWarning();
+  }
+
   }
    
   prepareImages(e) {
@@ -138,6 +166,8 @@ export class HomeindexComponent implements OnInit {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
       for (let f of this.newImages) {
+
+        this.imageInputLabel = f.name;
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;

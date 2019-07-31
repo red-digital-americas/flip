@@ -1,3 +1,7 @@
+
+<div class="col-12">
+    <strong>  Página Principal More</strong>
+  </div>
 <div class="modal-body">
   <div class="col-12  margin-gral">
       Facebook:
@@ -18,33 +22,29 @@
 
                 <button type="button" style="
                 margin-left: 20px;
-                margin-top: 20px;" class="btn btn-primary" (click)="updatesn()" >Save changes</button>
+                margin-top: 20px;" class="btn btn-primary" (click)="updatesn()" >Guardar Cambios</button>
 </div>
 
 
 <div class="row">
-  <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts" >
-    <div class="card ">
-      <div class="card-body ">
-        <div class="btn-group margin-gral" dropdown>
-          <div class="row">
-              <div  class="col-sm-6 col-md-6">
-                  <img style="margin-right: 10px;" class="img-size" src="{{post.frontphoto}}">
-                </div> 
-          </div>
-         
-          
-        </div>
-        <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
-            Editar
-          </button>        
-      </div>
-      <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
+    <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts" >
+      <div class="card " >
         
+              <a style="cursor:pointer; color:inherit">
+    
+                <div class="card-body">
+                  <img class="img-size-build" src="{{post.frontphoto}}" />
+                </div>
+                </a>
+                <button   style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+                    Editar
+                  </button>    
+            </div>
+        <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
+          
       </div>
-    </div>
-  </div><!--/.col-->
-</div><!--/.row-->
+    </div><!--/.col-->
+  </div><!--/.row-->
 
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
@@ -58,22 +58,26 @@
         
       <form #loginForm="ngForm" autocomplete="off">
       <div class="modal-body">
-          Imagen 1:
+
+          *La imagen deberá de ser de 288px * 866px; 
         <div class="custom-file margin-gral ">
          
           <input type="file" accept="image/*"
                  (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-          <label class="custom-file-label" for="customFile">Choose file</label>
+          <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
 
         </div>
         
       </div>
     </form> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-        <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Save changes</button>
-      </div>
+          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+          <button type="submit" class="btn btn-primary"  [disabled]="!loginForm.form.valid"  (click)="updatephoto()" >Guardar Cambios </button>
+         </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>

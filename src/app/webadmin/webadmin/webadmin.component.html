@@ -1,17 +1,25 @@
+
+<div class="col-12">
+  <strong>  Página Principal</strong>
+</div>
 <div class="row">
   <div class=" col  " *ngFor="let post of posts" >
     <div class="card ">
       <div class="card-body ">
+        
         <div class="btn-group float-right" dropdown>
           <div class="row">
+              
               <div  class="col-sm-6 col-md-4">
+                  
                   <img style="margin-right: 10px;" class="img-size" src="{{post.frontphoto}}">
                 </div> 
           </div>
          
           <div class="row">
-            
+               
          <div class="col-sm-6 col-md-4">
+        
             <img  class="img-size" src="{{post.backphoto}}">
           </div> 
              </div>
@@ -39,26 +47,26 @@
       <form #loginForm="ngForm" autocomplete="off">
 
       <div class="modal-body">
-          Imagen 1 : *La imagen deberá de ser de 350px * 350px; 
+          Imagen Default : *La imagen deberá de ser de 350px * 350px; 
         <div class="custom-file margin-gral ">
          
           <input type="file" accept="image/*"
-                 (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
+                 (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile" required>
           <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
 
         </div>
-        Imagen 2: 
+        Imagen  Hover : *La imagen deberá de ser de 350px * 350px; 
         <div class="custom-file margin-gral ">
          
           <input type="file" accept="image/*"
-                 (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-          <label class="custom-file-label" for="customFile">Choose file</label>
+                 (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile"required>
+          <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
 
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-        <button type="button" class="btn btn-primary"  [disabled]="!loginForm.form.valid"  (click)="updatephoto()" >Save changes</button>
+        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+        <button type="submit" class="btn btn-primary"  [disabled]="!loginForm.form.valid"  (click)="updatephoto()" >Guardar Cambios </button>
       </div>
       
     </form>
@@ -66,3 +74,4 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>

@@ -3,7 +3,7 @@
   import { ModalDirective } from 'ngx-bootstrap/modal';
   import { Router, ActivatedRoute } from '@angular/router';
   import { DatosService } from '../../../datos.service';
-  import { ToasterService } from 'angular2-toaster';
+  import { ToasterService, ToasterConfig } from 'angular2-toaster';
   import { Utils } from '../../utils/utils';
   import { ImageCropperModule, ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 
@@ -35,8 +35,9 @@ export class HomeservicesComponent implements OnInit {
     constructor(private router: Router,
       private heroService: DatosService,
       private route: ActivatedRoute,
-     ) {
-    }
+      toasterService: ToasterService) {
+        this.toasterService = toasterService;
+      }
     posts: any[];
     email: string;
     password: string;
@@ -62,6 +63,19 @@ export class HomeservicesComponent implements OnInit {
   
     public newImages: any[] = [];
   
+    imageInputLabel = "Choose file";
+    imageInputLabeltwo = "Choose file";
+    imageInputLabelthree = "Choose file";
+    imageInputLabelfour = "Choose file";
+  
+    private toasterService: ToasterService;
+  
+    public toasterconfig: ToasterConfig =
+      new ToasterConfig({
+        tapToDismiss: true,
+        timeout: 3000,
+        positionClass: "toast-top-center",
+      });
   
     ngOnInit() {
       if (localStorage.getItem("user") == undefined) {
@@ -113,14 +127,13 @@ export class HomeservicesComponent implements OnInit {
     }
   
   
-    uploadAttachmentToServer() {
+    uploadAttachmentToServer(indice) {
+      debugger; 
       const fileToUpload: File = new File([this.blob], 'filename.png');
-      const fileToUpload1: File = new File([this.blob1], 'filename1.png');
 
-      this.newImages.push(fileToUpload);
-      this.newImages.push(fileToUpload1);
-
-      this.addImages();
+      this.newImages[indice]=(fileToUpload);
+      this.imageInputLabelfour="movil"; 
+      this.addImages(indice);
      // debugger;
      // console.log(this.newImages);
     }
@@ -134,7 +147,7 @@ export class HomeservicesComponent implements OnInit {
           this.newImages.push(f);
         }
       }
-      this.addImages();
+     // this.addImages(e,);
   
     }
 
@@ -227,7 +240,11 @@ export class HomeservicesComponent implements OnInit {
      
      updatephoto() {
        debugger;
-      var creadoobj = { id: this.PostId, Photo: this.postphoto[3], PhotoMobile: this.postphoto[2] , Category: this.direction , Title:this.title, Icon:this.postphoto[1] };
+       if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"&&this.imageInputLabelthree!="Choose file"){
+
+       if(this.imageInputLabelfour!="Choose file"){
+
+      var creadoobj = { id: this.PostId, Photo: this.postphoto[2], PhotoMobile: this.postphoto[3] , Category: this.direction , Title:this.title, Icon:this.postphoto[0], Icon2:this.postphoto[1] };
       debugger;
   /**  post.Photo = item.Photo;
                         post.Description = item.Description;
@@ -241,7 +258,7 @@ export class HomeservicesComponent implements OnInit {
         switch (value.result) {
           case "Error":
             console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-           
+           this.showError();
             break;
           default:
             //debugger;
@@ -250,41 +267,81 @@ export class HomeservicesComponent implements OnInit {
               
               this.postphoto=[]; 
               this.postphoto.push("assets/img/Coliving.jpg");
-             
-  
+              this.showSuccess();
+              this.imageInputLabel="Choose file";
+              this.imageInputLabelfour="Choose file";
+              this.imageInputLabelthree="Choose file";
+              this.imageInputLabeltwo="Choose file";
+              this.title="";
+              this.direction="";
+
+
+
+
+
+
             }
         }
-      });
+      });    
+    }
+    else {
+     
+      alert("Sube la imagen móvil, por favor ")
+    }
+  
+  }
+else {
+  this.showWarning();
+}
+    }
+  
+  
+    showSuccess() {
+      this.toasterService.pop('success', 'Success ', 'Publicación Actualizada Correctamente ');
+    }
+  
+    showError() {
+      this.toasterService.pop('error', 'Error ', 'Por favor completa todos los campos ');
+    }
+    showWarning() {
+      this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
     }
      
-    prepareImages(e) {
-     // debugger; 
+    prepareImages(e,indice ) {
       if (Utils.isDefined(e.srcElement.files)) {
         for (let f of e.srcElement.files) {
-       //   debugger;
-          this.newImages.push(f);
+          this.newImages[indice]=(f);
         }
       }
-      //this.addImages();
-  
+      debugger; 
+      this.addImages(indice);
     }
   
   
-    addImages() {
+    addImages(indice) {
       let url: string = '';
       if (!Utils.isEmpty(this.newImages)) {
-        for (let f of this.newImages ) {
-          
-          
+        for (let f of this.newImages) {
+          debugger;
+          if(indice==0){
+            this.imageInputLabel = f.name;
+          }
+          if(indice==1)
+          {
+          this.imageInputLabeltwo = f.name;
+          }
+          if(indice==2)
+          {
+          this.imageInputLabelthree = f.name;
+          }
           this.heroService.UploadImgSuc(f).subscribe((r) => {
             if (Utils.isDefined(r)) {
               url = <string>r.message;
-              
+              debugger;
               url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-            
-              this.postphoto.push(url);
-              console.log(this.newImages);
-              this.newImages = [];
+              debugger;
+              this.postphoto[indice]=(url);
+              debugger;
             }
           })
         }

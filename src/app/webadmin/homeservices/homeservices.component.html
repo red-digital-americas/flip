@@ -1,4 +1,7 @@
 
+<div class="col-12">
+    <strong>  Servicios</strong>
+  </div>
 <div class="row">
     <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts" >
       <div class="card ">
@@ -14,15 +17,32 @@
                   </div>
                    
                        <div  class="col-sm-12 col-md-12">
-                          Photo: <img  class="img-size" style="margin-left: 17%;" src="{{post.frontphoto}}">
+                          Photo:
+                          
+                          <img style="height: 400px; width: 600px;" class="img-size" src="../../../assets/webtmp.png">
+                          <img  class="img-size" style="
+                          position: absolute; 
+                          left: 56px;
+                          height: 375px;
+                          width: 475px;
+                          top: 22px;" src="{{post.frontphoto}}">
                          </div> 
                          <div  style="margin-top: 5%;" class="col-sm-12 col-md-12">
-                           Mobile Photo:<img style="margin-left: 13%; " class="img-size" src="{{post.photomobile}}">
-                         </div> 
+                            Mobile Photo:
+                            <img style="height: 400px; width: 300px;" class="img-size" src="../../../assets/phone.png">
+                            <img style="position: absolute;
+                                              left: 166px;
+                                              height: 293px;
+                                              width: 180px;
+                                              top: 49px;" class="img-size" src="{{post.photomobile}}">
+
+            </div> 
                          <div  style="margin-top: 5%;" class="col-sm-12 col-md-12">
-                             Icon:<img style="margin-left: 19%; " class="img-size" src="{{post.icon}}">
+                             Icon:<img style="margin:5%; " class="img-size" src="{{post.icon}}">
+                             
+                             Icon Hover:<img style="margin:5%; " class="img-size" src="{{post.icon2}}">
+
                            </div> 
-                         
                          <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
                              Editar
                            </button>  
@@ -49,16 +69,24 @@
           </button>
         </div>
         <form #loginForm="ngForm" autocomplete="off">
-        <div class="modal-body">            Icon: 
+        <div class="modal-body">            Icon, la resolución debe de ser 50px * 50px: 
 
             <div class="custom-file margin-gral ">
             <input type="file" accept="image/*"
-            (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-     <label class="custom-file-label" for="customFile">Choose file</label>
+            (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
+     <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
             </div>
-            Imagen Build :
+
+            Icon Hover, la resolución debe de ser 50px * 50px: 
+
+            <div class="custom-file margin-gral ">
+            <input type="file" accept="image/*"
+            (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile">
+     <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
+            </div>
+            Imagen Build  la resolución debe de ser 1920px*1080px:
           <div class="custom-file margin-gral ">
-              <input type="file"   accept="image/*"  class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event);" />
+              <input type="file"   accept="image/*"  class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event,2);" />
     
       
               <div>
@@ -80,19 +108,14 @@
                       [style.display]="showCropper ? null : 'none'"
                   ></image-cropper>
                   Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage" />
-                  <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer()" >Upload Images</button>
+                  <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(3)" >Upload Images</button>
 
                 </div>
                
-       <label class="custom-file-label" for="customFile">Choose file</label>
+       <label class="custom-file-label" for="customFile">{{imageInputLabelthree}}</label>
   
      </div>
-
-   
-
-     
-            
-                  <div class="col-12  margin-gral">
+          <div class="col-12  margin-gral">
                       Title:
                         <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="title" required>
                       </div>
@@ -106,11 +129,12 @@
         </div>
       </form>
         <div class="modal-footer">
-          <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-          <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Save changes</button>
+          <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+          <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Guardar Cambios</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
   
   
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>

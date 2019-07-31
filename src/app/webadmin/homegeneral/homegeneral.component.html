@@ -1,3 +1,6 @@
+<div class="col-12">
+    <strong>  General </strong>
+  </div>
 
 <div class="row">
     <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts" >
@@ -9,10 +12,22 @@
                  <strong> Description :  </strong> {{post.desc}}
                   <br>
                       <div  class="col-sm-12 col-md-12">
-                         Photo: <img style="margin-right: 10px;" class="img-size" style="margin-left: 26%;" src="{{post.frontphoto}}">
+                          <img style="height: 400px; width: 600px;" class="img-size" src="../../../assets/webtmp.png">
+                          <img  class="img-size" style="
+                          position: absolute; 
+                          left: 56px;
+                          height: 375px;
+                          width: 432px;
+                          top: 22px;" src="{{post.frontphoto}}">
                         </div> 
                         <div  style="    margin-top: 5%;   " class="col-sm-12 col-md-12">
-                          Mobile Photo:<img style="margin-left: 17%; " class="img-size" src="{{post.photomobile}}">
+                            Mobile Photo:
+                            <img style="height: 400px; width: 300px;" class="img-size" src="../../../assets/phone.png">
+                            <img style="position: absolute;
+                                              left: 166px;
+                                              height: 293px;
+                                              width: 180px;
+                                              top: 49px;" class="img-size" src="{{post.photomobile}}">
                         </div> 
                         <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
                             Editar
@@ -43,7 +58,7 @@
         <div class="modal-body">
             Imagen :
           <div class="custom-file margin-gral ">
-              <input type="file"   accept="image/*"  class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event);" />
+              <input type="file"   accept="image/*"  class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event,0);" />
     
       
               <div>
@@ -65,29 +80,26 @@
                       [style.display]="showCropper ? null : 'none'"
                   ></image-cropper>
                   Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage" />
-                  <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer()" >Upload Images</button>
+                  <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(1)" >Upload Images</button>
 
                 </div>
-               
-       <label class="custom-file-label" for="customFile">Choose file</label>
-  
+       <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
      </div>
-            
                   <div class="col-12  margin-gral">
-                      Description:
+                      Descripción:
                         <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
                       </div>
-                   
-           
-          
         </div>
       </form>
         <div class="modal-footer">
-          <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-          <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Save changes</button>
+          <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+          <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Guardar Cambios</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+
+  
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
   
   

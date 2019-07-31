@@ -2,7 +2,7 @@ import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
-import { ToasterService } from 'angular2-toaster';
+import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
 import { ImageCropperModule, ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 
@@ -28,8 +28,9 @@ export class HomegeneralComponent implements OnInit {
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
-   ) {
-  }
+    toasterService: ToasterService) {
+      this.toasterService = toasterService;
+    }
   posts: any[];
   email: string;
   password: string;
@@ -49,12 +50,22 @@ export class HomegeneralComponent implements OnInit {
   public user: string[];
 
   postphoto: any[]=[];
-  
+  imageInputLabel = "Choose file";
+  imageInputLabeltwo = "Choose file";
+
 
   comment: string = "";
 
   public newImages: any[] = [];
-
+  
+  private toasterService: ToasterService;
+  
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 3000,
+      positionClass: "toast-top-center",
+    });
 
   ngOnInit() {
     if (localStorage.getItem("user") == undefined) {
@@ -101,14 +112,6 @@ export class HomegeneralComponent implements OnInit {
   }
 
 
-  uploadAttachmentToServer() {
-    const fileToUpload: File = new File([this.blob], 'filename.png');
-    this.newImages.push(fileToUpload);
-    this.addImages();
-   // debugger;
-   // console.log(this.newImages);
-  }
-
 
   prepareImagesblob(e) {
 
@@ -118,7 +121,7 @@ export class HomegeneralComponent implements OnInit {
         this.newImages.push(f);
       }
     }
-    this.addImages();
+  //  this.addImages();
 
   }
 
@@ -176,8 +179,11 @@ export class HomegeneralComponent implements OnInit {
 
    
    updatephoto() {
+    if(this.imageInputLabel!="Choose file"){
+
+      if(this.imageInputLabeltwo!="Choose file"){
      //debugger;
-    var creadoobj = { id: this.PostId, Photo: this.postphoto[1], PhotoMobile: this.postphoto[2] , Description: this.direction};
+    var creadoobj = { id: this.PostId, Photo: this.postphoto[0], PhotoMobile: this.postphoto[1] , Description: this.direction};
     //debugger;
 
     this.heroService.ServicioPostPost("UpdateHomeGeneral", creadoobj).subscribe((value) => {
@@ -186,7 +192,7 @@ export class HomegeneralComponent implements OnInit {
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-         
+         this.showError(); 
           break;
         default:
           //debugger;
@@ -194,41 +200,85 @@ export class HomegeneralComponent implements OnInit {
             this.get_photos();
             this.postphoto=[]; 
             this.postphoto.push("assets/img/Coliving.jpg");
-           
+            this.imageInputLabel="Choose file";
+            
+              this.imageInputLabeltwo="Choose file";
+              this.title="";
+              this.direction="";
+              this.primaryModal.hide();
 
-          }
-      }
-    });
+            this.showSuccess();
+
+
+
+            }
+        }
+      });    
+    }
+    else {
+     
+      alert("Sube la imagen móvil, por favor ")
+    }
+  
+  }
+else {
+  this.showWarning();
+}
   }
    
-  prepareImages(e) {
-   // debugger; 
-    if (Utils.isDefined(e.srcElement.files)) {
-      for (let f of e.srcElement.files) {
-     //   debugger;
-        this.newImages.push(f);
-      }
-    }
-    //this.addImages();
+ 
 
+  
+  
+  showSuccess() {
+    this.toasterService.pop('success', 'Success ', 'Publicación Actualizada Correctamente ');
   }
 
+  showError() {
+    this.toasterService.pop('error', 'Error ', 'Por favor completa todos los campos ');
+  }
+  showWarning() {
+    this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
+  }
+   
+  prepareImages(e,indice ) {
+    if (Utils.isDefined(e.srcElement.files)) {
+      for (let f of e.srcElement.files) {
+        this.newImages[indice]=(f);
+      }
+    }
+    debugger; 
+    this.addImages(indice);
+  }
 
-  addImages() {
+  uploadAttachmentToServer(indice) {
+    debugger; 
+    const fileToUpload: File = new File([this.blob], 'filename.png');
+
+    this.newImages[indice]=(fileToUpload);
+    this.imageInputLabeltwo="movil"; 
+    this.addImages(indice);
+   // debugger;
+   // console.log(this.newImages);
+  }
+
+  addImages(indice) {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
-      for (let f of this.newImages ) {
-        
-        
+      for (let f of this.newImages) {
+        debugger;
+        if(indice==0){
+          this.imageInputLabel = f.name;
+        }
+       
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
-            
+            debugger;
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-          
-            this.postphoto.push(url);
-            console.log(this.newImages);
-            this.newImages = [];
+            debugger;
+            this.postphoto[indice]=(url);
+            debugger;
           }
         })
       }

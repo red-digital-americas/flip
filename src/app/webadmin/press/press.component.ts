@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
+import { ToasterService, ToasterConfig } from 'angular2-toaster';
 @Component({
   selector: 'app-press',
   templateUrl: './press.component.html',
@@ -21,8 +22,9 @@ export class PressComponent implements OnInit {
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
-   ) {
-  }
+    toasterService: ToasterService) {
+      this.toasterService = toasterService;
+    }
   posts: any[];
   email: string;
   password: string;
@@ -38,6 +40,16 @@ export class PressComponent implements OnInit {
   public user: string[];
 
   postphoto: string = "assets/img/Coliving.jpg";
+  imageInputLabel = "Choose file";
+
+  private toasterService: ToasterService;
+
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 3000,
+      positionClass: "toast-top-center",
+    });
   
 
   title:string =""; 
@@ -65,6 +77,17 @@ export class PressComponent implements OnInit {
     }
   }
 
+
+  showSuccess() {
+    this.toasterService.pop('success', 'Success ', 'Publicación Actualizada Correctamente ');
+  }
+
+  showError() {
+    this.toasterService.pop('error', 'Error ', 'Por favor completa todos los campos ');
+  }
+  showWarning() {
+    this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
+  }
   get_photos() {
     // debugger;
      var creadoobj = { buildingid: 1 , userid: this.IDUSR };
@@ -94,6 +117,7 @@ export class PressComponent implements OnInit {
    
    updatephoto() {
     // debugger;
+    if(this.imageInputLabel!="Choose file"){
     var creadoobj = { id: this.PostId, Photo: this.postphoto, Resume: this.shortresume, LongResumen: this.longresume , Tittle: this.title };
     debugger;
 
@@ -103,18 +127,24 @@ export class PressComponent implements OnInit {
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-         
+         this.showError();
           break;
         default:
           debugger;
           if (value.result == "Success") {
             this.get_photos();
-           
-           
-
-          }
-      }
-    });
+           this.title="";
+           this.longresume="";
+           this.shortresume="";
+           this.showSuccess();
+            }
+        }
+      });    
+    }
+    else {
+      this.showWarning();
+    }
+  
   }
    
   prepareImages(e) {
@@ -134,6 +164,7 @@ export class PressComponent implements OnInit {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
       for (let f of this.newImages) {
+        this.imageInputLabel = f.name;
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;

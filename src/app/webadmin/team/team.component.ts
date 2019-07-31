@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
+import { ToasterService, ToasterConfig } from 'angular2-toaster';
 
 @Component({
   selector: 'app-team',
@@ -24,8 +25,9 @@ export class TeamComponent implements OnInit {
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
-   ) {
-  }
+    toasterService: ToasterService) {
+      this.toasterService = toasterService;
+    }
   posts: any[];
   email: string;
   password: string;
@@ -48,6 +50,17 @@ export class TeamComponent implements OnInit {
   postphoto: any[]=[];
   comment: string = "";
 
+  imageInputLabel = "Choose file";
+  imageInputLabeltwo = "Choose file";
+
+  private toasterService: ToasterService;
+
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 3000,
+      positionClass: "toast-top-center",
+    });
   public newImages: any[] = [];
 
 
@@ -99,7 +112,8 @@ export class TeamComponent implements OnInit {
    updatephoto() {
     // debugger;
     var apellido = this.Name.split(" ");
-    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[2], FrontPhoto: this.postphoto[1], Name : apellido[0] , LastName: apellido[1], Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
+    if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"){
+    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[1], FrontPhoto: this.postphoto[0], Name : apellido[0] , LastName: apellido[1], Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
     debugger;
 
     this.heroService.ServicioPostPost("UpdateTeam", creadoobj).subscribe((value) => {
@@ -108,7 +122,7 @@ export class TeamComponent implements OnInit {
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-         
+          this.showError(); 
           break;
         default:
           debugger;
@@ -118,40 +132,66 @@ export class TeamComponent implements OnInit {
             this.postphoto=[]; 
             this.postphoto.push("assets/img/Coliving.jpg");
            
-           
+            this.showSuccess();
+            
+            this.Name="";
+            this.Desc="";
+            this.Link="";
+            this.tt=""; 
+  this.imageInputLabel = "Choose file";
+  this.imageInputLabeltwo = "Choose file";
 
           }
       }
-    });
+    });    
+  }
+  else {
+    this.showWarning();
+  }
+  }
+    
+  showSuccess() {
+    this.toasterService.pop('success', 'Success ', 'Publicación Actualizada Correctamente ');
+  }
+
+  showError() {
+    this.toasterService.pop('error', 'Error ', 'Por favor completa todos los campos ');
+  }
+  showWarning() {
+    this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
   }
    
-  prepareImages(e) {
-    debugger; 
+  prepareImages(e,indice ) {
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
-        debugger;
-        this.newImages.push(f);
+        this.newImages[indice]=(f);
       }
     }
-    this.addImages();
+    this.addImages(indice);
 
   }
 
 
-  addImages() {
+  addImages(indice) {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
       for (let f of this.newImages) {
+        debugger;
+        if(indice==0){
+          this.imageInputLabel = f.name;
+        }
+        if(indice==1)
+        {
+        this.imageInputLabeltwo = f.name;
+        }
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
             debugger;
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
             debugger;
-            this.postphoto.push(url);
+            this.postphoto[indice]=(url);
             debugger;
-
-            this.newImages = [];
           }
         })
       }

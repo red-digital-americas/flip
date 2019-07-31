@@ -37,7 +37,7 @@ import { ChartsModule } from 'ng2-charts';
     ModalModule.forRoot(),
     ImageCropperModule,
     
-    ToasterModule,
+    ToasterModule.forRoot(),
   ],
   declarations: [WebadminComponent, TeamComponent, JobsComponent, PressComponent, DesignComponent, DesignindexComponent, MoreindexComponent, HomeindexComponent, HomeservicesComponent, HomeammenitiesComponent, HomeroomsComponent, HomegeneralComponent]
 })

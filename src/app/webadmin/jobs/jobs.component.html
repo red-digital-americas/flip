@@ -1,26 +1,30 @@
+<div class="col-12">
+    <strong>  Empleos</strong>
+  </div>
+
+  
 <div class="row">
-    <div class=" col-sm-12 col-md-12  " *ngFor="let post of posts" >
-      <div class="card ">
-        <div class="card-body pb-0">
-            <div class="col-sm-12 col-md-12" >
-                <strong> Title : </strong>{{post.name}} {{post.title}}
-                <br>
-               <strong> LongDesc :  </strong> {{post.longdesc}}
-                <br>
-               <strong> ShortDesc :  </strong>  {{post.shortdesc}}
-                <br> 
-              </div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
-              Editar
-            </button>        
-        </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
-          
-        </div>
-      </div>
+    <div class=" col-sm-6 col-md-6 " *ngFor="let post of posts" >
+      <div class="card " >
+              
+    
+                <div class="card-body">
+                    <div class="col-sm-12 col-md-12" >
+                        <strong> Title : </strong>{{post.name}} {{post.title}}
+                        <br>
+                       <strong> LongDesc :  </strong> {{post.longdesc}}
+                        <br>
+                       <strong> ShortDesc :  </strong>  {{post.shortdesc}}
+                        <br> 
+                      
+                    </div>
+                <button   style="margin-top: 10%;" type="button" class="btn btn-primary col-12" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+                    Editar
+                  </button>    
+            </div>
+       
     </div><!--/.col-->
   </div><!--/.row-->
-  
   <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
       <div class="modal-content">
@@ -49,8 +53,8 @@
         </div>
       </form>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-          <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Save changes</button>
+          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+          <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Guardar Cambios</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
