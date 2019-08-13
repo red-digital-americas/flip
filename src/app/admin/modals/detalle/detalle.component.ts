@@ -151,6 +151,9 @@ export class DetalleComponent implements OnInit {
     this.scheduleModel.Date = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+    if (startHour == "00" && endHour == "00") { 
+      this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
+    }
 
     if (this.allDaySwitch) {
       this.scheduleModel.TimeStart = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');

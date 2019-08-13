@@ -109,11 +109,14 @@ export class CrearComponent implements OnInit {
   public AddActivity() {            
     let date = moment(this.datePicker).format('YYYY/MM/DD');
     let startHour = moment(this.startTime).format('HH');
-    let endHour = moment(this.endTime).format('HH');
+    let endHour = moment(this.endTime).format('HH');        
     
     this.scheduleModel.Date = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+    if (startHour == "00" && endHour == "00") { 
+      this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
+    }
 
     if (this.allDaySwitch) {
       this.scheduleModel.TimeStart = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
@@ -127,6 +130,7 @@ export class CrearComponent implements OnInit {
     this.acitivyModel.AmenityId = this.amenityIdProps;
     
     console.log(this.acitivyModel);
+    // return;
 
     this.heroService.service_general_post("Activity", this.acitivyModel).subscribe(
       (res)=> {
