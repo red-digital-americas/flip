@@ -136,7 +136,7 @@ export class CrearComponent implements OnInit {
           this.responseData = {result:true, id:res.item.id, name:res.item.name};                
           this.modalRef.hide();
         } else if(res.result === "Error") {
-          console.log(res.detalle);
+          console.log(res.detalle);          
           this.toasterService.pop('danger', 'Error', res.detalle);
         } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
       },

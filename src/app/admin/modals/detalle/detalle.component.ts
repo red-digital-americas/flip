@@ -173,7 +173,7 @@ export class DetalleComponent implements OnInit {
           this.responseData = {action:'Edit'};  
           this.modalRef.hide();
         } else if(res.result === "Error") {
-          console.log(res.detalle);
+          console.log(res.detalle, res.item);
           this.toasterService.pop('danger', 'Error', res.detalle);
         } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
 
