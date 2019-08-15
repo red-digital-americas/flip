@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ToasterModule } from 'angular2-toaster/angular2-toaster';
@@ -41,6 +41,7 @@ import { InviteComponent } from './modals/invite/invite.component';
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),

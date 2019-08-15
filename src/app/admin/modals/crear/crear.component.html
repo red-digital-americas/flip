@@ -7,7 +7,7 @@
 
 <div class="modal-body">
     <div class="container clearfix">
-       <form #loginForm="ngForm" autocomplete="off">
+       <form [formGroup]="formGroup" autocomplete="off">
         <div class="row">                      
             <div class="col-12 col-lg-8 col-xl-8">
                 <div class="row">      
@@ -25,7 +25,7 @@
                     </div>
                     
                     <div class="col-12 mb-2">
-                        <input type="text" [(ngModel)]="acitivyModel.Name" class="form-control" name="activityName" id="activityName" placeholder="Title" required>
+                        <input type="text" formControlName="activityNameCtrl" class="form-control" placeholder="Title">
                     </div>          
                 
                     <div class="col-12 mb-2">
@@ -41,8 +41,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Description</span>
                             </div>
-                            <textarea name="activityDescription" id="activityDescription" class="form-control" [(ngModel)]="acitivyModel.Description" aria-label="With textarea"></textarea>
-                        </div>
+                            <textarea formControlName="activityDescriptionCtrl" class="form-control" aria-label="With textarea"></textarea>
+                        </div>                        
                     </div>           
                     
                     <div class="col-12 mb-2">                        
@@ -59,12 +59,10 @@
                             <!-- <fieldset class="form-control"> -->
                                 <ng-select    
                                     style="flex: 1"
-                                    name="activityUserId" 
-                                    id="activityUserId"
+                                    formControlName="activityUserIdCtrl" 
                                 
                                     [clearable]="false"
-                                    [items]="usersArray"                                                          
-                                    [(ngModel)]="acitivyModel.UserId" 
+                                    [items]="usersArray"                                                                                              
                                     bindLabel="name" 
                                     bindValue="id">
 
@@ -88,44 +86,62 @@
                             <input type="number" [(ngModel)]="acitivyModel.QuoteMax" class="form-control" name="activityQuoteMax" id="activityQuoteMax" min="1" placeholder="Cupo" required>
                         </div>                        
                     </div> -->
-                            
-                    <div class="col-12 mb-2 schedule">
-                        <div class="input-group schedule__datetime">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Date</span>
-                            </div>  
-                            <input type="text" name="date" [(ngModel)]="datePicker" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" placeholder="Datepicker" class="form-control" bsDatepicker>                            
-                        </div>                              
+                                       
+                    <div formArrayName="schedulesCtrl"
+                        *ngFor="let arrayItem of schedulesCrtlArray.controls; let i=index">
 
-                        <div class="schedule__datetime" >
-                            <div clasS="schedule__datetime">
+                        <div [formGroupName]="i" class="col-12 mb-2 schedule">
+                            
+                            <div class="input-group schedule__datetime">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Date</span>
+                                </div>  
+                                <input type="text" formControlName="dateCtrl" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', adaptivePosition: true }" placeholder="Datepicker" class="form-control" bsDatepicker>                            
+                            </div>                              
+
+                            <div class="schedule__datetime" >
+                                <div clasS="schedule__datetime">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Desde</span>
+                                    </div>                                            
+                                    <timepicker formControlName="startTimeCtrl" [max]="formGroup.get('schedulesCtrl').at(i).get('endTimeCtrl').value"  [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
+                                </div>                            
+                                <div class="schedule__datetime">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Hasta</span>
+                                    </div>                                      
+                                    <timepicker formControlName="endTimeCtrl" [min]="formGroup.get('schedulesCtrl').at(i).get('startTimeCtrl').value"  [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
+                                </div>                            
+                            </div>   
+                            <div *ngIf="i!=0" (click)="RemoveScheduleCtrl();" class="schedule__datetime">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </div>
+                                                    
+                            <!-- <div class="input-group schedule__datetime">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Desde</span>
                                 </div> 
                                 <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>                            
-                            </div>                            
-                            <div class="schedule__datetime">
+                            </div>
+
+                            <div class="input-group schedule__datetime">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Hasta</span>
                                 </div> 
                                 <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-                            </div>                            
-                        </div>   
-                                                
-                        <!-- <div class="input-group schedule__datetime">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Desde</span>
-                            </div> 
-                            <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>                            
-                        </div>
+                            </div> -->
+                        </div>                           
+                    </div>
+                    <div  *ngIf="formGroup.get('schedulesCtrl').errors?.overlap">
+                        Schedule overlap 
+                        {{formGroup.get('schedulesCtrl').errors?.schedule.dateCtrl | date:'dd/MM/yyyy'}} 
+                        {{formGroup.get('schedulesCtrl').errors?.schedule.startTimeCtrl | date:'HH'}}:00 - 
+                        {{formGroup.get('schedulesCtrl').errors?.schedule.endTimeCtrl | date:'HH'}}:00
+                    </div>
 
-                        <div class="input-group schedule__datetime">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Hasta</span>
-                            </div> 
-                            <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-                        </div> -->
-                    </div>   
+                    <div (click)="AddScheduleCtrl()" class="col-12">+ Add Schedule</div>
+
+                    <!-- <div>{{formGroup.value | json}}</div> -->
                     
                     <!-- <div class="col-12 mb-2 schedule">
                         <div class="schedule__datetime">
@@ -156,9 +172,7 @@
                         </label>                         
                         <div class="allDay__text">All day event</div>                        
                     </div> -->
-                  
-                    <div class="col-12">+ Add Schedule</div>
-
+                                      
                 </div>
             </div>
 
@@ -167,7 +181,7 @@
             </div>                                    
                       
             <div class="col-12">
-                <button (click)="AddActivity()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Add Activity</button>
+                <button (click)="AddActivity()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Activity</button>
             </div>            
                   
         </div>  
