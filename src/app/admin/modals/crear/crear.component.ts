@@ -220,14 +220,19 @@ export class CrearComponent implements OnInit {
 
   private OverlapScheduleValidation (schedulesArray:FormArray):any {
     // console.log(schedulesArray);
-    // console.log(schedulesArray.value);    
-    
-    for(let i=0; i<schedulesArray.value.length; i++) {
+    // console.log(schedulesArray.value);        
+       
+    for(let i=0; i<schedulesArray.value.length; i++) {      
       for (let j=0; j<schedulesArray.value.length; j++){                
         if (i == j) { continue; }        
-        
-        if (moment(schedulesArray.value[i].startTimeCtrl).isBefore(moment(schedulesArray.value[j].endTimeCtrl)) && 
-          moment(schedulesArray.value[j].startTimeCtrl).isBefore(moment(schedulesArray.value[i].endTimeCtrl)) &&
+                        
+        let iEndTime = moment(schedulesArray.value[i].endTimeCtrl);
+        let jEndTime = moment(schedulesArray.value[j].endTimeCtrl);
+        if (iEndTime.format('HH') == "00") { iEndTime.add(1, 'day') }
+        if (jEndTime.format('HH') == "00") { jEndTime.add(1, 'day') }
+
+        if (moment(schedulesArray.value[i].startTimeCtrl).isBefore(jEndTime) && 
+          moment(schedulesArray.value[j].startTimeCtrl).isBefore(iEndTime) &&
           moment(schedulesArray.value[i].dateCtrl).isSame(moment(schedulesArray.value[j].dateCtrl), 'day')) {          
           return { overlap:true, schedule:schedulesArray.value[i] }
         }
