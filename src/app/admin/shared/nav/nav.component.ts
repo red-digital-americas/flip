@@ -14,7 +14,8 @@ export class NavComponent implements OnInit {
     {title: "Newsfeed", route: "/newsfeed"}, 
     // {title: "Activities", route: "/activities"}, 
     {title: "Amenities", route: "/amenities"}, 
-    {title: "Reservations", route: "/reservations"}
+    {title: "Reservations", route: "/reservations"},
+    {title: "Perks", route: "/perks"}
   ]
   
   constructor(  private router: Router, private route: ActivatedRoute,                           

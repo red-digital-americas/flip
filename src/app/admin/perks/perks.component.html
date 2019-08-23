@@ -1,0 +1,149 @@
+<app-nav></app-nav>
+
+<div class="animated fadeIn">
+  <div class="card">    
+    <div class="card-body">
+      <h5 class="card-title">Add Perks</h5>
+        
+      <form [formGroup]="formGroup" autocomplete="off">
+        <div class="row">                      
+          <div class="col-12 col-lg-12 col-xl-12">
+            <div class="row">                                      
+              <div class="col-12 mb-2">
+                  <input type="text" formControlName="perkNameCtrl" class="form-control" placeholder="Title">
+              </div>          
+                                                            
+              <div class="col-12 mb-2">
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Description</span>
+                      </div>
+                      <textarea formControlName="perkDescriptionCtrl" class="form-control" aria-label="With textarea"></textarea>
+                  </div>                        
+              </div>  
+              
+              <div class="col-4 mb-2">
+                <input type="text" formControlName="perkStreetAddressCtrl" class="form-control" placeholder="StreetAddress">
+              </div>   
+              <div class="col-4 mb-2">
+                <input type="text" formControlName="perkCityCtrl" class="form-control" placeholder="City">
+              </div>   
+              <div class="col-4 mb-2">
+                <input type="text" formControlName="perkStateProvincyCtrl" class="form-control" placeholder="StateProvincy">
+              </div>   
+              <div class="col-3 mb-2">
+                <input type="text" formControlName="perkZipCtrl" class="form-control" placeholder="Zip">
+              </div>   
+              <div class="col-3 mb-2">
+                <input type="text" formControlName="perkCountryCtrl" class="form-control" placeholder="Country">
+              </div>   
+              <div class="col-3 mb-2">
+                <input type="text" formControlName="perkLatitudeCtrl" class="form-control" placeholder="Latitude">
+              </div>   
+              <div class="col-3 mb-2">
+                <input type="text" formControlName="perkLongitudeCtrl" class="form-control" placeholder="Longitude">
+              </div>                 
+              
+              <div class="col-6 mb-2">                        
+                <div class="input-group">
+                  <div class="input-group-prepend" style="position: relative; z-index:1;">
+                    <span class="input-group-text">Host</span>
+                  </div>                                  
+                        
+                  <ng-select    
+                    style="flex: 1"
+                    formControlName="perkCategoryIdCtrl"                 
+                    [clearable]="false"
+                    [items]="perkCategories"                                                                                              
+                    bindLabel="name" 
+                    bindValue="id">                   
+                  </ng-select>                                
+                </div>
+              </div> 
+
+              <div class="col-6 mb-2">
+                <div formGroupName="perkPhotoCtrl">                               
+                  <div class="custom-file">
+                    <input type="file" accept="image/*"
+                      formControlName="photoCtrl"
+                      (change)="prepareImages($event, formGroup.get('perkPhotoCtrl').controls)" class="custom-file-input" id="validatedCustomFile" required>
+                    <label class="custom-file-label" for="customFile">    
+                        {{formGroup.get('perkPhotoCtrl').get('labelCtrl').value}}                  
+                    </label>        
+                  </div>                                                                                            
+                </div> 
+                <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkPhotoCtrl').get('serverUrlCtrl').value" alt="">
+              </div>
+
+              <div class="col-12 mb-2">
+                
+              </div>
+              
+            </div>  <!-- End col -->
+          </div>    <!-- End row -->
+        </div>  <!-- End row -->
+        
+        <div style="margin-bottom: 1rem;"></div>
+        <h5 class="card-title">Imagenes</h5>
+        <div class="row">          
+          
+          <div formArrayName="perkGalleryCtrl"
+            class="col-4 mb-2"
+            *ngFor="let arrayItem of perkGalleryCrtlArray.controls; let i=index">
+
+            <div [formGroupName]="i">                               
+              <div class="custom-file">
+                <input type="file" accept="image/*"
+                  formControlName="photoCtrl"
+                  (change)="prepareImages($event, formGroup.get('perkGalleryCtrl').at(i).controls)" class="custom-file-input" id="validatedCustomFile" required>
+                <label class="custom-file-label" for="customFile">
+                  {{formGroup.get('perkGalleryCtrl').at(i).get('labelCtrl').value}}
+                </label>        
+              </div>
+
+              <div *ngIf="i!=0" (click)="RemoveGalleryCtrl();" class="schedule__datetime">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </div>                                                                             
+            </div> 
+            
+            <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkGalleryCtrl').at(i).get('serverUrlCtrl').value" alt="">
+          </div>
+          
+          <div (click)="AddGalleryCtrl()" class="col-12">+ Add Image</div>
+        </div>  <!-- End row -->
+
+        <div style="margin-bottom: 1rem;"></div>
+        <div class="col-12">
+            <button (click)="AddPerk()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Perk</button>
+            <!-- <button (click)="Reset()" type="button" class="btn btn-outline-dark margin-gral" >Reset</button> -->
+        </div>   
+      </form>     
+      
+      {{formGroup.value | json}}
+
+      <div style="margin-bottom: 1rem;"></div>
+      <div class="row">
+        <div class="col-sm-6 col-md-4" *ngFor="let post of perksArray">
+          <div class="card">
+            <div class="card-header">
+              {{post.name}}
+            </div>
+
+            <div class="card-body">
+              <label> {{post.description | slice:0:100}}</label>
+              <div class="col-sm-6 col-md-4">
+                <img class="img-size" src="{{post.photo}}">
+              </div>
+            </div>
+            <button (click)="DetailPerk(post.id)" type="button" class="btn btn-outline-primary">View Perk</button>
+            <button (click)="DeletePerk(post.id)" type="button" class="btn  btn-outline-danger">Delete Perk</button>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
