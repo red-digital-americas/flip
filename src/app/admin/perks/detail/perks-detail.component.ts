@@ -74,8 +74,12 @@ export class PerksDetailComponent implements OnInit {
     this.router.navigate(['perk-promotions-add', this.perkId])
   }
 
-  public DeletePromotion(id:number){
-    this.heroService.service_general_delete(`PerkPromotions/${id}`).subscribe(
+  public DetailPromotion(idPromotion:number) {
+    this.router.navigate(['perk-promotions-detail', idPromotion])
+  }
+
+  public DeletePromotion(idPromotion:number){
+    this.heroService.service_general_delete(`PerkPromotions/${idPromotion}`).subscribe(
       (res)=> {
         if(res.result === "Success"){      
           this.GetPromotions();         

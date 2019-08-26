@@ -12,12 +12,14 @@ import { PerksComponent } from './perks.component';
 import { PerksDetailComponent } from './detail/perks-detail.component';
 import { PerksPromotionAddComponent } from '../perk-promotions/add/perk-promotions-add.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { PerksPromotionDetailComponent } from '../perk-promotions/detail/perk-promotions-detail.component';
 
 const routes: Routes = [
   // { path: '', component: PerksComponent },  
   { path: 'perks/:id', component: PerksComponent },
   { path: 'perk-detail/:id', component: PerksDetailComponent },
-  { path: 'perk-promotions-add/:id', component: PerksPromotionAddComponent } 
+  { path: 'perk-promotions-add/:id', component: PerksPromotionAddComponent },
+  { path: 'perk-promotions-detail/:id', component: PerksPromotionDetailComponent },
 ];
   
 @NgModule({
@@ -33,7 +35,8 @@ const routes: Routes = [
   declarations: [
     PerksComponent,
     PerksDetailComponent,
-    PerksPromotionAddComponent
+    PerksPromotionAddComponent,
+    PerksPromotionDetailComponent
   ]
 })
 export class PerksComponentModule {}

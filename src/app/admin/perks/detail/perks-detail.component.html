@@ -14,28 +14,22 @@
                 {{perkDetail?.description}}                                        
               </div>  
               
-              <div class="col-4 mb-2">
-                <!-- <input type="text" formControlName="perkStreetAddressCtrl" class="form-control" placeholder="StreetAddress"> -->
+              <div class="col-4 mb-2">                
                 {{perkDetail?.streetAddress}}
               </div>   
-              <div class="col-4 mb-2">
-                <!-- <input type="text" formControlName="perkCityCtrl" class="form-control" placeholder="City"> -->
+              <div class="col-4 mb-2">                
                 {{perkDetail?.city}}
               </div>   
-              <div class="col-4 mb-2">
-                <!-- <input type="text" formControlName="perkStateProvincyCtrl" class="form-control" placeholder="StateProvincy"> -->
+              <div class="col-4 mb-2">                
                 {{perkDetail?.stateProvincy}}
               </div>   
-              <div class="col-3 mb-2">
-                <!-- <input type="text" formControlName="perkZipCtrl" class="form-control" placeholder="Zip"> -->
+              <div class="col-3 mb-2">                
                 {{perkDetail?.zip}}
               </div>   
-              <div class="col-3 mb-2">
-                <!-- <input type="text" formControlName="perkCountryCtrl" class="form-control" placeholder="Country"> -->
+              <div class="col-3 mb-2">                
                 {{perkDetail?.county}}
               </div>   
-              <div class="col-3 mb-2">
-                <!-- <input type="text" formControlName="perkLatitudeCtrl" class="form-control" placeholder="Latitude"> -->
+              <div class="col-3 mb-2">                
                 {{perkDetail?.latitude}}, {{perkDetail?.longitude}}
               </div>                                             
               
@@ -67,7 +61,7 @@
                 <img class="img-size" src="{{post.photo}}">
               </div>
             </div>
-            <button (click)="DetailPerk(post.id)" type="button" class="btn btn-outline-primary">View Promotion</button>
+            <button (click)="DetailPromotion(post.id)" type="button" class="btn btn-outline-primary">View Promotion</button>
             <button (click)="DeletePromotion(post.id)" type="button" class="btn  btn-outline-danger">Delete Promotion</button>
 
           </div>
