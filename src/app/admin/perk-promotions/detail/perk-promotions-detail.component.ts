@@ -53,6 +53,10 @@ export class PerksPromotionDetailComponent implements OnInit {
     );        
   }
 
+  public EditPromotion () {
+    this.router.navigate(['perk-promotions-edit', this.promotionDetail.id]);
+  }
+
   public DeletePromotion(){
     let perkId = this.promotionDetail.perkGuideId;
     this.heroService.service_general_delete(`PerkPromotions/${this.promotionDetail.id}`).subscribe(

@@ -1,25 +1,23 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DatosService } from '../../../datos.service';
+import { DatosService } from '../../../../datos.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { PerksGuide, PerksCategory } from '../models/Perks';
-import { Utils } from '../../utils/utils';
+import { PerksGuide, PerksCategory } from '../../models/Perks';
+import { Utils } from '../../../utils/utils';
 
 @Component({
-  selector: 'app-perks',
-  templateUrl: './perks.component.html',
-  styleUrls: ['./perks.component.scss'],
+  selector: 'app-perks-edit',
+  templateUrl: './perks-edit.component.html',
+  styleUrls: ['./perks-edit.component.scss'],
   providers: [ToasterService]
 })
-export class PerksComponent implements OnInit {
+export class PerksEditComponent implements OnInit {
   
-  IDUSR: string = "0";
-  IDBUILD: string = "0";  
+  IDUSR: string = "0";  
   public user: string[]; 
-
-  perksArray:PerksGuide[] = [];
-  
+  private perkId:number;    // Pass from routes
+    
   ////////////////////////////////////////////////////////
   // Form
   formGroup: FormGroup;
@@ -37,7 +35,7 @@ export class PerksComponent implements OnInit {
     else {
       this.user = JSON.parse(localStorage.getItem("user"));      
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
-      this.IDBUILD = this.route.snapshot.params['id'];                  
+      this.perkId = this.route.snapshot.params['id'];                  
     }
 
     this.formGroup = this._formBuilder.group({
@@ -51,23 +49,24 @@ export class PerksComponent implements OnInit {
       perkLatitudeCtrl: [''],
       perkLongitudeCtrl: [''],
       perkCategoryIdCtrl: [''],
-      perkPhotoCtrl: this.AddGalleryFormGroup(),
-      perkBuildingIdCtrol: [parseInt(this.IDBUILD)],             
-      perkGalleryCtrl: this._formBuilder.array(
-      [this.AddGalleryFormGroup()], [Validators.required])
+      perkPhotoCtrl: this._formBuilder.group({ labelCtrl: ['Choose file'], photoCtrl: [], serverUrlCtrl: [] }),
+      perkBuildingIdCtrol: [],             
+      perkGalleryCtrl: this._formBuilder.array([], [Validators.required])
     });
 
-    this.GetPerks();
     this.GetPerkCategories();
+    this.GetPerkDetail();    
   } 
 
 
-  private GetPerks() {
-    let params = { buildingId: this.IDBUILD};
-    this.heroService.service_general_get_with_params("PerkGuide/GetPerks", params).subscribe(
+  private GetPerkDetail() {
+    let params = { id: this.perkId};
+    this.heroService.service_general_get_with_params("PerkGuide/GetPerksWithGallery", params).subscribe(
       (res)=> {
-        if(res.result === "Success"){                              
-          this.perksArray = res.item;  
+        if(res.result === "Success"){                                      
+          this.perkModel.InstanceFromService(res.item[0]); 
+          this.perkModel.ParseToForm(this.formGroup);
+          console.log(this.perkModel);
         } else if(res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
         else { console.log("Error"); }
       }, (err)=> {console.log(err);}
@@ -81,24 +80,23 @@ export class PerksComponent implements OnInit {
     this.heroService.service_general_get("PerkGuide/GetCategories").subscribe(
       (res)=> {
         if(res.result === "Success"){                              
-          this.perkCategories = res.item;               
-          this.formGroup.controls.perkCategoryIdCtrl.setValue(this.perkCategories[0].id);
+          this.perkCategories = res.item;                    
+        //   this.formGroup.controls.perkCategoryIdCtrl.setValue(this.perkCategories[0].id);
         } else if(res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
         else { console.log("Error"); }
       }, (err)=> {console.log(err);}
     );
   }
 
-  public AddPerk () {
-    this.perkModel.ParseFromForm(this.formGroup.value);   
+  public UpdatePerk () {      
+    this.perkModel.ParseFromForm(this.formGroup.value);       
     // console.log(this.perkModel);return;
 
-    this.heroService.service_general_post("PerkGuide/AddPerk", this.perkModel).subscribe(
+    this.heroService.service_general_put("PerkGuide/UpdatePerk", this.perkModel).subscribe(
       (res)=> {
         if(res.result === "Success"){      
-          this.GetPerks();      
-          this.ResetForm();     
-          this.toasterService.pop('success', 'Success ', 'Perk created correctly.');                                     
+          this.router.navigate([ 'perk-detail', this.perkModel.id]); return;
+        //   this.toasterService.pop('success', 'Success ', 'Perk Updated correctly.');                                     
         } else if(res.result === "Error") { 
           console.log("Ocurrio un error" + res.detalle); 
           this.toasterService.pop('danger', 'Error', res.detalle);
@@ -106,49 +104,8 @@ export class PerksComponent implements OnInit {
         else { console.log("Error"); }
       }, (err)=> {console.log(err); this.toasterService.pop('danger', 'Error', 'Error');}
     );        
-  }
-
-  public DetailPerk(id:number) {    
-    this.router.navigate(['perk-detail', id])
-  }
-
-  public DeletePerk (id:number) {        
-    this.heroService.service_general_delete(`PerkGuide/${id}`).subscribe(
-      (res)=> {
-        if(res.result === "Success"){      
-          this.GetPerks();         
-          this.toasterService.pop('success', 'Success ', 'Perk deleted correctly.');
-        } else if(res.result === "Error") { 
-          console.log("Ocurrio un error" + res.detalle); 
-          this.toasterService.pop('danger', 'Error', res.detalle);
-        } 
-        else { console.log("Error"); }
-      }, (err)=> {console.log(err); this.toasterService.pop('danger', 'Error', "Error");}
-    );            
-  }
-
-  private ResetForm() {   
-    this.formGroup.reset();
-    this.formGroup.reset();                              
-    this.perkModel = new PerksGuide(); 
-    this.formGroup = this._formBuilder.group({
-      perkNameCtrl: [, Validators.required],
-      perkDescriptionCtrl: [''],
-      perkStreetAddressCtrl: [''],
-      perkCityCtrl: [''],
-      perkStateProvincyCtrl: [''],
-      perkZipCtrl: [''],
-      perkCountryCtrl: [''],
-      perkLatitudeCtrl: [''],
-      perkLongitudeCtrl: [''],
-      perkCategoryIdCtrl: [this.perkCategories[0].id],
-      perkPhotoCtrl: this.AddGalleryFormGroup(),
-      perkBuildingIdCtrol: [parseInt(this.IDBUILD)],             
-      perkGalleryCtrl: this._formBuilder.array(
-      [this.AddGalleryFormGroup()], [Validators.required])
-    });
-  }
-
+  } 
+    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GALLERYCTRLARRAY
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     

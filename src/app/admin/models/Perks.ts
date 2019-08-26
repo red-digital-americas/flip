@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import { FormGroup, FormControl } from '@angular/forms';
 
 export class PerksGuide {        
     public id:number;
@@ -21,6 +22,25 @@ export class PerksGuide {
     public perkPromotions?:PerkPromotion[];
 
     constructor() { }
+
+    public InstanceFromService(serviceObject:PerksGuide) {
+        this.id = serviceObject.id;
+        this.name = serviceObject.name;
+        this.description = serviceObject.description;
+        this.streetAddress = serviceObject.streetAddress;
+        this.city = serviceObject.city;
+        this.stateProvincy = serviceObject.stateProvincy;
+        this.zip = serviceObject.zip;
+        this.country = serviceObject.country;
+        this.latitude = serviceObject.latitude;
+        this.longitude = serviceObject.longitude;
+        this.packCategoryId = serviceObject.packCategoryId;
+        this.buildingId = serviceObject.buildingId;
+        this.photo = serviceObject.photo;
+
+        this.galleryPerks = serviceObject.galleryPerks;
+    }
+
     public ParseFromForm(form) {
         this.name = form.perkNameCtrl;
         this.description = form.perkDescriptionCtrl;
@@ -41,6 +61,31 @@ export class PerksGuide {
             galleryPerk.photo = photo.serverUrlCtrl;
             this.galleryPerks.push(galleryPerk);
         });        
+    }
+
+    public ParseToForm(form) {
+        form.controls.perkNameCtrl.setValue(this.name);        
+        form.controls.perkDescriptionCtrl.setValue(this.description);
+        form.controls.perkStreetAddressCtrl.setValue(this.streetAddress);
+        form.controls.perkCityCtrl.setValue(this.city);
+        form.controls.perkStateProvincyCtrl.setValue(this.stateProvincy);
+        form.controls.perkZipCtrl.setValue(this.zip);
+        form.controls.perkCountryCtrl.setValue(this.country);
+        form.controls.perkLatitudeCtrl.setValue(this.latitude);
+        form.controls.perkLongitudeCtrl.setValue(this.longitude);
+        form.controls.perkCategoryIdCtrl.setValue(this.packCategoryId);
+        form.controls.perkBuildingIdCtrol.setValue(this.buildingId);              
+        form.controls.perkPhotoCtrl.controls.serverUrlCtrl.setValue(this.photo);
+                             
+        this.galleryPerks.forEach( photo => {       
+            form.controls['perkGalleryCtrl'].push(
+                new FormGroup ({
+                    labelCtrl: new FormControl('Choose file'),
+                    photoCtrl: new FormControl(),  
+                    serverUrlCtrl: new FormControl(photo.photo)
+                })
+            );                                    
+        });         
     }
 }
 
@@ -68,6 +113,18 @@ export class PerkPromotion {
     public active:boolean;
     public perkGuideId:number;
 
+    public InstanceFromService(serviceObject:PerkPromotion) {
+        this.id = serviceObject.id;
+        this.name = serviceObject.name;
+        this.description = serviceObject.description;
+        this.startDate = serviceObject.startDate;
+        this.endDate = serviceObject.endDate;
+        this.date = serviceObject.date;
+        this.photo = serviceObject.photo;
+        this.active = serviceObject.active;
+        this.perkGuideId = serviceObject.perkGuideId;
+    }
+
     public ParseFromForm(form) {
         this.name = form.promotionNameCtrl;
         this.description = form.promotionDescriptionCtrl;
@@ -75,5 +132,14 @@ export class PerkPromotion {
         this.endDate = moment(form.promotionEndDateCtrl).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
         this.photo = form.promotionPhotoCtrl.serverUrlCtrl;     
         this.perkGuideId = form.promotionPerkGuideId;
+    }
+
+    public ParseToForm(form) {
+        form.controls.promotionNameCtrl.setValue(this.name);
+        form.controls.promotionDescriptionCtrl.setValue(this.description);
+        form.controls.promotionStartDateCtrl.setValue(moment(this.startDate).toDate());
+        form.controls.promotionEndDateCtrl.setValue(moment(this.endDate).toDate());
+        form.controls.promotionPhotoCtrl.controls.serverUrlCtrl.setValue(this.photo);        
+        form.controls.promotionPerkGuideId.setValue(this.perkGuideId);              
     }
 }

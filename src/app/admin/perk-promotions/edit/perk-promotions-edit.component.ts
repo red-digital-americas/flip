@@ -8,16 +8,16 @@ import { Utils } from '../../../utils/utils';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-perks-promotions-add',
-  templateUrl: './perk-promotions-add.component.html',
-  styleUrls: ['./perk-promotions-add.component.scss'],
+  selector: 'app-perks-promotions-edit',
+  templateUrl: './perk-promotions-edit.component.html',
+  styleUrls: ['./perk-promotions-edit.component.scss'],
   providers: [ToasterService]
 })
-export class PerksPromotionAddComponent implements OnInit {
+export class PerksPromotionEditComponent implements OnInit {
   
   IDUSR: string = "0";  
   public user: string[]; 
-  private perkId:number;    // Params from route    
+  private promotionId:number;    // Params from route    
   
   ////////////////////////////////////////////////////////
   // Form
@@ -36,31 +36,52 @@ export class PerksPromotionAddComponent implements OnInit {
     else {
       this.user = JSON.parse(localStorage.getItem("user"));      
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
-      this.perkId = this.route.snapshot.params['id'];                  
+      this.promotionId = this.route.snapshot.params['id'];                  
     }
 
     this.formGroup = this._formBuilder.group({
       promotionNameCtrl: [, Validators.required],
-      promotionDescriptionCtrl: [''],
-      promotionStartDateCtrl: [new Date()],
-      promotionEndDateCtrl: [moment().add(1, 'day').toDate()],
+      promotionDescriptionCtrl: [],
+      promotionStartDateCtrl: [],
+      promotionEndDateCtrl: [],
       promotionPhotoCtrl: this.AddGalleryFormGroup(),    
-      promotionPerkGuideId: [this.perkId]
-    });    
+      promotionPerkGuideId: []
+    });  
+    
+    this.GetPromotion();      
   } 
+
+  public GetPromotion () {
+    let params = { id: this.promotionId }    
+    this.heroService.service_general_get_with_params("PerkPromotions/GetPromotions", params).subscribe(
+      (res)=> {
+        if(res.result === "Success"){                                  
+            this.promotionModel.InstanceFromService(res.item[0]);                        
+            this.promotionModel.ParseToForm(this.formGroup);
+            // console.log(this.promotionModel);
+            // console.log(this.formGroup.controls);
+          return;
+        } else if(res.result === "Error") { 
+          console.log("Ocurrio un error" + res.detalle); 
+          this.toasterService.pop('danger', 'Error', res.detalle);
+        } 
+        else { console.log("Error"); }
+      }, (err)=> {console.log(err); this.toasterService.pop('danger', 'Error', 'Error');}
+    );        
+  }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // FORM
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
-  public AddPerk () {
+  public UpdatePromotion () {
     this.promotionModel.ParseFromForm(this.formGroup.value);   
     // console.log(this.promotionModel);return;
 
-    this.heroService.service_general_post("PerkPromotions/AddPromotion", this.promotionModel).subscribe(
+    this.heroService.service_general_put("PerkPromotions/EditPromotion", this.promotionModel).subscribe(
       (res)=> {
         if(res.result === "Success"){                                
-          // this.toasterService.pop('success', 'Success ', 'Perk created correctly.');   
-          this.router.navigate(['perk-detail', this.perkId]);
+          // this.toasterService.pop('success', 'Success ', 'Promotion updated correctly.');   
+          this.router.navigate(['perk-promotions-detail/', this.promotionId]);
           return;
         } else if(res.result === "Error") { 
           console.log("Ocurrio un error" + res.detalle); 
@@ -76,8 +97,8 @@ export class PerksPromotionAddComponent implements OnInit {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
   private AddGalleryFormGroup () {    
     return this._formBuilder.group({
-      labelCtrl: ['Choose file'],
-      photoCtrl: [, Validators.required],  
+      labelCtrl: ['Choosed file'],
+      photoCtrl: [],  
       serverUrlCtrl: []
     });    
   }

@@ -56,6 +56,10 @@ export class PerksDetailComponent implements OnInit {
       }, (err)=> {console.log(err);}
     );
   }
+
+  public EditPerk() {
+    this.router.navigate([ 'perk-edit', this.perkId]);
+  }
   
   private GetPromotions () {
     let params = { perkGuideId: this.perkId };

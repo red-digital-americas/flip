@@ -8,6 +8,7 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 })
 export class DatosServiceService {
 
+  //Use the outer datos.service.ts
   public heroesUrl = 'http://localhost:50570/api/';  // URL to web api  
   private url: string = 'http://23.253.173.64/'; // URL api server 
 
