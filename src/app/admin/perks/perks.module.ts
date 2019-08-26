@@ -10,11 +10,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { PerksComponent } from './perks.component';
 import { PerksDetailComponent } from './detail/perks-detail.component';
+import { PerksPromotionAddComponent } from '../perk-promotions/add/perk-promotions-add.component';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 const routes: Routes = [
   // { path: '', component: PerksComponent },  
   { path: 'perks/:id', component: PerksComponent },
-  { path: 'perk-detail/:id', component: PerksDetailComponent }  
+  { path: 'perk-detail/:id', component: PerksDetailComponent },
+  { path: 'perk-promotions-add/:id', component: PerksPromotionAddComponent } 
 ];
   
 @NgModule({
@@ -22,6 +25,7 @@ const routes: Routes = [
     CommonModule,          
     ReactiveFormsModule,
     NgSelectModule,
+    BsDatepickerModule.forRoot(),
     RouterModule.forChild(routes), 
     NavModule,    
     ToasterModule,     
@@ -29,6 +33,7 @@ const routes: Routes = [
   declarations: [
     PerksComponent,
     PerksDetailComponent,
+    PerksPromotionAddComponent
   ]
 })
 export class PerksComponentModule {}

@@ -108,8 +108,8 @@ export class PerksComponent implements OnInit {
     );        
   }
 
-  public DetailPerk(id:number) {
-    this.router.navigate(['perk-detail', 2])
+  public DetailPerk(id:number) {    
+    this.router.navigate(['perk-detail', id])
   }
 
   public DeletePerk (id:number) {        

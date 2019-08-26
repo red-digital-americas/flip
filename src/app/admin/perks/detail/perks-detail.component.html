@@ -1,1 +1,81 @@
-perks-detail works
+<div class="animated fadeIn">
+  <div class="card">    
+    <div class="card-body">
+      <h5 class="card-title">Perk</h5>
+              
+        <div class="row">                      
+          <div class="col-12 col-lg-12 col-xl-12">
+            <div class="row">                                      
+              <div class="col-12 mb-2">                  
+                {{perkDetail?.name}}
+              </div>          
+                                                            
+              <div class="col-12 mb-2">                  
+                {{perkDetail?.description}}                                        
+              </div>  
+              
+              <div class="col-4 mb-2">
+                <!-- <input type="text" formControlName="perkStreetAddressCtrl" class="form-control" placeholder="StreetAddress"> -->
+                {{perkDetail?.streetAddress}}
+              </div>   
+              <div class="col-4 mb-2">
+                <!-- <input type="text" formControlName="perkCityCtrl" class="form-control" placeholder="City"> -->
+                {{perkDetail?.city}}
+              </div>   
+              <div class="col-4 mb-2">
+                <!-- <input type="text" formControlName="perkStateProvincyCtrl" class="form-control" placeholder="StateProvincy"> -->
+                {{perkDetail?.stateProvincy}}
+              </div>   
+              <div class="col-3 mb-2">
+                <!-- <input type="text" formControlName="perkZipCtrl" class="form-control" placeholder="Zip"> -->
+                {{perkDetail?.zip}}
+              </div>   
+              <div class="col-3 mb-2">
+                <!-- <input type="text" formControlName="perkCountryCtrl" class="form-control" placeholder="Country"> -->
+                {{perkDetail?.county}}
+              </div>   
+              <div class="col-3 mb-2">
+                <!-- <input type="text" formControlName="perkLatitudeCtrl" class="form-control" placeholder="Latitude"> -->
+                {{perkDetail?.latitude}}, {{perkDetail?.longitude}}
+              </div>                                             
+              
+            </div>  <!-- End col -->
+          </div>    <!-- End row -->
+
+            <div class="col-12 mb-2">
+                <button (click)="EditPerk()" type="button" class="btn btn-outline-dark margin-gral">Edit Perk</button>
+                <button (click)="DeletePerk()" type="button" class="btn btn-outline-danger margin-gral">Delete Perk</button>
+            </div>  
+        </div>  <!-- End row -->                      
+            
+      <!-- Promotions -->
+      <div style="margin-bottom: 1rem;"></div>
+      <h5 class="card-title">Promotions</h5>
+      <div class="row">
+        <div class="col-12 mb-2">
+            <button (click)="AddPromotion()" type="button" class="btn btn-outline-dark margin-gral">Add Promotion</button>            
+        </div>           
+        <div class="col-sm-6 col-md-4" *ngFor="let post of promotionsArray">
+          <div class="card">
+            <div class="card-header">
+              {{post.name}}
+            </div>
+
+            <div class="card-body">
+              <label> {{post.description | slice:0:100}}</label>
+              <div class="col-sm-6 col-md-4">
+                <img class="img-size" src="{{post.photo}}">
+              </div>
+            </div>
+            <button (click)="DetailPerk(post.id)" type="button" class="btn btn-outline-primary">View Promotion</button>
+            <button (click)="DeletePromotion(post.id)" type="button" class="btn  btn-outline-danger">Delete Promotion</button>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>

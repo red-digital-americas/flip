@@ -1,4 +1,4 @@
-import { Validators } from "@angular/forms";
+import * as moment from 'moment';
 
 export class PerksGuide {        
     public id:number;
@@ -67,4 +67,13 @@ export class PerkPromotion {
     public photo:string;
     public active:boolean;
     public perkGuideId:number;
+
+    public ParseFromForm(form) {
+        this.name = form.promotionNameCtrl;
+        this.description = form.promotionDescriptionCtrl;
+        this.startDate = moment(form.promotionStartDateCtrl).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+        this.endDate = moment(form.promotionEndDateCtrl).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+        this.photo = form.promotionPhotoCtrl.serverUrlCtrl;     
+        this.perkGuideId = form.promotionPerkGuideId;
+    }
 }

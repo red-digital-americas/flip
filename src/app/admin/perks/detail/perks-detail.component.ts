@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../../datos.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { PerksGuide, PerksCategory } from '../../models/Perks';
+import { PerksGuide, PerksCategory, PerkPromotion } from '../../models/Perks';
 import { Utils } from '../../../utils/utils';
 
 @Component({
@@ -14,11 +14,12 @@ import { Utils } from '../../../utils/utils';
 })
 export class PerksDetailComponent implements OnInit {
   
-  IDUSR: string = "0";
-  IDBUILD: string = "0";  
+  IDUSR: string = "0";   
   public user: string[]; 
 
-  perksArray:PerksGuide[] = [];
+  private perkId:number;  // PArams from route
+  perkDetail:PerksGuide;
+  promotionsArray:PerkPromotion[] = [];
   
   ////////////////////////////////////////////////////////
   // Form
@@ -36,9 +37,55 @@ export class PerksDetailComponent implements OnInit {
     }
     else {
       this.user = JSON.parse(localStorage.getItem("user"));      
-      this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
-      this.IDBUILD = this.route.snapshot.params['id'];   
-      console.log(this.IDBUILD);
+      this.IDUSR = JSON.parse(localStorage.getItem("user")).id;    
+      this.perkId = this.route.snapshot.params['id'];    
+      this.GetPerk();
+      this.GetPromotions();
     }
-  }  
+  }
+  
+  private GetPerk() {
+    let params = { id: this.perkId };
+    this.heroService.service_general_get_with_params("PerkGuide/GetPerks", params).subscribe(
+      (res)=> {
+        if(res.result === "Success"){                              
+          this.perkDetail = res.item[0];  
+          console.log(this.perkDetail);
+        } else if(res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
+        else { console.log("Error"); }
+      }, (err)=> {console.log(err);}
+    );
+  }
+  
+  private GetPromotions () {
+    let params = { perkGuideId: this.perkId };
+    this.heroService.service_general_get_with_params("PerkPromotions/GetPerkPromotions", params).subscribe(
+      (res)=> {
+        if(res.result === "Success"){                              
+          this.promotionsArray = res.item;  
+          console.log(this.promotionsArray);
+        } else if(res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
+        else { console.log("Error"); }
+      }, (err)=> {console.log(err);}
+    );
+  }
+
+  public AddPromotion() {    
+    this.router.navigate(['perk-promotions-add', this.perkId])
+  }
+
+  public DeletePromotion(id:number){
+    this.heroService.service_general_delete(`PerkPromotions/${id}`).subscribe(
+      (res)=> {
+        if(res.result === "Success"){      
+          this.GetPromotions();         
+          this.toasterService.pop('success', 'Success ', 'Promotion deleted correctly.');
+        } else if(res.result === "Error") { 
+          console.log("Ocurrio un error" + res.detalle); 
+          this.toasterService.pop('danger', 'Error', res.detalle);
+        } 
+        else { console.log("Error"); }
+      }, (err)=> {console.log(err); this.toasterService.pop('danger', 'Error', "Error");}
+    );  
+  }
 }
