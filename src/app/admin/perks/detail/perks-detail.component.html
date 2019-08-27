@@ -4,37 +4,27 @@
       <h5 class="card-title">Perk</h5>
               
         <div class="row">                      
-          <div class="col-12 col-lg-12 col-xl-12">
+          <div class="col-12 col-lg-8 col-xl-8">
             <div class="row">                                      
               <div class="col-12 mb-2">                  
                 {{perkDetail?.name}}
-              </div>          
-                                                            
+              </div>                                                                      
               <div class="col-12 mb-2">                  
                 {{perkDetail?.description}}                                        
-              </div>  
-              
-              <div class="col-4 mb-2">                
-                {{perkDetail?.streetAddress}}
-              </div>   
-              <div class="col-4 mb-2">                
-                {{perkDetail?.city}}
-              </div>   
-              <div class="col-4 mb-2">                
-                {{perkDetail?.stateProvincy}}
-              </div>   
-              <div class="col-3 mb-2">                
-                {{perkDetail?.zip}}
-              </div>   
-              <div class="col-3 mb-2">                
-                {{perkDetail?.county}}
-              </div>   
-              <div class="col-3 mb-2">                
+              </div>                
+              <div class="col-12 mb-2">                
+                {{perkDetail?.streetAddress}}, {{perkDetail?.city}}, {{perkDetail?.stateProvincy}}, {{perkDetail?.zip}}, {{perkDetail?.country}}
+              </div>                               
+              <div class="col-6 mb-2">                
                 {{perkDetail?.latitude}}, {{perkDetail?.longitude}}
               </div>                                             
               
-            </div>  <!-- End col -->
-          </div>    <!-- End row -->
+            </div>  <!-- End row -->
+          </div>    <!-- End col -->
+
+          <div class="col-12 col-lg-4 col-xl-4">
+            <img style="width: 100%; max-height: 15rem;" [src]="perkDetail?.photo" alt="">            
+          </div>
 
             <div class="col-12 mb-2">
                 <button (click)="EditPerk()" type="button" class="btn btn-outline-dark margin-gral">Edit Perk</button>
