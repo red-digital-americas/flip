@@ -7,7 +7,7 @@
         
       <form [formGroup]="formGroup" autocomplete="off">
         <div class="row">                      
-          <div class="col-12 col-lg-12 col-xl-12">
+          <div class="col-12 col-lg-8 col-xl-8">
             <div class="row">                                      
               <div class="col-12 mb-2">
                   <input type="text" formControlName="perkNameCtrl" class="form-control" placeholder="Title">
@@ -72,17 +72,18 @@
                     </label>        
                   </div>                                                                                            
                 </div> 
-                <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkPhotoCtrl').get('serverUrlCtrl').value" alt="">
-              </div>
+                <!-- <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkPhotoCtrl').get('serverUrlCtrl').value" alt=""> -->
+              </div>                          
+            </div>  <!-- End row -->
+          </div>    <!-- End col -->
 
-              <div class="col-12 mb-2">
-                
-              </div>
-              
-            </div>  <!-- End col -->
-          </div>    <!-- End row -->
-        </div>  <!-- End row -->
+          <div class="col-12 col-lg-4 col-xl-4">
+            <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkPhotoCtrl').get('serverUrlCtrl').value" alt="">
+          </div>
+
+        </div>  <!-- End row -->        
         
+        <!-- GALLERY -->
         <div style="margin-bottom: 1rem;"></div>
         <h5 class="card-title">Imagenes</h5>
         <div class="row">          
@@ -91,8 +92,8 @@
             class="col-4 mb-2"
             *ngFor="let arrayItem of perkGalleryCrtlArray.controls; let i=index">
 
-            <div [formGroupName]="i">                               
-              <div class="custom-file">
+            <div [formGroupName]="i" class="input-file__container">                               
+              <div class="custom-file input-file">
                 <input type="file" accept="image/*"
                   formControlName="photoCtrl"
                   (change)="prepareImages($event, formGroup.get('perkGalleryCtrl').at(i).controls)" class="custom-file-input" id="validatedCustomFile" required>
@@ -101,26 +102,27 @@
                 </label>        
               </div>
 
-              <div *ngIf="i!=0" (click)="RemoveGalleryCtrl();" class="schedule__datetime">
+              <div *ngIf="i!=0" (click)="RemoveGalleryCtrl();" class="input-file__remove">
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </div>                                                                             
             </div> 
             
-            <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkGalleryCtrl').at(i).get('serverUrlCtrl').value" alt="">
+            <img class="input-file__img" [src]="formGroup.get('perkGalleryCtrl').at(i).get('serverUrlCtrl').value" alt="">
           </div>
           
-          <div (click)="AddGalleryCtrl()" class="col-12">+ Add Image</div>
+          <div (click)="AddGalleryCtrl()" class="add-btn">+ Add Image</div>
         </div>  <!-- End row -->
+        <!-- END OF GALLERY -->
 
         <div style="margin-bottom: 1rem;"></div>
         <div class="col-12">
-            <button (click)="AddPerk()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Perk</button>
-            <!-- <button (click)="Reset()" type="button" class="btn btn-outline-dark margin-gral" >Reset</button> -->
+          <button (click)="AddPerk()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Perk</button>
+          <!-- <button (click)="Reset()" type="button" class="btn btn-outline-dark margin-gral" >Reset</button> -->
         </div>   
-      </form>     
-      
+      </form>           
       <!-- {{formGroup.value | json}} -->
 
+      <!-- LIST OF PERKS -->
       <div style="margin-bottom: 1rem;"></div>
       <div class="row">
         <div class="col-sm-6 col-md-4" *ngFor="let post of perksArray">
@@ -141,6 +143,7 @@
           </div>
         </div>
       </div>
+      <!-- END LIST OF PERKS -->
 
     </div>
   </div>
