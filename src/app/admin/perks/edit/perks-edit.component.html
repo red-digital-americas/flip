@@ -5,7 +5,7 @@
         
       <form [formGroup]="formGroup" autocomplete="off">
         <div class="row">                      
-          <div class="col-12 col-lg-12 col-xl-12">
+          <div class="col-12 col-lg-8 col-xl-8">
             <div class="row">                                      
               <div class="col-12 mb-2">
                   <input type="text" formControlName="perkNameCtrl" class="form-control" placeholder="Title">
@@ -70,15 +70,14 @@
                     </label>        
                   </div>                                                                                            
                 </div> 
-                <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkPhotoCtrl').get('serverUrlCtrl').value" alt="">
-              </div>
+                <!-- <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkPhotoCtrl').get('serverUrlCtrl').value" alt=""> -->
+              </div>                            
+            </div>  <!-- End row -->
+          </div>    <!-- End col -->
 
-              <div class="col-12 mb-2">
-                
-              </div>
-              
-            </div>  <!-- End col -->
-          </div>    <!-- End row -->
+          <div class="col-12 col-lg-4 col-xl-4">
+            <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkPhotoCtrl').get('serverUrlCtrl').value" alt="">
+          </div>
         </div>  <!-- End row -->
         
         <div style="margin-bottom: 1rem;"></div>
@@ -86,10 +85,10 @@
         <div class="row">          
           
           <div formArrayName="perkGalleryCtrl"
-            class="col-4 mb-2"
+            class="col-4 mb-2 input-file"
             *ngFor="let arrayItem of perkGalleryCrtlArray.controls; let i=index">
 
-            <div [formGroupName]="i">                               
+            <div [formGroupName]="i" class="input-file__container">                               
               <div class="custom-file">
                 <input type="file" accept="image/*"
                   formControlName="photoCtrl"
@@ -99,20 +98,21 @@
                 </label>        
               </div>
 
-              <div *ngIf="i!=0" (click)="RemoveGalleryCtrl();" class="schedule__datetime">
+              <div *ngIf="i!=0" (click)="RemoveGalleryCtrl();" class="input-file__remove">
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </div>                                                                             
             </div> 
             
-            <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkGalleryCtrl').at(i).get('serverUrlCtrl').value" alt="">
+            <img class="input-file__img" [src]="formGroup.get('perkGalleryCtrl').at(i).get('serverUrlCtrl').value" alt="">
           </div>
           
-          <div (click)="AddGalleryCtrl()" class="col-12">+ Add Image</div>
+          <div (click)="AddGalleryCtrl()" class="add-btn">+ Add Image</div>
         </div>  <!-- End row -->
 
         <div style="margin-bottom: 1rem;"></div>
         <div class="col-12">
-            <button (click)="UpdatePerk()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Update Perk</button>            
+          <button (click)="UpdatePerk()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Update Perk</button>
+          <button (click)="Cancel()" type="button" class="btn btn-outline-danger margin-gral">Cancel</button>
         </div>   
       </form>     
       

@@ -105,6 +105,10 @@ export class PerksEditComponent implements OnInit {
       }, (err)=> {console.log(err); this.toasterService.pop('danger', 'Error', 'Error');}
     );        
   } 
+
+  public Cancel() {
+    this.router.navigate(['perk-detail', this.perkModel.id]);
+  }
     
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GALLERYCTRLARRAY
