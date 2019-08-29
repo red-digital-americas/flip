@@ -70,8 +70,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  public Login() {
-    debugger; 
+  public Login() {    
     var creadoobj = { username: this.email, password: this.password };
     this.heroService.ServicioPostLogin("CargarUsuario", creadoobj).subscribe((value) => {
       switch (value.token) {

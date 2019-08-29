@@ -91,7 +91,7 @@ export class ActivitiesComponent implements OnInit {
         default:          
           if (value.result == "Success") {
             this.get_posts();
-            debugger; 
+             
             this.postphoto = "assets/img/Coliving.jpg";
             this.posttext = "";
             this.posttitle = "";
@@ -102,10 +102,10 @@ export class ActivitiesComponent implements OnInit {
   }
 
   prepareImages(e) {
-    debugger; 
+     
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
-        debugger;
+        
         this.newImages.push(f);
       }
     }
@@ -119,11 +119,11 @@ export class ActivitiesComponent implements OnInit {
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
-            debugger;
+            
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-            debugger;
+            
             this.postphoto = url;
-            debugger;
+            
             this.newImages = [];
           }
         })

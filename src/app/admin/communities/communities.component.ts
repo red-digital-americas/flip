@@ -48,18 +48,17 @@ posts: any[] ;
 
 
   get_builds() {
-    // debugger;
+    // 
     var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
-    // debugger;
+    // 
     this.heroService.ServicioPostBuilds("SeeBuilding", creadoobj).subscribe((value) => {
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
           break;
-        default:
-          debugger; 
+        default:          
           if (value.result == "Success") {
-            //  debugger;
+            //  
             this.posts = value.item;
           }
       }

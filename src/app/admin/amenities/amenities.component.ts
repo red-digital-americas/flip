@@ -101,8 +101,7 @@ export class AmenitiesComponent implements OnInit {
     );  
   }
 
-  prepareImages(e) {
-    debugger; 
+  prepareImages(e) {     
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {        
         this.newImages.push(f);

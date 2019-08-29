@@ -88,7 +88,7 @@ if (permisos == 1) {
 else if (permisos == 2 ){
   menu = [
     { name: 'Commutinities', url: '/communities', icon: 'icon-drop' }, 
-    { name: 'Users', url: '/users', icon: 'icon-drop'}
+    // { name: 'Users', url: '/users', icon: 'icon-drop'}
   ] 
 }
 else if (permisos == 3){

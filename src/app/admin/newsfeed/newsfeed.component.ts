@@ -82,9 +82,9 @@ export class NewsfeedComponent implements OnInit {
   }
 
   get_posts() {
-   // debugger;
+   // 
     var creadoobj = { buildingid: this.route.snapshot.params['id'] , userid: this.IDUSR };
-    // debugger;
+    // 
     this.heroService.ServicioPostPost("SeePost", creadoobj).subscribe((value) => {
 
 
@@ -93,9 +93,9 @@ export class NewsfeedComponent implements OnInit {
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
           break;
         default:
-          //debugger; 
+          // 
           if (value.result == "Success") {
-             debugger;
+             
             this.posts = value.item;
           }
       }
@@ -103,10 +103,10 @@ export class NewsfeedComponent implements OnInit {
   }
 
   addPost() {
-    debugger;
+    
     
     var creadoobj = { id: 0, title: this.posttitle, userid: this.IDUSR, PostText: this.posttext, photo: this.postphoto, BuildingId: this.route.snapshot.params['id'] };
-    debugger;
+    
     /*
      public int id { get; set; }
             public int userid { get; set; }
@@ -123,10 +123,10 @@ export class NewsfeedComponent implements OnInit {
           this.showError(); 
           break;
         default:
-          debugger;
+          
           if (value.result == "Success") {
             this.get_posts();
-            debugger; 
+             
             this.postphoto = "assets/img/Coliving.jpg";
             this.posttext = "";
             this.posttitle = "";
@@ -139,10 +139,10 @@ export class NewsfeedComponent implements OnInit {
   }
 
   prepareImages(e) {
-    debugger; 
+     
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
-        debugger;
+        
         this.newImages.push(f);
       }
     }
@@ -158,11 +158,11 @@ export class NewsfeedComponent implements OnInit {
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
-            debugger;
+            
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-            debugger;
+            
             this.postphoto = url;
-            debugger;
+            
             this.newImages = [];
           }
         })
@@ -172,14 +172,14 @@ export class NewsfeedComponent implements OnInit {
 
 
   editPost(id: number) {
-   // debugger; 
+   //  
     this.router.navigate(['/editcomment/' + id])
 
   }
   deletePost(idpost: number) {
-    debugger;
+    ;
     var creadoobj = { id: idpost, title: "", userid: this.IDUSR, PostText: "", photo: "", BuildingId: this.route.snapshot.params['id'] };
-    debugger;
+    
     /*
      public int id { get; set; }
             public int userid { get; set; }
@@ -195,7 +195,7 @@ export class NewsfeedComponent implements OnInit {
           break;
 
         default:
-          debugger;
+          
           if (value.result == "Success") {
             this.get_posts();
             this.showWarning();
