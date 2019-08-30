@@ -58,6 +58,7 @@ export class PerksEditComponent implements OnInit {
     this.GetPerkDetail();    
   } 
 
+  goback() { window.history.back(); }
 
   private GetPerkDetail() {
     let params = { id: this.perkId};
@@ -113,7 +114,7 @@ export class PerksEditComponent implements OnInit {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GALLERYCTRLARRAY
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
-  private get perkGalleryCrtlArray() {
+  public get perkGalleryCrtlArray() {
     return this.formGroup.controls['perkGalleryCtrl'] as FormArray;
   }
 

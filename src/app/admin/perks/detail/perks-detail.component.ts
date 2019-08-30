@@ -43,6 +43,8 @@ export class PerksDetailComponent implements OnInit {
       this.GetPromotions();
     }
   }
+
+  goback() { window.history.back(); }
   
   private GetPerk() {
     let params = { id: this.perkId };
@@ -59,6 +61,20 @@ export class PerksDetailComponent implements OnInit {
 
   public EditPerk() {
     this.router.navigate([ 'perk-edit', this.perkId]);
+  }
+
+  public DeletePerk () {            
+    this.heroService.service_general_delete(`PerkGuide/${this.perkId}`).subscribe(
+      (res)=> {
+        if(res.result === "Success"){      
+          this.router.navigate(['perks', this.perkDetail.buildingId]);
+        } else if(res.result === "Error") { 
+          console.log("Ocurrio un error" + res.detalle); 
+          this.toasterService.pop('danger', 'Error', res.detalle);
+        } 
+        else { console.log("Error"); }
+      }, (err)=> {console.log(err); this.toasterService.pop('danger', 'Error', "Error");}
+    );            
   }
   
   private GetPromotions () {

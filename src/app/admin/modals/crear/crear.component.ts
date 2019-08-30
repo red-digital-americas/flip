@@ -217,7 +217,7 @@ export class CrearComponent implements OnInit {
   }
 
   ///////////////////////////
-  private get schedulesCrtlArray() {
+  public get schedulesCrtlArray() {
     return this.formGroup.controls['schedulesCtrl'] as FormArray;
   }
 

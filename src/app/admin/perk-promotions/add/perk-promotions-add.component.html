@@ -42,7 +42,7 @@
                   <div class="custom-file">
                     <input type="file" accept="image/*"
                       formControlName="photoCtrl"
-                      (change)="prepareImages($event, formGroup.get('promotionPhotoCtrl').controls)" class="custom-file-input" id="validatedCustomFile" required>
+                      (change)="prepareImages($event, formGroup.get('promotionPhotoCtrl')['controls'])" class="custom-file-input" id="validatedCustomFile" required>
                     <label class="custom-file-label" for="customFile">    
                         {{formGroup.get('promotionPhotoCtrl').get('labelCtrl').value}}                  
                     </label>        
@@ -71,4 +71,5 @@
   </div>
 </div>
 
-<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<toaster-container></toaster-container>
+<!-- <toaster-container [toasterconfig]="toasterconfig"></toaster-container> -->
