@@ -25,7 +25,7 @@ export class DatosServiceService {
   }
 
   ServicioPostGeneral_nuevo(url, parametros): Observable<any> {
-    debugger;
+    // debugger;
     // console.log(parametros);
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
