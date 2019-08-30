@@ -212,7 +212,7 @@ export class HomeservicesComponent implements OnInit {
            default:
              //debugger; 
              if (value.result == "Success") {
-                debugger;
+                //debugger;
                this.posts = value.item;
              }
          }
@@ -226,9 +226,9 @@ export class HomeservicesComponent implements OnInit {
   
      
      updatephoto() {
-       debugger;
+       //debugger;
       var creadoobj = { id: this.PostId, Photo: this.postphoto[3], PhotoMobile: this.postphoto[2] , Category: this.direction , Title:this.title, Icon:this.postphoto[1] };
-      debugger;
+      //debugger;
   /**  post.Photo = item.Photo;
                         post.Description = item.Description;
                         post.PhotoMobile = item.PhotoMobile;

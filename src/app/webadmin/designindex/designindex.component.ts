@@ -96,7 +96,7 @@ export class DesignindexComponent implements OnInit {
      updatephoto() {
       // debugger;
       var creadoobj = { id: this.PostId, Photo: this.postphoto,  Position: this.PostId };
-      debugger;
+      //debugger;
   
       this.heroService.ServicioPostPost("UpdateDesignIndex", creadoobj).subscribe((value) => {
   
@@ -107,7 +107,7 @@ export class DesignindexComponent implements OnInit {
            
             break;
           default:
-            debugger;
+            //debugger;
             if (value.result == "Success") {
               this.get_photos();
              
@@ -119,10 +119,10 @@ export class DesignindexComponent implements OnInit {
     }
      
     prepareImages(e) {
-      debugger; 
+      //debugger; 
       if (Utils.isDefined(e.srcElement.files)) {
         for (let f of e.srcElement.files) {
-          debugger;
+          //debugger;
           this.newImages.push(f);
         }
       }

@@ -209,7 +209,7 @@ export class HomeammenitiesComponent implements OnInit {
            default:
              //debugger; 
              if (value.result == "Success") {
-                debugger;
+                //debugger;
                this.posts = value.item;
              }
          }
@@ -223,9 +223,9 @@ export class HomeammenitiesComponent implements OnInit {
   
      
      updatephoto() {
-       debugger;
+       //debugger;
       var creadoobj = { id: this.PostId, Photo: this.postphoto[4], PhotoMobile: this.postphoto[5] , Description: this.direction , Title:this.title, Icon:this.postphoto[1], PhotoBuild:this.postphoto[2] , PhotoBuilMobile:this.postphoto[3] };
-      debugger;
+      //debugger;
   /**  post.Photo = item.Photo;
                         post.Description = item.Description;
                         post.PhotoMobile = item.PhotoMobile;

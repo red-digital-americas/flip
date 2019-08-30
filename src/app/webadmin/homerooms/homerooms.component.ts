@@ -218,7 +218,7 @@ export class HomeroomsComponent implements OnInit {
   updatephoto() {
     //debugger;
    var creadoobj = { id: this.PostId, Photo: this.postphoto[1], PhotoMobile: this.postphoto[2], IdCommunitiesRoomWeb: this.numroom };
-   debugger;
+   //debugger;
 
    this.heroService.ServicioPostPost("UpdateHomeRoomphoto", creadoobj).subscribe((value) => {
 
