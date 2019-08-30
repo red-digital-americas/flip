@@ -15,20 +15,23 @@
                     <div class="col-12 mb-3">
                         <div class="reservacion__text">Tipo de reservación:</div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" (change)="TipoReservacion('false')" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+                            <input type="radio" (change)="TipoReservacion(false)" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
                             <label class="custom-control-label" for="customRadioInline1">Actividad</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" (change)="TipoReservacion('true')" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                            <input type="radio" (change)="TipoReservacion(true)" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
                             <label class="custom-control-label" for="customRadioInline2">Espacio</label>
                         </div>
                     </div>
                     
                     <div class="col-12 mb-2">
+                    <!-- <div class="col-12 mb-2" *ngIf="!this.acitivyModel.Private"> -->
                         <input type="text" formControlName="activityNameCtrl" class="form-control" placeholder="Title">
                     </div>          
                 
+                    
                     <div class="col-12 mb-2">
+                    <!-- <div class="col-12 mb-2" *ngIf="!this.acitivyModel.Private"> -->
                         <div class="custom-file">
                             <input type="file" accept="image/*"
                                 (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
@@ -37,6 +40,7 @@
                     </div>
                     
                     <div class="col-12 mb-2">
+                    <!-- <div class="col-12 mb-2" *ngIf="!this.acitivyModel.Private"> -->
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Description</span>
@@ -177,6 +181,7 @@
             </div>
 
             <div class="col-4">
+            <!-- <div class="col-4" *ngIf="!this.acitivyModel.Private"> -->
                 <img style="width:100%" class="img-size" [src]="acitivyModel.Photo" />
             </div>                                    
                       

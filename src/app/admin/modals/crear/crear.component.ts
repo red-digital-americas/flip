@@ -157,6 +157,7 @@ export class CrearComponent implements OnInit {
     this.acitivyModel.Description = this.formGroup.controls.activityDescriptionCtrl.value;
     this.acitivyModel.UserId = this.formGroup.controls.activityUserIdCtrl.value;
     this.acitivyModel.AmenityId = this.amenityIdProps;
+    // if (this.acitivyModel.Private) { this.acitivyModel.Photo = "assets/img/Coliving.jpg"; }
     
     console.log(this.acitivyModel);
     // return;
@@ -177,7 +178,17 @@ export class CrearComponent implements OnInit {
     );             
   }  
 
-  TipoReservacion(tipoReservacion) { this.acitivyModel.Private = tipoReservacion; }
+  TipoReservacion(tipoReservacion) { 
+    this.acitivyModel.Private = tipoReservacion; 
+
+    // if (this.acitivyModel.Private) {
+    //   this.formGroup.controls.activityNameCtrl.setValue('Reservado');
+    //   this.formGroup.controls.activityDescriptionCtrl.setValue('Reservado');      
+    // } else {
+    //   this.formGroup.controls.activityNameCtrl.setValue('');
+    //   this.formGroup.controls.activityDescriptionCtrl.setValue('');      
+    // }
+  }
 
   prepareImages(e) {    
     if (Utils.isDefined(e.srcElement.files)) {
