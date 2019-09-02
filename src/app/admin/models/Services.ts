@@ -28,7 +28,8 @@ export class Service {
     public ParseFromForm(form) {
         this.name = form.nameCtrl;
         this.description = form.descriptionCtrl;
-        this.icon = form.iconCtrl;
+        // this.icon = form.iconCtrl;
+        this.icon = form.iconCtrl.serverUrl;
         this.photo = form.photoCtrl.serverUrl;
         this.provider = form.providerCtrl;
         this.price = form.priceCtrl;
@@ -39,7 +40,8 @@ export class Service {
     public ParseToForm(form) {
         form.controls.nameCtrl.setValue(this.name);
         form.controls.descriptionCtrl.setValue(this.description);
-        form.controls.iconCtrl.setValue(this.icon);
+        // form.controls.iconCtrl.setValue(this.icon);
+        form.controls.iconCtrl.controls.serverUrl.setValue(this.icon);
         form.controls.photoCtrl.controls.serverUrl.setValue(this.photo);
         form.controls.providerCtrl.setValue(this.provider);
         form.controls.priceCtrl.setValue(this.price);
@@ -51,7 +53,12 @@ export class Service {
 export const ServicesFormGroup = new FormGroup({
     nameCtrl: new FormControl('', [Validators.required]),
     descriptionCtrl: new FormControl('', [Validators.required]),
-    iconCtrl: new FormControl('/assets/Assets-prototype-flipApp/gym.svg', []),
+    // iconCtrl: new FormControl('/assets/Assets-prototype-flipApp/gym.svg', []),
+    iconCtrl: new FormGroup({
+        label: new FormControl('Choose icon', []),
+        photo: new FormControl('', []),
+        serverUrl: new FormControl('', [Validators.required])
+    }),
     photoCtrl: new FormGroup({
         label: new FormControl('Choose file', []),
         photo: new FormControl('', []),  
@@ -64,7 +71,10 @@ export const ServicesFormGroup = new FormGroup({
 })
 
 export const ServicesFormGroupInitialValues = {
-    iconCtrl: '/assets/Assets-prototype-flipApp/gym.svg',
+    // iconCtrl: '/assets/Assets-prototype-flipApp/gym.svg',
+    iconCtrl: {     
+        label: 'Choose icon'      
+    },
     photoCtrl: {     
         label: 'Choose file',
         serverUrl: 'assets/img/Coliving.jpg'

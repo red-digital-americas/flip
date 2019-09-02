@@ -112,9 +112,8 @@ export class ServicesComponent implements OnInit {
 // LOAD IMAGES
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
   prepareImages(e, formControl) {     
-    let file = e.srcElement.files[0];    
-    if (file == undefined || file == null) { return; }
-    
+    let file:File = e.srcElement.files[0];     
+    if (file == undefined || file == null) { return; }            
     formControl.label.setValue(file.name);        
     this.heroService.UploadImgSuc(file).subscribe((r) => {
       if (Utils.isDefined(r)) {
@@ -125,4 +124,29 @@ export class ServicesComponent implements OnInit {
       }
     })        
   } 
+
+  prepareIcon (e, formControl) {    
+    let file:File = e.srcElement.files[0];     
+    if (file == undefined || file == null) { return; }               
+
+    let fr = new FileReader;
+    fr.onload = () => {
+      let img:any = new Image();
+      img.onload = () => {                  
+          if (img.width > 64 && img.height > 64) { return; }
+          formControl.label.setValue(file.name);        
+          this.heroService.UploadImgSuc(file).subscribe((r) => {
+            if (Utils.isDefined(r)) {
+              let url = <string>r.message;            
+              url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip'); 
+              // url = "/assets/Assets-prototype-flipApp/gym.svg";
+              formControl.serverUrl.setValue(url);  
+            }
+          }) 
+      }      
+      img.src = fr.result;
+    }    
+
+    fr.readAsDataURL(file);    
+  }
 }

@@ -45,11 +45,25 @@
                 </div>                 
               </div>   
 
+              <div class="col-6 mb-2">
+                <div formGroupName="iconCtrl">                               
+                  <div class="custom-file">
+                    <input type="file" accept="image/*"
+                      formControlName="photo"
+                      (change)="prepareIcon($event, formGroup.get('iconCtrl')['controls'])" class="custom-file-input" id="validatedCustomFile">
+                    <label class="custom-file-label" for="customFile">    
+                        {{formGroup.get('iconCtrl').get('label').value | slice:0:25}}
+                    </label>        
+                  </div>                                                                                            
+                </div>                 
+              </div> 
+
             </div>  <!-- End row -->
           </div>    <!-- End col -->
 
           <div class="col-12 col-lg-4 col-xl-4">
             <img style="width: 14rem; max-height: 8rem; object-fit: cover;" [src]="formGroup.get('photoCtrl').get('serverUrl').value" alt="">
+            <img style="width: 4rem; height: 4rem; object-fit: cover; background: black;" [src]="formGroup.get('iconCtrl').get('serverUrl').value" alt="">
           </div>
 
         </div>  <!-- End row -->        
