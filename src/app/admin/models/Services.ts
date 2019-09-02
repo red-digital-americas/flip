@@ -65,8 +65,8 @@ export const ServicesFormGroup = new FormGroup({
         serverUrl: new FormControl('assets/img/Coliving.jpg', [])
     }, []),
     providerCtrl: new FormControl('', [Validators.required]),
-    priceCtrl: new FormControl('', [Validators.required, Validators.pattern('[0-9]*(\\.){0,1}[0-9]{1,2}')]),
-    priceUnitCtrl: new FormControl('', [Validators.required, Validators.pattern('[0-9]*(\\.){0,1}[0-9]{1,2}')]),
+    priceCtrl: new FormControl('', [Validators.required, Validators.pattern('[+]?[0-9]+([.][0-9]{1,2})?')]),
+    priceUnitCtrl: new FormControl('', [Validators.required, Validators.pattern('[+]?[0-9]+([.][0-9]{1,2})?')]),
     buildingIdCtrl: new FormControl(''),
 })
 
