@@ -1,0 +1,65 @@
+<div class="animated fadeIn">
+  <div class="card">    
+    <div class="card-body">
+      <h5 class="card-title">Add Service</h5>
+        
+      <form [formGroup]="formGroup" autocomplete="off">
+        <div class="row">                      
+          <div class="col-12 col-lg-8 col-xl-8">
+            <div class="row">                                      
+              <div class="col-12 mb-2">
+                  <input type="text" formControlName="nameCtrl" class="form-control" placeholder="Title">
+              </div>          
+                                                            
+              <div class="col-12 mb-2">
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Description</span>
+                      </div>
+                      <textarea formControlName="descriptionCtrl" class="form-control" aria-label="With textarea"></textarea>
+                  </div>                        
+              </div>  
+              
+              <div class="col-4 mb-2">
+                <input type="text" formControlName="providerCtrl" class="form-control" placeholder="Provider">
+              </div>
+              <div class="col-4 mb-2">
+                <input type="text" formControlName="priceCtrl" class="form-control" placeholder="Price">
+              </div>
+              <div class="col-4 mb-2">
+                <input type="text" formControlName="priceUnitCtrl" class="form-control" placeholder="PriceUnit">
+              </div>
+           
+              <div class="col-6 mb-2">
+                <div formGroupName="photoCtrl">                               
+                  <div class="custom-file">
+                    <input type="file" accept="image/*"
+                      formControlName="photo"
+                      (change)="prepareImages($event, formGroup.get('photoCtrl')['controls'])" class="custom-file-input" id="validatedCustomFile">
+                    <label class="custom-file-label" for="customFile">    
+                        {{formGroup.get('photoCtrl').get('label').value}}
+                    </label>        
+                  </div>                                                                                            
+                </div>                 
+              </div>   
+
+            </div>  <!-- End row -->
+          </div>    <!-- End col -->
+
+          <div class="col-12 col-lg-4 col-xl-4">
+            <img style="width: 14rem; max-height: 8rem; object-fit: cover;" [src]="formGroup.get('photoCtrl').get('serverUrl').value" alt="">
+          </div>
+
+        </div>  <!-- End row -->        
+              
+        <div style="margin-bottom: 1rem;"></div>
+        <div class="col-12">
+          <button (click)="UpdateService()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Update Service</button>          
+        </div>   
+      </form>           
+      {{formGroup.value | json}}
+    </div>
+  </div>
+</div>
+
+<toaster-container></toaster-container>

@@ -23,6 +23,7 @@ const routes: Routes = [
       { path: 'reservations/:id', component: ReservationsComponent, data: { title: 'Reservations' } },
       // { path: 'perks/:id', loadChildren: './perks/perks.module#PerksComponentModule' },
       { path: '', loadChildren: './perks/perks.module#PerksComponentModule' },
+      { path: '', loadChildren: './services/services.module#ServicesComponentModule' },
     ]
   }
 ];
