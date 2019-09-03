@@ -108,28 +108,6 @@ export class WebadminComponent implements OnInit {
    
    updatephoto() {
     // debugger;
-<<<<<<< HEAD
-=======
-    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[2], FrontPhoto: this.postphoto[1], Position: this.PostId };
-    //debugger;
-
-    this.heroService.ServicioPostPost("UpdateIndex", creadoobj).subscribe((value) => {
-
-
-      switch (value.result) {
-        case "Error":
-          console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-         
-          break;
-        default:
-          //debugger;
-          if (value.result == "Success") {
-            this.get_photos();
-           
-           
-            this.postphoto=[]; 
-            this.postphoto.push("assets/img/Coliving.jpg");
->>>>>>> 907108201cf6fa6333ea974f3566531a05d333ba
 
     if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"){
       var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[1], FrontPhoto: this.postphoto[0], Position: this.PostId };
@@ -176,19 +154,10 @@ export class WebadminComponent implements OnInit {
     this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
   }
    
-<<<<<<< HEAD
   prepareImages(e,indice ) {
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
         this.newImages[indice]=(f);
-=======
-  prepareImages(e) {
-    //debugger; 
-    if (Utils.isDefined(e.srcElement.files)) {
-      for (let f of e.srcElement.files) {
-        //debugger;
-        this.newImages.push(f);
->>>>>>> 907108201cf6fa6333ea974f3566531a05d333ba
       }
     }
     this.addImages(indice);
@@ -213,16 +182,9 @@ export class WebadminComponent implements OnInit {
             url = <string>r.message;
             //debugger;
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-<<<<<<< HEAD
             debugger;
             this.postphoto[indice]=(url);
             debugger;
-=======
-            //debugger;
-            this.postphoto.push(url);
-            //debugger;
-            this.newImages = [];
->>>>>>> 907108201cf6fa6333ea974f3566531a05d333ba
           }
         })
       }

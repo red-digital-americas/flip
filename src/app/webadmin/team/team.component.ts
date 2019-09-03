@@ -112,14 +112,9 @@ export class TeamComponent implements OnInit {
    updatephoto() {
     // debugger;
     var apellido = this.Name.split(" ");
-<<<<<<< HEAD
     if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"){
     var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[1], FrontPhoto: this.postphoto[0], Name : apellido[0] , LastName: apellido[1], Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
     debugger;
-=======
-    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[2], FrontPhoto: this.postphoto[1], Name : apellido[0] , LastName: apellido[1], Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
-    //debugger;
->>>>>>> 907108201cf6fa6333ea974f3566531a05d333ba
 
     this.heroService.ServicioPostPost("UpdateTeam", creadoobj).subscribe((value) => {
 
@@ -166,19 +161,10 @@ export class TeamComponent implements OnInit {
     this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
   }
    
-<<<<<<< HEAD
   prepareImages(e,indice ) {
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
         this.newImages[indice]=(f);
-=======
-  prepareImages(e) {
-    //debugger; 
-    if (Utils.isDefined(e.srcElement.files)) {
-      for (let f of e.srcElement.files) {
-        //debugger;
-        this.newImages.push(f);
->>>>>>> 907108201cf6fa6333ea974f3566531a05d333ba
       }
     }
     this.addImages(indice);
@@ -203,17 +189,9 @@ export class TeamComponent implements OnInit {
             url = <string>r.message;
             //debugger;
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-<<<<<<< HEAD
             debugger;
             this.postphoto[indice]=(url);
             debugger;
-=======
-            //debugger;
-            this.postphoto.push(url);
-            //debugger;
-
-            this.newImages = [];
->>>>>>> 907108201cf6fa6333ea974f3566531a05d333ba
           }
         })
       }
