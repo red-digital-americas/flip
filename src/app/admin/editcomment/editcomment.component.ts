@@ -96,22 +96,22 @@ export class EditcommentComponent implements OnInit {
     window.history.back();
 }
   get_comments() {
-    // debugger;
+    // 
     var creadoobj = { idpost: this.route.snapshot.params['id'] , userid: this.IDUSR };
-    // debugger;
+    // 
     this.heroService.ServicioPostPost("SeeComment", creadoobj).subscribe((value) => {
 
 
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-          debugger; 
+           
 
           break;
         default:
-          debugger;
+          
           if (value.result == "Success") {
-            debugger;
+            
             this.posts = value.item;
           
             if (this.IDUSR == value.item[0].userid) { this.validar_permisos() }
@@ -122,9 +122,9 @@ export class EditcommentComponent implements OnInit {
 
 
   get_post() {
-    // debugger;
+    // 
     var creadoobj = { idpost: this.route.snapshot.params['id'], userid: this.IDUSR };
-    // debugger;
+    // 
     this.heroService.ServicioPostPost("SeeOnePost", creadoobj).subscribe((value) => {
 
 
@@ -133,9 +133,9 @@ export class EditcommentComponent implements OnInit {
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
           break;
         default:
-          //debugger; 
+          // 
           if (value.result == "Success") {
-            // debugger;
+            // 
             //this.posts = value.item;
             this.idbuilding = value.item[0].idbuilding; 
             this.posttext = value.item[0].posttext; 
@@ -167,9 +167,9 @@ export class EditcommentComponent implements OnInit {
 
   }
   addPost() {
-    // debugger;
+    // 
     var creadoobj = { id: this.route.snapshot.params['id'], title: this.posttitle, userid: this.IDUSR, PostText: this.posttext, photo: this.postphoto };
-    debugger;
+    
     /*
      public int id { get; set; }
             public int userid { get; set; }
@@ -186,7 +186,7 @@ export class EditcommentComponent implements OnInit {
           this.showError();
           break;
         default:
-          debugger;
+          
           if (value.result == "Success") {
             this.get_post();
            
@@ -202,7 +202,7 @@ export class EditcommentComponent implements OnInit {
   
 
     /*openImage(src, id) {
-    //debugger;
+    //
     let imageDOM = <HTMLImageElement>document.getElementById(id);
     let width = 600;
     if (Utils.isDefined(imageDOM)) {
@@ -221,9 +221,9 @@ export class EditcommentComponent implements OnInit {
   */
 
   addComment() {
-    // debugger;
+    // 
     var creadoobj = { Id: 0, PostId: this.route.snapshot.params['id'], UserId: this.IDUSR , Comment1: this.comment };
-    debugger;
+    
     /*public int Id { get; set; }
     public int UserId { get; set; }
     public int PostId { get; set; }
@@ -237,7 +237,7 @@ export class EditcommentComponent implements OnInit {
           this.showError(); 
           break;
         default:
-          debugger;
+          
           if (value.result == "Success") {
             this.get_comments();
             this.comment = ""; 
@@ -252,7 +252,7 @@ export class EditcommentComponent implements OnInit {
 
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
-        debugger; 
+         
         this.newImages.push(f);
       }
     }
@@ -268,11 +268,11 @@ export class EditcommentComponent implements OnInit {
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
-            debugger; 
+             
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-            debugger; 
+             
             this.postphoto = url;
-            debugger; 
+             
             this.newImages = [];
           }
         })

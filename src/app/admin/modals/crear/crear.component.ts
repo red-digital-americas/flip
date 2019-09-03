@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, Input, forwardRef, TemplateRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Utils } from '../../../utils/utils';
 import { ActivatedRoute } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { DatosService } from '../../../../datos.service';
 import * as moment from 'moment';
+import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 
 class ScheduleModel {
   public Date;
@@ -40,7 +41,7 @@ export class CrearComponent implements OnInit {
   dateProps;  //dateProps.date, dateProps.dateStr, dateProps.view.type = "dayGridMonth" | "timeGridWeek" | "timeGridDay"
   amenityIdProps;
   buildingIdProps;
-  responseData;  
+  responseData;     // Response when close the modal, in order to inform reservation if we create or not an event
 
   ////////////////////////////////////////////////////////
   // CONFIGURATION
@@ -54,12 +55,14 @@ export class CrearComponent implements OnInit {
 
   ////////////////////////////////////////////////////////
   // Form
-  datePicker;
-  startTime;
-  endTime;
-  allDaySwitch = false;
+    //Form Configuration (Setup in ngOnInit)
+    datePicker; // Date parse from dateProps
+    startTime;  // StartTime for the inputs based in the selected space in fullCalendar (dateProps)
+    endTime;    // EndTime for the inputs based in the selected space in fullCalendar (dateProps)
 
-  scheduleModel:ScheduleModel = new ScheduleModel();    // For this moment only supports 1 schedule
+  allDaySwitch = false;
+  formGroup: FormGroup;
+
   acitivyModel:ActivityModel = new ActivityModel();
   public newImages: any[] = [];
 
@@ -71,7 +74,7 @@ export class CrearComponent implements OnInit {
   });
   
   constructor( public modalRef: BsModalRef, private modalService: BsModalService, private heroService: DatosService,
-               private toasterService: ToasterService, private route: ActivatedRoute
+               private toasterService: ToasterService, private route: ActivatedRoute, private _formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {    
@@ -84,8 +87,17 @@ export class CrearComponent implements OnInit {
       this.endTime = moment(new Date()).add(2, 'hour').toDate();
     }
     
-    this.responseData = {result:false};    
+    this.responseData = {result:false};
     this.GetUsers();
+
+    this.formGroup = this._formBuilder.group({
+      activityNameCtrl: [, Validators.required],
+      activityDescriptionCtrl: [''],
+      activityUserIdCtrl: [, Validators.required],      
+      schedulesCtrl: this._formBuilder.array(
+        [this.AddScheduleFormGroup()], [Validators.required, this.OverlapScheduleValidation])
+    });   
+
   }
 
   GetUsers() {   
@@ -95,7 +107,7 @@ export class CrearComponent implements OnInit {
         if(res.result === "Success"){                    
           this.usersArray = res.item;     
           if (this.usersArray.length <= 0) { return; }  
-          this.acitivyModel.UserId = this.usersArray[0].id;
+          this.formGroup.controls.activityUserIdCtrl.setValue(this.usersArray[0].id);
         } else if(res.result === "Error") {
           console.log("Ocurrio un error" + res.detalle);
         } else {
@@ -106,27 +118,49 @@ export class CrearComponent implements OnInit {
     );        
   }
   
-  public AddActivity() {            
-    let date = moment(this.datePicker).format('YYYY/MM/DD');
-    let startHour = moment(this.startTime).format('HH');
-    let endHour = moment(this.endTime).format('HH');
-    
-    this.scheduleModel.Date = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
-    this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
-    this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
-
-    if (this.allDaySwitch) {
-      this.scheduleModel.TimeStart = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
-      this.scheduleModel.TimeEnd = moment(this.datePicker).startOf('day').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
-    }
-    
-    ///////// Adding the complementaryData to the activityModel ///////////////////
+  public AddActivity() {                
+    /////////// Loading the schedules from scheduleModel and activityModel ////////////////////////7    
     this.acitivyModel.Schedules = [];
-    this.acitivyModel.Schedules.push(this.scheduleModel);
-    //this.acitivyModel.UserId = 4;                             // ALREADY ASOCIATED WITH NGMODEL, ONLY FOR REMINDER
+
+    this.formGroup.controls.schedulesCtrl.value.forEach(schedule => {
+      // console.log(schedule);
+      let date = moment(schedule.dateCtrl).format('YYYY/MM/DD');
+      let startHour = moment(schedule.startTimeCtrl).format('HH');
+      let endHour = moment(schedule.endTimeCtrl).format('HH');        
+      
+      let scheduleModel:ScheduleModel = new ScheduleModel();
+      scheduleModel.Date = moment(schedule.dateCtrl).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+      scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+      scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+      if (startHour == "00" && endHour == "00") { 
+        scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
+      }
+
+      if (this.allDaySwitch) {
+        scheduleModel.TimeStart = moment(schedule.dateCtrl).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+        scheduleModel.TimeEnd = moment(schedule.dateCtrl).startOf('day').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
+      }
+      
+      // Falta la comprobacion del mismo dia que esta en el de abajo
+      // this.acitivyModel.Schedules.forEach(s => {                
+      //   if (moment(scheduleModel.TimeStart).isBefore(moment(s.TimeEnd)) && 
+      //     moment(s.TimeStart).isBefore(moment(scheduleModel.TimeEnd))) {
+      //     console.log("Translaping schedule"); return;
+      //   }
+      // })
+
+      this.acitivyModel.Schedules.push(scheduleModel);
+    });
+            
+    ///////// Adding the complementaryData to the activityModel ///////////////////    
+    this.acitivyModel.Name = this.formGroup.controls.activityNameCtrl.value;
+    this.acitivyModel.Description = this.formGroup.controls.activityDescriptionCtrl.value;
+    this.acitivyModel.UserId = this.formGroup.controls.activityUserIdCtrl.value;
     this.acitivyModel.AmenityId = this.amenityIdProps;
+    // if (this.acitivyModel.Private) { this.acitivyModel.Photo = "assets/img/Coliving.jpg"; }
     
     console.log(this.acitivyModel);
+    // return;
 
     this.heroService.service_general_post("Activity", this.acitivyModel).subscribe(
       (res)=> {
@@ -136,7 +170,7 @@ export class CrearComponent implements OnInit {
           this.responseData = {result:true, id:res.item.id, name:res.item.name};                
           this.modalRef.hide();
         } else if(res.result === "Error") {
-          console.log(res.detalle);
+          console.log(res.detalle);          
           this.toasterService.pop('danger', 'Error', res.detalle);
         } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
       },
@@ -144,7 +178,17 @@ export class CrearComponent implements OnInit {
     );             
   }  
 
-  TipoReservacion(tipoReservacion) { this.acitivyModel.Private = tipoReservacion; }
+  TipoReservacion(tipoReservacion) { 
+    this.acitivyModel.Private = tipoReservacion; 
+
+    // if (this.acitivyModel.Private) {
+    //   this.formGroup.controls.activityNameCtrl.setValue('Reservado');
+    //   this.formGroup.controls.activityDescriptionCtrl.setValue('Reservado');      
+    // } else {
+    //   this.formGroup.controls.activityNameCtrl.setValue('');
+    //   this.formGroup.controls.activityDescriptionCtrl.setValue('');      
+    // }
+  }
 
   prepareImages(e) {    
     if (Utils.isDefined(e.srcElement.files)) {
@@ -170,6 +214,51 @@ export class CrearComponent implements OnInit {
         })
       }
     }
+  }
+
+  ///////////////////////////
+  public get schedulesCrtlArray() {
+    return this.formGroup.controls['schedulesCtrl'] as FormArray;
+  }
+
+  private AddScheduleFormGroup () {    
+    return this._formBuilder.group({
+      dateCtrl: [this.datePicker, Validators.required],
+      startTimeCtrl: [this.startTime, Validators.required],
+      endTimeCtrl: [this.endTime, Validators.required]
+    });    
+  }
+
+  private OverlapScheduleValidation (schedulesArray:FormArray):any {
+    // console.log(schedulesArray);
+    // console.log(schedulesArray.value);        
+       
+    for(let i=0; i<schedulesArray.value.length; i++) {      
+      for (let j=0; j<schedulesArray.value.length; j++){                
+        if (i == j) { continue; }        
+                        
+        let iEndTime = moment(schedulesArray.value[i].endTimeCtrl);
+        let jEndTime = moment(schedulesArray.value[j].endTimeCtrl);
+        if (iEndTime.format('HH') == "00") { iEndTime.add(1, 'day') }
+        if (jEndTime.format('HH') == "00") { jEndTime.add(1, 'day') }
+
+        if (moment(schedulesArray.value[i].startTimeCtrl).isBefore(jEndTime) && 
+          moment(schedulesArray.value[j].startTimeCtrl).isBefore(iEndTime) &&
+          moment(schedulesArray.value[i].dateCtrl).isSame(moment(schedulesArray.value[j].dateCtrl), 'day')) {          
+          return { overlap:true, schedule:schedulesArray.value[i] }
+        }
+      }    
+    }
+  
+    return null;  // No overlap in schedules
+  }
+
+  public AddScheduleCtrl () {    
+    this.schedulesCrtlArray.push(this.AddScheduleFormGroup());   
+  }
+
+  public RemoveScheduleCtrl () {    
+    this.schedulesCrtlArray.removeAt(this.schedulesCrtlArray.length - 1);    
   }
 
 }

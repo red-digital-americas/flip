@@ -72,9 +72,9 @@ export class RecoverpassComponent implements OnInit {
 
 
   public RecoverPass() {
-    debugger;
+    // debugger;
     var creadoobj = { username: this.email };
-    debugger;
+    // debugger;
     this.heroService.ServicioPostRecoverPass("RecoverPassword", creadoobj).subscribe((value) => {
 
       console.log(value);
@@ -84,7 +84,7 @@ export class RecoverpassComponent implements OnInit {
 
       }
       else {
-        debugger; 
+        // debugger; 
         this.message = value.response;
         this.showError(); 
       }

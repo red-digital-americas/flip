@@ -231,7 +231,7 @@ export class HomeammenitiesComponent implements OnInit {
            default:
              //debugger; 
              if (value.result == "Success") {
-                debugger;
+                //debugger;
                this.posts = value.item;
              }
          }
@@ -245,6 +245,7 @@ export class HomeammenitiesComponent implements OnInit {
   
      
      updatephoto() {
+<<<<<<< HEAD
         debugger;
         if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"&&this.imageInputLabelthree!="Choose file"&&this.imageInputLabelfive!="Choose file"){
  
@@ -252,6 +253,11 @@ export class HomeammenitiesComponent implements OnInit {
  
       var creadoobj = { id: this.PostId, Photo: this.postphoto[2], PhotoMobile: this.postphoto[5] , Description: this.direction , Title:this.title, Icon:this.postphoto[0],Icon2:this.postphoto[1], PhotoBuild:this.postphoto[4] , PhotoBuilMobile:this.postphoto[3] };
       debugger;
+=======
+       //debugger;
+      var creadoobj = { id: this.PostId, Photo: this.postphoto[4], PhotoMobile: this.postphoto[5] , Description: this.direction , Title:this.title, Icon:this.postphoto[1], PhotoBuild:this.postphoto[2] , PhotoBuilMobile:this.postphoto[3] };
+      //debugger;
+>>>>>>> 907108201cf6fa6333ea974f3566531a05d333ba
   /**  post.Photo = item.Photo;
                         post.Description = item.Description;
                         post.PhotoMobile = item.PhotoMobile;

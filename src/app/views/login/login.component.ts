@@ -49,7 +49,9 @@ export class LoginComponent implements OnInit {
 
   showSuccess() {
     this.toasterService.pop('success', 'Success ', 'You will be redirected ');
-    window.location.href = "/#/communities";
+    // window.location.href = "/#/communities";
+    window.location.href = "/communities";
+    // setTimeout(function(){ window.location.href = "/communities"; },3000);
   }
 
   showError() {
@@ -70,8 +72,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  public Login() {
-    debugger; 
+  public Login() {    
     var creadoobj = { username: this.email, password: this.password };
     this.heroService.ServicioPostLogin("CargarUsuario", creadoobj).subscribe((value) => {
       switch (value.token) {

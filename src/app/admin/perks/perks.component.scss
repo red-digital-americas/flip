@@ -1,0 +1,33 @@
+
+.input-file {
+  display: flex;
+  flex-flow: column;
+
+  &__container {
+      display: flex;
+      align-items: center;
+  }   
+
+  &__remove {
+      margin-left: 1rem;
+  }
+
+  &__img {        
+      width: 100%;
+      max-height: 8rem;        
+      object-fit: cover;        
+      margin: .5rem 0rem;
+  }
+}
+
+.add-btn {
+  align-self: flex-start;
+}
+
+////////////////////////////////
+// LIST OF PERKS
+.img-size {
+  width: 10em;
+  height: 10em;
+  margin-left:50%; 
+}

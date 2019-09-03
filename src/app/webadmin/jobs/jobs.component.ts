@@ -80,7 +80,7 @@ export class JobsComponent implements OnInit {
          default:
            //debugger; 
            if (value.result == "Success") {
-              debugger;
+              //debugger;
              this.posts = value.item;
            }
        }
@@ -96,7 +96,7 @@ export class JobsComponent implements OnInit {
    updatephoto() {
     // debugger;
     var creadoobj = { id: this.PostId, Title: this.title, ShortDescription:this.shortdesc, LongDescription:this.longdesc};
-    debugger;
+    //debugger;
 
     this.heroService.ServicioPostPost("UpdateJobs", creadoobj).subscribe((value) => {
 
@@ -107,7 +107,7 @@ export class JobsComponent implements OnInit {
          
           break;
         default:
-          debugger;
+          //debugger;
           if (value.result == "Success") {
             this.get_photos();
            
@@ -119,10 +119,10 @@ export class JobsComponent implements OnInit {
   }
    
   prepareImages(e) {
-    debugger; 
+    //debugger; 
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
-        debugger;
+        //debugger;
         this.newImages.push(f);
       }
     }
@@ -138,11 +138,11 @@ export class JobsComponent implements OnInit {
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
-            debugger;
+            //debugger;
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-            debugger;
+            //debugger;
             this.postphoto = url;
-            debugger;
+            //debugger;
             this.newImages = [];
           }
         })

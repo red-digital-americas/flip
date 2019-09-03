@@ -176,8 +176,8 @@ export class ReservationsComponent implements OnInit {
   handleDatesRender(info) {
     // console.log(info.view.type);
     // console.log(info.view.activeEnd, info.view.activeStart, info.view.currentEnd, info.view.currentStart); 
-    this.activeStart = moment(info.view.activeStart).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
-    this.activeEnd = moment(info.view.activeEnd).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+    this.activeStart = moment(info.view.activeStart).startOf('day').subtract(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
+    this.activeEnd = moment(info.view.activeEnd).endOf('day').format('YYYY-MM-DDTHH:mm:ss');
 
     let fcNextBtn = document.getElementsByClassName('fc-next-button')[0];
     let fcPrevBtn = document.getElementsByClassName('fc-prev-button')[0];

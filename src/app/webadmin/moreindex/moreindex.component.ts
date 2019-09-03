@@ -112,7 +112,7 @@ export class MoreindexComponent implements OnInit {
      }
      updatesn(){
       var creadoobj = { id: this.sn[0].id, FacebookUrl: this.Facebook,  TwitterUrl: this.Twitter , InstagramUrl :this.Instagram, YoutubeUrl:this.Youtube};
-      debugger;
+      //debugger;
   
       this.heroService.ServicioPostPost("UpdateSocialNetworks", creadoobj).subscribe((value) => {
   
@@ -123,7 +123,7 @@ export class MoreindexComponent implements OnInit {
            
             break;
           default:
-            debugger;
+            //debugger;
             if (value.result == "Success") {
               this.get_sn();
               this.showSuccess();
@@ -166,7 +166,7 @@ export class MoreindexComponent implements OnInit {
       if(this.imageInputLabel!="Choose file"){
 
       var creadoobj = { id: this.PostId, Photo: this.postphoto,  Position: this.PostId };
-      debugger;
+      //debugger;
   
       this.heroService.ServicioPostPost("UpdateMoreIndex", creadoobj).subscribe((value) => {
   
@@ -178,7 +178,7 @@ export class MoreindexComponent implements OnInit {
 
             break;
           default:
-            debugger;
+            //debugger;
             if (value.result == "Success") {
               this.get_photos();
               this.showSuccess();
@@ -192,10 +192,10 @@ export class MoreindexComponent implements OnInit {
  }
      
     prepareImages(e) {
-      debugger; 
+      //debugger; 
       if (Utils.isDefined(e.srcElement.files)) {
         for (let f of e.srcElement.files) {
-          debugger;
+          //debugger;
           this.newImages.push(f);
         }
       }
@@ -224,11 +224,11 @@ export class MoreindexComponent implements OnInit {
           this.heroService.UploadImgSuc(f).subscribe((r) => {
             if (Utils.isDefined(r)) {
               url = <string>r.message;
-              debugger;
+              //debugger;
               url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-              debugger;
+              //debugger;
               this.postphoto = url;
-              debugger;
+              //debugger;
               this.newImages = [];
             }
           })

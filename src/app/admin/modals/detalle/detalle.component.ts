@@ -151,6 +151,9 @@ export class DetalleComponent implements OnInit {
     this.scheduleModel.Date = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeStart = moment(`${date} ${startHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
     this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').format('YYYY-MM-DDTHH:mm:ss');
+    if (startHour == "00" && endHour == "00") { 
+      this.scheduleModel.TimeEnd = moment(`${date} ${endHour}`, 'YYYY/MM/DD HH').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
+    }
 
     if (this.allDaySwitch) {
       this.scheduleModel.TimeStart = moment(this.datePicker).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
@@ -173,7 +176,7 @@ export class DetalleComponent implements OnInit {
           this.responseData = {action:'Edit'};  
           this.modalRef.hide();
         } else if(res.result === "Error") {
-          console.log(res.detalle);
+          console.log(res.detalle, res.item);
           this.toasterService.pop('danger', 'Error', res.detalle);
         } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
 

@@ -107,7 +107,7 @@ export class HomeindexComponent implements OnInit {
          default:
            //debugger; 
            if (value.result == "Success") {
-              debugger;
+              //debugger;
              this.posts = value.item;
            }
        }
@@ -124,7 +124,7 @@ export class HomeindexComponent implements OnInit {
     // debugger;
     if(this.imageInputLabel!="Choose file"){
     var creadoobj = { id: this.PostId, Photo: this.postphoto, Title: this.title , Direction: this.direction ,  Position: this.PostId};
-    debugger;
+    //debugger;
 
     this.heroService.ServicioPostPost("UpdateHomeIndex", creadoobj).subscribe((value) => {
 
@@ -135,7 +135,7 @@ export class HomeindexComponent implements OnInit {
           this.showError(); 
           break;
         default:
-          debugger;
+          //debugger;
           if (value.result == "Success") {
             this.get_photos();
             this.showSuccess();
@@ -150,10 +150,10 @@ export class HomeindexComponent implements OnInit {
   }
    
   prepareImages(e) {
-    debugger; 
+    //debugger; 
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
-        debugger;
+        //debugger;
         this.newImages.push(f);
       }
     }
@@ -171,11 +171,11 @@ export class HomeindexComponent implements OnInit {
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
-            debugger;
+            //debugger;
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-            debugger;
+            //debugger;
             this.postphoto = url;
-            debugger;
+            //debugger;
             this.newImages = [];
           }
         })

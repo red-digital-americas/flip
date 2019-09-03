@@ -30,7 +30,7 @@ export class Wizard4Component implements OnInit {
     try {
       this.heroService.ServicioPostGeneral("get_catalogos_promocion", creadoobj).subscribe((value) => {
         setTimeout(() => {
-          debugger;
+          // debugger;
           switch (value.result) {
             case "Error":
               console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
@@ -56,7 +56,7 @@ export class Wizard4Component implements OnInit {
     var creadoObj = { TextoLibre: "" };
     this.heroService.ServicioPostGeneral("get_catalogos", creadoObj).subscribe((value) => {
       setTimeout(() => {
-        debugger;
+        // debugger;
         switch (value.result) {
           case "Error":
         console.log("mensaje de error: " + value.detalle);

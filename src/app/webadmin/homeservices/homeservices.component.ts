@@ -225,7 +225,7 @@ export class HomeservicesComponent implements OnInit {
            default:
              //debugger; 
              if (value.result == "Success") {
-                debugger;
+                //debugger;
                this.posts = value.item;
              }
          }
@@ -239,6 +239,7 @@ export class HomeservicesComponent implements OnInit {
   
      
      updatephoto() {
+<<<<<<< HEAD
        debugger;
        if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"&&this.imageInputLabelthree!="Choose file"){
 
@@ -246,6 +247,11 @@ export class HomeservicesComponent implements OnInit {
 
       var creadoobj = { id: this.PostId, Photo: this.postphoto[2], PhotoMobile: this.postphoto[3] , Category: this.direction , Title:this.title, Icon:this.postphoto[0], Icon2:this.postphoto[1] };
       debugger;
+=======
+       //debugger;
+      var creadoobj = { id: this.PostId, Photo: this.postphoto[3], PhotoMobile: this.postphoto[2] , Category: this.direction , Title:this.title, Icon:this.postphoto[1] };
+      //debugger;
+>>>>>>> 907108201cf6fa6333ea974f3566531a05d333ba
   /**  post.Photo = item.Photo;
                         post.Description = item.Description;
                         post.PhotoMobile = item.PhotoMobile;

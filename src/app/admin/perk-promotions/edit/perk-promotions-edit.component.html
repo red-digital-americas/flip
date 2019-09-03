@@ -1,0 +1,76 @@
+
+<div class="animated fadeIn">
+  <div class="card">    
+    <div class="card-body">
+      <h5 class="card-title">Edit Promotion</h5>
+        
+      <form [formGroup]="formGroup" autocomplete="off">
+        <div class="row">                      
+          <div class="col-12 col-lg-8 col-xl-8">
+            <div class="row">                                      
+              <div class="col-12 mb-2">
+                  <input type="text" formControlName="promotionNameCtrl" class="form-control" placeholder="Title">
+              </div>          
+                                                            
+              <div class="col-12 mb-2">
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Description</span>
+                      </div>
+                      <textarea formControlName="promotionDescriptionCtrl" class="form-control" aria-label="With textarea"></textarea>
+                  </div>                        
+              </div>  
+                                                                                   
+              <div class="col-12 mb-2 schedule">
+                <div class="input-group schedule__datetime">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Desde</span>
+                    </div> 
+                    <input type="text" formControlName="promotionStartDateCtrl" [minDate]="minDate" [maxDate]="formGroup.get('promotionEndDateCtrl').value" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', adaptivePosition: true }" placeholder="Datepicker" class="form-control" bsDatepicker>
+                </div>
+
+                <div class="input-group schedule__datetime">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Hasta</span>
+                    </div> 
+                    <input type="text" formControlName="promotionEndDateCtrl" [minDate]="formGroup.get('promotionStartDateCtrl').value" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', adaptivePosition: true }" placeholder="Datepicker" class="form-control" bsDatepicker>
+                </div>
+              </div>
+
+              <div class="col-6 mb-2">
+                <div formGroupName="promotionPhotoCtrl">                               
+                  <div class="custom-file">
+                    <input type="file" accept="image/*"
+                      formControlName="photoCtrl"
+                      (change)="prepareImages($event, formGroup.get('promotionPhotoCtrl')['controls'])" class="custom-file-input" id="validatedCustomFile">
+                    <label class="custom-file-label" for="customFile">    
+                        {{formGroup.get('promotionPhotoCtrl').get('labelCtrl').value}}                  
+                    </label>        
+                  </div>                                                                                            
+                </div> 
+                <!-- <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('promotionPhotoCtrl').get('serverUrlCtrl').value" alt=""> -->
+              </div>
+              
+            </div>  <!-- End row -->
+          </div>    <!-- End col -->
+
+          <div class="col-12 col-lg-4 col-xl-4">
+            <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('promotionPhotoCtrl').get('serverUrlCtrl').value" alt="">
+          </div>
+
+        </div>  <!-- End row -->                
+
+        <div style="margin-bottom: 1rem;"></div>
+        <div class="col-12">
+            <button (click)="UpdatePromotion()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Update Perk</button>
+            <button (click)="Cancel()" type="button" class="btn btn-outline-danger margin-gral">Cancel</button>
+        </div>   
+      </form>     
+      
+      <!-- {{formGroup.value | json}} -->
+    </div>
+  </div>
+</div>
+
+<toaster-container></toaster-container>
+<!-- <toaster-container [toasterconfig]="toasterconfig"></toaster-container> -->

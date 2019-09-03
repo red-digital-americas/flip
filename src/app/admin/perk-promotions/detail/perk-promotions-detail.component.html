@@ -1,0 +1,36 @@
+<div class="animated fadeIn">
+  <div class="card">    
+    <div class="card-body">
+      <h5 class="card-title">Promotion Detail</h5>
+              
+        <div class="row">                      
+          <div class="col-12 col-lg-8 col-xl-8">
+            <div class="row">                                      
+              <div class="col-12 mb-2">                  
+                {{promotionDetail?.name}}
+              </div>                                                                      
+              <div class="col-12 mb-2">                  
+                {{promotionDetail?.description}}                                        
+              </div>                             
+              <div class="col-12 mb-2">                
+                {{promotionDetail?.startDate | date: 'dd/MM/yyyy' }} - {{promotionDetail?.endDate | date: 'dd/MM/yyyy'}}
+              </div>                                                                      
+            </div>  <!-- End row -->
+          </div>    <!-- End col -->
+
+          <div class="col-12 col-lg-4 col-xl-4">
+            <img style="width: 100%; max-height: 8rem; object-fit: cover;" [src]="promotionDetail?.photo" alt="">            
+          </div>
+
+          <div class="col-12 mb-2">
+              <button (click)="EditPromotion()" type="button" class="btn btn-outline-dark margin-gral">Edit Promotion</button>
+              <button (click)="DeletePromotion()" type="button" class="btn btn-outline-danger margin-gral">Delete Promotion</button>
+          </div>  
+        </div>  <!-- End row -->                      
+                  
+    </div>
+  </div>
+</div>
+
+<toaster-container></toaster-container>
+<!-- <toaster-container [toasterconfig]="toasterconfig"></toaster-container> -->

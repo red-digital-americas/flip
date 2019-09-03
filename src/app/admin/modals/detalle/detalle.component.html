@@ -121,7 +121,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Description</span>
                                 </div>
-                                <textarea name="activityDescription" id="activityDescription" class="form-control" [(ngModel)]="acitivyModel.Description" aria-label="With textarea" required></textarea>
+                                <textarea name="activityDescription" id="activityDescription" class="form-control" [(ngModel)]="acitivyModel.Description" aria-label="With textarea"></textarea>
                             </div>
                         </div>                                                               
                         
@@ -134,15 +134,51 @@
                                 <input type="number" [(ngModel)]="acitivyModel.QuoteMax" class="form-control" name="activityQuoteMax" id="activityQuoteMax" min="1" placeholder="Cupo" required>
                             </div>                        
                         </div> -->
+
+                        <!-- <div formArrayName="schedulesCtrl"
+                            *ngFor="let arrayItem of schedulesCrtlArray.controls; let i=index"> -->
+
+                            <!-- <div [formGroupName]="i" class="col-12 mb-2 schedule"> -->
+                            <div class="col-12 mb-2 schedule">                                
+                            
+                                <div class="input-group schedule__datetime">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Date</span>
+                                    </div>  
+                                    <!-- <input type="text" formControlName="dateCtrl" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', adaptivePosition: true }" placeholder="Datepicker" class="form-control" bsDatepicker> -->
+                                    <input type="text" name="date" [(ngModel)]="datePicker" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" placeholder="Datepicker" class="form-control" bsDatepicker>
+                                </div>                              
+
+                                <div class="schedule__datetime" >
+                                    <div clasS="schedule__datetime">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Desde</span>
+                                        </div>                                            
+                                        <!-- <timepicker formControlName="startTimeCtrl" [max]="formGroup.get('schedulesCtrl').at(i).get('endTimeCtrl').value"  [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker> -->
+                                        <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
+                                    </div>                            
+                                    <div class="schedule__datetime">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Hasta</span>
+                                        </div>                                      
+                                        <!-- <timepicker formControlName="endTimeCtrl" [min]="formGroup.get('schedulesCtrl').at(i).get('startTimeCtrl').value"  [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker> -->
+                                        <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
+                                    </div>                            
+                                </div>   
+                                <!-- <div *ngIf="i!=0" (click)="RemoveScheduleCtrl();" class="schedule__datetime">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </div> -->
+                            </div>
+                        <!-- </div> -->
                                 
-                        <div class="col-12 mb-2">
+                        <!-- <div class="col-12 mb-2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Date</span>
                                 </div>  
                                 <input type="text" name="date" [(ngModel)]="datePicker" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" placeholder="Datepicker" class="form-control" bsDatepicker>
                             </div>                             
-                        </div>     
+                        </div> -->
 
                         <!-- Uncomment for all day feature -->
                         <!-- Uncomment this.isAllDayEvent();  in ngOnInit from detalle.component.ts -->
@@ -154,14 +190,15 @@
                             <div class="allDay__text">All day event</div>                        
                         </div> -->
 
-                        <div class="col-6 mb-2 aaa" *ngIf="!allDaySwitch">
+                        <!-- <div class="col-6 mb-2 aaa" *ngIf="!allDaySwitch">
                             <div>Desde</div>
                             <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
                         </div>     
                         <div class="col-6 aaa" *ngIf="!allDaySwitch">
                             <div>Hasta</div>
                             <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-                        </div>  
+                        </div> -->
+
                     </div>
                 </div>  
 

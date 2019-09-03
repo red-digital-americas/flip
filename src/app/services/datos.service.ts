@@ -8,6 +8,7 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 })
 export class DatosServiceService {
 
+  //Use the outer datos.service.ts
   public heroesUrl = 'http://localhost:50570/api/';  // URL to web api  
   private url: string = 'http://23.253.173.64/'; // URL api server 
 
@@ -24,7 +25,7 @@ export class DatosServiceService {
   }
 
   ServicioPostGeneral_nuevo(url, parametros): Observable<any> {
-    debugger;
+    // debugger;
     // console.log(parametros);
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
