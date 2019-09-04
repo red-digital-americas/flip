@@ -62,7 +62,7 @@
                              Icon Hover:<img style="margin:5%; " class="img-size" src="{{post.icon2}}">
 
                            </div> 
-                         <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+                         <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title,post.category);">
                              Editar
                            </button>  
            </div>
@@ -140,7 +140,7 @@
                       </div>
                       <div class="col-12  margin-gral">
                           Category:
-                            <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
+                            <input type="text" [(ngModel)]="direction" class="form-control" name="cat" id="cat" placeholder="Desc" required>
                           </div>
                    
            

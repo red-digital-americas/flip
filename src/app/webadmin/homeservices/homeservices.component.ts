@@ -247,8 +247,11 @@ serv(id?: number) {
      }
   
   
-     passdata(id:any ){
+     passdata(id:any, tit:any , desc:any  ){
       this.PostId = id ; 
+      this.title=tit;
+      this.direction=desc
+
      }
   
      

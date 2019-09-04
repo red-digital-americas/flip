@@ -80,8 +80,8 @@
                                                    width: 180px;
                                                    top: 49px;" class="img-size" src="{{post.buildmobile}}">
                                </div> 
-                         <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
-                             Editar
+                               <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title,post.desc);">
+                                Editar
                            </button>  
            </div>
             
@@ -194,7 +194,7 @@
                       </div>
                       <div class="col-12  margin-gral">
                           Description:
-                            <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
+                            <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="des" placeholder="Desc" required>
                           </div>
                    
            
