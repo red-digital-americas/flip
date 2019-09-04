@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { getStyle, hexToRgba } from '@coreui/coreui-pro/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import { navItems } from './../../_nav';
+// import { navItems } from './../../_nav';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DatosService } from '../../../datos.service';
 import { HttpModule } from '@angular/http';
