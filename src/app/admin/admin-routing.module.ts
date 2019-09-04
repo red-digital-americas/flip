@@ -8,9 +8,10 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { AmenitiesComponent } from './amenities/amenities.component';
 import { EditAmenitiesComponent } from './amenities/edit/edit-amenities.component';
+import { RoleGuardService } from '../guards/role-guard.service';
 
 const routes: Routes = [
-  { path: '', data: { title: 'AdminApp' },
+  { path: '', data: { title: 'AdminApp', expectedRole: [2,4] }, canActivate: [RoleGuardService],
     children: [
       { path: '', redirectTo: 'communities' },
       { path: 'newsfeed/:id', component: NewsfeedComponent, data: {title:'newsfeed'} },

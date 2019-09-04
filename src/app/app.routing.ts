@@ -18,6 +18,7 @@ import { Wizard5Component } from './views/wizard5/wizard5.component';
 import { RecoverpassComponent } from './recoverpass/recoverpass.component';
 
 import { FooterComponent } from './footer/footer.component';
+import { RoleGuardService } from './guards/role-guard.service';
 
 export const routes: Routes = [
   { path: 'wizard1', component: Wizard1Component },
@@ -36,7 +37,7 @@ export const routes: Routes = [
   { path: '', component: AppLayoutComponent, data: { title: '' },
     children: [
       { path: '', loadChildren: './admin/admin.module#AdminModule', data: { title: '' } },
-      { path: 'webadmin', loadChildren: './webadmin/webadmin.module#WebadminModule' },
+      { path: 'webadmin', loadChildren: './webadmin/webadmin.module#WebadminModule', canActivate: [RoleGuardService], data: { expectedRole: [1,4] } },
     ]
   },
   {
