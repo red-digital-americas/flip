@@ -10,7 +10,7 @@ import { AmenitiesComponent } from './amenities/amenities.component';
 import { EditAmenitiesComponent } from './amenities/edit/edit-amenities.component';
 
 const routes: Routes = [
-  { path: '', data: { title: 'Dashboard' },
+  { path: '', data: { title: 'AdminApp' },
     children: [
       { path: '', redirectTo: 'communities' },
       { path: 'newsfeed/:id', component: NewsfeedComponent, data: {title:'newsfeed'} },
@@ -22,8 +22,8 @@ const routes: Routes = [
       { path: 'editamenity/:id', component: EditAmenitiesComponent, data: { title: 'Amenities' } },
       { path: 'reservations/:id', component: ReservationsComponent, data: { title: 'Reservations' } },
       // { path: 'perks/:id', loadChildren: './perks/perks.module#PerksComponentModule' },
-      { path: '', loadChildren: './perks/perks.module#PerksComponentModule' },
-      { path: '', loadChildren: './services/services.module#ServicesComponentModule' },
+      { path: '', loadChildren: './perks/perks.module#PerksComponentModule', data: { title: 'Perks'} },
+      { path: '', loadChildren: './services/services.module#ServicesComponentModule', data: { title: 'Services'}  },
     ]
   }
 ];

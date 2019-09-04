@@ -8,7 +8,8 @@
 
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-3" *ngFor="let item of navSections">
-      <a  class="nav-link" 
+      <a  class="nav-link"         
+        [ngClass]="{'navSection--active': item.id == selectedSection}"
         (click)="GoSection(item)">
         {{item.name}}
       </a>      
@@ -168,7 +169,7 @@
         <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
         <div class="divider"></div>
         <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock account</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
+        <a class="dropdown-item" (click)="salir($event)"><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
     <!-- End Profile Menu -->
@@ -193,7 +194,7 @@
             <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>    
           </div>
         </li>
-    </ol>   -->
+    </ol> -->
 
     <div class="container-fluid">
       <router-outlet></router-outlet>

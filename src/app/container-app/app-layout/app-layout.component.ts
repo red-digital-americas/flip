@@ -14,6 +14,7 @@ export class AppLayoutComponent {
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
 
+  public selectedSection:number;
   public navSections = []
 
   constructor(
@@ -29,21 +30,22 @@ export class AppLayoutComponent {
     });
 
     if (localStorage.getItem("SystemTypeId") == undefined ) { return; }
-    let systemTypeId = parseInt(localStorage.getItem("SystemTypeId"));    
-    // systemTypeId = 0;
-    console.log("AppLayout-SystemTypeId: "+systemTypeId);  
+    let systemTypeId = parseInt(localStorage.getItem("SystemTypeId"));        
+    // console.log("AppLayout-SystemTypeId: "+systemTypeId);  
     this.navSections = this.menuService.CreateNavSections(systemTypeId);    
     this.navItems = this.menuService.CreateMenu(this.navSections[0].id);
+    this.selectedSection = this.navSections[0].id;
   }
   
   GoSection (section : { id:number, name:string, url:string}) { 
-    console.log(section);
+    // console.log(section);
     this.router.navigate([section.url]);
     this.navItems = this.menuService.CreateMenu(section.id);
+    this.selectedSection = section.id;
   }
 
   salir(): void {
     localStorage.clear();
-    window.location.href = "/login";    
+    window.location.href = "/#/login";    
   }
 }

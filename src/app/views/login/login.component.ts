@@ -7,6 +7,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DatosService } from '../../../datos.service';
 import { HttpModule } from '@angular/http';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
+import { MenuService } from '../../_nav';
 
 
 @Component({
@@ -20,7 +21,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: HttpModule,
     private heroService: DatosService,
-    toasterService: ToasterService) {
+    toasterService: ToasterService,
+    private menuService:MenuService
+  ) {
     this.toasterService = toasterService;
   }
 
@@ -48,10 +51,9 @@ export class LoginComponent implements OnInit {
   
 
   showSuccess() {
-    this.toasterService.pop('success', 'Success ', 'You will be redirected ');
-    // window.location.href = "/#/communities";
-    window.location.href = "/communities";
-    // setTimeout(function(){ window.location.href = "/communities"; },3000);
+    this.toasterService.pop('success', 'Success ', 'You will be redirected ');        
+    window.location.href = "/#"+this.menuService.GetFirstURLSection(parseInt(localStorage.getItem("SystemTypeId"))); // partial redirection
+    // window.location.href = "/communities"; // full redirection (loading again page)
   }
 
   showError() {
@@ -69,8 +71,6 @@ export class LoginComponent implements OnInit {
   showPrimary() {
     this.toasterService.pop('primary', 'Primary Toaster', 'This is toaster description');
   }
-
-
 
   public Login() {    
     var creadoobj = { username: this.email, password: this.password };
@@ -97,20 +97,14 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("id", value.user.id);
             localStorage.setItem("buildingid", value.user.buildingId);
             localStorage.setItem("SystemTypeId", value.user.systemTypeId);
-            this.showSuccess(); 
-          
-
+            this.showSuccess();          
           }
-
-
       }
     });
-
-
   }
+
   public recoverpass() {
     window.location.href = "/#/recoverpass";
-
   }
 }
 

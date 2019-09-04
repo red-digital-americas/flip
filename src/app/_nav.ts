@@ -18,9 +18,9 @@ export class MenuService {
     {
       name: 'Home', type: 1, url: '/webadmin/homemenu', icon: 'icon-puzzle', 
       children: [  
-        /*{ name: 'Home Services', url: '/webadmin/homeservices', icon: 'icon-drop' },
-        { name: 'Home Ammenities', url: '/webadmin/homeammenities', icon: 'icon-drop' },
-        { name: 'Home General', url: '/webadmin/homegeneral', icon: 'icon-drop' },*/
+        // { name: 'Home Services', url: '/webadmin/homeservices', icon: 'icon-drop' },
+        // { name: 'Home Ammenities', url: '/webadmin/homeammenities', icon: 'icon-drop' },
+        // { name: 'Home General', url: '/webadmin/homegeneral', icon: 'icon-drop' },
         { name: 'Home Menu', url: '/webadmin/homemenu', icon: 'icon-drop' },
       ]
     },
@@ -44,17 +44,17 @@ export class MenuService {
     { name: 'Communities', url: '/communities', icon: 'icon-drop' }
   ]
 
-  public CreateMenu(systemType:number) {
-    if (systemType == 1) { return this.flipWeb;}
-    if (systemType == 2) { return this.adminApp;}
-    if (systemType == 3) { return this.booking;}
+  public CreateMenu(sectionId:number) {
+    if (sectionId == 1) { return this.flipWeb;}
+    if (sectionId == 2) { return this.adminApp;}
+    if (sectionId == 3) { return this.booking;}
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   private navSections = [
-    {id:1, name: 'Flip Web', url: '/webadmin', permisos: [1, 0]},
-    {id:2, name: 'Admin App', url: '/communities', permisos: [2, 0]},
-    {id:3, name: 'Booking', url: '/communities', permisos: [3, 0]},
+    {id:1, name: 'Flip Web', url: '/webadmin', permisos: [1, 4]},
+    {id:2, name: 'Admin App', url: '/communities', permisos: [2, 4]},
+    {id:3, name: 'Booking', url: '/communities', permisos: [3, 4]},
   ]
 
   public CreateNavSections(systemType:number) {
@@ -64,6 +64,10 @@ export class MenuService {
       sections.push({ id: r.id, name: r.name, url: r.url});
     })
     return sections;
+  }
+
+  public GetFirstURLSection(systemType:number) {
+    return this.navSections.filter(r => r.permisos.includes(systemType))[0].url;
   }
 
 }

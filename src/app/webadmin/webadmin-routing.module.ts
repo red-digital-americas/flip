@@ -21,84 +21,22 @@ import { MoreindexComponent } from './moreindex/moreindex.component';
 
 const routes: Routes = [
   {
-    path: '',
-
-    data: {
-      title: 'Dashboard'
-    },
+    path: '', data: { title: 'Dashboard' },
     children: [
-        {
-          path: '',
-         redirectTo: 'webadmin'
-        },
-      {
-        path: 'webadmin',
-        component: WebadminComponent,
-        data: {title:'  Index'}
-      },
-      {
-        path: 'design',
-        component: DesignComponent,
-        data: {title:'Design'}
-      },
-      {
-        path: 'designindex',
-        component: DesignindexComponent,
-        data: {title:' Design Index'}
-      },
-      {
-        path: 'homemenu',
-        component: HomemenuComponent,
-        data: {title:'  Home Ammenities'}
-      },
-      {
-        path: 'homeammenities/:id',
-        component: HomeammenitiesComponent,
-        data: {title:'  Home Ammenities'}
-      },
-      {
-        path: 'homegeneral/:id',
-        component: HomegeneralComponent,
-        data: {title:'  Home General'}
-      },
-      {
-        path: 'homeindex/:id',
-        component: HomeindexComponent,
-        data: {title:'Home  Index'}
-      },
-      {
-        path: 'homeroom/:id',
-        component: HomeroomsComponent,
-        data: {title:'  Home Room'}
-      },
-      {
-        path: 'homeservices/:id',
-        component: HomeservicesComponent,
-        data: {title:'  Home Services'}
-      },
-      {
-        path: 'moreindex',
-        component: MoreindexComponent,
-        data: {title:'  More Index '}
-      },
-
-      {
-        path: 'team',
-        component: TeamComponent,
-        data: {title:'  Team'}
-      },
-      {
-        path: 'jobs',
-        component: JobsComponent,
-        data: {title:'  Jobs'}
-      },
-      {
-        path: 'press',
-        component: PressComponent,
-        data: {title:'  Press'}
-      },
-      
-
+      { path: '', redirectTo: 'webadmin' },
+      { path: 'webadmin', component: WebadminComponent, data: {title:'  Index'} },
+      { path: 'design', component: DesignComponent, data: {title:'Design'} },
+      { path: 'designindex', component: DesignindexComponent, data: {title:' Design Index'} },
+      { path: 'homemenu', component: HomemenuComponent, data: {title:'  Home Ammenities'} },
+      { path: 'homeammenities/:id', component: HomeammenitiesComponent, data: {title:'  Home Ammenities'} },
+      { path: 'homegeneral/:id', component: HomegeneralComponent, data: {title:'  Home General'} },
+      { path: 'homeindex/:id', component: HomeindexComponent, data: {title:'Home  Index'} },
+      { path: 'homeroom/:id', component: HomeroomsComponent, data: {title:'  Home Room'} },
+      { path: 'homeservices/:id', component: HomeservicesComponent, data: {title:'  Home Services'} },
+      { path: 'moreindex', component: MoreindexComponent, data: {title:'  More Index '} },
+      { path: 'team', component: TeamComponent, data: {title:'  Team'} },
+      { path: 'jobs', component: JobsComponent, data: {title:'  Jobs'} },
+      { path: 'press', component: PressComponent, data: {title:'  Press'} },      
     ]
   }
 ];

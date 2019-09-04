@@ -20,154 +20,42 @@ import { RecoverpassComponent } from './recoverpass/recoverpass.component';
 import { FooterComponent } from './footer/footer.component';
 
 export const routes: Routes = [
-  {
-    path: 'wizard1',
-    component: Wizard1Component
-  },
-  {
-    path: 'recoverpass',
-    component: RecoverpassComponent
-  },
-  {
-    path: 'wizard2a',
-    component: Wizard2aComponent
-  },
-  {
-    path: 'wizard2b',
-    component: Wizard2bComponent
-  },
-  {
-    path: 'wizard3',
-    component: Wizard3Component
-  },
-  {
-    path: 'wizard4',
-    component: Wizard4Component
-  },
-  {
-    path: 'wizard5',
-    component: Wizard5Component
-  },
-  {
-    path: 'footer',
-    component: FooterComponent
-  },
- 
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  },
-  {
-    path: '404',
-    component: P404Component,
-    data: {
-      title: 'Page 404'
-    }
-  },
-  {
-    path: '500',
-    component: P500Component,
-    data: {
-      title: 'Page 500'
-    }
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
-  },
-
-  {
-    path: '',
-    component: AppLayoutComponent,
-    data: {
-      title: 'Home'
-    },
+  { path: 'wizard1', component: Wizard1Component },
+  { path: 'recoverpass', component: RecoverpassComponent },
+  { path: 'wizard2a', component: Wizard2aComponent },
+  { path: 'wizard2b', component: Wizard2bComponent },
+  { path: 'wizard3', component: Wizard3Component },
+  { path: 'wizard4', component: Wizard4Component },
+  { path: 'wizard5', component: Wizard5Component },
+  { path: 'footer', component: FooterComponent }, 
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full', },
+  { path: '404', component: P404Component, data: { title: 'Page 404' } },
+  { path: '500', component: P500Component, data: { title: 'Page 500' } },
+  { path: 'login', component: LoginComponent, data: { title: 'Login Page' } },
+  { path: 'register', component: RegisterComponent, data: { title: 'Register Page' } },
+  { path: '', component: AppLayoutComponent, data: { title: '' },
     children: [
-      {
-        path: '',
-        loadChildren: './admin/admin.module#AdminModule'
-      },
-      {
-        path: 'webadmin',
-        loadChildren: './webadmin/webadmin.module#WebadminModule'
-      },
+      { path: '', loadChildren: './admin/admin.module#AdminModule', data: { title: '' } },
+      { path: 'webadmin', loadChildren: './webadmin/webadmin.module#WebadminModule' },
     ]
   },
-
   {
-    path: 'demo',
-    component: DefaultLayoutComponent,
-    data: {
-      title: 'Home'
-    },
+    path: 'demo', component: DefaultLayoutComponent, data: { title: 'Home' },
     children: [
-      {
-        path: 'base',
-        loadChildren: './views/base/base.module#BaseModule'
-      },
-      {
-        path: 'buttons',
-        loadChildren: './views/buttons/buttons.module#ButtonsModule'
-      },
-      {
-        path: 'charts',
-        loadChildren: './views/chartjs/chartjs.module#ChartJSModule'
-      },
-      {
-        path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
-      },
-      {
-        path: 'editors',
-        loadChildren: './views/editors/editors.module#EditorsModule'
-      },
-      {
-        path: 'forms',
-        loadChildren: './views/forms/forms.module#FormsModule'
-      },
-      {
-        path: 'google-maps',
-        loadChildren: './views/google-maps/google-maps.module#GoogleMapsModule'
-      },
-      {
-        path: 'icons',
-        loadChildren: './views/icons/icons.module#IconsModule'
-      },
-      {
-        path: 'notifications',
-        loadChildren: './views/notifications/notifications.module#NotificationsModule'
-      },
-      {
-        path: 'plugins',
-        loadChildren: './views/plugins/plugins.module#PluginsModule'
-      },
-      {
-        path: 'tables',
-        loadChildren: './views/tables/tables.module#TablesModule'
-      },
-      {
-        path: 'theme',
-        loadChildren: './views/theme/theme.module#ThemeModule'
-      },
-      {
-        path: 'apps',
-        loadChildren: './views/apps/apps.module#AppsModule'
-      },
-      {
-        path: 'widgets',
-        loadChildren: './views/widgets/widgets.module#WidgetsModule'
-      }
+      { path: 'base', loadChildren: './views/base/base.module#BaseModule' },
+      { path: 'buttons', loadChildren: './views/buttons/buttons.module#ButtonsModule' },
+      { path: 'charts', loadChildren: './views/chartjs/chartjs.module#ChartJSModule' },
+      { path: 'dashboard', loadChildren: './views/dashboard/dashboard.module#DashboardModule' },
+      { path: 'editors', loadChildren: './views/editors/editors.module#EditorsModule' },
+      { path: 'forms', loadChildren: './views/forms/forms.module#FormsModule' },
+      { path: 'google-maps', loadChildren: './views/google-maps/google-maps.module#GoogleMapsModule' },
+      { path: 'icons', loadChildren: './views/icons/icons.module#IconsModule' },
+      { path: 'notifications', loadChildren: './views/notifications/notifications.module#NotificationsModule' },
+      { path: 'plugins', loadChildren: './views/plugins/plugins.module#PluginsModule' },
+      { path: 'tables', loadChildren: './views/tables/tables.module#TablesModule' },
+      { path: 'theme', loadChildren: './views/theme/theme.module#ThemeModule' },
+      { path: 'apps', loadChildren: './views/apps/apps.module#AppsModule' },
+      { path: 'widgets', loadChildren: './views/widgets/widgets.module#WidgetsModule' }
     ]
   }
 ];
