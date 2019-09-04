@@ -40,7 +40,7 @@ export class HomeroomsComponent implements OnInit {
   validar: boolean = false;
   idpost: any;
   IDUSR: string = "0";
-  IDBUILD: string = "0";
+  IDBUILD: number = 0;
   PostId: number ;
   posttext: string = "";
   posttitle: string = "";
@@ -82,7 +82,7 @@ export class HomeroomsComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem("user"));
       console.log(this.user);
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
-      this.IDBUILD = this.route.snapshot.params['id']; 
+      this.IDBUILD = parseInt(this.route.snapshot.params['id']); 
       this.get_photos();
       
 
