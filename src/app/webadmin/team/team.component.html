@@ -2,11 +2,13 @@
   <strong>  Team Sección </strong>
 </div>
 <div class="row">
-    <div class=" col  " *ngFor="let post of posts" >
-      <div class="card " style="    height: 400px;">
+    <div class=" col  " *ngFor="let post of posts; let i = index" >
+      <div class="card "  *ngIf="i!=1" style="    height: 470px;">
         <div class="card-body pb-0">
           <div class="col-sm-12 col-md-12" >
             <strong> Nombre : </strong>{{post.name}} {{post.lastname}}
+            <br>
+            <strong> Apellido : </strong> {{post.lastname}}
             <br>
            <strong> Desc :  </strong> {{post.desc}}
             <br>
@@ -31,13 +33,20 @@
                </div>
           </div>
           
-          <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-top: 20px;" (click)="primaryModal.show();passdata(post.id);">
+          <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-top: 20px;" (click)="primaryModal.show();passdata(post.id, post.name ,post.lastname, post.desc, post.twitter, post.link );">
               Editar
             </button>        
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
           
         </div>
+      </div>
+
+
+      <div class="card "  *ngIf="i==1" style="     background-color: #f8cd58;height: 470px;">
+        <div class="card-body pb-0">
+          
+      THE TEAM 
       </div>
     </div><!--/.col-->
   </div><!--/.row-->
@@ -56,19 +65,23 @@
         <div class="modal-body">
          <div class="col-12  margin-gral">
             Name:
-              <input type="text" [(ngModel)]="Name" class="form-control" name="postitle" id="postitle"  placeholder="Nombre" required>
+              <input type="text" [(ngModel)]="Name" class="form-control" name="posname" id="posname"  placeholder="Nombre" required>
             </div>
             <div class="col-12  margin-gral">
+              Lastname:
+                <input type="text" [(ngModel)]="apellido" class="form-control" name="posap" id="posap"  placeholder="Apellido" required>
+              </div>
+            <div class="col-12  margin-gral">
                 Desc:
-                  <input type="text" [(ngModel)]="Desc" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
+                  <input type="text" [(ngModel)]="Desc" class="form-control" name="posdesc" id="posdesc" placeholder="Desc" required>
                 </div>
                 <div class="col-12  margin-gral">
                     Link:
-                      <input type="text" [(ngModel)]="Link" class="form-control" name="postitle" id="postitle" placeholder="Linkedin" required>
+                      <input type="text" [(ngModel)]="Link" class="form-control" name="poslink" id="poslink" placeholder="Linkedin" required>
                     </div>
                     <div class="col-12  margin-gral">
                         Twitter:
-                          <input type="text" [(ngModel)]="tt" class="form-control" name="postitle" id="postitle" placeholder="Twitter" required>
+                          <input type="text" [(ngModel)]="tt" class="form-control" name="postt" id="postt" placeholder="Twitter" required>
                         </div>
 
 

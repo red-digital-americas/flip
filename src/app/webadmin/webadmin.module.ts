@@ -22,6 +22,7 @@ import { HomegeneralComponent } from './homegeneral/homegeneral.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { ChartsModule } from 'ng2-charts';
+import { HomemenuComponent } from './homemenu/homemenu.component';
 
 
 
@@ -39,6 +40,6 @@ import { ChartsModule } from 'ng2-charts';
     
     ToasterModule.forRoot(),
   ],
-  declarations: [WebadminComponent, TeamComponent, JobsComponent, PressComponent, DesignComponent, DesignindexComponent, MoreindexComponent, HomeindexComponent, HomeservicesComponent, HomeammenitiesComponent, HomeroomsComponent, HomegeneralComponent]
+  declarations: [WebadminComponent, TeamComponent, JobsComponent, PressComponent, DesignComponent, DesignindexComponent, MoreindexComponent, HomeindexComponent, HomeservicesComponent, HomeammenitiesComponent, HomeroomsComponent, HomegeneralComponent, HomemenuComponent]
 })
 export class WebadminModule { }

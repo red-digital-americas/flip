@@ -3,8 +3,64 @@
   <strong>  Página Principal</strong>
 </div>
 <div class="row">
-  <div class=" col  " *ngFor="let post of posts" >
-    <div class="card ">
+  <div class=" col  " *ngFor="let post of posts; let i = index" >
+    <div *ngIf="i==7" class="card ">
+      <div class="card-body ">
+        
+        <div class="btn-group float-right" dropdown>
+          <div class="row">
+              
+              <div  class="col-sm-6 col-md-4">
+                  
+                  <img style="margin-right: 10px;" class="img-size" src="../../../assets/14.jpg">
+                </div> 
+          </div>
+         
+          <div class="row">
+               
+         <div class="col-sm-6 col-md-4">
+        
+            <img  class="img-size" src="{{post.backphoto}}">
+          </div> 
+             </div>
+        </div>
+        <button   style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+            Editar
+          </button>        
+      </div>
+      <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
+        
+      </div>
+    </div>
+    <div *ngIf="i==14" class="card ">
+      <div class="card-body ">
+        
+        <div class="btn-group float-right" dropdown>
+          <div class="row">
+              
+              <div  class="col-sm-6 col-md-4">
+                  
+                  <img style="margin-right: 10px;" class="img-size" src="../../../assets/14.jpg">
+                </div> 
+          </div>
+         
+          <div class="row">
+               
+         <div class="col-sm-6 col-md-4">
+        
+            <img  class="img-size" src="{{post.backphoto}}">
+          </div> 
+             </div>
+        </div>
+        <button   style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+            Editar
+          </button>        
+      </div>
+      <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
+        
+      </div>
+    </div>
+    <div *ngIf="i!=7 && i!=14"   class="card ">
       <div class="card-body ">
         
         <div class="btn-group float-right" dropdown>
@@ -46,24 +102,46 @@
       </div>
       <form #loginForm="ngForm" autocomplete="off">
 
-      <div class="modal-body">
-          Imagen Default : *La imagen deberá de ser de 350px * 350px; 
-        <div class="custom-file margin-gral ">
+      <div *ngIf="8==PostId ||  15==PostId "  class="modal-body">
          
-          <input type="file" accept="image/*"
-                 (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile" required>
-          <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
+        Imagen Default : *La imagen deberá de ser de 350px * 350px; 
+      <div class="custom-file margin-gral ">
+       
+        <input type="file" accept="image/*"
+               (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile" required>
+        <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
 
-        </div>
-        Imagen  Hover : *La imagen deberá de ser de 350px * 350px; 
-        <div class="custom-file margin-gral ">
-         
-          <input type="file" accept="image/*"
-                 (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile"required>
-          <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
-
-        </div>
       </div>
+      Imagen  Hover : *La imagen deberá de ser de 350px * 350px; 
+      <div class="custom-file margin-gral ">
+       
+        <input type="file" accept="image/*"
+               (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile"required>
+        <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
+
+      </div>
+      </div>
+      
+      <div  *ngIf="8!=PostId && 15!=PostId"  class="modal-body">
+        Imagen Default : *La imagen deberá de ser de 350px * 350px; 
+      <div class="custom-file margin-gral ">
+       
+        <input type="file" accept="image/*"
+               (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile" required>
+        <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
+
+      </div>
+      Imagen  Hover : *La imagen deberá de ser de 350px * 350px; 
+      <div class="custom-file margin-gral ">
+       
+        <input type="file" accept="image/*"
+               (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile"required>
+        <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
+
+      </div>
+    </div>
+
+    
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
         <button type="submit" class="btn btn-primary"  [disabled]="!loginForm.form.valid"  (click)="updatephoto()" >Guardar Cambios </button>

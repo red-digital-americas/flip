@@ -110,8 +110,11 @@ export class PressComponent implements OnInit {
    }
 
 
-   passdata(id:any ){
+   passdata(id:any, title:any , resu:any , lngrs:any ){
     this.PostId = id ; 
+    this.title=title;
+    this.shortresume=resu;
+    this.longresume=lngrs; 
    }
 
    
@@ -136,6 +139,7 @@ export class PressComponent implements OnInit {
            this.title="";
            this.longresume="";
            this.shortresume="";
+           this.postphoto=""; 
            this.showSuccess();
             }
         }

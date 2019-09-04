@@ -115,10 +115,26 @@ export class HomeindexComponent implements OnInit {
    }
 
 
-   passdata(id:any ){
+   passdata(id:any , title:any , direction:any ){
     this.PostId = id ; 
+    this.title=title;
+    this.direction=direction; 
    }
-
+   gotonewsfeed(id?: number) {
+    this.router.navigate(['webadmin/homeindex/' + id])
+ }
+ amm(id?: number) {
+  this.router.navigate(['webadmin/homeammenities/' + id])
+}
+gene(id?: number) {
+this.router.navigate(['webadmin/homegeneral/' + id])
+}
+room(id?: number) {
+this.router.navigate(['webadmin/homeroom/' + id])
+}
+serv(id?: number) {
+this.router.navigate(['webadmin/homeservices/' + id])
+}
    
    updatephoto() {
     // debugger;
@@ -138,6 +154,11 @@ export class HomeindexComponent implements OnInit {
           //debugger;
           if (value.result == "Success") {
             this.get_photos();
+            this.title="";
+            this.direction="";
+            
+            this.postphoto=""; 
+            this.imageInputLabel="Choose file";
             this.showSuccess();
           }
       }

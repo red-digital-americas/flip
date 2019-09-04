@@ -176,7 +176,21 @@ export class HomegeneralComponent implements OnInit {
    passdata(id:any ){
     this.PostId = id ; 
    }
-
+   gotonewsfeed(id?: number) {
+    this.router.navigate(['webadmin/homeindex/' + id])
+ }
+ amm(id?: number) {
+  this.router.navigate(['webadmin/homeammenities/' + id])
+}
+gene(id?: number) {
+this.router.navigate(['webadmin/homegeneral/' + id])
+}
+room(id?: number) {
+this.router.navigate(['webadmin/homeroom/' + id])
+}
+serv(id?: number) {
+this.router.navigate(['webadmin/homeservices/' + id])
+}
    
    updatephoto() {
     if(this.imageInputLabel!="Choose file"){

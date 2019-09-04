@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
+import { ToasterService, ToasterConfig } from 'angular2-toaster';
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
@@ -23,8 +24,9 @@ export class JobsComponent implements OnInit {
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
-   ) {
-  }
+    toasterService: ToasterService) {
+      this.toasterService = toasterService;
+    }
   posts: any[];
   email: string;
   password: string;
@@ -48,6 +50,15 @@ export class JobsComponent implements OnInit {
   comment: string = "";
 
   public newImages: any[] = [];
+
+  private toasterService: ToasterService;
+
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 3000,
+      positionClass: "toast-top-center",
+    });
 
 
   ngOnInit() {
@@ -80,7 +91,6 @@ export class JobsComponent implements OnInit {
          default:
            //debugger; 
            if (value.result == "Success") {
-              //debugger;
              this.posts = value.item;
            }
        }
@@ -88,8 +98,11 @@ export class JobsComponent implements OnInit {
    }
 
 
-   passdata(id:any ){
+   passdata(id:any , title :any , lng :any , sht :any  ){
     this.PostId = id ; 
+    this.title=title;
+    this.longdesc=lng;
+    this.shortdesc=sht; 
    }
 
    
@@ -111,11 +124,20 @@ export class JobsComponent implements OnInit {
           if (value.result == "Success") {
             this.get_photos();
            
+            this.title="";
+    this.longdesc="";
+    this.shortdesc="";
+    
            
+    this.showSuccess(); 
 
           }
       }
     });
+  }
+
+  showSuccess() {
+    this.toasterService.pop('success', 'Success ', 'Publicación Actualizada Correctamente ');
   }
    
   prepareImages(e) {

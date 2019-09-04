@@ -181,6 +181,9 @@ export class MoreindexComponent implements OnInit {
             //debugger;
             if (value.result == "Success") {
               this.get_photos();
+              
+            this.postphoto=""; 
+            this.imageInputLabel="Choose file";
               this.showSuccess();
             }
         }

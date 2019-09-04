@@ -137,7 +137,21 @@ export class HomeservicesComponent implements OnInit {
      // debugger;
      // console.log(this.newImages);
     }
-  
+    gotonewsfeed(id?: number) {
+      this.router.navigate(['webadmin/homeindex/' + id])
+   }
+   amm(id?: number) {
+    this.router.navigate(['webadmin/homeammenities/' + id])
+ }
+ gene(id?: number) {
+  this.router.navigate(['webadmin/homegeneral/' + id])
+}
+room(id?: number) {
+  this.router.navigate(['webadmin/homeroom/' + id])
+}
+serv(id?: number) {
+  this.router.navigate(['webadmin/homeservices/' + id])
+}
   
     prepareImagesblob(e) {
   

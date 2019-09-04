@@ -128,7 +128,8 @@ export class WebadminComponent implements OnInit {
              
              
               this.postphoto=[]; 
-              this.postphoto.push("assets/img/Coliving.jpg");
+              this.imageInputLabel="Choose file";
+              this.imageInputLabeltwo="Choose file";
               this.showSuccess();
             }
         }

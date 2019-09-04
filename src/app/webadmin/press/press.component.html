@@ -4,8 +4,8 @@
   
 
   <div class="row">
-      <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts" >
-        <div class="card " style="    height: 500px;" >
+      <div style="width: 18% ; margin:8px; " *ngFor="let post of posts; let i = index " >
+        <div class="card "*ngIf="i!=12" style="    height: 500px;" >
                   <div class="card-body">
                     <img class="img-size-build" src="{{post.photo}}" />
                   </div>
@@ -16,15 +16,21 @@
                       <br>
                      <strong> Long Resume :  </strong>  {{post.longresume}}
                       <br> 
-                      <button    type="button" class="btn btn-primary col-12" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+                      <button    type="button" class="btn btn-primary col-12" data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title, post.reusme, post.longresume);">
                           Editar
                         </button> 
                     </div>
                   </div>
                     
           
-      </div><!--/.col-->
+      
+      <div class="card "  *ngIf="i==12" style=" background-color: #f8cd58;height: 500px;">
+        <div class="card-body">
+          PRESS
+      </div>
     </div><!--/.row-->
+  </div>
+  </div>
     
   <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
@@ -44,13 +50,13 @@
                 </div>
                 <div class="col-12  margin-gral">
                     Short Resume:
-                      <input type="text" [(ngModel)]="shortresume" class="form-control" name="postitle" id="postitle" placeholder="Long Desc" required>
+                      <input type="text" [(ngModel)]="shortresume" class="form-control" name="shr" id="shr" placeholder="Long Desc" required>
                     </div>
                     <div class="col-12  margin-gral">
                         Long Resume:
-                          <input type="text" [(ngModel)]="longresume" class="form-control" name="postitle" id="postitle" placeholder="ShortDesc" required>
+                          <input type="text" [(ngModel)]="longresume" class="form-control" name="lng" id="lng" placeholder="ShortDesc" required>
                         </div>
-                        La imagen deberá de ser de 600px * 600px
+                        La imagen de la noticia  deberá de ser de 600px * 600px
           <div class="custom-file margin-gral ">
            
             <input type="file" accept="image/*"

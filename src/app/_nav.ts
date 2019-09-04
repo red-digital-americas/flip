@@ -66,12 +66,12 @@ if (permisos == 1) {
       ]
     },  
     {
-      name: 'Home', type: 1, url: '/', icon: 'icon-puzzle', 
+      name: 'Home', type: 1, url: '/webadmin/homemenu', icon: 'icon-puzzle', 
       children: [  
-        { name: 'Home Services', url: '/webadmin/homeservices', icon: 'icon-drop' },
+        /*{ name: 'Home Services', url: '/webadmin/homeservices', icon: 'icon-drop' },
         { name: 'Home Ammenities', url: '/webadmin/homeammenities', icon: 'icon-drop' },
-        { name: 'Home General', url: '/webadmin/homegeneral', icon: 'icon-drop' },
-        { name: 'Home Room', url: '/webadmin/homeroom', icon: 'icon-drop' },
+        { name: 'Home General', url: '/webadmin/homegeneral', icon: 'icon-drop' },*/
+        { name: 'Home Menu', url: '/webadmin/homemenu', icon: 'icon-drop' },
       ]
     },
     { name: 'Design', type: 1, url:'/webadmin/design', icon: 'icon-cursor' },

@@ -16,6 +16,7 @@ import { HomegeneralComponent } from './homegeneral/homegeneral.component';
 import { HomeindexComponent } from './homeindex/homeindex.component';
 import { HomeroomsComponent } from './homerooms/homerooms.component';
 import { HomeservicesComponent } from './homeservices/homeservices.component';
+import { HomemenuComponent } from './homemenu/homemenu.component';
 import { MoreindexComponent } from './moreindex/moreindex.component';
 
 const routes: Routes = [
@@ -46,27 +47,32 @@ const routes: Routes = [
         data: {title:' Design Index'}
       },
       {
-        path: 'homeammenities',
+        path: 'homemenu',
+        component: HomemenuComponent,
+        data: {title:'  Home Ammenities'}
+      },
+      {
+        path: 'homeammenities/:id',
         component: HomeammenitiesComponent,
         data: {title:'  Home Ammenities'}
       },
       {
-        path: 'homegeneral',
+        path: 'homegeneral/:id',
         component: HomegeneralComponent,
         data: {title:'  Home General'}
       },
       {
-        path: 'homeindex',
+        path: 'homeindex/:id',
         component: HomeindexComponent,
         data: {title:'Home  Index'}
       },
       {
-        path: 'homeroom',
+        path: 'homeroom/:id',
         component: HomeroomsComponent,
         data: {title:'  Home Room'}
       },
       {
-        path: 'homeservices',
+        path: 'homeservices/:id',
         component: HomeservicesComponent,
         data: {title:'  Home Services'}
       },

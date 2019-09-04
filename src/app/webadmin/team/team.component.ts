@@ -42,6 +42,7 @@ export class TeamComponent implements OnInit {
   posttitle: string = "";
   public user: string[];
   Name: string ="";
+  apellido: string ="";
   Desc: string ="";
   Link: string ="";
   tt: string ="";
@@ -104,16 +105,21 @@ export class TeamComponent implements OnInit {
    }
 
 
-   passdata(id:any ){
+   passdata(id:any, name:any ,lastname:any, desc:any, twitter:any, link:any  ){
     this.PostId = id ; 
+    this.Name= name ; 
+    this.apellido= lastname; 
+    debugger; 
+    this.Desc=desc;
+    this.tt=twitter;
+    this.Link= link; 
    }
 
    
    updatephoto() {
-    // debugger;
-    var apellido = this.Name.split(" ");
+     debugger;
     if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"){
-    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[1], FrontPhoto: this.postphoto[0], Name : apellido[0] , LastName: apellido[1], Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
+    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[1], FrontPhoto: this.postphoto[0], Name : this.Name , LastName: this.apellido, Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
     debugger;
 
     this.heroService.ServicioPostPost("UpdateTeam", creadoobj).subscribe((value) => {
@@ -130,11 +136,11 @@ export class TeamComponent implements OnInit {
             this.get_photos();
             
             this.postphoto=[]; 
-            this.postphoto.push("assets/img/Coliving.jpg");
+           
            
             this.showSuccess();
-            
             this.Name="";
+            this.apellido="";            
             this.Desc="";
             this.Link="";
             this.tt=""; 
