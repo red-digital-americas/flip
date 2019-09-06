@@ -185,7 +185,7 @@ export class HomeroomsComponent implements OnInit {
              this.posts = value.item;
              for (let index = 0; index < value.item.length; index++) {
               this.photos = value.item[index].photos; 
-               
+               debugger; 
              }
             
            }
@@ -276,6 +276,7 @@ this.router.navigate(['webadmin/homeservices/' + id])
            this.imageInputLabeltwo="Choose file";
            this.title="";
            this.direction="";
+           window.location.reload();
 
 
 
@@ -320,26 +321,31 @@ this.showWarning();
  }
 
 
+ 
  addImages(indice) {
-   let url: string = '';
-   if (!Utils.isEmpty(this.newImages)) {
-     for (let f of this.newImages) {
+  let url: string = '';
+  if (!Utils.isEmpty(this.newImages)) {
+    let f ={file:this.newImages[indice], name:this.newImages[indice].name}; {
        debugger;
-       if(indice==0){
-         this.imageInputLabel = f.name;
-       }
-       
-       this.heroService.UploadImgSuc(f).subscribe((r) => {
-         if (Utils.isDefined(r)) {
-           url = <string>r.message;
+      if(indice==0){
+        this.imageInputLabel = f.name;
+      }
+      if(indice==1)
+      {
+      this.imageInputLabeltwo = f.name;
+      }
+      
+      this.heroService.UploadImgSuc(this.newImages[indice]).subscribe((r) => {
+        if (Utils.isDefined(r)) {
+          url = <string>r.message;
+           
+          url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
+           
+          this.postphoto[indice]=(url);
            debugger;
-           url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-           debugger;
-           this.postphoto[indice]=(url);
-           debugger;
-         }
-       })
-     }
-   }
+        }
+      })
+    }
   }
+}
 }

@@ -279,20 +279,24 @@ else {
   addImages(indice) {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
-      for (let f of this.newImages) {
-        debugger;
+      let f ={file:this.newImages[indice], name:this.newImages[indice].name}; {
+         debugger;
         if(indice==0){
           this.imageInputLabel = f.name;
         }
-       
-        this.heroService.UploadImgSuc(f).subscribe((r) => {
+        if(indice==1)
+        {
+        this.imageInputLabeltwo = f.name;
+        }
+        
+        this.heroService.UploadImgSuc(this.newImages[indice]).subscribe((r) => {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
-            debugger;
+             
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-            debugger;
+             
             this.postphoto[indice]=(url);
-            debugger;
+             debugger;
           }
         })
       }

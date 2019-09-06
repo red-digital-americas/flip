@@ -144,21 +144,21 @@ serv(id?: number) {
   
   
     uploadAttachmentToServer(indice) {
-      debugger; 
+        
       if (indice==3){
       const fileToUpload: File = new File([this.blob], 'filename.png');
-
+        debugger; 
       this.newImages[indice]=(fileToUpload);
       this.imageInputLabelfour="movil"; 
       }
       if(indice==5){
-        const fileToUpload: File = new File([this.blob], 'filename.png');
+        const fileToUpload: File = new File([this.blob1], 'filename.png');
 
         this.newImages[indice]=(fileToUpload);
         this.imageInputLabelsix="movil"; 
       }
       this.addImages(indice);
-     // debugger;
+     //  
      // console.log(this.newImages);
     }
   
@@ -166,7 +166,7 @@ serv(id?: number) {
   
       if (Utils.isDefined(e.srcElement.files)) {
         for (let f of e.srcElement.files) {
-         // debugger;
+         //  
           this.newImages.push(f);
         }
       }
@@ -235,9 +235,9 @@ serv(id?: number) {
     }
   
     get_photos() {
-      // debugger;
+      //  
        var creadoobj = { buildingid: 1 , userid: this.IDUSR };
-       //debugger;
+       // 
        this.heroService.ServicioPostPost("SeeHomeAmmenities", creadoobj).subscribe((value) => {
    
    
@@ -246,9 +246,9 @@ serv(id?: number) {
              console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
              break;
            default:
-             //debugger; 
+             //  
              if (value.result == "Success") {
-                //debugger;
+                // 
                this.posts = value.item;
              }
          }
@@ -265,13 +265,13 @@ serv(id?: number) {
   
      
      updatephoto() {
-        debugger;
+         
         if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"&&this.imageInputLabelthree!="Choose file"&&this.imageInputLabelfive!="Choose file"){
  
         if(this.imageInputLabelfour!="Choose file"&&this.imageInputLabelsix!="Choose file"){
- 
+ debugger; 
       var creadoobj = { id: this.PostId, Photo: this.postphoto[2], PhotoMobile: this.postphoto[5] , Description: this.direction , Title:this.title, Icon:this.postphoto[0],Icon2:this.postphoto[1], PhotoBuild:this.postphoto[4] , PhotoBuilMobile:this.postphoto[3] };
-      debugger;
+       
   /**  post.Photo = item.Photo;
                         post.Description = item.Description;
                         post.PhotoMobile = item.PhotoMobile;
@@ -287,9 +287,9 @@ serv(id?: number) {
             this.showError();
             break;
           default:
-            //debugger;
+            // 
             if (value.result == "Success") {
-              debugger;
+               
               this.get_photos();
               this.postphoto=[]; 
               this.postphoto.push("assets/img/Coliving.jpg");
@@ -302,12 +302,7 @@ serv(id?: number) {
               this.imageInputLabeltwo="Choose file";
               this.title="";
               this.direction="";
-
-
-
-
-
-
+              window.location.reload();
             }
         }
       });    
@@ -340,7 +335,7 @@ else {
           this.newImages[indice]=(f);
         }
       }
-      debugger; 
+        
       this.addImages(indice);
     }
   
@@ -348,8 +343,8 @@ else {
     addImages(indice) {
       let url: string = '';
       if (!Utils.isEmpty(this.newImages)) {
-        for (let f of this.newImages) {
-          debugger;
+        let f ={file:this.newImages[indice], name:this.newImages[indice].name}; {
+           debugger;
           if(indice==0){
             this.imageInputLabel = f.name;
           }
@@ -364,15 +359,16 @@ else {
           if(indice==4)
           {
           this.imageInputLabelfive = f.name;
+           
           }
-          this.heroService.UploadImgSuc(f).subscribe((r) => {
+          this.heroService.UploadImgSuc(this.newImages[indice]).subscribe((r) => {
             if (Utils.isDefined(r)) {
               url = <string>r.message;
-              debugger;
+               
               url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-              debugger;
+               
               this.postphoto[indice]=(url);
-              debugger;
+               debugger;
             }
           })
         }

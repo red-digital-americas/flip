@@ -61,8 +61,21 @@
        left: 56px;
        height: 375px;
        width: 475px;
-       top: 22px;" src="{{post.photo}}">
+       top: 22px;" src="{{photo.photo}}">
   </div>
+
+  <!--
+
+    0:
+desc: "Room mediano"
+id: 1
+photos: Array(5)
+0:
+id: 1
+idCommunitiesRoomWeb: 1
+idCommunitiesRoomWebNavigation: null
+photo
+  -->
   <div  class="col-sm-12 col-md-12" >
 
   
@@ -72,7 +85,7 @@
                            left: 166px;
                            height: 293px;
                            width: 180px;
-                           top: 49px;" class="img-size" src="{{post.photoMobile}}">
+                           top: 49px;" class="img-size" src="{{photo.photoMobile}}">
                            </div>
 <button   style="margin: 5%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(photo.id);passnumroom(post.id);">
            Editar
