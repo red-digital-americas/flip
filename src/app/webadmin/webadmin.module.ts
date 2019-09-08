@@ -24,8 +24,9 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ChartsModule } from 'ng2-charts';
 import { HomemenuComponent } from './homemenu/homemenu.component';
 
-
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -37,7 +38,9 @@ import { HomemenuComponent } from './homemenu/homemenu.component';
     CommonModule,
     ModalModule.forRoot(),
     ImageCropperModule,
-    
+    MatTabsModule,
+    MatMenuModule,
+    MatIconModule,
     ToasterModule.forRoot(),
   ],
   declarations: [WebadminComponent, TeamComponent, JobsComponent, PressComponent, DesignComponent, DesignindexComponent, MoreindexComponent, HomeindexComponent, HomeservicesComponent, HomeammenitiesComponent, HomeroomsComponent, HomegeneralComponent, HomemenuComponent]

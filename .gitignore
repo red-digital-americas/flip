@@ -48,3 +48,6 @@ Thumbs.db
 /.vs/VSWorkspaceState.json
 /src/assets/img/BACKSTAGE
 /.vs/slnx.sqlite-journal
+src/.vs/slnx.sqlite
+src/.vs/src/v16/.suo
+src/.vs/src/config/applicationhost.config
