@@ -42,7 +42,8 @@ export class TeamComponent implements OnInit {
   posttitle: string = "";
   public user: string[];
   Name: string ="";
-  apellido: string ="";
+  apellido: string = "";
+  position: string = "";
   Desc: string ="";
   Link: string ="";
   tt: string ="";
@@ -105,10 +106,11 @@ export class TeamComponent implements OnInit {
    }
 
 
-   passdata(id:any, name:any ,lastname:any, desc:any, twitter:any, link:any  ){
+  passdata(id: any, name: any, lastname: any, position: any, desc:any, twitter:any, link:any  ){
     this.PostId = id ; 
     this.Name= name ; 
-    this.apellido= lastname; 
+    this.apellido = lastname;
+    this.position = position;
     debugger; 
     this.Desc=desc;
     this.tt=twitter;
@@ -119,7 +121,7 @@ export class TeamComponent implements OnInit {
    updatephoto() {
      debugger;
     if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"){
-    var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[1], FrontPhoto: this.postphoto[0], Name : this.Name , LastName: this.apellido, Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
+      var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[1], FrontPhoto: this.postphoto[0], Name: this.Name, LastName: this.apellido, Position: this.position, Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
     debugger;
 
     this.heroService.ServicioPostPost("UpdateTeam", creadoobj).subscribe((value) => {

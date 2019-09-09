@@ -1,64 +1,65 @@
-<div class="col-12">
-  <strong>  Design Principal</strong>
+<div class="col-12" style="padding:0;">
+  <br />
+  <h2>  Design Principal</h2>
+  <br />
 </div>
 <div class="row">
-    <div class=" col-sm-6 col-md-6 " *ngFor="let post of posts" >
-      <div class="card " >
-              <a style="cursor:pointer; color:inherit">
-    
-                <div class="card-body">
-                  <img class="img-size-build" src="{{post.frontphoto}}" />
-                </div>
-                <div class="card-footer"> Section : {{post.posdesc}}
-                    <br>
-                    Description: {{post.desc}}</div>
-                </a>
-                <button   style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
-                    Editar
-                  </button>    
-            </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
-          
-      </div>
-    </div><!--/.col-->
-  </div><!--/.row-->
-  
-  <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-primary" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <div class=" col-sm-6 col-md-6 " *ngFor="let post of posts">
+    <mat-card style="text-align:center; margin-bottom:15px;">
+      <a style="cursor:pointer; color:inherit">
+
+        <div class="card-body">
+          <img class="img-size-build" src="{{post.frontphoto}}" />
         </div>
-        <form #loginForm="ngForm" autocomplete="off">
+        <div class="card-footer">
+          Section : {{post.posdesc}}
+          <br>
+          Description: {{post.desc}}
+        </div>
+      </a>
+      <button style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+        Editar
+      </button>
+    </mat-card>
+  </div><!--/.col-->
+</div><!--/.row-->
+
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
-          *La imagen deberá de ser de 1920px * 1080px; 
+          *La imagen deberá de ser de 1920px * 1080px;
           <div class="custom-file margin-gral ">
-           
+
             <input type="file" accept="image/*"
                    (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
             <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-  
+
           </div>
           <div class="col-12  margin-gral">
-              Category:
-                <input type="text" [(ngModel)]="posdesc" class="form-control" name="postitle" id="postitle"  placeholder="Name" required>
-              </div>
-              <div class="col-12  margin-gral">
-                  Description:
-                    <input type="text" [(ngModel)]="desc" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
-                  </div>
+            Category:
+            <input type="text" [(ngModel)]="posdesc" class="form-control" name="postitle" id="postitle" placeholder="Name" required>
+          </div>
+          <div class="col-12  margin-gral">
+            Description:
+            <input type="text" [(ngModel)]="desc" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
+          </div>
         </div>
       </form>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar </button>
-          <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid"  (click)="updatephoto()" >Guardar Cambios</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  
-  
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar </button>
+        <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

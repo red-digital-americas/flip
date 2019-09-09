@@ -45,6 +45,7 @@ export class HomeindexComponent implements OnInit {
   imageInputLabel = "Choose file";
 
   direction: string = "";
+  comming = false;
   public user: string[];
 
   postphoto: string = "assets/img/Coliving.jpg";
@@ -138,8 +139,8 @@ this.router.navigate(['webadmin/homeservices/' + id])
    
    updatephoto() {
     // debugger;
-    if(this.imageInputLabel!="Choose file"){
-    var creadoobj = { id: this.PostId, Photo: this.postphoto, Title: this.title , Direction: this.direction ,  Position: this.PostId};
+     if (this.imageInputLabel != "Choose file") {
+       var creadoobj = { id: this.PostId, Photo: this.postphoto, Title: this.title, Direction: this.direction, IsComming: this.comming,  Position: this.PostId };
     //debugger;
 
     this.heroService.ServicioPostPost("UpdateHomeIndex", creadoobj).subscribe((value) => {

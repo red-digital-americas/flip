@@ -1,27 +1,26 @@
 
-<div class="col-12">
-    <strong>  Página Principal Design </strong>
-  </div>
+<div class="col-12" style="padding:0;">
+  <br />
+  <h2>  Página Principal Design </h2>
+  <br />
+</div>
 
 
 <div class="row">
-    <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts" >
-      <div class="card " >
-              <a style="cursor:pointer; color:inherit">
-    
-                <div class="card-body">
-                  <img class="img-size-build" src="{{post.frontphoto}}" />
-                </div>
-                </a>
-                <button   style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
-                    Editar
-                  </button>    
-            </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
-          
-      </div>
-    </div><!--/.col-->
-  </div><!--/.row-->
+  <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts">
+    <mat-card style="text-align:center; margin-bottom: 15px;">
+      <a style="cursor:pointer; color:inherit">
+
+        <div class="card-body">
+          <img class="img-size-build" src="{{post.frontphoto}}" />
+        </div>
+      </a>
+      <button style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
+        Editar
+      </button>
+    </mat-card>
+  </div><!--/.col-->
+</div><!--/.row-->
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
@@ -33,21 +32,21 @@
       </div>
       <form #loginForm="ngForm" autocomplete="off">
 
-      <div class="modal-body">
-        *La imagen deberá de ser de 288px * 866px;
-        <div class="custom-file margin-gral ">
-         
-          <input type="file" accept="image/*"
-                 (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-          <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
+        <div class="modal-body">
+          *La imagen deberá de ser de 288px * 866px;
+          <div class="custom-file margin-gral ">
+
+            <input type="file" accept="image/*"
+                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
+            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
+
+          </div>
 
         </div>
-        
-      </div>
-    </form>
+      </form>
       <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-          <button type="submit" class="btn btn-primary"  [disabled]="!loginForm.form.valid"  (click)="updatephoto()" >Guardar Cambios </button>
+        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios </button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -27,6 +27,9 @@ import { HomemenuComponent } from './homemenu/homemenu.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -41,6 +44,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatTabsModule,
     MatMenuModule,
     MatIconModule,
+    MatCardModule,
+    MatButtonModule,
+    MatCheckboxModule,
     ToasterModule.forRoot(),
   ],
   declarations: [WebadminComponent, TeamComponent, JobsComponent, PressComponent, DesignComponent, DesignindexComponent, MoreindexComponent, HomeindexComponent, HomeservicesComponent, HomeammenitiesComponent, HomeroomsComponent, HomegeneralComponent, HomemenuComponent]

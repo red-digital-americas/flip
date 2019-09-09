@@ -7,30 +7,30 @@ export class MenuService {
 
   private flipWeb = [ 
     { 
-      name: 'Index', url: '/webadmin/webadmin', icon: 'icon-drop',
+      name: 'Index', url: '/webadmin/webadmin', icon: 'icon-check',
       children: [  
-        { name: 'Index', url: '/webadmin/webadmin', icon: 'icon-drop'}, 
-        { name: 'Desgin Index', url: '/webadmin/designindex', icon: 'icon-drop'}, 
-        { name: 'More Index', url: '/webadmin/moreindex', icon: 'icon-drop' },
-        { name: 'Home Index', url: '/webadmin/homeindex', icon: 'icon-drop'}
+        { name: 'Index', url: '/webadmin/webadmin', icon: 'icon-minus'}, 
+        { name: 'Desgin Index', url: '/webadmin/designindex', icon: 'icon-minus'}, 
+        { name: 'More Index', url: '/webadmin/moreindex', icon: 'icon-minus' },
+        { name: 'Home Index', url: '/webadmin/homeindex/1', icon: 'icon-minus'}
       ]
     },  
     {
-      name: 'Home', type: 1, url: '/webadmin/homemenu', icon: 'icon-puzzle', 
+      name: 'Home', type: 1, url: '/webadmin/homemenu', icon: 'icon-home', 
       children: [  
         // { name: 'Home Services', url: '/webadmin/homeservices', icon: 'icon-drop' },
         // { name: 'Home Ammenities', url: '/webadmin/homeammenities', icon: 'icon-drop' },
         // { name: 'Home General', url: '/webadmin/homegeneral', icon: 'icon-drop' },
-        { name: 'Home Menu', url: '/webadmin/homemenu', icon: 'icon-drop' },
+        { name: 'Home Menu', url: '/webadmin/homemenu', icon: 'icon-minus' },
       ]
     },
-    { name: 'Design', type: 1, url:'/webadmin/design', icon: 'icon-cursor' },
+    { name: 'Design', type: 1, url: '/webadmin/design', icon: 'icon-grid' },
     {
-      name: 'More', type: 1, url: '/', icon: 'icon-cursor',
+      name: 'More', type: 1, url: '/', icon: 'icon-plus',
       children: [  
-        { name: 'Team', url: '/webadmin/team', icon: 'icon-cursor' },
-        { name: 'Jobs', url: '/webadmin/jobs', icon: 'icon-cursor' },
-        { name: 'Press', url: '/webadmin/press', icon: 'icon-cursor'}
+        { name: 'Team', url: '/webadmin/team', icon: 'icon-minus' },
+        { name: 'Jobs', url: '/webadmin/jobs', icon: 'icon-minus' },
+        { name: 'Press', url: '/webadmin/press', icon: 'icon-minus'}
       ]
     }
   ] 

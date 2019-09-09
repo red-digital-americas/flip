@@ -1,116 +1,114 @@
-<div class="col-12">
-  <strong>  Team Sección </strong>
+<div class="col-12" style="padding:0;">
+  <br />
+  <h2>Team Sección </h2>
+  <br />
 </div>
 <div class="row">
-    <div class=" col  " *ngFor="let post of posts; let i = index" >
-      <div class="card "  *ngIf="i!=1" style="    height: 470px;">
-        <div class="card-body pb-0">
-          <div class="col-sm-12 col-md-12" >
-            <strong> Nombre : </strong>{{post.name}} {{post.lastname}}
-            <br>
-            <strong> Apellido : </strong> {{post.lastname}}
-            <br>
-           <strong> Desc :  </strong> {{post.desc}}
-            <br>
-           <strong> Linkedin :  </strong>  {{post.link}}
-            <br> 
-            <strong> Twitter :  </strong>  {{post.twitter}}
-            <br> 
-          </div>
-          <div class="btn-group float-right" dropdown>
+  <div class="col-md-3" *ngFor="let post of posts; let i = index">
+    <mat-card *ngIf="i!=1" style=" height:620px; margin-bottom: 15px">
+      <div class="col-sm-12 col-md-12" style="padding:0;">
+        <p><strong> Nombre : </strong>{{post.name}} {{post.lastname}}</p>
+        <br>
+        <p><strong> Apellido : </strong> {{post.lastname}}</p>
+        <br>
+        <p><strong> Puesto : </strong> {{post.position}}</p>
+        <br>
+        <p><strong> Desc :  </strong> {{post.desc}}</p>
+        <br>
+        <p><strong> Linkedin :  </strong>  {{post.link}}</p>
+        <br>
+        <p><strong> Twitter :  </strong>  {{post.twitter}}</p>
+        <br>
+      </div>
+      <div class="btn-group" style="text-align:center">
 
-            <div class="row">
-                <div  class="col-sm-6 col-md-4">
-                    <img style="margin-right: 10px;" class="img-size" src="{{post.frontphoto}}">
-                  </div> 
-            </div>
-           
-            <div class="row">
-              
-           <div class="col-sm-6 col-md-4">
-              <img  class="img-size" src="{{post.backphoto}}">
-            </div> 
-               </div>
-          </div>
-          
-          <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-top: 20px;" (click)="primaryModal.show();passdata(post.id, post.name ,post.lastname, post.desc, post.twitter, post.link );">
-              Editar
-            </button>        
+        <div class="col-sm-6 col-md-6">
+          <img class="img-size" src="{{post.frontphoto}}">
         </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
-          
+
+        <div class="col-sm-6 col-md-6">
+          <img class="img-size" src="{{post.backphoto}}">
         </div>
+
       </div>
 
-
-      <div class="card "  *ngIf="i==1" style="     background-color: #f8cd58;height: 470px;">
-        <div class="card-body pb-0">
-          
-      THE TEAM 
+      <div class="col-12" style="text-align:center; vertical-align:baseline;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-top: 20px;" (click)="primaryModal.show();passdata(post.id, post.name ,post.lastname, post.position, post.desc, post.twitter, post.link );">
+          Editar
+        </button>
       </div>
-    </div><!--/.col-->
+    </mat-card>
+
+
+    <mat-card *ngIf="i==1" style="background-color: #f8cd58;height: 620px; margin-bottom: 15px">
+      THE TEAM
+    </mat-card><!--/.col-->
   </div><!--/.row-->
-  
-  <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-primary" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form #loginForm="ngForm" autocomplete="off">
+</div>
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #loginForm="ngForm" autocomplete="off">
 
         <div class="modal-body">
-         <div class="col-12  margin-gral">
+          <div class="col-12  margin-gral">
             Name:
-              <input type="text" [(ngModel)]="Name" class="form-control" name="posname" id="posname"  placeholder="Nombre" required>
-            </div>
-            <div class="col-12  margin-gral">
-              Lastname:
-                <input type="text" [(ngModel)]="apellido" class="form-control" name="posap" id="posap"  placeholder="Apellido" required>
-              </div>
-            <div class="col-12  margin-gral">
-                Desc:
-                  <input type="text" [(ngModel)]="Desc" class="form-control" name="posdesc" id="posdesc" placeholder="Desc" required>
-                </div>
-                <div class="col-12  margin-gral">
-                    Link:
-                      <input type="text" [(ngModel)]="Link" class="form-control" name="poslink" id="poslink" placeholder="Linkedin" required>
-                    </div>
-                    <div class="col-12  margin-gral">
-                        Twitter:
-                          <input type="text" [(ngModel)]="tt" class="form-control" name="postt" id="postt" placeholder="Twitter" required>
-                        </div>
-
-
-           Imagen Default : *La imagen deberá de ser de 350px * 350px; 
-          <div class="custom-file margin-gral "> 
-            <input type="file" accept="image/*"
-            (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
-            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-  
+            <input type="text" [(ngModel)]="Name" class="form-control" name="posname" id="posname" placeholder="Nombre" required>
           </div>
-          Imagen  Hover : *La imagen deberá de ser de 350px * 350px; 
-                    <div class="custom-file margin-gral ">
+          <div class="col-12  margin-gral">
+            Lastname:
+            <input type="text" [(ngModel)]="apellido" class="form-control" name="posap" id="posap" placeholder="Apellido" required>
+          </div>
+          <div class="col-12  margin-gral">
+            Position:
+            <input type="text" [(ngModel)]="position" class="form-control" name="posi" id="posi" placeholder="Puesto" required>
+          </div>
+          <div class="col-12  margin-gral">
+            Desc:
+            <input type="text" [(ngModel)]="Desc" class="form-control" name="posdesc" id="posdesc" placeholder="Desc" required>
+          </div>
+          <div class="col-12  margin-gral">
+            Link:
+            <input type="text" [(ngModel)]="Link" class="form-control" name="poslink" id="poslink" placeholder="Linkedin" required>
+          </div>
+          <div class="col-12  margin-gral">
+            Twitter:
+            <input type="text" [(ngModel)]="tt" class="form-control" name="postt" id="postt" placeholder="Twitter" required>
+          </div>
+
+
+          Imagen Default : *La imagen deberá de ser de 350px * 350px;
+          <div class="custom-file margin-gral ">
             <input type="file" accept="image/*"
-            (change)="prepareImages($event,1)"class="custom-file-input" id="validatedCustomFile">
+                   (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
+            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
+
+          </div>
+          Imagen  Hover : *La imagen deberá de ser de 350px * 350px;
+          <div class="custom-file margin-gral ">
+            <input type="file" accept="image/*"
+                   (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile">
             <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
-  
+
           </div>
         </div>
-        
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-          <button type="button" class="btn btn-primary"   [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Guardar Cambios</button>
+          <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
         </div>
-          </form>
+      </form>
 
-    
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  
-  
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

@@ -1,81 +1,86 @@
-<div class="col-12">
-    <strong> Prensa </strong>
-  </div>
-  
+<div class="col-12" style="padding:0;">
+  <br />
+  <h2>Prensa</h2>
+  <br />
+</div>
 
-  <div class="row">
-      <div style="width: 18% ; margin:8px; " *ngFor="let post of posts; let i = index " >
-        <div class="card "*ngIf="i!=12" style="    height: 500px;" >
-                  <div class="card-body">
-                    <img class="img-size-build" src="{{post.photo}}" />
-                  </div>
-                  <div class="card-footer"> 
-                      <strong> Title : </strong>{{post.title}} 
-                      <br>
-                     <strong> Short Resume :  </strong> {{post.reusme}}
-                      <br>
-                     <strong> Long Resume :  </strong>  {{post.longresume}}
-                      <br> 
-                      <button    type="button" class="btn btn-primary col-12" data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title, post.reusme, post.longresume);">
-                          Editar
-                        </button> 
-                    </div>
-                  </div>
-                    
-          
-      
-      <div class="card "  *ngIf="i==12" style=" background-color: #f8cd58;height: 500px;">
-        <div class="card-body">
-          PRESS
+
+<div class="row">
+  <div class="col-md-3" *ngFor="let post of posts; let i = index">
+    <mat-card *ngIf="i!=12" style="height: 600px; margin-bottom:15px;">
+      <div class="col-sm-12 col-md-12" style="padding:0;">
+        <img class="img-size-build" src="{{post.photo}}" />
       </div>
-    </div><!--/.row-->
+      <div style="margin-bottom:15px; word-wrap: break-word;">
+        <p><strong> Title : </strong>{{post.title}}</p>
+        <br>
+        <p><strong> Short Resume :  </strong> {{post.reusme}}</p>
+        <br>
+        <p><strong> Long Resume :  </strong> {{post.longresume}}</p>
+        <br>
+      </div>
+
+      <div class="col-md-12" style="text-align:center">
+        <button type="button" class="btn btn-primary col-12" data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title, post.reusme, post.longresume);">
+          Editar
+        </button>
+      </div>
+    </mat-card>
+
+
+
+    <mat-card *ngIf="i==12" style="background-color: #f8cd58;height: 600px; margin-bottom:15px;">
+      <div class="col-sm-12 col-md-12" style="padding:0;">
+        PRESS
+      </div>
+    </mat-card><!--/.row-->
   </div>
-  </div>
-    
-  <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-primary" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-          
-        <form #loginForm="ngForm" autocomplete="off">
+</div>
+
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
-            <div class="col-12  margin-gral">
-                Title:
-                  <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle"  placeholder="Title" required>
-                </div>
-                <div class="col-12  margin-gral">
-                    Short Resume:
-                      <input type="text" [(ngModel)]="shortresume" class="form-control" name="shr" id="shr" placeholder="Long Desc" required>
-                    </div>
-                    <div class="col-12  margin-gral">
-                        Long Resume:
-                          <input type="text" [(ngModel)]="longresume" class="form-control" name="lng" id="lng" placeholder="ShortDesc" required>
-                        </div>
-                        La imagen de la noticia  deberá de ser de 600px * 600px
+          <div class="col-12  margin-gral">
+            Title:
+            <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
+          </div>
+          <div class="col-12  margin-gral">
+            Short Resume:
+            <input type="text" [(ngModel)]="shortresume" class="form-control" name="shr" id="shr" placeholder="Long Desc" required>
+          </div>
+          <div class="col-12  margin-gral">
+            Long Resume:
+            <input type="text" [(ngModel)]="longresume" class="form-control" name="lng" id="lng" placeholder="ShortDesc" required>
+          </div>
+          La imagen de la noticia  deberá de ser de 600px * 600px
           <div class="custom-file margin-gral ">
-           
+
             <input type="file" accept="image/*"
                    (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
             <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-  
+
           </div>
-          
+
         </div>
-        </form>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-          <button type="button" class="btn btn-primary"  [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Guardar Cambios</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  
-  
-  
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+        <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
 
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

@@ -1,53 +1,55 @@
 <div class="col-12">
-  <strong>  Home Menu principal</strong>
+  <br />
+  <h2>  Home Menu principal</h2>
+  <br />
 </div>
 
-<a (click)="gotonewsfeed(IDBUILD)" style="cursor:pointer; color:inherit">
+<!--<a (click)="gotonewsfeed(IDBUILD)" style="cursor:pointer; color:inherit">
 
-  Home Index 
-  </a>
-  <a (click)="amm(IDBUILD)" style="cursor:pointer; color:inherit">
+  Home Index
+</a>
+<a (click)="amm(IDBUILD)" style="cursor:pointer; color:inherit">
 
-    Home Ammenities 
-    </a>
-    <a (click)="gene(IDBUILD)" style="cursor:pointer; color:inherit">
+  Home Ammenities
+</a>
+<a (click)="gene(IDBUILD)" style="cursor:pointer; color:inherit">
 
-      Home General 
-      </a>
-      <a (click)="serv(IDBUILD)" style="cursor:pointer; color:inherit">
+  Home General
+</a>
+<a (click)="serv(IDBUILD)" style="cursor:pointer; color:inherit">
 
-        Home Services 
-        </a>
-        <a (click)="room(IDBUILD)" style="cursor:pointer; color:inherit">
+  Home Services
+</a>
+<a (click)="room(IDBUILD)" style="cursor:pointer; color:inherit">
 
-          Home Room 
-          </a>
+  Home Room
+</a>-->
 
 <div class="row">
-    <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts" >
-      <div class="card " >
-        
-          <div class="col-sm-12 col-md-12" >
-              <strong> Title : </strong>{{post.title}} 
-              <br>
-             <strong> Direction :  </strong> {{post.direction}}
-              <br>
-            </div>
-              <a style="cursor:pointer; color:inherit">
-    
-                <div class="card-body">
-                  <img class="img-size-build" src="{{post.frontphoto}}" />
-                </div>
-                </a>
-                <button   style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title, post.direction);">
-                    Editar
-                  </button>    
-            </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
-          
+  <div class=" col-sm-3 col-md-3" *ngFor="let post of posts">
+    <mat-card style="margin-bottom: 15px;">
+
+      <div class="col-sm-12 col-md-12" style="padding:0;">
+        <strong> Title : </strong>{{post.title}}
+        <br>
+        <strong> Direction :  </strong> {{post.direction}}
+        <br>
       </div>
-    </div><!--/.col-->
-  </div><!--/.row-->
+      <a style="cursor:pointer; color:inherit">
+
+        <div class="card-body">
+          <img class="img-size-build" src="{{post.frontphoto}}" />
+        </div>
+      </a>
+      <div class="col-md-12" style="text-align:center;">
+        <button style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title, post.direction);">
+          Editar
+        </button>
+      </div>
+      
+    </mat-card>
+  </div><!--/.col-->
+</div><!--/.row-->
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
@@ -58,31 +60,35 @@
         </button>
       </div>
       <form #loginForm="ngForm" autocomplete="off">
-      <div class="modal-body">
-        *La imagen deberá de ser de 288px * 866px; 
-        <div class="custom-file margin-gral ">
+        <div class="modal-body">
+          *La imagen deberá de ser de 288px * 866px;
+          <div class="custom-file margin-gral ">
             <input type="file" accept="image/*"
-            (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-     <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
+                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
+            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
 
-   </div>
-            <div class="col-12  margin-gral">
-                Title:
-                  <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle"  placeholder="Nombre" required>
-                </div>
-                <div class="col-12  margin-gral">
-                    Direction:
-                      <input type="text" [(ngModel)]="direction" class="form-control" name="dire" id="dire" placeholder="Desc" required>
-                    </div>
-                 
-         
-        
-      </div>
-    </form>
+          </div>
+          <div class="col-12  margin-gral">
+            Title:
+            <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="Nombre" required>
+          </div>
+          <div class="col-12  margin-gral">
+            Direction:
+            <input type="text" [(ngModel)]="direction" class="form-control" name="dire" id="dire" placeholder="Desc" required>
+          </div>
+
+          <div class="col-12 margin-gral">
+            Comming:
+            <mat-checkbox [(ngModel)]="comming" name="dire" id="dire"></mat-checkbox>
+            <!--<input type="text" [(ngModel)]="direction" class="form-control" name="dire" id="dire" placeholder="Desc" required>-->
+          </div>
+
+        </div>
+      </form>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-        <button type="button" class="btn btn-primary"  [disabled]="!loginForm.form.valid"  (click)="updatephoto()" >Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

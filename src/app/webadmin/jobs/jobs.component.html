@@ -1,65 +1,72 @@
-<div class="col-12">
-    <strong>  Empleos</strong>
-  </div>
+<div class="col-12" style="padding:0;">
+  <br />
+  <h2>Empleos</h2>
+  <br />
+</div>
 
-  
+
 <div class="row">
-    <div style="width: 18% ; margin:8px; " *ngFor="let post of posts; let i = index" >
-      <div class="card " *ngIf="i!=3" style="    height: 400px;">
-        <div class="card-body ">
-                        <strong> Title : </strong>{{post.title}}
-                        <br>
-                       <strong> LongDesc :  </strong> {{post.longdesc}}
-                        <br>
-                       <strong> ShortDesc :  </strong>  {{post.shortdesc}}
-                        <br> 
-  <button   style="margin-top: 10%;" type="button" class="btn btn-primary col-12" data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title, post.longdesc,post.shortdesc);">
-                    Editar
-                  </button>    
-         
-            </div>
-       
-    </div><!--/.col-->
-    <div class="card "  *ngIf="i==3" style="     background-color: #f8cd58;height: 400px;">
-      <div class="card-body pb-0">
-        JOBS
-    </div>
-  </div><!--/.col-->
-  </div><!--/.row-->
-  <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-primary" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+  <div class="col-md-3" *ngFor="let post of posts; let i = index">
+    <mat-card *ngIf="i!=3" style="height: 400px; margin-bottom: 15px">
+      <div class="col-sm-12 col-md-12" style="padding:0;">
+        <strong> Title : </strong>{{post.title}}
+        <br>
+        <strong> LongDesc :  </strong> {{post.longdesc}}
+        <br>
+        <strong> ShortDesc :  </strong>  {{post.shortdesc}}
+        <br>
+
+        <div class="col-12" style="text-align:center; vertical-align:baseline;">
+          <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-top: 20px;" (click)="primaryModal.show();passdata(post.id, post.title, post.longdesc,post.shortdesc);">
+            Editar
           </button>
         </div>
-        
-        <form #loginForm="ngForm" autocomplete="off">
+
+      </div>
+
+    </mat-card><!--/.col-->
+    <mat-card *ngIf="i==3" style="background-color: #f8cd58;height: 400px; margin-bottom:15px">
+      <div class="col-sm-12 col-md-12" style="padding:0;">
+        JOBS
+      </div>
+    </mat-card><!--/.col-->
+  </div><!--/.row-->
+</div>
+
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
-            <div class="col-12  margin-gral">
-                Title:
-                  <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle"  placeholder="Title" required>
-                </div>
-                <div class="col-12  margin-gral">
-                    LongDesc:
-                      <input type="text" [(ngModel)]="longdesc" class="form-control" name="lng" id="lng" placeholder="Long Desc" required>
-                    </div>
-                    <div class="col-12  margin-gral">
-                        ShortDesc:
-                          <input type="text" [(ngModel)]="shortdesc" class="form-control" name="sht" id="sht" placeholder="ShortDesc" required>
-                        </div>
-          
+          <div class="col-12  margin-gral">
+            Title:
+            <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
+          </div>
+          <div class="col-12  margin-gral">
+            LongDesc:
+            <input type="text" [(ngModel)]="longdesc" class="form-control" name="lng" id="lng" placeholder="Long Desc" required>
+          </div>
+          <div class="col-12  margin-gral">
+            ShortDesc:
+            <input type="text" [(ngModel)]="shortdesc" class="form-control" name="sht" id="sht" placeholder="ShortDesc" required>
+          </div>
+
         </div>
       </form>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-          <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()" >Guardar Cambios</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  
-  
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+        <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

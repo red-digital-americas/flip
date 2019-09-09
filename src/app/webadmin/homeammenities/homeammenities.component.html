@@ -1,215 +1,244 @@
-<a (click)="gotonewsfeed(IDBUILD)" style="cursor:pointer; color:inherit">
+<!--<a (click)="gotonewsfeed(IDBUILD)" style="cursor:pointer; color:inherit">
 
-  Home Index 
-  </a>
-  <a (click)="amm(IDBUILD)" style="cursor:pointer; color:inherit">
+  Home Index
+</a>
+<a (click)="amm(IDBUILD)" style="cursor:pointer; color:inherit">
 
-    Home Ammenities 
-    </a>
-    <a (click)="gene(IDBUILD)" style="cursor:pointer; color:inherit">
+  Home Ammenities
+</a>
+<a (click)="gene(IDBUILD)" style="cursor:pointer; color:inherit">
 
-      Home General 
-      </a>
-      <a (click)="serv(IDBUILD)" style="cursor:pointer; color:inherit">
+  Home General
+</a>
+<a (click)="serv(IDBUILD)" style="cursor:pointer; color:inherit">
 
-        Home Services 
-        </a>
-        <a (click)="room(IDBUILD)" style="cursor:pointer; color:inherit">
+  Home Services
+</a>
+<a (click)="room(IDBUILD)" style="cursor:pointer; color:inherit">
 
-          Home Room 
-          </a>
+  Home Room
+</a>-->
 
 <div class="row">
-    <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts" >
-      <div class="card ">
-        <div class="card-body ">
-          <div class="btn-group margin-gral col-sm-12 col-md-12">
-              <div class="row">
-                  <div  class="col-sm-12 col-md-12">
-                  <strong> Title :  </strong> {{post.title}}
-                  </div>
-                  <div  class="col-sm-12 col-md-12">
-                    
-                  <strong> Description :  </strong> {{post.desc}}
-                  </div>
-                   
-                    
-                         <div  style="margin-top: 5%;" class="col-sm-12 col-md-12">
-                             Icon:<img style="margin: 5%; " class="img-size" src="{{post.icon}}">
-                             Icon Hover :<img style="margin: 5%; " class="img-size" src="{{post.icon2}}">
+  <div class="col-md-12">
+    <br />
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <h2><mat-icon><i class="fa fa-building-o" aria-hidden="true"></i></mat-icon> Altata <i class="fa fa-angle-down" aria-hidden="true"></i></h2>
+    </button>
 
-                           </div>
-                           
-                           <div  style="margin-top: 5%;" class="col-sm-12 col-md-12">
-                               Build Photo:
+    <mat-menu #menu="matMenu">
+      <!--<button mat-menu-item (click)="gotonewsfeed(IDBUILD)">
+      <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
+      <span>Home Index</span>
+    </button>-->
+      <button mat-menu-item (click)="amm(IDBUILD)">
+        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
+        <span>Home Ammenities</span>
+      </button>
+      <button mat-menu-item (click)="gene(IDBUILD)">
+        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
+        <span>Home General</span>
+      </button>
+      <button mat-menu-item (click)="serv(IDBUILD)">
+        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
+        <span>Home Services</span>
+      </button>
+      <button mat-menu-item (click)="room(IDBUILD)">
+        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
+        <span>Home Room</span>
+      </button>
+    </mat-menu>
+    <br />
+  </div>
+</div>
+<div class="row">
+  <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts">
+    <div class="card ">
+      <div class="card-body ">
+        <div class="btn-group margin-gral col-sm-12 col-md-12">
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <strong> Title :  </strong> {{post.title}}
+            </div>
+            <div class="col-sm-12 col-md-12">
 
-                               <img style="height: 400px; width: 600px;" class="img-size" src="../../../assets/webtmp.png">
-                          <img  class="img-size" style="
-                          position: absolute; 
+              <strong> Description :  </strong> {{post.desc}}
+            </div>
+
+
+            <div style="margin-top: 5%;" class="col-sm-12 col-md-12">
+              Icon:<img style="margin: 5%; " class="img-size" src="{{post.icon}}">
+              Icon Hover :<img style="margin: 5%; " class="img-size" src="{{post.icon2}}">
+
+            </div>
+
+            <div style="margin-top: 5%;" class="col-sm-12 col-md-12">
+              Build Photo:
+
+              <img style="height: 400px; width: 600px;" class="img-size" src="../../../assets/webtmp.png">
+              <img class="img-size" style="
+                          position: absolute;
                           left: 91px;
                           height: 375px;
                           width: 475px;
                           top: 22px;" src="{{post.build}}">
-                             </div> 
-                             <div  style="margin-top: 5%;" class="col-sm-12 col-md-12">
-                                 Build Mobile Photo:
-                                 <img style="height: 400px; width: 300px;" class="img-size" src="../../../assets/phone.png">
-                                 <img style="position: absolute;
+            </div>
+            <div style="margin-top: 5%;" class="col-sm-12 col-md-12">
+              Build Mobile Photo:
+              <img style="height: 400px; width: 300px;" class="img-size" src="../../../assets/phone.png">
+              <img style="position: absolute;
                                                    left: 201px;
                                                    height: 293px;
                                                    width: 180px;
                                                    top: 49px;" class="img-size" src="{{post.buildmobile}}">
-                               </div> 
+            </div>
 
-                               <div  class="col-sm-12 col-md-12">
-                                Photo:
-                                 
-                                <img style="height: 400px; width: 600px;" class="img-size" src="../../../assets/webtmp.png">
-                                <img  class="img-size" style="
-                                position: absolute; 
+            <div class="col-sm-12 col-md-12">
+              Photo:
+
+              <img style="height: 400px; width: 600px;" class="img-size" src="../../../assets/webtmp.png">
+              <img class="img-size" style="
+                                position: absolute;
                                 left: 56px;
                                 height: 375px;
                                 width: 475px;
                                 top: 22px;" src="{{post.frontphoto}}">
-                               </div> 
-                               <div  style="margin-top: 5%;" class="col-sm-12 col-md-12">
-                                 Mobile Photo:
-                                 <img style="height: 400px; width: 300px;" class="img-size" src="../../../assets/phone.png">
-                                 <img style="position: absolute;
+            </div>
+            <div style="margin-top: 5%;" class="col-sm-12 col-md-12">
+              Mobile Photo:
+              <img style="height: 400px; width: 300px;" class="img-size" src="../../../assets/phone.png">
+              <img style="position: absolute;
                                                    left: 166px;
                                                    height: 293px;
                                                    width: 180px;
                                                    top: 49px;" class="img-size" src="{{post.photomobile}}">
-      
-                               </div> 
-                               <button   style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title,post.desc);">
-                                Editar
-                           </button>  
-           </div>
-            
+
+            </div>
+            <button style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title,post.desc);">
+              Editar
+            </button>
           </div>
-                
+
         </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
-          
-        </div>
+
       </div>
-    </div><!--/.col-->
-   
-  </div><!--/.row-->
-  
-  <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-primary" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form #loginForm="ngForm" autocomplete="off">
-        <div class="modal-body">           Icon, la resolución debe de ser 50px * 50px: 
+      <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
 
-            <div class="custom-file margin-gral ">
+      </div>
+    </div>
+  </div><!--/.col-->
+
+</div><!--/.row-->
+
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #loginForm="ngForm" autocomplete="off">
+        <div class="modal-body">
+          Icon, la resolución debe de ser 50px * 50px:
+
+          <div class="custom-file margin-gral ">
             <input type="file" accept="image/*"
-            (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
-     <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
+                   (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
+            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
+          </div>
+
+          Icon Hover, la resolución debe de ser 50px * 50px:
+          <div class="custom-file margin-gral ">
+            <input type="file" accept="image/*"
+                   (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile">
+            <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
+          </div>
+
+
+          Imagen Build  la resolución debe de ser 1920px*1080px:
+          <div class="custom-file margin-gral ">
+            <input type="file" accept="image/*" class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event,2);" />
+
+
+            <div>
+              <image-cropper [imageChangedEvent]="imageChangedEvent"
+                             [maintainAspectRatio]="true"
+                             [aspectRatio]="1/ 2"
+                             [resizeToWidth]="600"
+                             [cropperMinWidth]="128"
+                             [onlyScaleDown]="true"
+                             [roundCropper]="false"
+                             format="png"
+                             outputType="both"
+                             imageQuality="100"
+                             (imageCropped)="imageCropped($event)"
+                             (imageLoaded)="imageLoaded()"
+                             (cropperReady)="cropperReady()"
+                             (loadImageFailed)="loadImageFailed()"
+                             [style.display]="showCropper ? null : 'none'"></image-cropper>
+              Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage" />
+              <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(3)">Upload Images</button>
+
             </div>
 
-            Icon Hover, la resolución debe de ser 50px * 50px: 
-            <div class="custom-file margin-gral ">
-            <input type="file" accept="image/*"
-            (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile">
-     <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
+            <label class="custom-file-label" for="customFile">{{imageInputLabelthree}}</label>
+
+          </div>
+
+          Imagen Background :
+          <div class="custom-file margin-gral ">
+            <input type="file" accept="image/*" class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent1($event); prepareImages($event,4);" />
+
+
+            <div>
+              <image-cropper [imageChangedEvent]="imageChangedEvent1"
+                             [maintainAspectRatio]="true"
+                             [aspectRatio]="1/ 2"
+                             [resizeToWidth]="600"
+                             [cropperMinWidth]="128"
+                             [onlyScaleDown]="true"
+                             [roundCropper]="false"
+                             format="png"
+                             outputType="both"
+                             imageQuality="100"
+                             (imageCropped)="imageCropped1($event)"
+                             (imageLoaded)="imageLoaded1()"
+                             (cropperReady)="cropperReady1()"
+                             (loadImageFailed)="loadImageFailed1()"
+                             [style.display]="showCropper ? null : 'none'"></image-cropper>
+              Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage1" />
+              <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(5)">Subir Imagen</button>
+
             </div>
 
+            <label class="custom-file-label" for="customFile">{{imageInputLabelfive}}</label>
 
-            Imagen Build  la resolución debe de ser 1920px*1080px:
-          <div class="custom-file margin-gral ">
-              <input type="file"   accept="image/*"  class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event,2);" />
-    
-      
-              <div>
-                  <image-cropper
-                      [imageChangedEvent]="imageChangedEvent"
-                      [maintainAspectRatio]="true"
-                      [aspectRatio]="1/ 2"
-                      [resizeToWidth]="600"
-                      [cropperMinWidth]="128"
-                      [onlyScaleDown]="true"
-                      [roundCropper]="false"
-                      format="png"
-                      outputType="both"
-                      imageQuality="100"
-                      (imageCropped)="imageCropped($event)"
-                      (imageLoaded)="imageLoaded()"
-                      (cropperReady)="cropperReady()"
-                      (loadImageFailed)="loadImageFailed()"
-                      [style.display]="showCropper ? null : 'none'"
-                  ></image-cropper>
-                  Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage" />
-                  <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(3)" >Upload Images</button>
+          </div>
 
-                </div>
-               
-       <label class="custom-file-label" for="customFile">{{imageInputLabelthree}}</label>
-  
-     </div>
 
-     Imagen Background :
-          <div class="custom-file margin-gral ">
-              <input type="file"   accept="image/*"  class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent1($event); prepareImages($event,4);" />
-    
-      
-              <div>
-                  <image-cropper
-                      [imageChangedEvent]="imageChangedEvent1"
-                      [maintainAspectRatio]="true"
-                      [aspectRatio]="1/ 2"
-                      [resizeToWidth]="600"
-                      [cropperMinWidth]="128"
-                      [onlyScaleDown]="true"
-                      [roundCropper]="false"
-                      format="png"
-                      outputType="both"
-                      imageQuality="100"
-                      (imageCropped)="imageCropped1($event)"
-                      (imageLoaded)="imageLoaded1()"
-                      (cropperReady)="cropperReady1()"
-                      (loadImageFailed)="loadImageFailed1()"
-                      [style.display]="showCropper ? null : 'none'"
-                  ></image-cropper>
-                  Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage1" />
-                  <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(5)" >Subir Imagen</button>
 
-                </div>
-               
-       <label class="custom-file-label" for="customFile">{{imageInputLabelfive}}</label>
-  
-     </div>
+          <div class="col-12  margin-gral">
+            Title:
+            <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="title" required>
+          </div>
+          <div class="col-12  margin-gral">
+            Description:
+            <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="des" placeholder="Desc" required>
+          </div>
 
-     
-            
-                  <div class="col-12  margin-gral">
-                      Title:
-                        <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="title" required>
-                      </div>
-                      <div class="col-12  margin-gral">
-                          Description:
-                            <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="des" placeholder="Desc" required>
-                          </div>
-                   
-           
-          
+
+
         </div>
       </form>
-        <div class="modal-footer">
-          <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-          <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid"  (click)="updatephoto()" >Subir Imagen</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  
-  
+      <div class="modal-footer">
+        <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+        <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Subir Imagen</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
