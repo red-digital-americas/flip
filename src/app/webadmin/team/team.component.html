@@ -7,7 +7,7 @@
   <div class="col-md-3" *ngFor="let post of posts; let i = index">
     <mat-card *ngIf="i!=1" style=" height:620px; margin-bottom: 15px">
       <div class="col-sm-12 col-md-12" style="padding:0;">
-        <p><strong> Nombre : </strong>{{post.name}} {{post.lastname}}</p>
+        <p><strong> Nombre : </strong>{{post.name}}</p>
         <br>
         <p><strong> Apellido : </strong> {{post.lastname}}</p>
         <br>
@@ -20,13 +20,13 @@
         <p><strong> Twitter :  </strong>  {{post.twitter}}</p>
         <br>
       </div>
-      <div class="btn-group" style="text-align:center">
+      <div class="row">
 
-        <div class="col-sm-6 col-md-6">
+        <!--<div class="col-sm-6 col-md-6">
           <img class="img-size" src="{{post.frontphoto}}">
-        </div>
+        </div>-->
 
-        <div class="col-sm-6 col-md-6">
+        <div class="col-sm-12 col-md-12" style="text-align:center">
           <img class="img-size" src="{{post.backphoto}}">
         </div>
 
@@ -56,47 +56,50 @@
       </div>
       <form #loginForm="ngForm" autocomplete="off">
 
-        <div class="modal-body">
-          <div class="col-12  margin-gral">
+        <div class="modal-body" style="padding:0; margin-bottom:20px;">
+          <br />
+          <div class="col-12  margin-gral" style="margin-bottom:10px">
             Name:
             <input type="text" [(ngModel)]="Name" class="form-control" name="posname" id="posname" placeholder="Nombre" required>
           </div>
-          <div class="col-12  margin-gral">
+          <div class="col-12  margin-gral" style="margin-bottom:10px">
             Lastname:
             <input type="text" [(ngModel)]="apellido" class="form-control" name="posap" id="posap" placeholder="Apellido" required>
           </div>
-          <div class="col-12  margin-gral">
+          <div class="col-12  margin-gral" style="margin-bottom:10px">
             Position:
             <input type="text" [(ngModel)]="position" class="form-control" name="posi" id="posi" placeholder="Puesto" required>
           </div>
-          <div class="col-12  margin-gral">
+          <div class="col-12  margin-gral" style="margin-bottom:10px">
             Desc:
             <input type="text" [(ngModel)]="Desc" class="form-control" name="posdesc" id="posdesc" placeholder="Desc" required>
           </div>
-          <div class="col-12  margin-gral">
+          <div class="col-12  margin-gral" style="margin-bottom:10px">
             Link:
             <input type="text" [(ngModel)]="Link" class="form-control" name="poslink" id="poslink" placeholder="Linkedin" required>
           </div>
-          <div class="col-12  margin-gral">
+          <div class="col-12  margin-gral" style="margin-bottom:10px">
             Twitter:
             <input type="text" [(ngModel)]="tt" class="form-control" name="postt" id="postt" placeholder="Twitter" required>
           </div>
 
+          <div class="col-12 margin-gral">
+            Imagen Default : *La imagen deberá de ser de 350px * 350px;
+            <div class="custom-file margin-gral" style="margin-bottom:10px">
+              <input type="file" accept="image/*"
+                     (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
+              <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
 
-          Imagen Default : *La imagen deberá de ser de 350px * 350px;
-          <div class="custom-file margin-gral ">
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
-            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
+            </div>
+            <!--Imagen  Hover : *La imagen deberá de ser de 350px * 350px;
+            <div class="custom-file margin-gral ">
+              <input type="file" accept="image/*"
+                     (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile">
+              <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
 
+            </div>-->
           </div>
-          Imagen  Hover : *La imagen deberá de ser de 350px * 350px;
-          <div class="custom-file margin-gral ">
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile">
-            <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
-
-          </div>
+         
         </div>
 
         <div class="modal-footer">

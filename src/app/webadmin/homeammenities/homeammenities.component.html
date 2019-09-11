@@ -114,7 +114,7 @@
                                                    top: 49px;" class="img-size" src="{{post.photomobile}}">
 
             </div>
-            <button style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title,post.desc);">
+            <button style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title, post.desc);">
               Editar
             </button>
           </div>
@@ -143,14 +143,14 @@
         <div class="modal-body">
           Icon, la resolución debe de ser 50px * 50px:
 
-          <div class="custom-file margin-gral ">
+          <div class="custom-file margin-gral" style="margin-bottom: 15px">
             <input type="file" accept="image/*"
                    (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
             <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
           </div>
 
           Icon Hover, la resolución debe de ser 50px * 50px:
-          <div class="custom-file margin-gral ">
+          <div class="custom-file margin-gral" style="margin-bottom: 15px">
             <input type="file" accept="image/*"
                    (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile">
             <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
@@ -158,11 +158,11 @@
 
 
           Imagen Build  la resolución debe de ser 1920px*1080px:
-          <div class="custom-file margin-gral ">
+          <div class="custom-file margin-gral" style="margin-bottom: 15px">
             <input type="file" accept="image/*" class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event,2);" />
+            <br />
 
-
-            <div>
+            <div class="col-12" style="text-align:center; margin-bottom: 15px;">
               <image-cropper [imageChangedEvent]="imageChangedEvent"
                              [maintainAspectRatio]="true"
                              [aspectRatio]="1/ 2"
@@ -178,21 +178,22 @@
                              (cropperReady)="cropperReady()"
                              (loadImageFailed)="loadImageFailed()"
                              [style.display]="showCropper ? null : 'none'"></image-cropper>
-              Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage" />
-              <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(3)">Upload Images</button>
+              Mobile Image: <br />  <img style="width:25%;" [src]="croppedImage" />
 
             </div>
-
+            <div style="margin-bottom: 15px; text-align:center;">
+              <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(3)">Subir Imagen</button>
+            </div>
+            
             <label class="custom-file-label" for="customFile">{{imageInputLabelthree}}</label>
 
           </div>
-
-          Imagen Background :
-          <div class="custom-file margin-gral ">
+          <span style="margin-top:15px;">Imagen Background :</span>
+          <div class="custom-file margin-gral" style="margin-bottom: 15px">
             <input type="file" accept="image/*" class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent1($event); prepareImages($event,4);" />
 
 
-            <div>
+            <div class="col-12" style="text-align:center; margin-bottom: 15px;">
               <image-cropper [imageChangedEvent]="imageChangedEvent1"
                              [maintainAspectRatio]="true"
                              [aspectRatio]="1/ 2"
@@ -208,22 +209,24 @@
                              (cropperReady)="cropperReady1()"
                              (loadImageFailed)="loadImageFailed1()"
                              [style.display]="showCropper ? null : 'none'"></image-cropper>
-              Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage1" />
-              <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(5)">Subir Imagen</button>
-
+              Mobile Image: <br /> <img style="width:25%;" [src]="croppedImage1" />
+              <br />
             </div>
-
+            <div style="margin-bottom: 15px; text-align:center;">
+              <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(5)">Subir Imagen</button>
+            </div>
             <label class="custom-file-label" for="customFile">{{imageInputLabelfive}}</label>
 
           </div>
 
 
 
-          <div class="col-12  margin-gral">
+          <div class="col-12  margin-gral" style="margin-bottom: 15px">
             Title:
-            <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="title" required>
+            <!--<input type="text" [(ngModel)]="titulo" class="form-control" name="postitle" id="postitle" placeholder="title" required>-->
+            <input type="text" [(ngModel)]="test" class="form-control" name="tes" id="tes" placeholder="title" required>
           </div>
-          <div class="col-12  margin-gral">
+          <div class="col-12  margin-gral" style="margin-bottom: 15px">
             Description:
             <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="des" placeholder="Desc" required>
           </div>

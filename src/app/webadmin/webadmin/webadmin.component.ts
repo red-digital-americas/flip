@@ -102,7 +102,9 @@ export class WebadminComponent implements OnInit {
 
 
    passdata(id:any ){
-    this.PostId = id ; 
+     this.PostId = id;
+     this.imageInputLabel = "Choose file";
+     this.imageInputLabeltwo = "Choose file";
    }
 
    
@@ -130,7 +132,9 @@ export class WebadminComponent implements OnInit {
               this.postphoto=[]; 
               this.imageInputLabel="Choose file";
               this.imageInputLabeltwo="Choose file";
+
               this.showSuccess();
+              //location.reload();
             }
         }
       });    
@@ -155,13 +159,33 @@ export class WebadminComponent implements OnInit {
     this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
   }
    
-  prepareImages(e,indice ) {
+  prepareImages(e, indice) {
+    //this.newImages = []
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
-        this.newImages[indice]=(f);
+        this.heroService.UploadImgSuc(f).subscribe((r) => {
+          console.log(r);
+          if (indice == 0) {
+            this.imageInputLabel = f.name;
+            this.postphoto[indice] = r.message;
+          }
+          if (indice == 1) {
+            this.imageInputLabeltwo = f.name;
+            this.postphoto[indice] = r.message;
+          }
+          
+          //if (Utils.isDefined(r)) {
+          //  url = <string>r.message;
+          //  //debugger;
+          //  url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
+          //  debugger;
+          //  this.postphoto[indice]=(url);
+          //  debugger;
+          //}
+        })
       }
     }
-    this.addImages(indice);
+    //this.addImages(indice);
 
   }
 
@@ -179,14 +203,15 @@ export class WebadminComponent implements OnInit {
         this.imageInputLabeltwo = f.name;
         }
         this.heroService.UploadImgSuc(f).subscribe((r) => {
-          if (Utils.isDefined(r)) {
-            url = <string>r.message;
-            //debugger;
-            url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-            debugger;
-            this.postphoto[indice]=(url);
-            debugger;
-          }
+          console.log(r);
+          //if (Utils.isDefined(r)) {
+          //  url = <string>r.message;
+          //  //debugger;
+          //  url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
+          //  debugger;
+          //  this.postphoto[indice]=(url);
+          //  debugger;
+          //}
         })
       }
     }

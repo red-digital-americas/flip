@@ -120,8 +120,8 @@ export class TeamComponent implements OnInit {
    
    updatephoto() {
      debugger;
-    if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"){
-      var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[1], FrontPhoto: this.postphoto[0], Name: this.Name, LastName: this.apellido, Position: this.position, Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
+    if(this.imageInputLabel!="Choose file"){
+      var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[0], FrontPhoto: this.postphoto[0], Name: this.Name, LastName: this.apellido, Position: this.position, Description: this.Desc, LinkedinUrl: this.Link,TwitterUrl:this.tt};
     debugger;
 
     this.heroService.ServicioPostPost("UpdateTeam", creadoobj).subscribe((value) => {
@@ -169,7 +169,8 @@ export class TeamComponent implements OnInit {
     this.toasterService.pop('warning', 'Warning Toaster', 'Completa todos los campos por favor');
   }
    
-  prepareImages(e,indice ) {
+  prepareImages(e, indice) {
+    console.log(e);
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {
         this.newImages[indice]=(f);
