@@ -92,20 +92,25 @@ export class DetalleComponent implements OnInit {
     this.responseData = {action:'None'};
 
     var params = { "id": this.idProps };
-    this.heroService.service_general_get_with_params("Schedules", params).subscribe(
-      (res)=> {
-        // console.log(res.item);
-        if(res.result === "Success"){          
-          if (res.item.length < 0) { return; }
-          this.eventDetail = res.item[0];
-
-          this.isPastEvent();
-          // this.isAllDayEvent();
-        } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
-        else { console.log("Error");}
-      },
-      (err)=> {console.log(err);}
-    );   
+    debugger;
+    this.heroService.service_general_get_with_params("Schedules", params).subscribe((res) => {
+      debugger;
+      // console.log(res.item);
+      if (res.result === "Success") {
+        if (res.item.length < 0) {
+          return;
+        }
+        this.eventDetail = res.item[0];
+        this.isPastEvent();
+        // this.isAllDayEvent();
+      }
+      else if (res.result === "Error") {
+        console.log("Ocurrio un error" + res.detalle);
+      }
+      else {
+        console.log("Error");
+      }
+    }, (err) => { console.log(err); });   
         
     this.heroService.service_general_get_with_params("Books", {scheduleId: this.idProps}).subscribe(
       (res)=> {
@@ -272,7 +277,7 @@ export class DetalleComponent implements OnInit {
   }   
 
   LoadInvitableUsers() {       
-    this.heroService.service_general_get_with_params("Users", {buildingId: this.buildingIdProps}).subscribe(
+    this.heroService.service_general_get_with_params("Users", {buildingId: this.buildingIdProps, dateInit: this.eventDetail.timeStart,dateEnd:this.eventDetail.timeEnd}).subscribe(
       (res)=> {
         // console.log(res.item);
         if(res.result === "Success"){                    

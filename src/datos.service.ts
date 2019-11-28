@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
+import { environment } from './environments/environment';
 
 
 
@@ -17,8 +18,8 @@ export class DatosService {
 
 
   //public heroesUrl = 'http://localhost:49314/api/';  // URL to web api 
-  public heroesUrl = 'http://23.253.173.64:8088/api/';  // URL to web api 
-  private url: string = 'http://23.253.173.64:8088/'; // URL api server 
+  public heroesUrl = environment.URL + '/api/';  // URL to web api 
+  private url: string = environment.URL ; // URL api server 
   
   constructor(private http: HttpClient, private https: Http) { }
   getAPI() { return this.heroesUrl; }
@@ -73,6 +74,7 @@ export class DatosService {
   }
 
   service_general_get_with_params(url, parametros): Observable<any> {
+    debugger;
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');    
     return this.http.get(this.heroesUrl + url, { headers: headers, params: parametros });

@@ -21,6 +21,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RoleGuardService } from './guards/role-guard.service';
 
 export const routes: Routes = [
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: 'wizard1', component: Wizard1Component },
   { path: 'recoverpass', component: RecoverpassComponent },
   { path: 'wizard2a', component: Wizard2aComponent },
@@ -29,7 +30,7 @@ export const routes: Routes = [
   { path: 'wizard4', component: Wizard4Component },
   { path: 'wizard5', component: Wizard5Component },
   { path: 'footer', component: FooterComponent }, 
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full', },
+  // { path: '', redirectTo: 'dashboard', pathMatch: 'full', },
   { path: '404', component: P404Component, data: { title: 'Page 404' } },
   { path: '500', component: P500Component, data: { title: 'Page 500' } },
   { path: 'login', component: LoginComponent, data: { title: 'Login Page' } },

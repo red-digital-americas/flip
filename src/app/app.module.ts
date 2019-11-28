@@ -66,6 +66,7 @@ import { RecoverpassComponent } from './recoverpass/recoverpass.component';
 //import { AppLayoutComponent } from './container-app/app-layout/app-layout.component';
 
 import { ChartsModule } from 'ng2-charts';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   imports: [
@@ -86,6 +87,7 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
     ToasterModule,
     ImageCropperModule,
+    MaterialModule
   ],
   declarations: [
     AppComponent,
