@@ -34,6 +34,9 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { DetalleComponent } from './modals/detalle/detalle.component';
 import { CrearComponent } from './modals/crear/crear.component';
 import { InviteComponent } from './modals/invite/invite.component';
+import { ChatComponent } from './chat/chat.component';
+import { MaterialModule } from '../material/material.module';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -53,7 +56,8 @@ import { InviteComponent } from './modals/invite/invite.component';
     ModalModule.forRoot(),
     NavModule,
     NgSelectModule,  
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   declarations: [
     CommunitiesComponent,  
@@ -66,12 +70,13 @@ import { InviteComponent } from './modals/invite/invite.component';
     ReservationsComponent,
     DetalleComponent,
     CrearComponent,
-    InviteComponent
+    InviteComponent,
+    ChatComponent
   ],
   entryComponents: [
     DetalleComponent,
     CrearComponent,
-    InviteComponent
+    InviteComponent,
   ]
 })
 export class AdminModule { }

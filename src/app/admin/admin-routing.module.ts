@@ -9,6 +9,7 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { AmenitiesComponent } from './amenities/amenities.component';
 import { EditAmenitiesComponent } from './amenities/edit/edit-amenities.component';
 import { RoleGuardService } from '../guards/role-guard.service';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   { path: '', data: { title: 'AdminApp', expectedRole: [2,4] }, canActivate: [RoleGuardService],
@@ -22,6 +23,8 @@ const routes: Routes = [
       { path: 'amenities/:id', component: AmenitiesComponent, data: { title: 'Amenities' } },
       { path: 'editamenity/:id', component: EditAmenitiesComponent, data: { title: 'Amenities' } },
       { path: 'reservations/:id', component: ReservationsComponent, data: { title: 'Reservations' } },
+      { path: 'chat/:id', component: ChatComponent, data: { title: 'Chat' } },
+
       // { path: 'perks/:id', loadChildren: './perks/perks.module#PerksComponentModule' },
       { path: '', loadChildren: './perks/perks.module#PerksComponentModule', data: { title: 'Perks'} },
       { path: '', loadChildren: './services/services.module#ServicesComponentModule', data: { title: 'Services'}  },

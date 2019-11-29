@@ -97,5 +97,18 @@ export class DatosService {
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');    
     return this.http.delete(this.heroesUrl + url, { headers: headers });
   }
+  ServicioPostMessage(url, parametros): Observable<any> {
+    let headers = new HttpHeaders();
+    console.log(parametros);
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post(this.heroesUrl + 'Message/' + url, parametros);
+}
+
+ServicioPostUsers(url, parametros): Observable<any> {
+  let headers = new HttpHeaders();
+  console.log(parametros);
+  headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+  return this.http.post(this.heroesUrl + 'Users/' + url, parametros);
+}
 
 }

@@ -1,0 +1,68 @@
+<app-nav></app-nav>
+<div class="row">
+    <div class="col col-lg-6">
+        <mat-card class="card-h">
+            <mat-card-header>
+                <div *ngIf="userInfo">
+                    <img mat-card-avatar [src]="userInfo.avatar?userInfo.avatar:'src\assets\avatar-def.png'" />
+                    <mat-card-title>{{userInfo.name}} {{userInfo.lastName}}</mat-card-title>
+                    <mat-card-subtitle>Chats</mat-card-subtitle>
+                </div>
+
+            </mat-card-header>
+            <div class="conversation" (click)="seemessage(post.conversationId)" *ngFor="let post of posts">
+                <!-- <div class="conversation__avatar">            
+                                    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                                    <img [src]="post.photo">            
+                                </div> -->
+
+                <div class="conversation__content">
+                    <div class="conversation__name">{{post.name}} {{post.lastname}}</div>
+                    <div class="conversation__message">
+                        {{(post?.lastMessage?.length>35)? (post?.lastMessage | slice:0:35)+'...':(post?.lastMessage)}}
+                    </div>
+                </div>
+                <div *ngIf="post.unreadMessages > 0" class="conversation__message-indicator">{{post.unreadMessages}}
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-lg-6">
+        <div class="row">
+            <button btn>Boton</button>
+        </div>
+        <div class="row">  <mat-card class="card-h">
+                <mat-card-header>
+                    <div *ngIf="userInfo">
+                        <img mat-card-avatar [src]="userInfo.avatar?userInfo.avatar:'src\assets\avatar-def.png'" />
+                        <mat-card-title>{{userInfo.name}} {{userInfo.lastName}}</mat-card-title>
+                        <mat-card-subtitle>Chats</mat-card-subtitle>
+                    </div>
+    
+                </mat-card-header>
+                <div class="conversation" (click)="seemessage(post.conversationId)" *ngFor="let post of posts">
+                    <!-- <div class="conversation__avatar">            
+                                        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                                        <img [src]="post.photo">            
+                                    </div> -->
+    
+                    <div class="conversation__content">
+                        <div class="conversation__name">{{post.name}} {{post.lastname}}</div>
+                        <div class="conversation__message">
+                            {{(post?.lastMessage?.length>35)? (post?.lastMessage | slice:0:35)+'...':(post?.lastMessage)}}
+                        </div>
+                    </div>
+                    <div *ngIf="post.unreadMessages > 0" class="conversation__message-indicator">{{post.unreadMessages}}
+                    </div>
+                </div>
+            </mat-card></div>
+    </div>
+
+</div>
+
+
+
+<!-- <div (click)="ShowModal()" class="btn-alert">
+    <ion-img class="btn-alert__icon" src="/assets/Assets-prototype-flipApp/Group.svg"></ion-img>
+    <div class="btn-alert__text">New Message</div>                    
+</div>   -->

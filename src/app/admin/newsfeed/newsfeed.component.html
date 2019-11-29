@@ -9,7 +9,8 @@
         <div class="col-md-6 col-sm-6 ">
           <div class="form-row ">
             <div class="col-12  margin-gral">
-              <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
+              <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle"
+                placeholder="Title" required>
             </div>
           </div>
 
@@ -18,8 +19,8 @@
         <label class="custom-file-label" for="customFile">Choose file</label>
       </div>-->
           <div class="custom-file margin-gral ">
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
+            <input type="file" accept="image/*" (change)="prepareImages($event)" class="custom-file-input"
+              id="validatedCustomFile" required>
             <label class="custom-file-label" for="customFile">Choose file</label>
 
           </div>
@@ -44,13 +45,27 @@
             <div class="input-group-prepend">
               <span class="input-group-text">Write Post</span>
             </div>
-            <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="posttext" aria-label="With textarea" required></textarea>
+            <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="posttext"
+              aria-label="With textarea" required></textarea>
           </div>
-          <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Add Post</button>
+          <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral "
+            [disabled]="!loginForm.form.valid">Add Post</button>
         </div>
+      
         <div class="col-md-6 col-sm-6 ">
           <img class="img-size" src="{{postphoto}}" />
+
         </div>
+        <!-- <div class="col-md-6 col-sm-6 ">
+          <div style="margin-left: 50%;">
+abc
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 ">
+          <button (click)="addPost()" type="button" class="btn btn-outline-dark " [disabled]="!loginForm.form.valid">Add
+            Post</button>
+        </div> -->
+
       </div>
 
     </form>
@@ -65,7 +80,7 @@
         </div>
 
         <div class="card-body">
-          <label> {{post.posttext}}  </label>
+          <label> {{post.posttext}} </label>
           <div class="col-sm-6 col-md-4">
             <img class="img-size" src="{{post.photo}}">
           </div>
@@ -79,5 +94,3 @@
 </div>
 
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
-
-
