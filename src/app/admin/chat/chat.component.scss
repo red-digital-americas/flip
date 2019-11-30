@@ -55,3 +55,88 @@
 .card-h{
     width: 100%;
 }
+
+//////////////////////////////
+// CHAT
+.chat {
+    display: flex;
+    flex-flow: column;
+    padding: 1rem;
+
+    // overflow: scroll;
+    // height: 80vh;
+    // height: 76vh;
+}
+
+.message {
+    display: flex;
+    flex-flow: column;
+    width: 80%;
+    margin-bottom: 1rem;
+    font-size: .8rem;
+    padding: .5rem 1rem;  
+    
+    // letter-spacing: .1rem;                
+    // font-family: 'GothamProLight';
+    // font-weight: 100;
+
+    &:last-child {
+        margin-bottom: 0rem;
+    }
+
+    &--sender {
+        // align-self: flex-start;
+        background: #d6ebe8;
+        border-radius: 10px 10px 10px 0px;
+    }
+
+    &--receiver {
+        align-self: flex-end;
+        background: #efefef;
+        border-radius: 10px 10px 0px 10px;
+    }
+
+    &__text {
+        word-break: break-all;
+    }
+
+    &__invitation {
+        text-align: center;
+        text-transform: uppercase;
+        margin-top: 1rem;
+        padding: .5rem;
+        border-radius: 5px;
+        font-weight: 700;
+        border-top: 0px solid white;
+    }
+}
+
+.sent {
+    display: flex;
+    background-color: #f8f8f8;
+    padding: .2rem .4rem;
+
+    align-items: center;
+
+    &__input {
+        flex: 1;
+        border-radius: 20px;        
+        border: 1px solid var(--ion-color-success);        
+        margin: .5rem .2rem;        
+        margin-right: auto;
+        outline: none;
+        padding: .5rem 1rem;
+
+        //text area
+        resize: none;
+        min-height: 2rem;
+        height: 2rem;
+        max-height: 5rem;
+        overflow: auto;        
+    }
+
+    &__icon {
+        width: 1.5rem;
+        margin: 1rem;
+    }
+}

@@ -6,18 +6,29 @@ import { Router } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 // import { ToastController } from '../shared/toast-controller/toast-controller';
+class MessageCustom {
+  public message;
+  public invitationId?:number;
+  constructor(){}
+}
 @Component({
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
   providers: [ToasterService]
 })
+
 export class ChatComponent implements OnInit {
   private hubConnection: HubConnection;
   IDUSR: string = "0";
   IDBUILD: string = "0";
   public user: string[];
   userInfo: any;
-  posts: any[];
+  posts: any;
+
+  userConversation;
+  messages:MessageCustom[] = [];
+  messageInput:string = ""
+  
   public buildingDetail: any;
   public toasterconfig: ToasterConfig = new ToasterConfig({
     tapToDismiss: true,
@@ -53,7 +64,7 @@ export class ChatComponent implements OnInit {
 
     this.hubConnection.on('Send', (rtMessageResponse) => {
       console.log(rtMessageResponse);
-      if (parseInt(this.IDUSR) == rtMessageResponse.user1Id || parseInt(this.IDUSR) == rtMessageResponse.user2Id) {
+      if (parseInt(this.IDUSR) == rtMessageResponse.conversationId || parseInt(this.IDUSR) == rtMessageResponse.user2Id) {
         this.get_chats();
       }
     });
@@ -74,7 +85,7 @@ export class ChatComponent implements OnInit {
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
           break;
         default:
-          console.log(value.item);
+          console.log("Post==>",value.item);
           if (value.result == "Success") {
             this.posts = value.item;
           }
@@ -111,43 +122,72 @@ export class ChatComponent implements OnInit {
           if (value.result == "Success") {
             console.log(value);
             this.userInfo = value.item[0];
-            // this.LastName = value.item[0].lastName;
-            // this.MotherName = value.item[0].motherName;
-            // this.Email = value.item[0].email;
-            // this.Password = value.item[0].password;
-            // this.Avatar = value.item[0].avatar;
-            // this.FacebookUrl = value.item[0].facebookUrl;
-            // this.TwitterUrl = value.item[0].twitterUrl;
-            // this.InstagramUrl = value.item[0].instagramUrl;
-            // this.Phone = value.item[0].phone;
-            // this.Workplace = value.item[0].workplace;
-            // this.AboutMe = value.item[0].aboutMe;
-            // if (this.AboutMe !== null) { this.ParseAboutMe(); }
-            // this.CompleteName = this.Name + " " + this.LastName + " " + this.MotherName;
           }
       }
     });
   }
+  showConversation(id:any){
+    this.GetConversationUser(id);
+      this.GetMessages(id);  
+  }
+  private GetConversationUser (id) { 
+    debugger;   
+    var creadoobj = { conversationId: id, userId: this.IDUSR };        
+    this.heroService.service_general_get_with_params("Message/GetConversationUser", creadoobj).subscribe((value) => {          
+      switch (value.result) {              
+        case "Error":
+          console.log("Ocurrio un error " + value.detalle);
+          break;
+        default:          
+        console.log("GetConversationUSer=>",value.item);
+        if (value.result == "Success") {                  
+            this.userConversation = value.item;                                                            
+          }
+        }
+    });
+  }
 
-  // async ShowModal() {
-  //   const modal = await this.modalController.create({
-  //     component: NewMessageComponent
-  //   });
+  private GetMessages (id) {   
+    debugger; 
+    var creadoobj = { conversationId: id, userId: this.IDUSR };        
+    this.heroService.service_general_get_with_params("Message/GetMessages", creadoobj).subscribe((value) => {          
+      switch (value.result) {              
+        case "Error":
+          console.log("Ocurrio un error " + value.detalle);
+          break;
+        default:          
+        console.log("GetMEsages=>",value.item);
+        if (value.result == "Success") {                  
+            // this.messages= value.item;
+            this.ReplaceInvitations(value.item);
 
-  // modal.onDidDismiss().then((dataReturned) => {
-  //     if (dataReturned !== null) {
-  //         console.log('Modal Sent Data :', dataReturned);
-  //         if (dataReturned.data === "true") { 
-  //           this.get_chats();
-  //           this.presentToast("Mensaje enviado"); 
-  //         }            
-  //     }
-  // });
+            setTimeout( () => { this.scrollToBottom(); }, 200 );                                                                
+          }
+        }
+    });
+  }
+  private scrollToBottom(): void {      
+    document.getElementById('last').scrollIntoView(true);    
+  }
+  private ReplaceInvitations (messageArray) {
+    this.messages = [];
 
-  // return await modal.present();
-  // }
-  // async presentToast(msj:string) {
-  //   // const toast = await this.toastController.create({ message: msj, duration: 2000 });
-  //   // toast.present();
-  // }
+    messageArray.forEach( m => {
+      let msj:string = m.message1;   
+      let messageObject = new MessageCustom();
+            
+      if (msj.includes('<a>')) {
+        m.message1 = msj.split('<a>')[0];
+
+        let id = msj.split('<a>')[1];
+        id = id.replace('</a>', '');
+        messageObject.invitationId = parseInt(id);
+      }
+
+      messageObject.message = m;
+      this.messages.push(messageObject);
+    });    
+
+    // console.log(this.messages);
+  }
 }
