@@ -34,9 +34,24 @@ app-header .sidebarToggler {
   height:100%;
   width:100%; 
 }
+.img-size{
+  max-height: 230px;
+  max-width: 334px; 
+}
 .main .container-fluid {
   padding:0px;
 }
 .card-body {
   padding: 0px;
+}
+.margin-gral {
+  margin: 1%;
+}
+
+.margin-bottom{
+  margin-bottom: 1%;
+}
+
+.margin-choose{
+  margin-bottom: 3%;
 }

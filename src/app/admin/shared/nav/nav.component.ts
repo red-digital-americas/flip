@@ -19,7 +19,7 @@ export class NavComponent implements OnInit {
     {title: "Reservations", route: "/reservations"},
     {title: "Perks", route: "/perks"},
     {title: "Services", route: "/services"},
-    {title: "Mensajes", route:"/chat"}
+    {title: "Messages", route:"/chat"}
   ]
   
   constructor(  private router: Router, private route: ActivatedRoute,                           

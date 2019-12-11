@@ -37,6 +37,13 @@ import { InviteComponent } from './modals/invite/invite.component';
 import { ChatComponent } from './chat/chat.component';
 import { MaterialModule } from '../material/material.module';
 import { MatCardModule } from '@angular/material/card';
+import { MessageUsersComponent } from './modals/message-users/message-users/message-users.component';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { Autoresize } from './shared/directives/autoresize.directive';
+import {MatInputModule} from '@angular/material/input';
+
+
 
 
 @NgModule({
@@ -57,7 +64,12 @@ import { MatCardModule } from '@angular/material/card';
     NavModule,
     NgSelectModule,  
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule
+    
+    
   ],
   declarations: [
     CommunitiesComponent,  
@@ -71,12 +83,16 @@ import { MatCardModule } from '@angular/material/card';
     DetalleComponent,
     CrearComponent,
     InviteComponent,
-    ChatComponent
+    ChatComponent,
+    MessageUsersComponent,
+    Autoresize
   ],
   entryComponents: [
     DetalleComponent,
     CrearComponent,
     InviteComponent,
-  ]
+    MessageUsersComponent
+  ],
+  exports:[Autoresize]
 })
 export class AdminModule { }

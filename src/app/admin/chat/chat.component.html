@@ -1,5 +1,17 @@
 <app-nav></app-nav>
 <div class="row">
+    <!-- <div class="col col-lg-6" *ngIf="showChat">
+
+    </div> -->
+    <div class="col col-lg-6">
+        <button mat-raised-button (click)="openModal()">Send Messages</button>
+
+    </div>
+</div>
+<div class="row">
+    <br>
+</div>
+<div class="row">
     <div class="col col-lg-6">
         <mat-card class="card-h">
             <mat-card-header>
@@ -10,7 +22,7 @@
                 </div>
 
             </mat-card-header>
-            <div class="conversation" (click)="showConversation(post.conversationId)" *ngFor="let post of posts">
+            <div class="conversation" (click)="showConversation(post, post.iduser)" *ngFor="let post of posts">
                 <!-- <div class="conversation__avatar">            
                                     <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
                                     <img [src]="post.photo">            
@@ -26,14 +38,15 @@
                 </div>
             </div>
         </mat-card>
+        <br>
+
     </div>
-    <div class="col-lg-6">
-        <div class="row">
-            <button btn>Boton</button>
-        </div>
-        <div class="row">
-            <mat-card class="card-h">
-                    <div class="chat" id="chat" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+    <br>
+    <div class="col-lg-6" id="style-1">
+        <mat-card class="card-h" *ngIf="showChat">
+            <div class="row">
+                <mat-card class="card-h card-chat">
+                    <div class="chat" id="chat">
                         <div class="message"
                             [ngClass]="{'message--receiver': IDUSR == message.message.userId, 'message--sender': IDUSR != message.message.userId}"
                             *ngFor="let message of messages">
@@ -44,8 +57,19 @@
                         </div>
                         <div id="last"></div>
                     </div>
-            </mat-card>
-        </div>
+                </mat-card>
+            </div>
+            <div class="row">
+                <div class="sent">
+                    <textarea placeholder="Type a message" autoresize [(ngModel)]="messageInput" id="sent-input"
+                        class="sent__input" maxlength="1900" rows="1"></textarea>
+                    <img (click)="SentMessage(1)" class="sent__icon"
+                        src="/assets/Assets-prototype-flipApp/baseline-send-24pxwithe.svg">
+                </div>
+                <!-- <textarea autoresize [(ngModel)]="messageInput" id="sent-input" class="sent__input" maxlength="1900"
+                rows="1"></textarea> -->
+            </div>
+        </mat-card>
     </div>
 
 </div>
