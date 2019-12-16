@@ -3,12 +3,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
+import { MatDialog } from '@angular/material/dialog';
+import { RoomModalComponent } from '../modals/room-modal/room-modal.component';
 
 @Component({
   selector: 'app-newsfeed',
   templateUrl: './newsfeed.component.html',
   styleUrls: ['./newsfeed.component.scss'],  
-  providers: [ToasterService]
+   providers: [ToasterService]
 })
 
 export class NewsfeedComponent implements OnInit {
@@ -17,8 +19,9 @@ export class NewsfeedComponent implements OnInit {
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
-    toasterService: ToasterService,) {
-    this.toasterService = toasterService;
+    toasterService: ToasterService,
+    public dialog: MatDialog) {
+   
   }
   posts: any[];
   email: string;
@@ -47,12 +50,34 @@ export class NewsfeedComponent implements OnInit {
       this.router.navigate(['/login']);
     }
     else {
-
+        debugger;
+      
       this.user = JSON.parse(localStorage.getItem("user"));
       console.log(this.user);
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
-      this.IDBUILD = this.route.snapshot.params['id']; 
-      this.get_posts();
+      this.IDBUILD = this.route.snapshot.params['id'];
+      debugger;
+      this.heroService.ServiceGetRooms(parseInt(this.IDBUILD)).subscribe(response=>{
+        debugger;
+        
+        this.get_posts();
+      }, error =>{
+        if(error = true){
+          debugger;
+          const dialogRef = this.dialog.open(RoomModalComponent, {
+            width: '512px',
+            height: '512px',
+            data: { buildId: this.IDBUILD }
+          });
+
+          dialogRef.afterClosed().subscribe(async rooms => {
+            if(rooms == true)
+              this.roomSuccess();
+          });
+
+        }
+        console.log("Error", error)
+      }); 
       
 
     }
@@ -202,4 +227,9 @@ export class NewsfeedComponent implements OnInit {
           }
       }
     }); }
+
+    roomSuccess() {
+      this.toasterService.pop('success', 'Success ', 'Rooms Saved');
+      
+    }
 }

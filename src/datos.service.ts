@@ -4,11 +4,12 @@ import { Injectable } from '@angular/core';
 //import { Http, Response, RequestOptions, Headers } from '@angular/http';
 // Importar la clase Observable desde la librería rxjs
 //import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Http, Response, RequestOptions, Headers,URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
 import { environment } from './environments/environment';
 import { MessageData } from './app/admin/models/message';
+import { TypeRoom } from './app/admin/models/building';
 
 
 
@@ -124,5 +125,35 @@ export class DatosService {
     console.log(parametros);
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.http.post(this.heroesUrl + 'Building/SaveBuilding', parametros);
+  }
+
+  ServiceGetRooms(buildId: number): Observable<any>{
+    let headers = new HttpHeaders();
+    debugger;
+    let params = new URLSearchParams();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    params.set("buildId", buildId+'');
+    return this.https.get(this.heroesUrl + 'Building/GetRooms', {search:params});
+
+  };
+  ServiceGetTypeRooms(idBuilding: number): Observable<any>{
+    let headers = new HttpHeaders();
+    debugger;
+    let params = new URLSearchParams();
+    params.append("buildId", idBuilding+'');
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    // headers.append("buildId", idBuilding.toString());
+
+    return this.https.get(this.heroesUrl + 'Building/GetTypeRoom', {search: params});
+
+  };
+  
+
+  ServiceSaveRooms(parametros): Observable<any> {
+    let headers = new HttpHeaders();
+    console.log(parametros);
+    debugger;
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post(this.heroesUrl + 'Building/SaveRooms', parametros);
   }
 }

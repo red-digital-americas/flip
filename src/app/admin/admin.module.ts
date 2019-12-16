@@ -42,6 +42,7 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { Autoresize } from './shared/directives/autoresize.directive';
 import {MatInputModule} from '@angular/material/input';
+import { RoomModalComponent } from './modals/room-modal/room-modal.component';
 
 
 
@@ -85,13 +86,15 @@ import {MatInputModule} from '@angular/material/input';
     InviteComponent,
     ChatComponent,
     MessageUsersComponent,
-    Autoresize
+    Autoresize,
+    RoomModalComponent
   ],
   entryComponents: [
     DetalleComponent,
     CrearComponent,
     InviteComponent,
-    MessageUsersComponent
+    MessageUsersComponent,
+    RoomModalComponent
   ],
   exports:[Autoresize]
 })

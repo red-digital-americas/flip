@@ -1,0 +1,72 @@
+<h1 mat-dialog-title>Add Rooms</h1>
+<div mat-dialog-content>
+    <!-- Rooms -->
+    <form [formGroup]="roomsForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="form-group col-md-12 col-sm-12">
+                <select formControlName="roomsNumber" class="form-control" (change)="onChangeRooms($event)"
+                    [ngClass]="{ 'is-invalid': submitted && f.roomsNumber.errors }">
+                    <option value="">Number of Rooms</option>
+                    <option *ngFor="let i of nrooms">{{i}}</option>
+                </select>
+                <div *ngIf="submitted && f.roomsNumber.errors" class="invalid-feedback">
+                    <div *ngIf="f.roomsNumber.errors.required">Number of rooms is required</div>
+                </div>
+            </div>
+            <div *ngFor="let room of t.controls; let i = index" class=" col-md-6 col-sm-6">
+                <div class="list-group-item margin-bottom">
+                    <h5 class="">Room {{i + 1}}</h5>
+                    <div [formGroup]="room" class="form-row">
+                        <div class="form-group ">
+                            <input placeholder="Name" type="text" formControlName="name"
+                                class="form-control margin-gral"
+                                [ngClass]="{ 'is-invalid': submitted && room.controls.name.errors }" />
+                            <div *ngIf="submitted && room.controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="room.controls.name.errors.required">Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <input placeholder="Description" type="text" formControlName="description"
+                                class="form-control margin-gral"
+                                [ngClass]="{ 'is-invalid': submitted && room.controls.description.errors }" />
+                            <div *ngIf="submitted && room.controls.description.errors" class="invalid-feedback">
+                                <div *ngIf="room.controls.description.errors.required">Description is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <input placeholder="Price" type="number" formControlName="price"
+                                class="form-control margin-gral"
+                                [ngClass]="{ 'is-invalid': submitted && room.controls.price.errors }" />
+                            <div *ngIf="submitted && room.controls.price.errors" class="invalid-feedback">
+                                <div *ngIf="room.controls.name.price.required">Price is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <select formControlName="typeRoomId" class="form-control"
+                                 [ngClass]="{ 'is-invalid': submitted && f.roomsNumber.errors }">
+                                <option value="">Type of Rooms</option>
+                                <option [ngValue]="i.id" *ngFor="let i of typeRoom">{{i.type}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.roomsNumber.errors" class="invalid-feedback">
+                                <div *ngIf="f.roomsNumber.errors.required">Number of rooms is required</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+
+    <!-- <mat-form-field>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field> -->
+</div>
+<div mat-dialog-actions>
+    <button class="btn btn-outline-dark" mat-button (click)="onNoClick()">Close</button>
+    <button [disabled]="!roomsForm.valid" mat-button type="button" class="btn btn-outline-dark"
+        (click)="onSubmit()">Send</button>
+</div>
