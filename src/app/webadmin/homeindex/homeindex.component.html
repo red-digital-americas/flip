@@ -25,8 +25,41 @@
   Home Room
 </a>-->
 
-<div class="row">
-  <div class=" col-sm-3 col-md-3" *ngFor="let post of posts">
+<div class="row padding-bottom-m">
+
+  <!-- Codigo fumado -->
+  <div class="big-card" *ngFor="let post of posts, index as index;">
+    <div class="card">
+      <div class="card__row">
+        <div class="card__info">
+          <p class="card__info-dato">
+            <span class="text-bold">Titulo: </span>
+            {{post.title}}
+          </p>
+          <p class="card__info-dato">
+            <span class="text-bold">Descripcion: </span>
+            {{post.direction}}
+          </p>
+        </div>
+      </div>
+      <div class="card__row" id="image_space_{{ index }}">
+        <figure class="card__image card__image--full">
+          <img src="{{post.frontphoto}}" class="card__image-img card__image-img--full" />
+        </figure>
+      </div>
+      <div class="card__row text-center">
+        <button 
+          class="button" 
+          data-toggle="modal" 
+          (click)="primaryModal.show(); passdata(post.id, post.title, post.direction); showImagesSpaces( 'image_space_' + index );">
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Codigo fumado -->
+
+  <!-- div class=" col-sm-3 col-md-3" *ngFor="let post of posts">
     <mat-card style="margin-bottom: 15px;">
 
       <div class="col-sm-12 col-md-12" style="padding:0;">
@@ -48,8 +81,12 @@
       </div>
       
     </mat-card>
-  </div><!--/.col-->
-</div><!--/.row-->
+  </div -->
+
+</div>
+
+<!-- Termina la pagina que es visible -->
+
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
@@ -59,7 +96,73 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form #loginForm="ngForm" autocomplete="off">
+
+      <div class="form">
+        <form #loginForm="ngForm" autocomplete="off">
+          <div class="form__image form__image--full margin-bottom-x">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_one_selected"
+              type="file" accept="image/*"
+              (change)="prepareImages($event); readImageData($event)" 
+              id="validatedCustomFile" />
+            <label class="form__image-img" for="validatedCustomFile">
+              <figure class="image_to_preview_container form_large_image">
+                <img src="" class="image_to_preview placeholder_image" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span>
+                <strong>Imagen:</strong> <br /> 
+                *La imagen deberá de ser de 288px * 866px;
+              </span>
+            </label>
+          </div>
+          <div class="card__row margin-bottom-x">
+            <div class="ml-col-1 custom-input">
+              <input 
+                type="text"
+                [(ngModel)]="title"
+                class="custom-input__text" 
+                name="titulo_home" 
+                id="titulo_home" 
+                placeholder="Nombre" 
+                required />
+              <label class="custom-input__label" for="titulo_home">
+                Nombre
+              </label>
+            </div>
+            <div class="ml-col-1 custom-input">
+              <textarea 
+                [(ngModel)]="direction"
+                class="custom-input__textarea" 
+                name="descripcion_home" 
+                id="descripcion_home" 
+                placeholder="Nombre" 
+                required></textarea>
+              <label class="custom-input__label" for="descripcion_home">
+                Descripción
+              </label>
+            </div>
+          </div>
+          <div class="card__row margin-top-x">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+              <button 
+                type="button" 
+                class="btn btn-primary" 
+                [disabled]="!loginForm.form.valid" 
+                (click)="updatephoto()">
+                Guardar Cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+
+      <!-- form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
           *La imagen deberá de ser de 288px * 866px;
           <div class="custom-file margin-gral ">
@@ -80,16 +183,15 @@
           <div class="col-12 margin-gral">
             Comming:
             <mat-checkbox [(ngModel)]="comming" name="dire" id="dire"></mat-checkbox>
-            <!--<input type="text" [(ngModel)]="direction" class="form-control" name="dire" id="dire" placeholder="Desc" required>-->
           </div>
-
         </div>
       </form>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
         <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
-      </div>
+      </div -->
+      <!--<input type="text" [(ngModel)]="direction" class="form-control" name="dire" id="dire" placeholder="Desc" required>-->
+
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

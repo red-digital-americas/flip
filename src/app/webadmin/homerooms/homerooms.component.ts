@@ -379,4 +379,52 @@ export class HomeroomsComponent implements OnInit {
       }
     }
   }
+
+
+  public room_selected = 'Room A';
+
+  public showSection( event_data ,id_section:string ):void {
+
+    this.room_selected = id_section == 'room_a' ? 'Room A' : 'Room B';
+
+    const event = event_data.target,
+          tabs_in = document.getElementsByClassName('room-data__tab');
+
+          if( !event.classList.contains('room-data__tab--active') ) {
+
+            resetTabsIn();
+            sectionSelected( id_section );
+            event.classList.add('room-data__tab--active');
+
+          }
+
+          function resetTabsIn() {
+
+            for( let tab = tabs_in.length; tab--; ) {
+
+              tabs_in[tab].classList.remove('room-data__tab--active');
+
+            }
+
+          }
+
+          function sectionSelected( section ) {
+
+            const rooms = document.getElementsByName('room-section');
+
+            for( let room = rooms.length; room--; ) {
+
+              rooms[room].classList.add('display-none');
+
+            }
+
+            let section_to_show = document.getElementById( section );
+
+                section_to_show.classList.remove('display-none');
+
+          }
+
+  }
+
+
 }

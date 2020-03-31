@@ -106,7 +106,6 @@ export class WebadminComponent implements OnInit {
      this.imageInputLabel = "Choose file";
      this.imageInputLabeltwo = "Choose file";
    }
-
    
    updatephoto() {
     // debugger;
@@ -216,4 +215,66 @@ export class WebadminComponent implements OnInit {
       }
     }
   }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: readImageData
+   * Tipo: Funcion efecto colateral
+   * Visto en: webadmin, desingindex, moreindex, homeindex
+   * Parametros: Objeto del evento que es emitido
+   * Regresa: N/A
+   * Descripcion: Cuando es seleccionada una imagen por el usuario, esta se muestra en la imagen que
+                  es contenida por el elemento HTML interno. 
+   */
+  public readImageData( event_data ):void {
+
+    const file = event_data.target.files,
+          img_target = event_data.target.parentElement.getElementsByClassName('image_to_preview')[0],
+          image_container_name = event_data.target.parentElement.getElementsByClassName('image_to_preview_name')[0];
+
+    if( file && file[0] ) {
+
+      let reader = new FileReader();
+
+          reader.onload = function(e:any) {
+
+            img_target.src = e.target.result; 
+            image_container_name.classList.remove('display-none');
+            image_container_name.innerHTML = file[0].name;
+
+          }
+
+          reader.readAsDataURL( file[0] );
+
+    }
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: showImagesSpaces
+   * Tipo: Funcion efecto colateral
+   * Visto en: webadmin, desingindex, moreindex, homeindex
+   * Parametros: id del espacio(contenedor, div, bloque, etc...) donde estan las imagenes actuales
+   * Regresa: N/A
+   * Descripcion: Cuando el usuario va editar imagenes, pero ya hay existentes estas se despliegan para que el usuario pueda visualizar
+                  que es lo que esta a punto de editar 
+   */
+  public showImagesSpaces( id_image_space:string ):void {
+
+    const IMAGE_SPACE = id_image_space,
+          IMAGES_ON_SPACE = document.getElementById( IMAGE_SPACE ).querySelectorAll('img'),
+          PLACEHOLDER_IMAGE = document.getElementsByClassName('placeholder_image');
+
+          for( let image = 0; image < IMAGES_ON_SPACE.length; image +=1 ) {
+
+            PLACEHOLDER_IMAGE[image].setAttribute('src', IMAGES_ON_SPACE[image].getAttribute('src'));
+            PLACEHOLDER_IMAGE[image].parentElement.parentElement.getElementsByClassName('image_to_preview_name')[0].innerHTML = '';
+
+          }
+
+  }
+
 }

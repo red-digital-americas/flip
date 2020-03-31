@@ -4,8 +4,35 @@
   <h2>  Página Principal</h2>
   <br />
 </div>
-<div class="row">
-  <div class="col" *ngFor="let post of posts; let i = index">
+<div class="row padding-bottom-m">
+
+
+
+  <div class="tarjeta-index" *ngFor="let post of posts, index as index;">
+    <div class="card">
+      <div class="card__row" id="image_space_{{ index }}">
+        <figure class="card__image">
+          <img src="{{post.frontphoto}}" class="card__image-img" />
+        </figure>
+        <figure class="card__image">
+          <img src="{{post.backphoto}}" class="card__image-img"  />
+        </figure>
+      </div>
+      <div class="card__row padding-tb-x text-center">
+        <button 
+          class="button" 
+          data-toggle="modal" 
+          (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index )">
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Aqui empieza las tarjeta: el for es quien las crea >
+  <div class="col" *ngFor="let post of posts; let i = index" style="border: solid 1px green;">
     <mat-card *ngIf="i==7" style="margin-bottom:15px; text-align:center">
       <div class="btn-group float-right" dropdown>
         <div class="row">
@@ -73,7 +100,8 @@
       </button>
     </mat-card>
 
-  </div><!--/.col-->
+  </div>
+  <Aqui terminan las tarjeta: el for es quien las crea -->
 </div><!--/.row-->
 
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -85,7 +113,63 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form #loginForm="ngForm" autocomplete="off">
+
+
+
+      <div class="form">
+        <form #loginForm="ngForm" autocomplete="off">
+          <div class="form__image">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_one_selected"
+              accept="image/*"
+              (change)="prepareImages($event,0); readImageData($event);"
+              id="validatedCustomFile" 
+              required>
+            <label class="form__image-img" for="validatedCustomFile">
+              <figure class="image_to_preview_container">
+                <img src="#" class="image_to_preview placeholder_image" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Imagen Default:</strong> <br /> 
+                *La imagen deberá de ser de 350px * 350px.
+              </span>
+            </label>
+          </div>
+          <div class="form__image">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_one_selected"
+              accept="image/*"
+              (change)="prepareImages($event,1); readImageData($event);"
+              id="validatedCustomFile1" 
+              required>
+            <label class="form__image-img" for="validatedCustomFile1">
+              <figure class="image_to_preview_container">
+                <img src="#" class="image_to_preview placeholder_image" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Imagen Hover:</strong> <br /> 
+                *La imagen deberá de ser de 350px * 350px.
+              </span>
+            </label>
+          </div>
+          <div class="card__row">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">
+                Guardar Cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- form #loginForm="ngForm" autocomplete="off" class="display-none">
 
         <div *ngIf="8==PostId ||  15==PostId " class="modal-body">
 
@@ -93,7 +177,7 @@
           <div class="custom-file margin-gral ">
 
             <input type="file" accept="image/*"
-                   (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile" required>
+                   (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile" required />
             <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
 
           </div>
@@ -132,7 +216,7 @@
           <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios </button>
         </div>
 
-      </form>
+      </form -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

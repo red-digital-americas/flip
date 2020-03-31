@@ -4,7 +4,67 @@
   <h2>  Página Principal More</h2>
   <br />
 </div>
-<div class="container-fluid" style="padding:0; margin-bottom: 15px;">
+
+<div class="row margin-bottom-x">
+  <div class="ml-col-1 custom-input">
+    <input 
+      type="text"
+      [(ngModel)]="Facebook"
+      (focusout)="validatingUrl('facebook', $event)" 
+      class="custom-input__text" 
+      name="" 
+      id="facebook_input" 
+      placeholder="Facebook" 
+      required />
+    <label class="custom-input__label" for="facebook_input">
+      Facebook
+    </label>
+  </div>
+  <div class="ml-col-1 custom-input">
+    <input 
+      type="text"
+      [(ngModel)]="Twitter" 
+      (focusout)="validatingUrl('twitter', $event)"
+      class="custom-input__text" 
+      name="" 
+      id="twitter_input" 
+      placeholder="Twitter" 
+      required />
+    <label class="custom-input__label" for="twitter_input">
+      Twitter
+    </label>
+  </div>
+  <div class="ml-col-1 custom-input">
+    <input 
+      type="text"
+      [(ngModel)]="Instagram" 
+      (focusout)="validatingUrl('instagram', $event)"
+      class="custom-input__text" 
+      name="" 
+      id="instagram_input" 
+      placeholder="Instagram" 
+      required />
+    <label class="custom-input__label" for="instagram_input">
+      Instagram
+    </label>
+  </div>
+  <div class="ml-col-1 custom-input">
+    <input 
+      type="text"
+      [(ngModel)]="Youtube" 
+      (focusout)="validatingUrl('youtube', $event)"
+      class="custom-input__text" 
+      name="" 
+      id="youtube_input" 
+      placeholder="Youtube" 
+      required />
+    <label class="custom-input__label" for="youtube_input">
+      Youtube
+    </label>
+  </div>
+</div>
+
+<!-- div class="container-fluid" style="padding:0; margin-bottom: 15px;">
   <div class="col-12" style="padding:0;">
     Facebook:
     <input type="text" [(ngModel)]="Facebook" class="form-control" name="postitle" id="postitle" placeholder="Facebook" required>
@@ -28,11 +88,33 @@
       Guardar Cambios
     </button>
   </div>
-</div>
+</div -->
 
 
-<div class="row">
-  <div class=" col-sm-3 col-md-3 " *ngFor="let post of posts">
+<div class="row padding-bottom-g">
+
+  <!-- Codigo fumado -->
+  <div class="big-card" *ngFor="let post of posts, index as index;">
+    <div class="card" id="image_space_{{ index }}">
+      <div class="card__row">
+        <figure class="card__image card__image--full">
+          <img src="{{post.frontphoto}}" class="card__image-img" />
+        </figure>
+      </div>
+      <div class="card__row text-center">
+        <button 
+          class="button" 
+          data-toggle="modal" 
+          (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index );">
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Codigo fumado -->
+
+
+  <!-- div class=" col-sm-3 col-md-3 " *ngFor="let post of posts">
     <mat-card style="margin-bottom: 15px; text-align:center;">
 
       <a style="cursor:pointer; color:inherit">
@@ -45,8 +127,14 @@
         Editar
       </button>
     </mat-card>
-  </div><!--/.col-->
-</div><!--/.row-->
+  </div -->
+</div>
+
+<div class="bottom-container">
+  <button type="button" class="button button-x center-element-absolute" (click)="updatesn()">
+      Guardar Cambios
+  </button>
+</div>
 
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
@@ -58,7 +146,42 @@
         </button>
       </div>
 
-      <form #loginForm="ngForm" autocomplete="off">
+
+      <div class="form">
+        <form #loginForm="ngForm" autocomplete="off">
+          <div class="form__image form__image--full">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_one_selected"
+              accept="image/*"
+              (change)="prepareImages($event); readImageData($event);"
+              id="validatedCustomFile" 
+              required>
+            <label class="form__image-img" for="validatedCustomFile">
+              <figure class="image_to_preview_container form_large_image">
+                <img src="" class="image_to_preview placeholder_image" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span>
+                <strong>Imagen:</strong> <br /> 
+                *La imagen deberá de ser de 288px * 866px;
+              </span>
+            </label>
+          </div>
+          <div class="card__row">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">
+                Guardar Cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+      <!-- form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
 
           *La imagen deberá de ser de 288px * 866px;
@@ -75,7 +198,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
         <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios </button>
-      </div>
+      </div -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

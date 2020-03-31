@@ -1,36 +1,10 @@
-<!--<a (click)="gotonewsfeed(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Index
-</a>
-<a (click)="amm(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Ammenities
-</a>
-<a (click)="gene(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home General
-</a>
-<a (click)="serv(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Services
-</a>
-<a (click)="room(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Room
-</a>-->
-
-<div class="row">
+<!-- div class="row">
   <div class="col-md-12">
     <br />
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <h2><mat-icon><i class="fa fa-building-o" aria-hidden="true"></i></mat-icon> Altata <i class="fa fa-angle-down" aria-hidden="true"></i></h2>
     </button>
-
     <mat-menu #menu="matMenu">
-      <!--<button mat-menu-item (click)="gotonewsfeed(IDBUILD)">
-      <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
-      <span>Home Index</span>
-    </button>-->
       <button mat-menu-item (click)="amm(IDBUILD)">
         <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
         <span>Home Ammenities</span>
@@ -50,8 +24,95 @@
     </mat-menu>
     <br />
   </div>
+</div -->
+
+<div class="row margin-tb-min">
+  <div class="ml-col-1 navbar__components">
+    <div class="navbar__component ml-col-4">
+      <button class="navbar__component-button navbar__component-button--active" (click)="amm(IDBUILD)">
+        Home Ammenities
+      </button>
+    </div>
+    <div class="navbar__component ml-col-4">
+      <button class="navbar__component-button" (click)="gene(IDBUILD)">
+        Home General
+      </button>
+    </div>
+    <div class="navbar__component ml-col-4">
+      <button class="navbar__component-button" (click)="serv(IDBUILD)">
+        Home Services
+      </button>
+    </div>
+    <div class="navbar__component ml-col-4">
+      <button class="navbar__component-button" (click)="room(IDBUILD)">
+        Home Room
+      </button>
+    </div>
+  </div>
 </div>
-<div class="row">
+
+<div class="row padding-bottom-m">
+  <div class="ml-col-1 card-style padding-general-m margin-bottom-x" *ngFor="let post of posts, index as index;">
+    <div class="ml-col-1">
+      <div class="card__info margin-bottom-x" style="height: auto !important;">
+        <p class="card__info-dato">
+          <span class="text-bold">Titulo: </span> 
+          {{ post.title }}
+        </p>
+        <p class="card__info-dato">
+          <span class="text-bold">Description: </span> 
+          {{ post.desc }}
+        </p>
+      </div>
+      <div class="ml-col-1">
+        <div class="ml-col-1 text-center">
+          <div class="icon-view">
+            <figure class="icon-view__icon">
+              <span class="text-bold">Icon:</span>
+              <img class="icon-view__icon--img" src="{{ post.icon }}" />
+            </figure>
+            <figure class="icon-view__icon">
+              <span class="text-bold">Icon hover:</span>
+              <img class="icon-view__icon--img" src="{{ post.icon2 }}" />
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div class="ml-col-1 images-view">
+        <div class="ml-col-7 images-view__section">
+          <figure class="images-view__image">
+            <span class="text-bold text-center images-view__image--title">
+              Build Photo:
+            </span>
+            <img src="../../../assets/webtmp.png" class="images-view__image--mask" />
+            <img src="{{ post.frontphoto }}" class="images-view__image--image" />
+          </figure>
+        </div>
+        <div class="ml-col-3o images-view__section">
+          <figure class="images-view__image">
+            <span class="text-bold text-center images-view__image--title">
+              Build Movile Photo:
+            </span>
+            <img src="../../../assets/phone.png" class="images-view__image--maskm" />
+            <img src="{{ post.buildmobile }}" class="images-view__image--imagem" />
+          </figure>
+        </div>
+      </div>
+      <div class="ml-col-1 text-center margin-top-m">
+        <button 
+          data-toggle="modal" 
+          (click)="primaryModal.show(); passdata(post.id, post.title, post.desc);"
+          class="button button-x">
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--
+<div class="row" style="border: solid 2px purple;">
   <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts">
     <div class="card ">
       <div class="card-body ">
@@ -126,9 +187,9 @@
 
       </div>
     </div>
-  </div><!--/.col-->
-
-</div><!--/.row-->
+  </div>
+</div>
+-->
 
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">

@@ -1,37 +1,10 @@
-<!--<a (click)="gotonewsfeed(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Index
-</a>
-<a (click)="amm(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Ammenities
-</a>
-<a (click)="gene(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home General
-</a>
-<a (click)="serv(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Services
-</a>
-<a (click)="room(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Room
-</a>-->
-
-
-<div class="row">
+<!-- div class="row">
   <div class="col-md-12">
     <br />
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <h2><mat-icon><i class="fa fa-building-o" aria-hidden="true"></i></mat-icon> Altata Room <i class="fa fa-angle-down" aria-hidden="true"></i></h2>
     </button>
-
     <mat-menu #menu="matMenu">
-      <!--<button mat-menu-item (click)="gotonewsfeed(IDBUILD)">
-        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
-        <span>Home Index</span>
-      </button>-->
       <button mat-menu-item (click)="amm(IDBUILD)">
         <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
         <span>Home Ammenities</span>
@@ -51,9 +24,217 @@
     </mat-menu>
     <br />
   </div>
+</div -->
+
+<div class="row margin-tb-min">
+  <div class="ml-col-1 navbar__components">
+    <div class="navbar__component ml-col-4">
+      <button class="navbar__component-button" (click)="amm(IDBUILD)">
+        Home Ammenities
+      </button>
+    </div>
+    <div class="navbar__component ml-col-4">
+      <button class="navbar__component-button" (click)="gene(IDBUILD)">
+        Home General
+      </button>
+    </div>
+    <div class="navbar__component ml-col-4">
+      <button class="navbar__component-button" (click)="serv(IDBUILD)">
+        Home Services
+      </button>
+    </div>
+    <div class="navbar__component ml-col-4">
+      <button class="navbar__component-button navbar__component-button--active" (click)="room(IDBUILD)">
+        Home Room
+      </button>
+    </div>
+  </div>
 </div>
 
-<div class="row">
+
+<div class="row padding-bottom-m">
+  <div class="ml-col-1 room-data__tabs text-center">
+    <span class="room-data__tab room-data__tab--active" (click)="showSection( $event, 'room_a')">
+      Room A
+    </span>
+    <span class="room-data__tab" (click)="showSection( $event ,'room_b')">
+      Room B
+    </span>
+  </div>
+  <!-- Primer section de post  -->
+  <div 
+    id="room_a" 
+    name="room-section"
+    *ngFor="let post of posts, index as index;"
+    class="ml-col-1 card-style padding-general-m margin-bottom-x">
+    <div class="ml-col-1 room-data margin-bottom-m">
+      <div class="room-data__card ml-col-1 card-style padding-general-m ">
+        <div class="ml-col-1">
+          <h4 class="room-data__card-titulo text-bold">
+            {{ room_selected }}
+          </h4>
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Title: </span>
+            {{ post.title }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Description: </span>
+            {{ post.desc }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Price: </span>
+            {{ post.price }}
+          </p>
+        </div>
+        <div class="ml-col-1 text-center">
+          <button 
+            data-toggle="modal" 
+            (click)="infoModal.show();passdata(post.id);"
+            class="button">
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="ml-col-1 card-style margin-bottom-m" *ngFor="let photo of post.photos, index_b as index;">
+      <div class="ml-col-1">
+        <div class="ml-col-1 text-center">
+          <div class="icon-view">
+            <figure class="icon-view__icon">
+              <span class="text-bold">Icon:</span>
+              <img class="icon-view__icon--img" src="{{ photo.icon }}" />
+            </figure>
+            <figure class="icon-view__icon">
+              <span class="text-bold">Icon hover:</span>
+              <img class="icon-view__icon--img" src="{{ photo.icon2 }}" />
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div class="ml-col-1 images-view">
+        <div class="ml-col-7 images-view__section">
+          <figure class="images-view__image">
+            <span class="text-bold text-center images-view__image--title">
+              Build Photo:
+            </span>
+            <img src="../../../assets/webtmp.png" class="images-view__image--mask" />
+            <img src="{{ photo.photo }}" class="images-view__image--image" />
+          </figure>
+        </div>
+        <div class="ml-col-3o images-view__section">
+          <figure class="images-view__image">
+            <span class="text-bold text-center images-view__image--title">
+              Build Movile Photo:
+            </span>
+            <img src="../../../assets/phone.png" class="images-view__image--maskm" />
+            <img src="{{ photo.photoMobile }}" class="images-view__image--imagem" />
+          </figure>
+        </div>
+      </div>
+      <div class="ml-col-1 text-center margin-tb-min">
+        <button 
+          data-toggle="modal" 
+          (click)="primaryModal.show(); passdata(post.id, post.title, post.desc);"
+          class="button button-x">
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Segundo section de post  -->
+  <div 
+    id="room_b" 
+    name="room-section"
+    *ngFor="let post of posts_b, index as index;"
+    class="ml-col-1 card-style padding-general-m margin-bottom-x display-none" >
+    <div class="ml-col-1 room-data margin-bottom-x">
+      <div class="room-data__card ml-col-1 card-style padding-general-m ">
+        <div class="ml-col-1">
+          <h4 class="room-data__card-titulo text-bold">
+            {{ room_selected }}
+          </h4>
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Title: </span>
+            {{ post.title }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Description: </span>
+            {{ post.desc }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Price: </span>
+            {{ post.price }}
+          </p>
+        </div>
+        <div class="ml-col-1 text-center">
+          <button 
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata(photo.id); passnumroom(post.id);"
+            class="button">
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="ml-col-1 card-style margin-bottom-m" *ngFor="let photo of post.photos, index_b as index;">
+      <div class="ml-col-1">
+        <div class="ml-col-1 text-center">
+          <div class="icon-view">
+            <figure class="icon-view__icon">
+              <span class="text-bold">Icon:</span>
+              <img class="icon-view__icon--img" src="{{ photo.icon }}" />
+            </figure>
+            <figure class="icon-view__icon">
+              <span class="text-bold">Icon hover:</span>
+              <img class="icon-view__icon--img" src="{{ photo.icon2 }}" />
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div class="ml-col-1 images-view">
+        <div class="ml-col-7 images-view__section">
+          <figure class="images-view__image">
+            <span class="text-bold text-center images-view__image--title">
+              Build Photo:
+            </span>
+            <img src="../../../assets/webtmp.png" class="images-view__image--mask" />
+            <img src="{{ photo.photo }}" class="images-view__image--image" />
+          </figure>
+        </div>
+        <div class="ml-col-3o images-view__section">
+          <figure class="images-view__image">
+            <span class="text-bold text-center images-view__image--title">
+              Build Movile Photo:
+            </span>
+            <img src="../../../assets/phone.png" class="images-view__image--maskm" />
+            <img src="{{ photo.photoMobile }}" class="images-view__image--imagem" />
+          </figure>
+        </div>
+      </div>
+      <div class="ml-col-1 text-center margin-tb-min">
+        <button 
+          data-toggle="modal" 
+          (click)="primaryModal.show(); passdata(post.id, post.title, post.desc);"
+          class="button button-x">
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>  
+</div>
+
+
+
+
+<!-- div class="row">
   <mat-tab-group style="width:100%;">
     <mat-tab label="ROOM A">
       <div class="container-fluid">
@@ -99,19 +280,6 @@
        width: 475px;
        top: 22px;" src="{{photo.photo}}">
               </div>
-
-              <!--
-
-                  0:
-              desc: "Room mediano"
-              id: 1
-              photos: Array(5)
-              0:
-              id: 1
-              idCommunitiesRoomWeb: 1
-              idCommunitiesRoomWebNavigation: null
-              photo
-                -->
               <div class="col-sm-12 col-md-12">
 
 
@@ -181,19 +349,6 @@
        width: 475px;
        top: 22px;" src="{{photo.photo}}">
             </div>
-
-            <!--
-
-                0:
-            desc: "Room mediano"
-            id: 1
-            photos: Array(5)
-            0:
-            id: 1
-            idCommunitiesRoomWeb: 1
-            idCommunitiesRoomWebNavigation: null
-            photo
-              -->
             <div class="col-sm-12 col-md-12">
 
 
@@ -219,8 +374,10 @@
       </div>
     </mat-tab>
   </mat-tab-group>
-  <!--/.col-->
-</div><!--/.row-->
+</div -->
+
+
+
 
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
