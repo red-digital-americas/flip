@@ -92,9 +92,9 @@ export class DetalleComponent implements OnInit {
     this.responseData = {action:'None'};
 
     var params = { "id": this.idProps };
-    debugger;
+    //debugger;
     this.heroService.service_general_get_with_params("Schedules", params).subscribe((res) => {
-      debugger;
+      //debugger;
       // console.log(res.item);
       if (res.result === "Success") {
         if (res.item.length < 0) {

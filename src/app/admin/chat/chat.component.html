@@ -1,11 +1,81 @@
-<app-nav></app-nav>
-<div class="row">
-    <!-- <div class="col col-lg-6" *ngIf="showChat">
+<app-nav [section]="section"></app-nav>
 
-    </div> -->
+<div class="ml-col-1 ap-chat">
+    <div class="ap-chat__people-person ap-chat__people-person--me">
+        <figure class="ap-chat__people-person-photo">
+            <img [src]="userInfo.avatar?userInfo.avatar:'src\assets\avatar-def.png'" />
+        </figure>
+        <p class="ap-chat__people-person-name">
+            {{userInfo.name}} {{userInfo.lastName}}
+        </p>
+        <p class="ap-chat__people-person-dato">
+            Mis chats
+        </p>
+    </div>
+    <div class="ap-chat__people-person ap-chat__people-person--contacts" (click)="openModal()">
+        <p class="ap-chat__people-person-name">
+            Enviar Mensajes
+        </p>
+        <p class="ap-chat__people-person-dato">
+            Ver contactos
+        </p>
+    </div>
+    <div class="ap-chat__people">
+        <div class="ml-col-1">
+            <div 
+                *ngFor="let friend of posts;"
+                (click)="showConversation(friend, friend.iduser, $event)" 
+                class="ap-chat__people-person ap-chat__people-person--friend">
+                <span class="ap-chat__people-person--mask"></span>
+                <figure class="ap-chat__people-person-photo">
+                    <img [src]="userInfo.avatar?userInfo.avatar:'src\assets\avatar-def.png'" />
+                </figure>
+                <p class="ap-chat__people-person-name">
+                    {{ friend.name }} {{ friend.lastname }}
+                </p>
+                <p class="ap-chat__people-person-dato">
+                    {{ (friend?.lastMessage?.length>35)? (friend?.lastMessage | slice:0:35)+'...':(friend?.lastMessage) }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="ap-chat__chat">
+        <div class="chatm card-style" *ngIf="showChat">
+            <h4 class="chatm__datos">
+                {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
+                <img class="chatm__datos-photo" 
+                     src="{{ userSendMessage.info.photo }}" />
+            </h4>
+            <div class="chatm__chat" id="chat_messages">
+                <div *ngFor="let message of messages"
+                     class="chatm__chat-message">
+                    <span class="chatm__chat-message-msg"
+                          [ngClass]="{'chatm__chat-message-msg-own': IDUSR == message.message.userId, 
+                                      'chatm__chat-message-msg-from': IDUSR != message.message.userId}">
+                        {{ message.message.message1 }}
+                    </span>
+                </div>
+            </div>
+            <div class="chatm__message">
+                <textarea class="chatm__message-message card-style" [(ngModel)]="messageInput"></textarea>
+                <button 
+                    (click)="SentMessage(1)"
+                    class="chatm__message-send">
+                    Enviar
+                </button>
+            </div>
+        </div>
+        <span class="chatm--selecting center-element-absolute" *ngIf="!showChat">
+            Selecciona una conversación
+        </span>
+    </div>
+</div>
+
+
+
+<!-- div class="row">
     <div class="col col-lg-6">
         <button mat-raised-button (click)="openModal()">Send Messages</button>
-
     </div>
 </div>
 <div class="row">
@@ -20,17 +90,11 @@
                     <mat-card-title>{{userInfo.name}} {{userInfo.lastName}}</mat-card-title>
                     <mat-card-subtitle>Chats</mat-card-subtitle>
                 </div>
-
             </mat-card-header>
             <div class="conversation" (click)="showConversation(post, post.iduser)" *ngFor="let post of posts">
-                <!-- <div class="conversation__avatar">            
-                                    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-                                    <img [src]="post.photo">            
-                                </div> -->
-
                 <div class="conversation__content">
                     <div class="conversation__name">{{post.name}} {{post.lastname}}</div>
-                    <div class="conversation__message">
+                    <div class="conversation__message" style="border: solid 1px red;">
                         {{(post?.lastMessage?.length>35)? (post?.lastMessage | slice:0:35)+'...':(post?.lastMessage)}}
                     </div>
                 </div>
@@ -39,7 +103,6 @@
             </div>
         </mat-card>
         <br>
-
     </div>
     <br>
     <div class="col-lg-6" id="style-1">
@@ -66,17 +129,7 @@
                     <img (click)="SentMessage(1)" class="sent__icon"
                         src="/assets/Assets-prototype-flipApp/baseline-send-24pxwithe.svg">
                 </div>
-                <!-- <textarea autoresize [(ngModel)]="messageInput" id="sent-input" class="sent__input" maxlength="1900"
-                rows="1"></textarea> -->
             </div>
         </mat-card>
     </div>
-
-</div>
-
-
-
-<!-- <div (click)="ShowModal()" class="btn-alert">
-    <ion-img class="btn-alert__icon" src="/assets/Assets-prototype-flipApp/Group.svg"></ion-img>
-    <div class="btn-alert__text">New Message</div>                    
-</div>   -->
+</div -->

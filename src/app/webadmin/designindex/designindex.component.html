@@ -1,31 +1,29 @@
 
-<div class="col-12" style="padding:0;">
-  <br />
-  <h2>  Página Principal Design </h2>
-  <br />
-</div>
-<div class="row padding-bottom-m">
-  
-  <!-- Codigo fumado -->
-  <div class="big-card" *ngFor="let post of posts, index as index;">
-    <div class="card">
-      <div class="card__row" id="image_space_{{ index }}">
-        <figure class="card__image card__image--full">
-          <img src="{{post.frontphoto}}" class="card__image-img" />
-        </figure>
-      </div>
-      <div class="card__row text-center">
-        <button 
-          class="button" 
-          data-toggle="modal" 
-          (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index );">
-          Editar
-        </button>
+<div class="ml-col-1 padding-general-m">
+  <div class="col-12" style="padding:0;">
+    <h2>  Página Principal Design </h2>
+    <br />
+  </div>
+  <div class="row padding-bottom-m">
+    <div class="big-card" *ngFor="let post of posts, index as index;">
+      <div class="card">
+        <div class="card__row" id="image_space_{{ index }}">
+          <figure class="card__image card__image--full">
+            <img src="{{post.frontphoto}}" class="card__image-img" />
+          </figure>
+        </div>
+        <div class="card__row text-center">
+          <button 
+            class="button" 
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index );">
+            Editar
+          </button>
+        </div>
       </div>
     </div>
   </div>
-  <!-- Codigo fumado -->
-
+</div>
   <!-- div class=" col-sm-3 col-md-3" *ngFor="let post of posts">
     <mat-card style="text-align:center; margin-bottom: 15px;">
       <a style="cursor:pointer; color:inherit">
@@ -38,7 +36,6 @@
       </button>
     </mat-card>
   </div -->
-</div>
 
 
 <!-- Welcomeback Mr. Anderson... We missed you. -->

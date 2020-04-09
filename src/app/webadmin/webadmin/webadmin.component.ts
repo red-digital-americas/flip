@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
+import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
+import { resolve } from 'dns';
 
 
 @Component({
@@ -227,21 +229,76 @@ export class WebadminComponent implements OnInit {
    * Descripcion: Cuando es seleccionada una imagen por el usuario, esta se muestra en la imagen que
                   es contenida por el elemento HTML interno. 
    */
-  public readImageData( event_data ):void {
+  public readImageData( event_data, dimension ):void {
 
     const file = event_data.target.files,
+          root_event = event_data.target,
           img_target = event_data.target.parentElement.getElementsByClassName('image_to_preview')[0],
-          image_container_name = event_data.target.parentElement.getElementsByClassName('image_to_preview_name')[0];
+          image_container_name = event_data.target.parentElement.getElementsByClassName('image_to_preview_name')[0],
+          placeh_image_data = document.getElementById('image_data'),
+          limits = {
+            width: 0,
+            height: 0
+          },
+          dimension_limits = {
+            get_dimension_limits: function() {
+
+              const dimension_calc = dimension.split('x'),
+                    width = dimension_calc[0],
+                    height = dimension_calc[1];
+
+              return {
+                width: Number( width ),
+                height: Number( height )
+              };
+
+            }
+          };
 
     if( file && file[0] ) {
+
+      const root = this;
 
       let reader = new FileReader();
 
           reader.onload = function(e:any) {
 
-            img_target.src = e.target.result; 
-            image_container_name.classList.remove('display-none');
-            image_container_name.innerHTML = file[0].name;
+            const parse_my_image = new Promise( ( resolve:any ) => {
+              
+              placeh_image_data.setAttribute('src',  e.target.result );
+
+              setTimeout(() => {
+
+                const image_dimension = {
+                  width: placeh_image_data.offsetWidth,
+                  height: placeh_image_data.offsetHeight
+                };
+
+                resolve( image_dimension );
+
+              }, 177);
+
+            });
+
+            parse_my_image.then( ( image_data:any ) => {
+
+              const limits = dimension_limits.get_dimension_limits();
+
+                if( limits.width == image_data.width && limits.height == image_data.height ) {
+
+                  img_target.src = e.target.result; 
+                  image_container_name.classList.remove('display-none');
+                  image_container_name.innerHTML = file[0].name;
+
+                } else {
+
+                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
+                  root_event.value = "";
+                  placeh_image_data.removeAttribute('src');
+
+                }
+
+            });
 
           }
 

@@ -11,8 +11,6 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 })
 export class TeamComponent implements OnInit {
 
-  
-  
   public myModal;
   public largeModal;
   public smallModal;
@@ -48,6 +46,7 @@ export class TeamComponent implements OnInit {
   Link: string ="";
   tt: string ="";
   
+  public titulo_seccion:string = 'Team seccion';
 
   postphoto: any[]=[];
   comment: string = "";
@@ -206,4 +205,7 @@ export class TeamComponent implements OnInit {
       }
     }
   }
+
+  
+
 }

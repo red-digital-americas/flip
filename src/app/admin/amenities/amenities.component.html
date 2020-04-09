@@ -1,6 +1,125 @@
-<app-nav></app-nav>
+<app-nav [section]="section"></app-nav>
+
+<div class="ml-col-1">
+  <div class="ml-col-1 padding-general-m margin-bottom-g">
+    <div class="ml-col-1 card-style" *ngIf="!show_ammenity_form">
+      <div class="ap-cards">
+        <h4 class="ap-cards__titulo">
+          Ammenities
+        </h4>
+        <div class="ap-cards__container" *ngFor="let amenity of amenitiesArray;">
+          <div class="ap-cards__card ap-cards__card--bbuttons card-style">
+            <h4 class="ap-cards__card-titulo">
+              {{ amenity.name }}
+            </h4>
+            <p class="ap-cards__card-desc">
+              {{ amenity.description }}
+            </p>
+            <figure class="ap-cards__card-image">
+              <img src="{{ amenity.photo }}" />
+            </figure>
+            <div class="ap-cards__card-buttons">
+              <button 
+                (click)="toggleSectionForm( 'edit', amenity )"
+                class="ap-cards__card-button ap-cards__card-button--aceptar">
+                Editar
+              </button>
+              <button 
+                class="ap-cards__card-button ap-cards__card-button--eliminar">
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form (ngSubmit)="sendAmenityData( $event )" class="ap-form ml-col-1 card-style" *ngIf="show_ammenity_form">
+      <div class="ml-col-1">
+        <h4 class="ap-form__titulo text-left">
+          {{ ammenity_form_action }}
+        </h4>
+      </div>
+      <div class="ml-col-7 margin-top-x">
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+            <input 
+              type="text" 
+              [(ngModel)]="data_amenity.title"
+              placeholder="Titulo"
+              id="new_amm_title" 
+              name="new_amm_title"
+              class="ap-form__input-text" />
+            <label for="new_amm_title" class="ap-form__label ap-form__label-text">
+              Titulo
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+            <textarea 
+              id="new_amm_desc"
+              name="new_amm_desc"
+              [(ngModel)]="data_amenity.description"
+              placeholder="Descripcion"
+              class="ap-form__label ap-form__input-textarea"></textarea>
+            <label for="new_amm_desc" class="ap-form__label ap-form__label-text">
+              Descripción
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="ml-col-3o">
+        <div class="ap-form__input">
+          <input
+            class="ap-form__input-image display-none" 
+            id="nueva_comunidad_img"
+            name="nueva_comunidad_img"
+            type="file"
+            (change)="validateImageUpload( $event, '350x350', 'new_amm_image_0', 'new_amm_name_0' )" />
+          <label for="nueva_comunidad_img" class="ap-form__label-image">
+            <figure class="ap-form__image">
+              <img class="ap-form__image-image no-image" 
+                   id="new_amm_image_0"
+                   src="{{ data_amenity.photo }}" />
+              <span class="ap-form__image-data text-center" id="new_amm_name_0">
+                La imagen debe medir <br />
+                <span class="text-bold">350x350</span> 
+              </span>
+            </figure>
+          </label>
+        </div>
+      </div>
+      <div class="ml-col-1 ap-form__buttons">
+        <button 
+          type="submit"
+          class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+          {{ ammenity_form_action }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="bottom-container">
+  <button 
+    class="button button-black button-see-x right-element-absolute"
+    *ngIf="!show_ammenity_form"
+    (click)="toggleSectionForm( 'new' )">
+    Agregar Nueva Amenidad
+  </button>
+  <button 
+    class="button button-blue button-x right-element-absolute"
+    *ngIf="show_ammenity_form"
+    (click)="toggleSectionForm()">
+    Lista de Amenidades
+  </button>
+</div>
+
+<div class="black-box">
+  <img src="" id="image_real_dimension" />
+</div>
   
-<div class="card card-height-newsfeed">  
+<div class="card card-height-newsfeed display-none">  
     <div class="card-body">
       <h5 class="card-title">Add Amenity</h5>
       
@@ -37,25 +156,29 @@
         </div>  
       </form>
     </div>
-  
-    <div class="row">
-      <div class="col-sm-6 col-md-4" *ngFor="let amenity of amenitiesArray">
-        <div class="card">
-          <div class="card-header">{{amenity.name}}</div>
-  
-          <div class="card-body">
-            <label> {{amenity.description}}  </label>
-            <div class="col-sm-6 col-md-4">
-              <img class="img-size" src="{{amenity.photo}}">
-            </div>
-          </div>
-
-          <button (click)="EditAmenity(amenity.id)" type="button" class="btn btn-outline-primary">Edit Amenity</button>
-          <button (click)="DeleteAmenity(amenity.id)" type="button" class="btn  btn-outline-danger">Delete Amenity</button>  
-        </div>
-      </div>
-    </div>
 
 </div>
+
+
+
+<!-- div class="row">
+    <div class="col-sm-6 col-md-4" *ngFor="let amenity of amenitiesArray">
+      <div class="card">
+        <div class="card-header">{{amenity.name}}</div>
+
+        <div class="card-body">
+          <label> {{amenity.description}}  </label>
+          <div class="col-sm-6 col-md-4">
+            <img class="img-size" src="{{amenity.photo}}">
+          </div>
+        </div>
+
+        <button (click)="EditAmenity(amenity.id)" type="button" class="btn btn-outline-primary">Edit Amenity</button>
+        <button (click)="DeleteAmenity(amenity.id)" type="button" class="btn  btn-outline-danger">Delete Amenity</button>  
+      </div>
+    </div>
+  </div --> 
+
+
   
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>    

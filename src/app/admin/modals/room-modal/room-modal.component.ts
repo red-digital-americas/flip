@@ -26,9 +26,9 @@ export class RoomModalComponent implements OnInit {
       roomsNumber: [''],
       rooms: new FormArray([])
     });
-    debugger;
+    //debugger;
     this.heroService.ServiceGetTypeRooms(this.data.buildId).subscribe(response =>{
-      debugger;
+      //debugger;
       console.log(response);
       this.typeRoom = JSON.parse(response._body);
       console.log("roomsType", this.typeRoom);
@@ -39,7 +39,7 @@ export class RoomModalComponent implements OnInit {
   get t() { return this.f.rooms as FormArray; }
 
   onChangeRooms(e) {
-    debugger;
+    //debugger;
     const roomsNumber = parseInt(e.target.value) || 0;
     if (this.t.length < roomsNumber) {
       for (let i = this.t.length; i < roomsNumber; i++) {
@@ -59,7 +59,7 @@ export class RoomModalComponent implements OnInit {
   }
 
   onSubmit(){
-    debugger;
+    //debugger;
     let listRooms = new Array<RoomDTO>();
      listRooms = this.roomsForm.value.rooms;
      

@@ -1,10 +1,205 @@
-<!-- <ul class="nav navbar-nav d-md-down-none" style="flex-direction: row;">
-  <li class="nav-item px-3">
-    <a class="nav-link" style="cursor:pointer;" (click)="goback()">Perks</a>
-  </li>    
-</ul> -->
+<div class="ml-col-1">
+  <div class="ml-col-1 padding-general-m margin-bottom-g" *ngIf="!show_dperk_form">
+    <div class="ml-col-1 ap-deeplink">
+        <p class="ap-deeplink__level ap-deeplink__level--prev" (click)="changeLevel()">Lista Persk</p>
+        <p class="ap-deeplink__level ap-deeplink__level--current">Detalle Perk</p>
+    </div>
+    <div class="ml-col-1 card-style" *ngIf="!show_perk_detail_form">
+      <div class="ml-col-1 ap-info">
+        <h4 class="ap-info__titulo">
+          Detalle Perk
+        </h4>
+        <div class="ml-col-6">
+          <p class="ap-info__dato">
+            <span class="text-bold">Nombre: </span> 
+            {{ perkDetail?.name }}
+          </p>
+          <p class="ap-info__dato">
+            <span class="text-bold">Descripción: </span> 
+            {{ perkDetail?.description }}
+          </p>
+          <p class="ap-info__dato">
+            <span class="text-bold">Dirección: </span> 
+            {{ perkDetail?.streetAddress }}, 
+            {{ perkDetail?.city }}, 
+            {{ perkDetail?.stateProvincy }}, 
+            {{ perkDetail?.zip }}, 
+            {{ perkDetail?.country }}.
+          </p>
+          <p class="ap-info__dato">
+            <span class="text-bold">Latitud: </span> 
+            {{ perkDetail?.latitude }}
+          </p>
+          <p class="ap-info__dato">
+            <span class="text-bold">Longitud: </span> 
+            {{ perkDetail?.longitude }}
+          </p>
+        </div>
+        <div class="ml-col-4o">
+          <figure class="ap-info__image">
+            <img class="ap-info__image-img" src="{{ perkDetail?.photo }}" />
+          </figure>
+        </div> 
+      </div>
+      <span class="ml-col-1 ap-info__noitems" *ngIf="how_many_promos == 0">
+        No hay promociones existentes {{ how_many_promos }}
+      </span>
+      <div class="ml-col-1 padding-lateral-m margin-bottom-m margin-top-x" *ngIf="how_many_promos != 0">
+        <div class="ap-cards card-style">
+          <h4 class="ap-cards__titulo">
+            Promociones
+          </h4>
+          <div class="ap-cards__container" *ngFor="let promo of promotionsArray;">
+            <div class="ap-cards__card ap-cards__card--bbuttons card-style">
+              <h4 class="ap-cards__card-titulo">
+                {{ promo.name }}
+              </h4>
+              <p class="ap-cards__card-desc">
+                {{ promo.description }}
+              </p>
+              <figure class="ap-cards__card-image">
+                <img src="{{ promo.photo }}" />
+              </figure>
+              <div class="ap-cards__card-buttons">
+                <button 
+                  (click)="toggleSectionForm( 'edit', promo )"
+                  class="ap-cards__card-button ap-cards__card-button--aceptar">
+                  Editar
+                </button>
+                <button 
+                  class="ap-cards__card-button ap-cards__card-button--eliminar">
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="animated fadeIn">
+
+
+  <div class="ml-col-1 padding-general-m margin-bottom-g" *ngIf="show_dperk_form">
+    <div class="ml-col-1 padding-general-m card-style">
+      <form class="ap-form ml-col-1 card-style">
+        <div class="ml-col-1">
+          <h4 class="ap-form__titulo text-left">
+            {{ show_dperk_form_action }}
+          </h4>
+        </div>
+        <div class="ml-col-7 margin-top-x">
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <input 
+                type="text"
+                placeholder="Titulo"
+                id="new_promo_title" 
+                name="new_promo_title"
+                class="ap-form__input-text" />
+              <label for="new_promo_title" class="ap-form__label ap-form__label-text">
+                Nombre
+              </label>
+            </div>
+          </div>
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <textarea 
+                id="new_perk_desc"
+                name="new_promo_desc"
+                placeholder="Descripcion"
+                class="ap-form__label ap-form__input-textarea"></textarea>
+              <label for="new_promo_desc" class="ap-form__label ap-form__label-text">
+                Descripción
+              </label>
+            </div>
+          </div>
+          <div class="ml-col-4o padding-right-min">
+            <div class="ap-form__input">
+              <input 
+                type="date"
+                placeholder="Fecha de Inicio"
+                id="new_promo_start" 
+                name="new_promo_start"
+                class="ap-form__input-text" />
+              <label for="new_promo_start" class="ap-form__label ap-form__label-text">
+                Fecha de Inicio
+              </label>
+            </div>
+          </div>
+          <div class="ml-col-4o padding-right-min">
+            <div class="ap-form__input">
+              <input 
+                type="date"
+                placeholder="Fecha Fin"
+                id="new_promo_end" 
+                name="new_promo_end"
+                class="ap-form__input-text" />
+              <label for="new_promo_end" class="ap-form__label ap-form__label-text">
+                Fecha Fin
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="ml-col-3o">
+          <div class="ap-form__input">
+            <input
+              class="ap-form__input-image display-none" 
+              id="nueva_promo_img"
+              name="nueva_promo_img"
+              type="file"
+              (change)="validateImageUpload( $event, '350x350', 'new_promo_image_0', 'new_promo_name_0' )" />
+            <label for="nueva_promo_img" class="ap-form__label-image">
+              <figure class="ap-form__image">
+                <img class="ap-form__image-image no-image" 
+                     id="new_promo_image_0"
+                     src="../../../../assets/14.jpg" />
+                <span class="ap-form__image-data text-center" id="new_promo_name_0">
+                  La imagen debe medir <br />
+                  <span class="text-bold">350x350</span> 
+                </span>
+              </figure>
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-1 ap-form__buttons">
+          <button 
+            type="submit"
+            class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+            {{ show_dperk_form_action }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+</div>
+
+<div class="bottom-container">
+  <button 
+    class="button button-black button-see-x right-element-absolute"
+    *ngIf="!show_dperk_form"
+    (click)="toggleSectionForm( 'new' )">
+    Agregar Nueva Promoción
+  </button>
+  <button 
+    class="button button-blue button-x right-element-absolute"
+    *ngIf="show_dperk_form"
+    (click)="toggleSectionForm()">
+    Detalle Perk
+  </button>
+</div>
+
+<div class="black-box">
+  <img src="" id="image_real_dimension" />
+</div>
+
+
+<!-- Codigo anterior -->
+<div class="animated fadeIn display-none">
   <div class="card">    
     <div class="card-body">
       <h5 class="card-title">Perk</h5>
@@ -25,8 +220,8 @@
                 {{perkDetail?.latitude}}, {{perkDetail?.longitude}}
               </div>                                             
               
-            </div>  <!-- End row -->
-          </div>    <!-- End col -->
+            </div>  
+          </div>    
 
           <div class="col-12 col-lg-4 col-xl-4">
             <img style="width: 100%; max-height: 15rem;" [src]="perkDetail?.photo" alt="">            
@@ -36,9 +231,9 @@
                 <button (click)="EditPerk()" type="button" class="btn btn-outline-dark margin-gral">Edit Perk</button>
                 <button (click)="DeletePerk()" type="button" class="btn btn-outline-danger margin-gral">Delete Perk</button>
             </div>  
-        </div>  <!-- End row -->                      
+        </div>                      
             
-      <!-- Promotions -->
+
       <div style="margin-bottom: 1rem;"></div>
       <h5 class="card-title">Promotions</h5>
       <div class="row">
@@ -67,6 +262,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 <toaster-container></toaster-container>
 <!-- <toaster-container [toasterconfig]="toasterconfig"></toaster-container> -->

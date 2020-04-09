@@ -1,9 +1,65 @@
-<div class="col-12" style="padding:0;">
-  <br />
-  <h2>Team Sección </h2>
-  <br />
+<div class="ml-col-1 padding-general-m">
+  <div class="col-12" style="padding:0;">
+    <h2>Team Sección </h2>
+    <br />
+  </div>
+  <div class="row padding-bottom-m">
+    <div class="card-auto">
+      <div class="card-auto__cards" *ngFor="let post of posts, index as index;">
+        <div class="card-auto__card card-style">
+          <div class="card__row">
+            <h4 class="card__titulo">
+              {{ titulo_seccion }}
+            </h4>
+          </div>
+          <div class="card__row margin-bottom-m">
+            <div class="card__info">
+              <p class="card__info-dato">
+                <span class="text-bold">Nombre: </span>
+                {{post.name}}
+              </p>
+              <p class="card__info-dato">
+                <span class="text-bold">Apellido: </span>
+                {{post.lastname}}
+              </p>
+              <p class="card__info-dato">
+                <span class="text-bold">Puesto: </span>
+                {{post.position}}
+              </p>
+              <p class="card__info-dato">
+                <span class="text-bold">Descripcion: </span> <br />
+                {{post.desc}}
+              </p>
+              <p class="card__info-dato">
+                <span class="text-bold">Linkedin: </span>
+                {{post.link}}
+              </p>
+              <p class="card__info-dato">
+                <span class="text-bold">Twitter: </span>
+                {{post.twitter}}
+              </p>
+            </div>
+            <div class="card__row" id="image_space_{{ index }}">
+              <figure class="card__image card__image--cards">
+                <img src="{{post.frontphoto}}" class="card__image-img card__image-img--card" />
+              </figure>
+            </div>
+          </div>
+          <div class="card__row text-center absolute-bottom">
+            <button 
+              class="button" 
+              data-toggle="modal" 
+              (click)="primaryModal.show(); passdata(post.id, post.name ,post.lastname, post.position, post.desc, post.twitter, post.link );
+                       showImagesSpaces( 'image_space_' + index );">
+              Editar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="row">
+<!-- div class="row">
   <div class="col-md-3" *ngFor="let post of posts; let i = index">
     <mat-card *ngIf="i!=1" style=" height:620px; margin-bottom: 15px">
       <div class="col-sm-12 col-md-12" style="padding:0;">
@@ -21,30 +77,25 @@
         <br>
       </div>
       <div class="row">
-
-        <!--<div class="col-sm-6 col-md-6">
-          <img class="img-size" src="{{post.frontphoto}}">
-        </div>-->
-
         <div class="col-sm-12 col-md-12" style="text-align:center">
           <img class="img-size" src="{{post.backphoto}}">
         </div>
-
       </div>
-
       <div class="col-12" style="text-align:center; vertical-align:baseline;">
         <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-top: 20px;" (click)="primaryModal.show();passdata(post.id, post.name ,post.lastname, post.position, post.desc, post.twitter, post.link );">
           Editar
         </button>
       </div>
     </mat-card>
-
-
     <mat-card *ngIf="i==1" style="background-color: #f8cd58;height: 620px; margin-bottom: 15px">
       THE TEAM
-    </mat-card><!--/.col-->
-  </div><!--/.row-->
-</div>
+    </mat-card>
+  </div>
+</div -->
+
+
+
+
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">

@@ -1,6 +1,207 @@
-<app-nav></app-nav>
+<app-nav [section]="section"></app-nav>
 
-<div class="animated fadeIn">
+<div class="ml-col-1">
+  <div class="ml-col-1 padding-general-m margin-bottom-g">
+    <div class="ml-col-1 card-style" *ngIf="!show_service_form">
+      <div class="ap-cards">
+        <h4 class="ap-cards__titulo">
+          Services
+        </h4>
+        <div class="ap-cards__container margin-top-x" *ngFor="let service of servicesArray;">
+          <div class="ap-cards__card ap-cards__card--bbuttons card-style">
+            <h4 class="ap-cards__card-titulo">
+              {{ service.name }}
+            </h4>
+            <p class="ap-cards__card-desc">
+              {{ service.description }}
+            </p>
+            <p class="ap-cards__card-desc">
+              <span class="text-bold">Month Price:</span>
+              {{ service.price | currency:'USD' }}
+            </p>
+            <p class="ap-cards__card-desc">
+              <span class="text-bold">Unit Price:</span>
+              {{ service.priceUnit | currency:'USD' }}
+            </p>
+            <figure class="ap-cards__card-image">
+              <img src="{{ service.photo }}" />
+            </figure>
+            <div class="ap-cards__card-buttons">
+              <button 
+                (click)="toggleSectionForm( 'edit', service )"
+                class="ap-cards__card-button ap-cards__card-button--aceptar">
+                Editar Servicio
+              </button>
+              <button 
+                class="ap-cards__card-button ap-cards__card-button--eliminar">
+                Eliminar
+              </button>
+            </div>
+            <figure class="ap-cards__card-icon">
+              <img class="ap-cards__card-icon-img" src="{{ service.icon }}" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <form name="service_form" class="ap-form ml-col-1 card-style" *ngIf="show_service_form">
+      <div class="ml-col-1">
+        <h4 class="ap-form__titulo text-left">
+          {{ service_form_action }}
+        </h4>
+      </div>
+      <div class="ml-col-6 margin-top-x">
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+            <input 
+              type="text"
+              placeholder="Titulo"
+              id="new_service_title" 
+              name="new_service_title"
+              [(ngModel)]="data_service.name"
+              class="ap-form__input-text" />
+            <label for="new_service_title" class="ap-form__label ap-form__label-text">
+              Titulo
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+            <textarea 
+              id="new_service_desc"
+              name="new_service_desc"
+              placeholder="Descripcion"
+              [(ngModel)]="data_service.description"
+              class="ap-form__label ap-form__input-textarea"></textarea>
+            <label for="new_service_desc" class="ap-form__label ap-form__label-text">
+              Descripción
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-3 padding-right-min">
+          <div class="ap-form__input">
+            <input 
+              type="text"
+              placeholder="Provider"
+              id="new_service_prov" 
+              name="new_service_prov"
+              [(ngModel)]="data_service.provider"
+              class="ap-form__input-text" />
+            <label for="new_service_prov" class="ap-form__label ap-form__label-text">
+              Provider
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-3 padding-right-min">
+          <div class="ap-form__input">
+            <input 
+              type="text"
+              placeholder="Price"
+              id="new_service_price" 
+              name="new_service_price"
+              [(ngModel)]="data_service.price"
+              class="ap-form__input-text" />
+            <label for="new_service_price" class="ap-form__label ap-form__label-text">
+              Price
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-3 padding-right-min">
+          <div class="ap-form__input">
+            <input 
+              type="text"
+              placeholder="Unit Price"
+              id="new_service_unitp" 
+              name="new_service_unitp"
+              [(ngModel)]="data_service.priceUnit"
+              class="ap-form__input-text" />
+            <label for="new_service_unitp" class="ap-form__label ap-form__label-text">
+              Unit Price
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="ml-col-4o">
+        <div class="ml-col-6">
+          <div class="ap-form__input">
+            <input
+              class="ap-form__input-image display-none" 
+              id="nueva_comunidad_img"
+              name="nueva_comunidad_img"
+              type="file"
+              (change)="validateImageUpload( $event, '350x350', 'new_amm_image_0', 'new_amm_name_0' )" />
+            <label for="nueva_comunidad_img" class="ap-form__label-image">
+              <figure class="ap-form__image">
+                <img class="ap-form__image-image no-image" 
+                     id="new_amm_image_0"
+                     src="{{ data_service.photo }}" />
+                <span class="ap-form__image-data text-center" id="new_amm_name_0">
+                  La imagen debe medir <br />
+                  <span class="text-bold">350x350</span> 
+                </span>
+              </figure>
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-4o">
+          <div class="ap-form__input">
+            <input
+              class="ap-form__input-image display-none" 
+              id="nueva_comunidadi_img"
+              name="nueva_comunidadi_img"
+              type="file"
+              (change)="validateImageUpload( $event, '150x150', 'new_amm_image_1', 'new_amm_name_1' )" />
+            <label for="nueva_comunidadi_img" class="ap-form__label-image ap-form__label-image--icon">
+              <figure class="ap-form__image">
+                <img class="ap-form__image-image ap-form__image-image--icon no-image bg-black" 
+                     id="new_amm_image_1"
+                     src="{{ data_service.icon }}" />
+                <span class="ap-form__image-data text-center" id="new_amm_name_1">
+                  La imagen debe medir <br />
+                  <span class="text-bold">150x150</span> 
+                </span>
+              </figure>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="ml-col-1 ap-form__buttons">
+        <button 
+          type="submit"
+          class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+          {{ service_form_action }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="bottom-container">
+  <button 
+    class="button button-black button-see-x right-element-absolute"
+    *ngIf="!show_service_form"
+    (click)="toggleSectionForm( 'new' )">
+    Agregar Nuevo Servicio
+  </button>
+  <button 
+    class="button button-blue button-x right-element-absolute"
+    *ngIf="show_service_form"
+    (click)="toggleSectionForm()">
+    Lista de Servicios
+  </button>
+</div>
+
+<div class="black-box">
+  <img src="" id="image_real_dimension" />
+</div>
+
+
+<!-- |||||||||||||||||||||||||||||||||||||||||| -->
+<!-- Necesito saber que espera bien el servicio para mandarle ese objeto -->
+<div class="animated fadeIn display-none">
   <div class="card">    
     <div class="card-body">
       <h5 class="card-title">Add Service</h5>
@@ -58,24 +259,22 @@
                 </div>                 
               </div> 
 
-            </div>  <!-- End row -->
-          </div>    <!-- End col -->
+            </div>  
+          </div>   
 
           <div class="col-12 col-lg-4 col-xl-4">
             <img style="width: 14rem; max-height: 8rem; object-fit: cover;" [src]="formGroup.get('photoCtrl').get('serverUrl').value" alt="">
             <img style="width: 4rem; height: 4rem; object-fit: cover; background: black;" [src]="formGroup.get('iconCtrl').get('serverUrl').value" alt="">
           </div>
 
-        </div>  <!-- End row -->        
+        </div>        
               
         <div style="margin-bottom: 1rem;"></div>
         <div class="col-12">
           <button (click)="AddService()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Service</button>          
         </div>   
       </form>           
-      <!-- {{formGroup.value | json}} -->
 
-      <!-- LIST OF SERVICES -->
       <div style="margin-bottom: 1rem;"></div>
       <div class="row">
         <div class="col-sm-6 col-md-4" *ngFor="let post of servicesArray">
@@ -98,7 +297,6 @@
           </div>
         </div>
       </div>
-      <!-- END LIST OF SERVICES -->
 
     </div>
   </div>

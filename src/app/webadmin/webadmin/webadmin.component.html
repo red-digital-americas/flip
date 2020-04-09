@@ -1,35 +1,31 @@
-
-<div class="col-12" style="padding:0;">
-  <br />
-  <h2>  Página Principal</h2>
-  <br />
-</div>
-<div class="row padding-bottom-m">
-
-
-
-  <div class="tarjeta-index" *ngFor="let post of posts, index as index;">
-    <div class="card">
-      <div class="card__row" id="image_space_{{ index }}">
-        <figure class="card__image">
-          <img src="{{post.frontphoto}}" class="card__image-img" />
-        </figure>
-        <figure class="card__image">
-          <img src="{{post.backphoto}}" class="card__image-img"  />
-        </figure>
-      </div>
-      <div class="card__row padding-tb-x text-center">
-        <button 
-          class="button" 
-          data-toggle="modal" 
-          (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index )">
-          Editar
-        </button>
+<div class="ml-col-1 padding-general-m">
+  <div class="col-12" style="padding:0;">
+    <h2>  Página Principal</h2>
+    <br />
+  </div>
+  <div class="row padding-bottom-m">
+    <div class="tarjeta-index" *ngFor="let post of posts, index as index;">
+      <div class="card">
+        <div class="card__row" id="image_space_{{ index }}">
+          <figure class="card__image">
+            <img src="{{post.frontphoto}}" class="card__image-img" />
+          </figure>
+          <figure class="card__image">
+            <img src="{{post.backphoto}}" class="card__image-img"  />
+          </figure>
+        </div>
+        <div class="card__row padding-tb-x text-center">
+          <button 
+            class="button" 
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index )">
+            Editar
+          </button>
+        </div>
       </div>
     </div>
   </div>
-
-
+</div>
 
   <!-- Aqui empieza las tarjeta: el for es quien las crea >
   <div class="col" *ngFor="let post of posts; let i = index" style="border: solid 1px green;">
@@ -102,7 +98,11 @@
 
   </div>
   <Aqui terminan las tarjeta: el for es quien las crea -->
-</div><!--/.row-->
+<!--/.row-->
+
+<div class="black-box">
+  <img src="" id="image_data" />
+</div>
 
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
@@ -124,7 +124,7 @@
               type="file" 
               name="image_one_selected"
               accept="image/*"
-              (change)="prepareImages($event,0); readImageData($event);"
+              (change)="prepareImages($event,0); readImageData($event, '350x350');"
               id="validatedCustomFile" 
               required>
             <label class="form__image-img" for="validatedCustomFile">
@@ -144,7 +144,7 @@
               type="file" 
               name="image_one_selected"
               accept="image/*"
-              (change)="prepareImages($event,1); readImageData($event);"
+              (change)="prepareImages($event,1); readImageData($event, '350x350');"
               id="validatedCustomFile1" 
               required>
             <label class="form__image-img" for="validatedCustomFile1">

@@ -1,62 +1,44 @@
-<div class="col-12">
-  <br />
-  <h2>  Home Menu principal</h2>
-  <br />
-</div>
+<div class="ml-col-1 padding-general-m">
 
-<!--<a (click)="gotonewsfeed(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Index
-</a>
-<a (click)="amm(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Ammenities
-</a>
-<a (click)="gene(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home General
-</a>
-<a (click)="serv(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Services
-</a>
-<a (click)="room(IDBUILD)" style="cursor:pointer; color:inherit">
-
-  Home Room
-</a>-->
-
-<div class="row padding-bottom-m">
-
-  <!-- Codigo fumado -->
-  <div class="big-card" *ngFor="let post of posts, index as index;">
-    <div class="card">
-      <div class="card__row">
-        <div class="card__info">
-          <p class="card__info-dato">
-            <span class="text-bold">Titulo: </span>
-            {{post.title}}
-          </p>
-          <p class="card__info-dato">
-            <span class="text-bold">Descripcion: </span>
-            {{post.direction}}
-          </p>
+  <div class="col-12" style="padding: 0;">
+    <h2>  Home Menu principal</h2>
+    <br />
+  </div>
+  
+  <div class="row padding-bottom-m">
+  
+    <div class="big-card" *ngFor="let post of posts, index as index;">
+      <div class="card">
+        <div class="card__row">
+          <div class="card__info card__info--reziser">
+            <p class="card__info-dato">
+              <span class="text-bold">Titulo: </span>
+              {{post.title}}
+            </p>
+            <p class="card__info-dato">
+              <span class="text-bold">Descripcion: </span>
+              {{post.direction}}
+            </p>
+          </div>
+        </div>
+        <div class="card__row" id="image_space_{{ index }}">
+          <figure class="card__image card__image--full">
+            <img src="{{post.frontphoto}}" class="card__image-img card__image-img--full" />
+          </figure>
+        </div>
+        <div class="card__row text-center">
+          <button 
+            class="button" 
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata(post.id, post.title, post.direction); showImagesSpaces( 'image_space_' + index );">
+            Editar
+          </button>
         </div>
       </div>
-      <div class="card__row" id="image_space_{{ index }}">
-        <figure class="card__image card__image--full">
-          <img src="{{post.frontphoto}}" class="card__image-img card__image-img--full" />
-        </figure>
-      </div>
-      <div class="card__row text-center">
-        <button 
-          class="button" 
-          data-toggle="modal" 
-          (click)="primaryModal.show(); passdata(post.id, post.title, post.direction); showImagesSpaces( 'image_space_' + index );">
-          Editar
-        </button>
-      </div>
     </div>
+  
   </div>
+</div>
   <!-- Codigo fumado -->
 
   <!-- div class=" col-sm-3 col-md-3" *ngFor="let post of posts">
@@ -82,8 +64,6 @@
       
     </mat-card>
   </div -->
-
-</div>
 
 <!-- Termina la pagina que es visible -->
 

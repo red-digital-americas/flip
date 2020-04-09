@@ -1,6 +1,15 @@
-<ul class="nav navbar-nav" style="flex-direction: row;">    
-    <li class="nav-item px-3" *ngFor="let nav of navRoutes">
-      <a class="nav-link" [routerLink]="[ nav.route, IDBUILD]">{{nav.title}}</a>
-      <!-- <a class="nav-link" [routerLink]="['/'+route, IDBUILD]">{{route}}</a> -->
-    </li>     
-</ul>
+<h4 class="aa-navbar__comunidad">
+  {{ community_name }}
+  <span class="aa-navbar__comunidad-back" (click)="goTo('communities')"></span>
+</h4>
+<div class="aa-navbar">
+  <div class="aa-navbar__item" 
+       *ngFor="let nav of navRoutes"
+       [ngClass]="{'aa-navbar__item--active': nav.active}">
+    <a class="aa-navbar__link aa-navbar__link--active" 
+       [ngClass]="{'aa-navbar__link--active': nav.active}"
+       [routerLink]="[ nav.route, IDBUILD]">
+      {{ nav.title }}
+    </a>
+  </div>
+</div>

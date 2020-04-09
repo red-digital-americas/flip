@@ -76,7 +76,6 @@ export class DatosService {
   }
 
   service_general_get_with_params(url, parametros): Observable<any> {
-    debugger;
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.http.get(this.heroesUrl + url, { headers: headers, params: parametros });
@@ -114,7 +113,6 @@ export class DatosService {
   }
 
   ServicioPostMessageList(parametros: MessageData[]): Observable<any> {
-    debugger;
     let headers = new HttpHeaders();
     console.log(parametros);
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -129,7 +127,6 @@ export class DatosService {
 
   ServiceGetRooms(buildId: number): Observable<any>{
     let headers = new HttpHeaders();
-    debugger;
     let params = new URLSearchParams();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     params.set("buildId", buildId+'');
@@ -138,7 +135,6 @@ export class DatosService {
   };
   ServiceGetTypeRooms(idBuilding: number): Observable<any>{
     let headers = new HttpHeaders();
-    debugger;
     let params = new URLSearchParams();
     params.append("buildId", idBuilding+'');
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -152,7 +148,6 @@ export class DatosService {
   ServiceSaveRooms(parametros): Observable<any> {
     let headers = new HttpHeaders();
     console.log(parametros);
-    debugger;
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.http.post(this.heroesUrl + 'Building/SaveRooms', parametros);
   }

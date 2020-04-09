@@ -1,43 +1,26 @@
-<app-nav></app-nav>
+<app-nav [section]="section"></app-nav>
   
-<!-- <div class="card card-height-newsfeed">  
-    <div class="card-body">
-      <h5 class="card-title">Add Reservation </h5>
-      
-      <form #loginForm="ngForm" autocomplete="off">
-        <div class="row">
-          <div class="col-md-6 col-sm-6 ">
-
-            <div class="form-row">
-              <div class="col-12  margin-gral">
-                <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
-              </div>
-            </div>                                     
-
-            <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral " [disabled]="!loginForm.form.valid" >Reservar</button>
-
-          </div>          
-        </div>  
-      </form>
-    </div>      
-</div>   -->
-
-<div class="animated fadeIn">
-  <div class="card">    
-    <div class="card-body">
-      <!-- <h5 class="card-title">Calendar</h5> -->
-      <button (click)="Refresh()" type="button" class="btn btn-outline-dark margin-gral">Refresh</button> 
-
-      <div class="form-row">
-        <div class="col-12 margin-gral">
-          <select class="form-control" [(ngModel)]="amenitySelect" (change)="GetEvents();">
-            <option *ngFor="let amenity of amenitiesArray" [value]="amenity.id" >
-              {{amenity.name}}
-            </option>                  
-          </select>
-        </div>            
-      </div>           
-
+<div class="ml-col-1 ap-calendar">
+  <div class="ml-col-1 padding-general-m margin-bottom-g">
+    <form class="ap-form ml-col-1 card-style margin-bottom-x">
+      <div class="ap-form__input">
+        <select 
+          class="ap-form__input-text" 
+          [(ngModel)]="amenitySelect" 
+          (change)="GetEvents();" 
+          name="select_kind" 
+          placeholder="Select Amenity"
+          id="select_kind">
+          <option *ngFor="let amenity of amenitiesArray" [value]="amenity.id" >
+            {{amenity.name}}
+          </option>                  
+        </select>
+        <label for="select_kind" class="ap-form__label ap-form__label-text">
+          Select Amenity
+        </label>
+      </div>
+    </form>
+    <div class="ml-col-1 padding-general-m card-style">
       <full-calendar
         #calendar
         defaultView="dayGridMonth"
@@ -52,32 +35,41 @@
         locale="es"
         nowIndicator="true"     
         slotDuration='01:00'   
-
         [events]="calendarEvents"
-
         selectable="true" 
         (select)="handleSelect($event)"
-
         (eventClick)="handleEventClick($event)"
         (dateClick)="handleDateClick($event)"   
         (eventDrop)="handleEventDrop($event)"
         (eventResize)="handleEventResize($event)" 
-        (datesRender)="handleDatesRender($event)"
-                
+        (datesRender)="handleDatesRender($event)"       
       ></full-calendar>
-      <!-- [header]="{
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      }" -->
-      <!-- selectable="false" 
-      (select)="handleSelect($event)" -->      
-
-      <!-- [events]="calendarEvents" -->      
-
-      <!-- x (eventOverlap)="handleEventOverlap($event, $event)" -->
+    </div>
   </div>
+  <button 
+    (click)="Refresh()"
+    class="ap-calendar__refresh card-style">
+  </button>
 </div>
+
+  <!--div class="card display-none">    
+    <div class="card-body">
+
+      <button (click)="Refresh()" type="button" class="btn btn-outline-dark margin-gral">Refresh</button> 
+
+      <div class="form-row">
+        <div class="col-12 margin-gral">
+          <select class="form-control" [(ngModel)]="amenitySelect" (change)="GetEvents();">
+            <option *ngFor="let amenity of amenitiesArray" [value]="amenity.id" >
+              {{amenity.name}}
+            </option>                  
+          </select>
+        </div>            
+      </div>           
+
+      
+  </div>
+</div -->
 
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>    
 

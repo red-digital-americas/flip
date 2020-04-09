@@ -26,6 +26,8 @@ export class ServicesComponent implements OnInit {
   formGroup: FormGroup;    
   serviceModel:Service = new Service();
 
+  public section:string;
+
   constructor(private router: Router, private heroService: DatosService, private route: ActivatedRoute,
      private toasterService: ToasterService, private _formBuilder: FormBuilder
   ) { }
@@ -37,7 +39,8 @@ export class ServicesComponent implements OnInit {
     else {
       this.user = JSON.parse(localStorage.getItem("user"));      
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
-      this.IDBUILD = this.route.snapshot.params['id'];                  
+      this.IDBUILD = this.route.snapshot.params['id'];      
+      this.section = 'services';            
     }
 
     this.formGroup = ServicesFormGroup;
@@ -149,4 +152,157 @@ export class ServicesComponent implements OnInit {
 
     fr.readAsDataURL(file);    
   }
+
+  //Autor: Carlos Hernandez Hernandez
+  public show_service_form:boolean = false;
+  public service_form_action:string = '';
+  public data_service: DataService = new DataService();
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: toggleSectionForm
+   * Tipo: Funcion | Funcion efecto colateral
+   * Visto en: amenities, newsfeed, services
+   * Parametros: Dependiendo el parametro, muestra el formulario para dar de alta o editar un objeto(amenidad) u oculta el formulario
+   * Regresa: N/A
+   * Descripcion: 
+   */
+  public toggleSectionForm( action_kind:string = 'hide', editable:any = {} ):void {
+
+    switch( action_kind ) {
+
+      case 'new':
+        this.show_service_form = true;
+        this.data_service.name = '';
+        this.data_service.description = '';
+        this.data_service.provider = '';
+        this.data_service.price = null;
+        this.data_service.priceUnit = null;
+        this.data_service.icon = '../../../assets/14.jpg';
+        this.data_service.photo = '../../../assets/14.jpg';
+        this.service_form_action = 'Añadir Servicio';
+        break;
+
+      case 'edit':
+        this.show_service_form = true;
+        this.data_service.name = editable.name;
+        this.data_service.description = editable.description;
+        this.data_service.provider = editable.provider;
+        this.data_service.price = editable.price;
+        this.data_service.priceUnit = editable.priceUnit;
+        this.data_service.icon = editable.icon;
+        this.data_service.photo = editable.photo;
+        this.service_form_action = 'Editar Servicio';
+        break;
+
+      case 'hide':
+        this.show_service_form = false;
+        break;
+
+      default:
+        console.log('Ese caso no existe');
+        break
+
+    }
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: validateImageUpload
+   * Tipo: Funcion | Funcion efecto colateral
+   * Visto en: communities, amenities, services
+   * Parametros: evento del input, dimensiones de la imagen, donde se va pre visualizar la masa, donde desplegara el nombre
+   * Regresa: N/A
+   * Descripcion: Cuando se le da clic al input y se selecciona la imagen esta valida que el tamaño sea el adecuado y la despliega el el 
+   *              visualizador
+   */
+  public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
+
+    const event = event_data.target,
+          dimensions_image_data = {
+            get_dimensions: ( function() {
+
+              const dimensions_split = dimensions_image.split('x'),
+                    width = Number( dimensions_split[0] ),
+                    height = Number( dimensions_split[1] );
+
+              return {
+                width: width,
+                height: height
+              }
+
+            }())
+          },
+          image_limit_width = dimensions_image_data.get_dimensions.width,
+          image_limit_height = dimensions_image_data.get_dimensions.height,
+          id_image_container:any = document.getElementById( target_image ),
+          name_image_container = document.getElementById( name_image ),
+          native_image_uploaded = document.getElementById('image_real_dimension');
+
+    if( event.files && event.files[0] ) {
+
+      const reader = new FileReader();
+
+            reader.onload = function(e:any) {
+
+              const image_convert:any = e.target.result,
+                    validating_image = new Promise( (resolve) => {
+
+                      native_image_uploaded.setAttribute('src', image_convert);
+                      
+                      setTimeout( () => {
+
+                        const native_image_dimension = {
+                          image: image_convert,
+                          width: native_image_uploaded.offsetWidth,
+                          height: native_image_uploaded.offsetHeight
+                        };
+
+                        resolve( native_image_dimension );
+
+                      }, 277);
+              
+                    });
+
+                    validating_image.then( ( image_data:any ) => {
+
+                      if( image_limit_width === image_data.width && image_limit_height === image_data.height ) {
+
+                        id_image_container.setAttribute('src', image_data.image );
+                        name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
+                        id_image_container.classList.remove('no-image');
+
+                      } else {
+
+                        id_image_container.src = '../../../assets/14.jpg';
+                        name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
+                        id_image_container.classList.add('no-image');
+
+                      }
+                      
+                    });
+
+            }
+
+            reader.readAsDataURL( event.files[0] );
+
+    }
+    
+  }
+
+}
+
+class DataService {
+  id: number;
+  name: string;
+  description: string;
+  icon: string;
+  photo: string;
+  provider: string;
+  price: number;
+  priceUnit: number;
+  buildingId: number;
 }

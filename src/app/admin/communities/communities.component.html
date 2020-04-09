@@ -1,216 +1,239 @@
-<div class="animated fadeIn">
-  <div class="container-fluid">
-    <button *ngIf="!buildButton" class="btn btn-dark margintop-button" (click)="AddBuilding()"> Agregar Nueva Comunidad
-    </button>
-    <mat-card class="margintop-button" *ngIf="buildButton" >
-      <mat-card-header>
-        <mat-card-title>Add Community</mat-card-title>
-      </mat-card-header>
-      <!-- <form #loginForm="ngForm" autocomplete="off" > -->
-      <!-- <div class="row">
-          <div class="col-md-6 col-sm-6 ">
-            <div class="form-row">
-              <div class="col-12  margin-gral">
-                <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle"
-                  placeholder="Name" required>
-              </div>
-            </div>
-            <div class="custom-file margin-gral ">
-              <input type="file" accept="image/*" (change)="prepareImages($event)" class="custom-file-input"
-                id="validatedCustomFile" required>
-              <label class="custom-file-label" for="customFile">Choose file</label>
 
-            </div>
-            <div class="input-group margin-gral ">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Adress</span>
-              </div>
-              <textarea name="adress" id="adress" class="form-control" [(ngModel)]="posttext" aria-label="With textarea"
-                required></textarea>
-            </div>
-            <div class="input-group margin-gral ">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Description</span>
-              </div>
-              <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="posttext"
-                aria-label="With textarea" required></textarea>
-            </div>
-            <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral "
-              [disabled]="!loginForm.form.valid">Add Community</button>
-          </div>
-
-
-          <div class="col-md-6 col-sm-6 ">
-            <img class="img-size" src="{{postphoto}}" />
-
-          </div>
-        </div> -->
-      <form [formGroup]="buildingForm" (ngSubmit)="onSubmit()" *ngIf="buildButton">
-        <div class="row">
-          <div class="col-md-6 col-sm-6 ">
-            <div class="form-group ">
-              <input placeholder="Name" type="text" formControlName="name" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && buildingForm.controls.type.errors }" />
-              <div *ngIf="submitted && buildingForm.controls.type.errors" class="invalid-feedback">
-                <div *ngIf="buildingForm.controls.type.errors.required">Name is required</div>
-              </div>
-            </div>
-            <div class="custom-file form-group margin-choose">
-              <input type="file" formControlName="photo" accept="image/*" (change)="uploadPhoto($event)"
-                class="custom-file-input">
-              <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
-
-            <div class="input-group form-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Adress</span>
-              </div>
-              <textarea formControlName="direction" class="form-control" aria-label="With textarea"></textarea>
-            </div>
-
-            <div class="input-group form-group ">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Description</span>
-              </div>
-              <textarea placeholder="type a description" formControlName="description" class="form-control"
-                aria-label="With textarea"></textarea>
+  <mat-card class="margintop-button" *ngIf="buildButton" >
+    <mat-card-header>
+      <mat-card-title>Add Community</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="buildingForm" (ngSubmit)="onSubmit()" *ngIf="buildButton">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 ">
+          <div class="form-group ">
+            <input placeholder="Name" type="text" formControlName="name" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && buildingForm.controls.type.errors }" />
+            <div *ngIf="submitted && buildingForm.controls.type.errors" class="invalid-feedback">
+              <div *ngIf="buildingForm.controls.type.errors.required">Name is required</div>
             </div>
           </div>
-          <div class="col-md-6 col-sm-6 " *ngIf="photo">
-              <img class="img-size"  [src]="photo" />
-  
+          <div class="custom-file form-group margin-choose">
+            <input type="file" formControlName="photo" accept="image/*" (change)="uploadPhoto($event)"
+              class="custom-file-input">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Adress</span>
             </div>
+            <textarea formControlName="direction" class="form-control" aria-label="With textarea"></textarea>
+          </div>
+          <div class="input-group form-group ">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Description</span>
+            </div>
+            <textarea placeholder="type a description" formControlName="description" class="form-control"
+              aria-label="With textarea"></textarea>
+          </div>
         </div>
-        
-        <div class="row">
-          <!-- Type Room -->
-          <div class="form-group col-md-12 col-sm-12">
-            <select formControlName="typeNumber" class="form-control" (change)="onChangeType($event)"
-              [ngClass]="{ 'is-invalid': submitted && f.typeNumber.errors }">
-              <option value="">Type Room</option>
-              <option *ngFor="let i of typeNumber">{{i}}</option>
-            </select>
-            <div *ngIf="submitted && f.typeNumber.errors" class="invalid-feedback">
-              <div *ngIf="f.typeNumber.errors.required">Type rooms is required</div>
-            </div>
+        <div class="col-md-6 col-sm-6 " *ngIf="photo">
+            <img class="img-size"  [src]="photo" />
           </div>
-          <div *ngFor="let typeR of formType.controls; let i = index" class=" col-6">
-            <div class="list-group-item margin-bottom">
-              <h5 class="">Type Room {{i + 1}}</h5>
-              <div [formGroup]="typeR" class="form-row">
-                <div class="form-group ">
-                  <input placeholder="Description" type="text" formControlName="type" class="form-control margin-gral"
-                    [ngClass]="{ 'is-invalid': submitted && typeR.controls.type.errors }" />
-                  <div *ngIf="submitted && typeR.controls.type.errors" class="invalid-feedback">
-                    <div *ngIf="typeR.controls.type.errors.required">description is required</div>
-                  </div>
-                </div>
-                <div class="form-group ">
-                  <input placeholder="Number of Rooms" type="number" formControlName="capacity"
-                    class="form-control margin-gral"
-                    [ngClass]="{ 'is-invalid': submitted && typeR.controls.capacity.errors }" />
-                  <div *ngIf="submitted && typeR.controls.capacity.errors" class="invalid-feedback">
-                    <div *ngIf="typeR.controls.capacity.errors.required">Description is required</div>
-                  </div>
-                </div>
-
-                <!-- <div class="form-group ">
-                  <input placeholder="Price" type="number" formControlName="price" class="form-control margin-gral"
-                    [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" />
-                  <div *ngIf="submitted && typeR.controls.price.errors" class="invalid-feedback">
-                    <div *ngIf="typeR.controls.name.price.required">Price is required</div>
-                  </div>
-                </div> -->
-
-              </div>
-            </div>
-            
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12 col-sm-12">
+          <select formControlName="typeNumber" class="form-control" (change)="onChangeType($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.typeNumber.errors }">
+            <option value="">Type Room</option>
+            <option *ngFor="let i of typeNumber">{{i}}</option>
+          </select>
+          <div *ngIf="submitted && f.typeNumber.errors" class="invalid-feedback">
+            <div *ngIf="f.typeNumber.errors.required">Type rooms is required</div>
           </div>
-        
-          <!-- Rooms -->
-          <!-- <div class="form-group col-md-12 col-sm-12" *ngIf="">
-            <select formControlName="roomsNumber" class="form-control" (change)="onChangeRooms($event)"
-              [ngClass]="{ 'is-invalid': submitted && f.roomsNumber.errors }">
-              <option value="">Number of Rooms</option>
-              <option *ngFor="let i of nrooms">{{i}}</option>
-            </select>
-            <div *ngIf="submitted && f.roomsNumber.errors" class="invalid-feedback">
-              <div *ngIf="f.roomsNumber.errors.required">Number of rooms is required</div>
-            </div>
-          </div>
-          <div *ngFor="let room of t.controls; let i = index" class=" col-6">
-            <div class="list-group-item margin-bottom">
-              <h5 class="">Room {{i + 1}}</h5>
-              <div [formGroup]="room" class="form-row">
-                <div class="form-group ">
-                  <input placeholder="Name" type="text" formControlName="name" class="form-control margin-gral"
-                    [ngClass]="{ 'is-invalid': submitted && room.controls.name.errors }" />
-                  <div *ngIf="submitted && room.controls.name.errors" class="invalid-feedback">
-                    <div *ngIf="room.controls.name.errors.required">Name is required</div>
-                  </div>
-                </div>
-                <div class="form-group ">
-                  <input placeholder="Description" type="text" formControlName="description"
-                    class="form-control margin-gral"
-                    [ngClass]="{ 'is-invalid': submitted && room.controls.description.errors }" />
-                  <div *ngIf="submitted && room.controls.description.errors" class="invalid-feedback">
-                    <div *ngIf="room.controls.description.errors.required">Description is required</div>
-                  </div>
-                </div>
-                <div class="form-group ">
-                  <input placeholder="Price" type="number" formControlName="price" class="form-control margin-gral"
-                    [ngClass]="{ 'is-invalid': submitted && room.controls.price.errors }" />
-                  <div *ngIf="submitted && room.controls.price.errors" class="invalid-feedback">
-                    <div *ngIf="room.controls.name.price.required">Price is required</div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div> -->
-
-          <!-- <button class="btn btn-primary mr-1">Buy Tickets</button> -->
-         
         </div>
-        <div class="row">
-            <div class="form-group col-md-3 col-sm-3">
-                <button class="btn btn-outline-dark form-group" [disabled]="!buildingForm.valid">Add Community</button>
-
-              </div>
-              <div class="form-group col-md-3 col-sm-3">
-                  <button class="btn btn-outline-dark form-group" (click)="cancel()">Cancelar</button>
-  
+        <div *ngFor="let typeR of formType.controls; let i = index" class=" col-6">
+          <div class="list-group-item margin-bottom">
+            <h5 class="">Type Room {{i + 1}}</h5>
+            <div [formGroup]="typeR" class="form-row">
+              <div class="form-group ">
+                <input placeholder="Description" type="text" formControlName="type" class="form-control margin-gral"
+                  [ngClass]="{ 'is-invalid': submitted && typeR.controls.type.errors }" />
+                <div *ngIf="submitted && typeR.controls.type.errors" class="invalid-feedback">
+                  <div *ngIf="typeR.controls.type.errors.required">description is required</div>
                 </div>
-        </div>
-        <!-- <div class="row">
-          <div class="col-6">
-            <button class="btn btn-outline-dark" [disabled]="!buildingForm.valid">Add Community</button>
-          </div>
-
-        </div> -->
-
-      </form>
-
-
-      <!-- </form> -->
-    </mat-card>
-
-
-    <!--  -->
-    <div class="row">
-      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4" *ngFor="let post of posts">
-        <div class="card">
-          <a (click)="gotonewsfeed(post.id)" style="cursor:pointer; color:inherit">
-
-            <div class="card-body">
-              <img class="img-size-build" src="assets/img/Builds/altata6.jpg" />
+              </div>
+              <div class="form-group ">
+                <input placeholder="Number of Rooms" type="number" formControlName="capacity"
+                  class="form-control margin-gral"
+                  [ngClass]="{ 'is-invalid': submitted && typeR.controls.capacity.errors }" />
+                <div *ngIf="submitted && typeR.controls.capacity.errors" class="invalid-feedback">
+                  <div *ngIf="typeR.controls.capacity.errors.required">Description is required</div>
+                </div>
+              </div>
             </div>
-            <div class="card-footer">{{post.name}}</div>
-          </a>
+          </div>
         </div>
       </div>
-      <!--/.col-->
+      <div class="row">
+          <div class="form-group col-md-3 col-sm-3">
+              <button class="btn btn-outline-dark form-group" [disabled]="!buildingForm.valid">Add Community</button>
+            </div>
+            <div class="form-group col-md-3 col-sm-3">
+                <button class="btn btn-outline-dark form-group" (click)="cancel()">Cancelar</button>
+              </div>
+      </div>
+    </form>
+  </mat-card>
+
+  <div class="row padding-bottom-g margin-top-x">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4" *ngFor="let post of posts">
+      <div class="card">
+        <a (click)="gotonewsfeed(post.id, post.name)" style="cursor:pointer; color:inherit">
+
+          <div class="card-body">
+            <img class="img-size-build" src="assets/img/Builds/altata6.jpg" />
+          </div>
+          <div class="card-footer">{{post.name}}</div>
+        </a>
+      </div>
     </div>
-    <!--/.row-->
-  </div><!-- /.container-fluid -->
-</div>
+  </div>
+
+  <div class="bottom-container">
+    <button type="button" class="button button-black button-x center-element-absolute" modal_trigger="nueva_comunidad">
+      Agregar Nueva Comunidad
+    </button>
+  </div>
+
+  <div class="ml-modal ap-form--to-center ml-modal--bg-black display-none" modal_toggle="nueva_comunidad">
+    <div class="ap-form ap-form__center card-style">
+      <div class="ml-col-1">
+        <h4 class="ap-form__titulo text-left">
+          Nueva Comunidad
+        </h4>
+      </div>
+      <div class="ml-col-6">
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+            <input 
+              type="text" 
+              placeholder="Nombre"
+              id="community_name" 
+              class="ap-form__input-text" />
+            <label for="community_name" class="ap-form__label ap-form__label-text">
+              Nombre
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+            <textarea 
+            id="community_direccion"
+            placeholder="Dirección"
+            class="ap-form__label ap-form__input-textarea"></textarea>
+            <label for="community_direccion" class="ap-form__label ap-form__label-text">
+              Dirección
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+            <textarea 
+            id="community_desc"
+            placeholder="Descripción"
+            class="ap-form__label ap-form__input-textarea"></textarea>
+            <label for="community_desc" class="ap-form__label ap-form__label-text">
+              Descripción
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="ml-col-4o">
+        <div class="ap-form__input">
+          <input
+            class="ap-form__input-image display-none" 
+            id="nueva_comunidad_img"
+            type="file"
+            (change)="validateImageUpload( $event, '350x350', 'form_newcommunity_image_0', 'form_newcommunity_name_0' )" />
+          <label for="nueva_comunidad_img" class="ap-form__label-image">
+            <figure class="ap-form__image">
+              <img class="ap-form__image-image no-image" 
+                   id="form_newcommunity_image_0"
+                   src="../../../assets/14.jpg" />
+              <span class="ap-form__image-data" id="form_newcommunity_name_0">
+                La imagen debe medir <br />
+                <span class="text-bold">350x350</span> 
+              </span>
+            </figure>
+          </label>
+        </div>
+      </div>
+
+
+      <div class="ml-col-1 display-none" section-name="add-new-rooms">
+        <div class="ml-col-3 margin-bottom-x" *ngFor="let room of new_rooms, index as index;"> <!-- for meter esa madre -->
+          <div class="ml-col-1 padding-general-min">
+            <div class="ap-form__added card-style">
+              <div class="ap-form__input">
+                <input 
+                  type="text" 
+                  placeholder="Descripción"
+                  id="add_room_desc_{{ room.room }}" 
+                  class="ap-form__input-text" />
+                <label for="add_room_desc_{{ room.room }}" class="ap-form__label ap-form__label-text">
+                  Descripción
+                </label>
+              </div>
+              <div class="ap-form__input">
+                <input 
+                  type="number" 
+                  placeholder="Número de cuartos"
+                  id="add_room_cantidad_{{ room.room }}" 
+                  class="ap-form__input-text" />
+                <label for="add_room_cantidad_{{ room.room }}" class="ap-form__label ap-form__label-text">
+                  Número de cuartos
+                </label>
+              </div>
+              <button 
+                *ngIf="room.can_delete" 
+                (click)="deleteRoomSeletcted( room.room )"
+                class="ap-form__added-delete">
+                X
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="ml-col-3">
+          <div class="ml-col-1 ap-form__added-more">
+            <button 
+              class="ap-form__added-more-button"
+              (click)="buildNewRoom()">+</button>
+          </div> 
+        </div>
+      </div>
+
+
+      <div class="ml-col-1 ap-form__buttons">
+        <button 
+          class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar"
+          section-to-show="add-new-rooms">
+          Agregar Room
+        </button>
+      </div>
+      <div class="ml-col-1 ap-form__buttons">
+        <button 
+          class="ap-form__buttons-button ap-form__buttons-button--aceptar" 
+          modal_trigger="nueva_comunidad">
+          Aceptar
+        </button>
+        <button 
+          class="ap-form__buttons-button ap-form__buttons-button--cancelar"
+          modal_trigger="nueva_comunidad">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="black-box">
+    <img src="" id="image_real_dimension" />
+  </div>
+
+
+

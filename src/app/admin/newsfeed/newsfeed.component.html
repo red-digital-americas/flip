@@ -1,7 +1,128 @@
-<app-nav></app-nav>
+<app-nav [section]="section"></app-nav>
 
-<div class="card card-height-newsfeed">
 
+<div class="ml-col-1">
+  <div class="ml-col-1 padding-general-m margin-bottom-g">
+    <div class="ml-col-1 card-style" *ngIf="!show_post_form">
+      <div class="ap-cards">
+        <h4 class="ap-cards__titulo">
+          Post
+        </h4>
+        <div class="ap-cards__container" *ngFor="let post of posts;">
+          <div class="ap-cards__card ap-cards__card--bbuttons card-style">
+            <h4 class="ap-cards__card-titulo">
+              {{ post.posttitle }}
+            </h4>
+            <p class="ap-cards__card-desc">
+              {{ post.posttext }}
+            </p>
+            <figure class="ap-cards__card-image">
+              <img src="{{ post.photo }}" />
+            </figure>
+            <div class="ap-cards__card-buttons">
+              <button 
+                (click)="toggleSectionForm( 'edit', post )"
+                class="ap-cards__card-button ap-cards__card-button--aceptar">
+                Editar Post
+              </button>
+              <button 
+                class="ap-cards__card-button ap-cards__card-button--eliminar">
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ml-col-1 padding-general-m card-style" *ngIf="show_post_form">
+      <form class="ap-form ml-col-1 card-style" name="post_form">
+        <div class="ml-col-1">
+          <h4 class="ap-form__titulo text-left">
+            {{ post_form_action }}
+          </h4>
+        </div>
+        <div class="ml-col-7 margin-top-x">
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <input 
+                type="text" 
+                placeholder="Titulo"
+                id="new_post_title" 
+                name="new_post_title"
+                [(ngModel)]="data_post.title"
+                class="ap-form__input-text" />
+              <label for="new_post_title" class="ap-form__label ap-form__label-text">
+                Titulo
+              </label>
+            </div>
+          </div>
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <textarea 
+                id="new_post_desc"
+                name="new_post_desc"
+                placeholder="Descripcion del post"
+                [(ngModel)]="data_post.description"
+                class="ap-form__label ap-form__input-textarea"></textarea>
+              <label for="new_post_desc" class="ap-form__label ap-form__label-text">
+                Post
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="ml-col-3o">
+          <div class="ap-form__input">
+            <input
+              class="ap-form__input-image display-none" 
+              id="nueva_comunidad_img"
+              name="nueva_comunidad_img"
+              type="file"
+              (change)="validateImageUpload( $event, '350x350', 'new_post_image_0', 'new_post_name_0' )" />
+            <label for="nueva_comunidad_img" class="ap-form__label-image">
+              <figure class="ap-form__image">
+                <img class="ap-form__image-image no-image" 
+                     id="new_post_image_0"
+                     src="{{ data_post.photo }}" />
+                <span class="ap-form__image-data text-center" id="new_post_name_0">
+                  La imagen debe medir <br />
+                  <span class="text-bold">350x350</span> 
+                </span>
+              </figure>
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-1 ap-form__buttons">
+          <button 
+            class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+            {{ post_form_action }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="bottom-container">
+  <button 
+    class="button button-black button-see-x right-element-absolute"
+    *ngIf="!show_post_form"
+    (click)="toggleSectionForm( 'new' )">
+    Agregar Nuevo Post
+  </button>
+  <button 
+    class="button button-blue button-x right-element-absolute"
+    *ngIf="show_post_form"
+    (click)="toggleSectionForm()">
+    Lista de Post
+  </button>
+</div>
+
+<div class="black-box">
+  <img src="" id="image_real_dimension" />
+</div>
+
+<!-- div class="card card-height-newsfeed">
   <div class="card-body">
     <h5 class="card-title">Add Post </h5>
     <form #loginForm="ngForm" autocomplete="off">
@@ -13,34 +134,11 @@
                 placeholder="Title" required>
             </div>
           </div>
-
-          <!-- <div class="custom-file">
-        <input type="file" class="custom-file-input" id="customFile">
-        <label class="custom-file-label" for="customFile">Choose file</label>
-      </div>-->
           <div class="custom-file margin-gral ">
             <input type="file" accept="image/*" (change)="prepareImages($event)" class="custom-file-input"
               id="validatedCustomFile" required>
             <label class="custom-file-label" for="customFile">Choose file</label>
-
           </div>
-
-          <!-- <input class="pull-center btn btn-default btn-default"
-      style="float:left; padding-left: 0px; padding-right: 5px;"
-      #fileInput multiple
-      type="file"
-      accept="image/*"
-      (change)="prepareImages($event)" />-->
-          <!--<button id="btncomp"
-              name="btncomp"
-              style="float:left;"
-              type="submit"
-              class="btn btn-outline-success"
-              (click)="addImages()"
-              [disabled]="newImages.lenght == 0">
-        Upload Foto
-      </button>-->
-
           <div class="input-group margin-gral ">
             <div class="input-group-prepend">
               <span class="input-group-text">Write Post</span>
@@ -51,27 +149,17 @@
           <button (click)="addPost()" type="button" class="btn btn-outline-dark margin-gral "
             [disabled]="!loginForm.form.valid">Add Post</button>
         </div>
-      
         <div class="col-md-6 col-sm-6 ">
           <img class="img-size" src="{{postphoto}}" />
-
         </div>
-        <!-- <div class="col-md-6 col-sm-6 ">
-          <div style="margin-left: 50%;">
-abc
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 ">
-          <button (click)="addPost()" type="button" class="btn btn-outline-dark " [disabled]="!loginForm.form.valid">Add
-            Post</button>
-        </div> -->
-
       </div>
-
     </form>
   </div>
+</div -->
 
-  <div class="row">
+
+
+<!-- div class="row">
     <div class="col-sm-6 col-md-4" *ngFor="let post of posts">
       <div class="card">
         <div class="card-header">
@@ -90,7 +178,8 @@ abc
 
       </div>
     </div>
-  </div>
-</div>
+  </div -->
+
+ 
 
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

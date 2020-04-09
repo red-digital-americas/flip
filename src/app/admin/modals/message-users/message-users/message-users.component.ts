@@ -57,7 +57,7 @@ export class MessageUsersComponent implements OnInit {
     this.dialogRef.close();
   }
   Send(){
-    debugger;
+    //debugger;
     let contact = new Array<ContactSend>()
 
     // this.selectedUsers.forEach(id =>{

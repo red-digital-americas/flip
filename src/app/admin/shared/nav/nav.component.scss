@@ -1,0 +1,73 @@
+.aa-navbar {
+
+    width: 100%;
+    position: relative;
+    float: left;
+    background-color: white;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    box-shadow: 0 6px 4px -4px rgba($color: #2e343a, $alpha: .4);
+
+    &__item {
+
+        display: flex;
+        flex-basis: 20%;
+        height: 50px;
+        padding-left: 12px;
+        padding-right: 15px;
+        text-align: center;
+        justify-content: center;
+        flex-direction: column;
+
+        &--active {
+            border-bottom: solid 3px #20a8d8;
+        }
+
+    }
+
+    &__comunidad {
+
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        background-color: white;
+        padding: 12.7px 0;
+        font-size: 22px;
+        position: relative;
+        border-bottom: solid 1px rgba(0,0,0,.4);
+
+        &-back {
+            position: absolute;
+            top: 50%;
+            width: 17px;
+            height: 17px;
+            border-width: 2px 0 0 2px;
+            border-style: solid;
+            border-color: #2e343a;
+            left: 30px;
+            cursor: pointer;
+            transition: transform .2s ease;
+            transform: translateY(-50%) rotate(-45deg) scale(1);
+        }
+
+        &-back:hover {
+            transform: translateY(-50%) rotate(-45deg) scale(1.07);
+            border-color: #20a8d8;
+        }
+
+    }
+
+    &__link {
+
+        text-decoration: none;
+        color: rgba($color: #2e343a, $alpha: .9);
+
+        &--active {
+            color: #20a8d8;
+            font-weight: bold;
+        }
+
+    }
+
+}

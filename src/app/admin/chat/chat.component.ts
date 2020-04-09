@@ -56,13 +56,15 @@ export class ChatComponent implements OnInit {
   userSendMessage = new ContactSend();
   conversationId: number;
 
+  public section:string;
+
   public toasterconfig: ToasterConfig = new ToasterConfig({
     tapToDismiss: true,
     timeout: 3000,
     positionClass: "toast-top-center",
   });
   ngOnInit() {
-    debugger;
+    //debugger;
 
     this.user = JSON.parse(localStorage.getItem("user"));
     console.log(this.user);
@@ -71,7 +73,8 @@ export class ChatComponent implements OnInit {
     // this.GetBuildingCoverImage()
     this.get_chats();
     this.get_users();
-    this.getInfoUser()
+    this.getInfoUser();
+    this.section = 'chat';
     this.hubConnection = new HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Debug)
       .withUrl(`${Gvars.URL}/chatHub`, {
@@ -85,7 +88,7 @@ export class ChatComponent implements OnInit {
 
     this.hubConnection.on('Send', (rtMessageResponse) => {
       // console.log(rtMessageResponse);
-      debugger;
+      //debugger;
       if (this.conversationId == rtMessageResponse.conversationId) {
         this.GetMessages();
       }
@@ -103,10 +106,10 @@ export class ChatComponent implements OnInit {
   }
 
   get_chats() {
-    debugger;
+    //debugger;
     var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
     this.heroService.ServicioPostMessage("SeeChats", creadoobj).subscribe((value) => {
-      debugger;
+      //debugger;
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
@@ -171,20 +174,38 @@ export class ChatComponent implements OnInit {
       }
     });
   }
-  showConversation(contact: any, id: any) {
-    debugger;
+  showConversation(contact: any, id: any, event_data:any) {
+    //debugger;
     this.showChat = true;
     this.conversationId = contact.conversationId;
     this.userSendMessage.info = new Info();
     this.userSendMessage.info.iduser = contact.iduser;
+    this.userSendMessage.info.name = contact.name;
     this.userSendMessage.info.lastname = contact.lastname;
     this.userSendMessage.info.photo = contact.photo;
     this.userSendMessage.selected = true;
     this.GetConversationUser(contact.conversationId);
     this.GetMessages();
+    this.illChatWith( event_data );
   }
+
+  public illChatWith( event_data:any ):void {
+
+    const event = event_data.target,
+          friend_item = document.getElementsByClassName('ap-chat__people-person--friend');
+
+    for( let friend = friend_item.length; friend--; ) {
+
+      friend_item[friend].classList.remove('ap-chat__people-person--active');
+
+    }
+
+    event.parentElement.classList.add('ap-chat__people-person--active');
+
+  }
+
   private GetConversationUser(id) {
-    debugger;
+    //debugger;
     var creadoobj = { conversationId: id, userId: this.IDUSR };
     this.heroService.service_general_get_with_params("Message/GetConversationUser", creadoobj).subscribe((value) => {
       switch (value.result) {
@@ -201,7 +222,7 @@ export class ChatComponent implements OnInit {
   }
 
   private GetMessages() {
-    debugger;
+    //debugger;
     var creadoobj = { conversationId: this.conversationId, userId: this.IDUSR };
     this.heroService.service_general_get_with_params("Message/GetMessages", creadoobj).subscribe((value) => {
       switch (value.result) {
@@ -213,12 +234,16 @@ export class ChatComponent implements OnInit {
           if (value.result == "Success") {
             this.messages = value.item;
             this.ReplaceInvitations(value.item);
-
-            setTimeout(() => { this.scrollToBottom(); }, 200);
+            const chat_messages = document.getElementById('chat_messages');
+            setTimeout( () => { chat_messages.scrollTo( 0, chat_messages.scrollHeight ) }, 200);
+            //setTimeout(() => { this.scrollToBottom(); }, 200);
           }
       }
     });
+
   }
+
+
   private scrollToBottom(): void {
     document.getElementById('last').scrollIntoView(true);
   }
@@ -251,7 +276,7 @@ export class ChatComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(async selectedUser => {
-      debugger;
+      //debugger;
       console.log("SElectedUser", selectedUser);
       console.log("SElectedUser", selectedUser);
 
@@ -286,7 +311,7 @@ export class ChatComponent implements OnInit {
       });
       console.log("MessageList=>", messageList);
       this.heroService.ServicioPostMessageList(messageList).subscribe(response => {
-        debugger;
+        //debugger;
         this.get_chats();
 
       }, error =>{
@@ -306,7 +331,7 @@ export class ChatComponent implements OnInit {
 
 
   SentMessage(send) {
-    debugger;
+    //debugger;
     let SendTXT = "";
     let message;
     if (typeSend.SEND == send) {
@@ -324,7 +349,7 @@ export class ChatComponent implements OnInit {
       SendTXT = 'SentMessageAll';
 
     }
-    debugger;
+    //debugger;
     //   this.selectedContacts.forEach((selected)=> {
     //     if (contact.info.iduser == selected.info.iduser) { contact.selected = true;}                  
     // });
@@ -344,7 +369,8 @@ export class ChatComponent implements OnInit {
             this.ResetTextArea();
             this.scrollToBottom();
             this.selectedContacts = new Array<Contact>();
-
+            const chat_messages = document.getElementById('chat_messages');
+            setTimeout( () => { chat_messages.scrollTo( 0, chat_messages.scrollHeight ) }, 200);
           }
       }
     });

@@ -42,7 +42,9 @@ export class ReservationsComponent implements OnInit {
   IDBUILD: string = "0";
   
   amenitiesArray = [];
-  amenitySelect;  
+  amenitySelect;
+  
+  public section:string;
   
   constructor(  private router: Router, private heroService: DatosService, private route: ActivatedRoute,  
                 private modalService: BsModalService, private toasterService: ToasterService           
@@ -57,6 +59,7 @@ export class ReservationsComponent implements OnInit {
       this.IDBUILD = this.route.snapshot.params['id'];       
       this.GetAmenities();         
       this.InitCalendarSetup();
+      this.section = 'reservations';
     }
   }        
 
