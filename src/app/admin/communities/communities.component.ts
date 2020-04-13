@@ -83,7 +83,6 @@ export class CommunitiesComponent implements OnInit {
     var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
 
     this.heroService.ServicioPostBuilds("SeeBuilding", creadoobj).subscribe((value) => {
-      //debugger;
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);

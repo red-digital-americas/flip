@@ -44,8 +44,15 @@ import { Autoresize } from './shared/directives/autoresize.directive';
 import {MatInputModule} from '@angular/material/input';
 import { RoomModalComponent } from './modals/room-modal/room-modal.component';
 
-
-
+//CHH
+import { BookingIndexComponent } from './Booking/index.component';
+import { TenantListComponent } from './Booking/TenantList/tenantList.component';
+import { BookingNavbarComponent } from './Booking/NavbarBooking/booking-navbar.component';
+import { RoomAvailavilityComponent } from './Booking/RoomAvailavility/room-availavility.component';
+import { MessagesComponent } from './Booking/Messages/messages.component';
+import { AlertsComponent } from './Booking/Alerts/alerts.component';
+import { RoomCatalogComponent } from './Booking/RoomCatalog/roomCatalog.component';
+import { MembershipCatalogComponent } from './Booking/Membership/memberShipCatalog.component';
 
 @NgModule({
   imports: [    
@@ -69,8 +76,6 @@ import { RoomModalComponent } from './modals/room-modal/room-modal.component';
     MatButtonModule,
     MatDialogModule,
     MatInputModule
-    
-    
   ],
   declarations: [
     CommunitiesComponent,  
@@ -87,7 +92,15 @@ import { RoomModalComponent } from './modals/room-modal/room-modal.component';
     ChatComponent,
     MessageUsersComponent,
     Autoresize,
-    RoomModalComponent
+    RoomModalComponent,
+    BookingIndexComponent,
+    TenantListComponent,
+    BookingNavbarComponent,
+    RoomAvailavilityComponent,
+    MessagesComponent,
+    AlertsComponent,
+    RoomCatalogComponent,
+    MembershipCatalogComponent
   ],
   entryComponents: [
     DetalleComponent,

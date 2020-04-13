@@ -1,0 +1,179 @@
+<div class="ml-col-1 padding-general-m margin-bottom-m">
+    <div class="ml-col-1 index-cards" *ngIf="!show_booking_form">
+        <div class="index-cards__container" *ngFor="let card of cards;">
+            <div class="index-cards__card card-style">
+                <figure class="index-cards__card-photo">
+                    <img 
+                        src="{{ card.photo == '' ? '../../../assets/14.jpg' : card.photo }}" 
+                        class="index-cards__card-photo-img" />
+                </figure>
+                <h4 class="index-cards__card-titulo">
+                    {{ card.name }}
+                </h4>
+                <div class="index-cards__card-buttons">
+                    <button 
+                        (click)="toggleSectionForm( 'edit', card )"
+                        class="index-cards__card-buttons-button button-blue">
+                        Editar
+                    </button>
+                    <button 
+                        (click)="goToBooking( card.id, card.name )"
+                        class="index-cards__card-buttons-button button-black">
+                        Booking
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form class="ap-form ml-col-1 card-style" *ngIf="show_booking_form">
+        <div class="ml-col-1">
+          <h4 class="ap-form__titulo text-left">
+            {{ booking_form_action }}
+          </h4>
+        </div>
+        <div class="ml-col-7 margin-top-x">
+            <div class="ml-col-1">
+                <div class="ap-form__input">
+                  <input 
+                    type="text"
+                    placeholder="Titulo"
+                    id="booking_title" 
+                    name="booking_title"
+                    class="ap-form__input-text" />
+                  <label for="booking_title" class="ap-form__label ap-form__label-text">
+                    Titulo
+                  </label>
+                </div>
+            </div>
+            <div class="ml-col-1">
+                <div class="ap-form__input">
+                  <textarea 
+                    id="booking_desc"
+                    name="booking_desc"
+                    placeholder="Descripcion"
+                    class="ap-form__label ap-form__input-textarea"></textarea>
+                  <label for="booking_desc" class="ap-form__label ap-form__label-text">
+                    Descripción
+                  </label>
+                </div>
+            </div>
+            <div class="ml-col-1">
+                <div class="ap-form__input">
+                  <textarea 
+                    id="booking_direccion"
+                    name="booking_direccion"
+                    placeholder="Dirección"
+                    class="ap-form__label ap-form__input-textarea"></textarea>
+                  <label for="booking_direccion" class="ap-form__label ap-form__label-text">
+                    Dirección
+                  </label>
+                </div>
+            </div>
+        </div>
+        <div class="ml-col-3o">
+            <div class="ap-form__input">
+                <input
+                  class="ap-form__input-image display-none" 
+                  id="booking_img"
+                  name="booking_img"
+                  type="file"
+                  (change)="validateImageUpload( $event, '350x350', 'booking_img_0', 'booking_img_name_0' )" />
+                <label for="booking_img" class="ap-form__label-image">
+                  <figure class="ap-form__image">
+                    <img class="ap-form__image-image no-image" 
+                         id="booking_img_0"
+                         src="../../../assets/14.jpg" />
+                    <span class="ap-form__image-data text-center" id="booking_img_name_0">
+                      La imagen debe medir <br />
+                      <span class="text-bold">350x350</span> 
+                    </span>
+                  </figure>
+                </label>
+            </div>
+        </div>
+        <div class="ml-col-1 ap-form__rooms" *ngIf="show_rooms_form">
+            <div class="ap-form__rooms-room" *ngFor="let room of rooms;">
+              <div class="ml-col-1 padding-general-min card-style">
+                <div class="ml-col-1">
+                  <div class="ap-form__input">
+                    <textarea 
+                      id="booking_room_desc_{{ room.id }}"
+                      name="booking_room_desc_{{ room.id }}"
+                      placeholder="Descripcion"
+                      class="ap-form__label ap-form__input-textarea"></textarea>
+                    <label for="booking_room_desc_{{ room.id }}" class="ap-form__label ap-form__label-text">
+                      Descripción
+                    </label>
+                  </div>
+                </div>
+                <div class="ml-col-1">
+                  <div class="ap-form__input">
+                    <input 
+                      type="text"
+                      placeholder="Titulo"
+                      id="booking_room_title_{{ room.id }}" 
+                      name="booking_room_title_{{ room.id }}"
+                      class="ap-form__input-text" />
+                    <label for="booking_room_title_{{ room.id }}" class="ap-form__label ap-form__label-text">
+                      Titulo
+                    </label>
+                  </div>
+                </div>
+                <button 
+                  *ngIf="room.can_delete"
+                  (click)="deleteThisRoom( room.id )"
+                  class="ap-form__rooms-room-delete button-orange">X
+                </button>
+              </div>
+            </div>
+            <div class="ap-form__rooms-room ap-form__rooms-buttons">
+              <button 
+                (click)="addNewRoom()"
+                class="ap-form__rooms-room-add button-blue">+
+              </button>
+              <button 
+                (click)="showRoomsForms()"
+                class="ap-form__rooms-room-hide button-black">
+                Hide Rooms
+              </button>
+            </div>
+        </div>
+        <div class="ml-col-1 ap-form__buttons">
+            <button 
+              type="button"
+              *ngIf="!show_rooms_form"
+              (click)="showRoomsForms()"
+              class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar margin-bottom-x">
+              Add Rooms
+            </button>
+            <button 
+              type="submit"
+              class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+              {{ booking_form_action }}
+            </button>
+          </div>
+    </form>
+</div>
+
+
+<div class="bottom-container">
+    <button 
+        type="button" 
+        *ngIf="!show_booking_form"
+        (click)="toggleSectionForm( 'new' )"
+        class="button button-see-x button-black button-x right-element-absolute">
+        Agregar Nueva Comunidad
+    </button>
+    <button 
+        type="button" 
+        *ngIf="show_booking_form"
+        (click)="toggleSectionForm()"
+        class="button button-blue button-x right-element-absolute">
+        Bookings
+    </button>
+</div>
+
+
+<div class="black-box">
+    <img src="" id="image_real_dimension" />
+</div>

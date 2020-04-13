@@ -1,0 +1,15 @@
+<h4 class="booking-titulo">
+    {{ section_name }}
+    <span
+        (click)="goToPage()"
+        class="booking-titulo__back">
+    </span>
+</h4>
+<div class="booking-navbar">
+    <div *ngFor="let option of navbar_options;" 
+         (click)="goToPage( option.id );" 
+         class="booking-navbar__item"
+         [ngClass]="{'booking-navbar__item--active':option.active}">
+        {{ option.name }} 
+    </div>
+</div>

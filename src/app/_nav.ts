@@ -41,7 +41,7 @@ export class MenuService {
   ] 
 
   private booking = [
-    { name: 'Communities', url: '/communities', icon: 'icon-drop' }
+    { name: 'Booking', url: '/booking', icon: 'icon-drop' }
   ]
 
   public CreateMenu(sectionId:number) {
@@ -54,7 +54,7 @@ export class MenuService {
   private navSections = [
     {id:1, name: 'Flip Web', url: '/webadmin', permisos: [1, 4]},
     {id:2, name: 'Admin App', url: '/communities', permisos: [2, 4]},
-    {id:3, name: 'Booking', url: '/communities', permisos: [3, 4]},
+    {id:3, name: 'Booking', url: '/booking', permisos: [3, 4]},
   ]
 
   public CreateNavSections(systemType:number) {
