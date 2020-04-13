@@ -169,10 +169,6 @@ export class BookingIndexComponent implements OnInit {
 
         this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === id_room ), 1);
 
-        console.log('============>');
-        console.log( this.rooms );
-        console.log( id_room );
-
     }
     
 
