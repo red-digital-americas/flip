@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DatosService } from '../../../datos.service';
+import { Utils } from '../../utils/utils';
 
 @Component({
     selector: 'bookingIndex',
@@ -27,18 +28,16 @@ export class BookingIndexComponent implements OnInit {
     public booking_form_action:string = "";
     public toggleSectionForm( action_kind:string = 'hide', editable:any = {} ):void {
 
-        console.log( action_kind );
-
         switch( action_kind ) {
 
             case 'new':
             this.show_booking_form = true;
-            this.booking_form_action = 'Nuevo Booking';
+            this.booking_form_action = 'Nuevo Edificio';
             break;
 
             case 'edit':
             this.show_booking_form = true;
-            this.booking_form_action = 'Editar Booking';
+            this.booking_form_action = 'Editar Edificio';
             break;
 
             case 'hide':
@@ -170,6 +169,115 @@ export class BookingIndexComponent implements OnInit {
         this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === id_room ), 1);
 
     }
+
+
+   /*
+    * Autor: Carlos Hernandez
+    * Email: carlos.hernandez@minimalist.mx    
+    * Name: sendBookingData
+    * Params: NA
+    * Return: NA
+    * Description: Envia la informacion del formulario al end point correspondiente
+    * Variables Out: NA
+    */
+    public booking_data: BookingData = new BookingData();
+    public sendBookingData():void {
+
+        /*
+        this.booking_data.name = 'Carlos';
+        this.booking_data.description = 'Hola este es el edificio';
+        this.booking_data.status = true;
+        this.booking_data.direction = 'Esta es la direccion del edificio';
+        this.booking_data.longitude = 100;
+        this.booking_data.latitude = 200;
+        this.booking_data.photo = '';
+        this.booking_data.typeroom = [
+            {type: 'uno', capacity: 10}
+        ];*/
+
+        //Falata la foto
+        // Los cuartos 
+        // Validar campos
+
+        const validating_data = new Promise( (resolve: any) => {
+
+            const are_rooms_completed = this.validateRoomsData();
+
+                  resolve( are_rooms_completed );
+
+        });
+
+        validating_data.then( (rooms_completed: boolean) => {
+
+            if( rooms_completed ) {
+
+                this.booking_data.typeroom = this.rooms;
+
+                console.log( this.booking_data );
+
+            }
+
+        });
+
+        
+        
+        /*this.services.ServiceSaveBuilding( this.booking_data ).subscribe( ( response: any ) => {
+
+            console.log( response );
+
+        }, (error: any) => {
+
+            console.log(error);
+
+        });*/
+
+        console.log( this.booking_data );
+
+    }
+
+
+    public espacios_habitaciones = [1,2,3,4,5,6,7,8,9,10];
+    public validateRoomsData():boolean {
+
+        const rooms_added_container = document.getElementById('room_added'),
+              rooms = rooms_added_container.querySelectorAll('.room');
+
+        let result: boolean = false;
+
+        for( let room = 0; room < rooms.length; room += 1) {
+
+            const inputs = rooms[room].querySelectorAll('input'),
+                  selects = rooms[room].querySelectorAll('select');
+
+            if( inputs.length == selects.length ) {
+
+                for( let field = 0; field < inputs.length; field += 1) {
+                    
+                    if( inputs[field].value != '' && selects[field].value  != null ) {
+
+                        this.rooms[room].name = inputs[field].value;
+                        this.rooms[room].cantidad = selects[field].value;
+
+                        if( rooms.length - 1 == room ) return true;
+
+                    } else {
+                        
+                        console.log('Completa los campos y dale estilos donde falten');
+                        return false;
+
+                    }
+
+                }
+
+            } else {
+
+                console.log('Error inesperado en el sistema, los campos no coinciden');
+
+            }
+
+        }
+
+    }
     
 
    /*
@@ -183,7 +291,10 @@ export class BookingIndexComponent implements OnInit {
     * Descripcion: Cuando se le da clic al input y se selecciona la imagen esta valida que el tamaño sea el adecuado y la despliega el el 
     *              visualizador
     */
+    public images_upload: any; 
     public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
+
+        this.images_upload = event_data;
 
         const event = event_data.target,
             dimensions_image_data = {
@@ -270,4 +381,44 @@ export class BookingIndexComponent implements OnInit {
         
     }
 
+    // Esta funcion no me gusta para nada
+    public newImages: any[] = [];
+    prepareImages(e) {     
+        if (Utils.isDefined(e.srcElement.files)) {
+          for (let f of e.srcElement.files) {        
+            this.newImages.push(f);
+            console.log( e.srcElement.files );
+          }
+        }
+        this.addImages();
+    }
+
+    addImages() {
+        let url: string = '';
+        if (!Utils.isEmpty(this.newImages)) {
+            for (let f of this.newImages) { console.log( this.newImages );
+            this.services.UploadImgSuc(f).subscribe((r) => {
+                if (Utils.isDefined(r)) {
+                url = <string>r.message;            
+                url = url.replace('/Imagenes', this.services.getURL() + 'Flip');            
+                this.booking_data.photo = url;            
+                this.newImages = [];
+                }
+            })
+            }
+        }
+    }
+    //Aqui termina ese jale
+
+}
+
+class BookingData {
+    name: string;
+    description: string;
+    status: boolean = true;
+    direction: string;
+    longitude: number = null;
+    latitude: number = null;
+    photo: string = '';
+    typeroom: any;
 }

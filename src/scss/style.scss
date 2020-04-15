@@ -789,6 +789,63 @@ select:active,
     background-color: rgba(0,0,0,.7);
   }
 
+  &__pop {
+
+    padding: 5px 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    background-color: white;
+    border-radius: 5px;
+    width: 420px;
+    box-shadow: 0 0 7px 2px rgba(0, 0, 0, .5);
+
+    &-titulo {
+      padding: 10px 0;
+      margin: 0;
+      font-size: 18px;
+      font-weight: bolder;
+      text-align: center;
+      border-bottom: solid 1px rgba(0,0,0,.4);
+      width: 100%;
+      float: left;
+      color: #f86c6b;
+    }
+
+    &-text {
+      padding: 10px 0;
+      font-size: 12px;
+      text-align: center;
+      width: 100%;
+      float: left;
+    }
+
+    &-buttons {
+
+      width: 100%;
+      float: left;
+      padding: 20px 0;
+      text-align: center;
+      border-top: solid 1px rgba(0,0,0,.4);
+
+      &-button {
+        width: 45%;
+        height: 32px;
+        border-radius: 5px;
+        color: white;
+        font-size: 12px;
+        margin: 0 2.5%;
+      }
+
+      &-button:focus {
+        outline: none;
+      }
+
+    }
+
+  }
+
 }
 
 .ap-form {
@@ -825,7 +882,7 @@ select:active,
 
     width: 100%;
     position: relative;
-    padding: 12px 0;
+    padding: 17px 0;
 
     &-text {
       width: 100%;
@@ -833,11 +890,19 @@ select:active,
     }
 
     &-textarea {
+
       min-width: 100%;
       max-width: 100%;
       min-height: 70px;
       max-height: 70px;
       padding-top: 4px;
+
+      &--big {
+        padding-top: 8px;
+        min-height: 120px;
+        max-height: 120px;
+      }
+
     }
 
     &-text,
@@ -1144,7 +1209,7 @@ select:active,
 
       &-add {
         position: absolute;
-        top: 40%;
+        top: 35%;
         left: 40%;
         transform: translate(-50%, -50%);
         width: 52px;
@@ -1157,7 +1222,7 @@ select:active,
         position: absolute;
         padding: 10px 25px;
         border-radius: 5px;
-        top: 65%;
+        top: 70%;
         left: 40%;
         transform: translate(-50%, -50%);
       }
@@ -1180,7 +1245,7 @@ select:active,
     }
 
     &-buttons {
-      height: 240px;
+      height: 175px;
     }
 
   }
@@ -1211,6 +1276,10 @@ select:active,
     padding: 10px 20px;
     flex-basis: 33.33%;
     flex-shrink: 0;
+
+    &--comment {
+      flex-basis: 33.33% !important;
+    }
 
     @media screen and (min-width: 1920px) {
       flex-basis: 20%;
@@ -1252,6 +1321,16 @@ select:active,
       margin: 0;
       float: left;
       font-size: 12px;
+      word-break: break-all;
+    }
+
+    &-comment {
+      width: 100%;
+      padding: 8px 0;
+      margin: 0;
+      float: left;
+      font-size: 12px;
+      min-height: 70px;
       word-break: break-all;
     }
 
@@ -1776,15 +1855,9 @@ select:active,
   flex-direction: row;
 
   &__container {
-
     flex-basis: 33.33%;
     flex-grow: 0;
     padding: 20px;
-    
-    @media screen and (min-width: 1920px){
-        flex-basis: 25%;
-    }
-
   }
 
   &__card {
@@ -1803,7 +1876,7 @@ select:active,
       height: 170px;
 
       @media screen and (min-width: 1920px){
-        height: 220px;
+        height: 310px;
       }
 
       &-img {
@@ -1875,6 +1948,13 @@ select:active,
 
 .no-image {
   border: dashed 2px #2e343a;
+}
+
+.no-content {
+  text-align: center;
+  padding: 20px;
+  color: #f86c6b;
+  font-size: 22px;
 }
 
 .image-name {
@@ -1967,6 +2047,23 @@ select:active,
 
 .block-test {
   border: dashed 1px black;
+}
+
+.forms_errors_nimage {
+  border: solid 2px #f86c6b;
+}
+
+.form_error_found {
+  border-bottom: solid 2px #f86c6b;
+}
+
+.form_error_found_label {
+  position: absolute;
+  bottom: 0;
+  color: #f86c6b;
+  font-size: 11px;
+  font-style: italic;
+  left: 0;
 }
 
 //Animations

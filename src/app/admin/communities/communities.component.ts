@@ -144,6 +144,7 @@ export class CommunitiesComponent implements OnInit {
   }
 
   onSubmit() {
+
     //debugger;
     this.submitted = true;
     this.BuildModel = this.buildingForm.value;
@@ -152,6 +153,7 @@ export class CommunitiesComponent implements OnInit {
 
     this.heroService.ServiceSaveBuilding(this.buildingForm.value).subscribe(response => {
       //debugger;
+      console.log( this.buildingForm );
     }, error => {
       //debugger;
       alert("Error al guardar")

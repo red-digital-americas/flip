@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <form (ngSubmit)="sendAmenityData( $event )" class="ap-form ml-col-1 card-style" *ngIf="show_ammenity_form">
+    <form (submit)="sendAmenityData()" onsubmit="return false;" class="ap-form ml-col-1 card-style" *ngIf="show_ammenity_form">
       <div class="ml-col-1">
         <h4 class="ap-form__titulo text-left">
           {{ ammenity_form_action }}
@@ -45,6 +45,7 @@
             <input 
               type="text" 
               [(ngModel)]="data_amenity.title"
+              [class.form_error_found]="form_amenity.no_title"
               placeholder="Titulo"
               id="new_amm_title" 
               name="new_amm_title"
@@ -52,6 +53,9 @@
             <label for="new_amm_title" class="ap-form__label ap-form__label-text">
               Titulo
             </label>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_amenity.no_title">
+              El campo es obligatorio*
+            </span>
           </div>
         </div>
         <div class="ml-col-1">
@@ -60,11 +64,15 @@
               id="new_amm_desc"
               name="new_amm_desc"
               [(ngModel)]="data_amenity.description"
+              [class.form_error_found]="form_amenity.no_desc"
               placeholder="Descripcion"
               class="ap-form__label ap-form__input-textarea"></textarea>
             <label for="new_amm_desc" class="ap-form__label ap-form__label-text">
               Descripción
             </label>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_amenity.no_desc">
+              El campo es obligatorio*
+            </span>
           </div>
         </div>
       </div>
@@ -75,15 +83,19 @@
             id="nueva_comunidad_img"
             name="nueva_comunidad_img"
             type="file"
-            (change)="validateImageUpload( $event, '350x350', 'new_amm_image_0', 'new_amm_name_0' )" />
+            (change)="validateImageUpload( $event, '350x350', 'new_amm_image_0', 'new_amm_name_0' ); prepareImages( $event );" />
           <label for="nueva_comunidad_img" class="ap-form__label-image">
             <figure class="ap-form__image">
               <img class="ap-form__image-image no-image" 
                    id="new_amm_image_0"
+                   [class.forms_errors_nimage]="form_amenity.no_photo"
                    src="{{ data_amenity.photo }}" />
               <span class="ap-form__image-data text-center" id="new_amm_name_0">
                 La imagen debe medir <br />
                 <span class="text-bold">350x350</span> 
+              </span>
+              <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_amenity.no_photo">
+                El campo es obligatorio*
               </span>
             </figure>
           </label>
@@ -93,7 +105,7 @@
         <button 
           type="submit"
           class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-          {{ ammenity_form_action }}
+          Guardar
         </button>
       </div>
     </form>
@@ -119,7 +131,15 @@
   <img src="" id="image_real_dimension" />
 </div>
   
-<div class="card card-height-newsfeed display-none">  
+
+
+
+
+
+
+
+<!-- Codigo de la version anterior  -->
+<!-- div class="card card-height-newsfeed">  
     <div class="card-body">
       <h5 class="card-title">Add Amenity</h5>
       
@@ -157,11 +177,11 @@
       </form>
     </div>
 
-</div>
+</div -->
 
 
 
-<!-- div class="row">
+<div class="row margin-bottom-g">
     <div class="col-sm-6 col-md-4" *ngFor="let amenity of amenitiesArray">
       <div class="card">
         <div class="card-header">{{amenity.name}}</div>
@@ -177,7 +197,7 @@
         <button (click)="DeleteAmenity(amenity.id)" type="button" class="btn  btn-outline-danger">Delete Amenity</button>  
       </div>
     </div>
-  </div --> 
+  </div> 
 
 
   

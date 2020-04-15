@@ -1,6 +1,5 @@
 <app-nav [section]="section"></app-nav>
 
-
 <div class="ml-col-1">
   <div class="ml-col-1 padding-general-m margin-bottom-g">
     <div class="ml-col-1 card-style" *ngIf="!show_post_form">
@@ -21,11 +20,14 @@
             </figure>
             <div class="ap-cards__card-buttons">
               <button 
+                type="button"
                 (click)="toggleSectionForm( 'edit', post )"
                 class="ap-cards__card-button ap-cards__card-button--aceptar">
                 Editar Post
               </button>
               <button 
+                type="button"
+                (click)="toggleSectionForm('delete', post)"
                 class="ap-cards__card-button ap-cards__card-button--eliminar">
                 Eliminar
               </button>
@@ -35,7 +37,7 @@
       </div>
     </div>
     <div class="ml-col-1 padding-general-m card-style" *ngIf="show_post_form">
-      <form class="ap-form ml-col-1 card-style" name="post_form">
+      <form class="ap-form ml-col-1 card-style" (submit)="sendPostData();" onsubmit="return false;" name="post_form">
         <div class="ml-col-1">
           <h4 class="ap-form__titulo text-left">
             {{ post_form_action }}
@@ -45,47 +47,63 @@
           <div class="ml-col-1">
             <div class="ap-form__input">
               <input 
+                required
                 type="text" 
                 placeholder="Titulo"
                 id="new_post_title" 
                 name="new_post_title"
                 [(ngModel)]="data_post.title"
+                [class.form_error_found]="forms_erros_found.no_title"
                 class="ap-form__input-text" />
               <label for="new_post_title" class="ap-form__label ap-form__label-text">
                 Titulo
               </label>
+              <span class="form_error_found_label" *ngIf="forms_erros_found.no_title">
+                El campo es obligatorio*
+              </span>
             </div>
           </div>
           <div class="ml-col-1">
             <div class="ap-form__input">
               <textarea 
+                required
                 id="new_post_desc"
                 name="new_post_desc"
                 placeholder="Descripcion del post"
-                [(ngModel)]="data_post.description"
+                [(ngModel)]="data_post.PostText"
+                [class.form_error_found]="forms_erros_found.no_post"
                 class="ap-form__label ap-form__input-textarea"></textarea>
               <label for="new_post_desc" class="ap-form__label ap-form__label-text">
                 Post
               </label>
+              <span class="form_error_found_label" *ngIf="forms_erros_found.no_post">
+                El campo es obligatorio*
+              </span>
             </div>
           </div>
         </div>
         <div class="ml-col-3o">
           <div class="ap-form__input">
             <input
+              required
               class="ap-form__input-image display-none" 
               id="nueva_comunidad_img"
               name="nueva_comunidad_img"
               type="file"
-              (change)="validateImageUpload( $event, '350x350', 'new_post_image_0', 'new_post_name_0' )" />
+              accept="image/*"
+              (change)="validateImageUpload( $event, '350x350', 'new_post_image_0', 'new_post_name_0' ); prepareImages( $event );" />
             <label for="nueva_comunidad_img" class="ap-form__label-image">
               <figure class="ap-form__image">
                 <img class="ap-form__image-image no-image" 
                      id="new_post_image_0"
+                     [class.forms_errors_nimage]="forms_erros_found.no_photo"
                      src="{{ data_post.photo }}" />
                 <span class="ap-form__image-data text-center" id="new_post_name_0">
                   La imagen debe medir <br />
                   <span class="text-bold">350x350</span> 
+                </span>
+                <span class="ml-col-1 form_error_found_label text-center" *ngIf="forms_erros_found.no_photo">
+                  El campo es obligatorio*
                 </span>
               </figure>
             </label>
@@ -93,15 +111,76 @@
         </div>
         <div class="ml-col-1 ap-form__buttons">
           <button 
+            type="submit"
             class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-            {{ post_form_action }}
+            Guardar
           </button>
+        </div>
+        <div class="ml-col-1" *ngIf="post_comments_section">
+          <div class="ap-cards card-style">
+            <h4 class="ap-cards__titulo">
+              Comentarios
+            </h4>
+            <div class="ap-form ml-col-1 card-style margin-tb-min">
+              <div class="ml-col-1">
+                <h4 class="ap-form__titulo text-left">
+                  Agregar Comentario
+                </h4>
+              </div>
+              <div class="ml-col-1">
+                <div class="ap-form__input">
+                  <textarea 
+                    required
+                    id="new_post_comment"
+                    name="new_post_comment"
+                    placeholder="Escriba su comentario..."
+                    [class.form_error_found]="form_comment_errors.no_comment"
+                    [(ngModel)]="comment_data"
+                    class="ap-form__label ap-form__input-textarea ap-form__input-textarea--big"></textarea>
+                  <label for="new_post_comment" class="ap-form__label ap-form__label-text">
+                    Comentario
+                  </label>
+                  <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_comment_errors.no_comment">
+                    El campo es obligatorio*
+                  </span>
+                </div>
+              </div>
+              <div class="ml-col-1 ap-form__buttons">
+                <button 
+                  (click)="addNewComment()"
+                  type="button"
+                  class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+                  Guardar
+                </button>
+              </div>
+            </div>
+            <div class="ap-cards__container ap-cards__container--comment" *ngFor="let comment of postComments;">
+              <div class="ap-cards__card ap-cards__card--bbuttons card-style">
+                <h4 class="ap-cards__card-titulo">
+                  {{ comment.name[0].name }} {{ comment.name[0].lastName }}
+                </h4>
+                <p class="ap-cards__card-comment">
+                  {{ comment.comment }}
+                </p>
+                <div class="ap-cards__card-buttons">
+                  <button 
+                    type="button"
+                    (click)="deleteThisComment( comment )"
+                    class="ap-cards__card-button ap-cards__card-button--eliminar">
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            </div>
+            <span class="ml-col-1 no-content" *ngIf="postComments == null">
+              Post sin comentarios
+            </span>
+          </div>
         </div>
       </form>
     </div>
   </div>
 </div>
-
 
 <div class="bottom-container">
   <button 
@@ -122,6 +201,51 @@
   <img src="" id="image_real_dimension" />
 </div>
 
+<div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
+  <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
+    <p class="ml-modal__pop-titulo">
+      Eliminar elemento
+    </p>
+    <p class="ml-modal__pop-text">
+      Estas seguro que deseas eliminar el elemento <br />
+      <span class="text-bold">"{{ data_post.title }}"</span>
+    </p>
+    <div class="ml-modal__pop-buttons">
+      <button 
+        (click)="toggleSectionForm('delete')"
+        class="ml-modal__pop-buttons-button button-blue">
+        Cancelar
+      </button>
+      <button 
+        (click)="confirmDeleteElement()"
+        class="ml-modal__pop-buttons-button button-orange">
+        Eliminar
+      </button>
+    </div>
+  </div>
+  <div class="ml-modal__pop" *ngIf="modal_to_show == 'delete_comment'">
+    <p class="ml-modal__pop-titulo">
+      Eliminar Comentario
+    </p>
+    <p class="ml-modal__pop-text">
+      ¿Estas seguro que deseas eliminar este comentario?
+    </p>
+    <div class="ml-modal__pop-buttons">
+      <button 
+        (click)="toggleSectionForm('delete')"
+        class="ml-modal__pop-buttons-button button-blue">
+        Cancelar
+      </button>
+      <button 
+        (click)="confirmDeleteComment()"
+        class="ml-modal__pop-buttons-button button-orange">
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Codigo pasao -->
 <!-- div class="card card-height-newsfeed">
   <div class="card-body">
     <h5 class="card-title">Add Post </h5>
@@ -155,11 +279,10 @@
       </div>
     </form>
   </div>
-</div -->
+</div>
 
 
-
-<!-- div class="row">
+<div class="row margin-bottom-g">
     <div class="col-sm-6 col-md-4" *ngFor="let post of posts">
       <div class="card">
         <div class="card-header">

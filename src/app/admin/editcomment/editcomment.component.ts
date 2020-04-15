@@ -101,6 +101,8 @@ export class EditcommentComponent implements OnInit {
     // 
     this.heroService.ServicioPostPost("SeeComment", creadoobj).subscribe((value) => {
 
+      console.log( 'Es esta mamada => ', value );
+
 
       switch (value.result) {
         case "Error":

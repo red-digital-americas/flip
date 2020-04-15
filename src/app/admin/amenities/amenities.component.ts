@@ -15,12 +15,6 @@ class AmenityRequestModel {
   }
 }
 
-class DataAmenity {
-  public title: String = '';
-  public description: String = '';
-  public photo: String = '';
-}
-
 @Component({
   selector: 'app-amenities',
   templateUrl: './amenities.component.html',
@@ -116,6 +110,7 @@ export class AmenitiesComponent implements OnInit {
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {        
         this.newImages.push(f);
+        console.log( e.srcElement.files );
       }
     }
     this.addImages();
@@ -129,7 +124,8 @@ export class AmenitiesComponent implements OnInit {
           if (Utils.isDefined(r)) {
             url = <string>r.message;            
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');            
-            this.amenityRequestModel.Photo = url;            
+            this.amenityRequestModel.Photo = url;  
+            this.data_amenity.photo = url;        
             this.newImages = [];
           }
         })
@@ -152,11 +148,39 @@ export class AmenitiesComponent implements OnInit {
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //Editor: Carlos Enrique Hernandez Hernandez
   
   /* Welcomeback Mr. Anderson, We missed you! */
   public show_ammenity_form:boolean = false;
-  public data_amenity: DataAmenity = new DataAmenity();
   public ammenity_form_action:string = "";
 
 
@@ -170,24 +194,34 @@ export class AmenitiesComponent implements OnInit {
    * Regresa: N/A
    * Descripcion: 
    */
+  public data_amenity: DataAmenity = new DataAmenity();
+  public new_amenity_button: boolean = false;
+  public edit_amenity_button: boolean = false;
   public toggleSectionForm( action_kind:string = 'hide', editable:any = {} ):void {
 
     switch( action_kind ) {
 
       case 'new':
         this.show_ammenity_form = true;
-        this.data_amenity.title = '';
-        this.data_amenity.description = '';
+        this.data_amenity.BuildingId = this.IDBUILD;
+        this.data_amenity.title = null;
+        this.data_amenity.description = null;
         this.data_amenity.photo = '../../../assets/14.jpg';
         this.ammenity_form_action = 'Añadir Amenidad';
+        this.new_amenity_button = true;
+        this.edit_amenity_button = false;
         break;
 
       case 'edit':
         this.show_ammenity_form = true;
+        this.data_amenity.BuildingId = this.IDBUILD;
         this.data_amenity.title = editable.name;
         this.data_amenity.description = editable.name;
         this.data_amenity.photo = editable.photo;
         this.ammenity_form_action = 'Editar Amenidad';
+        this.new_amenity_button = false;
+        this.edit_amenity_button = true;
+        console.log( editable );
         break;
 
       case 'hide':
@@ -202,11 +236,75 @@ export class AmenitiesComponent implements OnInit {
 
   }
 
-  public sendAmenityData( event_data:any ):void {
 
-    event_data.preventDefault();
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: sendAmenityData
+   * Tipo: Funcion 
+   * Parametros: N/A
+   * Regresa: N/A
+   * Descripcion: Envia la informacion al servicio post 'Amenity'
+   */
+  public sendAmenityData():void {
 
-    const event = event_data.target;
+    if( this.validatingFieldsFrom( this.data_amenity ) ) {
+
+      if(  this.new_amenity_button ) {
+
+        this.heroService.service_general_post("Amenity", this.data_amenity )
+        .subscribe( (response: any) => {
+
+          if( response.result == 'Success' ) {
+
+            //loader para que no haga mas
+            setTimeout( () => {  location.reload() }, 777);
+
+          }
+
+        }, (error: any) => {
+
+          console.log('Error Error Amenity: ', error);
+
+        });
+
+      } else if ( this.edit_amenity_button ) {
+
+        console.log('Aqui => ', this.data_amenity );
+
+      }
+
+    } else {
+
+      console.log('El formulario no esta completo');
+
+    }
+
+  }
+
+
+  public form_amenity: any = {
+    no_title: false,
+    no_desc: false,
+    no_photo: false
+  };
+  public validatingFieldsFrom( form_data: DataAmenity ): boolean {
+
+    let result = false; console.log( form_data );
+
+    form_data.title == null || form_data.title == '' ?
+      this.form_amenity.no_title = true : this.form_amenity.no_title = false; 
+
+    form_data.description == null || form_data.description == '' ? 
+      this.form_amenity.no_desc = true : this.form_amenity.no_desc = false;
+
+    form_data.photo == '../../../assets/14.jpg' || form_data.photo == '' ?
+      this.form_amenity.no_photo = true : this.form_amenity.no_photo = false;
+
+    !this.form_amenity.no_title && !this.form_amenity.no_desc && !this.form_amenity.no_photo ?
+      result = true : result = false; 
+
+    return result;
 
   }
 
@@ -243,7 +341,8 @@ export class AmenitiesComponent implements OnInit {
           image_limit_height = dimensions_image_data.get_dimensions.height,
           id_image_container:any = document.getElementById( target_image ),
           name_image_container = document.getElementById( name_image ),
-          native_image_uploaded = document.getElementById('image_real_dimension');
+          native_image_uploaded = document.getElementById('image_real_dimension'),
+          root_data = this;
 
     if( event.files && event.files[0] ) {
 
@@ -281,6 +380,7 @@ export class AmenitiesComponent implements OnInit {
                       } else {
 
                         id_image_container.src = '../../../assets/14.jpg';
+                        root_data.data_amenity.photo = '../../../assets/14.jpg';
                         name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
                         id_image_container.classList.add('no-image');
 
@@ -296,4 +396,11 @@ export class AmenitiesComponent implements OnInit {
     
   }
 
+}
+
+class DataAmenity {
+  public BuildingId: any;
+  public title: String = '';
+  public description: String = '';
+  public photo: String = '';
 }
