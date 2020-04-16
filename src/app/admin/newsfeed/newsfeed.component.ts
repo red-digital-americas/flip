@@ -331,6 +331,7 @@ export class NewsfeedComponent implements OnInit {
     }
 
   }
+  
 
   /*
    * Autor: Carlos Hernandez Hernandez

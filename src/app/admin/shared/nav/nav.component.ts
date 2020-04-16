@@ -23,7 +23,7 @@ export class NavComponent implements OnInit {
     {title: "Reservations", route: "/reservations", selector: 'reservations', active: false},
     {title: "Perks", route: "/perks", selector: 'perks', active: false},
     {title: "Services", route: "/services", selector: 'services', active: false},
-    {title: "Messages", route:"/chat", selector: 'chat', active: false}
+    //{title: "Messages", route:"/chat", selector: 'chat', active: false}
   ]
   
   constructor(  public router: Router, public route: ActivatedRoute,                           

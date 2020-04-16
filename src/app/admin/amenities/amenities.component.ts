@@ -125,7 +125,15 @@ export class AmenitiesComponent implements OnInit {
             url = <string>r.message;            
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');            
             this.amenityRequestModel.Photo = url;  
-            this.data_amenity.photo = url;        
+            
+            if( this.new_amenity_button ) {
+              this.data_amenity.photo = url;  
+            }
+
+            if( this.edit_amenity_button ) {
+              this.data_amenity_edit.photo = url;   
+            }
+            
             this.newImages = [];
           }
         })
@@ -195,8 +203,10 @@ export class AmenitiesComponent implements OnInit {
    * Descripcion: 
    */
   public data_amenity: DataAmenity = new DataAmenity();
+  public data_amenity_edit: DataAmenityEdit = new DataAmenityEdit();
   public new_amenity_button: boolean = false;
   public edit_amenity_button: boolean = false;
+  public id_amenity: any;
   public toggleSectionForm( action_kind:string = 'hide', editable:any = {} ):void {
 
     switch( action_kind ) {
@@ -204,7 +214,7 @@ export class AmenitiesComponent implements OnInit {
       case 'new':
         this.show_ammenity_form = true;
         this.data_amenity.BuildingId = this.IDBUILD;
-        this.data_amenity.title = null;
+        this.data_amenity.name = null;
         this.data_amenity.description = null;
         this.data_amenity.photo = '../../../assets/14.jpg';
         this.ammenity_form_action = 'Añadir Amenidad';
@@ -214,14 +224,17 @@ export class AmenitiesComponent implements OnInit {
 
       case 'edit':
         this.show_ammenity_form = true;
-        this.data_amenity.BuildingId = this.IDBUILD;
-        this.data_amenity.title = editable.name;
-        this.data_amenity.description = editable.name;
-        this.data_amenity.photo = editable.photo;
+        this.id_amenity = editable.id;
+        this.data_amenity_edit.name = editable.name;
+        this.data_amenity_edit.description = editable.description;
+        this.data_amenity_edit.photo = editable.photo;
         this.ammenity_form_action = 'Editar Amenidad';
         this.new_amenity_button = false;
         this.edit_amenity_button = true;
-        console.log( editable );
+        break;
+
+      case 'delete': 
+        this.showModal();
         break;
 
       case 'hide':
@@ -248,35 +261,49 @@ export class AmenitiesComponent implements OnInit {
    */
   public sendAmenityData():void {
 
-    if( this.validatingFieldsFrom( this.data_amenity ) ) {
+    if(  this.new_amenity_button ) {
 
-      if(  this.new_amenity_button ) {
+      if( this.validatingFieldsFrom( this.data_amenity ) ) {
 
         this.heroService.service_general_post("Amenity", this.data_amenity )
-        .subscribe( (response: any) => {
+          .subscribe( (response: any) => {
 
-          if( response.result == 'Success' ) {
+            if( response.result == 'Success' ) {
 
-            //loader para que no haga mas
-            setTimeout( () => {  location.reload() }, 777);
+              //loader para que no haga mas
+              setTimeout( () => {  location.reload() }, 777);
 
-          }
+              }
 
-        }, (error: any) => {
+          }, (error: any) => {
 
-          console.log('Error Error Amenity: ', error);
+            console.log('Error Error Amenity: ', error);
 
-        });
+          });
 
-      } else if ( this.edit_amenity_button ) {
+        }
 
-        console.log('Aqui => ', this.data_amenity );
+    } else if ( this.edit_amenity_button ) {
+
+      if( this.validatingFieldsFromEdit( this.data_amenity_edit ) ) {
+
+        this.heroService.service_general_put(`Amenity/${this.id_amenity}`, this.data_amenity_edit)
+          .subscribe( (response: any) => {
+
+            if( response.result == 'Success' ) {
+
+              //Poner aqui el loader
+              setTimeout( () => { location.reload() }, 777);
+
+            }
+
+          }, (error: any) => {
+
+            console.log('Error en el de editar => ', error);
+
+          });
 
       }
-
-    } else {
-
-      console.log('El formulario no esta completo');
 
     }
 
@@ -284,16 +311,16 @@ export class AmenitiesComponent implements OnInit {
 
 
   public form_amenity: any = {
-    no_title: false,
+    no_name: false,
     no_desc: false,
     no_photo: false
   };
   public validatingFieldsFrom( form_data: DataAmenity ): boolean {
 
-    let result = false; console.log( form_data );
+    let result = false; 
 
-    form_data.title == null || form_data.title == '' ?
-      this.form_amenity.no_title = true : this.form_amenity.no_title = false; 
+    form_data.name == null || form_data.name == '' ?
+      this.form_amenity.no_name = true : this.form_amenity.no_name = false; 
 
     form_data.description == null || form_data.description == '' ? 
       this.form_amenity.no_desc = true : this.form_amenity.no_desc = false;
@@ -301,13 +328,93 @@ export class AmenitiesComponent implements OnInit {
     form_data.photo == '../../../assets/14.jpg' || form_data.photo == '' ?
       this.form_amenity.no_photo = true : this.form_amenity.no_photo = false;
 
-    !this.form_amenity.no_title && !this.form_amenity.no_desc && !this.form_amenity.no_photo ?
+    !this.form_amenity.no_name && !this.form_amenity.no_desc && !this.form_amenity.no_photo ?
       result = true : result = false; 
 
     return result;
 
   }
 
+
+  public validatingFieldsFromEdit( form_data: DataAmenityEdit ) {
+
+    let result = false;
+
+    form_data.name == null || form_data.name == '' ?
+      this.form_amenity.no_name = true : this.form_amenity.no_name = false; 
+
+    form_data.description == null || form_data.description == '' ? 
+      this.form_amenity.no_desc = true : this.form_amenity.no_desc = false;
+
+    form_data.photo == '../../../assets/14.jpg' || form_data.photo == '' ?
+      this.form_amenity.no_photo = true : this.form_amenity.no_photo = false;
+
+    !this.form_amenity.no_name && !this.form_amenity.no_desc && !this.form_amenity.no_photo ?
+      result = true : result = false; 
+
+    return result;
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: toggleSectionForm
+   * Tipo: Funcion 
+   * Parametros: N/A
+   * Regresa: N/A
+   * Descripcion: Servicio que manda un post de un nuevo comentario
+   */
+  public amenity_to_delete: any;
+  public deleteThisAmenity( element_data: any ):void {
+
+    this.amenity_to_delete = element_data;
+    this.showModal();
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: confirmDeleteElement
+   * Tipo: Funcion 
+   * Parametros: Abre popup para confirmar si se elimina el elemento o se cancela
+   * Regresa: N/A
+   * Descripcion: N/A
+   */
+  public confirmDeleteElement():void {
+
+    this.heroService.service_general_delete(`Amenity/${ this.amenity_to_delete.id }`)
+      .subscribe( (response: any) => {
+
+        this.GetAmenities();
+        this.showModal();
+
+      }, (error: any) => {
+
+        console.log('Error en el servicio de eliminar => ', error);
+
+      });
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: showModal
+   * Tipo: Funcion 
+   * Parametros: NA
+   * Regresa: N/A
+   * Descripcion: Muestra y oculta el formulario de eliminar
+   */
+  public page_modal: boolean = false;
+  public modal_to_show: string;
+  public showModal( section: string = 'default' ):void {
+
+    this.modal_to_show = section;
+    !this.page_modal ? this.page_modal = true : this.page_modal = false; 
+
+  }
 
   /*
    * Autor: Carlos Hernandez Hernandez
@@ -381,6 +488,7 @@ export class AmenitiesComponent implements OnInit {
 
                         id_image_container.src = '../../../assets/14.jpg';
                         root_data.data_amenity.photo = '../../../assets/14.jpg';
+                        root_data.data_amenity_edit.photo = '../../../assets/14.jpg';
                         name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
                         id_image_container.classList.add('no-image');
 
@@ -400,7 +508,13 @@ export class AmenitiesComponent implements OnInit {
 
 class DataAmenity {
   public BuildingId: any;
-  public title: String = '';
+  public name: String = '';
   public description: String = '';
   public photo: String = '';
+}
+
+class DataAmenityEdit {
+  public name: string;
+  public description: string;
+  public photo: string;
 }

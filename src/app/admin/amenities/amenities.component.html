@@ -25,6 +25,7 @@
                 Editar
               </button>
               <button 
+                (click)="deleteThisAmenity( amenity )"
                 class="ap-cards__card-button ap-cards__card-button--eliminar">
                 Eliminar
               </button>
@@ -43,9 +44,19 @@
         <div class="ml-col-1">
           <div class="ap-form__input">
             <input 
+              *ngIf="new_amenity_button"
               type="text" 
-              [(ngModel)]="data_amenity.title"
-              [class.form_error_found]="form_amenity.no_title"
+              [(ngModel)]="data_amenity.name"
+              [class.form_error_found]="form_amenity.no_name"
+              placeholder="Titulo"
+              id="new_amm_title" 
+              name="new_amm_title"
+              class="ap-form__input-text" />
+            <input 
+              *ngIf="edit_amenity_button"
+              type="text" 
+              [(ngModel)]="data_amenity_edit.name"
+              [class.form_error_found]="form_amenity.no_name"
               placeholder="Titulo"
               id="new_amm_title" 
               name="new_amm_title"
@@ -53,7 +64,7 @@
             <label for="new_amm_title" class="ap-form__label ap-form__label-text">
               Titulo
             </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_amenity.no_title">
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_amenity.no_name">
               El campo es obligatorio*
             </span>
           </div>
@@ -63,7 +74,16 @@
             <textarea 
               id="new_amm_desc"
               name="new_amm_desc"
+              *ngIf="new_amenity_button"
               [(ngModel)]="data_amenity.description"
+              [class.form_error_found]="form_amenity.no_desc"
+              placeholder="Descripcion"
+              class="ap-form__label ap-form__input-textarea"></textarea>
+            <textarea 
+              id="new_amm_desc"
+              name="new_amm_desc"
+              *ngIf="edit_amenity_button"
+              [(ngModel)]="data_amenity_edit.description"
               [class.form_error_found]="form_amenity.no_desc"
               placeholder="Descripcion"
               class="ap-form__label ap-form__input-textarea"></textarea>
@@ -88,8 +108,14 @@
             <figure class="ap-form__image">
               <img class="ap-form__image-image no-image" 
                    id="new_amm_image_0"
+                   *ngIf="new_amenity_button"
                    [class.forms_errors_nimage]="form_amenity.no_photo"
                    src="{{ data_amenity.photo }}" />
+              <img class="ap-form__image-image no-image" 
+                   id="new_amm_image_0"
+                   *ngIf="edit_amenity_button"
+                   [class.forms_errors_nimage]="form_amenity.no_photo"
+                   src="{{ data_amenity_edit.photo }}" />
               <span class="ap-form__image-data text-center" id="new_amm_name_0">
                 La imagen debe medir <br />
                 <span class="text-bold">350x350</span> 
@@ -131,8 +157,29 @@
   <img src="" id="image_real_dimension" />
 </div>
   
-
-
+<div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
+  <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
+    <p class="ml-modal__pop-titulo">
+      Eliminar elemento
+    </p>
+    <p class="ml-modal__pop-text">
+      Estas seguro que deseas eliminar el elemento <br />
+      <span class="text-bold">"{{ amenity_to_delete.name }}"</span>
+    </p>
+    <div class="ml-modal__pop-buttons">
+      <button 
+        (click)="toggleSectionForm('delete')"
+        class="ml-modal__pop-buttons-button button-blue">
+        Cancelar
+      </button>
+      <button 
+        (click)="confirmDeleteElement()"
+        class="ml-modal__pop-buttons-button button-orange">
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
 
 
 
@@ -181,7 +228,7 @@
 
 
 
-<div class="row margin-bottom-g">
+<!-- div class="row margin-bottom-g">
     <div class="col-sm-6 col-md-4" *ngFor="let amenity of amenitiesArray">
       <div class="card">
         <div class="card-header">{{amenity.name}}</div>
@@ -197,7 +244,7 @@
         <button (click)="DeleteAmenity(amenity.id)" type="button" class="btn  btn-outline-danger">Delete Amenity</button>  
       </div>
     </div>
-  </div> 
+  </div --> 
 
 
   

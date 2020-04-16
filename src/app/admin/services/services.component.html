@@ -33,6 +33,7 @@
                 Editar Servicio
               </button>
               <button 
+                (click)="deleteThisService( service )"
                 class="ap-cards__card-button ap-cards__card-button--eliminar">
                 Eliminar
               </button>
@@ -46,7 +47,7 @@
     </div>
 
 
-    <form name="service_form" class="ap-form ml-col-1 card-style" *ngIf="show_service_form">
+    <form (submit)="sendServiceData()" onsubmit="return false;" class="ap-form ml-col-1 card-style" *ngIf="show_service_form">
       <div class="ml-col-1">
         <h4 class="ap-form__titulo text-left">
           {{ service_form_action }}
@@ -60,11 +61,15 @@
               placeholder="Titulo"
               id="new_service_title" 
               name="new_service_title"
+              [class.form_error_found]="form_service.no_name"
               [(ngModel)]="data_service.name"
               class="ap-form__input-text" />
             <label for="new_service_title" class="ap-form__label ap-form__label-text">
               Titulo
             </label>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_name">
+              El campo es obligatorio*
+            </span>
           </div>
         </div>
         <div class="ml-col-1">
@@ -73,11 +78,15 @@
               id="new_service_desc"
               name="new_service_desc"
               placeholder="Descripcion"
+              [class.form_error_found]="form_service.no_desc"
               [(ngModel)]="data_service.description"
               class="ap-form__label ap-form__input-textarea"></textarea>
             <label for="new_service_desc" class="ap-form__label ap-form__label-text">
               Descripción
             </label>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_desc">
+              El campo es obligatorio*
+            </span>
           </div>
         </div>
         <div class="ml-col-3 padding-right-min">
@@ -87,39 +96,51 @@
               placeholder="Provider"
               id="new_service_prov" 
               name="new_service_prov"
+              [class.form_error_found]="form_service.no_prov"
               [(ngModel)]="data_service.provider"
               class="ap-form__input-text" />
             <label for="new_service_prov" class="ap-form__label ap-form__label-text">
               Provider
             </label>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_prov">
+              El campo es obligatorio*
+            </span>
           </div>
         </div>
         <div class="ml-col-3 padding-right-min">
           <div class="ap-form__input">
             <input 
-              type="text"
+              type="number"
               placeholder="Price"
               id="new_service_price" 
               name="new_service_price"
+              [class.form_error_found]="form_service.no_pric"
               [(ngModel)]="data_service.price"
               class="ap-form__input-text" />
             <label for="new_service_price" class="ap-form__label ap-form__label-text">
               Price
             </label>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_pric">
+              El campo es obligatorio*
+            </span>
           </div>
         </div>
         <div class="ml-col-3 padding-right-min">
           <div class="ap-form__input">
             <input 
-              type="text"
+              type="number"
               placeholder="Unit Price"
               id="new_service_unitp" 
               name="new_service_unitp"
               [(ngModel)]="data_service.priceUnit"
+              [class.form_error_found]="form_service.no_puni"
               class="ap-form__input-text" />
             <label for="new_service_unitp" class="ap-form__label ap-form__label-text">
               Unit Price
             </label>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_puni">
+              El campo es obligatorio*
+            </span>
           </div>
         </div>
       </div>
@@ -131,15 +152,19 @@
               id="nueva_comunidad_img"
               name="nueva_comunidad_img"
               type="file"
-              (change)="validateImageUpload( $event, '350x350', 'new_amm_image_0', 'new_amm_name_0' )" />
+              (change)="validateImageUpload( $event, '350x350', 'new_amm_image_0', 'new_amm_name_0' ); prepareImages( $event );" />
             <label for="nueva_comunidad_img" class="ap-form__label-image">
               <figure class="ap-form__image">
                 <img class="ap-form__image-image no-image" 
                      id="new_amm_image_0"
+                     [class.forms_errors_nimage]="form_service.no_phot"
                      src="{{ data_service.photo }}" />
                 <span class="ap-form__image-data text-center" id="new_amm_name_0">
                   La imagen debe medir <br />
                   <span class="text-bold">350x350</span> 
+                </span>
+                <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_phot">
+                  El campo es obligatorio*
                 </span>
               </figure>
             </label>
@@ -152,15 +177,19 @@
               id="nueva_comunidadi_img"
               name="nueva_comunidadi_img"
               type="file"
-              (change)="validateImageUpload( $event, '150x150', 'new_amm_image_1', 'new_amm_name_1' )" />
+              (change)="validateImageUpload( $event, '150x150', 'new_amm_image_1', 'new_amm_name_1' ); prepareIcon( $event );" />
             <label for="nueva_comunidadi_img" class="ap-form__label-image ap-form__label-image--icon">
               <figure class="ap-form__image">
                 <img class="ap-form__image-image ap-form__image-image--icon no-image bg-black" 
                      id="new_amm_image_1"
+                     [class.forms_errors_nimage]="form_service.no_icon"
                      src="{{ data_service.icon }}" />
                 <span class="ap-form__image-data text-center" id="new_amm_name_1">
                   La imagen debe medir <br />
                   <span class="text-bold">150x150</span> 
+                </span>
+                <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_icon">
+                  El campo es obligatorio*
                 </span>
               </figure>
             </label>
@@ -171,7 +200,7 @@
         <button 
           type="submit"
           class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-          {{ service_form_action }}
+          Guardar
         </button>
       </div>
     </form>
@@ -194,6 +223,30 @@
   </button>
 </div>
 
+<div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
+  <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
+    <p class="ml-modal__pop-titulo">
+      Eliminar elemento
+    </p>
+    <p class="ml-modal__pop-text">
+      Estas seguro que deseas eliminar el elemento <br />
+      <span class="text-bold">"{{ service_to_delete.name }}"</span>
+    </p>
+    <div class="ml-modal__pop-buttons">
+      <button 
+        (click)="toggleSectionForm('delete')"
+        class="ml-modal__pop-buttons-button button-blue">
+        Cancelar
+      </button>
+      <button 
+        (click)="confirmDeleteElement()"
+        class="ml-modal__pop-buttons-button button-orange">
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="black-box">
   <img src="" id="image_real_dimension" />
 </div>
@@ -201,7 +254,7 @@
 
 <!-- |||||||||||||||||||||||||||||||||||||||||| -->
 <!-- Necesito saber que espera bien el servicio para mandarle ese objeto -->
-<div class="animated fadeIn display-none">
+<!-- div class="animated fadeIn">
   <div class="card">    
     <div class="card-body">
       <h5 class="card-title">Add Service</h5>
@@ -300,6 +353,6 @@
 
     </div>
   </div>
-</div>
+</div -->
 
 <toaster-container></toaster-container>

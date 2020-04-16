@@ -32,7 +32,7 @@ export class ServicesComponent implements OnInit {
      private toasterService: ToasterService, private _formBuilder: FormBuilder
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     if (localStorage.getItem("user") == undefined) {
       this.router.navigate(['/login']);
     }
@@ -114,7 +114,7 @@ export class ServicesComponent implements OnInit {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // LOAD IMAGES
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-  prepareImages(e, formControl) {     
+  /*prepareImages(e, formControl) {     
     let file:File = e.srcElement.files[0];     
     if (file == undefined || file == null) { return; }            
     formControl.label.setValue(file.name);        
@@ -122,7 +122,6 @@ export class ServicesComponent implements OnInit {
       if (Utils.isDefined(r)) {
         let url = <string>r.message;            
         url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip'); 
-        // url = "http://23.253.173.64:8088/PhotoPost/53481cbd-d5c4-479e-97c3-57e7938871c6.jpg";
         formControl.serverUrl.setValue(url);  
       }
     })        
@@ -151,12 +150,188 @@ export class ServicesComponent implements OnInit {
     }    
 
     fr.readAsDataURL(file);    
-  }
+  }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //Autor: Carlos Hernandez Hernandez
   public show_service_form:boolean = false;
   public service_form_action:string = '';
-  public data_service: DataService = new DataService();
+
+  public sendServiceData():void { 
+
+    if( this.validatingServiceForm( this.data_service ) ) {
+
+      console.log('New Service => ', this.new_service_action );
+      console.log('Edit Service => ', this.edit_service_action );
+
+      if( this.new_service_action ) {
+
+        this.heroService.service_general_post("Services", this.data_service)
+         .subscribe( (response: any) => {
+
+          if( response.result == 'Success' ) {
+
+            //Poner el loader pa que no suba de mas
+            setTimeout( () => { location.reload() }, 777);
+
+          }
+
+          }, (error: any) => {
+
+            console.log('Error en respuesta servicio NEWSERVICE', error );
+
+          });
+
+      }
+
+      if( this.edit_service_action  ) {
+
+        this.heroService.service_general_put("Services", this.data_service)
+          .subscribe( (response: any) => {
+
+            if( response.result == 'Success' ) {
+
+              //Poner el loader
+              setTimeout( () => { location.reload() }, 777);
+
+            }
+
+          }, (error: any) => {
+
+            console.log('Error en el servico EDITARSERVICE', error);
+
+          });
+
+      }
+
+    } 
+
+  }
+
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: toggleSectionForm
+   * Tipo: Funcion 
+   * Parametros: N/A
+   * Regresa: N/A
+   * Descripcion: Servicio que manda un post de un nuevo comentario
+   */
+  public service_to_delete: any;
+  public deleteThisService( element_data: any ):void {
+
+    this.service_to_delete = element_data;
+    this.showModal();
+
+  }
+
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: confirmDeleteElement
+   * Tipo: Funcion 
+   * Parametros: Abre popup para confirmar si se elimina el elemento o se cancela
+   * Regresa: N/A
+   * Descripcion: N/A
+   */
+  public confirmDeleteElement():void {
+
+    this.heroService.service_general_delete(`Services/${ this.service_to_delete.id }`)
+        .subscribe( (response: any) => { console.log( response );
+
+          if( response.result == 'Success' ) {
+
+            this.GetServices();
+            this.showModal();
+
+          }
+
+        }, (error: any) => {
+
+          console.log('Error en el servicio de eliminar => ', error);
+
+        });
+
+  }
+
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: showModal
+   * Tipo: Funcion 
+   * Parametros: NA
+   * Regresa: N/A
+   * Descripcion: Muestra y oculta el formulario de eliminar
+   */
+  public page_modal: boolean = false;
+  public modal_to_show: string;
+  public showModal( section: string = 'default' ):void {
+
+    this.modal_to_show = section;
+    !this.page_modal ? this.page_modal = true : this.page_modal = false; 
+
+  }
+
+  public form_service: any = {
+    no_name: false,
+    no_desc: false,
+    no_prov: false,
+    no_pric: false,
+    no_puni: false,
+    no_icon: false,
+    no_phot: false
+  };
+  public validatingServiceForm( form_data: DataService ): boolean { 
+
+    let result = false;
+
+    form_data.name == '' || form_data.name == null ?
+      this.form_service.no_name = true : this.form_service.no_name = false; 
+
+    form_data.description == '' || form_data.description == null ?
+      this.form_service.no_desc = true : this.form_service.no_desc = false;
+
+    form_data.provider == '' || form_data.provider == null ?
+      this.form_service.no_prov = true : this.form_service.no_prov = false;
+
+    form_data.price == null ?
+      this.form_service.no_pric = true : this.form_service.no_pric = false;
+
+    form_data.priceUnit == null ?
+      this.form_service.no_puni = true : this.form_service.no_puni = false;
+
+    form_data.photo == '' || form_data.photo == '../../../assets/14.jpg' ?
+      this.form_service.no_phot = true : this.form_service.no_phot = false;
+
+    form_data.icon == '' || form_data.icon == '../../../assets/14.jpg' ?
+      this.form_service.no_icon = true : this.form_service.no_icon = false;
+
+    !this.form_service.no_name && !this.form_service.description && !this.form_service.no_prov &&
+    !this.form_service.no_pric && !this.form_service.no_puni && !this.form_service.no_phot &&
+    !this.form_service.no_icon ? result = true : result = false;
+
+    return result;
+
+  }
 
   /*
    * Autor: Carlos Hernandez Hernandez
@@ -168,24 +343,32 @@ export class ServicesComponent implements OnInit {
    * Regresa: N/A
    * Descripcion: 
    */
+  public data_service: DataService = new DataService();
+  public new_service_action: boolean = false;
+  public edit_service_action: boolean = false;
   public toggleSectionForm( action_kind:string = 'hide', editable:any = {} ):void {
 
     switch( action_kind ) {
 
       case 'new':
         this.show_service_form = true;
-        this.data_service.name = '';
-        this.data_service.description = '';
-        this.data_service.provider = '';
+        this.data_service.buildingId = Number( this.IDBUILD );
+        this.data_service.name = null;
+        this.data_service.description = null;
+        this.data_service.provider = null;
         this.data_service.price = null;
         this.data_service.priceUnit = null;
         this.data_service.icon = '../../../assets/14.jpg';
         this.data_service.photo = '../../../assets/14.jpg';
+        this.new_service_action = true;
+        this.edit_service_action = false;
         this.service_form_action = 'Añadir Servicio';
         break;
 
       case 'edit':
         this.show_service_form = true;
+        this.data_service.buildingId = Number( this.IDBUILD );
+        this.data_service.id = editable.id;
         this.data_service.name = editable.name;
         this.data_service.description = editable.description;
         this.data_service.provider = editable.provider;
@@ -193,11 +376,17 @@ export class ServicesComponent implements OnInit {
         this.data_service.priceUnit = editable.priceUnit;
         this.data_service.icon = editable.icon;
         this.data_service.photo = editable.photo;
+        this.new_service_action = false;
+        this.edit_service_action = true;
         this.service_form_action = 'Editar Servicio';
         break;
 
       case 'hide':
         this.show_service_form = false;
+        break;
+
+      case 'delete': 
+        this.showModal();
         break;
 
       default:
@@ -240,7 +429,8 @@ export class ServicesComponent implements OnInit {
           image_limit_height = dimensions_image_data.get_dimensions.height,
           id_image_container:any = document.getElementById( target_image ),
           name_image_container = document.getElementById( name_image ),
-          native_image_uploaded = document.getElementById('image_real_dimension');
+          native_image_uploaded = document.getElementById('image_real_dimension'),
+          root_data = this;
 
     if( event.files && event.files[0] ) {
 
@@ -280,6 +470,8 @@ export class ServicesComponent implements OnInit {
                         id_image_container.src = '../../../assets/14.jpg';
                         name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
                         id_image_container.classList.add('no-image');
+                        if( event.id == 'nueva_comunidad_img' ) root_data.data_service.photo = '../../../assets/14.jpg'; 
+                        if( event.id == 'nueva_comunidadi_img' ) root_data.data_service.icon = '../../../assets/14.jpg'; 
 
                       }
                       
@@ -292,6 +484,61 @@ export class ServicesComponent implements OnInit {
     }
     
   }
+
+  //Images =================>
+  public newImages: any[] = [];
+  prepareImages(e) {     
+    if (Utils.isDefined(e.srcElement.files)) {
+      for (let f of e.srcElement.files) {        
+        this.newImages.push(f);
+        console.log( e.srcElement.files );
+      }
+    }
+    this.addImages();
+  }
+
+  prepareIcon(e) {
+    if (Utils.isDefined(e.srcElement.files)) {
+      for (let f of e.srcElement.files) {        
+        this.newImages.push(f);
+        console.log( e.srcElement.files );
+      }
+    }
+    this.addIcon();
+  }
+
+  addImages() {
+    let url: string = '';
+    if (!Utils.isEmpty(this.newImages)) {
+      for (let f of this.newImages) { console.log( this.newImages );
+        this.heroService.UploadImgSuc(f).subscribe((r) => {
+          if (Utils.isDefined(r)) {
+            url = <string>r.message;            
+            url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');            
+            this.data_service.photo = url; 
+            this.newImages = [];
+          }
+        })
+      }
+    }
+  }
+
+  addIcon() {
+    let url: string = '';
+    if (!Utils.isEmpty(this.newImages)) {
+      for (let f of this.newImages) { console.log( this.newImages );
+        this.heroService.UploadImgSuc(f).subscribe((r) => {
+          if (Utils.isDefined(r)) {
+            url = <string>r.message;            
+            url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');            
+            this.data_service.icon = url;
+            this.newImages = [];
+          }
+        })
+      }
+    }
+  }
+  
 
 }
 

@@ -67,10 +67,10 @@ export class ServiceEditComponent implements OnInit {
     // console.log(this.serviceDetail);return;
 
     this.heroService.service_general_put("Services", this.serviceDetail).subscribe(
-      (res)=> {
+      (res)=> { console.log( this.serviceDetail );
         if(res.result === "Success"){    
           this.ResetForm();  
-          this.router.navigate(['services', this.serviceDetail.buildingId])
+          //this.router.navigate(['services', this.serviceDetail.buildingId])
           this.toasterService.pop('success', 'Success ', 'Service created correctly.');                                     
         } else if(res.result === "Error") { 
           console.log("Ocurrio un error" + res.detalle); 
