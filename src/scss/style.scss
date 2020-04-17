@@ -878,6 +878,18 @@ select:active,
     border-bottom: solid 2px rgba(0,0,0,.9);
   }
 
+  &__close {
+    position: absolute;
+    top: -100%;
+    right: -3.5%;
+    width: 42px;
+    height: 42px;
+    font-size: 14px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bolder;
+  }
+
   &__input {
 
     width: 100%;
@@ -2042,7 +2054,7 @@ select:active,
 }
 
 .form_error_found {
-  border-bottom: solid 2px #f86c6b;
+  border-bottom: solid 2px red;
 }
 
 .form_error_found_label {
