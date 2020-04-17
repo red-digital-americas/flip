@@ -84,7 +84,7 @@ export class PerksComponent implements OnInit {
     this.heroService.service_general_get("PerkGuide/GetCategories").subscribe(
       (res)=> {
         if(res.result === "Success"){                              
-          this.perkCategories = res.item;               
+          this.perkCategories = res.item; console.log('Catalogo => ', this.perkCategories);             
           this.formGroup.controls.perkCategoryIdCtrl.setValue(this.perkCategories[0].id);
         } else if(res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
         else { console.log("Error"); }
@@ -97,7 +97,7 @@ export class PerksComponent implements OnInit {
     // console.log(this.perkModel);return;
 
     this.heroService.service_general_post("PerkGuide/AddPerk", this.perkModel).subscribe(
-      (res)=> {
+      (res)=> { console.log('Hay que mandar este => ', this.perkModel );
         if(res.result === "Success"){      
           this.GetPerks();      
           this.ResetForm();     
@@ -178,7 +178,7 @@ export class PerksComponent implements OnInit {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // LOAD IMAGES
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-  prepareImages(e, formControl) {     
+  prepareImages1(e, formControl) {     
     let file = e.srcElement.files[0];    
     if (file == undefined || file == null) { return; }
     
@@ -191,7 +191,21 @@ export class PerksComponent implements OnInit {
         formControl.serverUrlCtrl.setValue(url);  
       }
     })        
-  } 
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   //Autor: Carlos Enrique Hernandez Hernandez
@@ -209,30 +223,40 @@ export class PerksComponent implements OnInit {
    * Descripcion: 
    */
   public data_perk: DataPerk = new DataPerk();
+  public new_perk_button: boolean = false;
+  public edit_perk_button: boolean = false;
   public toggleSectionForm( action_kind:string = 'hide', editable:any = {} ):void {
 
     switch( action_kind ) {
 
       case 'new':
+        this.clearAndInitScopers();
         this.show_perk_form = true;
-        this.data_perk.name = '';
-        this.data_perk.description = '';
-        this.data_perk.streetAddress = '';
-        this.data_perk.city = '';
-        this.data_perk.stateProvincy = '';
+        this.data_perk.buildingId = Number( this.IDBUILD );
+        this.data_perk.name = null;
+        this.data_perk.description = null;
+        this.data_perk.streetAddress = null;
+        this.data_perk.city = null;
+        this.data_perk.stateProvincy = null;
         this.data_perk.zip = null;
-        this.data_perk.country = '';
+        this.data_perk.country = null;
         this.data_perk.latitude = null;
         this.data_perk.longitude = null;
+        this.data_perk.packCategoryId = -1;
+        this.new_perk_button = true;
+        this.edit_perk_button = false;
         this.data_perk.photo = '../../../assets/14.jpg';
         this.perk_form_action = 'Añadir Perk';
         break;
 
       case 'edit':
+        this.clearAndInitScopers();
         this.show_perk_form = true;
         this.show_perk_form = true;
+        this.data_perk.id = editable.id;
         this.data_perk.name = editable.name;
         this.data_perk.description = editable.description;
+        this.data_perk.packCategoryId = editable.packCategoryId;
         this.data_perk.streetAddress = editable.streetAddress;
         this.data_perk.city = editable.city;
         this.data_perk.stateProvincy = editable.stateProvincy;
@@ -241,6 +265,9 @@ export class PerksComponent implements OnInit {
         this.data_perk.latitude = editable.latitude;
         this.data_perk.longitude = editable.longitude;
         this.data_perk.photo = editable.photo;
+        this.new_perk_button = false;
+        this.edit_perk_button = true;
+        this.getPerkGallery( this.data_perk.id );
         this.perk_form_action = 'Editar Perk';
         break;
 
@@ -253,6 +280,276 @@ export class PerksComponent implements OnInit {
         break
 
     }
+
+  }
+
+
+  public sendPerkData():void {
+
+    if( this.validatingFieldsFrom( this.data_perk ) ) {
+
+      this.data_perk.galleryPerks = this.createImagesArray();
+      
+      if( this.new_perk_button && !this.edit_perk_button ) {
+
+        this.heroService.service_general_post("PerkGuide/AddPerk", this.data_perk)
+            .subscribe( (response: any) => {
+
+              if( response.result == 'Success' ) {
+
+                //Bloquear el boton y poner loader
+                setTimeout( () => { location.reload() }, 777);
+
+              }
+
+            }, (error: any) => {
+
+              console.log('Error WS AddPerk', error);
+
+            });
+
+      }
+
+      if( !this.new_perk_button && this.edit_perk_button ) {
+
+        this.heroService.service_general_put("PerkGuide/UpdatePerk", this.data_perk)
+            .subscribe( (response: any) => {
+
+              if( response.result == 'Success' ) {
+
+                this.toggleSectionForm('hide');
+                this.GetPerks();
+
+              }
+
+            }, (error: any) => {
+
+              console.log('Error en Editar Perk => ', error );
+
+            });
+
+      }
+
+    } else {
+
+      console.log('Formulario incompleto');
+
+    }
+
+  }
+
+
+  public getPerkGallery( id_perk: number ):void {
+
+    this.heroService.service_general_get_with_params("PerkGuide/GetPerksWithGallery", { id: id_perk })
+        .subscribe( (response: any) => { 
+
+          if( response.item[0].galleryPerks.length != 0 ) this.images_in_gallery.shift();
+
+          response.item[0].galleryPerks.forEach( (image_gallery: any) => {
+
+            let new_image = {
+              id: image_gallery.id,
+              src: image_gallery.photo,
+              can_delete: true,
+              last_one: false
+            };
+
+            this.images_in_gallery.push( new_image );
+
+          });
+
+          this.images_in_gallery[0].can_delete = false;
+          this.images_in_gallery[0].last_one = false;
+          this.images_in_gallery[this.images_in_gallery.length -1].last_one = true;
+
+        }, (error: any) => {
+
+          console.log('Error WS Gallery');
+
+        });
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: toggleSectionForm
+   * Tipo: Funcion 
+   * Parametros: N/A
+   * Regresa: N/A
+   * Descripcion: Servicio que manda un post de un nuevo comentario
+   */
+  public perk_to_delete: any;
+  public deleteThisPerk( element_data: any ):void {
+
+    this.perk_to_delete = element_data;
+    this.showModal();
+
+  }
+
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: confirmDeleteElement
+   * Tipo: Funcion 
+   * Parametros: Abre popup para confirmar si se elimina el elemento o se cancela
+   * Regresa: N/A
+   * Descripcion: N/A
+   */
+  public confirmDeleteElement():void {
+
+    this.heroService.service_general_delete(`PerkGuide/${ this.perk_to_delete.id }`)
+        .subscribe( (response: any) => {
+
+          if( response.result == 'Success' ) {
+
+            this.GetPerks();
+            this.showModal();
+
+          }
+
+        }, (error: any) => {
+
+          console.log('Error WS ELiminar PERK => ', error);
+
+        });
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: showModal
+   * Tipo: Funcion 
+   * Parametros: NA
+   * Regresa: N/A
+   * Descripcion: Muestra y oculta el formulario de eliminar
+   */
+  public page_modal: boolean = false;
+  public modal_to_show: string;
+  public showModal( section: string = 'default' ):void {
+
+    this.modal_to_show = section;
+    !this.page_modal ? this.page_modal = true : this.page_modal = false; 
+
+  }
+
+
+  public form_data: any = {
+    no_name: false,
+    no_desc: false,
+    no_cate: false,
+    no_stre: false,
+    no_city: false,
+    no_stat: false,
+    no_coun: false,
+    no_zip: false,
+    no_lati: false,
+    no_long: false,
+    no_phot: false
+  }
+  public validatingFieldsFrom( form_data: DataPerk ): boolean { 
+
+    let result = false;
+
+    form_data.name == null || form_data.name == '' ?
+      this.form_data.no_name = true : this.form_data.no_name = false;
+      
+    form_data.description == null || form_data.description == '' ?
+      this.form_data.no_desc = true : this.form_data.no_desc = false;
+
+    form_data.packCategoryId == null || form_data.packCategoryId < 0 ?
+      this.form_data.no_cate = true : this.form_data.no_cate = false;
+
+    form_data.streetAddress == null || form_data.streetAddress == '' ?
+      this.form_data.no_stre = true : this.form_data.no_stre = false;
+
+    form_data.city == null || form_data.city == '' ?
+      this.form_data.no_city = true : this.form_data.no_city = false;
+
+    form_data.stateProvincy == null || form_data.stateProvincy == '' ?
+      this.form_data.no_stat = true : this.form_data.no_stat = false;
+
+    form_data.zip == null || form_data.zip < 0 ?
+      this.form_data.no_zip = true : this.form_data.no_zip = false;
+
+    form_data.country == null || form_data.country == '' ?
+      this.form_data.no_coun = true : this.form_data.no_coun = false;
+
+    form_data.latitude == null ?
+      this.form_data.no_lati = true : this.form_data.no_lati = false;
+
+    form_data.longitude == null ?
+      this.form_data.no_long = true : this.form_data.no_long = false;
+
+    form_data.photo == '../../../assets/14.jpg' || form_data.photo == '' ?
+      this.form_data.no_phot = true : this.form_data.no_phot = false; 
+
+    for( let field in this.form_data ) {
+
+      if( this.form_data[field] ) return;
+      else result = true;
+
+    }
+
+    return result;
+
+  }
+
+
+  public getGalleryImages( id_image: string ):void {
+
+    const image_container = document.getElementById(id_image).parentElement.querySelector('img');
+          
+    setTimeout( () => {
+
+      image_container.src = this.imagesOnGallery;
+
+    }, 420);
+
+  }
+
+
+  public createImagesArray():any[] {
+
+    const images_on_gallery = document.getElementById('images_on_gallery').querySelectorAll('img');
+
+    let images_to_upload = [];
+
+    images_on_gallery.forEach( (image: any) => {
+
+      if( image.getAttribute('src') != '../../../assets/14.jpg' ) {
+
+        let new_image = image.getAttribute('src');
+            images_to_upload.push({photo: new_image}); 
+
+      }
+
+    });
+
+    return images_to_upload;
+
+  }
+
+  public clearAndInitScopers():void {
+
+    this.images_in_gallery = [];
+    this.images_in_gallery.push( {id: 0, src: '../../../assets/14.jpg', can_delete: false, last_one: true} );
+    this.form_data = {
+      no_name: false,
+      no_desc: false,
+      no_cate: false,
+      no_stre: false,
+      no_city: false,
+      no_stat: false,
+      no_coun: false,
+      no_zip: false,
+      no_lati: false,
+      no_long: false,
+      no_phot: false
+    };
 
   }
 
@@ -288,7 +585,8 @@ export class PerksComponent implements OnInit {
           image_limit_height = dimensions_image_data.get_dimensions.height,
           id_image_container:any = document.getElementById( target_image ),
           name_image_container = document.getElementById( name_image ),
-          native_image_uploaded = document.getElementById('image_real_dimension');
+          native_image_uploaded = document.getElementById('image_real_dimension'),
+          root_data = this;
 
     if( event.files && event.files[0] ) {
 
@@ -311,23 +609,25 @@ export class PerksComponent implements OnInit {
 
                         resolve( native_image_dimension );
 
-                      }, 277);
+                      }, 420);
               
                     });
 
-                    validating_image.then( ( image_data:any ) => {
+                    validating_image.then( ( image_data:any ) => { 
 
                       if( image_limit_width === image_data.width && image_limit_height === image_data.height ) {
 
                         id_image_container.setAttribute('src', image_data.image );
                         name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
                         id_image_container.classList.remove('no-image');
+                        if( event.hasAttribute('gallery') ) root_data.getGalleryImages(event.getAttribute('id'));
 
                       } else {
 
                         id_image_container.src = '../../../assets/14.jpg';
                         name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
                         id_image_container.classList.add('no-image');
+                        if( !event.hasAttribute('gallery') ) root_data.data_perk.photo = '../../../assets/14.jpg';
 
                       }
                       
@@ -339,25 +639,6 @@ export class PerksComponent implements OnInit {
 
     }
     
-  }
-
-  /*
-   * Autor: Carlos Hernandez Hernandez
-   * Contacto: carlos.hernandez@minimalist.com
-   * Nombre: showGalleryForm
-   * Tipo: Funcion | Funcion efecto colateral
-   * Visto en: perks
-   * Parametros: evento que muestra la galeria
-   * Regresa: N/A
-   * Descripcion: 
-   */
-  public show_gallery_container:boolean = false;
-  public showGalleryForm():void {
-
-    this.show_gallery_container ?
-      this.show_gallery_container = false :
-      this.show_gallery_container = true;
-
   }
 
 
@@ -372,14 +653,15 @@ export class PerksComponent implements OnInit {
    * Descripcion: 
    */
   public images_in_gallery:any = [
-    {id: 0, src: '../../../assets/14.jpg', can_delete: false}
+    {id: 0, src: '../../../assets/14.jpg', can_delete: false, last_one: true}
   ];
   public addOneImageToGallery():void {
 
     let new_image = {
       id: 0,
       src: '../../../assets/14.jpg',
-      can_delete: true
+      can_delete: true,
+      last_one: false
     };
 
     this.images_in_gallery.push( new_image );
@@ -387,10 +669,11 @@ export class PerksComponent implements OnInit {
     this.images_in_gallery.forEach( ( image:any, index ) => {
 
       image.id = index;
+      image.last_one = false;
 
     });
 
-    console.log( this.images_in_gallery );
+    this.images_in_gallery[this.images_in_gallery.length - 1].last_one = true;
 
   }
 
@@ -409,6 +692,65 @@ export class PerksComponent implements OnInit {
 
     this.images_in_gallery.splice( this.images_in_gallery.findIndex( (image:any) => {  image.id === id } ), 1);
 
+    this.images_in_gallery[this.images_in_gallery.length - 1].last_one = true;
+
+  }
+
+  //========================== C&PS
+  public newImages: any[] = []
+  prepareImages(e) {     
+    if (Utils.isDefined(e.srcElement.files)) {
+      for (let f of e.srcElement.files) {        
+        this.newImages.push(f);
+        console.log( e.srcElement.files );
+      }
+    }
+    this.addImages();
+  }
+
+  addImages() {
+    let url: string = '';
+    if (!Utils.isEmpty(this.newImages)) {
+      for (let f of this.newImages) { 
+        this.heroService.UploadImgSuc(f).subscribe((r) => {
+          if (Utils.isDefined(r)) {
+            url = <string>r.message;            
+            url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');   
+            this.data_perk.photo = url;  
+            this.newImages = [];
+          }
+        })
+      }
+    }
+  }
+
+  public newImagesG: any[] = [];
+  public imagesOnGallery: string;
+  prepareImagesG(e) {     
+    if (Utils.isDefined(e.srcElement.files)) {
+      for (let f of e.srcElement.files) {        
+        this.newImagesG.push(f);
+        console.log( e.srcElement.files );
+      }
+    }
+    this.addImagesG();
+  }
+
+  addImagesG() {
+    let url: string = '';
+    if (!Utils.isEmpty(this.newImagesG)) {
+      for (let f of this.newImagesG) { console.log( this.newImagesG );
+        this.heroService.UploadImgSuc(f).subscribe((r) => {
+          if (Utils.isDefined(r)) {
+            url = <string>r.message;            
+            url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip'); 
+            console.log('Desde la galeria => ',url);   
+            this.newImagesG = [];
+            this.imagesOnGallery = url;
+          }
+        })
+      }
+    }
   }
 
 }
@@ -427,5 +769,5 @@ class DataPerk {
   packCategoryId: number;
   buildingId: number;
   photo: string;
-  galleryPerks: Array<{photo: string}>
+  galleryPerks: any;
 }

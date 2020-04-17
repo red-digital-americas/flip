@@ -1085,9 +1085,8 @@ select:active,
       }
 
       &--cancelar {
-        color: #f86c6b;
-        background-color: white;
-        border: solid 1px #f86c6b;
+        color: white;
+        background-color: #f86c6b;
       }
 
     }
@@ -1113,9 +1112,9 @@ select:active,
     &-adder {
       margin: 0;
       flex-grow: 0;
-      flex-basis: 22.5%;
+      flex-basis: 33.33%;
       flex-shrink: 0;
-      height: 200px;
+      height: 240px;
       position: relative;
       margin-top: 15px;
       margin-bottom: 20px;
@@ -1125,38 +1124,27 @@ select:active,
 
       &-button {
         position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(1);
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
+        top: 0;
+        right: -7px;
+        transform: scale(1);
+        width: 30px;
+        height: 30px;
+        border-radius: 7px;
         background-color: #2e343a;
         color: white;
-        font-size: 30px;
         outline: none;
         transition: all .2s ease;
         font-weight: bolder;
       }
 
-      &-hide {
-        position: absolute;
-        bottom: 20%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 160px;
-        height: 35px;
-        color: white;
-      }
-
       &-button:hover {
-        transform: translate(-50%, -50%) scale(1.06);
+        transform: scale(1.06);
         box-shadow: 0 0 5px 2px rgba($color: #2e343a, $alpha: .4);
       }
 
       &-button:focus {
         outline: none;
-        transform: translate(-50%, -50%) scale(1);
+        transform: scale(1);
       }
 
     }
@@ -1164,11 +1152,11 @@ select:active,
     &-delete {
       position: absolute;
       z-index: 1;
-      top: -7px;
+      top: 32px;
       right: -7px;
       width: 30px;
       height: 30px;
-      border-radius: 50%;
+      border-radius: 7px;
       background-color: #f86c6b;
       color: white;
       font-weight: bolder;

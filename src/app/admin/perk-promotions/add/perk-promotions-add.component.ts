@@ -57,7 +57,7 @@ export class PerksPromotionAddComponent implements OnInit {
     // console.log(this.promotionModel);return;
 
     this.heroService.service_general_post("PerkPromotions/AddPromotion", this.promotionModel).subscribe(
-      (res)=> {
+      (res)=> { console.log('Tienes que mandar esto => ', this.promotionModel );
         if(res.result === "Success"){                                
           // this.toasterService.pop('success', 'Success ', 'Perk created correctly.');   
           this.router.navigate(['perk-detail', this.perkId]);

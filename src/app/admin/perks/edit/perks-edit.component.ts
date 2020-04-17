@@ -94,9 +94,9 @@ export class PerksEditComponent implements OnInit {
     // console.log(this.perkModel);return;
 
     this.heroService.service_general_put("PerkGuide/UpdatePerk", this.perkModel).subscribe(
-      (res)=> {
+      (res)=> { console.log('Editado => ', this.perkModel);
         if(res.result === "Success"){      
-          this.router.navigate([ 'perk-detail', this.perkModel.id]); return;
+          //this.router.navigate([ 'perk-detail', this.perkModel.id]); return;
         //   this.toasterService.pop('success', 'Success ', 'Perk Updated correctly.');                                     
         } else if(res.result === "Error") { 
           console.log("Ocurrio un error" + res.detalle); 

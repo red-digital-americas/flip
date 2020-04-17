@@ -117,7 +117,78 @@ export class PerksDetailComponent implements OnInit {
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //Autor: Carlos Enrique Hernandez Hernandez';
+
+  public sendDataPromotion():void { 
+
+    if( this.validatingFieldsFrom( this.data_promo  ) ) { 
+
+      if( this.new_promo_button && !this.edit_promo_button ) {
+
+        this.heroService.service_general_post("PerkPromotions/AddPromotion", this.data_promo )
+            .subscribe( (response: any) => {
+
+              if( response.result == 'Success' ) {
+
+                this.GetPromotions();
+                this.toggleSectionForm('hide');
+
+              }
+
+            }, (error: any) => {
+
+            console.log( error );
+
+            });
+
+      }
+
+      if( !this.new_promo_button && this.edit_promo_button ) {
+
+        this.heroService.service_general_put("PerkPromotions/EditPromotion", this.data_promo)
+            .subscribe( (response: any) => {
+
+              if( response.result == 'Success' ) {
+
+                this.GetPromotions();
+                this.toggleSectionForm('hide');
+
+              }
+
+            }, (error: any) => {
+
+              console.log('Error WS Delete Promo => ', error );
+
+            });
+
+      }
+
+    } else {
+
+      console.log('NO NO NO Puedes subir la info');
+
+    }
+
+  }
   
   /*
    * Autor: Carlos Hernandez Hernandez
@@ -132,17 +203,37 @@ export class PerksDetailComponent implements OnInit {
   //public data_perk: DataPerk = new DataPerk();
   public show_dperk_form:boolean = false;
   public show_dperk_form_action:string = '';
+  public data_promo: DataPromotion = new DataPromotion();
+  public new_promo_button: boolean = false;
+  public edit_promo_button: boolean = false;
   public toggleSectionForm( action_kind:string = 'hide', editable:any = {} ):void {
 
     switch( action_kind ) {
 
       case 'new':
         this.show_dperk_form = true;
+        this.new_promo_button = true;
+        this.edit_promo_button = false;
+        this.data_promo.perkGuideId = this.perkId.toString();
+        this.data_promo.name = null;
+        this.data_promo.description = null;
+        this.data_promo.startDate = null;
+        this.data_promo.endDate = null;
+        this.data_promo.photo = '../../../../assets/14.jpg';
         this.show_dperk_form_action = 'Añadir Promoción';
         break;
 
       case 'edit':
         this.show_dperk_form = true;
+        this.data_promo.id = editable.id;
+        this.data_promo.perkGuideId = this.perkId;
+        this.new_promo_button = false;
+        this.edit_promo_button = true;
+        this.data_promo.name = editable.name;
+        this.data_promo.description = editable.description;
+        this.data_promo.startDate = editable.startDate;
+        this.data_promo.endDate = editable.endDate;
+        this.data_promo.photo = editable.photo;
         this.show_dperk_form_action = 'Editar Promoción';
         break;
 
@@ -155,6 +246,107 @@ export class PerksDetailComponent implements OnInit {
         break
 
     }
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: toggleSectionForm
+   * Tipo: Funcion 
+   * Parametros: N/A
+   * Regresa: N/A
+   * Descripcion: Servicio que manda un post de un nuevo comentario
+   */
+  public promo_to_delete: any;
+  public deleteThisPromo( element_data: any ):void {
+
+    this.promo_to_delete = element_data;
+    this.showModal();
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: showModal
+   * Tipo: Funcion 
+   * Parametros: NA
+   * Regresa: N/A
+   * Descripcion: Muestra y oculta el formulario de eliminar
+   */
+  public page_modal: boolean = false;
+  public modal_to_show: string;
+  public showModal( section: string = 'default' ):void {
+
+    this.modal_to_show = section;
+    !this.page_modal ? this.page_modal = true : this.page_modal = false; 
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: confirmDeleteElement
+   * Tipo: Funcion 
+   * Parametros: Abre popup para confirmar si se elimina el elemento o se cancela
+   * Regresa: N/A
+   * Descripcion: N/A
+   */
+  public confirmDeleteElement():void {
+
+    this.heroService.service_general_delete(`PerkPromotions/${ this.promo_to_delete.id }`)
+        .subscribe( (response: any) => {
+
+          if( response.result == 'Success' ) {
+
+            this.GetPromotions();
+            this.showModal();
+
+          }
+
+        }, (error: any) => {
+
+          console.log('Error DeletePromo => ', error);
+
+        });
+
+  }
+
+  public form_data: any = {
+    no_name: false,
+    no_desc: false,
+    no_sdat: false,
+    no_edat: false,
+    no_phot: false
+  }
+  public validatingFieldsFrom( data_promo: DataPromotion ):boolean { 
+
+    let result = false;
+
+    data_promo.name == null || data_promo.name == '' ?
+      this.form_data.no_name = true : this.form_data.no_name = false; 
+
+    data_promo.description == null || data_promo.description == '' ?
+      this.form_data.no_desc = true : this.form_data.no_desc = false;
+
+    data_promo.startDate == null || data_promo.startDate == '' ?
+      this.form_data.no_sdat = true : this.form_data.no_sdat = false;
+
+    data_promo.endDate == null || data_promo.endDate == '' ?
+      this.form_data.no_edat = true : this.form_data.no_edat = false;
+
+    data_promo.photo == '../../../../assets/14.jpg' ? 
+      this.form_data.no_phot = true : this.form_data.no_phot = false;
+
+    for( let field in this.form_data ) {
+
+      if( this.form_data[field] ) return;
+      else result = true;
+
+    }
+
+    return result;
 
   }
 
@@ -190,7 +382,8 @@ export class PerksDetailComponent implements OnInit {
           image_limit_height = dimensions_image_data.get_dimensions.height,
           id_image_container:any = document.getElementById( target_image ),
           name_image_container = document.getElementById( name_image ),
-          native_image_uploaded = document.getElementById('image_real_dimension');
+          native_image_uploaded = document.getElementById('image_real_dimension'),
+          root_data = this;
 
     if( event.files && event.files[0] ) {
 
@@ -230,6 +423,7 @@ export class PerksDetailComponent implements OnInit {
                         id_image_container.src = '../../../assets/14.jpg';
                         name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
                         id_image_container.classList.add('no-image');
+                        root_data.data_promo.photo = '../../../assets/14.jpg';
 
                       }
                       
@@ -250,4 +444,43 @@ export class PerksDetailComponent implements OnInit {
   }
 
 
+  //========================== C&PS
+  public newImages: any[] = []
+  prepareImages(e) {     
+    if (Utils.isDefined(e.srcElement.files)) {
+      for (let f of e.srcElement.files) {        
+        this.newImages.push(f);
+        console.log( e.srcElement.files );
+      }
+    }
+    this.addImages();
+  }
+
+  addImages() {
+    let url: string = '';
+    if (!Utils.isEmpty(this.newImages)) {
+      for (let f of this.newImages) { 
+        this.heroService.UploadImgSuc(f).subscribe((r) => {
+          if (Utils.isDefined(r)) {
+            url = <string>r.message;            
+            url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');   
+            this.data_promo.photo = url;  
+            this.newImages = [];
+          }
+        })
+      }
+    }
+  }
+
+
+}
+
+class DataPromotion {
+  id: number;
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  photo: string;
+  perkGuideId: any;
 }
