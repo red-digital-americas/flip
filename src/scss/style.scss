@@ -857,6 +857,11 @@ select:active,
     margin: 0 22.5%;
   }
 
+  &--full-width {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
   &--to-center {
     padding-top: 40px;
     text-align: center;
@@ -895,6 +900,31 @@ select:active,
     width: 100%;
     position: relative;
     padding: 17px 0;
+
+    &-radio {
+      
+      position: relative;
+
+      &-titulo {
+        width: 100%;
+        padding: 5px 0 7px;
+        margin: 0;
+        font-weight: bold;
+      }
+
+      &-opc {
+        width: 100%;
+        float: left;
+        position: relative;
+        font-size: 14px;
+      }
+
+    }
+
+    &-radio:checked + .ap-form__label-radio::after {
+      background-color: white;
+      border: solid 3.5px #2e343a;
+    }
 
     &-text {
       width: 100%;
@@ -970,6 +1000,24 @@ select:active,
       width: 100%;
       height: 100%;
       position: relative;
+    }
+
+    &-radio {
+      padding: 0 5px 0 20px;
+      position: relative;
+      width: 100%;
+    }
+
+    &-radio::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #2e343a;
     }
 
   }

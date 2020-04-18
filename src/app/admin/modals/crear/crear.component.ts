@@ -108,6 +108,7 @@ export class CrearComponent implements OnInit {
           this.usersArray = res.item;     
           if (this.usersArray.length <= 0) { return; }  
           this.formGroup.controls.activityUserIdCtrl.setValue(this.usersArray[0].id);
+          this.reservationData.UserId = this.usersArray[0].id;
         } else if(res.result === "Error") {
           console.log("Ocurrio un error" + res.detalle);
         } else {
@@ -157,13 +158,14 @@ export class CrearComponent implements OnInit {
     this.acitivyModel.Description = this.formGroup.controls.activityDescriptionCtrl.value;
     this.acitivyModel.UserId = this.formGroup.controls.activityUserIdCtrl.value;
     this.acitivyModel.AmenityId = this.amenityIdProps;
+    this.reservationData.AmenityId = this.acitivyModel.AmenityId;
     // if (this.acitivyModel.Private) { this.acitivyModel.Photo = "assets/img/Coliving.jpg"; }
     
-    console.log(this.acitivyModel);
+    console.log('Model Old => ',this.acitivyModel);
     // return;
 
-    this.heroService.service_general_post("Activity", this.acitivyModel).subscribe(
-      (res)=> {
+    /*this.heroService.service_general_post("Activity", this.acitivyModel).subscribe(
+      (res)=> { console.log('Tienes que mandar => ', this.acitivyModel );
         console.log(res);
         if(res.result === "Success"){          
           console.log(res.item);  
@@ -175,7 +177,7 @@ export class CrearComponent implements OnInit {
         } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
       },
       (err)=> {console.log(err);}      
-    );             
+    ); */           
   }  
 
   TipoReservacion(tipoReservacion) { 
@@ -208,7 +210,8 @@ export class CrearComponent implements OnInit {
           if (Utils.isDefined(r)) {
             url = <string>r.message;            
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');            
-            this.acitivyModel.Photo = url;            
+            this.acitivyModel.Photo = url;    
+            this.responseData.photo = url;        
             this.newImages = [];
           }
         })
@@ -261,4 +264,181 @@ export class CrearComponent implements OnInit {
     this.schedulesCrtlArray.removeAt(this.schedulesCrtlArray.length - 1);    
   }
 
+
+
+
+
+
+
+
+  
+
+
+  //Que paso ak con todo y 47
+  public reservationData: ReservationData = new ReservationData(); 
+  public reservationDate: ReservationDate = new ReservationDate();
+  public sendReservationData():void {
+
+      this.AddActivity();
+
+      console.log('Old => ', this.acitivyModel );
+
+      this.reservationData.UserId = this.acitivyModel.UserId;
+      this.reservationData.AmenityId = this.acitivyModel.AmenityId;
+      this.reservationData.Schedules = [{
+        Date: "2020-04-29T00:00:00",
+        Status: 0,
+        TimeStart: "2020-04-29T00:00:00",
+        TimeEnd: "2020-04-29T00:00:00"
+      }];
+      this.reservationData.Private == 'act' ? this.reservationData.Private  = true : this.reservationData.Private = false; 
+
+      console.log('New => ', this.reservationData );
+
+      this.heroService.service_general_post("Activity", this.reservationData)
+          .subscribe( (response: any) => {
+            
+            if( response.result == 'Success' ) {
+
+              this.modalRef.hide();
+
+            } else {
+
+              console.log('Error interno WS Add => ', response );
+
+            }
+
+          }, (error: any) => {
+
+            console.log('Error => ',error);
+
+          });
+
+  }
+
+  public form_data: any = {
+    no_name: false,
+    no_desc: false,
+    no_host: false,
+    no_date: false,
+    no_hini: false,
+    no_hend: false,
+    no_kind: false,
+    no_photo: false
+  }
+  public formFieldValidator():boolean {
+
+    let result = false;
+
+
+
+    return false;
+
+  }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: validateImageUpload
+   * Tipo: Funcion | Funcion efecto colateral
+   * Visto en: communities, amenities, services
+   * Parametros: evento del input, dimensiones de la imagen, donde se va pre visualizar la masa, donde desplegara el nombre
+   * Regresa: N/A
+   * Descripcion: Cuando se le da clic al input y se selecciona la imagen esta valida que el tamaño sea el adecuado y la despliega el el 
+   *              visualizador
+   */
+  public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
+
+    const event = event_data.target,
+          dimensions_image_data = {
+            get_dimensions: ( function() {
+
+              const dimensions_split = dimensions_image.split('x'),
+                    width = Number( dimensions_split[0] ),
+                    height = Number( dimensions_split[1] );
+
+              return {
+                width: width,
+                height: height
+              }
+
+            }())
+          },
+          image_limit_width = dimensions_image_data.get_dimensions.width,
+          image_limit_height = dimensions_image_data.get_dimensions.height,
+          id_image_container:any = document.getElementById( target_image ),
+          name_image_container = document.getElementById( name_image ),
+          native_image_uploaded = document.getElementById('image_real_dimension'),
+          root_data = this;
+
+    if( event.files && event.files[0] ) {
+
+      const reader = new FileReader();
+
+            reader.onload = function(e:any) {
+
+              const image_convert:any = e.target.result,
+                    validating_image = new Promise( (resolve) => {
+
+                      native_image_uploaded.setAttribute('src', image_convert);
+                      
+                      setTimeout( () => {
+
+                        const native_image_dimension = {
+                          image: image_convert,
+                          width: native_image_uploaded.offsetWidth,
+                          height: native_image_uploaded.offsetHeight
+                        };
+
+                        resolve( native_image_dimension );
+
+                      }, 277);
+              
+                    });
+
+                    validating_image.then( ( image_data:any ) => {
+
+                      if( image_limit_width === image_data.width && image_limit_height === image_data.height ) {
+
+                        id_image_container.setAttribute('src', image_data.image );
+                        name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
+                        id_image_container.classList.remove('no-image');
+
+                      } else {
+
+                        id_image_container.src = '../../../assets/14.jpg';
+                        name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
+                        id_image_container.classList.add('no-image');
+                        root_data.reservationData.Photo = '../../../assets/14.jpg';  
+
+                      }
+                      
+                    });
+
+            }
+
+            reader.readAsDataURL( event.files[0] );
+
+    }
+    
+  }
+
+}
+
+class ReservationData {
+  Name: string;
+  Description: string;
+  Photo: string;
+  QuoteMax: number = 30;
+  Private: any;
+  Status: number = 0;
+  Schedules: any;
+  UserId: number;
+  AmenityId: number;
+}
+
+class ReservationDate {
+  Date: string;
+  InitHour: string;
+  EndHour: String;
 }

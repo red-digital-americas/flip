@@ -1,17 +1,197 @@
-<div class="modal-header">
+<form class="ap-form ap-form--full-width ml-col-1 card-style" name="form_reservar" (submit)="sendReservationData()" onsubmit="return false;">
+    <div class="ml-col-1">
+        <h4 class="ap-form__titulo text-left">
+          Nueva Reservación
+          <button 
+            type="button"
+            class="ap-form__close button-orange" 
+            (click)="modalRef.hide()">x
+          </button>
+        </h4>
+    </div>
+    <div class="ml-col-6 margin-top-x">
+        <div class="ml-col-1">
+            <div class="ap-form__input">
+                <input 
+                    type="text"
+                    placeholder="Titulo"
+                    id="new_service_title" 
+                    name="new_service_title"
+                    [(ngModel)]="reservationData.Name"
+                    class="ap-form__input-text" />
+                <label for="new_service_title" class="ap-form__label ap-form__label-text">
+                Titulo
+                </label>
+            </div>
+        </div>
+        <div class="ml-col-1">
+            <div class="ap-form__input">
+              <textarea 
+                id="new_service_desc"
+                name="new_service_desc"
+                placeholder="Descripcion"
+                [(ngModel)]="reservationData.Description"
+                class="ap-form__label ap-form__input-textarea"></textarea>
+              <label for="new_service_desc" class="ap-form__label ap-form__label-text">
+                Descripción
+              </label>
+            </div>
+        </div>
+        <div class="ml-col-1">
+            <div class="ap-form__input">
+                <select 
+                    type="text"
+                    placeholder="Titulo"
+                    id="reserv_host" 
+                    name="reserv_host"
+                    class="ap-form__input-text">
+                    <option selected disabled>Selecciona Host</option>
+                    <option *ngFor="let host of usersArray;" value="host.id">
+                        {{ host.name }} {{ host.lastName }}
+                    </option>
+                </select>
+                <label for="reserv_host" class="ap-form__label ap-form__label-text">
+                Host
+                </label>
+            </div>
+        </div>
+        <div class="ml-col-3 padding-right-min">
+            <div class="ap-form__input">
+                <input 
+                    type="date"
+                    placeholder="Titulo"
+                    id="new_service_title" 
+                    name="new_service_title"
+                    [(ngModel)]="reservationDate.Date"
+                    class="ap-form__input-text" />
+                <label for="new_service_title" class="ap-form__label ap-form__label-text">
+                Fecha
+                </label>
+            </div>
+        </div>
+        <div class="ml-col-3 padding-right-min">
+            <div class="ap-form__input">
+                <input 
+                    type="time"
+                    placeholder="Titulo"
+                    id="reserv_hdesde" 
+                    name="reserv_hdesde"
+                    min="00:00"
+                    max="23:59"
+                    [(ngModel)]="reservationDate.InitHour"
+                    class="ap-form__input-text"
+                    step="60" />
+                <label for="reserv_hdesde" class="ap-form__label ap-form__label-text">
+                Desde
+                </label>
+            </div>
+        </div>
+        <div class="ml-col-3 padding-right-min">
+            <div class="ap-form__input">
+                <input 
+                    type="time"
+                    placeholder="Titulo"
+                    id="reserv_hhasta" 
+                    name="reserv_hhasta"
+                    [(ngModel)]="reservationDate.EndHour"
+                    class="ap-form__input-text"
+                    tep="60" />
+                <label for="reserv_hhasta" class="ap-form__label ap-form__label-text">
+                Hasta
+                </label>
+            </div>
+        </div>
+        <div class="ml-col-2">
+            <div class="ml-col-1">
+                <p class="ap-form__input-radio-titulo">
+                    Tipo de reservación
+                </p>
+                <div class="ml-col-1">
+                    <div class="ap-form__input-radio-opc">
+                        <input 
+                            type="radio" 
+                            id="reserv_tipo_act"
+                            name="reserv_tipo"
+                            value="act"
+                            [(ngModel)]="reservationData.Private" 
+                            class="ap-form__input-radio display-none" />
+                        <label for="reserv_tipo_act" class="ap-form__label-radio">
+                            Actividad
+                        </label>
+                    </div>
+                </div>
+                <div class="ml-col-1">
+                    <div class="ap-form__input-radio-opc">
+                        <input 
+                            type="radio" 
+                            id="reserv_tipo_esp" 
+                            name="reserv_tipo"
+                            value="esp"
+                            [(ngModel)]="reservationData.Private" 
+                            class="ap-form__input-radio display-none" />
+                        <label for="reserv_tipo_esp" class="ap-form__label-radio">
+                            Espacio
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ml-col-4o margin-top-x">
+        <div class="ap-form__input">
+            <input
+              class="ap-form__input-image display-none" 
+              id="reserv_image"
+              name="reserv_image"
+              type="file"
+              accept="image/*"
+              onsubmit="return false;"
+              (change)="validateImageUpload( $event, '350x350', 'reserv_image_0', 'reserv_name_0' ); prepareImages( $event ); " />
+            <label for="reserv_image" class="ap-form__label-image">
+            <figure class="ap-form__image">
+                <img class="ap-form__image-image no-image" 
+                    id="reserv_image_0"
+                    src="../../../../assets/14.jpg" />
+                <span class="ap-form__image-data text-center" id="reserv_name_0">
+                    La imagen debe medir <br />
+                    <span class="text-bold">350x350</span> 
+                </span>
+            </figure>
+            </label>
+        </div>
+    </div>
+    <div class="ml-col-1 ap-form__buttons">
+        <button 
+          type="submit"
+          class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+          Guardar
+        </button>
+    </div>
+</form>
+
+<div class="black-box">
+    <img src="" id="image_real_dimension" />
+</div>
+
+
+
+
+
+
+
+<!-- ----------------------------------------------------------- -->
+<!-- div class="modal-header">
     <h4 class="modal-title pull-left">Nueva Reservación</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
 </div>
-
 <div class="modal-body">
     <div class="container clearfix">
        <form [formGroup]="formGroup" autocomplete="off">
         <div class="row">                      
             <div class="col-12 col-lg-8 col-xl-8">
                 <div class="row">      
-                    
                     <div class="col-12 mb-3">
                         <div class="reservacion__text">Tipo de reservación:</div>
                         <div class="custom-control custom-radio custom-control-inline">
@@ -23,24 +203,17 @@
                             <label class="custom-control-label" for="customRadioInline2">Espacio</label>
                         </div>
                     </div>
-                    
                     <div class="col-12 mb-2">
-                    <!-- <div class="col-12 mb-2" *ngIf="!this.acitivyModel.Private"> -->
                         <input type="text" formControlName="activityNameCtrl" class="form-control" placeholder="Title">
                     </div>          
-                
-                    
                     <div class="col-12 mb-2">
-                    <!-- <div class="col-12 mb-2" *ngIf="!this.acitivyModel.Private"> -->
                         <div class="custom-file">
                             <input type="file" accept="image/*"
                                 (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
                             <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>        
                         </div>
                     </div>
-                    
                     <div class="col-12 mb-2">
-                    <!-- <div class="col-12 mb-2" *ngIf="!this.acitivyModel.Private"> -->
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Description</span>
@@ -54,22 +227,13 @@
                             <div class="input-group-prepend" style="position: relative; z-index:1;">
                                 <span class="input-group-text">Host</span>
                             </div>  
-                            <!-- <select class="form-control" [(ngModel)]="acitivyModel.UserId" name="activityUserId" id="activityUserId">
-                                <option *ngFor="let user of usersArray" [value]="user.id" >
-                                    {{user.name}}
-                                </option>                            
-                            </select> -->
-
-                            <!-- <fieldset class="form-control"> -->
                                 <ng-select    
                                     style="flex: 1"
                                     formControlName="activityUserIdCtrl" 
-                                
                                     [clearable]="false"
                                     [items]="usersArray"                                                                                              
                                     bindLabel="name" 
                                     bindValue="id">
-
                                     <ng-template ng-label-tmp let-item="item">
                                         <span class="ng-value-label"><img [src]="item.avatar" style="border-radius: 50%;" width="20px" height="20px"> {{item.name}} {{item.lastName}} </span>                                                                
                                     </ng-template>
@@ -78,19 +242,8 @@
                                         <img [src]="item.avatar" style="border-radius: 50%;" width="20px" height="20px"> {{item.name}} {{item.lastName}}
                                     </ng-template>  
                                 </ng-select>
-                            <!-- </fieldset> -->
                         </div>
-                    </div> 
-
-                    <!-- <div class="col-12 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Cupo</span>
-                            </div>
-                            <input type="number" [(ngModel)]="acitivyModel.QuoteMax" class="form-control" name="activityQuoteMax" id="activityQuoteMax" min="1" placeholder="Cupo" required>
-                        </div>                        
-                    </div> -->
-                                       
+                    </div>                                        
                     <div formArrayName="schedulesCtrl"
                         *ngFor="let arrayItem of schedulesCrtlArray.controls; let i=index">
 
@@ -120,20 +273,6 @@
                             <div *ngIf="i!=0" (click)="RemoveScheduleCtrl();" class="schedule__datetime">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </div>
-                                                    
-                            <!-- <div class="input-group schedule__datetime">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Desde</span>
-                                </div> 
-                                <timepicker name="startTime" [(ngModel)]="startTime" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>                            
-                            </div>
-
-                            <div class="input-group schedule__datetime">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Hasta</span>
-                                </div> 
-                                <timepicker name="endTime" [(ngModel)]="endTime" [min]="startTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-                            </div> -->
                         </div>                           
                     </div>
                     <div  *ngIf="formGroup.get('schedulesCtrl').errors?.overlap">
@@ -141,57 +280,18 @@
                         {{formGroup.get('schedulesCtrl').errors?.schedule.dateCtrl | date:'dd/MM/yyyy'}} 
                         {{formGroup.get('schedulesCtrl').errors?.schedule.startTimeCtrl | date:'HH'}}:00 - 
                         {{formGroup.get('schedulesCtrl').errors?.schedule.endTimeCtrl | date:'HH'}}:00
-                    </div>
-
-                    <!-- <div (click)="AddScheduleCtrl()" class="col-12">+ Add Schedule</div> -->
-
-                    <!-- <div>{{formGroup.value | json}}</div> -->
-                    
-                    <!-- <div class="col-12 mb-2 schedule">
-                        <div class="schedule__datetime">
-                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Start</span>
-                                </div>  
-                                <input type="text" name="dateZZ"  [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', timePicker: true }" placeholder="Datepicker" class="form-control" bsDatepicker>
-                            </div> 
-                            <timepicker name="startTimeZZZZZ" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-                        </div>   
-                        <div class="schedule__datetime">
-                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">End</span>
-                                </div>  
-                                <input type="text" name="dateZZ"  [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', timePicker: true }" placeholder="Datepicker" class="form-control" bsDatepicker>
-                            </div> 
-                            <timepicker name="startTimeZZZZZ" [max]="endTime" [showMeridian]="isMeridian" [showMinutes]="showMin" [showSeconds]="showSec"></timepicker>
-                        </div>                                            
-                    </div> -->
-
-                    <!-- Uncomment for all day feature -->
-                    <!-- <div class="col-12 mb-2 allDay">
-                        <label class="switch switch-sm switch-3d switch-dark">
-                            <input class="switch-input" type="checkbox" name="allDaySwitch" [(ngModel)]="allDaySwitch">
-                            <span class="switch-slider"></span>                            
-                        </label>                         
-                        <div class="allDay__text">All day event</div>                        
-                    </div> -->
-                                      
+                    </div>          
                 </div>
             </div>
-
             <div class="col-4">
-            <!-- <div class="col-4" *ngIf="!this.acitivyModel.Private"> -->
                 <img style="width:100%" class="img-size" [src]="acitivyModel.Photo" />
-            </div>                                    
-                      
+            </div>    
             <div class="col-12">
                 <button (click)="AddActivity()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Activity</button>
-            </div>            
-                  
+            </div>                    
         </div>  
       </form>
     </div>
-</div>
+</div -->
 
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>    

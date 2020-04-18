@@ -154,17 +154,17 @@
           <div class="ap-form__input">
             <input
               class="ap-form__input-image display-none" 
-              id="nueva_comunidad_img"
-              name="nueva_comunidad_img"
+              id="nuevo_servicio_img"
+              name="nuevo_servicio_img"
               type="file"
-              (change)="validateImageUpload( $event, '350x350', 'new_amm_image_0', 'new_amm_name_0' ); prepareImages( $event );" />
-            <label for="nueva_comunidad_img" class="ap-form__label-image">
+              (change)="validateImageUpload( $event, '350x350', 'nuevo_servicio_img_0', 'nuevo_servicio_name_0' ); prepareImages( $event );" />
+            <label for="nuevo_servicio_img" class="ap-form__label-image">
               <figure class="ap-form__image">
                 <img class="ap-form__image-image no-image" 
-                     id="new_amm_image_0"
+                     id="nuevo_servicio_img_0"
                      [class.forms_errors_nimage]="form_service.no_phot"
                      src="{{ data_service.photo }}" />
-                <span class="ap-form__image-data text-center" id="new_amm_name_0">
+                <span class="ap-form__image-data text-center" id="nuevo_servicio_name_0">
                   La imagen debe medir <br />
                   <span class="text-bold">350x350</span> 
                 </span>
@@ -179,17 +179,17 @@
           <div class="ap-form__input">
             <input
               class="ap-form__input-image display-none" 
-              id="nueva_comunidadi_img"
-              name="nueva_comunidadi_img"
+              id="nuevo_servicio_icon"
+              name="nuevo_servicio_icon"
               type="file"
-              (change)="validateImageUpload( $event, '150x150', 'new_amm_image_1', 'new_amm_name_1' ); prepareIcon( $event );" />
-            <label for="nueva_comunidadi_img" class="ap-form__label-image ap-form__label-image--icon">
+              (change)="validateImageUpload( $event, '150x150', 'nuevo_servicio_icon_0', 'nuevo_servicio_name_0' ); prepareIcon( $event );" />
+            <label for="nuevo_servicio_icon" class="ap-form__label-image ap-form__label-image--icon">
               <figure class="ap-form__image">
                 <img class="ap-form__image-image ap-form__image-image--icon no-image bg-black" 
-                     id="new_amm_image_1"
+                     id="nuevo_servicio_icon_0"
                      [class.forms_errors_nimage]="form_service.no_icon"
                      src="{{ data_service.icon }}" />
-                <span class="ap-form__image-data text-center" id="new_amm_name_1">
+                <span class="ap-form__image-data text-center" id="nuevo_servicio_name_0">
                   La imagen debe medir <br />
                   <span class="text-bold">150x150</span> 
                 </span>
