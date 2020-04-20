@@ -1,4 +1,99 @@
-<div class="app-body">
+<div class="login">
+  <img src="../../../assets/img/Builds/coahuila8.jpg" class="login--background" />
+  <div class="login__container card-style">
+    <form class="ap-form ml-col-1 login-form" name="login-form" (submit)="loginEvent()" *ngIf="login_action">
+      <div class="ml-col-1">
+        <h4 class="ap-form__titulo text-left">
+          Login
+        </h4>
+      </div>
+      <div class="ml-col-1">
+        <div class="ap-form__input">
+          <input 
+            type="text" 
+            placeholder="Usuario"
+            id="login_user" 
+            name="login_user"
+            [(ngModel)]="user_data.username"
+            [class.form_error_found]="form_data.no_user"
+            class="ap-form__input-text" />
+          <label for="login_user" class="ap-form__label ap-form__label-text">
+            Usuario
+          </label>
+          <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_user">
+            El campo es obligatorio*
+          </span>
+        </div>
+      </div>
+      <div class="ml-col-1">
+        <div class="ap-form__input">
+          <input 
+            type="password" 
+            placeholder="Password"
+            id="login_pass" 
+            [(ngModel)]="user_data.password"
+            [class.form_error_found]="form_data.no_pass"
+            name="login_pass"
+            class="ap-form__input-text" />
+          <label for="login_pass" class="ap-form__label ap-form__label-text">
+            Password
+          </label>
+          <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_pass">
+            El campo es obligatorio*
+          </span>
+        </div>
+      </div>
+      <div class="ml-col-1 ap-form__buttons">
+        <button 
+          type="submit"
+          class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+          Login
+        </button>
+        <span class="ml-col-1 padding-general-min image-name cursor-pointer" (click)="recoverPassword()">
+          Forgot password?
+        </span>
+      </div>
+    </form>
+    <form class="ap-form ml-col-1 login-form" name="login-form" (submit)="recoverPasswordAction()" *ngIf="!login_action">
+      <h4 class="ap-form__titulo text-left">
+        Recover Password
+      </h4>
+      <div class="ml-col-1">
+        <div class="ap-form__input">
+          <input 
+            type="text" 
+            placeholder="Password"
+            id="recover_email" 
+            name="recover_email"
+            [(ngModel)]="pass_data.email"
+            [class.form_error_found]="form_pass.no_emai"
+            class="ap-form__input-text" />
+          <label for="recover_email" class="ap-form__label ap-form__label-text">
+            Email
+          </label>
+          <span class="ml-col-1 form_error_found_label" *ngIf="form_pass.no_emai">
+            El campo es obligatorio*
+          </span>
+        </div>
+        <div class="ml-col-1 ap-form__buttons">
+          <button 
+            type="button"
+            (click)="recoverPassword()"
+            class="ap-form__buttons-button ap-form__buttons-button--cancelar">
+            Cancelar
+          </button>
+          <button 
+            type="submit"
+            class="ap-form__buttons-button ap-form__buttons-button--aceptar">
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- div class="app-body">
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
@@ -7,7 +102,6 @@
             <div class="card p-4">
               <div class="card-body">
                 <form #loginForm="ngForm" autocomplete="off">
-
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
                   <div class="input-group mb-3">
@@ -34,21 +128,16 @@
                       <button type="button" (click)="recoverpass()" class="btn btn-link px-0">Forgot password?</button>
                     </div>
                   </div>
-                  <!--<button class="btn btn-success" (click)="showSuccess()">Try Success</button>
-  <button class="btn btn-danger" (click)="showError()">Try Error</button>
-  <button class="btn btn-warning" (click)="showWarning()">Try Warning</button>
-  <button class="btn btn-info" (click)="showInfo()">Try Info</button>
-  <button class="btn btn-primary" (click)="showPrimary()">Try Primary</button>
-      -->
                 </form>
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   </main>
-</div>
+</div -->
+
+
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
 

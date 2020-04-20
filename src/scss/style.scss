@@ -880,7 +880,7 @@ select:active,
     padding: 7px 0;
     float: left;
     margin-bottom: 20px;
-    border-bottom: solid 2px rgba(0,0,0,.9);
+    border-bottom: solid 3px #20a8d8;
   }
 
   &__close {
@@ -949,7 +949,7 @@ select:active,
 
     &-text,
     &-textarea {
-      border-width: 0 0 2px 0;
+      border-width: 0 0 1px 0;
       border-style: solid;
       border-color: rgba(0,0,0,.9);
     }
@@ -2112,6 +2112,10 @@ select:active,
   font-size: 11px;
   font-style: italic;
   left: 0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 //Animations
