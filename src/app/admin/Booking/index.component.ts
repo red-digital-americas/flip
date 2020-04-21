@@ -31,17 +31,26 @@ export class BookingIndexComponent implements OnInit {
         switch( action_kind ) {
 
             case 'new':
-            this.show_booking_form = true;
-            this.booking_form_action = 'Nuevo Edificio';
+                this.resetSettings();
+                this.show_booking_form = true;
+                this.booking_form_action = 'Nuevo Edificio';
             break;
 
             case 'edit':
-            this.show_booking_form = true;
-            this.booking_form_action = 'Editar Edificio';
+                this.resetSettings();
+                this.show_booking_form = true;
+                this.booking_data.id = editable.name;
+                this.booking_data.name = editable.name;
+                this.booking_data.descripcion = editable.descripcion;
+                this.booking_data.direccion = editable.direccion;
+                this.booking_data.latitude = editable.latitude;
+                this.booking_data.longitude = editable.longitude;
+                this.booking_data.photo = editable.photo;
+                this.booking_form_action = 'Editar Edificio';
             break;
 
             case 'hide':
-            this.show_booking_form = false;
+                this.show_booking_form = false;
             break;
 
             default:
@@ -98,28 +107,8 @@ export class BookingIndexComponent implements OnInit {
 
                 }
 
-                console.log( this.cards );
-
             });
             
-    }
-
-
-   /*
-    * Autor: Carlos Hernandez
-    * Email: carlos.hernandez@minimalist.mx    
-    * Name: showRoomsForms
-    * Params: NA
-    * Return: NA
-    * Description: Muestra el formulario de Añadir cuartos de ser requerido
-    * Variables Out: show_rooms_form
-    */
-    public show_rooms_form:boolean = false;
-    public showRoomsForms():void {
-
-        !this.show_rooms_form ?
-            this.show_rooms_form = true : this.show_rooms_form = false;
-
     }
 
 
@@ -133,7 +122,7 @@ export class BookingIndexComponent implements OnInit {
     * Variables Out: rooms
     */
     public rooms = [
-        {id: 0, name: '', cantidad: null, can_delete: false}
+        {id: 0, name: '', cantidad: null, can_delete: false, last_one: true}
     ];
     public addNewRoom():void {
 
@@ -141,7 +130,8 @@ export class BookingIndexComponent implements OnInit {
             id: 0,
             name: '',
             cantidad: null,
-            can_delete: true
+            can_delete: true,
+            last_one: false
         };
 
         this.rooms.push( new_room );
@@ -149,8 +139,11 @@ export class BookingIndexComponent implements OnInit {
         this.rooms.forEach( (room:any, index:number) => {
 
             room.id = index;
+            room.last_one = false;
 
         });
+
+        this.rooms[this.rooms.length -1].last_one = true;
 
     }
 
@@ -168,6 +161,8 @@ export class BookingIndexComponent implements OnInit {
 
         this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === id_room ), 1);
 
+        this.rooms[this.rooms.length -1].last_one = true;
+
     }
 
 
@@ -183,99 +178,121 @@ export class BookingIndexComponent implements OnInit {
     public booking_data: BookingData = new BookingData();
     public sendBookingData():void {
 
-        /*
-        this.booking_data.name = 'Carlos';
-        this.booking_data.description = 'Hola este es el edificio';
-        this.booking_data.status = true;
-        this.booking_data.direction = 'Esta es la direccion del edificio';
-        this.booking_data.longitude = 100;
-        this.booking_data.latitude = 200;
-        this.booking_data.photo = '';
-        this.booking_data.typeroom = [
-            {type: 'uno', capacity: 10}
-        ];*/
+        if( this.validatingNewBuildFields( this.booking_data ) ) {
+                
+            this.booking_data.typeroom = this.getRoomsData();
 
-        //Falata la foto
-        // Los cuartos 
-        // Validar campos
+            this.services.ServiceSaveBuilding( this.booking_data )
+                .subscribe( ( response: any ) => {
 
-        const validating_data = new Promise( (resolve: any) => {
+                    if( response == null ) {
 
-            const are_rooms_completed = this.validateRoomsData();
+                        this.requestIndexContent();
+                        this.toggleSectionForm('hide');
+                        this.resetSettings()
 
-                  resolve( are_rooms_completed );
+                    }
+    
+                }, (error: any) => {
+    
+                    console.log('Erro WS NewBuild',error);
+    
+                });
 
-        });
-
-        validating_data.then( (rooms_completed: boolean) => {
-
-            if( rooms_completed ) {
-
-                this.booking_data.typeroom = this.rooms;
-
-                console.log( this.booking_data );
-
-            }
-
-        });
-
-        
-        
-        /*this.services.ServiceSaveBuilding( this.booking_data ).subscribe( ( response: any ) => {
-
-            console.log( response );
-
-        }, (error: any) => {
-
-            console.log(error);
-
-        });*/
-
-        console.log( this.booking_data );
+        }
 
     }
 
 
     public espacios_habitaciones = [1,2,3,4,5,6,7,8,9,10];
-    public validateRoomsData():boolean {
+    public getRoomsData():Array<any> {
 
-        const rooms_added_container = document.getElementById('room_added'),
-              rooms = rooms_added_container.querySelectorAll('.room');
+        let rooms_added = [];
 
-        let result: boolean = false;
+        const rooms_container = document.getElementById('rooms_added'),
+              get_rooms = rooms_container.querySelectorAll('[room="added"]');
 
-        for( let room = 0; room < rooms.length; room += 1) {
+              get_rooms.forEach( (room: any) => {
 
-            const inputs = rooms[room].querySelectorAll('input'),
-                  selects = rooms[room].querySelectorAll('select');
+                let input = room.querySelector('input'),
+                    select = room.querySelector('select');
+                
+                if( input.value != '' && !select.value != null ) {
 
-            if( inputs.length == selects.length ) {
+                    let new_room = {
+                        type: input.value,
+                        capacity: select.value,
+                        active: true
+                    };
 
-                for( let field = 0; field < inputs.length; field += 1) {
-                    
-                    if( inputs[field].value != '' && selects[field].value  != null ) {
-
-                        this.rooms[room].name = inputs[field].value;
-                        this.rooms[room].cantidad = selects[field].value;
-
-                        if( rooms.length - 1 == room ) return true;
-
-                    } else {
-                        
-                        console.log('Completa los campos y dale estilos donde falten');
-                        return false;
-
-                    }
+                    rooms_added.push( new_room );
 
                 }
 
-            } else {
+              });
 
-                console.log('Error inesperado en el sistema, los campos no coinciden');
+        return rooms_added;
 
-            }
+    }
 
+    public resetSettings():void {
+        this.booking_data.name = null;
+        this.booking_data.descripcion = null;
+        this.booking_data.direccion = null;
+        this.booking_data.latitude = null;
+        this.booking_data.longitude = null;
+        this.form_data = {
+            no_name: false,
+            no_desc: false,
+            no_dire: false,
+            no_long: false,
+            no_lati: false,
+            no_phot: false
         }
+        this.booking_data.photo = '../../../assets/14.jpg';
+        this.rooms = [
+            {id: 0, name: '', cantidad: null, can_delete: false, last_one: true}
+        ];
+    }
+
+    public form_data: any = {
+        no_name: false,
+        no_desc: false,
+        no_dire: false,
+        no_long: false,
+        no_lati: false,
+        no_phot: false
+    }
+    public validatingNewBuildFields( form_data: BookingData ):boolean {
+
+        let result = false;
+
+        form_data.name == '' || form_data.name == null ?
+            this.form_data.no_name = true : this.form_data.no_name = false; 
+
+        form_data.descripcion == '' || form_data.descripcion == null ?
+            this.form_data.no_desc = true : this.form_data.no_desc = false; 
+
+        form_data.direccion == '' || form_data.direccion == null ?
+            this.form_data.no_dire = true : this.form_data.no_dire = false; 
+
+        form_data.latitude == null ?
+            this.form_data.no_lati = true : this.form_data.no_lati = false; 
+
+        form_data.longitude == null ?
+            this.form_data.no_long = true : this.form_data.no_long = false;
+
+        form_data.photo == '' || form_data.photo == '../../../assets/14.jpg' ?
+            this.form_data.no_phot = true : this.form_data.no_phot = false; 
+
+        for( let field in this.form_data ) {
+
+            if( this.form_data[field] ) return;
+            else result = true;
+    
+        }
+
+        return result;
 
     }
     
@@ -315,7 +332,8 @@ export class BookingIndexComponent implements OnInit {
             image_limit_height = dimensions_image_data.get_dimensions.height,
             id_image_container:any = document.getElementById( target_image ),
             name_image_container = document.getElementById( name_image ),
-            native_image_uploaded = document.getElementById('image_real_dimension');
+            native_image_uploaded = document.getElementById('image_real_dimension_nb'),
+            root = this;
 
         if( event.files && event.files[0] ) {
 
@@ -338,7 +356,7 @@ export class BookingIndexComponent implements OnInit {
 
                             resolve( native_image_dimension );
 
-                        }, 277);
+                        }, 777);
                 
                         });
 
@@ -355,6 +373,7 @@ export class BookingIndexComponent implements OnInit {
                             id_image_container.src = '../../../assets/14.jpg';
                             name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
                             id_image_container.classList.add('no-image');
+                            root.booking_data.photo = '../../../assets/14.jpg';
 
                         }
                         
@@ -387,7 +406,6 @@ export class BookingIndexComponent implements OnInit {
         if (Utils.isDefined(e.srcElement.files)) {
           for (let f of e.srcElement.files) {        
             this.newImages.push(f);
-            console.log( e.srcElement.files );
           }
         }
         this.addImages();
@@ -396,7 +414,7 @@ export class BookingIndexComponent implements OnInit {
     addImages() {
         let url: string = '';
         if (!Utils.isEmpty(this.newImages)) {
-            for (let f of this.newImages) { console.log( this.newImages );
+            for (let f of this.newImages) { 
             this.services.UploadImgSuc(f).subscribe((r) => {
                 if (Utils.isDefined(r)) {
                 url = <string>r.message;            
@@ -409,16 +427,17 @@ export class BookingIndexComponent implements OnInit {
         }
     }
     //Aqui termina ese jale
-
 }
 
 class BookingData {
+    id: number;
     name: string;
-    description: string;
+    descripcion: string;
     status: boolean = true;
-    direction: string;
-    longitude: number = null;
-    latitude: number = null;
-    photo: string = '';
+    direccion: string;
+    longitude: number;
+    latitude: number;
+    photo: string = '../../../assets/14.jpg';
     typeroom: any;
 }
+

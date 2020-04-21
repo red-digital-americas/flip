@@ -1,6 +1,27 @@
 <div class="ml-col-1">
     <booking-navbar [section]="section"></booking-navbar>
-    <div class="ml-col-1">
-        Esta es la pagina de Room Avai
+    <div class="ml-col-1 padding-general-m">
+        <div class="ml-col-1 padding-general-m card-style folder">
+            <div class="folder__tabs">
+                <div class="folder__tab" tabs-family="test" tab-show-content="tab_a">
+                    Tenanlist
+                </div>
+                <div class="folder__tab" tabs-family="test" tab-show-content="tab_b">
+                    Room Avaibility
+                </div>
+                <div class="folder__tab" tabs-family="test" tab-show-content="tab_c">
+                    Room Avaibility
+                </div>
+            </div>
+            <div class="ml-col-1 block-test" tabs-family="test" tab-id="tab_a" tab-visible="on">
+                Primer contenido
+            </div>
+            <div class="ml-col-1 block-test" tabs-family="test" tab-id="tab_b" tab-visible="off">
+                Segundo contenido
+            </div>
+            <div class="ml-col-1 block-test" tabs-family="test" tab-id="tab_c" tab-visible="off">
+                Terver contenido
+            </div>
+        </div>
     </div>
 </div>

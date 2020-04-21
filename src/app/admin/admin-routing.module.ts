@@ -11,7 +11,7 @@ import { EditAmenitiesComponent } from './amenities/edit/edit-amenities.componen
 import { RoleGuardService } from '../guards/role-guard.service';
 import { ChatComponent } from './chat/chat.component';
 
-//CHH
+//CHH => Booking
 import { BookingIndexComponent } from './Booking/index.component';
 import { TenantListComponent } from './Booking/TenantList/tenantList.component';
 import { BookingNavbarComponent } from './Booking/NavbarBooking/booking-navbar.component';
@@ -20,6 +20,10 @@ import { MessagesComponent } from './Booking/Messages/messages.component';
 import { AlertsComponent } from './Booking/Alerts/alerts.component';
 import { RoomCatalogComponent } from './Booking/RoomCatalog/roomCatalog.component';
 import { MembershipCatalogComponent } from './Booking/Membership/memberShipCatalog.component';
+import { GeneralTenantListComponent } from './Booking/GeneralTenantlist/GeneralTenantList.component';
+import { AddTenantComponent } from './Booking/AddTenant/AddTenant.component';
+import { UsersComponent } from './Booking/Users/Users.component';
+import { RolesComponent } from './Booking/Roles/Roles.component';
 
 const routes: Routes = [
   { path: '', data: { title: 'AdminApp', expectedRole: [2,4] }, canActivate: [RoleGuardService],
@@ -35,7 +39,7 @@ const routes: Routes = [
       { path: 'reservations/:id', component: ReservationsComponent, data: { title: 'Reservations' } },
       { path: 'chat/:id', component: ChatComponent, data: { title: 'Chat' } },
 
-      //CHH
+      //CHH => Booking 
       { path: 'booking', component: BookingIndexComponent, data: { title: 'Booking' } },
       { path: 'tenantList/:id', component: TenantListComponent, data: { title: 'Tenant List' } }, 
       { path: 'roomAvailavility/:id', component: RoomAvailavilityComponent, data: { title: 'Room Availavility' } },
@@ -43,7 +47,11 @@ const routes: Routes = [
       { path: 'alerts/:id', component: AlertsComponent, data: { title: 'Alerts' } },
       { path: 'roomCatalog/:id', component: RoomCatalogComponent, data: { title: 'Room Catalog' } },
       { path: 'MembershipCatalog/:id', component: MembershipCatalogComponent, data: { title: 'Membership Catalog' } },
-
+      { path: 'generalTenantlist', component: GeneralTenantListComponent, data: { title: 'General Tenantlist' } },
+      { path: 'AddTenant', component: AddTenantComponent, data: { title: 'Add Tenant' } },
+      { path: 'Users', component: UsersComponent, data: { title: 'Users' } },
+      { path: 'Roles', component: RolesComponent, data: { title: 'Roles' } },
+      
       // { path: 'perks/:id', loadChildren: './perks/perks.module#PerksComponentModule' },
       { path: '', loadChildren: './perks/perks.module#PerksComponentModule', data: { title: 'Perks'} },
       { path: '', loadChildren: './services/services.module#ServicesComponentModule', data: { title: 'Services'}  },

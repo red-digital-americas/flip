@@ -40,10 +40,14 @@
                     id="booking_title" 
                     name="booking_title"
                     class="ap-form__input-text"
+                    [class.form_error_found]="form_data.no_name"
                     [(ngModel)]="booking_data.name" />
                   <label for="booking_title" class="ap-form__label ap-form__label-text">
                     Nombre
                   </label>
+                  <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
+                    El campo es obligatorio*
+                  </span>
                 </div>
             </div>
             <div class="ml-col-1">
@@ -52,11 +56,15 @@
                     id="booking_desc"
                     name="booking_desc"
                     placeholder="Descripción"
+                    [class.form_error_found]="form_data.no_desc"
                     [(ngModel)]="booking_data.descripcion"
                     class="ap-form__label ap-form__input-textarea"></textarea>
                   <label for="booking_desc" class="ap-form__label ap-form__label-text">
                     Descripción
                   </label>
+                  <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
+                    El campo es obligatorio*
+                  </span>
                 </div>
             </div>
             <div class="ml-col-1">
@@ -65,11 +73,15 @@
                     id="booking_direccion"
                     name="booking_direccion"
                     placeholder="Dirección"
+                    [class.form_error_found]="form_data.no_dire"
                     [(ngModel)]="booking_data.direccion"
                     class="ap-form__label ap-form__input-textarea"></textarea>
                   <label for="booking_direccion" class="ap-form__label ap-form__label-text">
                     Dirección
                   </label>
+                  <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_dire">
+                    El campo es obligatorio*
+                  </span>
                 </div>
             </div>
             <div class="ml-col-2 padding-right-min">
@@ -80,10 +92,14 @@
                   id="booking_latitud" 
                   name="booking_latitud"
                   class="ap-form__input-text"
+                  [class.form_error_found]="form_data.no_lati"
                   [(ngModel)]="booking_data.latitude" />
                 <label for="booking_latitud" class="ap-form__label ap-form__label-text">
                   Latitud
                 </label>
+                <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
+                  El campo es obligatorio*
+                </span>
               </div>
             </div>
             <div class="ml-col-2 padding-right-min">
@@ -94,10 +110,14 @@
                   id="booking_longitud" 
                   name="booking_longitud"
                   class="ap-form__input-text"
+                  [class.form_error_found]="form_data.no_long"
                   [(ngModel)]="booking_data.longitude" />
                 <label for="booking_longitud" class="ap-form__label ap-form__label-text">
                   Longitud
                 </label>
+                <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">
+                  El campo es obligatorio*
+                </span>
               </div>
             </div>
         </div>
@@ -109,22 +129,31 @@
                   name="booking_img"
                   type="file" 
                   accept="image/*"
-                  (change)="validateImageUpload( $event, '350x350', 'booking_img_0', 'booking_img_name_0' ); prepareImages( $event )" />
+                  (change)="prepareImages( $event ); validateImageUpload( $event, '350x350', 'booking_img_0', 'booking_img_name_0' );" />
                 <label for="booking_img" class="ap-form__label-image">
                   <figure class="ap-form__image">
                     <img class="ap-form__image-image no-image" 
                          id="booking_img_0"
-                         src="../../../assets/14.jpg" />
+                         [class.forms_errors_nimage]="form_data.no_phot"
+                         src="{{ booking_data.photo}}" />
                     <span class="ap-form__image-data text-center" id="booking_img_name_0">
                       La imagen debe medir <br />
                       <span class="text-bold">350x350</span> 
+                    </span>
+                    <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
+                      El campo es obligatorio*
                     </span>
                   </figure>
                 </label>
             </div>
         </div>
-        <div class="ml-col-1 ap-form__rooms" [class.display-none]="!show_rooms_form" id="room_added">
-            <div class="ap-form__rooms-room room" *ngFor="let room of rooms;">
+        <div class="ml-col-1 ap-form__rooms padding-general-min" id="rooms_added">
+            <div class="ml-col-1">
+              <h4 class="ap-form__titulo text-left">
+                Rooms
+              </h4>
+            </div>
+            <div class="ap-form__rooms-room room" *ngFor="let room of rooms;" room="added">
               <div class="ml-col-1 padding-general-min card-style">
                 <div class="ml-col-1">
                   <div class="ap-form__input">
@@ -133,6 +162,7 @@
                       placeholder="Nombre"
                       id="booking_room_title_{{ room.id }}" 
                       name="booking_room_title_{{ room.id }}"
+                      value=""
                       class="ap-form__input-text" />
                     <label for="booking_room_title_{{ room.id }}" class="ap-form__label ap-form__label-text">
                       Nombre
@@ -143,7 +173,8 @@
                   <div class="ap-form__input">
                     <select 
                       placeholder="Número de habitaciones"
-                      id="booking_room_num_{{ room.id }}" 
+                      id="booking_room_num_{{ room.id }}"
+                      value="null" 
                       name="booking_num_title_{{ room.id }}"
                       class="ap-form__input-text">
                       <option disabled="disabled" value="null">Número de habitaciones</option>
@@ -158,39 +189,29 @@
                 </div>
                 <button 
                   *ngIf="room.can_delete"
+                  type="button"
                   (click)="deleteThisRoom( room.id )"
-                  class="ap-form__rooms-room-delete button-orange">X
+                  class="ap-form__rooms-room-delete button-orange">x
+                </button>
+                <button 
+                  type="button"
+                  *ngIf="room.last_one"
+                  (click)="addNewRoom()"
+                  class="ap-form__rooms-room-add button-blue">+
                 </button>
               </div>
             </div>
-            <div class="ap-form__rooms-room ap-form__rooms-buttons">
-              <button 
-                (click)="addNewRoom()"
-                class="ap-form__rooms-room-add button-blue">+
-              </button>
-              <button 
-                (click)="showRoomsForms()"
-                class="ap-form__rooms-room-hide button-black">
-                Hide Rooms
-              </button>
-            </div>
         </div>
         <div class="ml-col-1 ap-form__buttons">
-            <button 
-              type="button"
-              *ngIf="!show_rooms_form"
-              (click)="showRoomsForms()"
-              class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar margin-bottom-x">
-              Añadir tipo de cuarto
-            </button>
             <button 
               type="submit"
               class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
               Guardar
             </button>
-          </div>
+        </div>
     </form>
 </div>
+
 
 
 <div class="bottom-container">
@@ -212,5 +233,5 @@
 
 
 <div class="black-box">
-    <img src="" id="image_real_dimension" />
+    <img src="" id="image_real_dimension_nb" />
 </div>

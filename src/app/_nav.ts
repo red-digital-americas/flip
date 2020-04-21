@@ -41,7 +41,11 @@ export class MenuService {
   ] 
 
   private booking = [
-    { name: 'Booking', url: '/booking', icon: 'icon-drop' }
+    { name: 'Booking', url: '/booking', icon: 'icon-screen-tablet' },
+    { name: 'General TenanList', url: '/generalTenantlist', icon: 'icon-list' },
+    { name: ' Add Tenant', url: '/AddTenant', icon: 'icon-user-follow' },
+    { name: 'Users', url: '/Users', icon: 'icon-people' },
+    { name: 'Roles', url: '/Roles', icon: 'icon-settings' }
   ]
 
   public CreateMenu(sectionId:number) {
