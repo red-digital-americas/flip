@@ -63,7 +63,7 @@ export class BookingIndexComponent implements OnInit {
     * Variables Out: NA  
     */
     public goToBooking( id_booking:number, booking_name:string ):void {
-
+console.log('name_section_active', booking_name );
         sessionStorage.setItem('name_section_active', booking_name );
         this.router.navigateByUrl( `tenantList/${ id_booking }` );
 

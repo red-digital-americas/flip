@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
 //import { Http, Response, RequestOptions, Headers } from '@angular/http';
 // Importar la clase Observable desde la librería rxjs
 //import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Http, Response, RequestOptions, Headers,URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from './environments/environment';
 import { MessageData } from './app/admin/models/message';
 import { TypeRoom } from './app/admin/models/building';
-
+import { isUndefined } from 'util';
 
 
 @Injectable({
@@ -84,7 +85,9 @@ export class DatosService {
   service_general_post(url, parametros): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post(this.heroesUrl + url, parametros, { headers: headers });
+    return this.http.post(this.heroesUrl + url, parametros, { headers: headers })
+      .pipe(catchError(this.handleError)
+    );
   }
 
   service_general_put(url, parametros): Observable<any> {
@@ -150,5 +153,26 @@ export class DatosService {
     console.log(parametros);
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.http.post(this.heroesUrl + 'Building/SaveRooms', parametros);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////
+  // ErrorHandler
+  ////////////////////////////////////////////////////////////////////////////////////
+  messageError: string;
+  private handleError(error: HttpErrorResponse) {
+    console.log(error.error.message);
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // return an observable with a user-facing error message
+    this.messageError = isUndefined(error.error.message) ? 'Algo ha pasado, por favor intentalo mas tarde.' : error.error.message;
+    return throwError(this.messageError);
   }
 }

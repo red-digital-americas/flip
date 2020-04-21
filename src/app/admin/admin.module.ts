@@ -39,6 +39,12 @@ import { MaterialModule } from '../material/material.module';
 import { MatCardModule } from '@angular/material/card';
 import { MessageUsersComponent } from './modals/message-users/message-users/message-users.component';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import { Autoresize } from './shared/directives/autoresize.directive';
 import {MatInputModule} from '@angular/material/input';
@@ -53,6 +59,7 @@ import { MessagesComponent } from './Booking/Messages/messages.component';
 import { AlertsComponent } from './Booking/Alerts/alerts.component';
 import { RoomCatalogComponent } from './Booking/RoomCatalog/roomCatalog.component';
 import { MembershipCatalogComponent } from './Booking/Membership/memberShipCatalog.component';
+import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
 
 @NgModule({
   imports: [    
@@ -75,7 +82,13 @@ import { MembershipCatalogComponent } from './Booking/Membership/memberShipCatal
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatCheckboxModule
   ],
   declarations: [
     CommunitiesComponent,  
@@ -100,7 +113,8 @@ import { MembershipCatalogComponent } from './Booking/Membership/memberShipCatal
     MessagesComponent,
     AlertsComponent,
     RoomCatalogComponent,
-    MembershipCatalogComponent
+    MembershipCatalogComponent,
+    ProfileComponent
   ],
   entryComponents: [
     DetalleComponent,
