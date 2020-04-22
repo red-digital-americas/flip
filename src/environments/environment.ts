@@ -4,7 +4,10 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  URL: 'http://23.253.173.64:8088',
-  URLPROD:'http://23.253.173.64:8088',  
+  //URL: 'http://23.253.173.64:8088',
+  //URLPROD:'http://23.253.173.64:8088',
+  URL: 'http://34.237.214.147/back/api_flip',
+  //URL: 'http://localhost:49314',
+  //URLPROD: 'http://localhost:49314',
   production: false
 };

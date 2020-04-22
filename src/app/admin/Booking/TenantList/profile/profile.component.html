@@ -1,0 +1,376 @@
+<div class="ml-col-1">
+    <booking-navbar [section]="section"></booking-navbar>
+    <div class="ml-col-1 padding-general-m margin-bottom-m">
+
+        <div class="ml-col-1">
+          <h4 class="ap-form__titulo text-left">
+            Personal Data
+          </h4>
+        </div>
+        <div class="ml-col-1 room-data__tabs text-center">
+          <span class="room-data__tab room-data__tab--active" (click)="showSection( $event, 'personalData')">
+            Personal Data
+          </span>
+          <span class="room-data__tab" (click)="showSection( $event ,'addIformation')">
+            Additional Information
+          </span>
+          <span class="room-data__tab" (click)="showSection( $event ,'otraformation')">
+            References
+          </span>
+        </div>
+        <div id="personalData" name="room-section" class="ml-col-1">
+          <form (submit)="sendBookingData()" class="ap-form ml-col-1 card-style padding-general-m">
+          <div class="ml-col-7 margin-top-x" >
+            <div class="ml-col-3 padding-right-min">
+                <div class="ap-form__input">
+                  <input 
+                    type="text"
+                    placeholder="First Name"
+                    id="firstName" 
+                    name="firstName"
+                    class="ap-form__input-text"
+                    [(ngModel)]="name" />
+                  <label for="firstName" class="ap-form__label ap-form__label-text">
+                    First Name
+                  </label>
+                </div>
+            </div>
+            <div class="ml-col-3 padding-right-min">
+                <div class="ap-form__input">
+                    <input 
+                      type="text"
+                      placeholder="Last Name"
+                      id="middlename" 
+                      name="middlename"
+                      class="ap-form__input-text"
+                      [(ngModel)]="firstName" />
+                    <label for="middlename" class="ap-form__label ap-form__label-text">
+                      Last Name
+                    </label>
+                  </div>
+                  
+            </div>
+            <div class="ml-col-3 padding-right-min">
+                <div class="ap-form__input">
+                    <input 
+                      type="text"
+                      placeholder="Mother Name"
+                      id="lastname" 
+                      name="lastname"
+                      class="ap-form__input-text"
+                      [(ngModel)]="lastName" />
+                    <label for="lastname" class="ap-form__label ap-form__label-text">
+                      Mother Name
+                    </label>
+                  </div>
+            </div>
+            <div class="ml-col-3 padding-right-min">
+                <div class="ap-form__input">
+                    <label for="birth" class="ap-form__label ap-form__label-text">
+                        Date of Birth
+                    </label>
+                    <input 
+                        placeholder="Date of Birth" 
+                        id="birth" 
+                        name="birth"  
+                        type="date"
+                        [(ngModel)]="date.value" 
+                        class="ap-form__input-text">
+                </div>
+                
+                  <!-- <mat-form-field class="ap-form__input">
+                    <mat-label class="ap-form__label ap-form__label-text">Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" class="ap-form__input-text"
+                    [value]="date.value" [formControl]="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field> -->
+            </div>
+            <div class="ml-col-3 padding-right-min">
+                <div class="ap-form__input">
+                  <input 
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    [(ngModel)]="email"
+                    class="ap-form__label ap-form__input-text"/>
+                  <label for="email" class="ap-form__label ap-form__label-text">
+                    Email
+                  </label>
+                </div>
+            </div>
+            <div class="ml-col-3 padding-right-min">
+              <div class="ap-form__input">
+                <input 
+                  type="number"
+                  placeholder="Cell Phone"
+                  id="phone" 
+                  name="phone"
+                  class="ap-form__input-text"
+                  [(ngModel)]="phone" />
+                <label for="booking_latitud" class="ap-form__label ap-form__label-text">
+                  Cell Phone
+                </label>
+              </div>
+            </div>
+            <div class="ml-col-3 padding-right-min">
+              <div class="ap-form__input">
+                <input 
+                  type="text"
+                  placeholder="Workplace"
+                  id="workplace" 
+                  name="workplace"
+                  class="ap-form__input-text"
+                  [(ngModel)]="work" />
+                <label for="workplace" class="ap-form__label ap-form__label-text">
+                  Workplace
+                </label>
+              </div>
+            </div>
+            <div class="ml-col-3 padding-right-min">
+                <div class="ap-form__input">
+                  <mat-checkbox [(ngModel)]="active" [checked]="active" [ngModelOptions]="{standalone: true}">Active</mat-checkbox>
+                </div>
+            </div>
+            <div class="ml-col-3 padding-right-min">
+                <div class="ap-form__input">
+                  <input
+                    id="facebook"
+                    name="facebook"
+                    placeholder="Facebook URL"
+                    [(ngModel)]="facebook"
+                    class="ap-form__label ap-form__input-text"/>
+                  <label for="facebook" class="ap-form__label ap-form__label-text">
+                    Facebook URL
+                  </label>
+                </div>
+            </div>
+            <div class="ml-col-2 padding-right-min">
+                <div class="ap-form__input">
+                  <input 
+                    id="aboutMe"
+                    name="aboutMe"
+                    placeholder="About Me"
+                    type="text"
+                    [(ngModel)]="aboutMe"
+                    class="ap-form__label ap-form__input-text"/>
+                  <label for="aboutMe" class="ap-form__label ap-form__label-text">
+                    About Me
+                  </label>
+                </div>
+            </div>
+            <div class="ml-col-2 padding-right-min">
+                <div class="ap-form__input">
+                  <input
+                    id="instagram"
+                    name="instagram"
+                    placeholder="Instagram URL"
+                    [(ngModel)]="instagram"
+                    class="ap-form__label ap-form__input-text"/>
+                  <label for="instagram" class="ap-form__label ap-form__label-text">
+                    Instagram URL
+                  </label>
+                </div>
+            </div>
+            <div class="ml-col-2 padding-right-min">
+                <div class="ap-form__input">
+                  <input 
+                    id="booking_direccion"
+                    name="booking_direccion"
+                    placeholder="Twitter URL"
+                    [(ngModel)]="twitter"
+                    class="ap-form__label ap-form__input-text"/>
+                  <label for="booking_direccion" class="ap-form__label ap-form__label-text">
+                    Twitter URL
+                  </label>
+                </div>
+            </div>
+        </div>
+        <div class="ml-col-3o">
+          <div class="ap-form__input">
+              <input
+                class="ap-form__input-image display-none" 
+                id="booking_img"
+                name="booking_img"
+                type="file" 
+                accept="image/*"
+                (change)="validateImageUpload( $event, '350x350', 'booking_img_0', 'booking_img_name_0' ); prepareImages( $event )" />
+              <label for="booking_img" class="ap-form__label-image">
+                <figure class="ap-form__image">
+                  <img class="ap-form__image-image no-image" 
+                       id="booking_img_0"
+                       [src]="photo != null ? photo : '../../../assets/14.jpg'"/>
+                  <span class="ap-form__image-data text-center" id="booking_img_name_0">
+                    La imagen debe medir <br />
+                    <span class="text-bold">350x350</span> 
+                  </span>
+                </figure>
+              </label>
+          </div>
+      </div>
+      <div class="ml-col-1 ap-form__buttons">
+        <button 
+          type="submit"
+          class="ap-form__buttons-button ap-form__buttons-button--aceptar">
+          Save profile
+        </button>
+      </div>
+    </form>
+        </div>
+        
+      <div id="addIformation" class="ml-col-1 display-none" name="room-section">
+        <form (submit)="updateDataAddition()" class="ap-form ml-col-1 card-style padding-general-m">
+        <div class="ml-col-7 margin-top-x" >
+          <div class="ml-col-3 padding-right-min">
+            <div class="ap-form__input">
+              <select 
+                placeholder="Country"
+                id="country" 
+                name="country"
+                class="ap-form__input-text"
+                [(ngModel)]="countrySelect"
+                (change)="selectCountryOption($event.target.value)">
+                <option *ngFor="let countries of country;" [value]="countries.id">
+                  {{ countries.name }}
+                </option>
+              </select>
+              <label for="country" class="ap-form__label ap-form__label-text">
+                Country
+              </label>
+            </div>
+          </div>
+
+          <div class="ml-col-3 padding-right-min">
+            <div class="ap-form__input">
+              <select 
+                placeholder="Civil Status"
+                id="civilStatus" 
+                name="civilStatus"
+                class="ap-form__input-text"
+                [(ngModel)]="civilSelect"
+                (change)="selectCivilOption($event.target.value)">
+                <option *ngFor="let civil of civilStatus;" [value]="civil.id">
+                  {{ civil.name }}
+                </option>
+              </select>
+              <label for="civilStatus" class="ap-form__label ap-form__label-text">
+                Civil Status
+              </label>
+            </div>
+          </div>
+
+          <div class="ml-col-3 padding-right-min">
+            <div class="ap-form__input">
+              <select 
+                placeholder="Scholarship"
+                id="scholarship" 
+                name="scholarship"
+                class="ap-form__input-text"
+                [(ngModel)]="scholarSelect"
+                (change)="selectScholarshipOption($event.target.value)">
+                <option *ngFor="let scholar of scholarShip;" [value]="scholar.id">
+                  {{ scholar.name }}
+                </option>
+              </select>
+              <label for="scholarship" class="ap-form__label ap-form__label-text">
+                Scholarship
+              </label>
+            </div>
+          </div>
+
+        <div class="ml-col-3 padding-right-min">
+          <div class="ap-form__input">
+            <mat-checkbox [(ngModel)]="pet" [checked]="pet" [ngModelOptions]="{standalone: true}">Pet</mat-checkbox>
+          </div>
+        </div>
+
+        <div class="ml-col-1 ap-form__buttons">
+          <button 
+            type="submit"
+            class="ap-form__buttons-button ap-form__buttons-button--aceptar">
+            Update profile
+          </button>
+        </div>
+
+        </div>
+        </form>
+      </div>
+
+      <div id="otraformation" class="ml-col-1 display-none " name="room-section">
+        <div  class="ml-col-7 margin-top-x " >
+        </div>
+      </div>
+        
+    
+    
+          <div class="ml-col-1">
+            <h4 class="ap-form__titulo text-left">
+              Payment Methods
+            </h4>
+          </div>
+          <div class="ml-col-1">
+            <div class="ml-col-7 margin-top-x" *ngFor="let card of payementMethods;let i = index;">
+              <form (submit)="updateOrAddMethod(payementMethods[i])" class="ap-form ml-col-1 card-style padding-general-m">
+          <div class="ml-col-3 padding-right-min">
+            <div class="ap-form__input">
+              <input type="text"  placeholder="Name" id="Name" name="Name" class="ap-form__input-text" [(ngModel)]="payementMethods[i].name" />
+              <label for="Name" class="ap-form__label ap-form__label-text">
+                Name
+              </label>
+            </div>
+          </div>
+          <div class="ml-col-3 padding-right-min">
+            <div class="ap-form__input">
+              <input type="number" placeholder="Card Number" id="Card Number" name="CardNumber" class="ap-form__input-text" [(ngModel)]="payementMethods[i].number" />
+              <label for="CardNumber" class="ap-form__label ap-form__label-text">
+                Card number
+              </label>
+            </div>
+          </div>
+          <div class="ml-col-3 padding-right-min">
+            <div class="ap-form__input">
+              <input type="number" placeholder="ccv" id="ccv" name="ccv" class="ap-form__input-text" [(ngModel)]="payementMethods[i].ccv"/>
+              <label for="ccv" class="ap-form__label ap-form__label-text">
+                CCV
+              </label>
+            </div>
+          </div>
+          <div class="ml-col-3 padding-right-min">
+              <label for="month" class="ap-form__label ap-form__label-text">
+                  Month
+              </label>
+              <input 
+                  placeholder="Month" 
+                  id="month" 
+                  name="month"  
+                  type="number"
+                  class="ap-form__input-text" [(ngModel)]="payementMethods[i].month">
+          </div>
+          <div class="ml-col-3 padding-right-min">
+            <label for="year" class="ap-form__label ap-form__label-text">
+                Year
+            </label>
+            <input 
+                placeholder="Year" 
+                id="year" 
+                name="year"  
+                type="number"
+                class="ap-form__input-text" [(ngModel)]="payementMethods[i].year">
+          </div>
+          <div class="ml-col-3 padding-right-min">
+            <div class="ap-form__input">
+              <mat-checkbox >Active</mat-checkbox>
+            </div>
+          </div>
+          <div class="ml-col-1 ap-form__buttons">
+            <button type="submit" class="ap-form__buttons-button ap-form__buttons-button--aceptar">
+              Save Method
+            </button>
+          </div>
+        </form>
+        </div>
+          </div>
+          
+    </div>
+    </div>

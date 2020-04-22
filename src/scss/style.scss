@@ -832,7 +832,7 @@ select:active,
       &-button {
         width: 45%;
         height: 32px;
-        border-radius: 5px;
+        border-radius: 50px;
         color: white;
         font-size: 12px;
         margin: 0 2.5%;
@@ -899,7 +899,7 @@ select:active,
 
     width: 100%;
     position: relative;
-    padding: 17px 0;
+    padding: 17px 30px;
 
     &-radio {
       
@@ -977,7 +977,7 @@ select:active,
     &-text {
       position: absolute;
       top: 50%;
-      left: 0;
+      left: 30px;
       font-size: 12px;
       opacity: 0;
       transform: translateY(-50%);
@@ -1131,11 +1131,11 @@ select:active,
       margin-right: 5%;
       font-size: 14px;
       font-weight: 300;
-      border-radius: 5px;
+      border-radius: 50px;
       transition: all .2s ease;
 
       &--big {
-        width: 55%;
+        width: 200px;
       }
 
       &--aceptar {
@@ -1436,7 +1436,7 @@ select:active,
       color: white;
       outline: none;
       font-weight: bold;
-      border-radius: 5px;
+      border-radius: 50px;
       box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 
       &--aceptar {
@@ -1938,7 +1938,7 @@ select:active,
         color: white;
         font-size: 12px;
         font-weight: 300;
-        border-radius: 5px;
+        border-radius: 50px;
         width: 42.5%;
         margin: 0 3.75%;
         height: 32px;
@@ -2139,14 +2139,113 @@ select:active,
   color: #f86c6b;
   font-size: 11px;
   font-style: italic;
-  left: 0;
+  left: 30px;
 }
 
 .cursor-pointer {
   cursor: pointer;
 }
 
+.loader {
+
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255,255,255,.7);
+
+  &__container {
+    width: 320px;
+    height: 320px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__image {
+
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    &-photo {
+      width: 50%;
+      height: 50%;
+      position: absolute;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      animation-name: waveLoader;
+      animation-iteration-count: infinite;
+      animation-duration: 7s;
+      animation-timing-function: linear;
+    }
+
+    &-spiner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: dashed 7px #2e343a;
+      transform: rotate(0deg);
+      animation-name: rotateSpiner;
+      animation-iteration-count: infinite;
+      animation-duration: 5.5s;
+      animation-timing-function: linear;
+    }
+
+    &-spiner::after {
+      content: '';
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      width: 115%;
+      height: 115%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      border-style: inset;
+      border-width: 5px;
+      border-color: #20a8d8;
+    }
+
+    &-spiner::before {
+      content: '';
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      width: 125%;
+      height: 125%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      border-style: outset;
+      border-width: 5px;
+      border-color: #f86c6b;
+    }
+
+  }
+
+}
+
 //Animations
 @keyframes seeTheBottomX {
   100% { width: 200px; }
+}
+
+@keyframes waveLoader {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  25% { transform: translate(-50%, -50%) scale(1.2); }
+  50% { transform: translate(-50%, -50%) scale(1); }
+  75% { transform: translate(-50%, -50%) scale(1.4); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes rotateSpiner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

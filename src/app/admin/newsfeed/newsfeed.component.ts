@@ -6,6 +6,7 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomModalComponent } from '../modals/room-modal/room-modal.component';
 import { root } from 'rxjs/internal/util/root';
+import { LoaderComponent } from '../../../ts/loader';
 
 @Component({
   selector: 'app-newsfeed',
@@ -269,6 +270,7 @@ export class NewsfeedComponent implements OnInit {
 
 
   //Autor: Carlos Enrique Hernandez Hernandez
+  public add_loader = new LoaderComponent;
   public show_post_form:boolean = false;
   public data_post: DataPost = new DataPost();
   public post_form_action:string = "";
@@ -306,27 +308,24 @@ export class NewsfeedComponent implements OnInit {
 
     if( this.validatingFieldsFrom( this.data_post ) ) {
 
+      this.add_loader.showLoader();
+
       this.heroService.ServicioPostPost("PostPosts", this.data_post)
-      .subscribe( (value: any) => {
+          .subscribe( (value: any) => {
 
-        console.log( value );
+            if( value.success || value.result == 'Success' ) {
 
-        if( value.success || value.result == 'Success' ) {
+              this.get_posts();
+              this.toggleSectionForm('hide');
+              setTimeout( () => { this.add_loader.hideLoader(); }, 407);
 
-          //Poner loader y recargar la pagina para decirle que fue exitoso
-          setTimeout( () => { location.reload() }, 777);
+            }
 
-        }
+          }, (error: any) => {
 
-        }, (error: any) => {
+            console.log('Error en el servicio', error);
 
-          console.log('Error en el servicio', error);
-
-        });
-
-    } else {
-
-      console.log('El formulario esta incompleto');
+          });
 
     }
 
@@ -409,6 +408,8 @@ export class NewsfeedComponent implements OnInit {
 
     if( this.validatingCommentData() ) {
 
+      this.add_loader.showLoader();
+
       const new_comment = {
         Id: 0,
         PostId: this.data_post.id,
@@ -417,24 +418,25 @@ export class NewsfeedComponent implements OnInit {
       };
   
       this.heroService.ServicioPostPost('PostComment', new_comment)
-        .subscribe( (response: any) => {
-  
-          if( response.success ) {
-  
-            this.comment_data = '';
-            this.getCommentsPost();
-  
-          } else {
-  
-            console.log('Error en Comentario agregado');
-  
-          }
-  
-        }, (error: any) => {
-  
-          console.log('Error en el servicio: ', error);
-  
-        });
+          .subscribe( (response: any) => {
+    
+            if( response.success ) {
+    
+              this.comment_data = '';
+              this.add_loader.hideLoader();
+              this.getCommentsPost();
+    
+            } else {
+    
+              console.log('Error en Comentario agregado');
+    
+            }
+    
+          }, (error: any) => {
+    
+            console.log('Error en el servicio: ', error);
+    
+          });
 
     } else {
 
@@ -499,6 +501,8 @@ export class NewsfeedComponent implements OnInit {
    */
   public confirmDeleteComment():void {
 
+    this.add_loader.showLoader();
+
     const comment_data = {
       PostId: this.comment_to_delete.idpost,
       userid: this.IDUSR,
@@ -506,24 +510,25 @@ export class NewsfeedComponent implements OnInit {
     };
     
     this.heroService.ServicioPostPost("DeleteComment", comment_data)
-      .subscribe( (response: any) => {
+        .subscribe( (response: any) => {
 
-        if( response.success ) {
+          if( response.success ) {
 
-          this.showModal();
-          this.getCommentsPost();
+            this.showModal();
+            this.getCommentsPost();
+            this.add_loader.hideLoader();
 
-        } else {
+          } else {
 
-          console.log('Error en el servicio: Eliminar DeleteComment');
+            console.log('Error en el servicio: Eliminar DeleteComment');
 
-        }
+          }
 
-      }, (error: any) => {
+        }, (error: any) => {
 
-        console.log('Error en servicio de borrar comentario: ', error);
+          console.log('Error en servicio de borrar comentario: ', error);
 
-      });
+        });
 
   }
 
@@ -578,21 +583,24 @@ export class NewsfeedComponent implements OnInit {
    */
   public confirmDeleteElement():void {
 
+    this.add_loader.showLoader();
+
     this.heroService.ServicioPostPost("DeletePost", this.data_post)
-      .subscribe( ( response: any ) => {
+        .subscribe( ( response: any ) => {
 
           if( response.success ) {
 
             this.get_posts();
             this.showModal();
+            this.add_loader.hideLoader();
 
           }
 
-      }, (error: any) => {
+        }, (error: any) => {
 
-        console.log('Error en el servicio: ', error);
+          console.log('Error en el servicio: ', error);
 
-      });
+        });
 
   }
   

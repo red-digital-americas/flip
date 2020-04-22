@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
+import { LoaderComponent } from '../../../ts/loader';
 
 
 class AmenityRequestModel {
@@ -188,6 +189,7 @@ export class AmenitiesComponent implements OnInit {
   //Editor: Carlos Enrique Hernandez Hernandez
   
   /* Welcomeback Mr. Anderson, We missed you! */
+  public loader = new LoaderComponent();
   public show_ammenity_form:boolean = false;
   public ammenity_form_action:string = "";
 
@@ -265,21 +267,24 @@ export class AmenitiesComponent implements OnInit {
 
       if( this.validatingFieldsFrom( this.data_amenity ) ) {
 
+        this.loader.showLoader();
+
         this.heroService.service_general_post("Amenity", this.data_amenity )
-          .subscribe( (response: any) => {
+            .subscribe( (response: any) => {
 
-            if( response.result == 'Success' ) {
+              if( response.result == 'Success' ) {
 
-              //loader para que no haga mas
-              setTimeout( () => {  location.reload() }, 777);
+                this.GetAmenities();
+                this.toggleSectionForm('hide');
+                setTimeout( () => {  this.loader.hideLoader(); }, 407);
 
-              }
+                }
 
-          }, (error: any) => {
+            }, (error: any) => {
 
-            console.log('Error Error Amenity: ', error);
+              console.log('Error Error Amenity: ', error);
 
-          });
+            });
 
         }
 
@@ -287,21 +292,24 @@ export class AmenitiesComponent implements OnInit {
 
       if( this.validatingFieldsFromEdit( this.data_amenity_edit ) ) {
 
+        this.loader.showLoader();
+
         this.heroService.service_general_put(`Amenity/${this.id_amenity}`, this.data_amenity_edit)
-          .subscribe( (response: any) => {
+            .subscribe( (response: any) => {
 
-            if( response.result == 'Success' ) {
+              if( response.result == 'Success' ) {
 
-              //Poner aqui el loader
-              setTimeout( () => { location.reload() }, 777);
+                this.GetAmenities();
+                this.toggleSectionForm('hide');
+                setTimeout( () => { this.loader.hideLoader(); }, 407);
 
-            }
+              }
 
-          }, (error: any) => {
+            }, (error: any) => {
 
-            console.log('Error en el de editar => ', error);
+              console.log('Error en el de editar => ', error);
 
-          });
+            });
 
       }
 
@@ -384,17 +392,20 @@ export class AmenitiesComponent implements OnInit {
    */
   public confirmDeleteElement():void {
 
+    this.loader.showLoader();
+
     this.heroService.service_general_delete(`Amenity/${ this.amenity_to_delete.id }`)
-      .subscribe( (response: any) => {
+        .subscribe( (response: any) => {
 
-        this.GetAmenities();
-        this.showModal();
+          this.GetAmenities();
+          this.showModal();
+          this.loader.hideLoader();
 
-      }, (error: any) => {
+        }, (error: any) => {
 
-        console.log('Error en el servicio de eliminar => ', error);
+          console.log('Error en el servicio de eliminar => ', error);
 
-      });
+        });
 
   }
 

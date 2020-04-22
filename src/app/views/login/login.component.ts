@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit {
 
   
   ngOnInit() {
+    //Reset session
+    sessionStorage.removeItem('lastSectionId');
   }
 
   error = null;
@@ -173,7 +175,8 @@ export class LoginComponent implements OnInit {
 
   public form_data: any = {
     no_user: false,
-    no_pass: false
+    no_pass: false,
+    no_val_mail: false
   }
   private validatorForm( current_data ):boolean {
 
@@ -182,8 +185,13 @@ export class LoginComponent implements OnInit {
     current_data.username == null || current_data.username == '' ?
       this.form_data.no_user = true : this.form_data.no_user = false; 
 
+    !this.isEmailValid( current_data.username ) ? 
+      this.form_data.no_val_mail = true : this.form_data.no_val_mail = false;
+
     current_data.password == null || current_data.password == '' ?
       this.form_data.no_pass = true : this.form_data.no_pass = false;
+
+    console.log( this.form_data );
 
     for( let field in this.form_data ) {
 
@@ -197,7 +205,8 @@ export class LoginComponent implements OnInit {
   }
 
   public form_pass: any = {
-    no_emai: false
+    no_emai: false,
+    no_val_mail: false
   }
   public passwordValidator( form_pass: PassData ):boolean {
 
@@ -206,12 +215,43 @@ export class LoginComponent implements OnInit {
     form_pass.email == '' || form_pass.email == null ?
       this.form_pass.no_emai = true : this.form_pass.no_emai = false;
 
+    !this.isEmailValid( form_pass.email ) ? 
+      this.form_pass.no_val_mail = true : this.form_pass.no_val_mail = false;
+
     for( let field in this.form_pass ) {
 
       if( this.form_pass[field] ) return;
       else result = true;
 
     }
+
+    return result;
+
+  }
+
+
+  public isEmailValid( email: string ): boolean {
+
+    let result = false;
+
+    const email_split = email.split('@'); 
+
+    if( email_split.length > 1 ) {
+
+      const email_nick_nosp = email_split[0].match(/[^a-zA-Z0-9.\-_]/),
+            email_doma_nosp = email_split[1].match(/[^a-zA-Z0-9.]/);
+
+      if( email_nick_nosp == null && email_doma_nosp == null ) {
+
+        result = true;
+  
+      } else {
+  
+        result = false;
+  
+      }
+
+    } else result = false;
 
     return result;
 

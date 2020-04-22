@@ -11,17 +11,21 @@
         <div class="ap-form__input">
           <input 
             type="text" 
-            placeholder="Usuario"
+            placeholder="Email"
             id="login_user" 
             name="login_user"
             [(ngModel)]="user_data.username"
             [class.form_error_found]="form_data.no_user"
+            [class.form_error_found]="form_data.no_val_mail"
             class="ap-form__input-text" />
           <label for="login_user" class="ap-form__label ap-form__label-text">
-            Usuario
+            Email
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_user">
-            El campo es obligatorio*
+            Email is required*
+          </span>
+          <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_val_mail">
+            Email no valid, It can not contain special characters*
           </span>
         </div>
       </div>
@@ -39,7 +43,7 @@
             Password
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_pass">
-            El campo es obligatorio*
+            Password is required*
           </span>
         </div>
       </div>
@@ -54,7 +58,7 @@
         </span>
       </div>
     </form>
-    <form class="ap-form ml-col-1 login-form" name="login-form" (submit)="recoverPasswordAction()" *ngIf="!login_action">
+    <form class="ap-form ml-col-1 login-form" name="login-form" onsubmit="return false;" (submit)="recoverPasswordAction()" *ngIf="!login_action">
       <h4 class="ap-form__titulo text-left">
         Recover Password
       </h4>
@@ -67,12 +71,16 @@
             name="recover_email"
             [(ngModel)]="pass_data.email"
             [class.form_error_found]="form_pass.no_emai"
+            [class.form_error_found]="form_pass.no_val_mail"
             class="ap-form__input-text" />
           <label for="recover_email" class="ap-form__label ap-form__label-text">
             Email
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_pass.no_emai">
-            El campo es obligatorio*
+            Email is required*
+          </span>
+          <span class="ml-col-1 form_error_found_label" *ngIf="form_pass.no_val_mail">
+            Email no valid, It can not contain special characters*
           </span>
         </div>
         <div class="ml-col-1 ap-form__buttons">

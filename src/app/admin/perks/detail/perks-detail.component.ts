@@ -5,6 +5,7 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { PerksGuide, PerksCategory, PerkPromotion } from '../../models/Perks';
 import { Utils } from '../../../utils/utils';
+import { LoaderComponent } from '../../../../ts/loader';
 
 @Component({
   selector: 'app-perks-detail',
@@ -136,13 +137,18 @@ export class PerksDetailComponent implements OnInit {
 
 
 
+
   //Autor: Carlos Enrique Hernandez Hernandez';
+
+  public loader = new LoaderComponent();
 
   public sendDataPromotion():void { 
 
     if( this.validatingFieldsFrom( this.data_promo  ) ) { 
 
       if( this.new_promo_button && !this.edit_promo_button ) {
+
+        this.loader.showLoader(); 
 
         this.heroService.service_general_post("PerkPromotions/AddPromotion", this.data_promo )
             .subscribe( (response: any) => {
@@ -151,6 +157,7 @@ export class PerksDetailComponent implements OnInit {
 
                 this.GetPromotions();
                 this.toggleSectionForm('hide');
+                this.loader.hideLoader();
 
               }
 
@@ -164,6 +171,8 @@ export class PerksDetailComponent implements OnInit {
 
       if( !this.new_promo_button && this.edit_promo_button ) {
 
+        this.loader.showLoader();
+
         this.heroService.service_general_put("PerkPromotions/EditPromotion", this.data_promo)
             .subscribe( (response: any) => {
 
@@ -171,6 +180,7 @@ export class PerksDetailComponent implements OnInit {
 
                 this.GetPromotions();
                 this.toggleSectionForm('hide');
+                this.loader.hideLoader();
 
               }
 
@@ -295,6 +305,8 @@ export class PerksDetailComponent implements OnInit {
    */
   public confirmDeleteElement():void {
 
+    this.loader.showLoader();
+
     this.heroService.service_general_delete(`PerkPromotions/${ this.promo_to_delete.id }`)
         .subscribe( (response: any) => {
 
@@ -302,6 +314,7 @@ export class PerksDetailComponent implements OnInit {
 
             this.GetPromotions();
             this.showModal();
+            this.loader.hideLoader();
 
           }
 

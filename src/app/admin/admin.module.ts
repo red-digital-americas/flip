@@ -39,6 +39,12 @@ import { MaterialModule } from '../material/material.module';
 import { MatCardModule } from '@angular/material/card';
 import { MessageUsersComponent } from './modals/message-users/message-users/message-users.component';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import { Autoresize } from './shared/directives/autoresize.directive';
 import {MatInputModule} from '@angular/material/input';
@@ -57,6 +63,7 @@ import { GeneralTenantListComponent } from './Booking/GeneralTenantlist/GeneralT
 import { AddTenantComponent } from './Booking/AddTenant/AddTenant.component';
 import { UsersComponent } from './Booking/Users/Users.component';
 import { RolesComponent } from './Booking/Roles/Roles.component';
+import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
 
 @NgModule({
   imports: [    
@@ -79,7 +86,13 @@ import { RolesComponent } from './Booking/Roles/Roles.component';
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatCheckboxModule
   ],
   declarations: [
     CommunitiesComponent,  
@@ -108,7 +121,8 @@ import { RolesComponent } from './Booking/Roles/Roles.component';
     GeneralTenantListComponent,
     AddTenantComponent,
     UsersComponent,
-    RolesComponent
+    RolesComponent,
+    ProfileComponent
   ],
   entryComponents: [
     DetalleComponent,

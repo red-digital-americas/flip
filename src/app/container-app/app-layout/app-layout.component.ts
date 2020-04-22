@@ -32,9 +32,22 @@ export class AppLayoutComponent {
     if (localStorage.getItem("SystemTypeId") == undefined ) { return; }
     let systemTypeId = parseInt(localStorage.getItem("SystemTypeId"));        
     // console.log("AppLayout-SystemTypeId: "+systemTypeId);  
-    this.navSections = this.menuService.CreateNavSections(systemTypeId);    
-    this.navItems = this.menuService.CreateMenu(this.navSections[0].id);
-    this.selectedSection = this.navSections[0].id;
+    this.navSections = this.menuService.CreateNavSections(systemTypeId);
+
+    let last_section = sessionStorage.getItem('lastSectionId');
+
+    if( last_section != null || last_section != undefined  ) {
+
+      this.navItems = this.menuService.CreateMenu(Number( last_section ));
+      this.selectedSection = Number( last_section );
+
+    } else {
+
+      this.navItems = this.menuService.CreateMenu(this.navSections[0].id);
+      this.selectedSection = this.navSections[0].id;
+
+    }
+
   }
   
   GoSection (section : { id:number, name:string, url:string}) { 
@@ -42,6 +55,7 @@ export class AppLayoutComponent {
     this.router.navigate([section.url]);
     this.navItems = this.menuService.CreateMenu(section.id);
     this.selectedSection = section.id;
+    sessionStorage.setItem('lastSectionId', this.selectedSection.toString() );
   }
 
   salir(): void {

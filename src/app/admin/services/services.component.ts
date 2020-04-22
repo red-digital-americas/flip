@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { PerksGuide, PerksCategory } from '../models/Perks';
 import { Utils } from '../../utils/utils';
 import { Service, ServicesFormGroup, ServicesFormGroupInitialValues } from '../models/Services';
+import { LoaderComponent } from '../../../ts/loader';
 
 @Component({
   selector: 'app-services',
@@ -170,6 +171,7 @@ export class ServicesComponent implements OnInit {
 
 
   //Autor: Carlos Hernandez Hernandez
+  public loader = new LoaderComponent();
   public show_service_form:boolean = false;
   public service_form_action:string = '';
 
@@ -177,46 +179,49 @@ export class ServicesComponent implements OnInit {
 
     if( this.validatingServiceForm( this.data_service ) ) {
 
-      console.log('New Service => ', this.new_service_action );
-      console.log('Edit Service => ', this.edit_service_action );
-
       if( this.new_service_action ) {
 
+        this.loader.showLoader();
+
         this.heroService.service_general_post("Services", this.data_service)
-         .subscribe( (response: any) => {
+            .subscribe( (response: any) => {
 
-          if( response.result == 'Success' ) {
+              if( response.result == 'Success' ) {
 
-            //Poner el loader pa que no suba de mas
-            setTimeout( () => { location.reload() }, 777);
+                this.GetServices();
+                this.toggleSectionForm('hide');
+                setTimeout( () => { this.loader.hideLoader(); }, 407);
 
-          }
+              }
 
-          }, (error: any) => {
+              }, (error: any) => {
 
-            console.log('Error en respuesta servicio NEWSERVICE', error );
+                console.log('Error en respuesta servicio NEWSERVICE', error );
 
-          });
+              });
 
       }
 
       if( this.edit_service_action  ) {
 
+        this.loader.showLoader();
+
         this.heroService.service_general_put("Services", this.data_service)
-          .subscribe( (response: any) => {
+            .subscribe( (response: any) => {
 
-            if( response.result == 'Success' ) {
+              if( response.result == 'Success' ) {
 
-              //Poner el loader
-              setTimeout( () => { location.reload() }, 777);
+                this.GetServices();
+                this.toggleSectionForm('hide');
+                setTimeout( () => { this.loader.hideLoader(); }, 407);
 
-            }
+              }
 
-          }, (error: any) => {
+            }, (error: any) => {
 
-            console.log('Error en el servico EDITARSERVICE', error);
+              console.log('Error en el servico EDITARSERVICE', error);
 
-          });
+            });
 
       }
 
@@ -254,6 +259,8 @@ export class ServicesComponent implements OnInit {
    */
   public confirmDeleteElement():void {
 
+    this.loader.showLoader();
+
     this.heroService.service_general_delete(`Services/${ this.service_to_delete.id }`)
         .subscribe( (response: any) => { console.log( response );
 
@@ -261,6 +268,7 @@ export class ServicesComponent implements OnInit {
 
             this.GetServices();
             this.showModal();
+            this.loader.hideLoader();
 
           }
 

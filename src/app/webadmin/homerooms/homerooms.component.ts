@@ -381,11 +381,8 @@ export class HomeroomsComponent implements OnInit {
   }
 
 
-  public room_selected = 'Room A';
 
   public showSection( event_data ,id_section:string ):void {
-
-    this.room_selected = id_section == 'room_a' ? 'Room A' : 'Room B';
 
     const event = event_data.target,
           tabs_in = document.getElementsByClassName('room-data__tab');

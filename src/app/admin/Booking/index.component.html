@@ -29,6 +29,11 @@
         <div class="ml-col-1">
           <h4 class="ap-form__titulo text-left">
             {{ booking_form_action }}
+            <button 
+              type="button"
+              class="ap-form__close button-orange" 
+              (click)="toggleSectionForm()">x
+            </button> 
           </h4>
         </div>
         <div class="ml-col-7 margin-top-x">
@@ -57,7 +62,7 @@
                     name="booking_desc"
                     placeholder="Descripción"
                     [class.form_error_found]="form_data.no_desc"
-                    [(ngModel)]="booking_data.descripcion"
+                    [(ngModel)]="booking_data.description"
                     class="ap-form__label ap-form__input-textarea"></textarea>
                   <label for="booking_desc" class="ap-form__label ap-form__label-text">
                     Descripción
@@ -74,7 +79,7 @@
                     name="booking_direccion"
                     placeholder="Dirección"
                     [class.form_error_found]="form_data.no_dire"
-                    [(ngModel)]="booking_data.direccion"
+                    [(ngModel)]="booking_data.direction"
                     class="ap-form__label ap-form__input-textarea"></textarea>
                   <label for="booking_direccion" class="ap-form__label ap-form__label-text">
                     Dirección
@@ -84,7 +89,7 @@
                   </span>
                 </div>
             </div>
-            <div class="ml-col-2 padding-right-min">
+            <div class="ml-col-2">
               <div class="ap-form__input">
                 <input 
                   type="number"
@@ -102,7 +107,7 @@
                 </span>
               </div>
             </div>
-            <div class="ml-col-2 padding-right-min">
+            <div class="ml-col-2">
               <div class="ap-form__input">
                 <input 
                   type="number"
@@ -150,7 +155,7 @@
         <div class="ml-col-1 ap-form__rooms padding-general-min" id="rooms_added">
             <div class="ml-col-1">
               <h4 class="ap-form__titulo text-left">
-                Rooms
+                Rooms Category
               </h4>
             </div>
             <div class="ap-form__rooms-room room" *ngFor="let room of rooms;" room="added">
@@ -159,13 +164,13 @@
                   <div class="ap-form__input">
                     <input 
                       type="text"
-                      placeholder="Nombre"
+                      placeholder="Room Type"
                       id="booking_room_title_{{ room.id }}" 
                       name="booking_room_title_{{ room.id }}"
-                      value=""
+                      value="{{ room.input }}"
                       class="ap-form__input-text" />
                     <label for="booking_room_title_{{ room.id }}" class="ap-form__label ap-form__label-text">
-                      Nombre
+                      Room Type
                     </label>
                   </div>
                 </div>
@@ -174,10 +179,10 @@
                     <select 
                       placeholder="Número de habitaciones"
                       id="booking_room_num_{{ room.id }}"
-                      value="null" 
+                      value="{{ room.select }}" 
                       name="booking_num_title_{{ room.id }}"
                       class="ap-form__input-text">
-                      <option disabled="disabled" value="null">Número de habitaciones</option>
+                      <option disabled="disabled" value="">Número de habitaciones</option>
                       <option *ngFor="let espacio of espacios_habitaciones;" value="{{ espacio }}">
                         {{ espacio }}
                       </option>
@@ -190,7 +195,7 @@
                 <button 
                   *ngIf="room.can_delete"
                   type="button"
-                  (click)="deleteThisRoom( room.id )"
+                  (click)="deleteThisRoom( room.id, $event )"
                   class="ap-form__rooms-room-delete button-orange">x
                 </button>
                 <button 

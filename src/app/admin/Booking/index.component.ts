@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
+import { LoaderComponent } from '../../../ts/loader';
 
 @Component({
     selector: 'bookingIndex',
@@ -15,6 +16,8 @@ export class BookingIndexComponent implements OnInit {
         public services: DatosService
     ){}
 
+    public loader = new LoaderComponent();
+
     /*
     * Autor: Carlos Hernandez
     * Email: carlos.hernandez@minimalist.mx    
@@ -26,6 +29,8 @@ export class BookingIndexComponent implements OnInit {
     */
     public show_booking_form:boolean = false;
     public booking_form_action:string = "";
+    public new_build_button: boolean = false;
+    public edit_build_button: boolean = false;
     public toggleSectionForm( action_kind:string = 'hide', editable:any = {} ):void {
 
         switch( action_kind ) {
@@ -33,19 +38,24 @@ export class BookingIndexComponent implements OnInit {
             case 'new':
                 this.resetSettings();
                 this.show_booking_form = true;
+                this.new_build_button = true;
+                this.edit_build_button = false;
                 this.booking_form_action = 'Nuevo Edificio';
             break;
 
             case 'edit':
                 this.resetSettings();
                 this.show_booking_form = true;
-                this.booking_data.id = editable.name;
+                this.new_build_button = false;
+                this.edit_build_button = true;
+                this.booking_data.id = editable.id;
                 this.booking_data.name = editable.name;
-                this.booking_data.descripcion = editable.descripcion;
-                this.booking_data.direccion = editable.direccion;
+                this.booking_data.description = editable.description;
+                this.booking_data.direction = editable.direction;
                 this.booking_data.latitude = editable.latitude;
                 this.booking_data.longitude = editable.longitude;
                 this.booking_data.photo = editable.photo;
+                this.getRoomsToEdit(  editable.typeRoom );
                 this.booking_form_action = 'Editar Edificio';
             break;
 
@@ -105,10 +115,36 @@ export class BookingIndexComponent implements OnInit {
                     console.log('Detalles => ');
                     console.log( response );
 
-                }
+                } console.log( this.cards );
 
             });
             
+    }
+
+
+    public getRoomsToEdit( rooms: any ): void {
+
+        this.rooms = [];
+
+        rooms.forEach( (room: any) => {
+
+            let new_room = {
+                id: room.id,
+                name: room.type,
+                cantidad: room.capacity,
+                can_delete: true,
+                last_one: false,
+                input: room.type,
+                select: Number( room.capacity )
+            };
+        
+            this.rooms.push( new_room );
+
+        });
+
+        this.rooms[0].can_delete = false;
+        this.rooms[this.rooms.length -1].last_one = true;
+
     }
 
 
@@ -122,7 +158,7 @@ export class BookingIndexComponent implements OnInit {
     * Variables Out: rooms
     */
     public rooms = [
-        {id: 0, name: '', cantidad: null, can_delete: false, last_one: true}
+        {id: 0, name: '', cantidad: null, can_delete: false, last_one: true, input: '', select: null}
     ];
     public addNewRoom():void {
 
@@ -131,7 +167,9 @@ export class BookingIndexComponent implements OnInit {
             name: '',
             cantidad: null,
             can_delete: true,
-            last_one: false
+            last_one: false,
+            input: '',
+            select: ''
         };
 
         this.rooms.push( new_room );
@@ -157,11 +195,39 @@ export class BookingIndexComponent implements OnInit {
     * Description: elimina el cuarto seleccionado
     * Variables Out: NA
     */
-    public deleteThisRoom( id_room:number ):void {
+    public deleteThisRoom( id_room:number, event_data ):void {
 
         this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === id_room ), 1);
 
         this.rooms[this.rooms.length -1].last_one = true;
+
+        if( !this.new_build_button && this.edit_build_button ) {
+
+            const element = event_data.target.parentElement,
+                  element_id = element.querySelector('input').id,
+                  get_element_id = element_id.split('_')[element_id.split('_').length -1],
+                  delete_data = {
+                    idBuild: this.booking_data.id,
+                    type: element.querySelector('input').value,
+                    capacity: element.querySelector('select').value,
+                    active: false,
+                    id: Number( get_element_id )
+                  };
+
+            console.log( delete_data );
+
+            this.services.ServicioEditBuild( delete_data )
+                .subscribe( (response: any) => {
+
+                    console.log(response);
+
+                }, (error: any) => {
+
+                    console.log('Error Delete Room => ', error);
+
+                });
+
+        }
 
     }
 
@@ -182,22 +248,54 @@ export class BookingIndexComponent implements OnInit {
                 
             this.booking_data.typeroom = this.getRoomsData();
 
-            this.services.ServiceSaveBuilding( this.booking_data )
-                .subscribe( ( response: any ) => {
+            if( this.new_build_button && !this.edit_build_button ) {
 
-                    if( response == null ) {
+                this.loader.showLoader(); 
 
-                        this.requestIndexContent();
-                        this.toggleSectionForm('hide');
-                        this.resetSettings()
+                this.services.ServiceSaveBuilding( this.booking_data )
+                    .subscribe( ( response: any ) => {
 
-                    }
-    
-                }, (error: any) => {
-    
-                    console.log('Erro WS NewBuild',error);
-    
-                });
+                        if( response.result == 'Success' ) {
+
+                            this.requestIndexContent();
+                            this.toggleSectionForm('hide');
+                            this.resetSettings();
+                            setTimeout( () => { this.loader.hideLoader(); }, 407);
+
+                        }
+        
+                    }, (error: any) => {
+        
+                        console.log('Erro WS NewBuild',error);
+        
+                    });
+
+            }
+
+            if( !this.new_build_button && this.edit_build_button ) {
+
+                this.loader.showLoader(); 
+
+                this.services.ServicioEditBuild( this.booking_data )
+                    .subscribe( (response: any) => {
+
+                        if( response.result == 'Success' ) {
+
+                            this.requestIndexContent();
+                            this.toggleSectionForm('hide');
+                            this.resetSettings();
+                            setTimeout( () => { this.loader.hideLoader(); }, 407);
+
+                        }
+                        console.log( response );
+
+                    }, (error: any) => {
+
+                        console.log('Error Edit Build => ', error);
+
+                    });
+
+            }
 
         }
 
@@ -237,8 +335,8 @@ export class BookingIndexComponent implements OnInit {
 
     public resetSettings():void {
         this.booking_data.name = null;
-        this.booking_data.descripcion = null;
-        this.booking_data.direccion = null;
+        this.booking_data.description = null;
+        this.booking_data.direction = null;
         this.booking_data.latitude = null;
         this.booking_data.longitude = null;
         this.form_data = {
@@ -251,7 +349,7 @@ export class BookingIndexComponent implements OnInit {
         }
         this.booking_data.photo = '../../../assets/14.jpg';
         this.rooms = [
-            {id: 0, name: '', cantidad: null, can_delete: false, last_one: true}
+            {id: 0, name: '', cantidad: null, can_delete: false, last_one: true, input: '', select: ''}
         ];
     }
 
@@ -270,10 +368,10 @@ export class BookingIndexComponent implements OnInit {
         form_data.name == '' || form_data.name == null ?
             this.form_data.no_name = true : this.form_data.no_name = false; 
 
-        form_data.descripcion == '' || form_data.descripcion == null ?
+        form_data.description == '' || form_data.description == null ?
             this.form_data.no_desc = true : this.form_data.no_desc = false; 
 
-        form_data.direccion == '' || form_data.direccion == null ?
+        form_data.direction == '' || form_data.direction == null ?
             this.form_data.no_dire = true : this.form_data.no_dire = false; 
 
         form_data.latitude == null ?
@@ -432,9 +530,9 @@ export class BookingIndexComponent implements OnInit {
 class BookingData {
     id: number;
     name: string;
-    descripcion: string;
+    description: string;
     status: boolean = true;
-    direccion: string;
+    direction: string;
     longitude: number;
     latitude: number;
     photo: string = '../../../assets/14.jpg';

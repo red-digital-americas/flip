@@ -5,6 +5,7 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { PerksGuide, PerksCategory } from '../models/Perks';
 import { Utils } from '../../utils/utils';
+import { LoaderComponent } from '../../../ts/loader';
 
 @Component({
   selector: 'app-perks',
@@ -208,7 +209,10 @@ export class PerksComponent implements OnInit {
 
 
 
+
+
   //Autor: Carlos Enrique Hernandez Hernandez
+  public loader = new LoaderComponent();
   public show_perk_form:boolean = false;
   public perk_form_action:string = "";
 
@@ -292,13 +296,16 @@ export class PerksComponent implements OnInit {
       
       if( this.new_perk_button && !this.edit_perk_button ) {
 
+        this.loader.showLoader(); 
+
         this.heroService.service_general_post("PerkGuide/AddPerk", this.data_perk)
             .subscribe( (response: any) => {
 
               if( response.result == 'Success' ) {
 
-                //Bloquear el boton y poner loader
-                setTimeout( () => { location.reload() }, 777);
+                this.GetPerks();
+                this.toggleSectionForm('hide');
+                setTimeout( () => { this.loader.hideLoader(); }, 407);
 
               }
 
@@ -312,6 +319,8 @@ export class PerksComponent implements OnInit {
 
       if( !this.new_perk_button && this.edit_perk_button ) {
 
+        this.loader.showLoader(); 
+
         this.heroService.service_general_put("PerkGuide/UpdatePerk", this.data_perk)
             .subscribe( (response: any) => {
 
@@ -319,6 +328,7 @@ export class PerksComponent implements OnInit {
 
                 this.toggleSectionForm('hide');
                 this.GetPerks();
+                setTimeout( () => { this.loader.hideLoader(); }, 407);
 
               }
 
@@ -400,6 +410,8 @@ export class PerksComponent implements OnInit {
    */
   public confirmDeleteElement():void {
 
+    this.loader.showLoader(); 
+
     this.heroService.service_general_delete(`PerkGuide/${ this.perk_to_delete.id }`)
         .subscribe( (response: any) => {
 
@@ -407,6 +419,7 @@ export class PerksComponent implements OnInit {
 
             this.GetPerks();
             this.showModal();
+            this.loader.hideLoader(); 
 
           }
 

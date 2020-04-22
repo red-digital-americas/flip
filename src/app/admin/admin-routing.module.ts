@@ -24,6 +24,7 @@ import { GeneralTenantListComponent } from './Booking/GeneralTenantlist/GeneralT
 import { AddTenantComponent } from './Booking/AddTenant/AddTenant.component';
 import { UsersComponent } from './Booking/Users/Users.component';
 import { RolesComponent } from './Booking/Roles/Roles.component';
+import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
 
 const routes: Routes = [
   { path: '', data: { title: 'AdminApp', expectedRole: [2,4] }, canActivate: [RoleGuardService],
@@ -41,8 +42,9 @@ const routes: Routes = [
 
       //CHH => Booking 
       { path: 'booking', component: BookingIndexComponent, data: { title: 'Booking' } },
-      { path: 'tenantList/:id', component: TenantListComponent, data: { title: 'Tenant List' } }, 
-      { path: 'roomAvailavility/:id', component: RoomAvailavilityComponent, data: { title: 'Room Availavility' } },
+      { path: 'tenantList/:id', component: TenantListComponent, data: { title: 'Tenant List' } },
+      { path: 'app-profile/:id', component: ProfileComponent, data: { title: 'Tenant Profile' } }, 
+      { path: 'roomAvailavility/:id', component: RoomAvailavilityComponent, data: { id: 1, title: 'Room Availavility' } },
       { path: 'messages/:id', component: MessagesComponent, data: { title: 'Messages' } }, 
       { path: 'alerts/:id', component: AlertsComponent, data: { title: 'Alerts' } },
       { path: 'roomCatalog/:id', component: RoomCatalogComponent, data: { title: 'Room Catalog' } },
