@@ -237,13 +237,13 @@ export class PerksComponent implements OnInit {
         this.clearAndInitScopers();
         this.show_perk_form = true;
         this.data_perk.buildingId = Number( this.IDBUILD );
-        this.data_perk.name = null;
-        this.data_perk.description = null;
-        this.data_perk.streetAddress = null;
-        this.data_perk.city = null;
-        this.data_perk.stateProvincy = null;
+        this.data_perk.name = '';
+        this.data_perk.description = '';
+        this.data_perk.streetAddress = '';
+        this.data_perk.city = '';
+        this.data_perk.stateProvincy = '';
         this.data_perk.zip = null;
-        this.data_perk.country = null;
+        this.data_perk.country = '';
         this.data_perk.latitude = null;
         this.data_perk.longitude = null;
         this.data_perk.packCategoryId = -1;
@@ -770,13 +770,13 @@ export class PerksComponent implements OnInit {
 
 class DataPerk {
   id: number;
-  name: string;
-  description: string;
-  streetAddress: string;
-  city: string;
-  stateProvincy: string;
+  name: string = '';
+  description: string = '';
+  streetAddress: string = '';
+  city: string = '';
+  stateProvincy: string = '';
   zip: number;
-  country: string;
+  country: string = '';
   latitude: number;
   longitude: number;
   packCategoryId: number;

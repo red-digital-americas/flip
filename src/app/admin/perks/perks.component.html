@@ -61,11 +61,14 @@
               [(ngModel)]="data_perk.name"
               [class.form_error_found]="form_data.no_name"
               class="ap-form__input-text" />
-            <label for="new_perk_title" class="ap-form__label ap-form__label-text">
-              Titulo
+            <label 
+              for="new_perk_title" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_perk.name != ''">
+              Title
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
-              El campo es obligatorio*
+              Title is required*
             </span>
           </div>
         </div>
@@ -78,11 +81,14 @@
               [class.form_error_found]="form_data.no_desc"
               [(ngModel)]="data_perk.description"
               class="ap-form__label ap-form__input-textarea"></textarea>
-            <label for="new_perk_desc" class="ap-form__label ap-form__label-text">
-              Descripción
+            <label 
+              for="new_perk_desc" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_perk.description != ''">
+              Description
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
-              El campo es obligatorio*
+              Description is required*
             </span>
           </div>
         </div>
@@ -100,7 +106,10 @@
                 {{ category.name }}
               </option>
             </select>
-            <label for="new_perk_category" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_perk_category" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_perk.packCategoryId != '-1'">
               Category
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_cate">
@@ -108,7 +117,7 @@
             </span>
           </div>
         </div>
-        <div class="ml-col-3 padding-right-min">
+        <div class="ml-col-3">
           <div class="ap-form__input">
             <input 
               type="text"
@@ -118,7 +127,10 @@
               [(ngModel)]="data_perk.streetAddress"
               [class.form_error_found]="form_data.no_stre"
               class="ap-form__input-text" />
-            <label for="new_perk_street" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_perk_street" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_perk.streetAddress != ''">
               Street
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_stre">
@@ -126,7 +138,7 @@
             </span>
           </div>
         </div>
-        <div class="ml-col-3 padding-right-min">
+        <div class="ml-col-3">
           <div class="ap-form__input">
             <input 
               type="text"
@@ -136,7 +148,10 @@
               [class.form_error_found]="form_data.no_city"
               [(ngModel)]="data_perk.city"
               class="ap-form__input-text" />
-            <label for="new_perk_city" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_perk_city" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_perk.city != ''">
               City
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_city">
@@ -144,7 +159,7 @@
             </span>
           </div>
         </div>
-        <div class="ml-col-3 padding-right-min">
+        <div class="ml-col-3">
           <div class="ap-form__input">
             <input 
               type="text"
@@ -154,7 +169,10 @@
               [class.form_error_found]="form_data.no_stat"
               [(ngModel)]="data_perk.stateProvincy"
               class="ap-form__input-text" />
-            <label for="new_perk_sp" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_perk_sp" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_perk.stateProvincy != ''">
               State Provincy
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_stat">
@@ -162,17 +180,21 @@
             </span>
           </div>
         </div>
-        <div class="ml-col-4 padding-right-min">
+        <div class="ml-col-4">
           <div class="ap-form__input">
             <input 
               type="number"
+              min="0"
               placeholder="Zip"
               id="new_perk_zip" 
               name="new_perk_zip"
               [(ngModel)]="data_perk.zip"
               [class.form_error_found]="form_data.no_zip"
               class="ap-form__input-text" />
-            <label for="new_perk_zip" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_perk_zip" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_perk.zip != null">
               Zip
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_zip">
@@ -180,7 +202,7 @@
             </span>
           </div>
         </div>
-        <div class="ml-col-4 padding-right-min">
+        <div class="ml-col-4">
           <div class="ap-form__input">
             <input 
               type="text"
@@ -190,7 +212,10 @@
               [(ngModel)]="data_perk.country"
               [class.form_error_found]="form_data.no_coun"
               class="ap-form__input-text" />
-            <label for="new_perk_country" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_perk_country" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_perk.country != ''">
               Country
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_coun">
@@ -198,7 +223,7 @@
             </span>
           </div>
         </div>
-        <div class="ml-col-4 padding-right-min">
+        <div class="ml-col-4">
           <div class="ap-form__input">
             <input 
               type="number"
@@ -208,7 +233,10 @@
               [(ngModel)]="data_perk.latitude"
               [class.form_error_found]="form_data.no_lati"
               class="ap-form__input-text" />
-            <label for="new_perk_latitud" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_perk_latitud" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_perk.latitude != null">
               Latitud
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
@@ -216,7 +244,7 @@
             </span>
           </div>
         </div>
-        <div class="ml-col-4 padding-right-min">
+        <div class="ml-col-4">
           <div class="ap-form__input">
             <input 
               type="number"
@@ -226,7 +254,10 @@
               [class.form_error_found]="form_data.no_long"
               [(ngModel)]="data_perk.longitude"
               class="ap-form__input-text" />
-            <label for="new_perk_longitud" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_perk_longitud" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_perk.longitude != null">
               Longitud
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">

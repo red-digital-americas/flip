@@ -361,9 +361,9 @@ export class ServicesComponent implements OnInit {
       case 'new':
         this.show_service_form = true;
         this.data_service.buildingId = Number( this.IDBUILD );
-        this.data_service.name = null;
-        this.data_service.description = null;
-        this.data_service.provider = null;
+        this.data_service.name = '';
+        this.data_service.description = '';
+        this.data_service.provider = '';
         this.data_service.price = null;
         this.data_service.priceUnit = null;
         this.data_service.icon = '../../../assets/14.jpg';
@@ -552,11 +552,11 @@ export class ServicesComponent implements OnInit {
 
 class DataService {
   id: number;
-  name: string;
-  description: string;
+  name: string = '';
+  description: string = '';
   icon: string;
   photo: string;
-  provider: string;
+  provider: string = '';
   price: number;
   priceUnit: number;
   buildingId: number;

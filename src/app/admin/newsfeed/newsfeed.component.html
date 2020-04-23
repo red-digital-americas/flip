@@ -60,7 +60,10 @@
                 [(ngModel)]="data_post.title"
                 [class.form_error_found]="forms_erros_found.no_title"
                 class="ap-form__input-text" />
-              <label for="new_post_title" class="ap-form__label ap-form__label-text">
+              <label 
+                for="new_post_title" 
+                class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_post.title != ''">
                 Titulo
               </label>
               <span class="form_error_found_label" *ngIf="forms_erros_found.no_title">
@@ -78,7 +81,10 @@
                 [(ngModel)]="data_post.PostText"
                 [class.form_error_found]="forms_erros_found.no_post"
                 class="ap-form__label ap-form__input-textarea"></textarea>
-              <label for="new_post_desc" class="ap-form__label ap-form__label-text">
+              <label 
+                for="new_post_desc" 
+                class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_post.PostText != ''">
                 Post
               </label>
               <span class="form_error_found_label" *ngIf="forms_erros_found.no_post">
@@ -142,7 +148,10 @@
                     [class.form_error_found]="form_comment_errors.no_comment"
                     [(ngModel)]="comment_data"
                     class="ap-form__label ap-form__input-textarea ap-form__input-textarea--big"></textarea>
-                  <label for="new_post_comment" class="ap-form__label ap-form__label-text">
+                  <label 
+                    for="new_post_comment" 
+                    class="ap-form__label ap-form__label-text"
+                    [class.ap-form__label-text--active]="comment_data != ''">
                     Comentario
                   </label>
                   <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_comment_errors.no_comment">

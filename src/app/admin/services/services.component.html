@@ -69,7 +69,10 @@
               [class.form_error_found]="form_service.no_name"
               [(ngModel)]="data_service.name"
               class="ap-form__input-text" />
-            <label for="new_service_title" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_service_title" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_service.name != ''">
               Titulo
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_name">
@@ -86,7 +89,10 @@
               [class.form_error_found]="form_service.no_desc"
               [(ngModel)]="data_service.description"
               class="ap-form__label ap-form__input-textarea"></textarea>
-            <label for="new_service_desc" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_service_desc" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_service.description != ''">
               Descripción
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_desc">
@@ -94,7 +100,7 @@
             </span>
           </div>
         </div>
-        <div class="ml-col-3 padding-right-min">
+        <div class="ml-col-3">
           <div class="ap-form__input">
             <input 
               type="text"
@@ -104,7 +110,10 @@
               [class.form_error_found]="form_service.no_prov"
               [(ngModel)]="data_service.provider"
               class="ap-form__input-text" />
-            <label for="new_service_prov" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_service_prov" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_service.provider != ''">
               Provider
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_prov">
@@ -112,7 +121,7 @@
             </span>
           </div>
         </div>
-        <div class="ml-col-3 padding-right-min">
+        <div class="ml-col-3">
           <div class="ap-form__input">
             <input 
               type="number"
@@ -122,7 +131,10 @@
               [class.form_error_found]="form_service.no_pric"
               [(ngModel)]="data_service.price"
               class="ap-form__input-text" />
-            <label for="new_service_price" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_service_price" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_service.price != null">
               Price
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_pric">
@@ -130,7 +142,7 @@
             </span>
           </div>
         </div>
-        <div class="ml-col-3 padding-right-min">
+        <div class="ml-col-3">
           <div class="ap-form__input">
             <input 
               type="number"
@@ -140,7 +152,10 @@
               [(ngModel)]="data_service.priceUnit"
               [class.form_error_found]="form_service.no_puni"
               class="ap-form__input-text" />
-            <label for="new_service_unitp" class="ap-form__label ap-form__label-text">
+            <label 
+              for="new_service_unitp" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_service.priceUnit != null">
               Unit Price
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_puni">
@@ -231,22 +246,22 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
     <p class="ml-modal__pop-titulo">
-      Eliminar elemento
+      Room will be deleted
     </p>
     <p class="ml-modal__pop-text">
-      Estas seguro que deseas eliminar el elemento <br />
+      Confirm to delete element <br />
       <span class="text-bold">"{{ service_to_delete.name }}"</span>
     </p>
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="toggleSectionForm('delete')"
         class="ml-modal__pop-buttons-button button-blue">
-        Cancelar
+        Cancel
       </button>
       <button 
         (click)="confirmDeleteElement()"
         class="ml-modal__pop-buttons-button button-orange">
-        Eliminar
+        Delete
       </button>
     </div>
   </div>

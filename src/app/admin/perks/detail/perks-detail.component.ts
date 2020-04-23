@@ -225,10 +225,10 @@ export class PerksDetailComponent implements OnInit {
         this.new_promo_button = true;
         this.edit_promo_button = false;
         this.data_promo.perkGuideId = this.perkId.toString();
-        this.data_promo.name = null;
-        this.data_promo.description = null;
-        this.data_promo.startDate = null;
-        this.data_promo.endDate = null;
+        this.data_promo.name = '';
+        this.data_promo.description = '';
+        this.data_promo.startDate = '';
+        this.data_promo.endDate = '';
         this.data_promo.photo = '../../../../assets/14.jpg';
         this.show_dperk_form_action = 'Añadir Promoción';
         break;
@@ -490,10 +490,10 @@ export class PerksDetailComponent implements OnInit {
 
 class DataPromotion {
   id: number;
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  photo: string;
+  name: string = '';
+  description: string = '';
+  startDate: string = '';
+  endDate: string = '';
+  photo: string = '';
   perkGuideId: any;
 }

@@ -14,7 +14,7 @@
                     <button 
                         (click)="toggleSectionForm( 'edit', card )"
                         class="index-cards__card-buttons-button button-blue">
-                        Editar
+                        Edit
                     </button>
                     <button 
                         (click)="goToBooking( card.id, card.name )"
@@ -47,7 +47,10 @@
                     class="ap-form__input-text"
                     [class.form_error_found]="form_data.no_name"
                     [(ngModel)]="booking_data.name" />
-                  <label for="booking_title" class="ap-form__label ap-form__label-text">
+                  <label 
+                    for="booking_title" 
+                    class="ap-form__label ap-form__label-text"
+                    [class.ap-form__label-text--active]="booking_data.name != ''">
                     Nombre
                   </label>
                   <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
@@ -64,7 +67,10 @@
                     [class.form_error_found]="form_data.no_desc"
                     [(ngModel)]="booking_data.description"
                     class="ap-form__label ap-form__input-textarea"></textarea>
-                  <label for="booking_desc" class="ap-form__label ap-form__label-text">
+                  <label 
+                    for="booking_desc" 
+                    class="ap-form__label ap-form__label-text"
+                    [class.ap-form__label-text--active]="booking_data.description != ''">
                     Descripción
                   </label>
                   <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
@@ -81,7 +87,10 @@
                     [class.form_error_found]="form_data.no_dire"
                     [(ngModel)]="booking_data.direction"
                     class="ap-form__label ap-form__input-textarea"></textarea>
-                  <label for="booking_direccion" class="ap-form__label ap-form__label-text">
+                  <label 
+                    for="booking_direccion" 
+                    class="ap-form__label ap-form__label-text"
+                    [class.ap-form__label-text--active]="booking_data.direction != ''">
                     Dirección
                   </label>
                   <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_dire">
@@ -99,7 +108,10 @@
                   class="ap-form__input-text"
                   [class.form_error_found]="form_data.no_lati"
                   [(ngModel)]="booking_data.latitude" />
-                <label for="booking_latitud" class="ap-form__label ap-form__label-text">
+                <label 
+                  for="booking_latitud" 
+                  class="ap-form__label ap-form__label-text"
+                  [class.ap-form__label-text--active]="booking_data.latitude != null">
                   Latitud
                 </label>
                 <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
@@ -117,7 +129,10 @@
                   class="ap-form__input-text"
                   [class.form_error_found]="form_data.no_long"
                   [(ngModel)]="booking_data.longitude" />
-                <label for="booking_longitud" class="ap-form__label ap-form__label-text">
+                <label 
+                  for="booking_longitud"
+                  class="ap-form__label ap-form__label-text"
+                  [class.ap-form__label-text--active]="booking_data.longitude != null">
                   Longitud
                 </label>
                 <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">
@@ -159,7 +174,7 @@
               </h4>
             </div>
             <div class="ap-form__rooms-room room" *ngFor="let room of rooms;" room="added">
-              <div class="ml-col-1 padding-general-min card-style">
+              <div class="ml-col-1 padding-tb-m card-style">
                 <div class="ml-col-1">
                   <div class="ap-form__input">
                     <input 
@@ -169,7 +184,10 @@
                       name="booking_room_title_{{ room.id }}"
                       value="{{ room.input }}"
                       class="ap-form__input-text" />
-                    <label for="booking_room_title_{{ room.id }}" class="ap-form__label ap-form__label-text">
+                    <label 
+                      for="booking_room_title_{{ room.id }}" 
+                      class="ap-form__label ap-form__label-text"
+                      [class.ap-form__label-text--active]="room.input != ''">
                       Room Type
                     </label>
                   </div>
@@ -187,8 +205,24 @@
                         {{ espacio }}
                       </option>
                     </select>
-                    <label for="booking_num_title_{{ room.id }}" class="ap-form__label ap-form__label-text">
+                    <label 
+                      for="booking_num_title_{{ room.id }}" 
+                      class="ap-form__label ap-form__label-text"
+                      [class.ap-form__label-text--active]="room.select != ''">
                       Número de habitaciones
+                    </label>
+                  </div>
+                </div>
+                <div class="ml-col-1" *ngIf="edit_build_button">
+                  <div class="ap-form__input ap-form__input-no-padding-tb">
+                    <input 
+                      type="checkbox"
+                      id="booking_room_active_{{ room.id }}" 
+                      name="booking_room_active_{{ room.id }}"
+                      [checked]="room.active"
+                      class="ap-form__input-checkbox display-none" />
+                    <label for="booking_room_active_{{ room.id }}" class="ap-form__label ap-form__label-checkbox">
+                      Activo
                     </label>
                   </div>
                 </div>
@@ -217,8 +251,6 @@
     </form>
 </div>
 
-
-
 <div class="bottom-container">
     <button 
         type="button" 
@@ -236,6 +268,29 @@
     </button>
 </div>
 
+<div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
+  <div class="ml-modal__pop">
+    <p class="ml-modal__pop-titulo">
+      Eliminar elemento
+    </p>
+    <p class="ml-modal__pop-text">
+      Estas seguro que deseas eliminar el elemento <br />
+      <span class="text-bold">"{{ room_to_delete.type }}"</span>
+    </p>
+    <div class="ml-modal__pop-buttons">
+      <button 
+        (click)="confirmDeleteRoomModal()"
+        class="ml-modal__pop-buttons-button button-blue">
+        Cancelar
+      </button>
+      <button 
+        (click)="confirmDeleteRoom()"
+        class="ml-modal__pop-buttons-button button-orange">
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
 
 <div class="black-box">
     <img src="" id="image_real_dimension_nb" />

@@ -8,6 +8,7 @@ import { DatosService } from '../../../datos.service';
 import { HttpModule } from '@angular/http';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { MenuService } from '../../_nav';
+import { SystemMessage } from '../../../ts/systemMessage';
 
 
 @Component({
@@ -53,7 +54,7 @@ export class LoginComponent implements OnInit {
   
 
   showSuccess() {
-    this.toasterService.pop('success', 'Success ', 'You will be redirected ');        
+    //this.toasterService.pop('success', 'Success ', 'You will be redirected ');        
     window.location.href = "/#"+this.menuService.GetFirstURLSection(parseInt(localStorage.getItem("SystemTypeId"))); // partial redirection
     // window.location.href = "/communities"; // full redirection (loading again page)
   }
@@ -74,40 +75,7 @@ export class LoginComponent implements OnInit {
     this.toasterService.pop('primary', 'Primary Toaster', 'This is toaster description');
   }
 
-  public Login() {    
-    var creadoobj = { username: this.email, password: this.password };
-    this.heroService.ServicioPostLogin("CargarUsuario", creadoobj).subscribe((value) => {
-      switch (value.token) {
-        case "usuarios no existe":
-          this.message = "Usuario y/o contraseña incorrecta";
-          this.validar = true;
-          this.showError();
-          break;
-        case "password incorrecto":
-          this.message = "Usuario y/o contraseña incorrecta";
-          this.validar = true;
-          this.showError();
-          break;
-        default:
-          if (value.token != "usuarios no existe" || value.token != "password incorrecto") {
-            localStorage.setItem("token", value.token);
-            localStorage.setItem("user", JSON.stringify((value.user)));
-            localStorage.setItem("inicial", value.user.name.substring(0, 1));
-            localStorage.setItem("name", value.user.name);
-            localStorage.setItem("lastName", value.user.lastName);
-            localStorage.setItem("email", value.user.email);
-            localStorage.setItem("id", value.user.id);
-            localStorage.setItem("buildingid", value.user.buildingId);
-            localStorage.setItem("SystemTypeId", value.user.systemTypeId);
-            this.showSuccess();          
-          }
-      }
-    });
-  }
 
-  public recoverpass() {
-    window.location.href = "/#/recoverpass";
-  }
 
 
 
@@ -115,6 +83,8 @@ export class LoginComponent implements OnInit {
 
   
   //Autor: Carlos Enrique Hernandez Hernandez
+
+  public system_message = new SystemMessage();
 
   public login_action: boolean = true;
   public recoverPassword():void {
@@ -128,7 +98,27 @@ export class LoginComponent implements OnInit {
 
     if( this.passwordValidator( this.pass_data ) ) {
 
-      console.log('Servicio para recuperar password');
+      this.heroService.ServicioPostRecoverPass("RecoverPassword", this.pass_data)
+          .subscribe( (response: any) => { console.log( response );
+
+            if( response.success ) {
+
+              this.message = "Ya te enviamos una nueva contraseña";
+              this.showSuccess(); 
+
+            } else {
+
+              this.toasterService.pop('error', 'Error ', response.result);
+
+            }
+
+          }, (error: any) => {
+
+            console.log('Error recover => ', error);
+
+          });
+
+      console.log(this.pass_data);
 
     }
 
@@ -140,13 +130,34 @@ export class LoginComponent implements OnInit {
       if( this.validatorForm( this.user_data ) ) {
 
         this.heroService.ServicioPostLogin("CargarUsuario", this.user_data ).subscribe((value) => {
+          console.log('Value => ', value);
           switch (value.token) {
             case "usuarios no existe":
+
+              this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'Error',
+                  text: value.token
+                },
+                time: 2000
+              });
+
               this.message = "Usuario y/o contraseña incorrecta";
               this.validar = true;
               this.showError();
               break;
             case "password incorrecto":
+
+              this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'Error',
+                  text: value.token
+                },
+                time: 2000
+              });
+
               this.message = "Usuario y/o contraseña incorrecta";
               this.validar = true;
               this.showError();
@@ -162,7 +173,15 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem("id", value.user.id);
                 localStorage.setItem("buildingid", value.user.buildingId);
                 localStorage.setItem("SystemTypeId", value.user.systemTypeId);
-                this.showSuccess();          
+                this.system_message.showMessage({
+                  kind: 'ok',
+                  message: {
+                    header: 'Session Begins',
+                    text: `¡Welcome! ${ localStorage.getItem("name") } ${ localStorage.getItem("lastName") }`
+                  },
+                  time: 2000
+                });  
+                this.showSuccess();       
               }
           }
         });
@@ -212,10 +231,10 @@ export class LoginComponent implements OnInit {
 
     let result = false;
 
-    form_pass.email == '' || form_pass.email == null ?
+    form_pass.username == '' || form_pass.username == null ?
       this.form_pass.no_emai = true : this.form_pass.no_emai = false;
 
-    !this.isEmailValid( form_pass.email ) ? 
+    !this.isEmailValid( form_pass.username ) ? 
       this.form_pass.no_val_mail = true : this.form_pass.no_val_mail = false;
 
     for( let field in this.form_pass ) {
@@ -260,11 +279,11 @@ export class LoginComponent implements OnInit {
 }
 
 class UserData {
-  username: string;
-  password: string;
+  username: string = "";
+  password: string = "";
 }
 
 class PassData {
-  email: string;
+  username: string = "";
 }
 

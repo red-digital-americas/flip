@@ -66,7 +66,18 @@
               id="new_amm_title" 
               name="new_amm_title"
               class="ap-form__input-text" />
-            <label for="new_amm_title" class="ap-form__label ap-form__label-text">
+            <label
+              *ngIf="new_amenity_button" 
+              for="new_amm_title" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_amenity.name != ''">
+              Titulo
+            </label>
+            <label
+              *ngIf="edit_amenity_button" 
+              for="new_amm_title" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_amenity_edit.name != ''">
               Titulo
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_amenity.no_name">
@@ -92,7 +103,18 @@
               [class.form_error_found]="form_amenity.no_desc"
               placeholder="Descripcion"
               class="ap-form__label ap-form__input-textarea"></textarea>
-            <label for="new_amm_desc" class="ap-form__label ap-form__label-text">
+            <label
+              *ngIf="new_amenity_button" 
+              for="new_amm_desc" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_amenity.description != ''">
+              Descripción
+            </label>
+            <label
+              *ngIf="edit_amenity_button" 
+              for="new_amm_desc" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="data_amenity_edit.description != ''">
               Descripción
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_amenity.no_desc">

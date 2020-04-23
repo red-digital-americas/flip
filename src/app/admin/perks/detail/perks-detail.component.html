@@ -72,7 +72,10 @@
                       [class.form_error_found]="form_data.no_name"
                       name="new_promo_title"
                       class="ap-form__input-text" />
-                    <label for="new_promo_title" class="ap-form__label ap-form__label-text">
+                    <label 
+                      for="new_promo_title" 
+                      class="ap-form__label ap-form__label-text"
+                      [class.ap-form__label-text--active]="data_promo.name != ''">
                       Nombre
                     </label>
                     <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
@@ -89,7 +92,10 @@
                       [(ngModel)]="data_promo.description"
                       [class.form_error_found]="form_data.no_desc"
                       class="ap-form__label ap-form__input-textarea"></textarea>
-                    <label for="new_promo_desc" class="ap-form__label ap-form__label-text">
+                    <label 
+                      for="new_promo_desc" 
+                      class="ap-form__label ap-form__label-text"
+                      [class.ap-form__label-text--active]="data_promo.description != ''">
                       Descripción
                     </label>
                     <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
@@ -97,7 +103,7 @@
                     </span>
                   </div>
                 </div>
-                <div class="ml-col-4o padding-right-min">
+                <div class="ml-col-4o">
                   <div class="ap-form__input">
                     <input 
                       type="date"
@@ -107,7 +113,10 @@
                       [(ngModel)]="data_promo.startDate"
                       [class.form_error_found]="form_data.no_sdat"
                       class="ap-form__input-text" />
-                    <label for="new_promo_start" class="ap-form__label ap-form__label-text">
+                    <label 
+                      for="new_promo_start" 
+                      class="ap-form__label ap-form__label-text"
+                      [class.ap-form__label-text--active]="data_promo.startDate != ''">
                       Fecha de Inicio
                     </label>
                     <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_sdat">
@@ -115,7 +124,7 @@
                     </span>
                   </div>
                 </div>
-                <div class="ml-col-4o padding-right-min">
+                <div class="ml-col-4o">
                   <div class="ap-form__input">
                     <input 
                       type="date"
@@ -125,7 +134,10 @@
                       [(ngModel)]="data_promo.endDate"
                       [class.form_error_found]="form_data.no_edat"
                       class="ap-form__input-text" />
-                    <label for="new_promo_end" class="ap-form__label ap-form__label-text">
+                    <label 
+                      for="new_promo_end" 
+                      class="ap-form__label ap-form__label-text"
+                      [class.ap-form__label-text--active]="data_promo.endDate != ''">
                       Fecha Fin
                     </label>
                     <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_edat">

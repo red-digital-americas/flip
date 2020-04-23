@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { RoomModalComponent } from '../modals/room-modal/room-modal.component';
 import { root } from 'rxjs/internal/util/root';
 import { LoaderComponent } from '../../../ts/loader';
+import { SystemMessage } from '../../../ts/systemMessage';
 
 @Component({
   selector: 'app-newsfeed',
@@ -274,6 +275,7 @@ export class NewsfeedComponent implements OnInit {
   public show_post_form:boolean = false;
   public data_post: DataPost = new DataPost();
   public post_form_action:string = "";
+  public system_message = new SystemMessage();
 
 
   /*
@@ -317,7 +319,19 @@ export class NewsfeedComponent implements OnInit {
 
               this.get_posts();
               this.toggleSectionForm('hide');
-              setTimeout( () => { this.add_loader.hideLoader(); }, 407);
+              setTimeout( () => {
+
+                this.add_loader.hideLoader();
+                this.system_message.showMessage({
+                  kind: 'ok',
+                  time: 2200,
+                  message: {
+                    header: 'Post has been created',
+                    text: 'You can now see your post.'
+                  }
+                });
+
+              }, 407);
 
             }
 
@@ -349,8 +363,8 @@ export class NewsfeedComponent implements OnInit {
 
       case 'new':
         this.show_post_form = true;
-        this.data_post.title = null;
-        this.data_post.PostText = null;
+        this.data_post.title = '';
+        this.data_post.PostText = '';
         this.data_post.photo = '../../../assets/14.jpg';
         this.data_post.userid = this.IDUSR;
         this.data_post.BuildingId = this.route.snapshot.params['id'];
@@ -403,7 +417,7 @@ export class NewsfeedComponent implements OnInit {
    * Regresa: N/A
    * Descripcion: Servicio que manda un post de un nuevo comentario
    */
-  public comment_data: string = null;
+  public comment_data: string = '';
   public addNewComment():void {
 
     if( this.validatingCommentData() ) {
@@ -739,6 +753,6 @@ class DataPost {
   public PostText: String = '';
   public photo: String = '';
   public userid: any;
-  public BuildingId: string;
+  public BuildingId: string = '';
 }
  

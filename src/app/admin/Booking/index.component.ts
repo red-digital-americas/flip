@@ -36,18 +36,18 @@ export class BookingIndexComponent implements OnInit {
         switch( action_kind ) {
 
             case 'new':
-                this.resetSettings();
                 this.show_booking_form = true;
                 this.new_build_button = true;
                 this.edit_build_button = false;
+                this.resetSettings();
                 this.booking_form_action = 'Nuevo Edificio';
             break;
 
             case 'edit':
-                this.resetSettings();
                 this.show_booking_form = true;
                 this.new_build_button = false;
                 this.edit_build_button = true;
+                this.resetSettings( editable.typeRoom.length );
                 this.booking_data.id = editable.id;
                 this.booking_data.name = editable.name;
                 this.booking_data.description = editable.description;
@@ -124,8 +124,6 @@ export class BookingIndexComponent implements OnInit {
 
     public getRoomsToEdit( rooms: any ): void {
 
-        this.rooms = [];
-
         rooms.forEach( (room: any) => {
 
             let new_room = {
@@ -135,7 +133,8 @@ export class BookingIndexComponent implements OnInit {
                 can_delete: true,
                 last_one: false,
                 input: room.type,
-                select: Number( room.capacity )
+                select: Number( room.capacity ),
+                active: room.active
             };
         
             this.rooms.push( new_room );
@@ -169,14 +168,29 @@ export class BookingIndexComponent implements OnInit {
             can_delete: true,
             last_one: false,
             input: '',
-            select: ''
+            select: '',
+            active: false
         };
 
         this.rooms.push( new_room );
 
         this.rooms.forEach( (room:any, index:number) => {
 
-            room.id = index;
+            
+            if( this.new_build_button && !this.edit_build_button ) {
+                room.id = index;
+            }
+
+            if( !this.new_build_button && this.edit_build_button ) {
+                
+                if( room.id == 0 ) {
+
+                    room.id = `tmp_${ index }`;
+
+                }
+
+            }
+
             room.last_one = false;
 
         });
@@ -197,39 +211,72 @@ export class BookingIndexComponent implements OnInit {
     */
     public deleteThisRoom( id_room:number, event_data ):void {
 
-        this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === id_room ), 1);
+        if( this.new_build_button && !this.edit_build_button ) {
 
-        this.rooms[this.rooms.length -1].last_one = true;
+            this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === id_room ), 1);
+            this.rooms[this.rooms.length -1].last_one = true;
+
+        }
 
         if( !this.new_build_button && this.edit_build_button ) {
 
-            const element = event_data.target.parentElement,
-                  element_id = element.querySelector('input').id,
-                  get_element_id = element_id.split('_')[element_id.split('_').length -1],
-                  delete_data = {
-                    idBuild: this.booking_data.id,
-                    type: element.querySelector('input').value,
-                    capacity: element.querySelector('select').value,
-                    active: false,
-                    id: Number( get_element_id )
-                  };
-
-            console.log( delete_data );
-
-            this.services.ServicioEditBuild( delete_data )
-                .subscribe( (response: any) => {
-
-                    console.log(response);
-
-                }, (error: any) => {
-
-                    console.log('Error Delete Room => ', error);
-
-                });
+            this.deleteRoomService( event_data, id_room );
 
         }
 
     }
+
+
+    public deleteRoomService( event_data: any, id_room: any ):void {
+
+        const element = event_data.target.parentElement,
+              element_id = element.querySelector('input').id,
+              get_element_id = element_id.split('_')[element_id.split('_').length -1];
+
+        this.room_to_delete = {
+            idBuild: this.booking_data.id,
+            type: element.querySelector('input').value,
+            capacity: element.querySelector('select').value,
+            active: false,
+            id: Number( get_element_id )
+          };
+
+        if( this.room_to_delete.type == '' || this.room_to_delete.capacity == '' ) {
+
+            this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === id_room ), 1);
+            this.rooms[this.rooms.length -1].last_one = true;
+
+        } else this.confirmDeleteRoomModal();
+
+    }
+
+    /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: showModal
+   * Tipo: Funcion 
+   * Parametros: NA
+   * Regresa: N/A
+   * Descripcion: Muestra y oculta el formulario de eliminar
+   */
+  public page_modal: boolean = false;
+  public modal_to_show: string;
+  public room_to_delete: any;
+  public confirmDeleteRoomModal():void {
+
+    !this.page_modal ? this.page_modal = true : this.page_modal = false; 
+
+  }
+
+  public confirmDeleteRoom():void {
+
+    console.log('Consumir servicio para eliminarlo');
+    this.loader.showLoader();
+    setTimeout( () => { this.loader.hideLoader(); this.confirmDeleteRoomModal(); }, 407);
+    this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === this.room_to_delete.id ), 1);
+    this.rooms[this.rooms.length -1].last_one = true;
+
+  }
 
 
    /*
@@ -245,15 +292,15 @@ export class BookingIndexComponent implements OnInit {
     public sendBookingData():void {
 
         if( this.validatingNewBuildFields( this.booking_data ) ) {
-                
-            this.booking_data.typeroom = this.getRoomsData();
 
-            if( this.new_build_button && !this.edit_build_button ) {
+            if( this.new_build_button && !this.edit_build_button ) { 
+
+                this.booking_data.typeroom = this.getRoomsData('new');
 
                 this.loader.showLoader(); 
 
                 this.services.ServiceSaveBuilding( this.booking_data )
-                    .subscribe( ( response: any ) => {
+                    .subscribe( ( response: any ) => { console.log('Para Nuevo = >', this.booking_data );
 
                         if( response.result == 'Success' ) {
 
@@ -274,6 +321,8 @@ export class BookingIndexComponent implements OnInit {
 
             if( !this.new_build_button && this.edit_build_button ) {
 
+                this.booking_data.typeroom = this.getRoomsData('edit');
+
                 this.loader.showLoader(); 
 
                 this.services.ServicioEditBuild( this.booking_data )
@@ -287,7 +336,6 @@ export class BookingIndexComponent implements OnInit {
                             setTimeout( () => { this.loader.hideLoader(); }, 407);
 
                         }
-                        console.log( response );
 
                     }, (error: any) => {
 
@@ -303,42 +351,90 @@ export class BookingIndexComponent implements OnInit {
 
 
     public espacios_habitaciones = [1,2,3,4,5,6,7,8,9,10];
-    public getRoomsData():Array<any> {
+    public getRoomsData( for_action: string ):Array<any> {
 
         let rooms_added = [];
 
         const rooms_container = document.getElementById('rooms_added'),
               get_rooms = rooms_container.querySelectorAll('[room="added"]');
 
-              get_rooms.forEach( (room: any) => {
+        switch ( for_action ) {
 
-                let input = room.querySelector('input'),
-                    select = room.querySelector('select');
-                
-                if( input.value != '' && !select.value != null ) {
+            case 'new':
 
-                    let new_room = {
-                        type: input.value,
-                        capacity: select.value,
-                        active: true
-                    };
+                    get_rooms.forEach( (room: any) => {
 
-                    rooms_added.push( new_room );
+                        let input = room.querySelector('input'),
+                            select = room.querySelector('select');
+                        
+                        if( input.value != '' && !select.value != null ) {
+        
+                            let new_room = {
+                                type: input.value,
+                                capacity: select.value,
+                                active: true
+                            };
+        
+                            rooms_added.push( new_room );
+        
+                        }
+        
+                    });
 
-                }
+                break;
 
-              });
+            case 'edit':
+
+                    get_rooms.forEach( (room: any) => {
+
+                        let input = room.querySelectorAll('input')[0],
+                            select = room.querySelector('select'),
+                            active = room.querySelectorAll('input')[1],
+                            get_id_token = (function () {
+                                    const input_sample = input.id.split('_'),
+                                          input_id = input_sample[input_sample.length -1],
+                                          find_tmp_id = input_sample[input_sample.length -2],
+                                          is_tmp_id = find_tmp_id == 'tmp' ? true : false;
+
+                                    return {
+                                        id: input_id,
+                                        valid_id: is_tmp_id 
+                                    };
+                                }());
+
+                        if( input.value != '' && !select.value != null ) {
+    
+                            let new_room = {
+                                type: input.value,
+                                capacity: select.value,
+                                active: active.checked,
+                                idBuild: this.booking_data.id
+                            };
+
+                            if( !get_id_token.valid_id ) new_room['id'] =  Number( get_id_token.id );
+        
+                            rooms_added.push( new_room );
+        
+                        }
+
+                    });
+
+                break;
+
+        }
 
         return rooms_added;
 
     }
 
-    public resetSettings():void {
-        this.booking_data.name = null;
-        this.booking_data.description = null;
-        this.booking_data.direction = null;
+    public resetSettings( rooms_in: number = 0 ):void {
+
+        this.booking_data.name = '';
+        this.booking_data.description = '';
+        this.booking_data.direction = '';
         this.booking_data.latitude = null;
         this.booking_data.longitude = null;
+
         this.form_data = {
             no_name: false,
             no_desc: false,
@@ -347,10 +443,34 @@ export class BookingIndexComponent implements OnInit {
             no_lati: false,
             no_phot: false
         }
+
         this.booking_data.photo = '../../../assets/14.jpg';
-        this.rooms = [
-            {id: 0, name: '', cantidad: null, can_delete: false, last_one: true, input: '', select: ''}
-        ];
+        
+        if( this.new_build_button && !this.edit_build_button ) {
+
+            this.rooms = [
+                {id: 0, name: '', cantidad: null, can_delete: false, last_one: true, input: '', select: ''}
+            ];
+
+        }
+
+
+        if( !this.new_build_button && this.edit_build_button ) {
+
+            if( rooms_in == 0) {
+
+                this.rooms = [
+                    {id: 0, name: '', cantidad: null, can_delete: false, last_one: true, input: '', select: ''}
+                ];
+
+            } else {
+
+                this.rooms.shift();
+
+            }
+
+        }
+
     }
 
     public form_data: any = {
@@ -529,10 +649,10 @@ export class BookingIndexComponent implements OnInit {
 
 class BookingData {
     id: number;
-    name: string;
-    description: string;
+    name: string = '';
+    description: string = '';
     status: boolean = true;
-    direction: string;
+    direction: string = '';
     longitude: number;
     latitude: number;
     photo: string = '../../../assets/14.jpg';

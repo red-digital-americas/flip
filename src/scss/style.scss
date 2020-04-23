@@ -901,6 +901,11 @@ select:active,
     position: relative;
     padding: 17px 30px;
 
+    &-no-padding-tb {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
     &-radio {
       
       position: relative;
@@ -924,6 +929,10 @@ select:active,
     &-radio:checked + .ap-form__label-radio::after {
       background-color: white;
       border: solid 3.5px #2e343a;
+    }
+
+    &-checkbox:checked + .ap-form__label-checkbox::after {
+      background-color: #20a8d8;
     }
 
     &-text {
@@ -975,12 +984,19 @@ select:active,
     transition: all .2s ease;
 
     &-text {
+
       position: absolute;
       top: 50%;
       left: 30px;
       font-size: 12px;
       opacity: 0;
       transform: translateY(-50%);
+
+      &--active {
+        top: 7.7% !important;
+        opacity: 1 !important;
+      }
+
     }
 
     &-image {
@@ -1018,6 +1034,24 @@ select:active,
       height: 15px;
       border-radius: 50%;
       background-color: #2e343a;
+    }
+
+    &-checkbox {
+      width: 50%;
+      height: 20px;
+      position: relative;
+      padding-left: 27.5px;
+    }
+
+    &-checkbox::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+      border: solid 1.5px #2e343a;
     }
 
   }
@@ -1246,7 +1280,7 @@ select:active,
       position: relative;
       flex-basis: 33.33%;
       flex-grow: 0;
-      padding: 20px 30px;
+      padding: 20px;
 
       &-add,
       &-delete {
@@ -2081,6 +2115,11 @@ select:active,
   padding-bottom: 10px;
 }
 
+.padding-tb-m {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 .padding-bottom-m {
   padding-bottom: 40px;
 }
@@ -2232,6 +2271,120 @@ select:active,
 
 }
 
+.system-message {
+
+  width: 340px;
+  min-height: 70px;
+  max-height: 180px;
+  position: fixed;
+  padding: 10px 20px 20px 75px;
+  background-color: white;
+  top: 70px;
+  box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.7);
+  z-index: 99999;
+  
+  &--animation {
+
+    &-in {
+      animation-name: systemMessageIn;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      animation-duration: 1.47s;
+    }
+    
+    &-out {
+      animation-name: systemMessageOut;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      animation-duration: 2s;
+    }
+    
+  }
+
+  @media screen and (min-width: 1920px) {
+    width: 370px;
+    min-height: 100px;
+    max-height: 200px;
+  }
+
+  &__error {
+
+    background-image: url('../assets/icon/er-icon.jpg');
+    background-position: 3.5% 50%;
+    background-size: 50px;
+    background-repeat: no-repeat;
+    border-left: solid 4px red;
+
+    & > h4 {
+      color: red;
+      border-bottom: solid 1px red;
+    }
+
+  }
+
+  &__warning {
+
+    background-image: url('../assets/icon/wa-icon.png');
+    background-position: 3.5% 50%;
+    background-size: 50px;
+    background-repeat: no-repeat;
+    border-left: solid 4px #ffd42b;
+
+    & > h4 {
+      color: #ffd42b;
+      border-bottom: solid 1px #ffd42b;
+    }
+
+  }
+
+  &__success,
+  &__ok {
+
+    background-image: url('../assets/icon/ok-icon.png');
+    background-position: 3.5% 50%;
+    background-size: 50px;
+    background-repeat: no-repeat;
+    border-left: solid 4px green;
+
+    & > h4 {
+      color: green;
+      border-bottom: solid 1px green;
+    }
+
+  }
+
+  &__titulo {
+
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    float: left;
+    padding: 5px 0;
+    text-shadow: .35px .35px .35px black;
+
+    @media screen and (min-width: 1920px) {
+      font-size: 18px;
+    }
+
+  }
+
+  &__text {
+
+    font-size: 13px;
+    color: #2e343a;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    float: left;
+
+    @media screen and (min-width: 1920px) {
+      font-size: 15px;
+    }
+
+  }
+
+}
+
 //Animations
 @keyframes seeTheBottomX {
   100% { width: 200px; }
@@ -2248,4 +2401,14 @@ select:active,
 @keyframes rotateSpiner {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@keyframes systemMessageIn {
+  0% { right: -100%; }
+  100% { right: 0; }
+}
+
+@keyframes systemMessageOut {
+  0% { right: 0; }
+  100% { right: -100%; }
 }

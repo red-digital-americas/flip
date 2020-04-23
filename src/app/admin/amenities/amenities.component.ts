@@ -216,8 +216,8 @@ export class AmenitiesComponent implements OnInit {
       case 'new':
         this.show_ammenity_form = true;
         this.data_amenity.BuildingId = this.IDBUILD;
-        this.data_amenity.name = null;
-        this.data_amenity.description = null;
+        this.data_amenity.name = '';
+        this.data_amenity.description = '';
         this.data_amenity.photo = '../../../assets/14.jpg';
         this.ammenity_form_action = 'Añadir Amenidad';
         this.new_amenity_button = true;
@@ -525,7 +525,7 @@ class DataAmenity {
 }
 
 class DataAmenityEdit {
-  public name: string;
-  public description: string;
-  public photo: string;
+  public name: string = '';
+  public description: string = '';
+  public photo: string = '';
 }

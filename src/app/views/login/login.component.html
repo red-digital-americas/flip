@@ -1,7 +1,11 @@
 <div class="login">
   <img src="../../../assets/img/Builds/altata6.jpg" class="login--background" />
   <div class="login__container card-style">
-    <form class="ap-form ml-col-1 login--logo login-form" name="login-form" (submit)="loginEvent()" *ngIf="login_action">
+    <form 
+      class="ap-form ml-col-1 login--logo login-form" 
+      name="login-form" 
+      (submit)="loginEvent()" 
+      *ngIf="login_action">
       <div class="ml-col-1">
         <h4 class="ap-form__titulo text-left">
           Login
@@ -15,16 +19,21 @@
             id="login_user" 
             name="login_user"
             [(ngModel)]="user_data.username"
-            [class.form_error_found]="form_data.no_user"
-            [class.form_error_found]="form_data.no_val_mail"
+            [ngClass]="{
+              'form_error_found' : form_data.no_user,
+              'form_error_found' : form_data.no_val_mail
+            }"
             class="ap-form__input-text" />
-          <label for="login_user" class="ap-form__label ap-form__label-text">
+          <label 
+            for="login_user" 
+            class="ap-form__label ap-form__label-text"
+            [class.ap-form__label-text--active]="user_data.username != ''">
             Email
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_user">
             Email is required*
           </span>
-          <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_val_mail">
+          <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_val_mail && !form_data.no_user">
             Email no valid, It can not contain special characters*
           </span>
         </div>
@@ -39,7 +48,10 @@
             [class.form_error_found]="form_data.no_pass"
             name="login_pass"
             class="ap-form__input-text" />
-          <label for="login_pass" class="ap-form__label ap-form__label-text">
+          <label 
+            for="login_pass" 
+            class="ap-form__label ap-form__label-text"
+            [class.ap-form__label-text--active]="user_data.password != ''">
             Password
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_pass">
@@ -58,7 +70,12 @@
         </span>
       </div>
     </form>
-    <form class="ap-form ml-col-1 login-form" name="login-form" onsubmit="return false;" (submit)="recoverPasswordAction()" *ngIf="!login_action">
+    <form 
+      class="ap-form ml-col-1 login-form" 
+      name="login-form" 
+      onsubmit="return false;" 
+      (submit)="recoverPasswordAction()" 
+      *ngIf="!login_action">
       <h4 class="ap-form__titulo text-left">
         Recover Password
       </h4>
@@ -66,14 +83,17 @@
         <div class="ap-form__input">
           <input 
             type="text" 
-            placeholder="Password"
+            placeholder="Email"
             id="recover_email" 
             name="recover_email"
-            [(ngModel)]="pass_data.email"
+            [(ngModel)]="pass_data.username"
             [class.form_error_found]="form_pass.no_emai"
             [class.form_error_found]="form_pass.no_val_mail"
             class="ap-form__input-text" />
-          <label for="recover_email" class="ap-form__label ap-form__label-text">
+          <label 
+            for="recover_email" 
+            class="ap-form__label ap-form__label-text" 
+            [class.ap-form__label-text--active]="pass_data.username != ''">
             Email
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_pass.no_emai">
