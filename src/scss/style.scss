@@ -342,6 +342,7 @@ select:active,
 }
 
 .ml-col-1,
+.ml-col-15,
 .ml-col-2,
 .ml-col-2o,
 .ml-col-3,
@@ -352,6 +353,10 @@ select:active,
 .ml-col-7,
 .ml-col-8 {
   float: left;
+}
+
+.ml-col-r {
+  float: right;
 }
 
 .ml-col-1 {
@@ -368,6 +373,10 @@ select:active,
 
 .ml-col-6 {
   width: 60%;
+}
+
+.ml-col-15 {
+  width: 15%;
 }
 
 .ml-col-2o {
@@ -965,7 +974,7 @@ select:active,
 
     &-text:focus + .ap-form__label-text,
     &-textarea:focus + .ap-form__label-text {
-      top: 7.7%;
+      top: 16.777%;
       opacity: 1;
     }
 
@@ -993,7 +1002,7 @@ select:active,
       transform: translateY(-50%);
 
       &--active {
-        top: 7.7% !important;
+        top: 16.777% !important;
         opacity: 1 !important;
       }
 
@@ -1167,6 +1176,10 @@ select:active,
       font-weight: 300;
       border-radius: 50px;
       transition: all .2s ease;
+
+      &--no-margin {
+        margin-right: 0 !important;
+      }
 
       &--big {
         width: 200px;
@@ -2183,6 +2196,10 @@ select:active,
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.color-red {
+  color: red;
 }
 
 .loader {

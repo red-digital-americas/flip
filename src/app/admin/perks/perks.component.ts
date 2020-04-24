@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { PerksGuide, PerksCategory } from '../models/Perks';
 import { Utils } from '../../utils/utils';
 import { LoaderComponent } from '../../../ts/loader';
+import { SystemMessage } from '../../../ts/systemMessage';
 
 @Component({
   selector: 'app-perks',
@@ -211,8 +212,10 @@ export class PerksComponent implements OnInit {
 
 
 
+
   //Autor: Carlos Enrique Hernandez Hernandez
   public loader = new LoaderComponent();
+  public system_message = new SystemMessage();
   public show_perk_form:boolean = false;
   public perk_form_action:string = "";
 
@@ -305,13 +308,32 @@ export class PerksComponent implements OnInit {
 
                 this.GetPerks();
                 this.toggleSectionForm('hide');
-                setTimeout( () => { this.loader.hideLoader(); }, 407);
+                setTimeout( () => { 
+                  
+                  this.loader.hideLoader(); 
+                  this.system_message.showMessage({
+                    kind: 'ok',
+                    message: {
+                      header: 'Perk created',
+                      text: 'Perk has been created successfully.'
+                    },
+                    time: 2000
+                  });
+                
+                }, 407);
 
               }
 
             }, (error: any) => {
 
-              console.log('Error WS AddPerk', error);
+              this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'System Error',
+                  text: 'Error WS => Add Perk'
+                },
+                time: 2000
+              });
 
             });
 
@@ -328,13 +350,32 @@ export class PerksComponent implements OnInit {
 
                 this.toggleSectionForm('hide');
                 this.GetPerks();
-                setTimeout( () => { this.loader.hideLoader(); }, 407);
+                setTimeout( () => { 
+                  
+                  this.loader.hideLoader(); 
+                  this.system_message.showMessage({
+                    kind: 'ok',
+                    message: {
+                      header: 'Perk edited',
+                      text: 'Perk has been edited successfully.'
+                    },
+                    time: 2000
+                  });
+
+                }, 407);
 
               }
 
             }, (error: any) => {
 
-              console.log('Error en Editar Perk => ', error );
+              this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'System Error',
+                  text: 'Error WS => Edit Perk'
+                },
+                time: 2000
+              });
 
             });
 
@@ -420,12 +461,27 @@ export class PerksComponent implements OnInit {
             this.GetPerks();
             this.showModal();
             this.loader.hideLoader(); 
+            this.system_message.showMessage({
+              kind: 'ok',
+              message: {
+                header: 'Perk Deleted',
+                text: 'Perk has been deleted successfully.'
+              },
+              time: 2000
+            });
 
           }
 
         }, (error: any) => {
 
-          console.log('Error WS ELiminar PERK => ', error);
+          this.system_message.showMessage({
+            kind: 'error',
+            message: {
+              header: 'System Error',
+              text: 'Error WS => Deleted Perk'
+            },
+            time: 2000
+          });
 
         });
 

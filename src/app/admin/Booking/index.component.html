@@ -140,6 +140,20 @@
                 </span>
               </div>
             </div>
+            <div class="ml-col-2">
+              <div class="ap-form__input">
+                <input 
+                  type="checkbox"
+                  id="booking_active" 
+                  name="booking_active"
+                  [checked]="booking_data.status"
+                  [(ngModel)]="booking_data.status"
+                  class="ap-form__input-checkbox display-none" />
+                <label for="booking_active" class="ap-form__label ap-form__label-checkbox">
+                  Build Active
+                </label>
+              </div>
+            </div>
         </div>
         <div class="ml-col-3o">
             <div class="ap-form__input">

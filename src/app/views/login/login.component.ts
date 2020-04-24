@@ -103,18 +103,39 @@ export class LoginComponent implements OnInit {
 
             if( response.success ) {
 
-              this.message = "Ya te enviamos una nueva contraseña";
+              this.system_message.showMessage({
+                kind: 'ok',
+                message: {
+                  header: 'Recover Pass',
+                  text: `We will send you an email for next spets.`
+                },
+                time: 2000
+              });  
               this.showSuccess(); 
 
             } else {
 
-              this.toasterService.pop('error', 'Error ', response.result);
+              this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'Error recovering password',
+                  text: `${ response.result }`
+                },
+                time: 2000
+              });  
 
             }
 
           }, (error: any) => {
 
-            console.log('Error recover => ', error);
+            this.system_message.showMessage({
+              kind: 'error',
+              message: {
+                header: 'System Error',
+                text: `Error WS => RecoverPassword`
+              },
+              time: 2000
+            });  
 
           });
 
@@ -145,7 +166,6 @@ export class LoginComponent implements OnInit {
 
               this.message = "Usuario y/o contraseña incorrecta";
               this.validar = true;
-              this.showError();
               break;
             case "password incorrecto":
 
@@ -160,7 +180,6 @@ export class LoginComponent implements OnInit {
 
               this.message = "Usuario y/o contraseña incorrecta";
               this.validar = true;
-              this.showError();
               break;
             default:
               if (value.token != "usuarios no existe" || value.token != "password incorrecto") {
@@ -177,7 +196,7 @@ export class LoginComponent implements OnInit {
                   kind: 'ok',
                   message: {
                     header: 'Session Begins',
-                    text: `¡Welcome! ${ localStorage.getItem("name") } ${ localStorage.getItem("lastName") }`
+                    text: `¡Welcome back! ${ localStorage.getItem("name") } ${ localStorage.getItem("lastName") }`
                   },
                   time: 2000
                 });  

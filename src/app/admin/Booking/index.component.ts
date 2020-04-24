@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
 import { LoaderComponent } from '../../../ts/loader';
+import { SystemMessage } from '../../../ts/systemMessage';
 
 @Component({
     selector: 'bookingIndex',
@@ -17,6 +18,7 @@ export class BookingIndexComponent implements OnInit {
     ){}
 
     public loader = new LoaderComponent();
+    public system_message = new SystemMessage();
 
     /*
     * Autor: Carlos Hernandez
@@ -54,6 +56,7 @@ export class BookingIndexComponent implements OnInit {
                 this.booking_data.direction = editable.direction;
                 this.booking_data.latitude = editable.latitude;
                 this.booking_data.longitude = editable.longitude;
+                this.booking_data.status = editable.status;
                 this.booking_data.photo = editable.photo;
                 this.getRoomsToEdit(  editable.typeRoom );
                 this.booking_form_action = 'Editar Edificio';
@@ -84,6 +87,7 @@ export class BookingIndexComponent implements OnInit {
     public goToBooking( id_booking:number, booking_name:string ):void {
 
         sessionStorage.setItem('name_section_active', booking_name );
+        sessionStorage.setItem('id_section_active', id_booking.toString() );
         this.router.navigateByUrl( `tenantList/${ id_booking }` );
 
     }
@@ -130,7 +134,7 @@ export class BookingIndexComponent implements OnInit {
                 id: room.id,
                 name: room.type,
                 cantidad: room.capacity,
-                can_delete: true,
+                can_delete: false,
                 last_one: false,
                 input: room.type,
                 select: Number( room.capacity ),
@@ -141,7 +145,6 @@ export class BookingIndexComponent implements OnInit {
 
         });
 
-        this.rooms[0].can_delete = false;
         this.rooms[this.rooms.length -1].last_one = true;
 
     }
@@ -220,7 +223,8 @@ export class BookingIndexComponent implements OnInit {
 
         if( !this.new_build_button && this.edit_build_button ) {
 
-            this.deleteRoomService( event_data, id_room );
+            //Anteriormente se pensaba que se eliminarian los cuartos
+            //this.deleteRoomService( event_data, id_room );
 
         }
 
@@ -300,20 +304,39 @@ export class BookingIndexComponent implements OnInit {
                 this.loader.showLoader(); 
 
                 this.services.ServiceSaveBuilding( this.booking_data )
-                    .subscribe( ( response: any ) => { console.log('Para Nuevo = >', this.booking_data );
+                    .subscribe( ( response: any ) => { 
 
                         if( response.result == 'Success' ) {
 
                             this.requestIndexContent();
                             this.toggleSectionForm('hide');
                             this.resetSettings();
-                            setTimeout( () => { this.loader.hideLoader(); }, 407);
+                            setTimeout( () => { 
+                                
+                                this.loader.hideLoader(); 
+                                this.system_message.showMessage({
+                                    kind: 'ok',
+                                    message: {
+                                      header: 'Build created',
+                                      text: 'Build has been created successfully.'
+                                    },
+                                    time: 2000
+                                  });
+                            
+                            }, 407);
 
                         }
         
                     }, (error: any) => {
         
-                        console.log('Erro WS NewBuild',error);
+                        this.system_message.showMessage({
+                            kind: 'error',
+                            message: {
+                              header: 'System Error',
+                              text: 'Error WS => AddBuild'
+                            },
+                            time: 2000
+                          });
         
                     });
 
@@ -323,23 +346,42 @@ export class BookingIndexComponent implements OnInit {
 
                 this.booking_data.typeroom = this.getRoomsData('edit');
 
-                this.loader.showLoader(); 
+                this.loader.showLoader();
 
                 this.services.ServicioEditBuild( this.booking_data )
-                    .subscribe( (response: any) => {
+                    .subscribe( (response: any) => { 
 
                         if( response.result == 'Success' ) {
 
                             this.requestIndexContent();
                             this.toggleSectionForm('hide');
                             this.resetSettings();
-                            setTimeout( () => { this.loader.hideLoader(); }, 407);
+                            setTimeout( () => { 
+                                
+                                this.loader.hideLoader(); 
+                                this.system_message.showMessage({
+                                    kind: 'ok',
+                                    message: {
+                                      header: 'Promotion edited',
+                                      text: 'Promotion has been edited successfully.'
+                                    },
+                                    time: 2000
+                                  });
+                            
+                            }, 407);
 
                         }
 
                     }, (error: any) => {
 
-                        console.log('Error Edit Build => ', error);
+                        this.system_message.showMessage({
+                            kind: 'error',
+                            message: {
+                              header: 'System Error',
+                              text: 'Error WS => Edit Build'
+                            },
+                            time: 2000
+                          });
 
                     });
 
@@ -651,7 +693,7 @@ class BookingData {
     id: number;
     name: string = '';
     description: string = '';
-    status: boolean = true;
+    status: boolean;
     direction: string = '';
     longitude: number;
     latitude: number;

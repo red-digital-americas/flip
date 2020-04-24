@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { PerksGuide, PerksCategory, PerkPromotion } from '../../models/Perks';
 import { Utils } from '../../../utils/utils';
 import { LoaderComponent } from '../../../../ts/loader';
+import { SystemMessage } from '../../../../ts/systemMessage';
 
 @Component({
   selector: 'app-perks-detail',
@@ -141,6 +142,7 @@ export class PerksDetailComponent implements OnInit {
   //Autor: Carlos Enrique Hernandez Hernandez';
 
   public loader = new LoaderComponent();
+  public system_message = new SystemMessage();
 
   public sendDataPromotion():void { 
 
@@ -158,12 +160,27 @@ export class PerksDetailComponent implements OnInit {
                 this.GetPromotions();
                 this.toggleSectionForm('hide');
                 this.loader.hideLoader();
+                this.system_message.showMessage({
+                  kind: 'ok',
+                  message: {
+                    header: 'Promotion created',
+                    text: 'Promotion has been created successfully.'
+                  },
+                  time: 2000
+                });
 
               }
 
             }, (error: any) => {
 
-            console.log( error );
+              this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'System Error',
+                  text: 'Error WS => Add Promo'
+                },
+                time: 2000
+              });
 
             });
 
@@ -181,20 +198,31 @@ export class PerksDetailComponent implements OnInit {
                 this.GetPromotions();
                 this.toggleSectionForm('hide');
                 this.loader.hideLoader();
+                this.system_message.showMessage({
+                  kind: 'ok',
+                  message: {
+                    header: 'Promotion edited',
+                    text: 'Promotion has been edited successfully.'
+                  },
+                  time: 2000
+                });
 
               }
 
             }, (error: any) => {
 
-              console.log('Error WS Delete Promo => ', error );
+              this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'System Error',
+                  text: 'Error WS => Edit Promo.'
+                },
+                time: 2000
+              });
 
             });
 
       }
-
-    } else {
-
-      console.log('NO NO NO Puedes subir la info');
 
     }
 
@@ -315,12 +343,27 @@ export class PerksDetailComponent implements OnInit {
             this.GetPromotions();
             this.showModal();
             this.loader.hideLoader();
+            this.system_message.showMessage({
+              kind: 'ok',
+              message: {
+                header: 'Promotion deleted',
+                text: 'Promotion has been deleted successfully.'
+              },
+              time: 2000
+            });
 
           }
 
         }, (error: any) => {
 
-          console.log('Error DeletePromo => ', error);
+          this.system_message.showMessage({
+            kind: 'error',
+            message: {
+              header: 'System Error',
+              text: 'Error WS => Deleted promo'
+            },
+            time: 2000
+          });
 
         });
 

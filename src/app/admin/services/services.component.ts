@@ -7,6 +7,7 @@ import { PerksGuide, PerksCategory } from '../models/Perks';
 import { Utils } from '../../utils/utils';
 import { Service, ServicesFormGroup, ServicesFormGroupInitialValues } from '../models/Services';
 import { LoaderComponent } from '../../../ts/loader';
+import { SystemMessage } from '../../../ts/systemMessage';
 
 @Component({
   selector: 'app-services',
@@ -172,6 +173,7 @@ export class ServicesComponent implements OnInit {
 
   //Autor: Carlos Hernandez Hernandez
   public loader = new LoaderComponent();
+  public system_message = new SystemMessage();
   public show_service_form:boolean = false;
   public service_form_action:string = '';
 
@@ -190,13 +192,32 @@ export class ServicesComponent implements OnInit {
 
                 this.GetServices();
                 this.toggleSectionForm('hide');
-                setTimeout( () => { this.loader.hideLoader(); }, 407);
+                setTimeout( () => { 
+                  
+                  this.loader.hideLoader();
+                  this.system_message.showMessage({
+                    kind: 'ok',
+                    message: {
+                      header: 'Service has been created',
+                      text: 'Service has been created successfully.'
+                    },
+                    time: 2000
+                  });
+                
+                }, 407);
 
               }
 
               }, (error: any) => {
 
-                console.log('Error en respuesta servicio NEWSERVICE', error );
+                this.system_message.showMessage({
+                  kind: 'Error',
+                  message: {
+                    header: 'System Error',
+                    text: 'Error WS => New Service'
+                  },
+                  time: 2000
+                });
 
               });
 
@@ -213,13 +234,32 @@ export class ServicesComponent implements OnInit {
 
                 this.GetServices();
                 this.toggleSectionForm('hide');
-                setTimeout( () => { this.loader.hideLoader(); }, 407);
+                setTimeout( () => { 
+                  
+                  this.loader.hideLoader(); 
+                  this.system_message.showMessage({
+                    kind: 'ok',
+                    message: {
+                      header: 'Service has been edited',
+                      text: 'Service has been edited successfully.'
+                    },
+                    time: 2000
+                  });
+                
+                }, 407);
 
               }
 
             }, (error: any) => {
 
-              console.log('Error en el servico EDITARSERVICE', error);
+              this.system_message.showMessage({
+                kind: 'Error',
+                message: {
+                  header: 'System Error',
+                  text: 'Error WS => Edit Service'
+                },
+                time: 2000
+              });
 
             });
 
@@ -269,12 +309,42 @@ export class ServicesComponent implements OnInit {
             this.GetServices();
             this.showModal();
             this.loader.hideLoader();
+            this.system_message.showMessage({
+              kind: 'ok',
+              message: {
+                header: 'Service has been deleted',
+                text: 'Service has been deleted successfully.'
+              },
+              time: 2000
+            });
+
+          } else {
+
+            this.system_message.showMessage({
+              kind: 'error',
+              message: {
+                header: 'System Error',
+                text: 'Error WS => Delete Service'
+              },
+              time: 2000
+            });
+  
+            setTimeout( () => { location.reload() }, 2777);
 
           }
 
         }, (error: any) => {
 
-          console.log('Error en el servicio de eliminar => ', error);
+          this.system_message.showMessage({
+            kind: 'Error',
+            message: {
+              header: 'System Error',
+              text: 'Error WS => Delete Service'
+            },
+            time: 2000
+          });
+
+          setTimeout( () => { location.reload() }, 2777);
 
         });
 

@@ -324,7 +324,7 @@ export class NewsfeedComponent implements OnInit {
                 this.add_loader.hideLoader();
                 this.system_message.showMessage({
                   kind: 'ok',
-                  time: 2200,
+                  time: 2500,
                   message: {
                     header: 'Post has been created',
                     text: 'You can now see your post.'
@@ -439,6 +439,14 @@ export class NewsfeedComponent implements OnInit {
               this.comment_data = '';
               this.add_loader.hideLoader();
               this.getCommentsPost();
+              this.system_message.showMessage({
+                kind: 'ok',
+                time: 2500,
+                message: {
+                  header: 'Comment has been created',
+                  text: 'Your Comment has been created succesfully.'
+                }
+              });
     
             } else {
     
@@ -531,6 +539,14 @@ export class NewsfeedComponent implements OnInit {
             this.showModal();
             this.getCommentsPost();
             this.add_loader.hideLoader();
+            this.system_message.showMessage({
+              kind: 'ok',
+              time: 2500,
+              message: {
+                header: 'Comment has been deleted',
+                text: 'Your Comment has been delete succesfully.'
+              }
+            });
 
           } else {
 
@@ -607,6 +623,14 @@ export class NewsfeedComponent implements OnInit {
             this.get_posts();
             this.showModal();
             this.add_loader.hideLoader();
+            this.system_message.showMessage({
+              kind: 'ok',
+              time: 2500,
+              message: {
+                header: 'Post has been deleted',
+                text: 'Your Post has been delete succesfully.'
+              }
+            });
 
           }
 

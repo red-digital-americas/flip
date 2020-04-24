@@ -26,11 +26,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 
     public goToPage( to_where:string = 'default' ):void {
 
-        const id_path = this.router_data.snapshot.params['id'];
+        const id_path = sessionStorage.getItem('id_section_active'); console.log('PTM ===> ', id_path );
 
-        to_where != 'default' ? 
-            this.router.navigateByUrl( `${ to_where }/${ id_path }` ) :
+        
+
+        if( to_where != 'default' ) {
+
+            id_path == null || id_path == undefined ? 
+                this.router.navigateByUrl( 'booking' ) : 
+                this.router.navigateByUrl( `${ to_where }/${ id_path }` );
+
+        } else {
+
             this.router.navigateByUrl( 'booking' );
+
+        }
+
     }
 
     public activeOptionStyle( option_selected:string ):void {

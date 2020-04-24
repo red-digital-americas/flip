@@ -4,6 +4,7 @@ import { DatosService } from '../../../datos.service';
 import { Utils } from '../../utils/utils';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { LoaderComponent } from '../../../ts/loader';
+import { SystemMessage } from '../../../ts/systemMessage';
 
 
 class AmenityRequestModel {
@@ -190,6 +191,7 @@ export class AmenitiesComponent implements OnInit {
   
   /* Welcomeback Mr. Anderson, We missed you! */
   public loader = new LoaderComponent();
+  public system_message = new SystemMessage();
   public show_ammenity_form:boolean = false;
   public ammenity_form_action:string = "";
 
@@ -276,13 +278,32 @@ export class AmenitiesComponent implements OnInit {
 
                 this.GetAmenities();
                 this.toggleSectionForm('hide');
-                setTimeout( () => {  this.loader.hideLoader(); }, 407);
+                setTimeout( () => {  
+
+                  this.loader.hideLoader(); 
+                  this.system_message.showMessage({
+                    kind: 'ok',
+                    message: {
+                      header: 'Amenity has been created',
+                      text: 'You can now see your amenity.'
+                    },
+                    time: 2000
+                  });
+
+                }, 407);
 
                 }
 
             }, (error: any) => {
 
-              console.log('Error Error Amenity: ', error);
+              this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'System Error',
+                  text: 'Error WS => New Amenity'
+                },
+                time: 2000
+              });
 
             });
 
@@ -301,13 +322,32 @@ export class AmenitiesComponent implements OnInit {
 
                 this.GetAmenities();
                 this.toggleSectionForm('hide');
-                setTimeout( () => { this.loader.hideLoader(); }, 407);
+                setTimeout( () => { 
+                  
+                  this.loader.hideLoader(); 
+                  this.system_message.showMessage({
+                    kind: 'ok',
+                    message: {
+                      header: 'Amenity has been edited',
+                      text: 'Your amenity has been updated.'
+                    },
+                    time: 2000
+                  });
+                
+                }, 407);
 
               }
 
             }, (error: any) => {
 
-              console.log('Error en el de editar => ', error);
+              this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'System Error',
+                  text: 'Error WS => Edit Amenity'
+                },
+                time: 2000
+              });
 
             });
 
@@ -400,10 +440,25 @@ export class AmenitiesComponent implements OnInit {
           this.GetAmenities();
           this.showModal();
           this.loader.hideLoader();
+          this.system_message.showMessage({
+            kind: 'ok',
+            message: {
+              header: 'Amenity has been deleted',
+              text: 'The amenity has been deleted successfully.'
+            },
+            time: 2000
+          });
 
         }, (error: any) => {
 
-          console.log('Error en el servicio de eliminar => ', error);
+          this.system_message.showMessage({
+            kind: 'error',
+            message: {
+              header: 'System Error',
+              text: 'Error WS => Delete Amenity'
+            },
+            time: 2000
+          });
 
         });
 
