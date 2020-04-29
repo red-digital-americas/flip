@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit {
                   header: 'Recover Pass',
                   text: `We will send you an email for next spets.`
                 },
-                time: 2000
+                time: 4000
               });  
               this.showSuccess(); 
 
@@ -175,7 +175,7 @@ export class LoginComponent implements OnInit {
                   header: 'Error',
                   text: value.token
                 },
-                time: 2000
+                time: 4000
               });
 
               this.message = "Usuario y/o contraseña incorrecta";

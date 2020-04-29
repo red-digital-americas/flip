@@ -670,6 +670,33 @@ export class NewsfeedComponent implements OnInit {
     kind_data.photo == '../../../assets/14.jpg' || kind_data.photo == '' ? 
       this.forms_erros_found.no_photo = true : this.forms_erros_found.no_photo = false;
 
+    if( this.forms_erros_found.no_title ) this.system_message.showMessage({
+        kind: 'error',
+        time: 3800,
+        message: {
+          header: 'Field can not be empty',
+          text: 'Title is required.'
+        }
+    });
+
+    if( this.forms_erros_found.no_post ) this.system_message.showMessage({
+      kind: 'error',
+      time: 3800,
+      message: {
+        header: 'Field can not be empty',
+        text: 'Title is required.'
+      }
+    });
+
+    if( this.forms_erros_found.no_photo ) this.system_message.showMessage({
+      kind: 'error',
+      time: 3800,
+      message: {
+        header: 'Field can not be empty',
+        text: 'Title is required.'
+      }
+    });
+
     if(
       !this.forms_erros_found.no_title &&
       !this.forms_erros_found.no_post &&
@@ -779,4 +806,3 @@ class DataPost {
   public userid: any;
   public BuildingId: string = '';
 }
- 
