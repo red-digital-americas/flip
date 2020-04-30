@@ -71,6 +71,10 @@ import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/
 import { PaymentComponent } from './payment/payment.component';
 import { Module as StripeModule } from "stripe-angular"
 
+
+import { PaymentComponent } from './payment/payment.component';
+import { Module as StripeModule } from "stripe-angular"
+
 @NgModule({
   imports: [    
     BsDatepickerModule.forRoot(),
@@ -125,12 +129,17 @@ import { Module as StripeModule } from "stripe-angular"
     AlertsComponent,
     RoomCatalogComponent,
     MembershipCatalogComponent,
+<<<<<<< HEAD
     GeneralTenantListComponent,
     AddTenantComponent,
     UsersComponent,
     RolesComponent,
     ProfileComponent,
     ProfileReservationsComponent
+=======
+    ProfileComponent,
+    PaymentComponent
+>>>>>>> Feature Add payment with Stripe
   ],
   entryComponents: [
     DetalleComponent,
