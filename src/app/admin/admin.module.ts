@@ -67,6 +67,10 @@ import { RolesComponent } from './Booking/Roles/Roles.component';
 import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
 import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/Reservations.component';
 
+
+import { PaymentComponent } from './payment/payment.component';
+import { Module as StripeModule } from "stripe-angular"
+
 @NgModule({
   imports: [    
     BsDatepickerModule.forRoot(),
