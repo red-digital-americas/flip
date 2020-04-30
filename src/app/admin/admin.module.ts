@@ -61,6 +61,10 @@ import { RoomCatalogComponent } from './Booking/RoomCatalog/roomCatalog.componen
 import { MembershipCatalogComponent } from './Booking/Membership/memberShipCatalog.component';
 import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
 
+
+import { PaymentComponent } from './payment/payment.component';
+import { Module as StripeModule } from "stripe-angular"
+
 @NgModule({
   imports: [    
     BsDatepickerModule.forRoot(),
@@ -88,7 +92,10 @@ import { ProfileComponent } from './Booking/TenantList/profile/profile.component
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    
+    
+    StripeModule.forRoot()
   ],
   declarations: [
     CommunitiesComponent,  
@@ -114,7 +121,8 @@ import { ProfileComponent } from './Booking/TenantList/profile/profile.component
     AlertsComponent,
     RoomCatalogComponent,
     MembershipCatalogComponent,
-    ProfileComponent
+    ProfileComponent,
+    PaymentComponent
   ],
   entryComponents: [
     DetalleComponent,

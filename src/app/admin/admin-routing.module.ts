@@ -10,6 +10,7 @@ import { AmenitiesComponent } from './amenities/amenities.component';
 import { EditAmenitiesComponent } from './amenities/edit/edit-amenities.component';
 import { RoleGuardService } from '../guards/role-guard.service';
 import { ChatComponent } from './chat/chat.component';
+import { PaymentComponent } from './payment/payment.component';
 
 //CHH
 import { BookingIndexComponent } from './Booking/index.component';
@@ -49,6 +50,7 @@ const routes: Routes = [
       // { path: 'perks/:id', loadChildren: './perks/perks.module#PerksComponentModule' },
       { path: '', loadChildren: './perks/perks.module#PerksComponentModule', data: { title: 'Perks'} },
       { path: '', loadChildren: './services/services.module#ServicesComponentModule', data: { title: 'Services'}  },
+      { path: 'payment', component: PaymentComponent, data: { title: 'Payment' } }
     ]
   }
 ];
