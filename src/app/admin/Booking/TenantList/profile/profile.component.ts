@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatosService } from '../../../../../datos.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { userInfo } from 'os';
 import { isNullOrUndefined } from 'util';
@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     public services: DatosService, 
     private route: ActivatedRoute, 
-    private location: Location
+    private location: Location,
+    public router: Router
   ) {}
 
 
@@ -578,6 +579,8 @@ export class ProfileComponent implements OnInit {
     this.services.service_general_get_with_params('Tenant/getCreditCard', user_data)
         .subscribe( (response: any) => {
 
+          console.log('Card => ', response.item );
+
           if( response.result == 'Sucess' ) {
 
             this.payment_cards = response.item; 
@@ -586,8 +589,11 @@ export class ProfileComponent implements OnInit {
 
               card.number = this.decryptData( card.number ).toString();
               card.ccv = this.decryptData( card.ccv ).toString();
+              card.kind = this.kindCardDetecter( card.number );
 
             });
+
+            console.log('Cards => ', this.payment_cards);
 
           } 
 
@@ -603,6 +609,7 @@ export class ProfileComponent implements OnInit {
 
     this.card_data.number = this.encryptData( this.card_data.number );
     this.card_data.ccv = this.encryptData( this.card_data.ccv );
+    delete this.card_data.kind;
 
     this.loader.showLoader();
 
@@ -630,6 +637,51 @@ export class ProfileComponent implements OnInit {
         }, (error: any) => {
 
           console.log('Error WS Creditcard => ', error);
+
+        });
+
+  }
+
+  public chooseAsFavorite( card_data: CardDTO ):void {
+
+    console.log(card_data);
+    this.card_data = card_data;
+    this.card_data.number = this.encryptData( this.card_data.number );
+    this.card_data.ccv = this.encryptData( this.card_data.ccv );
+    this.card_data.main = 1;
+    delete this.card_data.kind;
+
+    console.log('Desde aqui => ', this.card_data);
+
+    this.loader.showLoader();
+
+    this.services.service_general_post('Tenant/CreateUpdateCreditCard/' , this.card_data)
+        .subscribe( (response: any) => {
+
+          console.log( response );
+
+          if( response.result == 'Success' ) {
+
+            this.loader.hideLoader();
+
+            this.system_message.showMessage({
+              kind: 'ok',
+              time: 4777,
+              message: {
+                header: 'Card choosed.',
+                text: 'This Credit card has been choosed as favorite.'
+              }
+            });
+
+            this.getPaymentData();
+
+          }
+
+        }, (error: any) => {
+
+          this.loader.hideLoader();
+
+          console.log('Choose Favorite => ', error);
 
         });
 
@@ -684,7 +736,6 @@ export class ProfileComponent implements OnInit {
     no_bphon: false
   }
   private validatingProfileData( form_data: ProfileDTO ):boolean {
-
 
     let result: boolean;
 
@@ -753,6 +804,34 @@ export class ProfileComponent implements OnInit {
     }
 
     return result;
+
+  }
+
+  public kindCardDetecter( card_number: string ):any {
+
+    let card_kind = '';
+    
+    const visa_regex = new RegExp("^4[0-9]{12}(?:[0-9]{3})?$"),
+          mcard_regex = new RegExp("^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$"),
+          american_regex = new RegExp("^3[47][0-9]{13}$");
+
+    if( visa_regex.test( card_number ) && 
+        card_number.length >= 13 && 
+        card_number.length <= 16 ) card_kind = 'visa';
+
+    if( mcard_regex.test( card_number ) && 
+        card_number.length == 16 ) card_kind = 'mcard';
+
+    if( american_regex.test( card_number ) && 
+        card_number.length == 15 ) card_kind = 'american';
+
+    return card_kind;
+
+  }
+
+  public goToPage( page: string ):void {
+
+    this.router.navigateByUrl( page );
 
   }
 
@@ -1015,4 +1094,5 @@ class CardDTO {
   userId: number = null;
   userPaymentServices: any;
   year: string = '';
+  kind: string = '';
 }

@@ -25,6 +25,7 @@ import { AddTenantComponent } from './Booking/AddTenant/AddTenant.component';
 import { UsersComponent } from './Booking/Users/Users.component';
 import { RolesComponent } from './Booking/Roles/Roles.component';
 import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
+import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/Reservations.component';
 
 const routes: Routes = [
   { path: '', data: { title: 'AdminApp', expectedRole: [2,4] }, canActivate: [RoleGuardService],
@@ -52,7 +53,9 @@ const routes: Routes = [
       { path: 'generalTenantlist', component: GeneralTenantListComponent, data: { title: 'General Tenantlist' } },
       { path: 'AddTenant', component: AddTenantComponent, data: { title: 'Add Tenant' } },
       { path: 'Users', component: UsersComponent, data: { title: 'Users' } },
-      { path: 'Roles', component: RolesComponent, data: { title: 'Roles' } },
+      { path: 'Roles', component: RolesComponent, data: { title: 'Roles' } }, 
+      { path: 'reservations', component: ProfileReservationsComponent, data: { title: 'Reservations' } }, 
+      
       
       // { path: 'perks/:id', loadChildren: './perks/perks.module#PerksComponentModule' },
       { path: '', loadChildren: './perks/perks.module#PerksComponentModule', data: { title: 'Perks'} },
