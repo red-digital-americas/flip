@@ -64,6 +64,7 @@ import { AddTenantComponent } from './Booking/AddTenant/AddTenant.component';
 import { UsersComponent } from './Booking/Users/Users.component';
 import { RolesComponent } from './Booking/Roles/Roles.component';
 import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
+import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/Reservations.component';
 
 @NgModule({
   imports: [    
@@ -122,7 +123,8 @@ import { ProfileComponent } from './Booking/TenantList/profile/profile.component
     AddTenantComponent,
     UsersComponent,
     RolesComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileReservationsComponent
   ],
   entryComponents: [
     DetalleComponent,

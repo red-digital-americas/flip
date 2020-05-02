@@ -45,7 +45,7 @@ export class BookingIndexComponent implements OnInit {
                 this.booking_form_action = 'Nuevo Edificio';
             break;
 
-            case 'edit':
+            case 'edit': console.log('Editable => ', editable);
                 this.show_booking_form = true;
                 this.new_build_button = false;
                 this.edit_build_button = true;
@@ -137,7 +137,7 @@ export class BookingIndexComponent implements OnInit {
                 can_delete: false,
                 last_one: false,
                 input: room.type,
-                select: Number( room.capacity ),
+                select: room.description,
                 active: room.active
             };
         
@@ -346,7 +346,7 @@ export class BookingIndexComponent implements OnInit {
 
                 this.booking_data.typeroom = this.getRoomsData('edit');
 
-                this.loader.showLoader();
+                this.loader.showLoader(); console.log('this one => ', this.booking_data);
 
                 this.services.ServicioEditBuild( this.booking_data )
                     .subscribe( (response: any) => { 
@@ -392,7 +392,6 @@ export class BookingIndexComponent implements OnInit {
     }
 
 
-    public espacios_habitaciones = [1,2,3,4,5,6,7,8,9,10];
     public getRoomsData( for_action: string ):Array<any> {
 
         let rooms_added = [];
@@ -406,14 +405,14 @@ export class BookingIndexComponent implements OnInit {
 
                     get_rooms.forEach( (room: any) => {
 
-                        let input = room.querySelector('input'),
-                            select = room.querySelector('select');
+                        let input = room.querySelectorAll('input')[0],
+                            select = room.querySelectorAll('textarea')[0];
                         
                         if( input.value != '' && !select.value != null ) {
         
                             let new_room = {
                                 type: input.value,
-                                capacity: select.value,
+                                description: select.value,
                                 active: true
                             };
         
@@ -421,7 +420,7 @@ export class BookingIndexComponent implements OnInit {
         
                         }
         
-                    });
+                    }); 
 
                 break;
 
@@ -430,7 +429,7 @@ export class BookingIndexComponent implements OnInit {
                     get_rooms.forEach( (room: any) => {
 
                         let input = room.querySelectorAll('input')[0],
-                            select = room.querySelector('select'),
+                            select = room.querySelectorAll('textarea')[0],
                             active = room.querySelectorAll('input')[1],
                             get_id_token = (function () {
                                     const input_sample = input.id.split('_'),
@@ -448,7 +447,7 @@ export class BookingIndexComponent implements OnInit {
     
                             let new_room = {
                                 type: input.value,
-                                capacity: select.value,
+                                description: select.value,
                                 active: active.checked,
                                 idBuild: this.booking_data.id
                             };
@@ -459,7 +458,7 @@ export class BookingIndexComponent implements OnInit {
         
                         }
 
-                    });
+                    }); 
 
                 break;
 
@@ -654,6 +653,7 @@ export class BookingIndexComponent implements OnInit {
         if (localStorage.getItem("user") == undefined) this.router.navigate(['/login']);
         else {
 
+            sessionStorage.removeItem('id_section_active');
             this.requestIndexContent();
 
         }

@@ -1,3 +1,5 @@
+import { Settings } from "http2";
+
 export class SystemMessage {
 
     private message_settings: MessageSettings = new MessageSettings();
@@ -6,7 +8,7 @@ export class SystemMessage {
 
         const message_container = document.createElement('div');
 
-              message_container.setAttribute('id', 'system_messsage');
+              message_container.setAttribute('system-message', 'system-message');
               message_container.setAttribute('class', `system-message system-message--animation-in system-message__${ message_settings.kind }`);
               message_container.innerHTML = `
                     <h4 class="system-message__titulo">
@@ -25,41 +27,72 @@ export class SystemMessage {
         
         if( settings.where == undefined ) settings.where = 'root_html'; console.log( settings );
 
-        const get_sm_container = document.getElementById('system_messsage'),
-              get_root = document.getElementById( settings.where ),
-              init_message_functions = new Promise( ( resolve ) => {
+        const get_root = document.getElementById( settings.where );
+              get_root.appendChild( this.createMessageContainer( settings ));
 
-                get_sm_container == null ? resolve( true ) : resolve( false );
-
-              });
-
-              init_message_functions.then( (result: boolean) => {
-
-                if( result ) {
-
-                    get_root.appendChild( this.createMessageContainer( settings ) );
-                    this.destroyMessage( settings.time );
-
-                }
-
-              });
+        this.stylingMessages( settings );
 
     }
 
-    private destroyMessage( time: number ):void { console.log( time );
+    private stylingMessages( settings_message: MessageSettings = null ):void {
 
-        setTimeout( () => {
+        let messages_in = document.querySelectorAll('[system-message]');
 
-            document.getElementById('system_messsage').classList.remove('system-message--animation-in');
-            document.getElementById('system_messsage').classList.add('system-message--animation-out');
+            messages_in.forEach( (message: any, index: number) => {
+
+                let padding_top = index == 0 ? 1 : index + 1;
+
+                message.style.top = `${ ( message.offsetHeight + 10 ) * padding_top }px`;
+
+                if( messages_in.length == index + 1 ) this.destroyMessage( messages_in, settings_message.time );
+
+            });
+
+    }
+
+    private destroyMessage( messages: any, time_to_destroy: number ):void { 
+
+        if( messages.length == 6 ) {
+
+            messages[0].classList.add('system-message--animation-out');
 
             setTimeout( () => {
 
-                document.getElementById('system_messsage').remove();
+                messages[0].remove();
+                this.stylingMessages();
 
-            }, 1700);
+            }, 600);
 
-        }, time + 777);
+        }
+
+        initRemoverMessage();
+
+        function initRemoverMessage():void {
+
+            if( messages.length <= 5 ) {
+
+                let timer = 1;
+
+                for( let message = messages.length; message--; ) {
+
+                    setTimeout( () => {
+
+                        messages[message].classList.add('system-message--animation-out');
+                        timer += 1;
+
+                        setTimeout( () => {
+
+                            messages[message].remove();
+
+                        }, 600);
+
+                    }, time_to_destroy * timer);
+
+                }
+
+            }
+
+        }
 
     }
 

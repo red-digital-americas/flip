@@ -28,9 +28,22 @@ export class LoaderComponent {
 
     }
 
+    private allFocusOut():void {
+
+        const inputs = document.querySelectorAll('input');
+
+        inputs.forEach( (input: any) => {
+
+            input.blur();
+
+        });
+
+    }
+
     public showLoader( section: string = 'root_html' ): void {
 
         this.section = section;
+        this.allFocusOut();
 
         const create_loader = new Promise( (resolve: any) => {
 

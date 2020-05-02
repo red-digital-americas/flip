@@ -15,11 +15,13 @@ export class RoomAvailavilityComponent implements OnInit {
 
     public section: string;
     public tabs_content = new TabsComponent('root');
+    public tabs_inner = new TabsComponent('inner');
 
     ngOnInit() {
 
         this.section = 'roomAvailavility';
         this.tabs_content.createTabsApp();
+        this.tabs_inner.createTabsApp();
 
     }
 
