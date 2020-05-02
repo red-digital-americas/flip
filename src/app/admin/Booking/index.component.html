@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    <form (submit)="sendBookingData()" onsubmit="return false;" class="ap-form ml-col-1 card-style" *ngIf="show_booking_form">
+    <form (submit)="sendBookingData()" class="ap-form ml-col-1 card-style" *ngIf="show_booking_form">
         <div class="ml-col-1">
           <h4 class="ap-form__titulo text-left">
             {{ booking_form_action }}
@@ -208,18 +208,22 @@
                 </div>
                 <div class="ml-col-1">
                   <div class="ap-form__input">
-                    <textarea 
-                      type="text"
-                      placeholder="Description"
+                    <select 
+                      placeholder="Número de habitaciones"
                       id="booking_room_num_{{ room.id }}"
                       value="{{ room.select }}" 
                       name="booking_num_title_{{ room.id }}"
-                      class="ap-form__input-textarea"></textarea>
+                      class="ap-form__input-text">
+                      <option disabled="disabled" value="">Número de habitaciones</option>
+                      <option *ngFor="let espacio of espacios_habitaciones;" value="{{ espacio }}">
+                        {{ espacio }}
+                      </option>
+                    </select>
                     <label 
                       for="booking_num_title_{{ room.id }}" 
                       class="ap-form__label ap-form__label-text"
                       [class.ap-form__label-text--active]="room.select != ''">
-                      Description
+                      Número de habitaciones
                     </label>
                   </div>
                 </div>

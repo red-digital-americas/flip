@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DatosService } from '../../../../../datos.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { userInfo } from 'os';
 import { isNullOrUndefined } from 'util';
 import { Location } from '@angular/common';
 import * as CryptoJS from 'crypto-js';
 import { SystemMessage } from '../../../../../ts/systemMessage';
-import { TabsComponent } from '../../../../../ts/systemTabs';
-import { Utils } from '../../../../utils/utils';
-import { LoaderComponent } from '../../../../../ts/loader';
 
 @Component({
   selector: 'app-profile',
@@ -21,8 +18,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     public services: DatosService, 
     private route: ActivatedRoute, 
-    private location: Location,
-    public router: Router
+    private location: Location
   ) {}
 
 
@@ -51,9 +47,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
 
     this.initProfileApp();
-    this.tabs.createTabsApp();
-
-
 
     this.section = 'tenantList';
     this.idUser = this.route.snapshot.paramMap.get('id');
@@ -180,7 +173,6 @@ export class ProfileComponent implements OnInit {
     try {
       this.services.service_general_post('Tenant/CreateUpdateCreditCard/' , obj).subscribe((value) => {
         //console.log(value);
-        console.log('Credit card model => ', obj);
       }, (error) => {
         //console.log(error);
       } );
@@ -308,24 +300,16 @@ export class ProfileComponent implements OnInit {
 
 
 
-
-
   /// Carlos Enrique Hernandez
   /* Welcomeback Mr. Anderson we missed you. */ 
-  public tabs = new TabsComponent('root');
-  public system_message: SystemMessage = new SystemMessage();
-  public loader: LoaderComponent = new LoaderComponent();
   public profile_data: ProfileDTO = new ProfileDTO();
   public section: string;
+  public system_message: SystemMessage = new SystemMessage();
   public tenant_id: string;
 
   public country_catalogo: [];
   public civilStatus_catalogo: [];
   public scholarship_catalogo: [];
-  public companyType_catalogo: [];
-  public genderList_catalogo: [];
-  public stateCountry_catalogo: [];
-  public relationship_catalogo: [];
   public id_user_selected: number;
   public initProfileApp(): void {
 
@@ -334,14 +318,11 @@ export class ProfileComponent implements OnInit {
       this.services.service_general_get('Tenant/getCatalogsUser')
           .subscribe( (response: any) => {
 
-          if( response.result == 'Sucess' ) { 
+          if( response.result == 'Sucess' ) {
 
             this.country_catalogo = response.country;
             this.civilStatus_catalogo = response.civilStatus;
             this.scholarship_catalogo = response.scholarShip;
-            this.companyType_catalogo = response.companyTypeList; 
-            this.genderList_catalogo = response.genderList;
-            this.relationship_catalogo = response.relationship;
 
             resolve( true );
 
@@ -363,34 +344,35 @@ export class ProfileComponent implements OnInit {
 
         const user_data = { userId: this.tenant_id };
 
-        this.services.service_general_get_with_params('Profile/GetProfileById', user_data )
+        this.services.service_general_get_with_params('Tenant/getTenantById', user_data )
             .subscribe( (response: any) => {
 
               if( response.result == 'Sucess' ) {
 
                 const user_data = response.item[0];
 
-                this.profile_data = user_data;
-                this.profile_data.id = Number( this.tenant_id );
-                delete user_data.userData.id;
-                delete user_data.userTaxData.id;
+                console.log('User Data => ', user_data);
 
-                const country_data = {countryId: user_data.userData.countryId};
+                this.profile_data.name = user_data.firstName;
+                this.profile_data.lastName = user_data.lastname;
+                this.profile_data.avatar = user_data.photo;
+                this.profile_data.motherName = user_data.middleName;
+                this.profile_data.birth = user_data.dateBirth;
+                this.profile_data.phone = user_data.phone;
+                this.profile_data.email = user_data.email;
+                this.profile_data.twitterUrl = user_data.twitter;
+                this.profile_data.facebookUrl = user_data.facebook;
+                this.profile_data.userData.civilStatusId = user_data.civilStatus;
+                this.profile_data.userData.scholarshipId = user_data.scholarship.id;
+                this.profile_data.userData.pet = user_data.pet;
+                this.profile_data.active = user_data.active;
+                this.profile_data.clientKind = false;
 
-                this.services.service_general_get_with_params('Tenant/getStateListById', country_data)
-                    .subscribe( (response: any) => {
+                console.log( this.profile_data );
 
-                      if( response.result == 'Sucess' ) {
+              } else {
 
-                        this.stateCountry_catalogo = response.item;
-
-                      }
-
-                    }, (error: any) => {
-
-                      console.log('Error WS getStateListById => ', error);
-
-                    });
+                //Mandar mensaje de que no pudo obtener dicho usuario y ver que hace
 
               }
 
@@ -400,7 +382,11 @@ export class ProfileComponent implements OnInit {
 
             });
 
-      } 
+      } else {
+
+        //Error al cargar los catalogos no puede continuar
+
+      }
 
     });
 
@@ -409,302 +395,10 @@ export class ProfileComponent implements OnInit {
 
   public sendProfileData():void {
 
-    if( this.validatingProfileData( this.profile_data ) ) {
-
-      this.loader.showLoader();
-
-      this.services.service_general_post('Profile/'  ,this.profile_data)
-          .subscribe( (response: any) => {
-
-            if( response.result == "Sucess" ) {
-
-              this.system_message.showMessage({
-                kind: 'ok',
-                time: 4777,
-                message: {
-                  header: 'Profile saved.',
-                  text: 'Profile has been saved successfully'
-                }
-              });
-
-              setTimeout( () => { this.loader.hideLoader(); }, 1277);
-
-            }
-
-          }, (error: any) => {
-
-            this.system_message.showMessage({
-              kind: 'error',
-              time: 2400,
-              message: {
-                header: 'System Error',
-                text: 'Error WS => Add Profile'
-              }
-            });
-
-            setTimeout( () => { this.loader.hideLoader(); }, 1277);
-
-          });
-
-    } else this.system_message.showMessage({
-      kind: 'error',
-      time: 2400,
-      message: {
-        header: 'Formulario incompleto',
-        text: 'El formulario no esta completo'
-      }
-    });
+    console.log('Los campos estan completos => ', this.validatingProfileData( this.profile_data ) );
 
   }
 
-  
-  public income_data: IncomeDTO = new IncomeDTO(); 
-  public getIncomeData():void {
-
-    this.income_data.id = this.profile_data.id;
-
-    const id_user = {userId: this.profile_data.id };
-
-    this.services.service_general_get_with_params('Profile/getIncome', id_user)
-        .subscribe( (response: any) => {
-
-          if( response.result == 'Sucess' ) {
-
-            const root_data = response.item;
-
-            this.income_data = root_data;
-
-          }
-
-        }, (error: any) => {
-
-          console.log('Error WS GetIncome => ', error);
-
-        });
-
-  }
-
-  public sendIncomeData():void {
-
-    this.loader.showLoader();
-
-    this.services.service_general_post('Profile/AddOrEditIncome', this.income_data)
-        .subscribe( (response: any) => {
-
-          if( response.result == 'Sucess' ) {
-
-            this.system_message.showMessage({
-              kind: 'ok',
-              time: 4777,
-              message: {
-                header: 'Income saved.',
-                text: 'Income has been saved successfully'
-              }
-            });
-
-            setTimeout( () => this.loader.hideLoader(), 1277);
-
-          }
-
-        }, (error: any) => {
-
-          console.log('Error Servicio PostIncome => ', error);
-
-        });
-
-  }
-
-
-  public reference_data: ReferenceDTO = new ReferenceDTO();
-  public getReferenceData():void {
-
-    const user_data = {userId: this.profile_data.id};
-
-    this.services.service_general_get_with_params('Profile/getReference', user_data)
-        .subscribe( (response: any) => {
-
-          if( response.result == 'Sucess' ) {
-
-            this.reference_data = response.item;
-
-          }
-
-        }, (error: any) => {
-
-          console.log('Error GetReference => ', error);
-
-        });
-
-  }
-
-
-  public sendReferencesData():void {
-
-    this.loader.showLoader();
-
-    this.services.service_general_post('Profile/AddOrEditReference', this.reference_data)
-        .subscribe( (response: any) => {
-
-          if( response.result == 'Sucess' ) {
-
-            this.system_message.showMessage({
-              kind: 'ok',
-              time: 4777,
-              message: {
-                header: 'Reference saved.',
-                text: 'Reference has been saved successfully.'
-              }
-            });
-
-            setTimeout( () => this.loader.hideLoader(), 1777);
-
-          }
-
-        }, (error: any) => {
-
-          console.log('Error en Post Reference => ', error);
-
-        });
-
-  }
-
-  public payment_cards: [];
-  public card_data: CardDTO = new CardDTO();
-  public getPaymentData():void {
-
-    const user_data = {userId: this.profile_data.id};
-
-    this.show_payment_form = false;
-
-    this.services.service_general_get_with_params('Tenant/getCreditCard', user_data)
-        .subscribe( (response: any) => {
-
-          console.log('Card => ', response.item );
-
-          if( response.result == 'Sucess' ) {
-
-            this.payment_cards = response.item; 
-
-            this.payment_cards.forEach( (card: any) => {
-
-              card.number = this.decryptData( card.number ).toString();
-              card.ccv = this.decryptData( card.ccv ).toString();
-              card.kind = this.kindCardDetecter( card.number );
-
-            });
-
-            console.log('Cards => ', this.payment_cards);
-
-          } 
-
-        }, (error: any) => {
-
-          console.log('Error Get Payment Data => ', error);
-
-        });
-
-  }
-
-  public sendCardData():void {
-
-    this.card_data.number = this.encryptData( this.card_data.number );
-    this.card_data.ccv = this.encryptData( this.card_data.ccv );
-    delete this.card_data.kind;
-
-    this.loader.showLoader();
-
-    this.services.service_general_post('Tenant/CreateUpdateCreditCard/' , this.card_data)
-        .subscribe( (response: any) => {
-
-          if( response.result == 'Success' ) {
-
-            this.system_message.showMessage({
-              kind: 'ok',
-              time: 4777,
-              message: {
-                header: 'Credit card updated.',
-                text: 'Credit card has been updated successfully.'
-              }
-            });
-
-            this.getPaymentData();
-            this.show_payment_form = false;
-
-            setTimeout( () => this.loader.hideLoader(), 1277);
-
-          } 
-
-        }, (error: any) => {
-
-          console.log('Error WS Creditcard => ', error);
-
-        });
-
-  }
-
-  public chooseAsFavorite( card_data: CardDTO ):void {
-
-    console.log(card_data);
-    this.card_data = card_data;
-    this.card_data.number = this.encryptData( this.card_data.number );
-    this.card_data.ccv = this.encryptData( this.card_data.ccv );
-    this.card_data.main = 1;
-    delete this.card_data.kind;
-
-    console.log('Desde aqui => ', this.card_data);
-
-    this.loader.showLoader();
-
-    this.services.service_general_post('Tenant/CreateUpdateCreditCard/' , this.card_data)
-        .subscribe( (response: any) => {
-
-          console.log( response );
-
-          if( response.result == 'Success' ) {
-
-            this.loader.hideLoader();
-
-            this.system_message.showMessage({
-              kind: 'ok',
-              time: 4777,
-              message: {
-                header: 'Card choosed.',
-                text: 'This Credit card has been choosed as favorite.'
-              }
-            });
-
-            this.getPaymentData();
-
-          }
-
-        }, (error: any) => {
-
-          this.loader.hideLoader();
-
-          console.log('Choose Favorite => ', error);
-
-        });
-
-  }
-
-  public show_payment_form: boolean = false;
-  public showPaymentForm( paymentData: CardDTO = null ):void {
-
-    !this.show_payment_form ? 
-      this.show_payment_form = true:
-      this.show_payment_form = false;
-
-    this.card_data = paymentData;
-
-    if( this.card_data == null ) {
-
-      this.card_data = new CardDTO();
-      this.card_data.userId = this.profile_data.id;
-      delete this.card_data.id;
-
-    }
-
-  }
 
   public toggleKindClientForm( section_to_show: boolean ): void {
 
@@ -737,7 +431,10 @@ export class ProfileComponent implements OnInit {
   }
   private validatingProfileData( form_data: ProfileDTO ):boolean {
 
+
     let result: boolean;
+
+    console.log('Para validar => ', form_data);
 
     form_data.name == '' || form_data.name == null ? 
       this.form_required.no_name = true : this.form_required.no_name = false;
@@ -753,6 +450,24 @@ export class ProfileComponent implements OnInit {
 
     form_data.email == '' || form_data.email == null ? 
       this.form_required.no_email = true : this.form_required.no_email = false;
+
+    form_data.userTaxData.name == '' || form_data.userTaxData.name == null ? 
+        this.form_required.no_bname = true : this.form_required.no_bname = false;
+
+    form_data.userTaxData.activity == '' || form_data.userTaxData.activity == null ? 
+      this.form_required.no_bacti = true : this.form_required.no_bacti = false;
+
+    form_data.userTaxData.tradeName == '' || form_data.userTaxData.tradeName == null ? 
+      this.form_required.no_btrad = true : this.form_required.no_btrad = false;
+
+    form_data.userTaxData.rfc == '' || form_data.userTaxData.rfc == null ? 
+      this.form_required.no_brfc = true : this.form_required.no_brfc = false;
+
+    form_data.userTaxData.legalRepresentative == '' || form_data.userTaxData.legalRepresentative == null ? 
+      this.form_required.no_bfirm = true : this.form_required.no_bfirm = false;
+
+    form_data.userTaxData.phone == '' || form_data.userTaxData.legalRepresentative == null ? 
+      this.form_required.no_bphon = true : this.form_required.no_bphon = false;
 
     if(
       !this.form_required.no_name &&
@@ -770,188 +485,20 @@ export class ProfileComponent implements OnInit {
       !this.form_required.no_snam &&
       !this.form_required.no_phon &&
       !this.form_required.no_mail &&
-      this.profile_data.clientKind  
-    ) {
+      !this.form_required.no_bacti &&
+      !this.form_required.no_btrad &&
+      !this.form_required.no_brfc &&
+      !this.form_required.no_bfirm &&
+      !this.form_required.no_bphon &&
+      !this.profile_data.clientKind &&
+      this.form_required.no_bname 
+    ) result = true;
+    else result = false;
 
-      form_data.userTaxData.name == '' || form_data.userTaxData.name == null ? 
-        this.form_required.no_bname = true : this.form_required.no_bname = false;
-
-      form_data.userTaxData.activity == '' || form_data.userTaxData.activity == null ? 
-        this.form_required.no_bacti = true : this.form_required.no_bacti = false;
-
-      form_data.userTaxData.tradeName == '' || form_data.userTaxData.tradeName == null ? 
-        this.form_required.no_btrad = true : this.form_required.no_btrad = false;
-
-      form_data.userTaxData.rfc == '' || form_data.userTaxData.rfc == null ? 
-        this.form_required.no_brfc = true : this.form_required.no_brfc = false;
-
-      form_data.userTaxData.legalRepresentative == '' || form_data.userTaxData.legalRepresentative == null ? 
-        this.form_required.no_bfirm = true : this.form_required.no_bfirm = false;
-
-      form_data.userTaxData.phone == '' || form_data.userTaxData.legalRepresentative == null ? 
-        this.form_required.no_bphon = true : this.form_required.no_bphon = false;
-
-      if(
-        !this.form_required.no_bname &&
-        !this.form_required.no_bacti &&
-        !this.form_required.no_btrad &&
-        !this.form_required.no_brfc &&
-        !this.form_required.no_bfirm &&
-        !this.form_required.no_bphon
-      ) result = true;
-      else result = false;
-
-    }
+    console.log('Validados => ', this.form_required );
 
     return result;
 
-  }
-
-  public kindCardDetecter( card_number: string ):any {
-
-    let card_kind = '';
-    
-    const visa_regex = new RegExp("^4[0-9]{12}(?:[0-9]{3})?$"),
-          mcard_regex = new RegExp("^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$"),
-          american_regex = new RegExp("^3[47][0-9]{13}$");
-
-    if( visa_regex.test( card_number ) && 
-        card_number.length >= 13 && 
-        card_number.length <= 16 ) card_kind = 'visa';
-
-    if( mcard_regex.test( card_number ) && 
-        card_number.length == 16 ) card_kind = 'mcard';
-
-    if( american_regex.test( card_number ) && 
-        card_number.length == 15 ) card_kind = 'american';
-
-    return card_kind;
-
-  }
-
-  public goToPage( page: string ):void {
-
-    this.router.navigateByUrl( page );
-
-  }
-
-  /*
-   * Autor: Carlos Hernandez Hernandez
-   * Contacto: carlos.hernandez@minimalist.com
-   * Nombre: validateImageUpload
-   * Tipo: Funcion | Funcion efecto colateral
-   * Visto en: communities
-   * Parametros: evento del input, dimensiones de la imagen, donde se va pre visualizar la masa, donde desplegara el nombre
-   * Regresa: N/A
-   * Descripcion: Cuando se le da clic al input y se selecciona la imagen esta valida que el tamaño sea el adecuado y la despliega el el 
-   *              visualizador
-   */
-  public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
-
-    const event = event_data.target,
-          dimensions_image_data = {
-            get_dimensions: ( function() {
-
-              const dimensions_split = dimensions_image.split('x'),
-                    width = Number( dimensions_split[0] ),
-                    height = Number( dimensions_split[1] );
-
-              return {
-                width: width,
-                height: height
-              }
-
-            }())
-          },
-          image_limit_width = dimensions_image_data.get_dimensions.width,
-          image_limit_height = dimensions_image_data.get_dimensions.height,
-          id_image_container:any = document.getElementById( target_image ),
-          name_image_container = document.getElementById( name_image ),
-          native_image_uploaded = document.getElementById('image_real_dimension'),
-          root_data = this;
-
-    if( event.files && event.files[0] ) {
-
-      const reader = new FileReader();
-
-            reader.onload = function(e:any) {
-
-              const image_convert:any = e.target.result,
-                    validating_image = new Promise( (resolve) => {
-
-                      native_image_uploaded.setAttribute('src', image_convert);
-                      
-                      setTimeout( () => {
-
-                        const native_image_dimension = {
-                          image: image_convert,
-                          width: native_image_uploaded.offsetWidth,
-                          height: native_image_uploaded.offsetHeight
-                        };
-
-                        resolve( native_image_dimension );
-
-                      }, 277);
-              
-                    });
-
-                    validating_image.then( ( image_data:any ) => {
-
-                      if( image_limit_width === image_data.width && image_limit_height === image_data.height ) {
-
-                        id_image_container.setAttribute('src', image_data.image );
-                        name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
-                        id_image_container.classList.remove('no-image');
-
-                      } else {
-
-                        id_image_container.src = '../../../assets/14.jpg';
-                        root_data.profile_data.avatar = '../../../assets/14.jpg';
-                        name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
-                        id_image_container.classList.add('no-image');
-
-                      }
-                      
-                    });
-
-            }
-
-            reader.readAsDataURL( event.files[0] );
-
-    }
-    
-  }
-
-  public newImages: any[] = [];
-  prepareImages(e) {
-     
-    if (Utils.isDefined(e.srcElement.files)) {
-      for (let f of e.srcElement.files) {
-        
-        this.newImages.push(f);
-      }
-    }
-    this.addImages();
-
-  }
-
-  addImages() {
-    let url: string = '';
-    if (!Utils.isEmpty(this.newImages)) {
-      for (let f of this.newImages) {
-        this.services.UploadImgSuc(f).subscribe((r) => {
-          if (Utils.isDefined(r)) {
-            url = <string>r.message;
-            
-            url = url.replace('/Imagenes', this.services.getURL() + 'Flip');
-            
-            this.profile_data.avatar = url;
-            
-            this.newImages = [];
-          }
-        })
-      }
-    }
   }
 
 }
@@ -979,7 +526,7 @@ class ProfileDTO {
     pet: boolean,
     scholarshipId: number,
     civilStatusId: number,
-    car: number,
+    cars: number,
     howMuchMax: number,
     howMuchMin: number,
     rent: boolean,
@@ -988,7 +535,7 @@ class ProfileDTO {
     pet: false,
     scholarshipId: -1,
     civilStatusId: -1,
-    car: null,
+    cars: 0,
     howMuchMax: 0,
     howMuchMin: 0,
     rent: false,
@@ -1009,90 +556,4 @@ class ProfileDTO {
     phone: '',
     rfc: ''
   }
-}
-
-class IncomeDTO {
-  id: number;
-  income: {
-    nameEmployer: string,
-    industry: string,
-    contactNumber: string,
-    tenureId: number,
-    creditHistory: boolean,
-    splitRent: boolean,
-    companyTypeId: number,
-    employeeId: number,
-    jobPosition: string,
-    mainSource: string,
-    monthlyIncome: number,
-    billLastYear: number,
-    companyYearStart: string,
-    branchoffice: string,
-    streetHo: string,
-    NumberHo: string,
-    intNumberHo: string,
-    cityHo: string
-  } = {
-    nameEmployer: '',
-    industry: '',
-    contactNumber: '',
-    tenureId: null,
-    creditHistory: false,
-    splitRent: false,
-    companyTypeId: null,
-    employeeId: null,
-    jobPosition: '',
-    mainSource: '',
-    monthlyIncome: null,
-    billLastYear: null,
-    companyYearStart: null,
-    branchoffice: '',
-    streetHo: '',
-    NumberHo: '',
-    intNumberHo: '',
-    cityHo: ''
-  }
-}
-
-class ReferenceDTO {
-  id: number;
-  reference: {
-    name: string,
-    firstName: string,
-    lastName: string,
-    firstRent: boolean,
-    relationshipId: number,
-    mail: string,
-    phone: string,
-    nameLandlord: string,
-    phoneLandLord: string,
-    emailLandLord: string
-  } = {
-    name: '',
-    firstName: '',
-    lastName: '',
-    firstRent: false,
-    relationshipId: null,
-    mail: '',
-    phone: '',
-    nameLandlord: '',
-    phoneLandLord: '',
-    emailLandLord: ''
-  }
-}
-
-class CardDTO {
-  active: boolean;
-  ccv: string = '';
-  id: number = null;
-  main: any;
-  membershipBookings: any;
-  month: string = '';
-  name: string = '';
-  number: string = '';
-  user: any;
-  userId: number = null;
-  userPaymentServices: any;
-  year: string = '';
-  kind: string = '';
 }

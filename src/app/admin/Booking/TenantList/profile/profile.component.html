@@ -1,42 +1,16 @@
 <booking-navbar [section]="section"></booking-navbar>
 <div class="ml-col-1">
   <div class="ml-col-1 padding-general-m margin-bottom-g">
-    <div class="ml-col-1 margin-top-m folder">
-      <!-- Tabs Section: Begin -->
-      <div class="folder__tabs ap-form">
-        <div class="folder__tab" tabs-family="root" tab-show-content="tenant_profile">
-            Rrofile
-        </div>
-        <div class="folder__tab" tabs-family="root" tab-show-content="tenant_income" (click)="getIncomeData()">
-            Income
-        </div>
-        <div class="folder__tab" tabs-family="root" tab-show-content="tenant_references" (click)="getReferenceData()">
-            References
-        </div>
-        <div class="folder__tab" tabs-family="root" tab-show-content="tenant_payment" (click)="getPaymentData()">
-          Payment methods
-        </div>
-      </div>
-      <!-- Tabs Section: End -->
-      <!-- Form Profile Section: Begin -->
+    <div class="ml-col-1">
       <form 
-        class="ap-form ap-form--no-tl-br ml-col-1 card-style" 
+        class="ap-form ml-col-1 card-style" 
         onsubmit="return false;" 
-        name="post_profile"
-        (submit)="sendProfileData()"
-        tabs-family="root" 
-        tab-id="tenant_profile" 
-        tab-visible="on">
-        <div class="ml-col-1 position-relative">
+        name="post_form"
+        (submit)="sendProfileData()">
+        <div class="ml-col-1">
           <h4 class="ap-form__titulo text-left">
             Profile
           </h4>
-          <button 
-            type="button"
-            class="ap-form__titulo-button button-blue"
-            (click)="goToPage('reservations')">
-            Reservations
-          </button> 
         </div>
         <div class="ml-col-1 margin-bottom-x">
           <div class="ap-form__input">
@@ -128,17 +102,17 @@
             <input
               required
               class="ap-form__input-image display-none" 
-              id="profile_avatar"
-              name="profile_avatar"
+              id="nueva_comunidad_img"
+              name="nueva_comunidad_img"
               type="file"
               accept="image/*"
-              (change)="validateImageUpload( $event, '350x350', 'profile_avatar_img', 'profile_avatar_name' ); prepareImages( $event );" />
-            <label for="profile_avatar" class="ap-form__label-image">
+              (change)="validateImageUpload( $event, '350x350', 'new_post_image_0', 'new_post_name_0' ); prepareImages( $event );" />
+            <label for="nueva_comunidad_img" class="ap-form__label-image">
               <figure class="ap-form__image">
                 <img class="ap-form__image-image no-image" 
-                    id="profile_avatar_img"
-                    src="{{ profile_data.avatar }}" />
-                <span class="ap-form__image-data text-center" id="profile_avatar_name">
+                    id=""
+                    src="{{ profile_data.photo }}" />
+                <span class="ap-form__image-data text-center" id="">
                   La imagen debe medir <br />
                   <span class="text-bold">350x350</span> 
                 </span>
@@ -176,8 +150,7 @@
               <input 
                 required
                 type="number" 
-                min="0"
-                placeholder="Phone*"
+                placeholder="*Phone"
                 id="profile_phone" 
                 name="profile_phone"
                 class="ap-form__input-text"
@@ -187,7 +160,8 @@
                 for="profile_phone" 
                 class="ap-form__label ap-form__label-text"
                 [class.ap-form__label-text--active]="profile_data.phone != ''">
-                Phone <span class="color-red text-bold">*</span>
+                <span class="color-red text-bold">*</span>
+                Phone
               </label>
               <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_phon">
                 Phone is required*
@@ -228,42 +202,15 @@
                 placeholder="Gender"
                 id="profile_gender" 
                 name="profile_gender"
-                class="ap-form__input-text"
-                [(ngModel)]="profile_data.userData.genderId">
-                <option value="null" disabled>Gender*</option>
-                <option *ngFor="let gender of genderList_catalogo;" [value]="gender.id">
-                  {{ gender.name }}
-                </option>
+                class="ap-form__input-text">
+                <option value="-1" disabled>Gender*</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
               </select>
               <label 
                 for="profile_gender" 
-                class="ap-form__label ap-form__label-text"
-                [class.ap-form__label-text--active]="profile_data.userData.genderId != null">
+                class="ap-form__label ap-form__label-text">
                 Gender <span class="color-red text-bold">*</span> 
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ml-col-1">
-            <div class="ap-form__input">
-              <select
-                required 
-                placeholder="Nationality"
-                id="profile_nationality" 
-                name="profile_nationality"
-                class="ap-form__input-text"
-                [(ngModel)]="profile_data.userData.countryId">
-                <option value="null" disabled>Nationality</option>
-                <option *ngFor="let country of country_catalogo;" [value]="country.id">
-                  {{ country.name }}
-                </option>
-              </select>
-              <label 
-                for="profile_nationality" 
-                class="ap-form__label ap-form__label-text"
-                [class.ap-form__label-text--active]="profile_data.userData.countryId != null">
-                Nationality
               </label>
             </div>
           </div>
@@ -276,18 +223,35 @@
                 placeholder="Birthplace"
                 id="profile_bplace" 
                 name="profile_bplace"
-                class="ap-form__input-text"
-                [(ngModel)]="profile_data.userData.stateId">
-                <option value="null" disabled>Birthplace</option>
-                <option *ngFor="let state of stateCountry_catalogo;" [value]="state.id">
-                  {{ state.name }}
-                </option>
+                class="ap-form__input-text">
+                <option value="-1" disabled>Birthplace</option>
               </select>
               <label 
                 for="profile_bplace" 
-                class="ap-form__label ap-form__label-text"
-                [class.ap-form__label-text--active]="profile_data.userData.stateId != null">
+                class="ap-form__label ap-form__label-text">
                 Birthplace
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="ml-col-3">
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <select
+                required 
+                placeholder="Nationality"
+                id="profile_nationality" 
+                name="profile_nationality"
+                class="ap-form__input-text">
+                <option value="-1" disabled>Nationality</option>
+                <option *ngFor="let country of country_catalogo;" [value]="country.id">
+                  {{ country.name }}
+                </option>
+              </select>
+              <label 
+                for="profile_nationality" 
+                class="ap-form__label ap-form__label-text">
+                Nationality
               </label>
             </div>
           </div>
@@ -322,12 +286,10 @@
                   placeholder="Linked In"
                   id="profile_linkedin" 
                   name="profile_linkedin"
-                  class="ap-form__input-text"
-                  [(ngModel)]="profile_data.linkedInUrl" />
+                  class="ap-form__input-text" />
                 <label 
                   for="profile_linkedin" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="profile_data.linkedInUrl != ''">
+                  class="ap-form__label ap-form__label-text">
                   Linked In
                 </label>
               </div>
@@ -430,12 +392,10 @@
                   placeholder="RFC"
                   id="profile_rfc" 
                   name="profile_rfc"
-                  class="ap-form__input-text"
-                  [(ngModel)]="profile_data.rfc" />
+                  class="ap-form__input-text" />
                 <label 
                   for="profile_rfc" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="profile_data.rfc != ''">
+                  class="ap-form__label ap-form__label-text">
                   RFC
                 </label>
               </div>
@@ -449,9 +409,8 @@
                   placeholder="Have you ever rented?"
                   id="profile_rented" 
                   name="profile_rented"
-                  class="ap-form__input-text"
-                  [(ngModel)]="profile_data.userData.rent">
-                  <option value="null" disabled>Have you ever rented?</option>
+                  class="ap-form__input-text">
+                  <option value="-1" disabled>Have you ever rented?</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
                 </select>
@@ -479,8 +438,7 @@
                 </select>
                 <label 
                   for="profile_pets" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="profile_data.userData.pet != '-1'">
+                  class="ap-form__label ap-form__label-text">
                   Do you bring pets?
                 </label>
               </div>
@@ -496,12 +454,10 @@
                   placeholder="How many cars will you bring?"
                   id="profile_cars" 
                   name="profile_cars"
-                  class="ap-form__input-text"
-                  [(ngModel)]="profile_data.userData.car" />
+                  class="ap-form__input-text">
                 <label 
                   for="profile_cars" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="profile_data.userData.car != null">
+                  class="ap-form__label ap-form__label-text">
                   How many cars will you bring?
                 </label>
               </div>
@@ -517,12 +473,10 @@
                   placeholder="Money spend monthly in food?"
                   id="profile_mfood" 
                   name="profile_mfood"
-                  class="ap-form__input-text"
-                  [(ngModel)]="profile_data.userData.howMuchMin" />
+                  class="ap-form__input-text" />
                 <label 
                   for="profile_mfood" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="profile_data.userData.howMuchMin != null">
+                  class="ap-form__label ap-form__label-text">
                   Money spend monthly in food?
                 </label>
               </div>
@@ -538,12 +492,10 @@
                   placeholder="Money spend monthly on Free Time?"
                   id="profile_mtime" 
                   name="profile_mtime"
-                  class="ap-form__input-text"
-                  [(ngModel)]="profile_data.userData.howMuchMax" />
+                  class="ap-form__input-text" />
                 <label 
                   for="profile_mtime" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="profile_data.userData.howMuchMax != null">
+                  class="ap-form__label ap-form__label-text">
                   Money spend monthly on Free Time?
                 </label>
               </div>
@@ -725,971 +677,8 @@
           </button>
         </div>
       </form>
-      <!-- Form Profile Section: End -->
-      <!-- Form Profile Income: Begin -->
-      <form 
-        class="ap-form ap-form--no-tl-br ml-col-1 card-style" 
-        onsubmit="return false;" 
-        name="post_income"
-        tabs-family="root" 
-        tab-id="tenant_income" 
-        tab-visible="off"
-        (submit)="sendIncomeData()">
-        <div class="ml-col-1">
-          <h4 class="ap-form__titulo text-left">
-            Income
-          </h4>
-        </div>
-        <div class="ml-col-1 ap-form__sdato padding-tb-m">
-          <div class="ml-col-1 text-bold">
-            Profile Type: {{ !profile_data.clientKind ? 'Personal' : 'Business' }}
-          </div>
-        </div>
-        <div class="ml-col-1" *ngIf="!profile_data.clientKind">
-          <div class="ml-col-1 ap-form__sdato padding-tb-x">
-            <div class="ml-col-1 ap-form__sdato--bbottom">
-              Workplace
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="Employer name"
-                  id="income_ename" 
-                  name="income_ename"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.nameEmployer" />
-                <label 
-                  for="income_ename" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.nameEmployer != ''">
-                  Employer name
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="Industry"
-                  id="income_industry" 
-                  name="income_industry"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.industry" />
-                <label 
-                  for="income_industry" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.industry != ''">
-                  Industry
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  min="0"
-                  placeholder="Phone"
-                  id="income_phone" 
-                  name="income_phone"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.contactNumber" />
-                <label 
-                  for="income_phone" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.contactNumber != ''">
-                  Phone
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="number" 
-                  min="0"
-                  placeholder="Tenure"
-                  id="income_tenure" 
-                  name="income_tenure"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.tenureId" />
-                <label 
-                  for="income_tenure" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.tenureId != null">
-                  Tenure
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <select
-                  required 
-                  placeholder="Credit History"
-                  id="income_credith" 
-                  name="income_credith"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.creditHistory">
-                  <option value="-1" disabled>Credit History</option>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
-                </select>
-                <label 
-                  for="income_credith" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.industry != '-1'">
-                  Credit History
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <select
-                  required 
-                  placeholder="Will You split the fee with someone?"
-                  id="income_split" 
-                  name="income_split"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.splitRent">
-                  <option value="-1" disabled>Will You split the fee with someone?</option>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
-                </select>
-                <label 
-                  for="income_split" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.industry != '-1'">
-                  Will You split the fee with someone?
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <select
-                  required 
-                  placeholder="Kind of Company"
-                  id="income_ckind" 
-                  name="income_ckind"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.companyTypeId">
-                  <option value="null" disabled>Kind of Company</option>
-                  <option *ngFor="let kind of companyType_catalogo;" [value]="kind.id">
-                    {{ kind.name }}
-                  </option>
-                </select>
-                <label 
-                  for="income_ckind" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.companyTypeId != null">
-                  Kind of Company
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="number" 
-                  min="0"
-                  placeholder="How many employees?"
-                  id="income_hemploys" 
-                  name="income_hemploys"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.employeeId" />
-                <label 
-                  for="income_hemploys" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.employeeId != null">
-                  How many employees?
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="What is your charge?"
-                  id="income_charge" 
-                  name="income_charge"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.jobPosition" />
-                <label 
-                  for="income_charge" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.jobPosition != ''">
-                  What is your charge?
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="What is your main income source?"
-                  id="income_isource" 
-                  name="income_isource"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.mainSource" />
-                <label 
-                  for="income_isource" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.mainSource != ''">
-                  What is your main income source?
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="number" 
-                  min="0"
-                  placeholder="Income monthly verificable"
-                  id="income_iverificable" 
-                  name="income_iverificable"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.monthlyIncome" />
-                <label 
-                  for="income_iverificable" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.monthlyIncome != null">
-                  Income monthly verificable
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-1" *ngIf="profile_data.clientKind">
-          <div class="ml-col-1 ap-form__sdato padding-tb-x">
-            <div class="ml-col-1 ap-form__sdato--bbottom">
-              Tell us more about the company
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="What year start the company?"
-                  id="income_bscompany" 
-                  name="income_bscompany"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.companyYearStart" />
-                <label 
-                  for="income_bscompany" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.companyYearStart != null">
-                  What year start the company?
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="number" 
-                  min="0"
-                  placeholder="How much money check in the last year? - MXN"
-                  id="income_bcheckin" 
-                  name="income_bcheckin"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.billLastYear" />
-                <label 
-                  for="income_bcheckin" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.billLastYear != null">
-                  How much money check in the last year?
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="number" 
-                  min="0"
-                  placeholder="How many employees work in?"
-                  id="income_bhemployees" 
-                  name="income_bhemployees"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.employeeId" />
-                <label 
-                  for="income_bhemployees" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.employeeId != null">
-                  How many employees work in?
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="number" 
-                  min="0"
-                  placeholder="How many stores?"
-                  id="income_bhstores" 
-                  name="income_bhstores"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.branchoffice" />
-                <label 
-                  for="income_bhstores" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.branchoffice != null">
-                  How many stores?
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-1 ap-form__sdato padding-tb-x">
-            <div class="ml-col-1 ap-form__sdato--bbottom">
-              Head office address
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="City"
-                  id="income_bcity" 
-                  name="income_bcity"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.cityHo" />
-                <label 
-                  for="income_bcity" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.cityHo != null">
-                  City
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="Community"
-                  id="income_bcommu" 
-                  name="income_bcommu"
-                  class="ap-form__input-text" />
-                <label 
-                  for="income_bcommu" 
-                  class="ap-form__label ap-form__label-text">
-                  Community
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="Street"
-                  id="income_bstreet" 
-                  name="income_bstreet"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.streetHo" />
-                <label 
-                  for="income_bstreet" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.streetHo != null">
-                  Street
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  min="0"
-                  placeholder="Street Number"
-                  id="income_bsnumber" 
-                  name="income_bsnumber"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.intNumberHo" />
-                <label 
-                  for="income_bsnumber" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.intNumberHo != null">
-                  Street Number
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  min="0"
-                  type="text" 
-                  placeholder="Suite Number"
-                  id="income_bnumber" 
-                  name="income_bnumber"
-                  class="ap-form__input-text"
-                  [(ngModel)]="income_data.income.numberHo" />
-                <label 
-                  for="income_bnumber" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="income_data.income.intNumberHo != null">
-                  Suite Number
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="Departament"
-                  id="income_bdepartament" 
-                  name="income_bdepartament"
-                  class="ap-form__input-text" />
-                <label 
-                  for="income_bdepartament" 
-                  class="ap-form__label ap-form__label-text">
-                  Departament
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-1 ap-form__buttons">
-          <button 
-            type="submit"
-            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-            Save
-          </button>
-        </div>
-      </form>
-      <!-- Form Profile Section: End -->
-      <!-- Form Profile References: Begin -->
-      <form 
-        class="ap-form ap-form--no-tl-br ml-col-1 card-style" 
-        onsubmit="return false;" 
-        name="post_references"
-        tabs-family="root" 
-        tab-id="tenant_references" 
-        tab-visible="off"
-        (submit)="sendReferencesData()">
-        <div class="ml-col-1">
-          <h4 class="ap-form__titulo text-left">
-            References
-          </h4>
-        </div>
-        <div class="ml-col-1 ap-form__sdato padding-tb-m">
-          <div class="ml-col-1 text-bold">
-            Profile Type: {{ !profile_data.clientKind ? 'Personal' : 'Business' }}
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ml-col-1">
-            <div class="ap-form__input">
-              <input 
-                required
-                type="text" 
-                placeholder="Name"
-                id="reference_name" 
-                name="reference_name"
-                class="ap-form__input-text"
-                [(ngModel)]="reference_data.reference.name" />
-              <label 
-                for="reference_name" 
-                class="ap-form__label ap-form__label-text"
-                [class.ap-form__label-text--active]="reference_data.reference.name != ''">
-                Name
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ml-col-1">
-            <div class="ap-form__input">
-              <input 
-                required
-                type="text" 
-                placeholder="Firstname"
-                id="reference_lname" 
-                name="reference_lname"
-                class="ap-form__input-text"
-                [(ngModel)]="reference_data.reference.firstName" />
-              <label 
-                for="reference_lname" 
-                class="ap-form__label ap-form__label-text"
-                [class.ap-form__label-text--active]="reference_data.reference.firstName != ''">
-                Firstname
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ml-col-1">
-            <div class="ap-form__input">
-              <input 
-                required
-                type="text" 
-                placeholder="Lastname"
-                id="reference_mname" 
-                name="reference_mname"
-                class="ap-form__input-text"
-                [(ngModel)]="reference_data.reference.lastName" />
-              <label 
-                for="reference_mname" 
-                class="ap-form__label ap-form__label-text"
-                [class.ap-form__label-text--active]="reference_data.reference.lastName != ''">
-                Lastname
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ml-col-1">
-            <div class="ap-form__input">
-              <select
-                required
-                type="text" 
-                placeholder="Relationship"
-                id="reference_relationship" 
-                name="reference_relationship"
-                class="ap-form__input-text"
-                [(ngModel)]="reference_data.reference.relationshipId">
-                <option value="0" disabled>Relationship</option>
-                <option *ngFor="let relation of relationship_catalogo;" [value]="relation.id">
-                  {{ relation.name }}
-                </option>
-              </select>
-              <label 
-                for="reference_relationship" 
-                class="ap-form__label ap-form__label-text"
-                [class.ap-form__label-text--active]="reference_data.reference.relationshipId != 0">
-                Relationship
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ml-col-1">
-            <div class="ap-form__input">
-              <input 
-                required
-                type="text" 
-                placeholder="Email"
-                id="reference_email" 
-                name="reference_email"
-                class="ap-form__input-text"
-                [(ngModel)]="reference_data.reference.mail" />
-              <label 
-                for="reference_email" 
-                class="ap-form__label ap-form__label-text"
-                [class.ap-form__label-text--active]="reference_data.reference.mail != ''">
-                Email
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ml-col-1">
-            <div class="ap-form__input">
-              <input 
-                required
-                type="text" 
-                placeholder="Phone"
-                id="reference_phone" 
-                name="reference_phone"
-                class="ap-form__input-text"
-                [(ngModel)]="reference_data.reference.phone"/>
-              <label 
-                for="reference_phone" 
-                class="ap-form__label ap-form__label-text"
-                [class.ap-form__label-text--active]="reference_data.reference.phone != ''">
-                Phone
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-3" *ngIf="!profile_data.clientKind">
-          <div class="ml-col-1">
-            <div class="ap-form__input">
-              <select
-                required
-                type="text" 
-                placeholder="First rent?"
-                id="reference_firstr" 
-                name="reference_firstr"
-                class="ap-form__input-text"
-                [(ngModel)]="reference_data.reference.firstRent">
-                <option value="null" disabled>First rent?</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-              <label 
-                for="reference_firstr" 
-                class="ap-form__label ap-form__label-text"
-                [class.ap-form__label-text--active]="reference_data.reference.firstRent != null">
-                First rent?
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-1" *ngIf="!profile_data.clientKind">
-          <div class="ml-col-1 ap-form__sdato padding-tb-x">
-            <div class="ml-col-1 ap-form__sdato--bbottom">
-              First owner reference
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="Name"
-                  id="reference_oname" 
-                  name="reference_oname"
-                  class="ap-form__input-text"
-                  [(ngModel)]="reference_data.reference.nameLandlord" />
-                <label 
-                  for="reference_oname" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="reference_data.reference.nameLandlord != ''">
-                  Name
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="Email"
-                  id="reference_omail" 
-                  name="reference_omail"
-                  class="ap-form__input-text"
-                  [(ngModel)]="reference_data.reference.emailLandLord" />
-                <label 
-                  for="reference_omail" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="reference_data.reference.emailLandLord != ''">
-                  Email
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-3">
-            <div class="ml-col-1">
-              <div class="ap-form__input">
-                <input 
-                  required
-                  type="text" 
-                  placeholder="Phone Number"
-                  id="reference_ophone" 
-                  name="reference_ophone"
-                  class="ap-form__input-text"
-                  [(ngModel)]="reference_data.reference.phoneLandLord" />
-                <label 
-                  for="reference_ophone" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="reference_data.reference.phoneLandLord != ''">
-                  Phone Number
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-1 ap-form__buttons">
-          <button 
-            type="submit"
-            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-            Save
-          </button>
-        </div>
-      </form>
-      <!-- Form Profile References: End -->
-      <!-- Form Profile Payment: Begin -->
-      <div 
-        class="ap-form ap-form--no-tl-br ml-col-1 card-style" 
-        tabs-family="root" 
-        tab-id="tenant_payment" 
-        tab-visible="off">
-        <div class="ml-col-1">
-          <h4 class="ap-form__titulo text-left">
-            Payment Methods
-          </h4>
-        </div>
-        <div class="ml-col-1" *ngIf="!show_payment_form">
-          <div *ngFor="let payment of payment_cards;" class="ml-col-3">
-            <div class="credit-card">
-              <div class="credit-card__container">
-                <div class="credit-card__card card-style">
-                  <button 
-                    (click)="chooseAsFavorite( payment )"
-                    class="credit-card__card-favorite"
-                    [class.credit-card__card-favorite--desactive]="payment.main == 0">
-                  </button>
-                  <h4 class="credit-card__card-titulo">
-                    {{ payment.name }} 
-                  </h4>
-                  <p 
-                    class="credit-card__card-number credit-card__card-number--icon"
-                    [ngClass]="{
-                      'credit-card__card-number--visa' : payment.kind == 'visa',
-                      'credit-card__card-number--mcard' : payment.kind == 'mcard',
-                      'credit-card__card-number--american' : payment.kind == 'american',
-                      'credit-card__card-number--default' : payment.kind == ''
-                    }">
-                    <span>****</span>
-                    <span>****</span>
-                    <span>****</span>
-                    <span>{{ payment.number | slice:-4 }}</span>
-                  </p>
-                  <p class="credit-card__card-date">
-                    {{ payment.month }}/{{ payment.year | slice:-2 }}
-                  </p>
-                </div>
-              </div>
-              <div class="credit-card__buttons">
-                <button 
-                  (click)="showPaymentForm( payment )"
-                  class="credit-card__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--aceptar">
-                  Edit
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-1">
-            <div class="ml-col-1 ap-form__buttons">
-              <button 
-                  type="button"
-                  (click)="showPaymentForm()"
-                  class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-blue color-white">
-                  Add Payment Method
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="ml-col-1" *ngIf="show_payment_form">
-          <div class="ml-col-3">
-            <div class="credit-card">
-              <div class="credit-card__container credit-card--no-padding-top">
-                <div class="credit-card__card card-style">
-                  <h4 class="credit-card__card-titulo">
-                    {{ card_data.name == '' ? 'Card name' : card_data.name }}
-                  </h4>
-                  <p 
-                    class="credit-card__card-number"
-                    [ngClass]="{
-                      'credit-card__card-number--visa' : card_data.kind == 'visa',
-                      'credit-card__card-number--mcard' : card_data.kind == 'mcard',
-                      'credit-card__card-number--american' : card_data.kind == 'american',
-                      'credit-card__card-number--default' : card_data.kind == ''
-                    }">
-                    <span>****</span>
-                    <span>****</span>
-                    <span>****</span>
-                    <span>{{ card_data.number.toString() | slice:-4 }}</span>
-                  </p>
-                  <p class="credit-card__card-date">
-                    {{ card_data.month }}/{{ card_data.year.toString() | slice:-2 }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="ml-col-32">
-            <form 
-              class="ap-form ap-form--no-tl-br ml-col-1 card-style" 
-              onsubmit="return false;" 
-              (submit)="sendCardData()"
-              name="post_form">
-              <div class="ml-col-2">
-                <div class="ml-col-1">
-                  <div class="ap-form__input">
-                    <input 
-                      required
-                      type="text" 
-                      placeholder="Name"
-                      id="card_name" 
-                      name="card_name"
-                      class="ap-form__input-text"
-                      [(ngModel)]="card_data.name" />
-                    <label 
-                      for="card_name" 
-                      class="ap-form__label ap-form__label-text"
-                      [class.ap-form__label-text--active]="card_data.name != ''">
-                      Name
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="ml-col-2">
-                <div class="ml-col-1">
-                  <div class="ap-form__input">
-                    <input 
-                      required
-                      min="0"
-                      max="9999999999999999"
-                      type="number" 
-                      placeholder="Number"
-                      id="card_number" 
-                      name="card_number"
-                      class="ap-form__input-text"
-                      [(ngModel)]="card_data.number" />
-                    <label 
-                      for="card_number" 
-                      class="ap-form__label ap-form__label-text"
-                      [class.ap-form__label-text--active]="card_data.number != ''">
-                      Number
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="ml-col-3">
-                <div class="ml-col-1">
-                  <div class="ap-form__input">
-                    <input 
-                      required
-                      type="number" 
-                      min="0"
-                      placeholder="Expiration month"
-                      id="card_day" 
-                      name="card_day"
-                      class="ap-form__input-text"
-                      [(ngModel)]="card_data.month" />
-                    <label 
-                      for="card_day" 
-                      class="ap-form__label ap-form__label-text"
-                      [class.ap-form__label-text--active]="card_data.month != ''">
-                      Expiration month
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="ml-col-3">
-                <div class="ml-col-1">
-                  <div class="ap-form__input">
-                    <input 
-                      required
-                      min="0"
-                      type="number" 
-                      placeholder="Expiration year"
-                      id="card_year" 
-                      name="card_year"
-                      class="ap-form__input-text"
-                      [(ngModel)]="card_data.year" />
-                    <label 
-                      for="card_year" 
-                      class="ap-form__label ap-form__label-text"
-                      [class.ap-form__label-text--active]="card_data.year != ''">
-                      Expiration year
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="ml-col-3">
-                <div class="ml-col-1">
-                  <div class="ap-form__input">
-                    <input 
-                      required
-                      type="number" 
-                      placeholder="CVV"
-                      min="0"
-                      id="card_cvv" 
-                      name="card_cvv"
-                      class="ap-form__input-text"
-                      [(ngModel)]="card_data.ccv" />
-                    <label 
-                      for="card_cvv" 
-                      class="ap-form__label ap-form__label-text"
-                      [class.ap-form__label-text--active]="card_data.ccv != ''">
-                      CVV
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="ml-col-3">
-                <div class="ap-form__input">
-                  <input 
-                    type="checkbox"
-                    id="card_active" 
-                    name="card_active"
-                    class="ap-form__input-checkbox display-none"
-                    [checked]="card_data.active"
-                    [(ngModel)]="card_data.active" />
-                  <label for="card_active" class="ap-form__label ap-form__label-checkbox">
-                    Active
-                  </label>
-                </div>
-              </div>
-              <div class="ml-col-1 ap-form__buttons">
-                <button 
-                  type="button"
-                  (click)="showPaymentForm()"
-                  class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--cancelar">
-                  Cancelar
-                </button>
-                <button 
-                  type="submit"
-                  class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-                  Save
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <!-- Form Profile Payment: End -->
   </div>
 </div>
-<div class="black-box">
-  <img src="" id="image_real_dimension" />
-</div>
 
 
 
@@ -1721,13 +710,7 @@
 
 
 
-
-
-
-
-
-
-<!-- div class="ml-col-1 display-none">
+<div class="ml-col-1">
     <div class="ml-col-1 padding-general-m margin-bottom-m">
 
         <div class="ml-col-1">
@@ -1804,6 +787,14 @@
                         [(ngModel)]="date.value" 
                         class="ap-form__input-text">
                 </div>
+                
+                  <!-- <mat-form-field class="ap-form__input">
+                    <mat-label class="ap-form__label ap-form__label-text">Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" class="ap-form__input-text"
+                    [value]="date.value" [formControl]="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field> -->
             </div>
             <div class="ml-col-3 padding-right-min">
                 <div class="ap-form__input">
@@ -1823,7 +814,6 @@
               <div class="ap-form__input">
                 <input 
                   type="number"
-                  min="0"
                   placeholder="Cell Phone"
                   id="phone" 
                   name="phone"
@@ -2093,4 +1083,4 @@
           </div>
           
     </div>
-    </div -->
+    </div>

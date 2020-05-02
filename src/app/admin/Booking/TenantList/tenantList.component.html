@@ -1,64 +1,81 @@
 <div class="ml-col-1">
     <booking-navbar [section]="section"></booking-navbar>
     <div class="ml-col-1 padding-general-m margin-bottom-m">
-        <div class="ml-col-1 padding-general-m card-style">
-            <mat-form-field>
-                <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
-            </mat-form-field>
-            <table mat-table mat-sort [dataSource]="tenantList" class="mat-elevation-z8">
-                <ng-container matColumnDef="typeRoom">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Type Room</th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> {{element.typeRoom}} </td>
-                </ng-container>
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Name </th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> {{element.firstName}} </td>
-                </ng-container>
-                <ng-container matColumnDef="age">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Age </th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> {{element.age}} </td>
-                </ng-container>
-                <ng-container matColumnDef="membership">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Membership </th>
-                    <td mat-cell *matCellDef="let element" class="table__data">
-                        <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock>{{element.membership.membershipType}}</ng-template>
-                        <ng-template #elseBlock>None</ng-template>
-                    </td>
-                </ng-container>
-                <ng-container matColumnDef="dateInit">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Arrival date </th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> {{element.dateInit}} </td>
-                </ng-container>
-        
-                <ng-container matColumnDef="dateEnd">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Deperture date </th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> {{element.dateEnd}} </td>
-                </ng-container>
-                <ng-container matColumnDef="amountOutstanding">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Amount Outstanding </th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> 
-                        <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock>{{element.membership.priceMembership + element.amountOutstanding | currency }}</ng-template>
-                        <ng-template #elseBlock>{{element.amountOutstanding | currency }}</ng-template>
-                    </td>
-                </ng-container>
-                <ng-container matColumnDef="idUser">
-                    <th mat-header-cell *matHeaderCellDef> </th>
-                    <td mat-cell *matCellDef="let element">
-                        <button 
-                            (click)="viewDetail(element.idUser)" 
-                            mat-raised-button color="accent"
-                            class="table__data-button">
-                            view more
-                        </button>
-                    </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-        </div>
+
+    <br>
+    <br>
+    <br>
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+    </mat-form-field>
+    <table mat-table mat-sort [dataSource]="tenantList" class="mat-elevation-z8">
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="typeRoom">
+            <th mat-header-cell *matHeaderCellDef> Type Room </th>
+            <td mat-cell *matCellDef="let element"> {{element.typeRoom}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef> Age </th>
+            <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="membership">
+            <th mat-header-cell *matHeaderCellDef> Membership </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock>{{element.membership.membershipType}}</ng-template>
+                <ng-template #elseBlock>None</ng-template>
+                <!-- <div *ngIf="element.membership.membershipType != null">{{element.membership.membershipType}}</div>  -->
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateInit">
+            <th mat-header-cell *matHeaderCellDef> Arrival date </th>
+            <td mat-cell *matCellDef="let element"> {{element.dateInit}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateEnd">
+            <th mat-header-cell *matHeaderCellDef> Deperture date </th>
+            <td mat-cell *matCellDef="let element"> {{element.dateEnd}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amountOutstanding">
+            <th mat-header-cell *matHeaderCellDef> Amount Outstanding </th>
+            <td mat-cell *matCellDef="let element"> 
+                <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock>{{element.membership.priceMembership + element.amountOutstanding | currency }}</ng-template>
+                <ng-template #elseBlock>{{element.amountOutstanding | currency }}</ng-template>
+            </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="idUser">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element">
+                <button 
+                        (click)="viewDetail(element.idUser)" 
+                        mat-raised-button color="accent"
+                        class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar button">
+                        view more
+                    </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
 </div>

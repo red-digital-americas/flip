@@ -9,7 +9,6 @@ import { HttpModule } from '@angular/http';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { MenuService } from '../../_nav';
 import { SystemMessage } from '../../../ts/systemMessage';
-import { LoaderComponent } from '../../../ts/loader';
 
 
 @Component({
@@ -86,7 +85,6 @@ export class LoginComponent implements OnInit {
   //Autor: Carlos Enrique Hernandez Hernandez
 
   public system_message = new SystemMessage();
-  public loader = new LoaderComponent();
 
   public login_action: boolean = true;
   public recoverPassword():void {
@@ -111,7 +109,7 @@ export class LoginComponent implements OnInit {
                   header: 'Recover Pass',
                   text: `We will send you an email for next spets.`
                 },
-                time: 4000
+                time: 2000
               });  
               this.showSuccess(); 
 
@@ -150,81 +148,64 @@ export class LoginComponent implements OnInit {
   public user_data: UserData = new UserData();
   public loginEvent():void {
 
-    if( this.validatorForm( this.user_data ) ) {
+      if( this.validatorForm( this.user_data ) ) {
 
-      this.loader.showLoader();
+        this.heroService.ServicioPostLogin("CargarUsuario", this.user_data ).subscribe((value) => {
+          console.log('Value => ', value);
+          switch (value.token) {
+            case "usuarios no existe":
 
-      this.heroService.ServicioPostLogin("CargarUsuario", this.user_data ).subscribe((value) => {
-        console.log('Value => ', value);
-        switch (value.token) {
-          case "usuarios no existe":
-
-            this.system_message.showMessage({
-              kind: 'error',
-              message: {
-                header: 'Error',
-                text: value.token
-              },
-              time: 2000
-            });
-
-            this.message = "Usuario y/o contraseña incorrecta";
-            this.validar = true;
-            this.loader.hideLoader();
-            break;
-          case "password incorrecto":
-
-            this.system_message.showMessage({
-              kind: 'error',
-              message: {
-                header: 'Error',
-                text: value.token
-              },
-              time: 4000
-            });
-
-            this.message = "Usuario y/o contraseña incorrecta";
-            this.validar = true;
-            break;
-          default:
-            if (value.token != "usuarios no existe" || value.token != "password incorrecto") {
-              localStorage.setItem("token", value.token);
-              localStorage.setItem("user", JSON.stringify((value.user)));
-              localStorage.setItem("inicial", value.user.name.substring(0, 1));
-              localStorage.setItem("name", value.user.name);
-              localStorage.setItem("lastName", value.user.lastName);
-              localStorage.setItem("email", value.user.email);
-              localStorage.setItem("id", value.user.id);
-              localStorage.setItem("buildingid", value.user.buildingId);
-              localStorage.setItem("SystemTypeId", value.user.systemTypeId);
               this.system_message.showMessage({
-                kind: 'ok',
+                kind: 'error',
                 message: {
-                  header: 'Session Begins',
-                  text: `¡Welcome back! ${ localStorage.getItem("name") } ${ localStorage.getItem("lastName") }`
+                  header: 'Error',
+                  text: value.token
                 },
                 time: 2000
-              });  
-              this.showSuccess();       
-            }
-            this.loader.hideLoader();
-        }
-      }, (error: any) => {
+              });
 
-        this.system_message.showMessage({
-          kind: 'error',
-          message: {
-            header: 'Error',
-            text: `Please come back soon or contact support`
-          },
-          time: 2000
-        });  
+              this.message = "Usuario y/o contraseña incorrecta";
+              this.validar = true;
+              break;
+            case "password incorrecto":
 
-        this.loader.hideLoader();
+              this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'Error',
+                  text: value.token
+                },
+                time: 2000
+              });
 
-      });
+              this.message = "Usuario y/o contraseña incorrecta";
+              this.validar = true;
+              break;
+            default:
+              if (value.token != "usuarios no existe" || value.token != "password incorrecto") {
+                localStorage.setItem("token", value.token);
+                localStorage.setItem("user", JSON.stringify((value.user)));
+                localStorage.setItem("inicial", value.user.name.substring(0, 1));
+                localStorage.setItem("name", value.user.name);
+                localStorage.setItem("lastName", value.user.lastName);
+                localStorage.setItem("email", value.user.email);
+                localStorage.setItem("id", value.user.id);
+                localStorage.setItem("buildingid", value.user.buildingId);
+                localStorage.setItem("SystemTypeId", value.user.systemTypeId);
+                this.system_message.showMessage({
+                  kind: 'ok',
+                  message: {
+                    header: 'Session Begins',
+                    text: `¡Welcome back! ${ localStorage.getItem("name") } ${ localStorage.getItem("lastName") }`
+                  },
+                  time: 2000
+                });  
+                this.showSuccess();       
+              }
+          }
+        });
 
-    }
+      }
 
   }
 
@@ -237,8 +218,6 @@ export class LoginComponent implements OnInit {
   }
   private validatorForm( current_data ):boolean {
 
-    this.isUrlValid( current_data.username, 'facebook' );
-
     let result = false;
 
     current_data.username == null || current_data.username == '' ?
@@ -250,43 +229,14 @@ export class LoginComponent implements OnInit {
     current_data.password == null || current_data.password == '' ?
       this.form_data.no_pass = true : this.form_data.no_pass = false;
 
+    console.log( this.form_data );
+
     for( let field in this.form_data ) {
 
       if( this.form_data[field] ) return;
       else result = true;
 
     }
-
-    return result;
-
-  }
-
-  //Validador de tips de tarjetas de credito
-  public kindCardDetecter( test: string ):boolean {
-
-    let result = false;
-    
-    const visa_regex = new RegExp("^4[0-9]{12}(?:[0-9]{3})?$"),
-          mcard_regex = new RegExp("^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$"),
-          american_regex = new RegExp("^3[47][0-9]{13}$");
-
-    console.log('Visa Reg => ', visa_regex.test(test) );
-    console.log('Master Card Reg => ', mcard_regex.test(test) );
-    console.log('American Reg => ', american_regex.test(test));
-
-    return result;
-
-  }
-
-  //Validador de direccion url
-  public isUrlValid( url: string,custom_url: string = '' ):boolean {
-
-    const url_regex = new RegExp("https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)");
-
-    let result = false;
-  
-    console.log('URL => ', url_regex.test(url));
-    console.log('Custom URL => ', custom_url);
 
     return result;
 
