@@ -139,7 +139,6 @@
                 <tr mat-header-row *matHeaderRowDef="table_colums"></tr>
                 <tr mat-row *matRowDef="let row; columns: table_colums;"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
         <div class="ml-col-1 margin-bottom-x">
             <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
@@ -171,9 +170,8 @@
                 <tr mat-header-row *matHeaderRowDef="table_colums"></tr>
                 <tr mat-row *matRowDef="let row; columns: table_colums;"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
-        <div class="ml-col-1">
+        <div class="ml-col-1 margin-tb-min">
             Default Method pay
             <span class="ap-membership__payment-label"
                   [ngClass]="{
@@ -233,7 +231,6 @@
                 <tr mat-header-row *matHeaderRowDef="table_history_colums"></tr>
                 <tr mat-row *matRowDef="let row; columns: table_history_colums;"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
     </div>
 </div>

@@ -920,8 +920,9 @@ select:active,
         top: 35%;
         left: 50%;
         transform: translate(-50%, -50%);
-        max-width: 85%;
-        max-height: 85%;
+        width: 37.5%;
+        height: 37.5%;
+        filter: brightness(.2);
       }
 
     }
