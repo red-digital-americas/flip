@@ -205,9 +205,9 @@ export class LoginComponent implements OnInit {
                 },
                 time: 2000
               });  
+              this.loader.hideLoader();
               this.showSuccess();       
             }
-            this.loader.hideLoader();
         }
       }, (error: any) => {
 
@@ -237,8 +237,6 @@ export class LoginComponent implements OnInit {
   }
   private validatorForm( current_data ):boolean {
 
-    this.isUrlValid( current_data.username, 'facebook' );
-
     let result = false;
 
     current_data.username == null || current_data.username == '' ?
@@ -256,37 +254,6 @@ export class LoginComponent implements OnInit {
       else result = true;
 
     }
-
-    return result;
-
-  }
-
-  //Validador de tips de tarjetas de credito
-  public kindCardDetecter( test: string ):boolean {
-
-    let result = false;
-    
-    const visa_regex = new RegExp("^4[0-9]{12}(?:[0-9]{3})?$"),
-          mcard_regex = new RegExp("^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$"),
-          american_regex = new RegExp("^3[47][0-9]{13}$");
-
-    console.log('Visa Reg => ', visa_regex.test(test) );
-    console.log('Master Card Reg => ', mcard_regex.test(test) );
-    console.log('American Reg => ', american_regex.test(test));
-
-    return result;
-
-  }
-
-  //Validador de direccion url
-  public isUrlValid( url: string,custom_url: string = '' ):boolean {
-
-    const url_regex = new RegExp("https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)");
-
-    let result = false;
-  
-    console.log('URL => ', url_regex.test(url));
-    console.log('Custom URL => ', custom_url);
 
     return result;
 

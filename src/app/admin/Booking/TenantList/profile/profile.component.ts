@@ -733,7 +733,8 @@ export class ProfileComponent implements OnInit {
     no_btrad: false,
     no_brfc: false,
     no_bfirm: false,
-    no_bphon: false
+    no_bphon: false,
+    no_val_mail: false
   }
   private validatingProfileData( form_data: ProfileDTO ):boolean {
 
@@ -752,7 +753,14 @@ export class ProfileComponent implements OnInit {
       this.form_required.no_phon = true : this.form_required.no_phon = false;
 
     form_data.email == '' || form_data.email == null ? 
-      this.form_required.no_email = true : this.form_required.no_email = false;
+      this.form_required.no_mail = true : this.form_required.no_mail = false;
+
+    !this.isEmailValid( form_data.email ) ? 
+      this.form_required.no_val_mail = true : this.form_required.no_val_mail = false;
+
+    console.log('Validando => ' ,form_data );
+    console.log(' => ',this.isEmailValid( form_data.email ));
+    console.log(this.form_required);
 
     if(
       !this.form_required.no_name &&
@@ -760,6 +768,7 @@ export class ProfileComponent implements OnInit {
       !this.form_required.no_snam &&
       !this.form_required.no_phon &&
       !this.form_required.no_mail &&
+      !this.form_required.no_val_mail &&
       !this.profile_data.clientKind 
     ) result = true;
     else result = false;
@@ -770,6 +779,7 @@ export class ProfileComponent implements OnInit {
       !this.form_required.no_snam &&
       !this.form_required.no_phon &&
       !this.form_required.no_mail &&
+      !this.form_required.no_val_mail &&
       this.profile_data.clientKind  
     ) {
 
@@ -802,6 +812,33 @@ export class ProfileComponent implements OnInit {
       else result = false;
 
     }
+
+    return result;
+
+  }
+
+  public isEmailValid( email: string ): boolean {
+
+    let result = false;
+
+    const email_split = email.split('@'); 
+
+    if( email_split.length > 1 ) {
+
+      const email_nick_nosp = email_split[0].match(/[^a-zA-Z0-9.\-_]/),
+            email_doma_nosp = email_split[1].match(/[^a-zA-Z0-9.]/);
+
+      if( email_nick_nosp == null && email_doma_nosp == null ) {
+
+        result = true;
+  
+      } else {
+  
+        result = false;
+  
+      }
+
+    } else result = false;
 
     return result;
 

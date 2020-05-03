@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatosService } from '../../../../../datos.service';
 import * as CryptoJS from 'crypto-js';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'reservations',
@@ -20,7 +21,8 @@ import * as CryptoJS from 'crypto-js';
     public section: string;
 
     constructor(
-        public _services: DatosService
+        public _services: DatosService,
+        public _router: Router
     ) {}
 
     ngOnInit() {
@@ -50,6 +52,10 @@ import * as CryptoJS from 'crypto-js';
                 if( response.result == 'Success' ) {
 
                     this.current_membership = response.infoMembership;
+                    this.current_membership.customDateS = this.dateWorker('format' ,this.current_membership.dateStart );
+                    this.current_membership.customDateE = this.dateWorker('format' ,this.current_membership.dateEnd );
+                    this.current_membership.customDateDif = 
+                        this.dateWorker('calc' , this.current_membership.dateStart, this.current_membership.dateEnd );
                     this.current_services = response.infoMembership.services;
                     this.current_aditionals = response.infoMembership.servicesAditional;
                     this.current_topay = response.infoMembership.toPay;
@@ -86,14 +92,57 @@ import * as CryptoJS from 'crypto-js';
     }
 
     public show_page_modal: boolean = false;
-    public showModal( to_show: string ):void {
+    public modal_to_show: string;
+    public showModal( to_show: string = 'default' ):void {
 
         !this.show_page_modal ?
             this.show_page_modal = true :
             this.show_page_modal = false;
 
+        this.modal_to_show = to_show;
+
     }
 
+    public dateWorker( action: string , date: string, date_b: string = '' ):any {
+
+        let result: any = null;
+
+        const day_gotted = {
+            date_values: (function(){ return date.split('/') }()),
+            get day() { return this.date_values[0] },
+            get month() { return this.date_values[1] },
+            get year() { return this.date_values[2] }
+        },
+        months = ['Jan.','Feb.','Mar.','Apr.','May','June','July','Aug.','Sept.','Oct.','Nov.','Dec.'];
+
+        const day_gotted_b = {
+            date_values: (function(){ return date_b.split('/') }()),
+            get day() { return this.date_values[0] },
+            get month() { return this.date_values[1] },
+            get year() { return this.date_values[2] }
+        };
+
+        let date_s: any, date_e: any, time_diff: any, diff_days: any;
+
+        switch( action ) {
+
+            case 'format':
+                result = `${ months[day_gotted.month - 1] } ${ day_gotted.day } ${ day_gotted.year }`
+                break;
+
+            case 'calc':
+                date_s = new Date(`${ day_gotted.month }/${ day_gotted.day }/${ day_gotted.year }`);
+                date_e = new Date(`${ day_gotted_b.month }/${ day_gotted_b.day }/${ day_gotted_b.year }`),
+                time_diff =  Math.abs(date_e.getTime() - date_s.getTime());
+                diff_days = Math.ceil(time_diff / (1000 * 3600 * 24));
+                result = diff_days;
+                break;
+
+        }
+
+        return result;
+
+    }
 
     public kindCardDetecter( card_number: string ):any {
 
@@ -136,6 +185,14 @@ import * as CryptoJS from 'crypto-js';
             // this.decryptData(this.crypt);
             return crypt;
         } catch (e) { console.log(e); }
+    }
+
+    public goToPage( the_page: string = '' ):void {
+
+        the_page != '' ? 
+            this._router.navigateByUrl( the_page ) :
+            window.history.back();
+
     }
 
 }

@@ -198,24 +198,29 @@
         <div class="ml-col-3">
           <div class="ml-col-1">
             <div class="ap-form__input">
-              <input 
+              <input
                 required
                 type="text" 
                 placeholder="*Mail"
                 id="profile_mail" 
                 name="profile_mail"
                 class="ap-form__input-text"
-                [class.form_error_found]="form_required.no_email"
+                [ngClass]="{
+                  'form_error_found' : form_required.no_mail,
+                  'form_error_found' : form_required.no_val_mail
+                }"
                 [(ngModel)]="profile_data.email" />
               <label 
                 for="profile_mail" 
                 class="ap-form__label ap-form__label-text"
                 [class.ap-form__label-text--active]="profile_data.email != ''">
-                <span class="color-red text-bold">*</span>
-                Mail
+                Mail <span class="color-red text-bold">*</span>
               </label>
-              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_email">
-                Phone is required*
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_mail">
+                Mail is required*
+              </span>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_val_mail && !form_required.no_mail">
+                Email no valid, It can not contain special characters*
               </span>
             </div>
           </div>

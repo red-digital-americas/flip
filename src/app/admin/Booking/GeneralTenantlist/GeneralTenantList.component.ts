@@ -64,4 +64,12 @@ import { Router } from '@angular/router';
 
     }
 
+    public applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.tenantList.filter = filterValue.trim().toLowerCase();
+        if (this.tenantList.paginator) {
+          this.tenantList.paginator.firstPage();
+        }
+    }
+
 }
