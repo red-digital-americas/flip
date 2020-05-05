@@ -139,6 +139,9 @@ export class PerksDetailComponent implements OnInit {
 
 
 
+
+
+
   //Autor: Carlos Enrique Hernandez Hernandez';
 
   public loader = new LoaderComponent();
@@ -499,6 +502,25 @@ export class PerksDetailComponent implements OnInit {
 
   }
 
+  public validatingDateRange():void {
+
+    const new_promo_end: any = document.getElementById('new_promo_end'),
+          new_promo_start: any = document.getElementById('new_promo_start');
+
+    if( new_promo_start.value == null || new_promo_start.value == '' ) {
+
+      new_promo_end.value = "";
+      new_promo_end.setAttribute('disabled', 'true');
+
+    } else {
+
+      new_promo_end.removeAttribute('disabled');
+      new_promo_end.setAttribute('min', new_promo_start.value);
+      new_promo_start.setAttribute('max', new_promo_end.value);
+
+    }
+    
+  }
 
   //========================== C&PS
   public newImages: any[] = []

@@ -17,6 +17,8 @@ import { Router } from '@angular/router';
 
     public table_colums: any[] = ['service','type','sdate','edate','xcost'];
     public table_history_colums: any[] = ['build','room','membership','adate','ddate','aout','button'];
+    public table_adding_services: any[] = ['icon','service','description','recurrent','once','select'];
+    public name_build: string;
 
     public section: string;
 
@@ -29,6 +31,7 @@ import { Router } from '@angular/router';
 
         this.section = 'tenantList';
         this.getReservationData();
+        this.name_build = sessionStorage.getItem('name_build');
 
     }
 
@@ -40,6 +43,11 @@ import { Router } from '@angular/router';
     public current_membership: any;
     public number_card: string;
     public kind_card: string;
+    public bill_services_added: number;
+    public bill_services_added_total: number;
+    public bill_services_topay: number;
+    public check_in_active: boolean;
+    public check_out_active: boolean;
     public getReservationData():void {
 
         const user_data = {
@@ -63,8 +71,17 @@ import { Router } from '@angular/router';
                     this.current_card = response.mainCard;
 
                     const card_number = this.decryptData( this.current_card.number ).toString();
+                    this.bill_services_added = this.getBillFrom( this.current_aditionals );
+                    this.bill_services_added_total = this.getBillFrom( this.current_aditionals ) + this.current_membership.price; 
+                    this.bill_services_topay = this.getBillFrom( this.current_topay );
                     this.kind_card = this.kindCardDetecter( card_number );
                     this.number_card = card_number.substr( this.decryptData( this.current_card.number ).toString().length - 4);
+                    this.current_membership.dateStartReal == null ? 
+                        this.check_in_active = true : 
+                        this.check_in_active = false;
+                    this.current_membership.dateEndReal == null ? 
+                        this.check_out_active = true : 
+                        this.check_out_active = false;
 
                 }
 
@@ -100,6 +117,20 @@ import { Router } from '@angular/router';
             this.show_page_modal = false;
 
         this.modal_to_show = to_show;
+
+    }
+
+    public getBillFrom( bills: any ):number {
+
+        let total: number = 0;
+
+        bills.forEach( (bill: any) => {
+
+            total += bill.cost;
+
+        });
+
+        return total;
 
     }
 

@@ -112,11 +112,11 @@
                       name="new_promo_start"
                       [(ngModel)]="data_promo.startDate"
                       [class.form_error_found]="form_data.no_sdat"
+                      (change)="validatingDateRange()"
                       class="ap-form__input-text" />
                     <label 
                       for="new_promo_start" 
-                      class="ap-form__label ap-form__label-text"
-                      [class.ap-form__label-text--active]="data_promo.startDate != ''">
+                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
                       Fecha de Inicio
                     </label>
                     <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_sdat">
@@ -127,17 +127,18 @@
                 <div class="ml-col-4o">
                   <div class="ap-form__input">
                     <input 
+                      disabled
                       type="date"
                       placeholder="Fecha Fin"
                       id="new_promo_end" 
                       name="new_promo_end"
+                      (change)="validatingDateRange()"
                       [(ngModel)]="data_promo.endDate"
                       [class.form_error_found]="form_data.no_edat"
                       class="ap-form__input-text" />
                     <label 
                       for="new_promo_end" 
-                      class="ap-form__label ap-form__label-text"
-                      [class.ap-form__label-text--active]="data_promo.endDate != ''">
+                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
                       Fecha Fin
                     </label>
                     <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_edat">

@@ -88,6 +88,7 @@ export class BookingIndexComponent implements OnInit {
 
         sessionStorage.setItem('name_section_active', booking_name );
         sessionStorage.setItem('id_section_active', id_booking.toString() );
+        sessionStorage.setItem('name_build', booking_name );
         this.router.navigateByUrl( `tenantList/${ id_booking }` );
 
     }
@@ -362,8 +363,8 @@ export class BookingIndexComponent implements OnInit {
                                 this.system_message.showMessage({
                                     kind: 'ok',
                                     message: {
-                                      header: 'Promotion edited',
-                                      text: 'Promotion has been edited successfully.'
+                                      header: 'Build uploaded',
+                                      text: 'Build has been uploaded successfully.'
                                     },
                                     time: 2000
                                   });
@@ -654,6 +655,7 @@ export class BookingIndexComponent implements OnInit {
         else {
 
             sessionStorage.removeItem('id_section_active');
+            sessionStorage.removeItem('name_build');
             this.requestIndexContent();
 
         }

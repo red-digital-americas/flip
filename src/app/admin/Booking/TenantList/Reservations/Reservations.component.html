@@ -12,7 +12,7 @@
         </div>
         <div class="ml-col-1 margin-bottom-x">
             <h4 class="ap-form__titulo ap-form__titulo--no-border">
-                Tenant list
+                {{ name_build }}
             </h4>
             <button 
                 class="ap-form__rButton button-green"
@@ -25,15 +25,51 @@
                 Add Service
             </button>
             <button 
-                class="ap-form__rButton button-blue"
-                (click)="showModal('check_in')">
-                Check In
-            </button>
-            <button 
+                *ngIf="check_out_active"
                 class="ap-form__rButton button-orange"
                 (click)="showModal('check_out')">
                 Check Out
             </button>
+            <button 
+                *ngIf="check_in_active"
+                class="ap-form__rButton button-blue"
+                (click)="showModal('check_in')">
+                Check In
+            </button>
+        </div>
+        <div class="ml-col-1 margin-bottom-x">
+            <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                <div class="ml-col-1">
+                  Program starts: 
+                  <span class="text-bold">
+                    {{ current_membership?.dateStartProgram }}     
+                  </span>
+                </div>
+            </div>
+            <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
+                <div class="ml-col-1">
+                    Program ends: 
+                  <span class="text-bold">
+                    {{ current_membership?.dateEndProgram }}     
+                  </span>
+                </div>
+            </div>
+            <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
+                <div class="ml-col-1">
+                    Real starts: 
+                  <span class="text-bold">
+                    {{ current_membership?.dateStartReal }}     
+                  </span>
+                </div>
+            </div>
+            <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-right">
+                <div class="ml-col-1">
+                    Real ends: 
+                  <span class="text-bold">
+                    {{ current_membership?.dateEndReal != null ? current_membership?.dateEndReal : 'No Date' }}     
+                  </span>
+                </div>
+            </div>
         </div>
         <div class="ml-col-3 ap-form__sdato ap-form__sdato--no-padding">
             <div class="ml-col-1">
@@ -55,7 +91,7 @@
             <div class="ml-col-1 text-right">
                 Roomate type: 
                 <span class="text-bold">
-                    {{ current_membership?.typeRoom }}
+                    {{ current_membership?.roomateType }}
                 </span>
               </div>
         </div>
@@ -92,7 +128,7 @@
                 <p class="ap-membership__text ml-col-1">
                     Type Room
                     <span class="text-bold">
-                        {{ current_membership?.roomateType }}
+                        {{ current_membership?.typeRoom }}
                     </span>
                 </p>
                 <p class="ap-membership__text ml-col-1">
@@ -139,10 +175,30 @@
                 <tr mat-header-row *matHeaderRowDef="table_colums"></tr>
                 <tr mat-row *matRowDef="let row; columns: table_colums;"></tr>
             </table>
+            <div class="table__footer">
+                <div class="table__footer-dato">
+                    <p class="table__footer-dato-a">Services bill:</p> 
+                    <span class="text-bold table__footer-dato-b">
+                        {{ bill_services_added | currency }}
+                    </span>
+                </div>
+                <div class="table__footer-dato">
+                    <p class="table__footer-dato-a">Membership cost:</p> 
+                    <span class="text-bold table__footer-dato-b">
+                        {{ current_membership?.price | currency }}
+                    </span>
+                </div>
+                <div class="table__footer-dato">
+                    <p class="table__footer-dato-a">Total:</p> 
+                    <span class="text-bold table__footer-dato-b">
+                        {{ bill_services_added_total | currency }}
+                    </span>
+                </div>
+            </div>
         </div>
         <div class="ml-col-1 margin-bottom-x">
             <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
-                <div class="ml-col-1 ap-form__sdato--bbottom">
+                <div class="ml-col-1 ap-form__sdato--bbottom font-big">
                   Pendiente de pago
                 </div>
             </div>
@@ -170,6 +226,14 @@
                 <tr mat-header-row *matHeaderRowDef="table_colums"></tr>
                 <tr mat-row *matRowDef="let row; columns: table_colums;"></tr>
             </table>
+            <div class="table__footer">
+                <div class="table__footer-dato">
+                    <p class="table__footer-dato-a">Total:</p> 
+                    <span class="text-bold table__footer-dato-b">
+                        {{ bill_services_topay | currency }}
+                    </span>
+                </div>
+            </div>
         </div>
         <div class="ml-col-1 margin-tb-min">
             Default Method pay
@@ -234,9 +298,6 @@
         </div>
     </div>
 </div>
-
-
-
 <div class="ml-modal ml-modal--bg-black" *ngIf="show_page_modal">
     <div class="ml-modal__pop" *ngIf="modal_to_show == 'check_in'">
         <p class="ml-modal__pop-titulo">
@@ -276,6 +337,135 @@
             class="ml-modal__pop-buttons-button button-orange">
             Delete
             </button>
+        </div>
+    </div>
+    <div class="ml-modal__content card-style" *ngIf="modal_to_show == 'add_service'">
+        <div class="ml-col-1 margin-bottom-m position-relative">
+            <span class="font-big">Add Services</span> <br />
+            <span>Additional services</span>
+            <button 
+                type="button"
+                (click)="showModal()"
+                class="ap-form__close button-orange">x
+            </button> 
+        </div>
+        <div class="ml-col-1">
+            <table mat-table mat-sort [dataSource]="current_aditionals" class="mat-elevation-z8" style="width: 100%;">
+                <ng-container matColumnDef="icon">
+                    <th mat-header-cell *matHeaderCellDef class="table__header"></th>
+                    <td mat-cell *matCellDef="let element" class="table__data">
+                        <figure class="table__icon">
+                            <img src="https://1.bp.blogspot.com/-FzlONvfh_jU/WM3UC09bJCI/AAAAAAAAAsM/XzDZQ1jkyWIeoNfMuFPX3UpgulG5NwC2gCLcB/s280/lf4%2B2017.gif%2B44.gif" 
+                                  class="table__icon-img" />
+                        </figure>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="service">
+                    <th mat-header-cell *matHeaderCellDef class="table__header">Service</th>
+                    <td mat-cell *matCellDef="let element" class="table__data">{{ element.booked }}</td>
+                </ng-container>
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef class="table__header">Description</th>
+                    <td mat-cell *matCellDef="let element" class="table__data">
+                        +++ Chromin Rush +++ Today our Chromin Rush event starts once again and it runs until 7th May at 10 am LST. Pick up special loot boxes in some of the Galaxy Gates, earn the precious Chromin ore & craft event recipes: Seprom, Osmium and the brand-new SPC-SPE01 ship upgrade module!
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="recurrent">
+                    <th mat-header-cell *matHeaderCellDef class="table__header">Recurrent</th>
+                    <td mat-cell *matCellDef="let element" class="table__data">$7893.77</td>
+                </ng-container>
+                <ng-container matColumnDef="once">
+                    <th mat-header-cell *matHeaderCellDef class="table__header">Once cost</th>
+                    <td mat-cell *matCellDef="let element" class="table__data">$2380.00</td>
+                </ng-container>
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef class="table__header"></th>
+                    <td mat-cell *matCellDef="let element" class="table__data">
+                        <input 
+                            type="checkbox"
+                            id="service_list_0"
+                            name="service_list_0" />
+                        <label class="table__icon block-test" for="service_list_0">
+                            
+                        </label>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="table_adding_services"></tr>
+                <tr mat-row *matRowDef="let row; columns: table_adding_services;"></tr>
+            </table>
+        </div>
+        <div class="ml-col-1 margin-top-x">
+            <span class="font-big">Services selected</span>
+        </div>
+        <div class="ml-col-1 margin-top-x">
+            <div class="ml-col-1 padding-general-min card-style">
+                <div class="ml-col-1 ap-form__sdato margin-bottom-x">
+                    <div class="ml-col-1 ap-form__sdato--bbottom">
+                      Service selected 1
+                    </div>
+                </div>
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <select
+                            required
+                            type="text" 
+                            placeholder="Relationship"
+                            id="reference_relationship" 
+                            name="reference_relationship"
+                            class="ap-form__input-text">
+                            <option value="">Select one</option>
+                            <option value="0" disabled>Relationship</option>
+                            <option value="1" disabled>Relationship</option>
+                        </select>
+                        <label 
+                          for="profile_name" 
+                          class="ap-form__label ap-form__label-text">
+                          Name 
+                        </label>
+                      </div>
+                    </div>
+                </div>
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input 
+                          required
+                          type="date" 
+                          placeholder="Name*"
+                          id="profile_name" 
+                          name="profile_name"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_name" 
+                          class="ap-form__label ap-form__label-text">
+                          Name 
+                        </label>
+                      </div>
+                    </div>
+                </div>
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input 
+                          required
+                          type="date" 
+                          placeholder="Name*"
+                          id="profile_name" 
+                          name="profile_name"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_name" 
+                          class="ap-form__label ap-form__label-text">
+                          Name 
+                        </label>
+                      </div>
+                    </div>
+                </div>
+                <div class="ml-col-4">
+                    $4,450.77
+                </div>
+            </div>
         </div>
     </div>
 </div>

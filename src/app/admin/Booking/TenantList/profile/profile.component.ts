@@ -607,38 +607,43 @@ export class ProfileComponent implements OnInit {
 
   public sendCardData():void {
 
-    this.card_data.number = this.encryptData( this.card_data.number );
-    this.card_data.ccv = this.encryptData( this.card_data.ccv );
-    delete this.card_data.kind;
+    if( this.cardDataValidator( this.card_data ) ) {
 
-    this.loader.showLoader();
+      this.card_data.number = this.encryptData( this.card_data.number );
+      this.card_data.ccv = this.encryptData( this.card_data.ccv );
+      this.card_data.main = 0;
+      delete this.card_data.kind;
 
-    this.services.service_general_post('Tenant/CreateUpdateCreditCard/' , this.card_data)
-        .subscribe( (response: any) => {
+      this.loader.showLoader(); 
 
-          if( response.result == 'Success' ) {
+      this.services.service_general_post('Tenant/CreateUpdateCreditCard/' , this.card_data)
+          .subscribe( (response: any) => {
 
-            this.system_message.showMessage({
-              kind: 'ok',
-              time: 4777,
-              message: {
-                header: 'Credit card updated.',
-                text: 'Credit card has been updated successfully.'
-              }
-            });
+            if( response.result == 'Success' ) {
 
-            this.getPaymentData();
-            this.show_payment_form = false;
+              this.system_message.showMessage({
+                kind: 'ok',
+                time: 4777,
+                message: {
+                  header: 'Credit card updated.',
+                  text: 'Credit card has been updated successfully.'
+                }
+              });
 
-            setTimeout( () => this.loader.hideLoader(), 1277);
+              this.getPaymentData();
+              this.show_payment_form = false;
 
-          } 
+              setTimeout( () => this.loader.hideLoader(), 1277);
 
-        }, (error: any) => {
+            } 
 
-          console.log('Error WS Creditcard => ', error);
+          }, (error: any) => {
 
-        });
+            console.log('Error WS Creditcard => ', error);
+
+          });
+
+    }
 
   }
 
@@ -704,6 +709,8 @@ export class ProfileComponent implements OnInit {
 
     }
 
+    this.resetCardValidators();
+
   }
 
   public toggleKindClientForm( section_to_show: boolean ): void {
@@ -757,10 +764,6 @@ export class ProfileComponent implements OnInit {
 
     !this.isEmailValid( form_data.email ) ? 
       this.form_required.no_val_mail = true : this.form_required.no_val_mail = false;
-
-    console.log('Validando => ' ,form_data );
-    console.log(' => ',this.isEmailValid( form_data.email ));
-    console.log(this.form_required);
 
     if(
       !this.form_required.no_name &&
@@ -844,7 +847,7 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  public kindCardDetecter( card_number: string ):any {
+  public kindCardDetecter( card_number: string ):any { 
 
     let card_kind = '';
     
@@ -862,7 +865,70 @@ export class ProfileComponent implements OnInit {
     if( american_regex.test( card_number ) && 
         card_number.length == 15 ) card_kind = 'american';
 
+    this.card_data.kind = card_kind;
+
     return card_kind;
+
+  }
+
+  public credit_form_card = {
+    no_name: false,
+    no_numb: false,
+    no_mont: false,
+    no_year: false,
+    no_ccv: false
+  }
+  public cardDataValidator( form_data: CardDTO ):boolean {
+
+    let result: boolean = false;
+
+    form_data.name == '' || form_data.name == null ?
+      this.credit_form_card.no_name = true : this.credit_form_card.no_name = false; 
+
+    form_data.number == '' || form_data.number == null ?
+      this.credit_form_card.no_numb = true : this.credit_form_card.no_numb = false; 
+
+    form_data.month == '' || form_data.month == null ?
+      this.credit_form_card.no_mont = true : this.credit_form_card.no_mont = false; 
+
+    form_data.year == '' || form_data.year == null ?
+      this.credit_form_card.no_year = true : this.credit_form_card.no_year = false; 
+
+    form_data.ccv == '' || form_data.ccv == null ?
+      this.credit_form_card.no_ccv = true : this.credit_form_card.no_ccv = false;
+      
+    for( let field in this.credit_form_card ) {
+
+      if( this.credit_form_card[field] ) {
+
+        this.system_message.showMessage({
+          kind: 'error',
+          time: 4200,
+          message: {
+            header: 'Credit card incomplete',
+            text: 'You must give all credit/debit card information.'
+          }
+        });
+
+        return;
+
+      } else result = true;
+
+    }
+
+    return result;
+
+  }
+
+  private resetCardValidators():void {
+
+    this.credit_form_card = {
+      no_name: false,
+      no_numb: false,
+      no_mont: false,
+      no_year: false,
+      no_ccv: false
+    }
 
   }
 
