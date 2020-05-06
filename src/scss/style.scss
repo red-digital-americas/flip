@@ -869,11 +869,18 @@ select:active,
   }
 
   &__content {
+
     width: 70%;
     padding: 30px;
     position: relative;
     margin: 50px 15%;
     float: left;
+
+    @media screen and (min-width: 1920px){
+      width: 50%;
+      margin: 50px 25%;
+    }
+
   }
 
 }
@@ -2465,6 +2472,10 @@ select:active,
   font-size: 22px;
 }
 
+.filter-brightness {
+  filter: brightness(0);
+}
+
 .credit-card {
 
   width: 100%;
@@ -2848,7 +2859,20 @@ select:active,
     font-weight: bolder;
     color: black;
     font-size: 10px;
-    text-align: center !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    
+    &-center {
+      text-align: center !important;
+    }
+
+    &-right {
+      text-align: right !important;
+    }
+
+    &-left {
+      text-align: left !important;
+    }
 
     @media screen and (min-width: 1920px) {
       font-size: 13px;
@@ -2861,7 +2885,20 @@ select:active,
 
     color: black;
     font-size: 10px;
-    text-align: center !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    
+    &-center {
+      text-align: center !important;
+    }
+
+    &-right {
+      text-align: right !important;
+    }
+
+    &-left {
+      text-align: left !important;
+    }
 
     @media screen and (min-width: 1920px) {
       font-size: 13px;
@@ -2893,9 +2930,36 @@ select:active,
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 90%;
-      height: 90%;
+      width: 70%;
+      height: 70%;
       transform: translate(-50%, -50%);
+    }
+
+    &-radio {
+
+      width: 17.5px;
+      height: 17.5px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: #2e343a;
+      cursor: pointer;
+
+    }
+
+  }
+
+  &__input {
+    
+    &-radio {
+      display: none;
+    }
+
+    &-radio:checked + .table__icon > .table__icon-radio {
+      border: solid 5px #2e343a;
+      background-color: white;
     }
 
   }

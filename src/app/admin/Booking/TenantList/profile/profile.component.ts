@@ -934,6 +934,8 @@ export class ProfileComponent implements OnInit {
 
   public goToPage( page: string ):void {
 
+    sessionStorage.setItem('user_id', this.profile_data.id.toString() );
+
     this.router.navigateByUrl( page );
 
   }

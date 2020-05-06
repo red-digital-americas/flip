@@ -45,7 +45,6 @@ export class TenantListComponent implements OnInit {
 
     viewDetail(id: number) {
         console.log('Id user', id);
-        sessionStorage.setItem('name_section_active', 'Tenant Profile' );
         this.router.navigateByUrl( `app-profile/${ id }`, { state: { id: this.buildingId, name: 'TenantList To Profile' } });
     }
 

@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
     public table_history_colums: any[] = ['build','room','membership','adate','ddate','aout','button'];
     public table_adding_services: any[] = ['icon','service','description','recurrent','once','select'];
     public name_build: string;
+    public user_id: number;
 
     public section: string;
 
@@ -29,6 +30,7 @@ import { Router } from '@angular/router';
 
     ngOnInit() {
 
+        this.user_id = Number( sessionStorage.getItem('user_id') );
         this.section = 'tenantList';
         this.getReservationData();
         this.name_build = sessionStorage.getItem('name_build');
@@ -51,7 +53,7 @@ import { Router } from '@angular/router';
     public getReservationData():void {
 
         const user_data = {
-            userid: 8
+            userid: this.user_id
         };
 
         this._services.service_general_post('Booking/SeeStateAccountAdmin', user_data)
@@ -105,6 +107,119 @@ import { Router } from '@angular/router';
         console.log('Pagar cosas pendientes');
         console.log('Pendientes => ', this.current_topay);
         console.log('Credit card => ', this.current_card);
+
+    }
+
+    public all_services_gotted: any[];
+    public getServicesData():void {
+
+        const user_data = {
+            userId: this.user_id, 
+            buildingId: this.current_membership.idRoom,  
+            idBooking: this.current_membership.idBooking
+        };
+
+        this._services.service_general_get_with_params('HistoricalServices/GetBookedAndBuildingAdmin' ,user_data)
+            .subscribe( (response: any) => {
+
+                if( response.result == 'Success' ) {
+
+                    this.all_services_gotted = response.item;
+
+                }
+
+                console.log('All Services => ', this.all_services_gotted );
+
+            }, (error: any) => {
+
+            });
+
+    }
+
+    public services_selected: any[] = [];
+    public selectingServices( service_data: any ):void {
+
+        const finder = (service: any) => service_data.id == service.id;
+
+        if( this.services_selected.findIndex( finder ) == -1 ) {
+
+            this.services_selected.push( service_data );
+
+        } else {
+
+            this.services_selected.splice( this.services_selected.findIndex( finder ), 1);
+
+        }
+
+        console.log('Services selected => ', this.services_selected );
+
+    }
+
+    public clearServicesSelected():void {
+
+        this.services_selected = [];
+
+    }
+
+
+    public saveServicesSelected():void {
+
+        console.log('Send Services => ', this.services_selected);
+
+        const services_to_send: any[] = [];
+
+        this.validateServicesSelectedForm();
+
+        this.services_selected.forEach( (service: any) => {
+
+            const object_service = new ServiceAddedDTO();
+
+                  object_service.id = this.user_id;
+                  object_service.idService = service.id;
+                  object_service.idBooking = this.current_membership.idBooking;
+                  object_service.dateStart = '10/07/2022';
+                  object_service.dateEnd = '20/07/2022';
+                  object_service.recurrent = 1;
+                  object_service.fromMembership = 2;
+                  object_service.IdUserPaymentService = 0;
+                  object_service.amount = 100;
+                  object_service.idUserPaymentServiceNavigation = {
+                    id: 0,
+                    idServiceBooking: 0,
+                    idCreditCard: 0,
+                    payment: 0,
+                    paymentDate: ''
+                  };
+
+                  services_to_send.push( object_service );
+
+        });
+
+        console.log('To send => ', services_to_send);
+
+        this._services.service_general_post('BookingServiceAdmin/PostBookingService', services_to_send )
+            .subscribe( (response: any) => {
+
+                console.log('Response => ', response);
+
+            }, (error: any) => {
+
+                console.log('Error WS Save Services => ', error);
+
+            });
+
+    } 
+
+    public history_selected: any;
+    public history_selected_services_bill: number;
+    public history_selected_services_total: number;
+    public moreHistoryData( history_data: any ):void {
+
+        this.history_selected = history_data;
+        this.history_selected.customDateDif = 
+                    this.dateWorker('calc' , this.history_selected.dateStart, this.history_selected.dateEnd );
+        this.history_selected_services_bill = this.getBillFrom( this.history_selected.servicesAditional );
+        this.history_selected_services_total = this.getBillFrom( this.history_selected.servicesAditional ) + this.history_selected.price; 
 
     }
 
@@ -226,4 +341,65 @@ import { Router } from '@angular/router';
 
     }
 
+    public validateServicesSelectedForm():boolean {
+
+        let result: boolean = false;
+
+        const form_services_added = document.getElementById('form_services_added'),
+              service_form = form_services_added.querySelectorAll('[service="added"]');
+
+              service_form.forEach( (service: any) => {
+
+                let service_form_data = {
+                    select: service.querySelectorAll('select')[0].value,
+                    date_s: service.querySelectorAll('input')[0].value,
+                    date_e: service.querySelectorAll('input')[1].value 
+                }
+
+                console.log('B Here => ', service);
+                console.log( service.querySelectorAll('select')[0] );
+                console.log( service.querySelectorAll('input')[0] );
+                console.log( service.querySelectorAll('input')[1] );
+                console.log('Form Service => ', service_form_data);
+
+                //Añadir validaciones a los campos cuando esten vacios
+                //Calcular las fechas para sacar el total
+                //Completar el objeto con la informacion validada
+                //Desplegar mensajes de error si existen
+                //Terminar de enviar la data
+
+              });
+
+        console.log('Here => ', form_services_added);
+        console.log('Here Goes => ', service_form);
+
+        return result;
+
+    }
+
+}
+
+class ServiceAddedDTO {
+    id: number = 0;
+    idService: number = null;
+    idBooking: number = null;
+    dateStart: string = '';
+    dateEnd: string = '';
+    recurrent: number = null;
+    fromMembership: number = null;
+    IdUserPaymentService: number = null;
+    amount: number = null;
+    idUserPaymentServiceNavigation: {
+        id: number;
+        idServiceBooking: number;
+        idCreditCard: any;
+        payment: number;
+        paymentDate: any;
+    } = {
+        id: null,
+        idServiceBooking: null,
+        idCreditCard: null,
+        payment: null,
+        paymentDate: null
+    }
 }
