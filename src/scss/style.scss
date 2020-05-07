@@ -1559,6 +1559,22 @@ select:active,
 
   }
 
+  &__group {
+
+    padding-top: 10px;
+    padding-right: 20px;
+
+    &-dato {
+      width: 100%;
+      padding: 0 5px;
+      float: left;
+      margin: 0;
+      padding: 0;
+      text-align: right;
+    }
+
+  }
+
 }
 
 .ap-cards {
@@ -2309,22 +2325,27 @@ select:active,
 
 .bg-black {
   background-color: #2e343a;
+  color: white;
 }
 
 .button-black {
   background-color: #2e343a;
+  color: white;
 }
 
 .button-blue {
   background-color: #20a8d8;
+  color: white;
 }
 
 .button-orange {
   background-color: #f86c6b;
+  color: white;
 }
 
 .button-green {
   background-color: #309b8a;
+  color: white;
 }
 
 .no-image {
@@ -2944,7 +2965,8 @@ select:active,
       left: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      background-color: #2e343a;
+      background-color: white;
+      border: solid 2px #2e343a;
       cursor: pointer;
 
     }
@@ -2999,6 +3021,32 @@ select:active,
 
   }
 
+}
+
+.show-more-icon {
+  position: absolute;
+  top: 50%;
+  right: 2.5%;
+  width: 12.5px;
+  height: 12.5px;
+  border-width: 1.2px 1.2px 0 0;
+  border-color: rgba($color: #2e343a, $alpha: .7);
+  border-style: solid;
+  transform: translateY(-50%) rotate(130deg) scale(1);
+}
+
+.show-more-style {
+  border-bottom: solid 2px #f86c6b;
+  padding: 7px 0;
+}
+
+.show-more-style:hover {
+  border-bottom: solid 2px #20a8d8;
+}
+
+.show-more-style:hover > .show-more-icon {
+  border-color: rgba($color: #20a8d8, $alpha: 1);
+  transform: translateY(-50%) rotate(130deg) scale(1.12);
 }
 
 select {

@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DatosService } from '../../../../../datos.service';
 import * as CryptoJS from 'crypto-js';
 import { Router } from '@angular/router';
+import { LoaderComponent } from '../../../../../ts/loader';
+import { SystemMessage } from '../../../../../ts/systemMessage';
 
 @Component({
     selector: 'reservations',
@@ -15,8 +17,11 @@ import { Router } from '@angular/router';
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+    public loader: LoaderComponent = new LoaderComponent();
+    public system_message: SystemMessage = new SystemMessage();
     public table_colums: any[] = ['service','type','sdate','edate','xcost'];
     public table_history_colums: any[] = ['build','room','membership','adate','ddate','aout','button'];
+    public table_payHistory_colums: any[] = ['dateStart','dateEnd','payday','ammount','card'];
     public table_adding_services: any[] = ['icon','service','description','recurrent','once','select'];
     public name_build: string;
     public user_id: number;
@@ -37,12 +42,31 @@ import { Router } from '@angular/router';
 
     }
 
+    public beds_section: boolean = false;
+    public history_section: boolean = false;
+    public showSection( section_to_show: string ):void {
+
+        switch( section_to_show ) {
+
+            case 'beds':
+                this.beds_section ? this.beds_section = false : this.beds_section = true;
+                break;
+
+            case 'history_section':
+                this.history_section ? this.history_section = false : this.history_section = true;
+                break;
+
+        }
+
+    }
+
     public current_services: any;
     public current_aditionals: any;
     public current_topay: any;
     public current_history: any;
     public current_card: any;
     public current_membership: any;
+    public current_paymentHis: any;
     public number_card: string;
     public kind_card: string;
     public bill_services_added: number;
@@ -71,6 +95,7 @@ import { Router } from '@angular/router';
                     this.current_topay = response.infoMembership.toPay;
                     this.current_history = response.history;
                     this.current_card = response.mainCard;
+                    this.current_paymentHis = this.current_membership.historyPaymentsMemberships;
 
                     const card_number = this.decryptData( this.current_card.number ).toString();
                     this.bill_services_added = this.getBillFrom( this.current_aditionals );
@@ -83,7 +108,14 @@ import { Router } from '@angular/router';
                         this.check_in_active = false;
                     this.current_membership.dateEndReal == null ? 
                         this.check_out_active = true : 
-                        this.check_out_active = false;
+                        this.check_out_active = false; 
+                    this.current_paymentHis.forEach( (history: any) => {
+
+                        const card_number = this.decryptData( history.paymentData.cc );
+
+                        history.creditNumber = card_number.substr( card_number.toString().length - 4); 
+
+                    });
 
                 }
 
@@ -91,6 +123,7 @@ import { Router } from '@angular/router';
                 console.log('Services => ', this.current_services);
                 console.log('Services add => ', this.current_aditionals);
                 console.log('Services to pay => ', this.current_topay);
+                console.log('Payments History => ', this.current_paymentHis);
                 console.log('History => ', this.current_history);
                 console.log('Credit => ', this.current_card);
 
@@ -164,56 +197,176 @@ import { Router } from '@angular/router';
 
     public saveServicesSelected():void {
 
-        console.log('Send Services => ', this.services_selected);
-
-        const services_to_send: any[] = [];
-
         this.validateServicesSelectedForm();
 
-        this.services_selected.forEach( (service: any) => {
+        /*this.loader.showLoader();
 
-            const object_service = new ServiceAddedDTO();
-
-                  object_service.id = this.user_id;
-                  object_service.idService = service.id;
-                  object_service.idBooking = this.current_membership.idBooking;
-                  object_service.dateStart = '10/07/2022';
-                  object_service.dateEnd = '20/07/2022';
-                  object_service.recurrent = 1;
-                  object_service.fromMembership = 2;
-                  object_service.IdUserPaymentService = 0;
-                  object_service.amount = 100;
-                  object_service.idUserPaymentServiceNavigation = {
-                    id: 0,
-                    idServiceBooking: 0,
-                    idCreditCard: 0,
-                    payment: 0,
-                    paymentDate: ''
-                  };
-
-                  services_to_send.push( object_service );
-
-        });
-
-        console.log('To send => ', services_to_send);
-
-        this._services.service_general_post('BookingServiceAdmin/PostBookingService', services_to_send )
+        this._services.service_general_post('BookingServiceAdmin/PostBookingService', this.services_to_send )
             .subscribe( (response: any) => {
 
-                console.log('Response => ', response);
+                if( response.result == 'Success' ) {
+
+                    this.system_message.showMessage({
+                        kind: 'ok',
+                        time: 4200,
+                        message: {
+                            header: 'Services added.',
+                            text: 'Service/s have been added succesfully.'
+                        }
+                    });
+
+                    this.getReservationData();
+                    this.showModal();
+
+                    setTimeout( () => this.loader.hideLoader(), 1777 );
+
+                }
 
             }, (error: any) => {
 
                 console.log('Error WS Save Services => ', error);
 
+            });*/
+
+    }
+    
+    public services_to_send: any[] = [];
+    public validateServicesSelectedForm():any {
+
+        this.services_to_send = [];
+
+        const service_data = document.querySelectorAll('[service="added"]');
+
+        service_data.forEach( (service: any) => {
+
+            const id_service = service.querySelectorAll('select')[0].id.split('_')[service.querySelectorAll('select')[0].id.split('_').length -1],
+                  select_field = service.querySelectorAll('select')[0],
+                  input_s_field = service.querySelectorAll('input')[0],
+                  input_e_field = service.querySelectorAll('input')[1];
+            
+            let form_error_found = {
+            error_one_found: false,
+            error_two_found: false,
+            error_three_found: false,
+            confirm: function( this ) {
+
+                    let result: boolean = false;
+
+                    this.error_one_found || 
+                    this.error_two_found ||
+                    this.error_three_found ?
+                        result = true : result = false;
+
+                    return result;
+                }
+            }
+
+            this.services_selected.forEach( (service_on: any) => {
+
+                if( service_on.id == id_service ) {
+
+                    service_on.no_select = false;
+                    service_on.no_sDate = false;
+                    service_on.no_eDate = false;
+
+                    if( select_field.value == null || select_field.value == "" ) {
+
+                        service_on.no_select = true;
+                        form_error_found.error_one_found = true;
+
+                    } else {
+
+                        service_on.no_select = false;
+                        form_error_found.error_one_found = false;
+
+                    }
+
+                    if( input_s_field.value == null || input_s_field.value == "" ) {
+
+                        service_on.no_sDate = true;    
+                        form_error_found.error_two_found = true;    
+
+                    } else {
+
+                        form_error_found.error_one_found = false;
+                        service_on.no_eDate = false;
+
+                    }
+
+                    if( input_e_field.value == null || input_e_field.value == "" ) {
+
+                        service_on.no_eDate = true;
+                        form_error_found.error_three_found = true;  
+
+                    } else {
+
+                        service_on.no_eDate = false;
+                        form_error_found.error_one_found = false;
+
+                    }
+
+                    if( form_error_found.confirm() ) {
+
+                        this.system_message.showMessage({
+                            kind: 'error',
+                            time: 5500,
+                            message: {
+                                header: 'Form Data Error',
+                                text: 'All input form must be fill. Please check and try again.'
+                            }
+                        });
+
+                    }
+
+                    const days_diff = this.calcDaysDiff(input_s_field.value, input_e_field.value),
+                        object_service = new ServiceAddedDTO();
+                        object_service.id = 0;
+                        object_service.idService = service_on.id;
+                        object_service.idBooking = this.current_membership.idBooking;
+                        object_service.dateStart = input_s_field.value;
+                        object_service.dateEnd = input_e_field.value;
+                        object_service.recurrent = select_field.value;
+                        object_service.fromMembership = 2;
+                        object_service.IdUserPaymentService = 0;
+                        object_service.amount = days_diff * service_on.price;
+                        service_on.total = object_service.amount;
+                        object_service.idUserPaymentServiceNavigation = {
+                            id: 0,
+                            idServiceBooking: 0,
+                            idCreditCard: null,
+                            payment: 0,
+                            paymentDate: ''
+                        }
+
+                    this.services_to_send.push( object_service );
+
+                }
+
             });
 
-    } 
+        });
+
+        console.log('Aqui ===> ', this.services_selected );
+
+    }
+
+    public calcDaysDiff( date_one: string, date_two: string ):number {
+
+        const date_s = new Date(date_one),
+              date_e = new Date(date_two),
+              time_diff =  Math.abs(date_e.getTime() - date_s.getTime()),
+              diff_days = Math.ceil(time_diff / (1000 * 3600 * 24));
+
+        return diff_days;
+
+    }
 
     public history_selected: any;
     public history_selected_services_bill: number;
     public history_selected_services_total: number;
-    public moreHistoryData( history_data: any ):void {
+    public moreHistoryData( history_data: any ):void { 
+
+        console.log('No veo informacion del Payments History');
 
         this.history_selected = history_data;
         this.history_selected.customDateDif = 
@@ -284,6 +437,9 @@ import { Router } from '@angular/router';
                 result = diff_days;
                 break;
 
+            case 'calcJS':
+                break;
+
         }
 
         return result;
@@ -338,42 +494,6 @@ import { Router } from '@angular/router';
         the_page != '' ? 
             this._router.navigateByUrl( the_page ) :
             window.history.back();
-
-    }
-
-    public validateServicesSelectedForm():boolean {
-
-        let result: boolean = false;
-
-        const form_services_added = document.getElementById('form_services_added'),
-              service_form = form_services_added.querySelectorAll('[service="added"]');
-
-              service_form.forEach( (service: any) => {
-
-                let service_form_data = {
-                    select: service.querySelectorAll('select')[0].value,
-                    date_s: service.querySelectorAll('input')[0].value,
-                    date_e: service.querySelectorAll('input')[1].value 
-                }
-
-                console.log('B Here => ', service);
-                console.log( service.querySelectorAll('select')[0] );
-                console.log( service.querySelectorAll('input')[0] );
-                console.log( service.querySelectorAll('input')[1] );
-                console.log('Form Service => ', service_form_data);
-
-                //Añadir validaciones a los campos cuando esten vacios
-                //Calcular las fechas para sacar el total
-                //Completar el objeto con la informacion validada
-                //Desplegar mensajes de error si existen
-                //Terminar de enviar la data
-
-              });
-
-        console.log('Here => ', form_services_added);
-        console.log('Here Goes => ', service_form);
-
-        return result;
 
     }
 
