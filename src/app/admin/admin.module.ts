@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ToasterModule } from 'angular2-toaster/angular2-toaster';
+import { StripeModule } from "stripe-angular"
 
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -93,7 +94,8 @@ import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    [ StripeModule.forRoot("pk_test_WiAYJgrEz6XKxL2MwKD89oqO00bfPcrlOF") ]
   ],
   declarations: [
     CommunitiesComponent,  

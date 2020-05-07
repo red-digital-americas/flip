@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatosService } from '../../../../../datos.service';
+import { StripeToken, StripeSource } from 'stripe-angular';
+import { StripeScriptTag } from "stripe-angular";
 import * as CryptoJS from 'crypto-js';
 import { Router } from '@angular/router';
 import { LoaderComponent } from '../../../../../ts/loader';
@@ -17,6 +19,7 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+    private st_key:string = "pk_test_WiAYJgrEz6XKxL2MwKD89oqO00bfPcrlOF";
     public loader: LoaderComponent = new LoaderComponent();
     public system_message: SystemMessage = new SystemMessage();
     public table_colums: any[] = ['service','type','sdate','edate','xcost'];
@@ -30,8 +33,33 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
     constructor(
         public _services: DatosService,
-        public _router: Router
-    ) {}
+        public _router: Router,
+        public _stripeScriptTag: StripeScriptTag
+    ) {
+
+        this._stripeScriptTag.setPublishableKey(this.st_key);
+
+    }
+
+    public setStripeToken( token:StripeToken ){
+
+        //Booking/PayFromAdmin => Pagar servicios {
+        //"id": id
+        //}
+
+        const st_data = {
+            token : token.id,
+            amount: 100
+        }
+
+        this._services.service_general_post('Booking/PayAddServices', st_data)
+            .subscribe( (response: any) => {
+
+                console.log('Pago ===> ', response);
+
+            });
+
+      }
 
     ngOnInit() {
 
@@ -197,7 +225,7 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
     public saveServicesSelected():void {
 
-        this.validateServicesSelectedForm();
+        //this.validateServicesSelectedForm();
 
         /*this.loader.showLoader();
 
@@ -435,9 +463,6 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
                 time_diff =  Math.abs(date_e.getTime() - date_s.getTime());
                 diff_days = Math.ceil(time_diff / (1000 * 3600 * 24));
                 result = diff_days;
-                break;
-
-            case 'calcJS':
                 break;
 
         }

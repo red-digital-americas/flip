@@ -1,3 +1,14 @@
+<stripe-card #stripeCard 
+            (catch)="onStripeError($event)" 
+            [(invalid)]="invalidError"
+            (tokenChange)="setStripeToken($event)" 
+            (sourceChange)="setStripeSource($event)" 
+            class="form-control">
+</stripe-card>
+<button type="button" (click)="stripeCard.createToken()"
+            class="btn btn-outline-dark margin-gral">createToken
+</button>
+
 <div class="ml-col-1 padding-general-m margin-bottom-m">
     <div class="ap-form ml-col-1 card-style">
         <div class="ml-col-1">
@@ -687,7 +698,7 @@
                   type="button"
                   (click)="saveServicesSelected()"
                   class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-                  Save services
+                  Add to account
                 </button>
                 <button 
                   type="button"
