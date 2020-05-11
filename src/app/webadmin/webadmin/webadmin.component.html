@@ -109,7 +109,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+        <button type="button" class="close" id="close_button" (click)="primaryModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -124,7 +124,7 @@
               type="file" 
               name="image_one_selected"
               accept="image/*"
-              (change)="prepareImages($event,0); readImageData($event, '350x350');"
+              (change)="readImageData($event, '350x350', 0);"
               id="validatedCustomFile" 
               required>
             <label class="form__image-img" for="validatedCustomFile">
@@ -144,7 +144,7 @@
               type="file" 
               name="image_one_selected"
               accept="image/*"
-              (change)="prepareImages($event,1); readImageData($event, '350x350');"
+              (change)="readImageData($event, '350x350', 1);"
               id="validatedCustomFile1" 
               required>
             <label class="form__image-img" for="validatedCustomFile1">

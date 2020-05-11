@@ -85,7 +85,7 @@
               type="file" 
               name="image_one_selected"
               type="file" accept="image/*"
-              (change)="prepareImages($event); readImageData($event)" 
+              (change)="readImageData($event, '288x576');" 
               id="validatedCustomFile" />
             <label class="form__image-img" for="validatedCustomFile">
               <figure class="image_to_preview_container form_large_image">
@@ -94,7 +94,7 @@
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span>
                 <strong>Imagen:</strong> <br /> 
-                *La imagen deberá de ser de 288px * 866px;
+                *La imagen deberá de ser de 350x350px;
               </span>
             </label>
           </div>
@@ -127,7 +127,7 @@
           </div>
           <div class="card__row margin-top-x">
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+              <button type="button" class="btn btn-secondary" id="close_button" (click)="primaryModal.hide()">Cerrar</button>
               <button 
                 type="button" 
                 class="btn btn-primary" 
@@ -140,7 +140,9 @@
         </form>
       </div>
 
-
+      <div class="black-box">
+        <img src="" id="image_data" />
+      </div>
 
       <!-- form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">

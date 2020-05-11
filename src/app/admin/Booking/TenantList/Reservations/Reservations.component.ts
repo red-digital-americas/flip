@@ -9,6 +9,7 @@ import * as CryptoJS from 'crypto-js';
 import { Router } from '@angular/router';
 import { LoaderComponent } from '../../../../../ts/loader';
 import { SystemMessage } from '../../../../../ts/systemMessage';
+import { resolve } from 'dns';
 
 @Component({
     selector: 'reservations',
@@ -24,7 +25,8 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
     public system_message: SystemMessage = new SystemMessage();
     public table_colums: any[] = ['service','type','sdate','edate','xcost'];
     public table_history_colums: any[] = ['build','room','membership','adate','ddate','aout','button'];
-    public table_payHistory_colums: any[] = ['dateStart','dateEnd','payday','ammount','card'];
+    public table_payHistory_colums: any[] = ['membership','dateStart','dateEnd','payday','ammount','card'];
+    public table_serHistory_colums: any[] = ['name','price','payday','dateStart','dateEnd','card'];
     public table_adding_services: any[] = ['icon','service','description','recurrent','once','select'];
     public name_build: string;
     public user_id: number;
@@ -41,25 +43,6 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
     }
 
-    public setStripeToken( token:StripeToken ){
-
-        //Booking/PayFromAdmin => Pagar servicios {
-        //"id": id
-        //}
-
-        const st_data = {
-            token : token.id,
-            amount: 100
-        }
-
-        this._services.service_general_post('Booking/PayAddServices', st_data)
-            .subscribe( (response: any) => {
-
-                console.log('Pago ===> ', response);
-
-            });
-
-      }
 
     ngOnInit() {
 
@@ -95,6 +78,8 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
     public current_card: any;
     public current_membership: any;
     public current_paymentHis: any;
+    public current_paymentSer: any;
+    public current_beds: any;
     public number_card: string;
     public kind_card: string;
     public bill_services_added: number;
@@ -114,6 +99,7 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
                 if( response.result == 'Success' ) {
 
                     this.current_membership = response.infoMembership;
+                    this.current_beds = this.current_membership.additionalBeds;
                     this.current_membership.customDateS = this.dateWorker('format' ,this.current_membership.dateStart );
                     this.current_membership.customDateE = this.dateWorker('format' ,this.current_membership.dateEnd );
                     this.current_membership.customDateDif = 
@@ -124,6 +110,7 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
                     this.current_history = response.history;
                     this.current_card = response.mainCard;
                     this.current_paymentHis = this.current_membership.historyPaymentsMemberships;
+                    this.current_paymentSer = this.current_membership.historyPaymentService;
 
                     const card_number = this.decryptData( this.current_card.number ).toString();
                     this.bill_services_added = this.getBillFrom( this.current_aditionals );
@@ -144,20 +131,87 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
                         history.creditNumber = card_number.substr( card_number.toString().length - 4); 
 
                     });
+                    this.current_paymentSer.forEach( (service: any) => {
+
+                        if( service.cc.cc != null ) {
+
+                            const card_number = this.decryptData( service.cc.cc );
+
+                            service.cardClue = card_number.substr( card_number.toString().length - 4);
+
+                        } else {
+
+                            service.cardClue = null;
+
+                        }
+
+                    });
 
                 }
 
                 console.log('General => ', this.current_membership);
+                console.log('Add Beds => ', this.current_beds );
                 console.log('Services => ', this.current_services);
                 console.log('Services add => ', this.current_aditionals);
                 console.log('Services to pay => ', this.current_topay);
                 console.log('Payments History => ', this.current_paymentHis);
+                console.log('Services History => ', this.current_paymentSer );
                 console.log('History => ', this.current_history);
                 console.log('Credit => ', this.current_card);
 
             }, (error: any) => {
 
-                console.log('Error Get Reservation => ', error);
+                console.error('Error Get Reservation => ', error);
+
+            });
+
+    }
+
+    public confirmCheckInOut( action: string ):void {
+
+        let ws_action: string = null;
+
+        const ws_data = {
+            username: this.current_card.userId
+        }
+
+        switch( action ) {
+
+            case 'in':
+                ws_action = 'checkIn';
+                break;
+
+            case 'out':
+                ws_action = 'checkOut';
+                break;
+
+        }
+
+        this.loader.showLoader();
+
+        this._services.service_general_post(`Profile/${ ws_action }`, ws_data)
+            .subscribe( (response: any) => {
+
+                if( response.result == 'Success' ) {
+
+                    this.system_message.showMessage({
+                        kind: 'ok',
+                        time: 4200,
+                        message: {
+                            header: `${ ws_action == 'in' ? 'Check In ' : 'Check out' } successfully.`,
+                            text: `You have been ${ ws_action == 'in' ? 'Check In ' : 'Check out' } successfully`
+                        }
+                    });
+
+                    this.showModal();
+
+                    setTimeout( () => this.loader.hideLoader(),1777);
+
+                }
+
+            }, (error: any) => {
+
+                console.error('Error WS CIO => ', error);
 
             });
 
@@ -165,9 +219,60 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
     public payPendingItems():void {
 
-        console.log('Pagar cosas pendientes');
-        console.log('Pendientes => ', this.current_topay);
-        console.log('Credit card => ', this.current_card);
+        const card_data = {
+            number: this.decryptData( this.current_card.number ),
+            expYear: Number( this.current_card.year ),
+            expMonth: Number( this.current_card.month ),
+            cvc: this.decryptData( this.current_card.ccv ).toString(),
+            id: this.current_card.id
+        }
+
+        this.loader.showLoader();
+        
+        this._services.service_general_post('Stripe', card_data)
+            .subscribe( (response: any) => {
+                
+                if( response.result == 'Success' ) {
+
+                    const st_data = {
+                        token : response.item,
+                        amount: this.bill_services_topay
+                    }
+            
+                    this._services.service_general_post('Booking/PayAddServices', st_data)
+                        .subscribe( (response: any) => {
+
+                            if( response.result == 'Success' ) {
+
+                                const ws_data = {
+                                    id: this.current_membership.idBooking
+                                }
+
+                                this._services.service_general_post('Booking/PayFromAdmin', ws_data)
+                                    .subscribe( (response: any) => {
+
+                                        console.log( response );
+                                        this.showModal();
+                                        this.getReservationData();
+                                        this.loader.hideLoader();
+
+                                    }, (error: any) => {
+
+                                        console.error('Error WS PayFromAdmin => ', error);
+
+                                    });
+
+                            }
+            
+                    });
+
+                }
+
+            }, (error: any) => {
+
+                console.error('Error WS Pay Pend => ', error);
+
+            });
 
     }
 
@@ -189,9 +294,9 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
                 }
 
-                console.log('All Services => ', this.all_services_gotted );
-
             }, (error: any) => {
+
+                console.log('Error WS GetBookedAndBuildingAdmin => ', error);
 
             });
 
@@ -204,7 +309,16 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
         if( this.services_selected.findIndex( finder ) == -1 ) {
 
+            service_data.service_lapse = '';
+
             this.services_selected.push( service_data );
+
+            setTimeout( () => {
+
+                const input_s_field = document.getElementById(`addServ_sDate_${ service_data.id }`);
+                      input_s_field.setAttribute('min', this.dateWorker('value', this.current_membership.dateStart.trim() ) );
+
+            }, this.services_selected.length * 10 );
 
         } else {
 
@@ -212,7 +326,19 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
         }
 
-        console.log('Services selected => ', this.services_selected );
+    }
+
+    public updateServiceSelectedPrice( service: any ,event_data: any ):void {
+
+        service.service_lapse = event_data.value;
+
+        if( service.days_diff ) {
+
+            service.service_lapse == '1' ? 
+                service.total = service.price * service.days_diff :
+                service.total = service.priceUnit * service.days_diff;
+
+        }
 
     }
 
@@ -222,46 +348,123 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
     }
 
+    private get_token: string;
+    public saveOrPayServicesSelected( action: string = '' ):void {
 
-    public saveServicesSelected():void {
+        if( this.validateServicesSelectedForm() ) {
 
-        //this.validateServicesSelectedForm();
+            this.loader.showLoader();
 
-        /*this.loader.showLoader();
+            if( action == 'pay' ) {
+
+                const card_data = {
+                    number: this.decryptData( this.current_card.number ),
+                    expYear: Number( this.current_card.year ),
+                    expMonth: Number( this.current_card.month ),
+                    cvc: this.decryptData( this.current_card.ccv ).toString(),
+                    id: this.current_card.id
+                }
+
+                this._services.service_general_post('Stripe', card_data)
+                    .subscribe( (response: any) => {
+
+                        if( response.result == 'Success' ) {
+
+                            const st_data = {
+                                token : response.item,
+                                amount: this.bill_services_topay
+                            }
+
+                            this._services.service_general_post('Booking/PayAddServices', st_data)
+                                .subscribe( (response: any) => {
+
+                                    if( response.result == 'Success' ) {
+
+                                        this.services_to_send.forEach( (service: any) => {
+
+                                            service.idUserPaymentServiceNavigation.id = 0;
+                                            service.idUserPaymentServiceNavigation.idServiceBooking = 0;
+                                            service.idUserPaymentServiceNavigation.payment = 1;
+                                            service.idUserPaymentServiceNavigation.idCreditCard = card_data.id;
+                                            service.idUserPaymentServiceNavigation.paymentDate = 
+                                                `${ new Date().getFullYear() }-${ new Date().getDay() }-${ new Date().getMonth() }`;
+            
+                                        });
+
+                                        this.saveOrPayServices();
+
+                                    }
+
+                                }, (error: any) => {
+
+                                    console.error('WS PayService => ', error);
+
+                                });
+
+                        }
+
+                    }, (error: any) => {
+
+                        console.error('Error WS Stripe => ', error);
+
+                    });
+
+            } else {
+
+                this.saveOrPayServices();
+
+            }
+
+
+        } else this.system_message.showMessage({
+                    kind: 'error',
+                    time: 5200,
+                    message: {
+                        header: 'Information Error',
+                        text: 'All Inputs must be fill to continue'
+                    }
+                });
+
+    }
+
+    public saveOrPayServices():void {
 
         this._services.service_general_post('BookingServiceAdmin/PostBookingService', this.services_to_send )
             .subscribe( (response: any) => {
 
-                if( response.result == 'Success' ) {
+            if( response.result == 'Success' ) {
 
-                    this.system_message.showMessage({
-                        kind: 'ok',
-                        time: 4200,
-                        message: {
-                            header: 'Services added.',
-                            text: 'Service/s have been added succesfully.'
-                        }
-                    });
+                this.system_message.showMessage({
+                    kind: 'ok',
+                    time: 4200,
+                    message: {
+                        header: 'Services added.',
+                        text: 'Service/s have been added succesfully.'
+                    }
+                });
 
-                    this.getReservationData();
-                    this.showModal();
+                this.getReservationData();
+                this.showModal();
+                this.services_selected = [];
 
-                    setTimeout( () => this.loader.hideLoader(), 1777 );
+                setTimeout( () => this.loader.hideLoader(), 1777 );
 
-                }
+            }
 
-            }, (error: any) => {
+        }, (error: any) => {
 
-                console.log('Error WS Save Services => ', error);
+            console.log('Error WS Save Services => ', error);
 
-            });*/
+        });
 
     }
     
     public services_to_send: any[] = [];
-    public validateServicesSelectedForm():any {
+    public validateServicesSelectedForm():boolean {
 
         this.services_to_send = [];
+
+        let result = false;
 
         const service_data = document.querySelectorAll('[service="added"]');
 
@@ -273,21 +476,21 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
                   input_e_field = service.querySelectorAll('input')[1];
             
             let form_error_found = {
-            error_one_found: false,
-            error_two_found: false,
-            error_three_found: false,
-            confirm: function( this ) {
+                error_one_found: false,
+                error_two_found: false,
+                error_three_found: false,
+                confirm: function( this ) {
 
-                    let result: boolean = false;
+                        let result: boolean = false;
 
-                    this.error_one_found || 
-                    this.error_two_found ||
-                    this.error_three_found ?
-                        result = true : result = false;
+                        this.error_one_found || 
+                        this.error_two_found ||
+                        this.error_three_found ?
+                            result = true : result = false;
 
-                    return result;
+                        return result;
+                    }
                 }
-            }
 
             this.services_selected.forEach( (service_on: any) => {
 
@@ -333,18 +536,7 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
                     }
 
-                    if( form_error_found.confirm() ) {
-
-                        this.system_message.showMessage({
-                            kind: 'error',
-                            time: 5500,
-                            message: {
-                                header: 'Form Data Error',
-                                text: 'All input form must be fill. Please check and try again.'
-                            }
-                        });
-
-                    }
+                    form_error_found.confirm(); 
 
                     const days_diff = this.calcDaysDiff(input_s_field.value, input_e_field.value),
                         object_service = new ServiceAddedDTO();
@@ -356,7 +548,7 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
                         object_service.recurrent = select_field.value;
                         object_service.fromMembership = 2;
                         object_service.IdUserPaymentService = 0;
-                        object_service.amount = days_diff * service_on.price;
+                        object_service.amount = days_diff * ( service_on.service_lapse == '1' ? service_on.priceUnit : service_on.price );
                         service_on.total = object_service.amount;
                         object_service.idUserPaymentServiceNavigation = {
                             id: 0,
@@ -374,7 +566,60 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
         });
 
-        console.log('Aqui ===> ', this.services_selected );
+        for( let service of this.services_selected ) {
+
+            if( service.no_select || service.no_sDate || service.no_eDate ) return;
+            else result = true;
+
+        }
+
+        return result;
+
+    }
+
+    public addServiceDateValidator( id_sDate: string, id_eDate: string, id: string ):void {
+
+        const date_s: any = document.getElementById( id_sDate ),
+              date_e: any = document.getElementById( id_eDate ),
+              id_service = Number( id );
+
+        let days_diff = 0;
+
+        if( date_s.value == '' ) {
+
+            date_e.setAttribute('disabled', 'true');
+
+        } else {
+
+            date_e.min = date_s.value;
+            date_e.removeAttribute('disabled');
+
+        }
+
+        if( date_e.value != '' ) {
+
+            date_s.max = date_e.value;
+
+        }
+
+        days_diff = this.calcDaysDiff(date_s.value, date_e.value);
+
+        if( days_diff !== NaN ) {
+
+            this.services_selected.forEach( (service: any) => {
+
+                if( service.id == id_service ) {
+
+                    service.service_lapse == '1' ? 
+                    service.total = service.price * days_diff : 
+                    service.total = service.priceUnit * days_diff;
+                    service.days_diff = days_diff;
+
+                }
+
+            });
+
+        }
 
     }
 
@@ -390,17 +635,114 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
     }
 
     public history_selected: any;
+    public history_selected_memberships: any;
+    public history_selected_servicesHis: any;
     public history_selected_services_bill: number;
     public history_selected_services_total: number;
     public moreHistoryData( history_data: any ):void { 
 
-        console.log('No veo informacion del Payments History');
+        this.history_selected = history_data; 
+        this.history_selected_memberships = this.history_selected.historyPaymentsMemberships;
+        this.history_selected_servicesHis = this.history_selected.historyPaymentService;
 
-        this.history_selected = history_data;
+        console.log('CC Mem => ', this.history_selected_servicesHis);
+
+        this.history_selected_memberships.forEach( (card: any) => {
+
+            const card_number = this.decryptData( card.paymentData.cc );
+
+            card.creditNumber = card_number.substr( card_number.toString().length - 4);
+
+        });
+
+        this.history_selected_servicesHis.forEach( (card: any) => {
+
+            if( card.cc.cc != null || card.cc.cc != undefined ) {
+
+                const card_number = this.decryptData( card.cc.cc );
+
+                card.cardClue = card_number.substr( card_number.toString().length - 4);
+
+            } else {
+
+                card.cardClue = null;
+
+            }
+
+        });
+
         this.history_selected.customDateDif = 
                     this.dateWorker('calc' , this.history_selected.dateStart, this.history_selected.dateEnd );
         this.history_selected_services_bill = this.getBillFrom( this.history_selected.servicesAditional );
         this.history_selected_services_total = this.getBillFrom( this.history_selected.servicesAditional ) + this.history_selected.price; 
+
+    }
+
+    public endDateData: EndDateDataModel = new EndDateDataModel();
+    public editEndDateInit():void {
+
+        this.end_date_form.no_edat = false;
+        
+        this.endDateData.cost_nig = this.current_membership.costPerNigth;
+        this.endDateData.date_s = this.dateWorker('value', this.current_membership.dateStart.trim(), '', 1 );
+        this.endDateData.date_e = null;
+        this.endDateData.days_res = 0;
+        this.endDateData.total_pay = 0;
+
+    }
+
+    public updateEndDateData( event_data: any ):void {
+
+        this.endDateData.date_e = event_data;
+        this.endDateData.days_res = this.calcDaysDiff( this.endDateData.date_s, this.endDateData.date_e );
+        this.endDateData.total_pay = this.endDateData.days_res * this.endDateData.cost_nig;
+        
+    }
+
+    public updateEndDate():void {
+
+        if( this.endDateFormValidator( this.endDateData ) ) {
+
+            this.loader.showLoader();
+
+            this.system_message.showMessage({
+                kind: 'ok',
+                time: 5200,
+                message: {
+                    header: 'End Date Updated',
+                    text: 'End Date has been updated successfully'
+                }
+            });
+
+            this.showModal();
+
+            setTimeout( () => this.loader.hideLoader(), 1777);
+
+        } else this.system_message.showMessage({
+            kind: 'error',
+            time: 5200,
+            message: {
+                header: 'Form incompleted',
+                text: 'You must fill all inputs.'
+            }    
+        });
+
+    }
+
+    public end_date_form: any = {
+        no_edat: false
+    }
+    public endDateFormValidator( form_data: EndDateDataModel ):boolean {
+
+        let result: boolean = false;
+
+        form_data.date_e == '' || form_data.date_e == null ?
+            this.end_date_form.no_edat = true : this.end_date_form.no_edat = false; 
+
+        if( this.end_date_form.no_edat ) result = false;
+        else result = true;
+
+        return result;
 
     }
 
@@ -430,7 +772,7 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
     }
 
-    public dateWorker( action: string , date: string, date_b: string = '' ):any {
+    public dateWorker( action: string , date: string, date_b: string = '', add_days: number = 0 ):any {
 
         let result: any = null;
 
@@ -455,6 +797,20 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 
             case 'format':
                 result = `${ months[day_gotted.month - 1] } ${ day_gotted.day } ${ day_gotted.year }`
+                break;
+
+            case 'value':
+                const value_worker = {
+                    day: function() {
+                        
+                        let day = Number( day_gotted.day ) + add_days,
+                            result = day > 9 ? day.toString() : `0${ day.toString() }`;
+
+                        return result;
+
+                    } 
+                }
+                result = `${ day_gotted.year }-${ day_gotted.month }-${ value_worker.day() }`;
                 break;
 
             case 'calc':
@@ -547,4 +903,12 @@ class ServiceAddedDTO {
         payment: null,
         paymentDate: null
     }
+}
+
+class EndDateDataModel {
+    date_s: string = '';
+    date_e: string = '';
+    days_res: number = 0;
+    total_pay: number = 0;
+    cost_nig: number = 0;
 }

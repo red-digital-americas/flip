@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
+import { LoaderComponent } from '../../../ts/loader';
 
 @Component({
   selector: 'app-designindex',
@@ -11,8 +12,6 @@ import { Utils } from '../../utils/utils';
   styleUrls: ['./designindex.component.scss']
 })
 export class DesignindexComponent implements OnInit {
-
-  
     
     public myModal;
     public largeModal;
@@ -117,12 +116,16 @@ export class DesignindexComponent implements OnInit {
       this.PostId = id ; 
      }
   
-     
+     public loader = new LoaderComponent();
      updatephoto() {
-      // debugger;
+
+      const close_button = document.getElementById('close_button');
+
       if(this.imageInputLabel!="Choose file"){
       var creadoobj = { id: this.PostId, Photo: this.postphoto,  Position: this.PostId };
       //debugger;
+
+      this.loader.showLoader();
   
       this.heroService.ServicioPostPost("UpdateDesignIndex", creadoobj).subscribe((value) => {
   
@@ -141,6 +144,11 @@ export class DesignindexComponent implements OnInit {
               this.showSuccess();
             }
         }
+        
+        close_button.click();
+
+        setTimeout( () => this.loader.hideLoader(), 777);
+
       });    
     }
     else {
@@ -193,21 +201,91 @@ export class DesignindexComponent implements OnInit {
    * Descripcion: Cuando es seleccionada una imagen por el usuario, esta se muestra en la imagen que
                   es contenida por el elemento HTML interno. 
    */
-  public readImageData( event_data ):void {
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: readImageData
+   * Tipo: Funcion efecto colateral
+   * Visto en: webadmin, desingindex, moreindex, homeindex
+   * Parametros: Objeto del evento que es emitido
+   * Regresa: N/A
+   * Descripcion: Cuando es seleccionada una imagen por el usuario, esta se muestra en la imagen que
+                  es contenida por el elemento HTML interno. 
+   */
+  public readImageData( event_data, dimension ):void {
 
     const file = event_data.target.files,
+          root_event = event_data.target,
           img_target = event_data.target.parentElement.getElementsByClassName('image_to_preview')[0],
-          image_container_name = event_data.target.parentElement.getElementsByClassName('image_to_preview_name')[0];
+          image_container_name = event_data.target.parentElement.getElementsByClassName('image_to_preview_name')[0],
+          placeh_image_data = document.getElementById('image_data'),
+          limits = {
+            width: 0,
+            height: 0
+          },
+          dimension_limits = {
+            get_dimension_limits: function() {
+
+              const dimension_calc = dimension.split('x'),
+                    width = dimension_calc[0],
+                    height = dimension_calc[1];
+
+              return {
+                width: Number( width ),
+                height: Number( height )
+              };
+
+            }
+          },
+          last_image = this.postphoto;
 
     if( file && file[0] ) {
+
+      const root = this;
 
       let reader = new FileReader();
 
           reader.onload = function(e:any) {
 
-            img_target.src = e.target.result; 
-            image_container_name.classList.remove('display-none');
-            image_container_name.innerHTML = file[0].name;
+            const parse_my_image = new Promise( ( resolve:any ) => {
+              
+              placeh_image_data.setAttribute('src',  e.target.result );
+
+              setTimeout(() => {
+
+                const image_dimension = {
+                  width: placeh_image_data.offsetWidth,
+                  height: placeh_image_data.offsetHeight
+                };
+
+                resolve( image_dimension );
+
+              }, 177);
+
+            });
+
+            parse_my_image.then( ( image_data:any ) => {
+
+              const limits = dimension_limits.get_dimension_limits();
+
+                if( limits.width == image_data.width && limits.height == image_data.height ) {
+
+                  img_target.src = e.target.result; 
+                  image_container_name.classList.remove('display-none');
+                  image_container_name.innerHTML = file[0].name;
+                  root.prepareImages( event_data );
+                  console.log('Si pasa => ', last_image );
+
+                } else {
+
+                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
+                  root_event.value = "";
+                  root.postphoto = last_image;
+                  placeh_image_data.removeAttribute('src');
+
+                }
+
+            });
 
           }
 
@@ -230,6 +308,8 @@ export class DesignindexComponent implements OnInit {
    */
   public showImagesSpaces( id_image_space:string ):void {
 
+    this.imageInputLabel = '';
+
     const IMAGE_SPACE = id_image_space,
           IMAGES_ON_SPACE = document.getElementById( IMAGE_SPACE ).querySelectorAll('img'),
           PLACEHOLDER_IMAGE = document.getElementsByClassName('placeholder_image');
@@ -238,6 +318,8 @@ export class DesignindexComponent implements OnInit {
 
             PLACEHOLDER_IMAGE[image].setAttribute('src', IMAGES_ON_SPACE[image].getAttribute('src'));
             PLACEHOLDER_IMAGE[image].parentElement.parentElement.getElementsByClassName('image_to_preview_name')[0].innerHTML = '';
+
+            this.postphoto = IMAGES_ON_SPACE[image].getAttribute('src');
 
           }
 

@@ -164,7 +164,7 @@ export class CrearComponent implements OnInit {
     console.log('Model Old => ',this.acitivyModel);
     // return;
 
-    /*this.heroService.service_general_post("Activity", this.acitivyModel).subscribe(
+    this.heroService.service_general_post("Activity", this.acitivyModel).subscribe(
       (res)=> { console.log('Tienes que mandar => ', this.acitivyModel );
         console.log(res);
         if(res.result === "Success"){          
@@ -177,7 +177,7 @@ export class CrearComponent implements OnInit {
         } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
       },
       (err)=> {console.log(err);}      
-    ); */           
+    );       
   }  
 
   TipoReservacion(tipoReservacion) { 

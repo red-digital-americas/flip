@@ -6,6 +6,7 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
 import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
 import { resolve } from 'dns';
+import { LoaderComponent } from '../../../ts/loader';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class WebadminComponent implements OnInit {
   public warningModal;
   public dangerModal;
   public infoModal;
+  public loader = new LoaderComponent();
 
   constructor(private router: Router,
     private heroService: DatosService,
@@ -110,14 +112,16 @@ export class WebadminComponent implements OnInit {
    }
    
    updatephoto() {
-    // debugger;
+
+    const close_button = document.getElementById('close_button');
 
     if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"){
+
+      this.loader.showLoader();
+
       var creadoobj = { id: this.PostId, BackPhoto: this.postphoto[1], FrontPhoto: this.postphoto[0], Position: this.PostId };
-      debugger;
   
       this.heroService.ServicioPostPost("UpdateIndex", creadoobj).subscribe((value) => {
-  
   
         switch (value.result) {
           case "Error":
@@ -125,7 +129,6 @@ export class WebadminComponent implements OnInit {
             this.showError(); 
             break;
           default:
-            debugger;
             if (value.result == "Success") {
               this.get_photos();
              
@@ -138,6 +141,11 @@ export class WebadminComponent implements OnInit {
               //location.reload();
             }
         }
+
+        close_button.click();
+
+        setTimeout( () => this.loader.hideLoader(), 777);
+
       });    
     }
     else {
@@ -229,7 +237,7 @@ export class WebadminComponent implements OnInit {
    * Descripcion: Cuando es seleccionada una imagen por el usuario, esta se muestra en la imagen que
                   es contenida por el elemento HTML interno. 
    */
-  public readImageData( event_data, dimension ):void {
+  public readImageData( event_data, dimension, image_index: number ):void {
 
     const file = event_data.target.files,
           root_event = event_data.target,
@@ -253,7 +261,8 @@ export class WebadminComponent implements OnInit {
               };
 
             }
-          };
+          },
+          last_image = this.postphoto;
 
     if( file && file[0] ) {
 
@@ -289,11 +298,14 @@ export class WebadminComponent implements OnInit {
                   img_target.src = e.target.result; 
                   image_container_name.classList.remove('display-none');
                   image_container_name.innerHTML = file[0].name;
+                  root.prepareImages( event_data, image_index );
+                  console.log('Si pasa => ', last_image );
 
                 } else {
 
                   root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
                   root_event.value = "";
+                  root.postphoto = last_image;
                   placeh_image_data.removeAttribute('src');
 
                 }
@@ -321,6 +333,9 @@ export class WebadminComponent implements OnInit {
    */
   public showImagesSpaces( id_image_space:string ):void {
 
+    this.imageInputLabel = "";
+    this.imageInputLabeltwo = "";
+
     const IMAGE_SPACE = id_image_space,
           IMAGES_ON_SPACE = document.getElementById( IMAGE_SPACE ).querySelectorAll('img'),
           PLACEHOLDER_IMAGE = document.getElementsByClassName('placeholder_image');
@@ -329,6 +344,10 @@ export class WebadminComponent implements OnInit {
 
             PLACEHOLDER_IMAGE[image].setAttribute('src', IMAGES_ON_SPACE[image].getAttribute('src'));
             PLACEHOLDER_IMAGE[image].parentElement.parentElement.getElementsByClassName('image_to_preview_name')[0].innerHTML = '';
+
+            this.postphoto[0] = IMAGES_ON_SPACE[0].getAttribute('src');
+            this.postphoto[1] = IMAGES_ON_SPACE[1].getAttribute('src');
+
 
           }
 

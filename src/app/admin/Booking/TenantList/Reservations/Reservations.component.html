@@ -1,14 +1,3 @@
-<stripe-card #stripeCard 
-            (catch)="onStripeError($event)" 
-            [(invalid)]="invalidError"
-            (tokenChange)="setStripeToken($event)" 
-            (sourceChange)="setStripeSource($event)" 
-            class="form-control">
-</stripe-card>
-<button type="button" (click)="stripeCard.createToken()"
-            class="btn btn-outline-dark margin-gral">createToken
-</button>
-
 <div class="ml-col-1 padding-general-m margin-bottom-m">
     <div class="ap-form ml-col-1 card-style">
         <div class="ml-col-1">
@@ -27,7 +16,7 @@
             </h4>
             <button 
                 class="ap-form__rButton button-green"
-                (click)="showModal('edit_end_date')">
+                (click)="showModal('edit_end_date'); editEndDateInit();">
                 Edit End Date
             </button>
             <button 
@@ -67,15 +56,15 @@
             </div>
             <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
                 <div class="ml-col-1">
-                    Real starts: 
+                    Check In: 
                   <span class="text-bold">
-                    {{ current_membership?.dateStartReal }}     
+                    {{ current_membership?.dateStartReal != null ? current_membership?.dateStartReal : 'No Date' }}     
                   </span>
                 </div>
             </div>
             <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-right">
                 <div class="ml-col-1">
-                    Real ends: 
+                    Check Out: 
                   <span class="text-bold">
                     {{ current_membership?.dateEndReal != null ? current_membership?.dateEndReal : 'No Date' }}     
                   </span>
@@ -94,7 +83,7 @@
             <div class="ml-col-1 text-center">
                 Beds reserved: 
                 <span class="text-bold">
-                  2    
+                  {{ current_membership?.beds + current_membership?.additionalBeds.length }}    
                 </span>
             </div>
         </div>
@@ -151,7 +140,7 @@
                 </div>
             </div>
             <div class="ml-col-1" *ngIf="beds_section">
-                <div class="ml-col-1 padding-general-min card-style margin-bottom-x">
+                <div class="ml-col-1 padding-general-min card-style margin-bottom-x" *ngFor="let bed of current_beds;">
                     <div class="ml-col-1 ap-form__sdato margin-bottom-x">
                         <div class="ml-col-1 ap-form__sdato--bbottom">
                           Additional bed #
@@ -167,10 +156,12 @@
                               placeholder="Name*"
                               id="ab_name" 
                               name="ab_name"
-                              class="ap-form__input-text" />
+                              class="ap-form__input-text"
+                              value="{{ bed.name }}" />
                             <label 
                               for="ab_name" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.name != ''">
                               Name* 
                             </label>
                           </div>
@@ -186,10 +177,12 @@
                               placeholder="Last Name*"
                               id="ab_lname" 
                               name="ab_lname"
-                              class="ap-form__input-text" />
+                              class="ap-form__input-text"
+                              value="{{ bed.lastName }}" />
                             <label 
                               for="ab_lname" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.lastName != ''">
                               Last Name* 
                             </label>
                           </div>
@@ -205,10 +198,13 @@
                               placeholder="Mother Name*"
                               id="ab_mname" 
                               name="ab_mname"
-                              class="ap-form__input-text" />
+                              class="ap-form__input-text"
+                              value="{{ bed.motherName }}"
+                               />
                             <label 
                               for="ab_mname" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.motherName != ''">
                               Mother Name* 
                             </label>
                           </div>
@@ -224,14 +220,16 @@
                                 placeholder="Gender*"
                                 id="ab_gender" 
                                 name="ab_gender"
+                                value="{{ bed.gender }}"
                                 class="ap-form__input-text">
                                 <option disabled>Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option disabled value="Male">Male</option>
+                                <option disabled value="Female">Female</option>
                             </select>
                             <label 
                               for="ab_gender" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.id != null">
                               Gender* 
                             </label>
                           </div>
@@ -247,10 +245,12 @@
                               placeholder="Email*"
                               id="ab_mail" 
                               name="ab_mail"
-                              class="ap-form__input-text" />
+                              class="ap-form__input-text"
+                              value="{{ bed.email }}" />
                             <label 
                               for="ab_mail" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.email != ''">
                               Email* 
                             </label>
                           </div>
@@ -266,10 +266,12 @@
                               placeholder="Phone Number*"
                               id="ab_phone" 
                               name="ab_phone"
-                              class="ap-form__input-text" />
+                              class="ap-form__input-text"
+                              value="{{ bed.phone }}" />
                             <label 
                               for="ab_phone" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.phone != ''">
                               Phone Number* 
                             </label>
                           </div>
@@ -415,7 +417,16 @@
                 </div>
             </div>
             <div class="ml-col-1" *ngIf="history_section">
+                <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
+                    <div class="ml-col-1 ap-form__sdato--bbottom">
+                        Memberships History
+                    </div>
+                </div>
                 <table mat-table mat-sort [dataSource]="current_paymentHis" class="mat-elevation-z8" style="width: 100%;">
+                    <ng-container matColumnDef="membership">
+                        <th mat-header-cell *matHeaderCellDef class="table__header">Membership</th>
+                        <td mat-cell *matCellDef="let element" class="table__data">{{ element.nameMembership }}</td>
+                    </ng-container>
                     <ng-container matColumnDef="dateStart">
                         <th mat-header-cell *matHeaderCellDef class="table__header">Service Start</th>
                         <td mat-cell *matCellDef="let element" class="table__data">{{ element.dateStart }}</td>
@@ -438,6 +449,42 @@
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="table_payHistory_colums"></tr>
                     <tr mat-row *matRowDef="let row; columns: table_payHistory_colums;"></tr>
+                </table>
+                <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x margin-top-x">
+                    <div class="ml-col-1 ap-form__sdato--bbottom">
+                        Services History
+                    </div>
+                </div>
+                <table mat-table mat-sort [dataSource]="current_paymentSer" class="mat-elevation-z8" style="width: 100%;">
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef class="table__header">Service</th>
+                        <td mat-cell *matCellDef="let element" class="table__data">{{ element.idServiceNavigation?.name }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="price">
+                        <th mat-header-cell *matHeaderCellDef class="table__header">Service Start</th>
+                        <td mat-cell *matCellDef="let element" class="table__data">{{ element.dateStart }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="payday">
+                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Service End</th>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.dateEnd }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="dateStart">
+                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Payment day</th>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.cc.datePay }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="dateEnd">
+                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Ammount</th>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.idServiceNavigation.price | currency }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="card">
+                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Card clue</th>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                            <span *ngIf="element.cardClue == null">No Data</span>
+                            <span *ngIf="element.cardClue != null">**** {{ element.cardClue }}</span>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="table_serHistory_colums"></tr>
+                    <tr mat-row *matRowDef="let row; columns: table_serHistory_colums;"></tr>
                 </table>
             </div>
         </div>
@@ -500,13 +547,13 @@
         <div class="ml-modal__pop-buttons">
             <button 
                 (click)="showModal()"
-                class="ml-modal__pop-buttons-button button-blue">
+                class="ml-modal__pop-buttons-button button-orange">
                 Cancel
             </button>
             <button 
-                (click)="confirmDeleteElement()"
-                class="ml-modal__pop-buttons-button button-orange">
-                Delete
+                (click)="confirmCheckInOut('in')"
+                class="ml-modal__pop-buttons-button button-blue">
+                Check In
             </button>
         </div>
     </div>
@@ -519,14 +566,14 @@
         </p>
         <div class="ml-modal__pop-buttons">
             <button 
-            (click)="showModal()"
-            class="ml-modal__pop-buttons-button button-blue">
-            Cancel
+                (click)="showModal()"
+                class="ml-modal__pop-buttons-button button-orange">
+                Cancel
             </button>
             <button 
-            (click)="confirmDeleteElement()"
-            class="ml-modal__pop-buttons-button button-orange">
-            Delete
+                (click)="confirmCheckInOut('out')"
+                class="ml-modal__pop-buttons-button button-blue">
+                Check Out
             </button>
         </div>
     </div>
@@ -536,7 +583,7 @@
             <span>Additional services</span>
             <button 
                 type="button"
-                (click)="showModal()"
+                (click)="showModal(); clearServicesSelected()"
                 class="ap-form__close button-orange">x
             </button> 
         </div>
@@ -588,7 +635,9 @@
             </table>
         </div>
         <div class="ml-col-1 margin-top-m">
-            <span class="font-big">Services selected</span>
+            <span class="font-big" *ngIf="services_selected != 0">
+                Services selected
+            </span>
         </div>
         <div class="ml-col-1 ap-info__buttons" *ngIf="services_selected == 0">
             <span class="ap-info__noitems">
@@ -613,8 +662,10 @@
                             id="addServ_time_{{ service.id }}" 
                             name="addServ_time_{{ service.id }}"
                             [class.form_error_found]="service.no_select"
-                            class="ap-form__input-text">
-                            <option value="" disabled>Select one</option>
+                            value="{{ service.service_lapse }}"
+                            class="ap-form__input-text"
+                            (change)="updateServiceSelectedPrice( service, $event.target )">
+                            <option value="" disabled>Select type</option>
                             <option value="1">Once</option>
                             <option value="2">Recurrent</option>
                         </select>
@@ -638,6 +689,7 @@
                           placeholder="Start Date*"
                           id="addServ_sDate_{{ service.id }}" 
                           name="addServ_sDate_{{ service.id }}"
+                          (change)="addServiceDateValidator('addServ_sDate_' + service.id,'addServ_eDate_' + service.id, service.id)"
                           [class.form_error_found]="service.no_sDate"
                           class="ap-form__input-text" />
                         <label 
@@ -657,6 +709,8 @@
                         <input 
                           required
                           type="date" 
+                          disabled
+                          (change)="addServiceDateValidator('addServ_sDate_' + service.id,'addServ_eDate_' + service.id, service.id)"
                           placeholder="End Date*"
                           id="addServ_eDate_{{ service.id }}" 
                           name="addServ_eDate_{{ service.id }}"
@@ -673,10 +727,14 @@
                       </div>
                     </div>
                 </div>
-                <div class="ml-col-4 ap-form__group">
-                    <p class="ap-form__group-dato">
+                <div class="ml-col-4 ap-form__group" *ngIf="service.service_lapse != ''">
+                    <p class="ap-form__group-dato" *ngIf="service.service_lapse == '1'">
                         <span class="text-bold">Price Unit</span>
                         {{ service?.price | currency }}
+                    </p>
+                    <p class="ap-form__group-dato" *ngIf="service.service_lapse == '2'">
+                        <span class="text-bold">Price recurrent</span>
+                        {{ service?.priceUnit | currency }}
                     </p>
                     <p class="ap-form__group-dato">
                         <span class="text-bold">Total</span>
@@ -696,19 +754,146 @@
                 </button>
                 <button 
                   type="button"
-                  (click)="saveServicesSelected()"
+                  (click)="saveOrPayServicesSelected()"
                   class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
                   Add to account
                 </button>
                 <button 
                   type="button"
-                  (click)="payervicesSelected()"
+                  (click)="saveOrPayServicesSelected('pay')"
                   class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-blue">
                   Pay services
                 </button>
             </div>
         </div>
     </div>
+    <form class="ml-modal__content card-style" *ngIf="modal_to_show == 'edit_end_date'"> 
+        <div class="ml-col-1">
+            <div class="ml-col-1 margin-bottom-m position-relative">
+                <span class="font-big">Edit End Date</span>
+                <button 
+                    type="button"
+                    (click)="showModal();"
+                    class="ap-form__close button-orange">x
+                </button> 
+            </div>
+        </div>
+        <div class="ml-col-3 ap-form__sdato">
+            <div class="ml-col-1">
+                Membershipt: 
+              <span class="text-bold">
+                {{ current_membership?.membresia }}  
+              </span>
+            </div>
+        </div>
+        <div class="ml-col-3 ap-form__sdato">
+            <div class="ml-col-1 text-center">
+                Cost per night: 
+              <span class="text-bold">
+                {{ current_membership?.costPerNigth | currency }}  
+              </span>
+            </div>
+        </div>
+        <div class="ml-col-3 ap-form__sdato">
+            <div class="ml-col-1 text-right">
+                Beds: 
+              <span class="text-bold">
+                {{ current_membership?.beds + current_membership?.additionalBeds.length }}  
+              </span>
+            </div>
+        </div>
+        <div class="ml-col-1 margin-top-m">
+            <div class="ml-col-4">
+                <div class="ml-col-1">
+                  <div class="ap-form__input">
+                    <input 
+                      required
+                      disabled
+                      type="date" 
+                      placeholder="Start Date*"
+                      id="addServ_sDate_n" 
+                      name="addServ_sDate_n"
+                      class="ap-form__input-text"
+                      [min]="endDateData.date_s"
+                      [value]="endDateData.date_s" />
+                    <label 
+                      for="addServ_sDate_n" 
+                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                      Start Date 
+                    </label>
+                  </div>
+                </div>
+            </div>
+            <div class="ml-col-4">
+                <div class="ml-col-1">
+                  <div class="ap-form__input">
+                    <input 
+                      required
+                      type="date" 
+                      placeholder="End Date*"
+                      id="addServ_eDate_n" 
+                      name="addServ_eDate_n"
+                      class="ap-form__input-text"
+                      [min]="endDateData.date_s"
+                      [value]="endDateData.date_e"
+                      [(ngModel)]="endDateData.date_e"
+                      [class.form_error_found]="end_date_form.no_edat"
+                      (change)="updateEndDateData( endDateData.date_e )" />
+                    <label 
+                      for="addServ_eDate_n" 
+                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                      End Date
+                    </label>
+                    <span class="ml-col-1 form_error_found_label" *ngIf="end_date_form.no_edat">
+                        End Date is required*
+                      </span>
+                  </div>
+                </div>
+            </div>
+            <div class="ml-col-4">
+                <div class="ml-col-1">
+                  <div class="ap-form__input">
+                    <p class="ap-form__input-dato">
+                        {{ endDateData?.days_res }}
+                    </p>
+                    <label 
+                      for="addServ_eDate_n" 
+                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                      Days reserved:
+                    </label>
+                  </div>
+                </div>
+            </div>
+            <div class="ml-col-4">
+                <div class="ml-col-1">
+                  <div class="ap-form__input">
+                    <p class="ap-form__input-dato">
+                        {{ endDateData?.total_pay | currency }}
+                    </p>
+                    <label 
+                      for="addServ_eDate_n" 
+                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                      Total payment: 
+                    </label>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="ml-col-1 ap-form__buttons">
+            <button 
+              type="button"
+              (click)="showModal();"
+              class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--cancelar">
+              Cancelar
+            </button>
+            <button
+              (click)="updateEndDate()" 
+              type="button"
+              class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+              Save
+            </button>
+        </div>
+    </form>
     <div class="ml-modal__content card-style" *ngIf="modal_to_show == 'history'">
         <div class="ml-col-1">
             <h4 class="ap-form__titulo text-left">
@@ -742,7 +927,7 @@
             </div>
             <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
                 <div class="ml-col-1">
-                    Real starts: 
+                    Check In: 
                   <span class="text-bold">
                     {{ history_selected?.dateStartReal }}     
                   </span>
@@ -750,7 +935,7 @@
             </div>
             <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-right">
                 <div class="ml-col-1">
-                    Real ends: 
+                    Check out: 
                   <span class="text-bold">
                     {{ history_selected?.dateEndReal != null ? history_selected?.dateEndReal : 'No Date' }}     
                   </span>
@@ -770,7 +955,7 @@
                 <div class="ml-col-1 text-center">
                     Beds reserved: 
                     <span class="text-bold">
-                        {{ history_selected?.beds }}         
+                        {{ history_selected?.beds + history_selected?.additionalBeds.length }}         
                     </span>
                 </div>
             </div>
@@ -820,11 +1005,11 @@
                     Additional Beds Information
                 </div>
             </div>
-            <div class="ml-col-1 margin-top-x">
+            <div class="ml-col-1 margin-top-x" *ngFor="let bed of history_selected?.additionalBeds;">
                 <div class="ml-col-1 padding-general-min card-style margin-bottom-x">
                     <div class="ml-col-1 ap-form__sdato margin-bottom-x">
                         <div class="ml-col-1 ap-form__sdato--bbottom">
-                          Additional bed #
+                          Additional bed: 
                         </div>
                     </div>
                     <div class="ml-col-4">
@@ -837,10 +1022,12 @@
                               placeholder="Name*"
                               id="ab_name" 
                               name="ab_name"
-                              class="ap-form__input-text" />
+                              class="ap-form__input-text"
+                              value="{{ bed.name }}" />
                             <label 
                               for="ab_name" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.name != ''">
                               Name* 
                             </label>
                           </div>
@@ -856,10 +1043,12 @@
                               placeholder="Last Name*"
                               id="ab_lname" 
                               name="ab_lname"
-                              class="ap-form__input-text" />
+                              class="ap-form__input-text"
+                              value="{{ bed.lastName }}" />
                             <label 
                               for="ab_lname" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.lastName != ''">
                               Last Name* 
                             </label>
                           </div>
@@ -875,10 +1064,13 @@
                               placeholder="Mother Name*"
                               id="ab_mname" 
                               name="ab_mname"
-                              class="ap-form__input-text" />
+                              class="ap-form__input-text"
+                              value="{{ bed.motherName }}"
+                               />
                             <label 
                               for="ab_mname" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.motherName != ''">
                               Mother Name* 
                             </label>
                           </div>
@@ -894,14 +1086,16 @@
                                 placeholder="Gender*"
                                 id="ab_gender" 
                                 name="ab_gender"
+                                value="{{ bed.gender }}"
                                 class="ap-form__input-text">
                                 <option disabled>Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option disabled value="Male">Male</option>
+                                <option disabled value="Female">Female</option>
                             </select>
                             <label 
                               for="ab_gender" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.id != null">
                               Gender* 
                             </label>
                           </div>
@@ -917,10 +1111,12 @@
                               placeholder="Email*"
                               id="ab_mail" 
                               name="ab_mail"
-                              class="ap-form__input-text" />
+                              class="ap-form__input-text"
+                              value="{{ bed.email }}" />
                             <label 
                               for="ab_mail" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.email != ''">
                               Email* 
                             </label>
                           </div>
@@ -936,10 +1132,12 @@
                               placeholder="Phone Number*"
                               id="ab_phone" 
                               name="ab_phone"
-                              class="ap-form__input-text" />
+                              class="ap-form__input-text"
+                              value="{{ bed.phone }}" />
                             <label 
                               for="ab_phone" 
-                              class="ap-form__label ap-form__label-text">
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="bed.phone != ''">
                               Phone Number* 
                             </label>
                           </div>
@@ -1028,7 +1226,16 @@
                 </div>
             </div>
             <div class="ml-col-1">
-                <table mat-table mat-sort [dataSource]="current_paymentHis" class="mat-elevation-z8" style="width: 100%;">
+                <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
+                    <div class="ml-col-1 ap-form__sdato--bbottom">
+                        Memberships History
+                    </div>
+                </div>
+                <table mat-table mat-sort [dataSource]="history_selected_memberships" class="mat-elevation-z8" style="width: 100%;">
+                    <ng-container matColumnDef="membership">
+                        <th mat-header-cell *matHeaderCellDef class="table__header">Membership</th>
+                        <td mat-cell *matCellDef="let element" class="table__data">{{ element.nameMembership }}</td>
+                    </ng-container>
                     <ng-container matColumnDef="dateStart">
                         <th mat-header-cell *matHeaderCellDef class="table__header">Service Start</th>
                         <td mat-cell *matCellDef="let element" class="table__data">{{ element.dateStart }}</td>
@@ -1051,6 +1258,42 @@
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="table_payHistory_colums"></tr>
                     <tr mat-row *matRowDef="let row; columns: table_payHistory_colums;"></tr>
+                </table>
+                <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x margin-top-x">
+                    <div class="ml-col-1 ap-form__sdato--bbottom">
+                        Services History
+                    </div>
+                </div>
+                <table mat-table mat-sort [dataSource]="history_selected_servicesHis" class="mat-elevation-z8" style="width: 100%;">
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef class="table__header">Service</th>
+                        <td mat-cell *matCellDef="let element" class="table__data">{{ element.idServiceNavigation?.name }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="price">
+                        <th mat-header-cell *matHeaderCellDef class="table__header">Service Start</th>
+                        <td mat-cell *matCellDef="let element" class="table__data">{{ element.dateStart }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="payday">
+                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Service End</th>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.dateEnd }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="dateStart">
+                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Payment day</th>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.cc.datePay }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="dateEnd">
+                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Ammount</th>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.idServiceNavigation.price | currency }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="card">
+                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Card clue</th>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                            <span *ngIf="element.cardClue == null">No Data</span>
+                            <span *ngIf="element.cardClue != null">**** {{ element.cardClue }}</span>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="table_serHistory_colums"></tr>
+                    <tr mat-row *matRowDef="let row; columns: table_serHistory_colums;"></tr>
                 </table>
             </div>
         </div>

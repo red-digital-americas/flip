@@ -152,7 +152,7 @@
               type="file" 
               name="image_one_selected"
               accept="image/*"
-              (change)="prepareImages($event); readImageData($event);"
+              (change)="readImageData($event, '288x576');"
               id="validatedCustomFile" 
               required>
             <label class="form__image-img" for="validatedCustomFile">
@@ -168,13 +168,17 @@
           </div>
           <div class="card__row">
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+              <button type="button" class="btn btn-secondary" id="close_button" (click)="primaryModal.hide()">Cerrar</button>
               <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">
                 Guardar Cambios
               </button>
             </div>
           </div>
         </form>
+      </div>
+
+      <div class="black-box">
+        <img src="" id="image_data" />
       </div>
 
 

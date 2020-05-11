@@ -114,7 +114,7 @@ export class DetalleComponent implements OnInit {
         
     this.heroService.service_general_get_with_params("Books", {scheduleId: this.idProps}).subscribe(
       (res)=> {
-        console.log(res.item);
+        console.log('Bef ===> ',res);
         if(res.result === "Success"){                    
           this.booksArray = res.item;
           this.LoadInvitableUsers();
@@ -280,6 +280,7 @@ export class DetalleComponent implements OnInit {
     this.heroService.service_general_get_with_params("Users", {buildingId: this.buildingIdProps, dateInit: this.eventDetail.timeStart,dateEnd:this.eventDetail.timeEnd}).subscribe(
       (res)=> {
         // console.log(res.item);
+        console.log('Here ===> ', res);
         if(res.result === "Success"){                    
           this.usersBuildingArray = res.item;                       
           
