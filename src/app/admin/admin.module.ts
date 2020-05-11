@@ -66,14 +66,11 @@ import { UsersComponent } from './Booking/Users/Users.component';
 import { RolesComponent } from './Booking/Roles/Roles.component';
 import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
 import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/Reservations.component';
+import { DetailComponent } from './Booking/Membership/detail/detail.component';
+import { RoomComponent } from './Booking/RoomCatalog/room/room.component';
+import { RoomNewComponent } from './Booking/RoomCatalog/room-new/room-new.component';
+import { MembershipNewComponent } from './Booking/Membership/membership-new/membership-new.component';
 
-
-import { PaymentComponent } from './payment/payment.component';
-import { Module as StripeModule } from "stripe-angular"
-
-
-import { PaymentComponent } from './payment/payment.component';
-import { Module as StripeModule } from "stripe-angular"
 
 @NgModule({
   imports: [    
@@ -129,17 +126,17 @@ import { Module as StripeModule } from "stripe-angular"
     AlertsComponent,
     RoomCatalogComponent,
     MembershipCatalogComponent,
-<<<<<<< HEAD
     GeneralTenantListComponent,
     AddTenantComponent,
     UsersComponent,
     RolesComponent,
     ProfileComponent,
-    ProfileReservationsComponent
-=======
     ProfileComponent,
-    PaymentComponent
->>>>>>> Feature Add payment with Stripe
+    ProfileReservationsComponent,
+    DetailComponent,
+    RoomComponent,
+    RoomNewComponent,
+    MembershipNewComponent
   ],
   entryComponents: [
     DetalleComponent,

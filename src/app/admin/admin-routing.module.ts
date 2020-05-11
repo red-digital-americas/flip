@@ -10,7 +10,6 @@ import { AmenitiesComponent } from './amenities/amenities.component';
 import { EditAmenitiesComponent } from './amenities/edit/edit-amenities.component';
 import { RoleGuardService } from '../guards/role-guard.service';
 import { ChatComponent } from './chat/chat.component';
-import { PaymentComponent } from './payment/payment.component';
 
 //CHH => Booking
 import { BookingIndexComponent } from './Booking/index.component';
@@ -27,6 +26,10 @@ import { UsersComponent } from './Booking/Users/Users.component';
 import { RolesComponent } from './Booking/Roles/Roles.component';
 import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
 import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/Reservations.component';
+import { DetailComponent } from './Booking/Membership/detail/detail.component';
+import { RoomComponent } from './Booking/RoomCatalog/room/room.component';
+import { RoomNewComponent } from './Booking/RoomCatalog/room-new/room-new.component';
+import { MembershipNewComponent } from './Booking/Membership/membership-new/membership-new.component';
 
 const routes: Routes = [
   { path: '', data: { title: 'AdminApp', expectedRole: [2,4] }, canActivate: [RoleGuardService],
@@ -45,12 +48,16 @@ const routes: Routes = [
       //CHH => Booking 
       { path: 'booking', component: BookingIndexComponent, data: { title: 'Booking' } },
       { path: 'tenantList/:id', component: TenantListComponent, data: { title: 'Tenant List' } },
-      { path: 'app-profile/:id', component: ProfileComponent, data: { title: 'Tenant Profile' } }, 
+      { path: 'app-profile/:id', component: ProfileComponent, data: { title: 'Tenant Profile' } },
       { path: 'roomAvailavility/:id', component: RoomAvailavilityComponent, data: { id: 1, title: 'Room Availavility' } },
       { path: 'messages/:id', component: MessagesComponent, data: { title: 'Messages' } }, 
       { path: 'alerts/:id', component: AlertsComponent, data: { title: 'Alerts' } },
       { path: 'roomCatalog/:id', component: RoomCatalogComponent, data: { title: 'Room Catalog' } },
+      { path: 'room/:id', component: RoomComponent, data: { title: 'Room' } },
+      { path: 'roomNew/:id', component: RoomNewComponent, data: { title: 'New Room' } },
       { path: 'MembershipCatalog/:id', component: MembershipCatalogComponent, data: { title: 'Membership Catalog' } },
+      { path: 'MembershipDetail/:id', component: DetailComponent, data:  { id: 1, title: 'MembershipDetail' } },
+      { path: 'MembershipNew/:id', component: MembershipNewComponent, data:  { id: 1, title: 'MembershipDetail' } },
       { path: 'generalTenantlist', component: GeneralTenantListComponent, data: { title: 'General Tenantlist' } },
       { path: 'AddTenant', component: AddTenantComponent, data: { title: 'Add Tenant' } },
       { path: 'Users', component: UsersComponent, data: { title: 'Users' } },
@@ -60,8 +67,7 @@ const routes: Routes = [
       
       // { path: 'perks/:id', loadChildren: './perks/perks.module#PerksComponentModule' },
       { path: '', loadChildren: './perks/perks.module#PerksComponentModule', data: { title: 'Perks'} },
-      { path: '', loadChildren: './services/services.module#ServicesComponentModule', data: { title: 'Services'}  },
-      { path: 'payment', component: PaymentComponent, data: { title: 'Payment' } }
+      { path: '', loadChildren: './services/services.module#ServicesComponentModule', data: { title: 'Services'}  }
     ]
   }
 ];

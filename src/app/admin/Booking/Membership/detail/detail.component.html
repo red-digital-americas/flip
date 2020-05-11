@@ -1,0 +1,197 @@
+<div class="ml-col-1">
+    <booking-navbar [section]="section"></booking-navbar>
+    <div class="ml-col-1">
+        <div class="ml-col-1 padding-general-m margin-bottom-g">
+          <div class="ml-col-1 margin-top-m folder">
+            <div class="ml-col-1 margin-top-x" >
+              <form 
+              class="ap-form ap-form--no-tl-br ml-col-1 card-style"
+              action="submit"
+              (submit)="updateMembership()">
+              <div class="ml-col-1">
+                <h4 class="ap-form__titulo text-left">
+                    Membership
+                </h4>
+            </div>
+                    <div class="ml-col-3">
+                        <div class="ml-col-1">
+                          <div class="ap-form__input">
+                            <input 
+                              required
+                              type="text" 
+                              placeholder="Name*"
+                              id="profile_name" 
+                              name="profile_name"
+                              class="ap-form__input-text"
+                              [class.form_error_found]="form_required.no_name"
+                              [(ngModel)]="membershipObj.name" />
+                            <label 
+                              for="profile_name" 
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="membershipObj.name != ''">
+                              Name <span class="color-red text-bold">*</span>
+                            </label>
+                            <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_name">
+                              Name is required*
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="ml-col-3">
+                        <div class="ml-col-1">
+                          <div class="ap-form__input">
+                            <input 
+                              required
+                              type="text" 
+                              placeholder="Description*"
+                              id="profile_description" 
+                              name="profile_description"
+                              class="ap-form__input-text"
+                              [class.form_error_found]="form_required.no_description"
+                              [(ngModel)]="membershipObj.description" />
+                            <label 
+                              for="profile_description" 
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="membershipObj.description != ''">
+                              Description <span class="color-red text-bold">*</span>
+                            </label>
+                            <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_description">
+                              Description is required*
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="ml-col-3">
+                        <div class="ml-col-1">
+                          <div class="ap-form__input">
+                            <input 
+                              required
+                              type="number" 
+                              placeholder="Price*"
+                              id="profile_price" 
+                              name="profile_price"
+                              class="ap-form__input-text"
+                              [class.form_error_found]="form_required.no_price"
+                              [(ngModel)]="membershipObj.price" />
+                            <label 
+                              for="profile_price" 
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="membershipObj.price != ''">
+                              Price <span class="color-red text-bold">*</span>
+                            </label>
+                            <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_price">
+                              Price is required*
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="ml-col-3">
+                        <div class="ml-col-1">
+                          <div class="ap-form__input">
+                            <select
+                              required
+                              placeholder="typeRoom"
+                              id="profile_typeRoom" 
+                              name="typeRoom"
+                              class="ap-form__input-text"
+                              [(ngModel)]="membershipObj.typeRoomId">
+                              <option value="null" disabled>Kind Room*</option>
+                              <option *ngFor="let room of typeRoomList;" [value]="room.id">
+                                {{ room.type }}
+                              </option>
+                            </select>
+                            <label 
+                              for="profile_typeRoom" 
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="membershipObj.typeRoomId != null">
+                              Kind Room <span class="color-red text-bold">*</span> 
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    <!-- <div class="ml-col-6">
+                        <div class="ap-form__input" *ngFor="let service of servicesList; let selectedIndex of membershipObj.membershipIndices">
+                            <input 
+                            type="checkbox"
+                            id="profile_{{service.id}}" 
+                            name="profile_{{service.id}}"
+                            [checked]="service.id"
+                            class="ap-form__input-checkbox display-none" />
+                            <label for="profile_{{service.id}}" class="ap-form__label ap-form__label-checkbox">
+                            {{ service.name }}
+                            </label>
+                        </div>
+                    </div> -->
+
+                    <div class="ml-col-1 margin-top-x" >
+                      <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
+                        <div class="ml-col-1 ap-form__sdato--bbottom font-big">
+                            Include services
+                        </div>
+                    </div>
+                      <table mat-table mat-sort [dataSource]="servicesList" class="mat-elevation-z8" style="width: 100%;">
+                          <ng-container matColumnDef="icon">
+                              <th mat-header-cell *matHeaderCellDef class="table__header"></th>
+                              <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                                  <figure class="table__icon">
+                                      <img src="{{ element.icon }}" 
+                                            class="table__icon-img filter-brightness" />
+                                  </figure>
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="service">
+                              <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Service</th>
+                              <td mat-cell *matCellDef="let element" class="table__data table__data-center text-bold">{{ element.name }}</td>
+                          </ng-container>
+                          <ng-container matColumnDef="description">
+                              <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Description</th>
+                              <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                                  {{element.description}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="recurrent">
+                              <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Recurrent</th>
+                              <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.price | currency }}</td>
+                          </ng-container>
+                          <ng-container matColumnDef="once">
+                              <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Once cost</th>
+                              <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.priceUnit | currency }}</td>
+                          </ng-container>
+                          <ng-container matColumnDef="select">
+                              <th mat-header-cell *matHeaderCellDef class="table__header"></th>
+                              <td mat-cell *matCellDef="let element" class="table__data">
+                                  <input 
+                                      type="checkbox"
+                                      id="service_list_{{ element.id }}"
+                                      name="service_list_{{ element.id }}"
+                                      class="table__input-radio"
+                                      [(ngModel)]="element.active"
+                                      (change)="selectingServices( element )" />
+                                  <label class="table__icon" for="service_list_{{ element.id }}">
+                                      <span class="table__icon-radio"></span>
+                                  </label>
+                              </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="table_adding_services"></tr>
+                          <tr mat-row *matRowDef="let row; columns: table_adding_services;"></tr>
+                      </table>
+                  </div>
+                      
+                      <!---->
+                      <div class="ml-col-1 ap-form__buttons">
+                        <button 
+                          type="submit"
+                          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+                          Save
+                        </button>
+                      </div>
+              </form>
+          </div>
+        </div>
+    </div>
+</div>
+</div>
