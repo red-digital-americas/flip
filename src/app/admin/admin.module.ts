@@ -131,7 +131,6 @@ import { MembershipNewComponent } from './Booking/Membership/membership-new/memb
     UsersComponent,
     RolesComponent,
     ProfileComponent,
-    ProfileComponent,
     ProfileReservationsComponent,
     DetailComponent,
     RoomComponent,
