@@ -48,7 +48,7 @@ const routes: Routes = [
       //CHH => Booking 
       { path: 'booking', component: BookingIndexComponent, data: { title: 'Booking' } },
       { path: 'tenantList/:id', component: TenantListComponent, data: { title: 'Tenant List' } },
-      { path: 'app-profile/:id', component: ProfileComponent, data: { title: 'Tenant Profile' } },
+      { path: 'app-profile/:id/:booking', component: ProfileComponent, data: { title: 'Tenant Profile' } },
       { path: 'roomAvailavility/:id', component: RoomAvailavilityComponent, data: { id: 1, title: 'Room Availavility' } },
       { path: 'messages/:id', component: MessagesComponent, data: { title: 'Messages' } }, 
       { path: 'alerts/:id', component: AlertsComponent, data: { title: 'Alerts' } },

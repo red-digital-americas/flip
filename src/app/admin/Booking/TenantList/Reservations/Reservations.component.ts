@@ -30,7 +30,7 @@ import { resolve } from 'dns';
     public table_adding_services: any[] = ['icon','service','description','recurrent','once','select'];
     public name_build: string;
     public user_id: number;
-
+    public booking_id: number;
     public section: string;
 
     constructor(
@@ -47,6 +47,7 @@ import { resolve } from 'dns';
     ngOnInit() {
 
         this.user_id = Number( sessionStorage.getItem('user_id') );
+        this.booking_id = Number(sessionStorage.getItem('booking_id'));
         this.section = 'tenantList';
         this.getReservationData();
         this.name_build = sessionStorage.getItem('name_build');
@@ -90,7 +91,8 @@ import { resolve } from 'dns';
     public getReservationData():void {
 
         const user_data = {
-            userid: this.user_id
+            userid: this.user_id,
+            bookingId: this.booking_id
         };
 
         this._services.service_general_post('Booking/SeeStateAccountAdmin', user_data)
