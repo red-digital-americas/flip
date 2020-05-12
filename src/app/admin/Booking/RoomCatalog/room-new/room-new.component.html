@@ -64,29 +64,29 @@
                         </div>
 
                         <div class="ml-col-3">
-                            <div class="ml-col-1">
-                            <div class="ap-form__input">
-                                <input 
-                                required
-                                type="number" 
-                                placeholder="Price*"
-                                id="profile_price" 
-                                name="profile_price"
-                                class="ap-form__input-text"
-                                [class.form_error_found]="form_required.no_price"
-                                [(ngModel)]="roomObj.price" />
-                                <label 
-                                for="profile_price" 
-                                class="ap-form__label ap-form__label-text"
-                                [class.ap-form__label-text--active]="roomObj.price != ''">
-                                Price <span class="color-red text-bold">*</span>
-                                </label>
-                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_price">
-                                Price is required*
-                                </span>
-                            </div>
-                            </div>
-                        </div>
+                          <div class="ml-col-1">
+                          <div class="ap-form__input">
+                              <input 
+                              required
+                              type="number" 
+                              placeholder="Beds*"
+                              id="profile_price" 
+                              name="profile_price"
+                              class="ap-form__input-text"
+                              [class.form_error_found]="form_required.no_price"
+                              [(ngModel)]="roomObj.totalBeds" />
+                              <label 
+                              for="profile_price" 
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="roomObj.totalBeds != ''">
+                              Total Beds <span class="color-red text-bold">*</span>
+                              </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_price">
+                              Bed is required*
+                              </span>
+                          </div>
+                          </div>
+                      </div>
 
                         <div class="ml-col-3">
                             <div class="ml-col-1">
@@ -142,7 +142,7 @@
                                 name="gallery_input_{{ image.id }}"
                                 type="file"
                                 gallery="image"
-                                (change)="prepareImagesG( $event, image.id ); validateImageUpload( $event, '1920x1080', 'gallery_img_' + image.id, 'gallery_img_name_' + image.id );" />
+                                (change)="prepareImagesG( $event ); validateImageUpload( $event, '320x180', 'gallery_img_' + image.id, 'gallery_img_name_' + image.id );" />
                               <label for="gallery_input_{{ image.id }}" class="ap-form__label-gallery">
                                 <figure class="ap-form__image">
                                   <img class="ap-form__image-image ap-form__image-image--gallery no-image" 

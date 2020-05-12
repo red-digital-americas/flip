@@ -33,6 +33,7 @@ export class RoomComponent implements OnInit {
     name: '',
     price: 0,
     typeRoomId: 0,
+    totalBeds: 0
   };
   imageRooms;
   typeRoomList;
@@ -107,7 +108,7 @@ export class RoomComponent implements OnInit {
       this.form_required.no_name = false;
       this.form_required.no_description = true;
       this.loader.hideLoader();
-    } else if (this.roomObj.price === 0 || this.roomObj.price === null) {
+    } else if (this.roomObj.totalBeds === 0 || this.roomObj.totalBeds === null) {
       this.form_required.no_price = true;
       this.form_required.no_name = false;
       this.form_required.no_description = false;
@@ -219,14 +220,15 @@ export class RoomComponent implements OnInit {
                         id_image_container.classList.remove('no-image');
                         if( event.hasAttribute('gallery') ) root_data.getGalleryImages(event.getAttribute('id'));
 
-                      } else {
+                      } 
+                      // else {
 
-                        id_image_container.src = '../../../assets/14.jpg';
-                        name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
-                        id_image_container.classList.add('no-image');
-                        // if( !event.hasAttribute('gallery') ) root_data.data_perk.photo = '../../../../../assets/14.jpg';
+                      //   id_image_container.src = '../../../assets/14.jpg';
+                      //   name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
+                      //   id_image_container.classList.add('no-image');
+                      //   if( !event.hasAttribute('gallery') ) root_data.roomObj.photo = '../../../../../assets/14.jpg';
 
-                      }
+                      // }
                       
                     });
 
@@ -240,17 +242,17 @@ export class RoomComponent implements OnInit {
 
   public newImagesG: any[] = [];
   public imagesOnGallery: string;
-  prepareImagesG(e, id) {     
+  prepareImagesG(e) {     
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {        
         this.newImagesG.push(f);
         console.log( e.srcElement.files );
       }
     }
-    this.addImagesG(id);
+    this.addImagesG();
   }
 
-  addImagesG(id) {
+  addImagesG() {
     let url: string = '';
     if (!Utils.isEmpty(this.newImagesG)) {
       for (let f of this.newImagesG) { console.log( this.newImagesG );
@@ -261,10 +263,10 @@ export class RoomComponent implements OnInit {
             console.log('Desde la galeria => ',url);   
             this.newImagesG = [];
             this.imagesOnGallery = url;
-            this.images_in_gallery.forEach(element => {
-              element.src = element.id === id ? url : element.src;
-            });
-            console.log(url);
+            // this.images_in_gallery.forEach(element => {
+            //   element.src = element.id === id ? url : element.src;
+            // });
+            // console.log(url);
           }
         })
       }
