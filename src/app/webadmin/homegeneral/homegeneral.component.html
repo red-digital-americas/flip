@@ -26,7 +26,6 @@
     <br />
   </div>
 </div -->
-
 <div class="row">
   <div class="ml-col-1 navbar__components">
     <div class="navbar__component ml-col-4">
@@ -51,7 +50,6 @@
     </div>
   </div>
 </div>
-
 <div class="row padding-bottom-m padding-general-m">
   <div class="ml-col-1 card-style padding-general-m margin-bottom-x" *ngFor="let post of posts, index as index;">
     <div class="ml-col-1">
@@ -88,7 +86,7 @@
       <div class="ml-col-1 text-center margin-top-m">
         <button 
           data-toggle="modal" 
-          (click)="primaryModal.show();passdata(post.id);"
+          (click)="primaryModal.show();passdata(post);"
           class="button button-x">
           Editar
         </button>
@@ -96,7 +94,6 @@
     </div>
   </div>
 </div>
-
 <!-- div class="row">
   <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts">
     <div class="card ">
@@ -138,7 +135,9 @@
     </div>
   </div>
 </div -->
-
+<div class="black-box">
+  <img src="" id="image_data" />
+</div>
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
@@ -148,7 +147,75 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form #loginForm="ngForm" autocomplete="off">
+      <div class="form">
+        <form #loginForm="ngForm" autocomplete="off">
+          <div class="ml-col-1 custom-input margin-top-m">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="titulo_home" 
+              id="titulo_home" 
+              placeholder="Nombre"
+              required />
+            <label class="custom-input__label" for="titulo_home">
+              Nombre
+            </label>
+          </div>
+          <div class="ml-col-1 custom-input">
+            <textarea 
+              class="custom-input__textarea" 
+              name="descripcion_home" 
+              id="descripcion_home" 
+              placeholder="Nombre" 
+              [(ngModel)]="general_data.Description"
+              required></textarea>
+            <label class="custom-input__label" for="descripcion_home">
+              Descripción
+            </label>
+          </div>
+          <div class="form__image">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_one_selected"
+              accept="image/*"
+              (change)="readImageData($event, '1920x1080', 0);"
+              id="validatedCustomFile" 
+              required />
+            <label class="form__image-img" for="validatedCustomFile">
+              <figure class="image_to_preview_container">
+                <img src="{{ general_data.Photo }}" class="image_to_preview placeholder_image" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Icon Default:</strong> <br /> 
+                *La imagen deberá de ser de 350px * 350px.
+              </span>
+            </label>
+          </div>
+          <div class="form__image">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_one_selected"
+              accept="image/*"
+              (change)="readImageData($event, '1920x1080', 1);"
+              id="validatedCustomFile1" 
+              required />
+            <label class="form__image-img" for="validatedCustomFile1">
+              <figure class="image_to_preview_container">
+                <img src="{{ general_data.Photo }}" class="image_to_preview placeholder_image" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Icon Default:</strong> <br /> 
+                *La imagen deberá de ser de 350px * 350px.
+              </span>
+            </label>
+          </div>
+        </form>
+      </div>
+      <!-- form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
           Imagen :
           <div class="custom-file margin-gral ">
@@ -182,7 +249,7 @@
             <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
           </div>
         </div>
-      </form>
+      </form -->
       <div class="modal-footer">
         <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
         <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
@@ -190,7 +257,6 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
 

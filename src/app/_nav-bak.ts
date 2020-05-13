@@ -57,12 +57,12 @@ mainRoutes.filter(r => r.permisos.includes(permisos)).forEach(r => {
 if (permisos == 1) {
   menu = [ 
     { 
-      name: 'Index', url: '/webadmin/webadmin', icon: 'icon-drop',
+      name: 'Main Page', url: '/webadmin/webadmin', icon: 'icon-drop',
       children: [  
-        { name: 'Index', url: '/webadmin/webadmin', icon: 'icon-drop'}, 
+        { name: 'Homes', url: '/webadmin/webadmin', icon: 'icon-globe'}, 
         { name: 'Desgin Index', url: '/webadmin/designindex', icon: 'icon-drop'}, 
-        { name: 'More Index', url: '/webadmin/moreindex', icon: 'icon-drop' },
-        { name: 'Home Index', url: '/webadmin/homeindex', icon: 'icon-drop'}
+        { name: 'More Index', url: '/webadmin/moreindex', icon: 'icon-book-open' },
+        { name: 'Home Index', url: '/webadmin/homeindex', icon: 'icon-globe-alt'}
       ]
     },  
     {

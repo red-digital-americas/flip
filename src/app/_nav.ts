@@ -7,30 +7,30 @@ export class MenuService {
 
   private flipWeb = [ 
     { 
-      name: 'Index', url: '/webadmin/webadmin', icon: 'icon-check',
+      name: 'Main', url: '/webadmin/webadmin', icon: 'icon-globe',
       children: [  
-        { name: 'Index', url: '/webadmin/webadmin', icon: 'icon-minus'}, 
-        { name: 'Desgin Index', url: '/webadmin/designindex', icon: 'icon-minus'}, 
-        { name: 'More Index', url: '/webadmin/moreindex', icon: 'icon-minus' },
-        { name: 'Home Index', url: '/webadmin/homeindex/1', icon: 'icon-minus'}
+        { name: 'Index', url: '/webadmin/webadmin', icon: 'icon-docs'}, 
+        { name: 'Desgin Index', url: '/webadmin/designindex', icon: 'icon-tag'}, 
+        { name: 'More Index', url: '/webadmin/moreindex', icon: 'icon-book-open' },
+        { name: 'Communities Index', url: '/webadmin/homeindex/1', icon: 'icon-globe-alt'}
       ]
     },  
     {
-      name: 'Home', type: 1, url: '/webadmin/homemenu', icon: 'icon-home', 
+      name: 'Communities', type: 1, url: '/webadmin/homemenu', icon: 'icon-home', 
       children: [  
         // { name: 'Home Services', url: '/webadmin/homeservices', icon: 'icon-drop' },
         // { name: 'Home Ammenities', url: '/webadmin/homeammenities', icon: 'icon-drop' },
         // { name: 'Home General', url: '/webadmin/homegeneral', icon: 'icon-drop' },
-        { name: 'Home Menu', url: '/webadmin/homemenu', icon: 'icon-minus' },
+        { name: 'Builds', url: '/webadmin/homemenu', icon: 'icon-docs' },
       ]
     },
     { name: 'Design', type: 1, url: '/webadmin/design', icon: 'icon-grid' },
     {
       name: 'More', type: 1, url: '/', icon: 'icon-plus',
       children: [  
-        { name: 'Team', url: '/webadmin/team', icon: 'icon-minus' },
-        { name: 'Jobs', url: '/webadmin/jobs', icon: 'icon-minus' },
-        { name: 'Press', url: '/webadmin/press', icon: 'icon-minus'}
+        { name: 'Team', url: '/webadmin/team', icon: 'icon-people' },
+        { name: 'Jobs', url: '/webadmin/jobs', icon: 'icon-wrench' },
+        { name: 'Press', url: '/webadmin/press', icon: 'icon-bubbles'}
       ]
     }
   ] 

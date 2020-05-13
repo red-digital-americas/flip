@@ -102,7 +102,7 @@
       <div class="ml-col-1 text-center margin-top-m">
         <button 
           data-toggle="modal" 
-          (click)="primaryModal.show(); passdata(post.id, post.title,post.category);"
+          (click)="primaryModal.show(); passdata(post);"
           class="button button-x">
           Editar
         </button>
@@ -169,7 +169,9 @@
   </div>
 </div -->
 
-
+<div class="black-box">
+  <img src="" id="image_data" />
+</div>
 
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
@@ -180,7 +182,135 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form #loginForm="ngForm" autocomplete="off">
+
+
+      <div class="form">
+        <form #loginForm="ngForm" autocomplete="off">
+          <div class="ml-col-1 custom-input margin-top-m">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="titulo_home" 
+              id="titulo_home" 
+              placeholder="Nombre" 
+              [(ngModel)]="service_data.title"
+              required />
+            <label class="custom-input__label" for="titulo_home">
+              Title
+            </label>
+          </div>
+          <div class="ml-col-1 custom-input margin-top-m">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="titulo_desc" 
+              id="titulo_desc" 
+              placeholder="Category" 
+              [(ngModel)]="service_data.category"
+              required />
+            <label class="custom-input__label" for="titulo_desc">
+              Category
+            </label>
+          </div>
+          <div class="ml-col-1 custom-input">
+            <textarea 
+              [(ngModel)]="service_data.description"
+              class="custom-input__textarea" 
+              name="service_desc" 
+              id="service_desc" 
+              placeholder="Description" 
+              required></textarea>
+            <label class="custom-input__label" for="service_desc">
+              Description
+            </label>
+          </div>
+          <div class="form__image">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_one_selected"
+              accept="image/*"
+              (change)="readImageData($event, '350x350', 0);"
+              id="validatedCustomFile" 
+              required>
+            <label class="form__image-img" for="validatedCustomFile">
+              <figure class="image_to_preview_container">
+                <img src="{{ service_data.icon }}" class="image_to_preview placeholder_image" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Icon Default:</strong> <br /> 
+                *La imagen deberá de ser de 350px * 350px.
+              </span>
+            </label>
+          </div>
+          <div class="form__image">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_one_selected"
+              accept="image/*"
+              (change)="readImageData($event, '350x350', 1);"
+              id="validatedCustomFile1" 
+              required>
+            <label class="form__image-img" for="validatedCustomFile1">
+              <figure class="image_to_preview_container">
+                <img src="{{ service_data.icon2 }}" class="image_to_preview placeholder_image" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Icon Hover:</strong> <br /> 
+                *La imagen deberá de ser de 350px * 350px.
+              </span>
+            </label>
+          </div>
+          <div class="form__image">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_one_selected"
+              accept="image/*"
+              (change)="readImageData($event, '1920x1080', 2);"
+              id="validatedCustomFile2" 
+              required>
+            <label class="form__image-img" for="validatedCustomFile2">
+              <figure class="image_to_preview_container">
+                <img src="{{ service_data.frontphoto }}" class="image_to_preview placeholder_image" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Icon Hover:</strong> <br /> 
+                *La imagen deberá de ser de 350px * 350px.
+              </span>
+            </label>
+          </div>
+          <div class="form__image">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_one_selected"
+              accept="image/*"
+              (change)="readImageData($event, '1920x1080', 3);"
+              id="validatedCustomFile3" 
+              required>
+            <label class="form__image-img" for="validatedCustomFile3">
+              <figure class="image_to_preview_container">
+                <img src="{{ service_data.photomobile }}" class="image_to_preview placeholder_image" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Icon Hover:</strong> <br /> 
+                *La imagen deberá de ser de 350px * 350px.
+              </span>
+            </label>
+          </div>
+        </form>
+      </div>
+
+
+
+
+      <!-- form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
           Icon, la resolución debe de ser 50px * 50px:
 
@@ -238,10 +368,11 @@
 
 
         </div>
-      </form>
+      </form -->
+
       <div class="modal-footer">
         <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-        <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
+        <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

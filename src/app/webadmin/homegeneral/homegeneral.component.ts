@@ -121,7 +121,8 @@ export class HomegeneralComponent implements OnInit {
         this.newImages.push(f);
       }
     }
-  //  this.addImages();
+    
+    //this.addImages();
 
   }
 
@@ -173,9 +174,16 @@ export class HomegeneralComponent implements OnInit {
    }
 
 
-   passdata(id:any ){
-    this.PostId = id ; 
+   passdata( post:any ){
+
+    this.general_data.id = post.id;
+    this.general_data.Description = post.desc;
+    this.general_data.Photo = post.frontphoto;
+    this.general_data.PhotoMobile = post.photomobile;
+
    }
+
+
    gotonewsfeed(id?: number) {
     this.router.navigate(['webadmin/homeindex/' + id])
  }
@@ -192,12 +200,20 @@ serv(id?: number) {
 this.router.navigate(['webadmin/homeservices/' + id])
 }
    
+   public general_data: GeneralData = new GeneralData();
    updatephoto() {
-    if(this.imageInputLabel!="Choose file"){
+    //if(this.imageInputLabel!="Choose file"){
 
-      if(this.imageInputLabeltwo!="Choose file"){
+    //if(this.imageInputLabeltwo!="Choose file"){
      //debugger;
-    var creadoobj = { id: this.PostId, Photo: this.postphoto[0], PhotoMobile: this.postphoto[1] , Description: this.direction};
+    var creadoobj = { 
+      id: this.general_data.id, 
+      Photo: this.general_data.Photo, 
+      PhotoMobile: this.general_data.PhotoMobile, 
+      Description: this.general_data.Description
+    };
+
+    console.log('=======> ', this.general_data );
     //debugger;
 
     this.heroService.ServicioPostPost("UpdateHomeGeneral", creadoobj).subscribe((value) => {
@@ -219,7 +235,7 @@ this.router.navigate(['webadmin/homeservices/' + id])
               this.imageInputLabeltwo="Choose file";
               this.title="";
               this.direction="";
-              this.primaryModal.hide();
+              //this.primaryModal.hide();
 
             this.showSuccess();
 
@@ -228,16 +244,10 @@ this.router.navigate(['webadmin/homeservices/' + id])
             }
         }
       });    
-    }
-    else {
-     
-      alert("Sube la imagen móvil, por favor ")
-    }
+    //} else { alert("Sube la imagen móvil, por favor ") }
   
-  }
-else {
-  this.showWarning();
-}
+  //} else { this.showWarning(); }
+
   }
    
  
@@ -261,12 +271,12 @@ else {
         this.newImages[indice]=(f);
       }
     }
-    debugger; 
+    //debugger; 
     this.addImages(indice);
   }
 
   uploadAttachmentToServer(indice) {
-    debugger; 
+    //debugger; 
     const fileToUpload: File = new File([this.blob], 'filename.png');
 
     this.newImages[indice]=(fileToUpload);
@@ -280,7 +290,7 @@ else {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
       let f ={file:this.newImages[indice], name:this.newImages[indice].name}; {
-         debugger;
+         //debugger;
         if(indice==0){
           this.imageInputLabel = f.name;
         }
@@ -295,11 +305,120 @@ else {
              
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
              
-            this.postphoto[indice]=(url);
-             debugger;
+            //this.postphoto[indice]=(url);
+            if( indice == 0 ) {
+              this.general_data.Photo = url;
+            }
+
+            if( indice == 1 ) {
+              this.general_data.PhotoMobile = url;
+            }
+             //debugger;
           }
         })
       }
     }
   }
+
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: readImageData
+   * Tipo: Funcion efecto colateral
+   * Visto en: webadmin, desingindex, moreindex, homeindex
+   * Parametros: Objeto del evento que es emitido
+   * Regresa: N/A
+   * Descripcion: Cuando es seleccionada una imagen por el usuario, esta se muestra en la imagen que
+                  es contenida por el elemento HTML interno. 
+   */
+  public readImageData( event_data, dimension, image_index: number ):void {
+
+    const file = event_data.target.files,
+          root_event = event_data.target,
+          img_target = event_data.target.parentElement.getElementsByClassName('image_to_preview')[0],
+          image_container_name = event_data.target.parentElement.getElementsByClassName('image_to_preview_name')[0],
+          placeh_image_data = document.getElementById('image_data'),
+          limits = {
+            width: 0,
+            height: 0
+          },
+          dimension_limits = {
+            get_dimension_limits: function() {
+
+              const dimension_calc = dimension.split('x'),
+                    width = dimension_calc[0],
+                    height = dimension_calc[1];
+
+              return {
+                width: Number( width ),
+                height: Number( height )
+              };
+
+            }
+          },
+          last_image = this.postphoto;
+
+    if( file && file[0] ) {
+
+      const root = this;
+
+      let reader = new FileReader();
+
+          reader.onload = function(e:any) {
+
+            const parse_my_image = new Promise( ( resolve:any ) => {
+              
+              placeh_image_data.setAttribute('src',  e.target.result );
+
+              setTimeout(() => {
+
+                const image_dimension = {
+                  width: placeh_image_data.offsetWidth,
+                  height: placeh_image_data.offsetHeight
+                };
+
+                resolve( image_dimension );
+
+              }, 177);
+
+            });
+
+            parse_my_image.then( ( image_data:any ) => {
+
+              const limits = dimension_limits.get_dimension_limits();
+
+                if( limits.width == image_data.width && limits.height == image_data.height ) {
+
+                  img_target.src = e.target.result; 
+                  image_container_name.classList.remove('display-none');
+                  image_container_name.innerHTML = file[0].name;
+                  root.prepareImages( event_data, image_index );
+                  console.log('Index => ', image_index);
+
+                } else {
+
+                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
+                  root_event.value = "";
+                  root.postphoto = last_image;
+                  placeh_image_data.removeAttribute('src');
+
+                }
+
+            });
+
+          }
+
+          reader.readAsDataURL( file[0] );
+
+    }
+
+  }
+
+}
+
+class GeneralData {
+  id: number;
+  Photo: string;
+  PhotoMobile: string;
+  Description: string;
 }

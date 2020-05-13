@@ -167,10 +167,9 @@ export class LoginComponent implements OnInit {
               },
               time: 2000
             });
-
+            setTimeout( () => this.loader.hideLoader(), 1777);
             this.message = "Usuario y/o contraseña incorrecta";
             this.validar = true;
-            this.loader.hideLoader();
             break;
           case "password incorrecto":
 
@@ -182,6 +181,8 @@ export class LoginComponent implements OnInit {
               },
               time: 4000
             });
+
+            setTimeout( () => this.loader.hideLoader(), 1777);
 
             this.message = "Usuario y/o contraseña incorrecta";
             this.validar = true;
@@ -197,6 +198,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("id", value.user.id);
               localStorage.setItem("buildingid", value.user.buildingId);
               localStorage.setItem("SystemTypeId", value.user.systemTypeId);
+              setTimeout( () => this.loader.hideLoader(), 1777);
               this.system_message.showMessage({
                 kind: 'ok',
                 message: {
@@ -204,11 +206,12 @@ export class LoginComponent implements OnInit {
                   text: `¡Welcome back! ${ localStorage.getItem("name") } ${ localStorage.getItem("lastName") }`
                 },
                 time: 2000
-              });  
-              this.loader.hideLoader();
+              });  ;
               this.showSuccess();       
             }
         }
+      
+
       }, (error: any) => {
 
         this.system_message.showMessage({

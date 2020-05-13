@@ -216,8 +216,13 @@ export class HomeroomsComponent implements OnInit {
   }
 
   numroom: number = 0;
-  passdata(id: any) {
-    this.PostId = id;
+  public room_data: RoomModel = new RoomModel();
+  passdataRoom(post: any) {
+    //this.PostId = id;
+    this.room_data.id = post.id;
+    this.room_data.Description = post.desc;
+    this.room_data.Title = post.title;
+    this.room_data.Price = post.price;
   }
   passnumroom(id: any) {
     this.numroom = id;
@@ -226,7 +231,12 @@ export class HomeroomsComponent implements OnInit {
   updateindo() {
 
     //debugger;
-    var creadoobj = { id: this.PostId, Description: this.direction, Title: this.title, Price: this.price };
+    var creadoobj = { 
+      id: this.room_data.id, 
+      Description: this.room_data.Description, 
+      Title: this.room_data.Title, 
+      Price: this.room_data.Price 
+    };
     //debugger;
 
     this.heroService.ServicioPostPost("UpdateHomeRooms", creadoobj).subscribe((value) => {
@@ -266,18 +276,36 @@ export class HomeroomsComponent implements OnInit {
     this.router.navigate(['webadmin/homeservices/' + id])
   }
 
+  public photos_data: PhotosModelData = new PhotosModelData();
+  public passPhotosData( album: any, id: any ):void {
+
+    this.photos_data.id = id;
+    this.photos_data.icon = album.icon;
+    this.photos_data.icon2 = album.icon2;
+    this.photos_data.Photo = album.photo;
+    this.photos_data.PhotoMobile = album.photoMobile;
+    this.photos_data.IdCommunitiesRoomWeb = album.idCommunitiesRoomWeb;
+
+  }
 
   updatephoto() {
+
+    console.log('Here => ', this.photos_data );
     //debugger;
-    if (this.imageInputLabel != "Choose file") {
+    //if (this.imageInputLabel != "Choose file") {
 
-      if (this.imageInputLabeltwo != "Choose file") {
+      //if (this.imageInputLabeltwo != "Choose file") {
 
-        var creadoobj = { id: this.PostId, Photo: this.postphoto[0], PhotoMobile: this.postphoto[1], icon: this.postphoto[2], icon2: this.postphoto[3], IdCommunitiesRoomWeb: this.numroom };
-        debugger;
+        var creadoobj = { 
+          id: this.photos_data.id, 
+          Photo: this.photos_data.Photo, 
+          PhotoMobile: this.photos_data.PhotoMobile, 
+          icon: this.photos_data.icon, 
+          icon2: this.photos_data.icon2, 
+          IdCommunitiesRoomWeb: this.photos_data.IdCommunitiesRoomWeb 
+        };
 
         this.heroService.ServicioPostPost("UpdateHomeRoomphoto", creadoobj).subscribe((value) => {
-
 
           switch (value.result) {
             case "Error":
@@ -310,16 +338,9 @@ export class HomeroomsComponent implements OnInit {
               }
           }
         });
-      }
-      else {
+      //} else { alert("Sube la imagen móvil, por favor ") }
 
-        alert("Sube la imagen móvil, por favor ")
-      }
-
-    }
-    else {
-      this.showWarning();
-    }
+    //} else { this.showWarning(); }
   }
 
 
@@ -340,7 +361,6 @@ export class HomeroomsComponent implements OnInit {
         this.newImages[indice] = (f);
       }
     }
-    debugger;
     this.addImages(indice);
   }
 
@@ -373,7 +393,23 @@ export class HomeroomsComponent implements OnInit {
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
 
             this.postphoto[indice] = (url);
-            debugger;
+
+            if (indice == 0) {
+              this.photos_data.icon = url;
+            }
+
+            if (indice == 1) {
+              this.photos_data.icon2 = url;
+            }
+
+            if (indice == 2) {
+              this.photos_data.Photo = url;
+            }
+
+            if (indice == 3) {
+              this.photos_data.PhotoMobile = url;
+            }
+
           }
         })
       }
@@ -424,4 +460,116 @@ export class HomeroomsComponent implements OnInit {
   }
 
 
+  /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: readImageData
+   * Tipo: Funcion efecto colateral
+   * Visto en: webadmin, desingindex, moreindex, homeindex
+   * Parametros: Objeto del evento que es emitido
+   * Regresa: N/A
+   * Descripcion: Cuando es seleccionada una imagen por el usuario, esta se muestra en la imagen que
+                  es contenida por el elemento HTML interno. 
+   */
+  public readImageData( event_data, dimension, image_index: number ):void {
+
+    const file = event_data.target.files,
+          root_event = event_data.target,
+          img_target = event_data.target.parentElement.getElementsByClassName('image_to_preview')[0],
+          image_container_name = event_data.target.parentElement.getElementsByClassName('image_to_preview_name')[0],
+          placeh_image_data = document.getElementById('image_data'),
+          limits = {
+            width: 0,
+            height: 0
+          },
+          dimension_limits = {
+            get_dimension_limits: function() {
+
+              const dimension_calc = dimension.split('x'),
+                    width = dimension_calc[0],
+                    height = dimension_calc[1];
+
+              return {
+                width: Number( width ),
+                height: Number( height )
+              };
+
+            }
+          },
+          last_image = this.postphoto;
+
+    if( file && file[0] ) {
+
+      const root = this;
+
+      let reader = new FileReader();
+
+          reader.onload = function(e:any) {
+
+            const parse_my_image = new Promise( ( resolve:any ) => {
+              
+              placeh_image_data.setAttribute('src',  e.target.result );
+
+              setTimeout(() => {
+
+                const image_dimension = {
+                  width: placeh_image_data.offsetWidth,
+                  height: placeh_image_data.offsetHeight
+                };
+
+                resolve( image_dimension );
+
+              }, 177);
+
+            });
+
+            parse_my_image.then( ( image_data:any ) => {
+
+              const limits = dimension_limits.get_dimension_limits();
+
+                if( limits.width == image_data.width && limits.height == image_data.height ) {
+
+                  img_target.src = e.target.result; 
+                  image_container_name.classList.remove('display-none');
+                  image_container_name.innerHTML = file[0].name;
+                  root.prepareImages( event_data, image_index );
+                  console.log('Index => ', image_index);
+
+                } else {
+
+                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
+                  root_event.value = "";
+                  root.postphoto = last_image;
+                  placeh_image_data.removeAttribute('src');
+
+                }
+
+            });
+
+          }
+
+          reader.readAsDataURL( file[0] );
+
+    }
+
+  }
+
+
 }
+
+class RoomModel {
+  id: number;
+  Description: string;
+  Title: String;
+  Price: number;
+}
+
+class PhotosModelData {
+  id: number;
+  Photo: string;
+  PhotoMobile: string;
+  icon: string;
+  icon2: string;
+  IdCommunitiesRoomWeb: number;
+}
+ 

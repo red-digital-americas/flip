@@ -202,7 +202,8 @@ import { resolve } from 'dns';
                             text: `You have been ${ ws_action == 'in' ? 'Check In ' : 'Check out' } successfully`
                         }
                     });
-
+                    
+                    this.getReservationData();
                     this.showModal();
 
                     setTimeout( () => this.loader.hideLoader(),1777);
@@ -251,10 +252,10 @@ import { resolve } from 'dns';
                                 this._services.service_general_post('Booking/PayFromAdmin', ws_data)
                                     .subscribe( (response: any) => {
 
-                                        console.log( response );
                                         this.showModal();
                                         this.getReservationData();
                                         this.loader.hideLoader();
+                                        this.clearServicesSelected();
 
                                     }, (error: any) => {
 
@@ -348,6 +349,25 @@ import { resolve } from 'dns';
 
     }
 
+    public payServicesConfirm( action: boolean = true ):void {
+
+        if( this.validateServicesSelectedForm() ) {
+
+            !action ? 
+                this.modal_to_show = 'add_service' :
+                this.modal_to_show = 'confirm_payment_services';
+
+        } else this.system_message.showMessage({
+                kind: 'error',
+                time: 5200,
+                message: {
+                    header: 'Information Error',
+                    text: 'All Inputs must be fill to continue'
+                }
+            }); 
+
+    }
+
     private get_token: string;
     public saveOrPayServicesSelected( action: string = '' ):void {
 
@@ -379,6 +399,8 @@ import { resolve } from 'dns';
                                 .subscribe( (response: any) => {
 
                                     if( response.result == 'Success' ) {
+
+                                        console.log('Here ===> ', this.services_to_send);
 
                                         this.services_to_send.forEach( (service: any) => {
 
@@ -429,6 +451,8 @@ import { resolve } from 'dns';
 
     public saveOrPayServices():void {
 
+        console.log('Pal Erick => ', this.services_to_send);
+
         this._services.service_general_post('BookingServiceAdmin/PostBookingService', this.services_to_send )
             .subscribe( (response: any) => {
 
@@ -445,7 +469,7 @@ import { resolve } from 'dns';
 
                 this.getReservationData();
                 this.showModal();
-                this.services_selected = [];
+                this.clearServicesSelected();
 
                 setTimeout( () => this.loader.hideLoader(), 1777 );
 
@@ -461,8 +485,6 @@ import { resolve } from 'dns';
     
     public services_to_send: any[] = [];
     public validateServicesSelectedForm():boolean {
-
-        this.services_to_send = [];
 
         let result = false;
 
@@ -548,7 +570,7 @@ import { resolve } from 'dns';
                         object_service.recurrent = select_field.value;
                         object_service.fromMembership = 2;
                         object_service.IdUserPaymentService = 0;
-                        object_service.amount = days_diff * ( service_on.service_lapse == '1' ? service_on.priceUnit : service_on.price );
+                        object_service.amount = ( days_diff + 1 ) * ( service_on.service_lapse == '1' ? service_on.priceUnit : service_on.price );
                         service_on.total = object_service.amount;
                         object_service.idUserPaymentServiceNavigation = {
                             id: 0,
@@ -602,7 +624,7 @@ import { resolve } from 'dns';
 
         }
 
-        days_diff = this.calcDaysDiff(date_s.value, date_e.value);
+        days_diff = this.calcDaysDiff(date_s.value, date_e.value) + 1;
 
         if( days_diff !== NaN ) {
 
@@ -611,8 +633,9 @@ import { resolve } from 'dns';
                 if( service.id == id_service ) {
 
                     service.service_lapse == '1' ? 
-                    service.total = service.price * days_diff : 
-                    service.total = service.priceUnit * days_diff;
+                        service.total = service.price * days_diff : 
+                        service.total = service.priceUnit * days_diff;
+
                     service.days_diff = days_diff;
 
                 }
@@ -644,8 +667,6 @@ import { resolve } from 'dns';
         this.history_selected = history_data; 
         this.history_selected_memberships = this.history_selected.historyPaymentsMemberships;
         this.history_selected_servicesHis = this.history_selected.historyPaymentService;
-
-        console.log('CC Mem => ', this.history_selected_servicesHis);
 
         this.history_selected_memberships.forEach( (card: any) => {
 
@@ -679,12 +700,14 @@ import { resolve } from 'dns';
     }
 
     public endDateData: EndDateDataModel = new EndDateDataModel();
+    public endDateDataMinEnd: string;
     public editEndDateInit():void {
 
         this.end_date_form.no_edat = false;
         
         this.endDateData.cost_nig = this.current_membership.costPerNigth;
-        this.endDateData.date_s = this.dateWorker('value', this.current_membership.dateStart.trim(), '', 1 );
+        this.endDateData.date_s = this.dateWorker('value', this.current_membership.dateEndProgram.trim(), '', 1 );
+        this.endDateDataMinEnd = this.dateWorker('value', this.current_membership.dateEndProgram.trim(), '', 2 );
         this.endDateData.date_e = null;
         this.endDateData.days_res = 0;
         this.endDateData.total_pay = 0;
@@ -699,24 +722,104 @@ import { resolve } from 'dns';
         
     }
 
+    public updateEndDateConfirm( action: boolean = true ):void {
+
+        if( this.endDateFormValidator( this.endDateData ) ) {
+
+            !action ? 
+                this.modal_to_show = 'edit_end_date' :
+                this.modal_to_show = 'confirm_pay_endDate';
+
+        }
+
+    }
+
     public updateEndDate():void {
 
         if( this.endDateFormValidator( this.endDateData ) ) {
 
+            const ws_data = {
+                id: this.current_membership.idMembershipBooking,
+                idBooking: this.current_membership.idBooking,
+                idCard: this.current_card.id,
+                dateEnd: this.endDateData.date_e,
+                amount: this.endDateData.total_pay * ( this.current_beds.length + this.current_membership.beds )
+            }, card_data = {
+                number: this.decryptData( this.current_card.number ),
+                expYear: Number( this.current_card.year ),
+                expMonth: Number( this.current_card.month ),
+                cvc: this.decryptData( this.current_card.ccv ).toString(),
+                id: this.current_card.id
+            }
+
             this.loader.showLoader();
 
-            this.system_message.showMessage({
-                kind: 'ok',
-                time: 5200,
-                message: {
-                    header: 'End Date Updated',
-                    text: 'End Date has been updated successfully'
-                }
-            });
+            this._services.service_general_post('Stripe', card_data)
+                .subscribe( (response: any) => {
 
-            this.showModal();
+                    if( response.result == 'Success' ) {
 
-            setTimeout( () => this.loader.hideLoader(), 1777);
+                        const st_data = {
+                            token : response.item,
+                            amount: ws_data.amount
+                        }
+    
+                        this._services.service_general_post('Booking/PayAddServices', st_data)
+                            .subscribe( (response: any) => {
+
+                                if( response.result == 'Success' ) {
+
+                                    console.log('WS Data => ', ws_data);
+
+                                    this._services.service_general_post('Booking/UpdateBooking', ws_data)
+                                        .subscribe( (response: any) => {
+
+                                            if( response.result == 'Success' ) {
+
+                                                this.system_message.showMessage({
+                                                    kind: 'ok',
+                                                    time: 5200,
+                                                    message: {
+                                                        header: 'End Date Updated',
+                                                        text: 'End Date has been updated successfully'
+                                                    }
+                                                });
+
+                                                this.showModal();
+                                                this.getReservationData();
+
+                                                setTimeout( () => this.loader.hideLoader(), 1777);
+
+                                            } else this.system_message.showMessage({
+                                                kind: 'error',
+                                                time: 4400,
+                                                message: {
+                                                    header: 'System Error',
+                                                    text: 'Error: We can not save information, please try later o contact support team.'
+                                                }
+                                            });
+
+                                        }, (error: any) => {
+
+                                            console.error('Error WS END => ', error);
+
+                                        });
+
+                                }
+
+                            }, (error: any) => {
+
+                                console.error('WS End Date Stripe 2 => ', error );
+
+                            });
+
+                    }
+
+                }, (error: any) => {
+
+                    console.error('WS End Date Stripe 1 => ', error );
+
+                });
 
         } else this.system_message.showMessage({
             kind: 'error',
@@ -800,17 +903,39 @@ import { resolve } from 'dns';
                 break;
 
             case 'value':
-                const value_worker = {
-                    day: function() {
+                
+                const current_date = new Date( `${ day_gotted.year }-${ day_gotted.month }-${ day_gotted.day }` );
+                      current_date.setDate( current_date.getDate() + add_days );
+                let date_date = {
+                    month: function() {
+
+                        let month: string = ( current_date.getMonth() + 1 ).toString();
                         
-                        let day = Number( day_gotted.day ) + add_days,
-                            result = day > 9 ? day.toString() : `0${ day.toString() }`;
+                        if( Number( month ) < 10 ) {
 
-                        return result;
+                            month = `0${ month }`;
 
-                    } 
+                        }
+
+                        return month;
+
+                    }, day: function() {
+
+                        let day: string = ( current_date.getDate() ).toString();
+                        
+                        if( Number( day ) < 10 ) {
+
+                            day = `0${ day }`;
+
+                        }
+
+                        return day;
+
+                    }
                 }
-                result = `${ day_gotted.year }-${ day_gotted.month }-${ value_worker.day() }`;
+                      
+                result = `${ current_date.getFullYear() }-${ date_date.month() }-${ date_date.day() }`;
+
                 break;
 
             case 'calc':

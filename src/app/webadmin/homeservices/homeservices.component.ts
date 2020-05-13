@@ -246,23 +246,42 @@ serv(id?: number) {
        });
      }
   
-  
-     passdata(id:any, tit:any , desc:any  ){
-      this.PostId = id ; 
+     
+     public service_data: ServiceData = new ServiceData();
+     passdata( post: any ){
+      console.log('That One => ', post);
+      this.service_data.id = post.id;
+      this.service_data.title = post.title;
+      this.service_data.category = post.category;
+      this.service_data.icon = post.icon;
+      this.service_data.icon2 = post.icon2;
+      this.service_data.frontphoto = post.frontphoto;
+      this.service_data.photomobile = post.photomobile;
+
+      /*this.PostId = id ; 
       this.title=tit;
-      this.direction=desc
+      this.direction=desc*/
 
      }
   
      
      updatephoto() {
-       debugger;
-       if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"&&this.imageInputLabelthree!="Choose file"){
 
-       if(this.imageInputLabelfour!="Choose file"){
+      //if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"&&this.imageInputLabelthree!="Choose file"){
 
-      var creadoobj = { id: this.PostId, Photo: this.postphoto[2], PhotoMobile: this.postphoto[3] , Category: this.direction , Title:this.title, Icon:this.postphoto[0], Icon2:this.postphoto[1] };
-      debugger;
+      //if(this.imageInputLabelfour!="Choose file"){
+
+      console.log('Here ===> ', this.service_data );
+      var creadoobj = { 
+        id: this.service_data.id, 
+        Photo: this.service_data.frontphoto, 
+        PhotoMobile: this.service_data.photomobile, 
+        Category: this.service_data.category, 
+        Description: this.service_data.description,
+        Title: this.service_data.title, 
+        Icon: this.service_data.icon, 
+        Icon2: this.service_data.icon2 
+      };
   /**  post.Photo = item.Photo;
                         post.Description = item.Description;
                         post.PhotoMobile = item.PhotoMobile;
@@ -300,17 +319,11 @@ serv(id?: number) {
             }
         }
       });    
-    }
-    else {
-     
-      alert("Sube la imagen móvil, por favor ")
-    }
+    //} else { alert("Sube la imagen móvil, por favor ") }
   
-  }
-else {
-  this.showWarning();
+  //} else { this.showWarning(); }
+    
 }
-    }
   
   
     showSuccess() {
@@ -329,8 +342,7 @@ else {
         for (let f of e.srcElement.files) {
           this.newImages[indice]=(f);
         }
-      }
-      debugger; 
+      } 
       this.addImages(indice);
     }
   
@@ -339,8 +351,8 @@ else {
       let url: string = '';
       if (!Utils.isEmpty(this.newImages)) {
         for (let f of this.newImages) {
-          debugger;
-          if(indice==0){
+          /**
+           * if(indice==0){
             this.imageInputLabel = f.name;
           }
           if(indice==1)
@@ -351,18 +363,138 @@ else {
           {
           this.imageInputLabelthree = f.name;
           }
+           */
           this.heroService.UploadImgSuc(f).subscribe((r) => {
             if (Utils.isDefined(r)) {
               url = <string>r.message;
-              debugger;
               url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
-              debugger;
               this.postphoto[indice]=(url);
-              debugger;
+
+              if(indice==0){
+                this.service_data.icon = url;
+              }
+
+              if(indice==1){
+                this.service_data.icon2 = url;
+              }
+
+              if(indice==2){
+                this.service_data.frontphoto = url;
+              }
+
+              if(indice==3){
+                this.service_data.photomobile = url;
+              }
+
             }
           })
         }
       }
     }
+
+    /*
+   * Autor: Carlos Hernandez Hernandez
+   * Contacto: carlos.hernandez@minimalist.com
+   * Nombre: readImageData
+   * Tipo: Funcion efecto colateral
+   * Visto en: webadmin, desingindex, moreindex, homeindex
+   * Parametros: Objeto del evento que es emitido
+   * Regresa: N/A
+   * Descripcion: Cuando es seleccionada una imagen por el usuario, esta se muestra en la imagen que
+                  es contenida por el elemento HTML interno. 
+   */
+  public readImageData( event_data, dimension, image_index: number ):void {
+
+    const file = event_data.target.files,
+          root_event = event_data.target,
+          img_target = event_data.target.parentElement.getElementsByClassName('image_to_preview')[0],
+          image_container_name = event_data.target.parentElement.getElementsByClassName('image_to_preview_name')[0],
+          placeh_image_data = document.getElementById('image_data'),
+          limits = {
+            width: 0,
+            height: 0
+          },
+          dimension_limits = {
+            get_dimension_limits: function() {
+
+              const dimension_calc = dimension.split('x'),
+                    width = dimension_calc[0],
+                    height = dimension_calc[1];
+
+              return {
+                width: Number( width ),
+                height: Number( height )
+              };
+
+            }
+          },
+          last_image = this.postphoto;
+
+    if( file && file[0] ) {
+
+      const root = this;
+
+      let reader = new FileReader();
+
+          reader.onload = function(e:any) {
+
+            const parse_my_image = new Promise( ( resolve:any ) => {
+              
+              placeh_image_data.setAttribute('src',  e.target.result );
+
+              setTimeout(() => {
+
+                const image_dimension = {
+                  width: placeh_image_data.offsetWidth,
+                  height: placeh_image_data.offsetHeight
+                };
+
+                resolve( image_dimension );
+
+              }, 177);
+
+            });
+
+            parse_my_image.then( ( image_data:any ) => {
+
+              const limits = dimension_limits.get_dimension_limits();
+
+                if( limits.width == image_data.width && limits.height == image_data.height ) {
+
+                  img_target.src = e.target.result; 
+                  image_container_name.classList.remove('display-none');
+                  image_container_name.innerHTML = file[0].name;
+                  root.prepareImages( event_data, image_index );
+                  console.log('Index => ', image_index);
+
+                } else {
+
+                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
+                  root_event.value = "";
+                  root.postphoto = last_image;
+                  placeh_image_data.removeAttribute('src');
+
+                }
+
+            });
+
+          }
+
+          reader.readAsDataURL( file[0] );
+
+    }
+
+  }
+
   }
   
+  class ServiceData {
+    id: number;
+    title: string;
+    category: string;
+    description: string;
+    icon: string;
+    icon2: string;
+    frontphoto: string;
+    photomobile: string;
+  }
