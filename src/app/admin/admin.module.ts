@@ -70,6 +70,8 @@ import { DetailComponent } from './Booking/Membership/detail/detail.component';
 import { RoomComponent } from './Booking/RoomCatalog/room/room.component';
 import { RoomNewComponent } from './Booking/RoomCatalog/room-new/room-new.component';
 import { MembershipNewComponent } from './Booking/Membership/membership-new/membership-new.component';
+import { UserDetailComponent } from './Booking/Users/user-detail/user-detail.component';
+import { UserNewComponent } from './Booking/Users/user-new/user-new.component';
 
 
 @NgModule({
@@ -135,7 +137,9 @@ import { MembershipNewComponent } from './Booking/Membership/membership-new/memb
     DetailComponent,
     RoomComponent,
     RoomNewComponent,
-    MembershipNewComponent
+    MembershipNewComponent,
+    UserDetailComponent,
+    UserNewComponent
   ],
   entryComponents: [
     DetalleComponent,
