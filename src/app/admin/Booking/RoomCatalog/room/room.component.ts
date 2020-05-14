@@ -171,88 +171,86 @@ export class RoomComponent implements OnInit {
     }, 420);
   }
 
-  public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
+  public validateImageUpload(event_data: any, dimensions_image: string, target_image: string, name_image: string, image_id: any): void {
     const event = event_data.target,
-          dimensions_image_data = {
-            get_dimensions: ( function() {
-              const dimensions_split = dimensions_image.split('x'),
-                    width = Number( dimensions_split[0] ),
-                    height = Number( dimensions_split[1] );
-              return {
-                width: width,
-                height: height
-              }
-            }())
-          },
-          image_limit_width = dimensions_image_data.get_dimensions.width,
-          image_limit_height = dimensions_image_data.get_dimensions.height,
-          id_image_container:any = document.getElementById( target_image ),
-          name_image_container = document.getElementById( name_image ),
-          native_image_uploaded = document.getElementById('image_real_dimension'),
-          root_data = this;
+      dimensions_image_data = {
+        get_dimensions: (function () {
+          const dimensions_split = dimensions_image.split('x'),
+            width = Number(dimensions_split[0]),
+            height = Number(dimensions_split[1]);
+          return {
+            width: width,
+            height: height
+          }
+        }())
+      },
+      image_limit_width = dimensions_image_data.get_dimensions.width,
+      image_limit_height = dimensions_image_data.get_dimensions.height,
+      id_image_container: any = document.getElementById(target_image),
+      name_image_container = document.getElementById(name_image),
+      native_image_uploaded = document.getElementById('image_real_dimension'),
+      root_data = this;
 
-    if( event.files && event.files[0] ) {
+    if (event.files && event.files[0]) {
       const reader = new FileReader();
-            reader.onload = function(e:any) {
-              const image_convert:any = e.target.result,
-                    validating_image = new Promise( (resolve) => {
-                      native_image_uploaded.setAttribute('src', image_convert);
-                      setTimeout( () => {
+      reader.onload = function (e: any) {
+        const image_convert: any = e.target.result,
+          validating_image = new Promise((resolve) => {
+            native_image_uploaded.setAttribute('src', image_convert);
+            setTimeout(() => {
+              const native_image_dimension = {
+                image: image_convert,
+                width: native_image_uploaded.offsetWidth,
+                height: native_image_uploaded.offsetHeight
+              };
+              resolve(native_image_dimension);
+            }, 420);
+          });
+        validating_image.then((image_data: any) => {
+          if (image_limit_width === image_data.width && image_limit_height === image_data.height) {
+            id_image_container.setAttribute('src', image_data.image);
+            name_image_container.innerHTML = `<span class="image-name">${event.files[0].name}</span>`;
+            id_image_container.classList.remove('no-image');
+            if (event.hasAttribute('gallery')) { root_data.getGalleryImages(event.getAttribute('id')); }
+            console.log('si cumple', root_data.images_in_gallery);
+            console.log('si cumple', event_data);
+            console.log('si cumple', image_id);
+            root_data.prepareImagesG(event_data, image_id);
+          } else {
+            id_image_container.src = '../../../assets/14.jpg';
+            name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
+            id_image_container.classList.add('no-image');
+            root_data.systemMessage.showMessage({
+              kind: 'error',
+              message: {
+                header: 'Error',
+                text: `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`
+              },
+              time: 4800
+            });
+            // if( !event.hasAttribute('gallery') ) root_data.data_perk.photo = '../../../../../assets/14.jpg';
 
-                        const native_image_dimension = {
-                          image: image_convert,
-                          width: native_image_uploaded.offsetWidth,
-                          height: native_image_uploaded.offsetHeight
-                        };
-
-                        resolve( native_image_dimension );
-
-                      }, 420);
-              
-                    });
-
-                    validating_image.then( ( image_data:any ) => { 
-
-                      if( image_limit_width === image_data.width && image_limit_height === image_data.height ) {
-
-                        id_image_container.setAttribute('src', image_data.image );
-                        name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
-                        id_image_container.classList.remove('no-image');
-                        if( event.hasAttribute('gallery') ) root_data.getGalleryImages(event.getAttribute('id'));
-
-                      } 
-                      // else {
-
-                      //   id_image_container.src = '../../../assets/14.jpg';
-                      //   name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
-                      //   id_image_container.classList.add('no-image');
-                      //   if( !event.hasAttribute('gallery') ) root_data.roomObj.photo = '../../../../../assets/14.jpg';
-
-                      // }
-                      
-                    });
-
-            }
-
-            reader.readAsDataURL( event.files[0] );
-
+          }
+        });
+      };
+      reader.readAsDataURL(event.files[0]);
     }
-    
   }
 
   public newImagesG: any[] = [];
   public imagesOnGallery: string;
-  prepareImagesG(e) {     
+  prepareImagesG(e, index) {     
     if (Utils.isDefined(e.srcElement.files)) {
       for (let f of e.srcElement.files) {        
         this.newImagesG.push(f);
         console.log( e.srcElement.files );
       }
     }
-    this.addImagesG();
+    this.addImagesG(index);
   }
 
-  addImagesG() {
+  addImagesG(indices) {
+    console.log('Index', indices);
     let url: string = '';
     if (!Utils.isEmpty(this.newImagesG)) {
       for (let f of this.newImagesG) { console.log( this.newImagesG );
@@ -260,26 +258,28 @@ export class RoomComponent implements OnInit {
           if (Utils.isDefined(r)) {
             url = <string>r.message;
             url = url.replace('/Imagenes', this.services.getURL() + 'Flip'); 
-            console.log('Desde la galeria => ',url);   
+            console.log('Desde la galeria => ', url);
             this.newImagesG = [];
             this.imagesOnGallery = url;
-            // this.images_in_gallery.forEach(element => {
-            //   element.src = element.id === id ? url : element.src;
-            // });
-            // console.log(url);
+            this.images_in_gallery.forEach(element => {
+              element.src = element.id === indices ? url : element.src;
+            });
+            console.log(url);
           }
         })
       }
     }
   }
 
-  public deleteImageFromGallery( id:number ):void {
-
-    this.images_in_gallery.splice( this.images_in_gallery.forEach( (image:any) => {  image.id == id } ), 1);
-
+  public deleteImageFromGallery( id ): void {
+    // console.log('Gallery array', this.images_in_gallery);
+    // console.log('Item to delete', id);
+    let index = this.images_in_gallery.indexOf(id);
+    // console.log('Id to delete', index);
+    this.images_in_gallery.splice(index, 1);
     this.images_in_gallery[this.images_in_gallery.length - 1].last_one = true;
     this.images_in_gallery[0].can_delete = false;
-
+    // console.log(this.images_in_gallery);
   }
 
 }

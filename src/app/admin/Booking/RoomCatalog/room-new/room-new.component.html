@@ -135,27 +135,27 @@
                                 Gallery
                               </h4>
                             </div>
-                            <div class="ap-form__gallery-image" *ngFor="let image of images_in_gallery, index as index;">
+                            <div class="ap-form__gallery-image margin-top-x" *ngFor="let image of images_in_gallery, index as index;">
                               <input
                                 class="ap-form__input-image display-none" 
                                 id="gallery_input_{{ image.id }}"
                                 name="gallery_input_{{ image.id }}"
                                 type="file"
                                 gallery="image"
-                                (change)="prepareImagesG( $event ); validateImageUpload( $event, '320x180', 'gallery_img_' + image.id, 'gallery_img_name_' + image.id );" />
+                                (change)="validateImageUpload( $event, '320x180', 'gallery_img_' + image.id, 'gallery_img_name_' + image.id, image.id);" />
                               <label for="gallery_input_{{ image.id }}" class="ap-form__label-gallery">
                                 <figure class="ap-form__image">
                                   <img class="ap-form__image-image ap-form__image-image--gallery no-image" 
                                        id="gallery_img_{{ image.id }}"
                                        src="{{ image.src }}" />
-                                  <span class="ap-form__image-data text-center display-none" id="gallery_img_name_{{ image.id }}">
+                                  <span class="ap-form__image-data text-center" id="gallery_img_name_{{ image.id }}">
                                     La imagen debe medir <br />
-                                    <span class="text-bold">350x350</span> 
+                                    <span class="text-bold">350x180</span> 
                                   </span>
                                   <button 
                                     *ngIf="image.can_delete"
                                     type="button"
-                                    (click)="deleteImageFromGallery( image.id )"
+                                    (click)="deleteImageFromGallery( image )"
                                     class="ap-form__gallery-delete">x
                                   </button>
                                 </figure>
