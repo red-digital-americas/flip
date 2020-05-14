@@ -1,0 +1,365 @@
+<div class="ml-col-1">
+    <div class="ml-col-1">
+        <div class="ml-col-1 padding-general-m margin-bottom-g">
+            <div class="ml-col-1 margin-top-m folder">
+                <div class="ml-col-1 margin-top-x" >
+                <form 
+                class="ap-form ap-form--no-tl-br ml-col-1 card-style"
+                action="submit"
+                (submit)="update()">
+                <div class="ml-col-1">
+                    <h4 class="ap-form__titulo text-left">
+                        Edit User
+                    </h4>
+                </div>
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="text" 
+                                placeholder="Name*"
+                                id="profile_name" 
+                                name="profile_name"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_name"
+                                [(ngModel)]="userObj.name" />
+                                <label 
+                                for="profile_name" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.name != ''">
+                                Name <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_name">
+                                Name is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="text" 
+                                placeholder="Last Name*"
+                                id="profile_last_name" 
+                                name="profile_last_name"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_lastName"
+                                [(ngModel)]="userObj.lastName" />
+                                <label 
+                                for="profile_last_name" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.lastName != ''">
+                                Last Name <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_lastName">
+                                Last Name is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3 ml-col-r">
+                            <div class="ap-form__input">
+                              <input
+                                required
+                                class="ap-form__input-image display-none" 
+                                id="profile_avatar"
+                                name="profile_avatar"
+                                type="file"
+                                accept="image/*"
+                                (change)="validateImageUpload( $event, '350x350', 'profile_avatar_img', 'profile_avatar_name' );" />
+                              <label for="profile_avatar" class="ap-form__label-image">
+                                <figure class="ap-form__image">
+                                  <img class="ap-form__image-image no-image" 
+                                      id="profile_avatar_img"
+                                      src="{{ userObj.avatar }}" />
+                                  <span class="ap-form__image-data text-center" id="profile_avatar_name">
+                                    La imagen debe medir <br />
+                                    <span class="text-bold">350x350</span> 
+                                  </span>
+                                </figure>
+                              </label>
+                            </div>
+                        </div>
+
+                        <div class="black-box">
+                            <img src="" id="image_real_dimension" />
+                          </div>
+
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="text" 
+                                placeholder="Mother Name*"
+                                id="profile_mother_name" 
+                                name="profile_mother_name"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_motherName"
+                                [(ngModel)]="userObj.motherName" />
+                                <label 
+                                for="profile_mother_name" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.motherName != ''">
+                                Mother Name <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_motherName">
+                                Mother Name is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="password" 
+                                placeholder="Password*"
+                                id="profile_password" 
+                                name="profile_password"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_password"
+                                [(ngModel)]="userObj.password" />
+                                <label 
+                                for="profile_password" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.password != ''">
+                                Password <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_password">
+                                Password is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="email" 
+                                placeholder="Email*"
+                                id="profile_email" 
+                                name="profile_email"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_email"
+                                [(ngModel)]="userObj.email" />
+                                <label 
+                                for="profile_price" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.email != ''">
+                                Email <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_email">
+                                Email is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3" *ngIf="userObj.systemTypeId != 6">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <select
+                                required
+                                placeholder="System type"
+                                id="profile_systemType" 
+                                name="profile_systemType"
+                                class="ap-form__input-text"
+                                [(ngModel)]="userObj.systemTypeId">
+                                <option value="null" disabled>System type*</option>
+                                <option *ngFor="let system of systemType;" [value]="system.id">
+                                    {{ system.name }}
+                                </option>
+                                </select>
+                                <label 
+                                for="profile_systemType" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.systemTypeId != null">
+                                System type <span class="color-red text-bold">*</span> 
+                                </label>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="tel" 
+                                placeholder="Phone*"
+                                id="profile_phone" 
+                                name="profile_phone"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_phone"
+                                [(ngModel)]="userObj.phone" />
+                                <label 
+                                for="profile_phone" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.phone != ''">
+                                Phone <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_phone">
+                                Phone is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="tel" 
+                                placeholder="Cellphone*"
+                                id="profile_cellphone" 
+                                name="profile_cellphone"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_cellphone"
+                                [(ngModel)]="userObj.cellPhone" />
+                                <label 
+                                for="profile_cellphone" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.cellPhone != ''">
+                                Cellphone <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_cellphone">
+                                Cellphone is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="text" 
+                                placeholder="Workplace*"
+                                id="profile_workplace" 
+                                name="profile_workplace"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_workplace"
+                                [(ngModel)]="userObj.workplace" />
+                                <label 
+                                for="profile_workplace" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.workplace != ''">
+                                Workplace <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_workplace">
+                                Workplace is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="text" 
+                                placeholder="About Me*"
+                                id="profile_aboutMe" 
+                                name="profile_aboutMe"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_aboutMe"
+                                [(ngModel)]="userObj.aboutMe" />
+                                <label 
+                                for="profile_aboutMe" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.aboutMe != ''">
+                                About me <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_aboutMe">
+                                About me is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="ml-col-3">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="date" 
+                                placeholder="Birthday"
+                                id="profile_bday" 
+                                name="profile_bday"
+                                [(ngModel)]="userObj.birth"
+                                class="ap-form__input-text" />
+                                <label 
+                                for="profile_bday" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.birth != ''">
+                                Birthday
+                            </label>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                    <input 
+                                    required
+                                    type="text" 
+                                    placeholder="RFC*"
+                                    id="profile_rfc" 
+                                    name="profile_rfc"
+                                    class="ap-form__input-text"
+                                    [class.form_error_found]="form_required.no_rfc"
+                                    [(ngModel)]="userObj.rfc" />
+                                    <label 
+                                    for="profile_rfc" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="userObj.rfc != ''">
+                                RFC <span class="color-red text-bold">*</span>
+                            </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_rfc">
+                                    RFC is required*
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                type="checkbox"
+                                id="profile_active" 
+                                name="profile_active"
+                                [checked]="userObj.active"
+                                [(ngModel)]="userObj.active"
+                                [ngModelOptions]="{standalone: true}"
+                                class="ap-form__input-checkbox display-none" />
+                                <label for="profile_active" class="ap-form__label ap-form__label-checkbox">
+                                Active
+                                </label>
+                            </div>
+                        </div>   
+                        <!---->
+                        <div class="ml-col-1 ap-form__buttons">
+                            <button 
+                            type="submit"
+                            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+                            Save
+                            </button>
+                        </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
