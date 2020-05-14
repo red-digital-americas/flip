@@ -1,32 +1,3 @@
-<!-- div class="row">
-  <div class="col-md-12">
-    <br />
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <h2><mat-icon><i class="fa fa-building-o" aria-hidden="true"></i></mat-icon> Altata Servicios <i class="fa fa-angle-down" aria-hidden="true"></i></h2>
-    </button>
-
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="amm(IDBUILD)">
-        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
-        <span>Home Ammenities</span>
-      </button>
-      <button mat-menu-item (click)="gene(IDBUILD)">
-        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
-        <span>Home General</span>
-      </button>
-      <button mat-menu-item (click)="serv(IDBUILD)">
-        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
-        <span>Home Services</span>
-      </button>
-      <button mat-menu-item (click)="room(IDBUILD)">
-        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
-        <span>Home Room</span>
-      </button>
-    </mat-menu>
-    <br />
-  </div>
-</div -->
-
 <div class="row">
   <div class="ml-col-1 navbar__components">
     <div class="navbar__component ml-col-4">
@@ -51,7 +22,6 @@
     </div>
   </div>
 </div>
-
 <div class="row padding-bottom-m padding-general-m">
   <div class="ml-col-1 card-style padding-general-m margin-bottom-x" *ngFor="let post of posts, index as index;">
     <div class="ml-col-1">
@@ -61,8 +31,8 @@
           {{ post.title }}
         </p>
         <p class="card__info-dato">
-          <span class="text-bold">Description: </span> 
-          {{ post.desc }}
+          <span class="text-bold">Category: </span> 
+          {{ post.category }}
         </p>
       </div>
       <div class="ml-col-1">
@@ -110,70 +80,10 @@
     </div>
   </div>
 </div>
-
-
-
-<!-- div class="row">
-  <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts">
-    <div class="card ">
-      <div class="card-body ">
-        <div class="btn-group margin-gral col-sm-12 col-md-12">
-          <div class="row">
-            <div class="col-sm-12 col-md-12">
-              <strong> Title :  </strong> {{post.title}}
-            </div>
-            <div class="col-sm-12 col-md-12">
-
-              <strong> Description :  </strong> {{post.category}}
-            </div>
-
-            <div class="col-sm-12 col-md-12">
-              Photo:
-
-              <img style="height: 400px; width: 600px;" class="img-size" src="../../../assets/webtmp.png">
-              <img class="img-size" style="
-                          position: absolute;
-                          left: 56px;
-                          height: 375px;
-                          width: 475px;
-                          top: 22px;" src="{{post.frontphoto}}">
-            </div>
-            <div style="margin-top: 5%;" class="col-sm-12 col-md-12">
-              Mobile Photo:
-              <img style="height: 400px; width: 300px;" class="img-size" src="../../../assets/phone.png">
-              <img style="position: absolute;
-                                              left: 166px;
-                                              height: 293px;
-                                              width: 180px;
-                                              top: 49px;" class="img-size" src="{{post.photomobile}}">
-
-            </div>
-            <div style="margin-top: 5%;" class="col-sm-12 col-md-12">
-              Icon:<img style="margin:5%; " class="img-size" src="{{post.icon}}">
-
-              Icon Hover:<img style="margin:5%; " class="img-size" src="{{post.icon2}}">
-
-            </div>
-            <button style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title,post.category);">
-              Editar
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-      <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
-
-      </div>
-    </div>
-  </div>
-</div -->
-
 <div class="black-box">
   <img src="" id="image_data" />
 </div>
-
-<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-fw">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -182,8 +92,6 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
-
       <div class="form">
         <form #loginForm="ngForm" autocomplete="off">
           <div class="ml-col-1 custom-input margin-top-m">
@@ -192,12 +100,16 @@
               class="custom-input__text" 
               name="titulo_home" 
               id="titulo_home" 
-              placeholder="Nombre" 
+              placeholder="Title" 
               [(ngModel)]="service_data.title"
+              [class.custom-input__text--error]="form_watcher.no_titl"
               required />
-            <label class="custom-input__label" for="titulo_home">
+            <label class="custom-input__label custom-input__label--active" for="titulo_home">
               Title
             </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
+              Title is required
+            </span>
           </div>
           <div class="ml-col-1 custom-input margin-top-m">
             <input 
@@ -207,22 +119,14 @@
               id="titulo_desc" 
               placeholder="Category" 
               [(ngModel)]="service_data.category"
+              [class.custom-input__textarea--error]="form_watcher.no_cate"
               required />
-            <label class="custom-input__label" for="titulo_desc">
+            <label class="custom-input__label custom-input__label--active" for="titulo_desc">
               Category
             </label>
-          </div>
-          <div class="ml-col-1 custom-input">
-            <textarea 
-              [(ngModel)]="service_data.description"
-              class="custom-input__textarea" 
-              name="service_desc" 
-              id="service_desc" 
-              placeholder="Description" 
-              required></textarea>
-            <label class="custom-input__label" for="service_desc">
-              Description
-            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_cate">
+              Category is required
+            </span>
           </div>
           <div class="form__image">
             <input 
@@ -235,12 +139,18 @@
               required>
             <label class="form__image-img" for="validatedCustomFile">
               <figure class="image_to_preview_container">
-                <img src="{{ service_data.icon }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ service_data.icon }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_ico0" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
                 <strong>Icon Default:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <span class="color-red" *ngIf="form_watcher.no_ico0">
+                  Icon Default is required <br />
+                </span>
+                *Image resolution 350x350px.
               </span>
             </label>
           </div>
@@ -255,12 +165,18 @@
               required>
             <label class="form__image-img" for="validatedCustomFile1">
               <figure class="image_to_preview_container">
-                <img src="{{ service_data.icon2 }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ service_data.icon2 }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_ico1" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
                 <strong>Icon Hover:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <span class="color-red" *ngIf="form_watcher.no_ico1">
+                  Icon Hover is required <br />
+                </span>
+                *Image resolution 350x350px.
               </span>
             </label>
           </div>
@@ -275,12 +191,18 @@
               required>
             <label class="form__image-img" for="validatedCustomFile2">
               <figure class="image_to_preview_container">
-                <img src="{{ service_data.frontphoto }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ service_data.frontphoto }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_img0" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
-                <strong>Icon Hover:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <strong>Desktop photo:</strong> <br /> 
+                <span class="color-red" *ngIf="form_watcher.no_img0">
+                  Desktop photo is required <br />
+                </span>
+                *Image resolution 1920x1080px.
               </span>
             </label>
           </div>
@@ -290,93 +212,33 @@
               type="file" 
               name="image_one_selected"
               accept="image/*"
-              (change)="readImageData($event, '1920x1080', 3);"
+              (change)="readImageData($event, '441x660', 3);"
               id="validatedCustomFile3" 
               required>
             <label class="form__image-img" for="validatedCustomFile3">
               <figure class="image_to_preview_container">
-                <img src="{{ service_data.photomobile }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ service_data.photomobile }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_img1" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
-                <strong>Icon Hover:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <strong>Desktop mobile:</strong> <br /> 
+                <span class="color-red" *ngIf="form_watcher.no_img1">
+                  Desktop mobile is required <br />
+                </span>
+                *Image resolution 441x660px.
               </span>
             </label>
           </div>
         </form>
       </div>
-
-
-
-
-      <!-- form #loginForm="ngForm" autocomplete="off">
-        <div class="modal-body">
-          Icon, la resolución debe de ser 50px * 50px:
-
-          <div class="custom-file margin-gral ">
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
-            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-          </div>
-
-          Icon Hover, la resolución debe de ser 50px * 50px:
-
-          <div class="custom-file margin-gral ">
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile">
-            <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
-          </div>
-          Imagen Build  la resolución debe de ser 1920px*1080px:
-          <div class="custom-file margin-gral ">
-            <input type="file" accept="image/*" class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event,2);" />
-
-
-            <div>
-              <image-cropper [imageChangedEvent]="imageChangedEvent"
-                             [maintainAspectRatio]="true"
-                             [aspectRatio]="1/ 2"
-                             [resizeToWidth]="600"
-                             [cropperMinWidth]="128"
-                             [onlyScaleDown]="true"
-                             [roundCropper]="false"
-                             format="png"
-                             outputType="both"
-                             imageQuality="100"
-                             (imageCropped)="imageCropped($event)"
-                             (imageLoaded)="imageLoaded()"
-                             (cropperReady)="cropperReady()"
-                             (loadImageFailed)="loadImageFailed()"
-                             [style.display]="showCropper ? null : 'none'"></image-cropper>
-              Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage" />
-              <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(3)">Upload Images</button>
-
-            </div>
-
-            <label class="custom-file-label" for="customFile">{{imageInputLabelthree}}</label>
-
-          </div>
-          <div class="col-12  margin-gral">
-            Title:
-            <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="title" required>
-          </div>
-          <div class="col-12  margin-gral">
-            Category:
-            <input type="text" [(ngModel)]="direction" class="form-control" name="cat" id="cat" placeholder="Desc" required>
-          </div>
-
-
-
-        </div>
-      </form -->
-
       <div class="modal-footer">
-        <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+        <button type="button" style="z-index: 9999;" id="close_modal" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
         <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
+    </div>
+  </div>
+</div>
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

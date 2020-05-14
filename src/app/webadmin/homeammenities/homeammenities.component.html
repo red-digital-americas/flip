@@ -30,22 +30,22 @@
   <div class="ml-col-1 navbar__components">
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button navbar__component-button--active" (click)="amm(IDBUILD)">
-        Home Ammenities
+        Build: Ammenities
       </button>
     </div>
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button" (click)="gene(IDBUILD)">
-        Home General
+        Build: General
       </button>
     </div>
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button" (click)="serv(IDBUILD)">
-        Home Services
+        Build: Services
       </button>
     </div>
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button" (click)="room(IDBUILD)">
-        Home Room
+        Build: Rooms
       </button>
     </div>
   </div>
@@ -194,7 +194,15 @@
 <div class="black-box">
   <img src="" id="image_data" />
 </div>
-<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div 
+  bsModal 
+  #primaryModal="bs-modal" 
+  class="modal fade" 
+  tabindex="-1" 
+  role="dialog" 
+  aria-labelledby="myModalLabel" 
+  aria-hidden="true" 
+  id="modal-fw">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -249,12 +257,18 @@
               required />
             <label class="form__image-img" for="validatedCustomFile">
               <figure class="image_to_preview_container">
-                <img src="{{ post.icon }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ post.icon }}" 
+                  class="image_to_preview placeholder_image custom-input__image" 
+                  [class.custom-input__image--error]="form_watcher.no_ico0" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
                 <strong>Icon Default:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <span class="color-red" *ngIf="form_watcher.no_ico0">
+                  Icon Default is required <br />
+                </span>
+                *Image resolution 350x350px.
               </span>
             </label>
           </div>
@@ -269,12 +283,18 @@
               required>
             <label class="form__image-img" for="validatedCustomFile1">
               <figure class="image_to_preview_container">
-                <img src="{{ post.icon2 }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ post.icon2 }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_ico1" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
                 <strong>Icon Hover:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <span class="color-red" *ngIf="form_watcher.no_ico1">
+                  Icon Hover is required <br />
+                </span>
+                *Image resolution 350x350px.
               </span>
             </label>
           </div>
@@ -289,12 +309,18 @@
               required>
             <label class="form__image-img" for="validatedCustomFile2">
               <figure class="image_to_preview_container">
-                <img src="{{ post.frontphoto }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ post.frontphoto }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_img2" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
                 <strong>Desktop slider photo:</strong> <br /> 
-                *La imagen deberá de ser de 1920 x 1080px.
+                <span class="color-red" *ngIf="form_watcher.no_img2">
+                  Desktop slider photo is required <br />
+                </span>
+                *Image resolution 1920x1080px.
               </span>
             </label>
           </div>
@@ -309,12 +335,18 @@
               required>
             <label class="form__image-img" for="validatedCustomFile3">
               <figure class="image_to_preview_container">
-                <img src="{{ post.build }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ post.build }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_img0" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
                 <strong>Desktop amenity ubication:</strong> <br /> 
-                *La imagen deberá de ser de 256 x 396px.
+                <span class="color-red" *ngIf="form_watcher.no_img0">
+                  Desktop amenity ubication is required <br />
+                </span>
+                *Image resolution 256x396px.
               </span>
             </label>
           </div>
@@ -329,12 +361,18 @@
               required>
             <label class="form__image-img" for="validatedCustomFile4">
               <figure class="image_to_preview_container">
-                <img src="{{ post.buildmobile }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ post.buildmobile }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_img1" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
                 <strong>Mobile slider photo:</strong> <br /> 
-                *La imagen deberá de ser de 441 x 660px.
+                <span class="color-red" *ngIf="form_watcher.no_img1">
+                  Mobile slider photo is required <br />
+                </span>
+                *Image resolution 441x660px.
               </span>
             </label>
           </div>
@@ -349,11 +387,17 @@
               required>
             <label class="form__image-img" for="validatedCustomFile5">
               <figure class="image_to_preview_container">
-                <img src="{{ post.photomobile }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ post.photomobile }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_img3" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
                 <strong>Mobile amenity photo:</strong> <br /> 
+                <span class="color-red" *ngIf="form_watcher.no_img3">
+                  Mobile amenity photo is required <br />
+                </span>
                 *La imagen deberá de ser de 441 x 660px.
               </span>
             </label>

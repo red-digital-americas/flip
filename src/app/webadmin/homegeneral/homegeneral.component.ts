@@ -5,6 +5,8 @@ import { DatosService } from '../../../datos.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
 import { ImageCropperModule, ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
+import { SystemMessage } from '../../../ts/systemMessage';
+import { LoaderComponent } from '../../../ts/loader';
 
 @Component({
   selector: 'app-homegeneral',
@@ -177,6 +179,7 @@ export class HomegeneralComponent implements OnInit {
    passdata( post:any ){
 
     this.general_data.id = post.id;
+    this.general_data.title = post.title;
     this.general_data.Description = post.desc;
     this.general_data.Photo = post.frontphoto;
     this.general_data.PhotoMobile = post.photomobile;
@@ -200,53 +203,73 @@ serv(id?: number) {
 this.router.navigate(['webadmin/homeservices/' + id])
 }
    
+   public system_message: SystemMessage = new SystemMessage();
+   public loader: LoaderComponent = new LoaderComponent();
    public general_data: GeneralData = new GeneralData();
-   updatephoto() {
-    //if(this.imageInputLabel!="Choose file"){
+   public updatephoto():void {
 
-    //if(this.imageInputLabeltwo!="Choose file"){
-     //debugger;
+    const close_modal: any = document.getElementById('close_modal');
+
     var creadoobj = { 
       id: this.general_data.id, 
+      title: this.general_data.title,
       Photo: this.general_data.Photo, 
       PhotoMobile: this.general_data.PhotoMobile, 
       Description: this.general_data.Description
     };
 
-    console.log('=======> ', this.general_data );
-    //debugger;
+    if( this.formValidator( this.general_data ) ) {
 
-    this.heroService.ServicioPostPost("UpdateHomeGeneral", creadoobj).subscribe((value) => {
+      this.loader.showLoader();
 
+      this.heroService.ServicioPostPost("UpdateHomeGeneral", creadoobj)
+          .subscribe( (response: any) => {
 
-      switch (value.result) {
-        case "Error":
-          console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-         this.showError(); 
-          break;
-        default:
-          //debugger;
-          if (value.result == "Success") {
-            this.get_photos();
-            this.postphoto=[]; 
-            this.postphoto.push("assets/img/Coliving.jpg");
-            this.imageInputLabel="Choose file";
-            
-              this.imageInputLabeltwo="Choose file";
-              this.title="";
-              this.direction="";
-              //this.primaryModal.hide();
+            if( response.result == 'Success' ) {
 
-            this.showSuccess();
+              this.system_message.showMessage({
+                kind: 'ok',
+                time: 4700,
+                message: {
+                  header: 'Content updated',
+                  text: 'Content has been updated successfully'
+                }
+              });
 
+              close_modal.click();
+              this.get_photos();
 
+              setTimeout( () => this.loader.hideLoader(),777);
 
             }
+
+          }, (error: any) => {
+
+            this.system_message.showMessage({
+              kind: 'error',
+              time: 4700,
+              message: {
+                header: 'Fatal Error',
+                text: 'Error Fatal'
+              }
+            });
+
+          });
+
+    } else {
+
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 4700,
+        message: {
+          header: 'Form must be completed',
+          text: 'All inputs must be filled to continue'
         }
-      });    
-    //} else { alert("Sube la imagen móvil, por favor ") }
-  
-  //} else { this.showWarning(); }
+      });
+
+      this.sendToPageTop();
+
+    }   
 
   }
    
@@ -414,10 +437,52 @@ this.router.navigate(['webadmin/homeservices/' + id])
 
   }
 
+  public form_watcher = {
+    no_titl: false,
+    no_desc: false,
+    no_img0: false,
+    no_img1: false
+  }
+  public formValidator( form_data: GeneralData ):boolean {
+
+      let resuslt: boolean = false;
+
+      form_data.title == null || form_data.title == '' ? 
+        this.form_watcher.no_titl = true : this.form_watcher.no_titl = false; 
+
+      form_data.Description == null || form_data.Description == '' ? 
+        this.form_watcher.no_desc = true : this.form_watcher.no_desc = false; 
+
+      form_data.Photo == null || form_data.Photo == '' ? 
+        this.form_watcher.no_img0 = true : this.form_watcher.no_img0 = false; 
+
+      form_data.PhotoMobile == null || form_data.PhotoMobile == '' ? 
+        this.form_watcher.no_img1 = true : this.form_watcher.no_img1 = false; 
+
+      for( const dato in this.form_watcher ) {
+
+        if( this.form_watcher[dato] ) return false;
+        else resuslt = true;
+
+      }
+
+      return resuslt;
+
+  }
+
+  public sendToPageTop():void {
+
+    const modal_page: any = document.getElementById('modal-fw');
+
+          modal_page.scrollTo(0,0);
+
+  }
+
 }
 
 class GeneralData {
   id: number;
+  title: string;
   Photo: string;
   PhotoMobile: string;
   Description: string;

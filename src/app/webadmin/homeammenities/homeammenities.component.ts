@@ -278,14 +278,7 @@ export class HomeammenitiesComponent implements OnInit {
   public system_message = new SystemMessage();
   updatephoto() {
 
-    //if (this.imageInputLabel != "Choose file" && 
-        //this.imageInputLabeltwo != "Choose file" && 
-        //this.imageInputLabelthree != "Choose file" && 
-        //this.imageInputLabelfive != "Choose file") {
-
-      //if (this.imageInputLabelfour != "Choose file" && this.imageInputLabelsix != "Choose file") {
-
-        var creadoobj = { 
+        let creadoobj = { 
           id: this.post.id, 
           Photo: this.post.frontphoto, 
           PhotoMobile: this.post.photomobile, 
@@ -296,15 +289,6 @@ export class HomeammenitiesComponent implements OnInit {
           PhotoBuild: this.post.build, 
           PhotoBuilMobile: this.post.buildmobile
         };
-    
-        console.log('=======> ', creadoobj);
-        //debugger;
-        /**  post.Photo = item.Photo;
-                              post.Description = item.Description;
-                              post.PhotoMobile = item.PhotoMobile;
-                              post.Icon = item.Icon;
-                              post.PhotoBuild = item.PhotoBuild;
-                              post.PhotoBuilMobile = item.PhotoBuilMobile; */
 
         if( this.formValidator( this.post ) ) {
 
@@ -344,10 +328,14 @@ export class HomeammenitiesComponent implements OnInit {
                 });
 
                 setTimeout( () => this.loader.hideLoader(), 777);
+
+                this.get_photos();
                   
               });
 
-        } else this.system_message.showMessage({
+        } else {
+
+          this.system_message.showMessage({
             kind: 'error',
             time: 4700,
             message: {
@@ -355,6 +343,10 @@ export class HomeammenitiesComponent implements OnInit {
               text: 'All inputs must be filled to continue'
             }
           });
+
+          this.sendToPageTop();
+
+        }
       //}
       //else {
 
@@ -485,6 +477,14 @@ export class HomeammenitiesComponent implements OnInit {
 
   }
 
+  public sendToPageTop():void {
+
+    const modal_page: any = document.getElementById('modal-fw');
+
+          modal_page.scrollTo(0,0);
+
+  }
+
   /*
    * Autor: Carlos Hernandez Hernandez
    * Contacto: carlos.hernandez@minimalist.com
@@ -561,10 +561,17 @@ export class HomeammenitiesComponent implements OnInit {
 
                 } else {
 
-                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
                   root_event.value = "";
                   root.postphoto = last_image;
                   placeh_image_data.removeAttribute('src');
+                  root.system_message.showMessage({
+                    kind: 'error',
+                    time: 4700,
+                    message: {
+                      header: 'Image Resolution',
+                      text: 'Image resolution is not acceptable.'
+                    }
+                  });
 
                 }
 

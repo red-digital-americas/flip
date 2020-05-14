@@ -6,6 +6,8 @@
   import { ToasterService, ToasterConfig } from 'angular2-toaster';
   import { Utils } from '../../utils/utils';
   import { ImageCropperModule, ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
+import { SystemMessage } from '../../../ts/systemMessage';
+import { LoaderComponent } from '../../../ts/loader';
 
 @Component({
   selector: 'app-homeservices',
@@ -249,7 +251,7 @@ serv(id?: number) {
      
      public service_data: ServiceData = new ServiceData();
      passdata( post: any ){
-      console.log('That One => ', post);
+       
       this.service_data.id = post.id;
       this.service_data.title = post.title;
       this.service_data.category = post.category;
@@ -258,70 +260,77 @@ serv(id?: number) {
       this.service_data.frontphoto = post.frontphoto;
       this.service_data.photomobile = post.photomobile;
 
-      /*this.PostId = id ; 
-      this.title=tit;
-      this.direction=desc*/
-
      }
   
      
+     public system_message: SystemMessage = new SystemMessage();
+     public loader: LoaderComponent = new LoaderComponent();
      updatephoto() {
 
-      //if(this.imageInputLabel!="Choose file"&&this.imageInputLabeltwo!="Choose file"&&this.imageInputLabelthree!="Choose file"){
+      const close_modal = document.getElementById('close_modal');
 
-      //if(this.imageInputLabelfour!="Choose file"){
-
-      console.log('Here ===> ', this.service_data );
-      var creadoobj = { 
+      let creadoobj = { 
         id: this.service_data.id, 
         Photo: this.service_data.frontphoto, 
         PhotoMobile: this.service_data.photomobile, 
         Category: this.service_data.category, 
-        Description: this.service_data.description,
         Title: this.service_data.title, 
         Icon: this.service_data.icon, 
         Icon2: this.service_data.icon2 
       };
-  /**  post.Photo = item.Photo;
-                        post.Description = item.Description;
-                        post.PhotoMobile = item.PhotoMobile;
-                        post.Icon = item.Icon;
-                        post.PhotoBuild = item.PhotoBuild;
-                        post.PhotoBuilMobile = item.PhotoBuilMobile; */
-      this.heroService.ServicioPostPost("UpdateHomeServicios", creadoobj).subscribe((value) => {
+
+      if( this.formValidator( this.service_data ) ) {
+
+        this.loader.showLoader();
+
+        this.heroService.ServicioPostPost("UpdateHomeServicios", creadoobj)
+            .subscribe( (response: any) => {
+
+              if( response.result == 'Success' ) {
+
+                this.system_message.showMessage({
+                  kind: 'ok',
+                  time: 4700,
+                  message: {
+                    header: 'Content updated',
+                    text: 'Content has been updated successfully'
+                  }
+                });
   
+                close_modal.click();
+                this.get_photos();
   
-        switch (value.result) {
-          case "Error":
-            console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-           this.showError();
-            break;
-          default:
-            //debugger;
-            if (value.result == "Success") {
-              this.get_photos();
-              
-              this.postphoto=[]; 
-              this.postphoto.push("assets/img/Coliving.jpg");
-              this.showSuccess();
-              this.imageInputLabel="Choose file";
-              this.imageInputLabelfour="Choose file";
-              this.imageInputLabelthree="Choose file";
-              this.imageInputLabeltwo="Choose file";
-              this.title="";
-              this.direction="";
+                setTimeout( () => this.loader.hideLoader(),777);
 
+              }
 
+            }, (error: any) => {
 
+              this.system_message.showMessage({
+                kind: 'error',
+                time: 4700,
+                message: {
+                  header: 'Fatal Error',
+                  text: 'Error Fatal'
+                }
+              });
 
+            });
 
+      } else {
 
-            }
-        }
-      });    
-    //} else { alert("Sube la imagen móvil, por favor ") }
+        this.system_message.showMessage({
+          kind: 'error',
+          time: 4700,
+          message: {
+            header: 'Form must be completed',
+            text: 'All inputs must be filled to continue'
+          }
+        });
   
-  //} else { this.showWarning(); }
+        this.sendToPageTop();
+
+      }  
     
 }
   
@@ -486,13 +495,63 @@ serv(id?: number) {
 
   }
 
+  public form_watcher = {
+    no_titl: false,
+    no_cate: false,
+    no_ico0: false,
+    no_ico1: false,
+    no_img0: false,
+    no_img1: false
+  }
+  public formValidator( form_data: ServiceData ):boolean {
+
+      let resuslt: boolean = false;
+
+      form_data.title == null || form_data.title == '' ? 
+        this.form_watcher.no_titl = true : this.form_watcher.no_titl = false; 
+
+      form_data.category == null || form_data.category == '' ? 
+        this.form_watcher.no_cate = true : this.form_watcher.no_cate = false; 
+
+      form_data.icon == null || form_data.icon == '' ? 
+        this.form_watcher.no_ico0 = true : this.form_watcher.no_ico0 = false; 
+
+      form_data.icon2 == null || form_data.icon2 == '' ? 
+        this.form_watcher.no_ico1 = true : this.form_watcher.no_ico1 = false;
+
+      form_data.frontphoto == null || form_data.frontphoto == '' ? 
+        this.form_watcher.no_img0 = true : this.form_watcher.no_img0 = false;
+
+      form_data.photomobile == null || form_data.photomobile == '' ? 
+        this.form_watcher.no_img1 = true : this.form_watcher.no_img1 = false;
+
+      for( const dato in this.form_watcher ) {
+
+        if( this.form_watcher[dato] ) return false;
+        else resuslt = true;
+
+      }
+
+      return resuslt;
+
+  }
+
+  public sendToPageTop():void {
+
+    const modal_page: any = document.getElementById('modal-fw');
+
+          modal_page.scrollTo(0,0);
+
+  }
+
+
+
   }
   
   class ServiceData {
     id: number;
     title: string;
     category: string;
-    description: string;
     icon: string;
     icon2: string;
     frontphoto: string;

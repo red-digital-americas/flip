@@ -11,8 +11,7 @@ export class LoaderComponent {
               new_loader.innerHTML = `
                 <div class="loader__container">
                 <figure class="loader__image">
-                    <img src="../../../assets/flipF.png" class="loader__image-photo" />
-                    <span class="loader__image-spiner"></span>
+                    <img src="https://www.grupovelca.com.mx/images/loading_12.gif?crc=3993585413" class="loader__image-photo" />
                 </figure>
                 </div>
               `;

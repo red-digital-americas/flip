@@ -1,31 +1,3 @@
-<!-- div class="row">
-  <div class="col-md-12">
-    <br />
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <h2><mat-icon><i class="fa fa-building-o" aria-hidden="true"></i></mat-icon> Altata Room <i class="fa fa-angle-down" aria-hidden="true"></i></h2>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="amm(IDBUILD)">
-        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
-        <span>Home Ammenities</span>
-      </button>
-      <button mat-menu-item (click)="gene(IDBUILD)">
-        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
-        <span>Home General</span>
-      </button>
-      <button mat-menu-item (click)="serv(IDBUILD)">
-        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
-        <span>Home Services</span>
-      </button>
-      <button mat-menu-item (click)="room(IDBUILD)">
-        <mat-icon><i class="fa fa-angle-right" aria-hidden="true"></i></mat-icon>
-        <span>Home Room</span>
-      </button>
-    </mat-menu>
-    <br />
-  </div>
-</div -->
-
 <div class="row">
   <div class="ml-col-1 navbar__components">
     <div class="navbar__component ml-col-4">
@@ -50,8 +22,6 @@
     </div>
   </div>
 </div>
-
-
 <div class="row padding-bottom-m padding-general-m">
   <div class="ml-col-1 room-data__tabs text-center">
     <span class="room-data__tab room-data__tab--active" (click)="showSection( $event, 'room_a')">
@@ -61,7 +31,6 @@
       Room B
     </span>
   </div>
-  <!-- Primer section de post  -->
   <div 
     id="room_a" 
     name="room-section"
@@ -145,7 +114,6 @@
       </div>
     </div>
   </div>
-  <!-- Segundo section de post  -->
   <div 
     id="room_b" 
     name="room-section"
@@ -222,7 +190,7 @@
       <div class="ml-col-1 text-center margin-tb-min">
         <button 
           data-toggle="modal" 
-          (click)="primaryModal.show(); passPhotosData(post.photos);"
+          (click)="primaryModal.show(); passPhotosData( photo, post.id );"
           class="button button-x">
           Editar
         </button>
@@ -230,158 +198,7 @@
     </div>
   </div>  
 </div>
-
-<div class="black-box">
-  <img src="" id="image_data" />
-</div>
-
-
-<!-- div class="row">
-  <mat-tab-group style="width:100%;">
-    <mat-tab label="ROOM A">
-      <div class="container-fluid">
-        <br />
-        <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts ">
-          <div class="card ">
-            <div class="card-body ">
-              <div class="btn-group margin-gral col-sm-12 col-md-12">
-                <div class="row">
-                  <div class="col-sm-12 col-md-12">
-                    <strong> Title :  </strong> {{post.title}}
-                  </div>
-                  <div class="col-sm-12 col-md-12">
-                    <strong> Description :  </strong> {{post.desc}}
-                  </div>
-                  <div class="col-sm-12 col-md-12">
-                    <strong> Price :  </strong> {{post.price}}
-                  </div>
-                  <button style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="infoModal.show();passdata(post.id);">
-                    Editar info
-                  </button>
-
-
-                </div>
-
-              </div>
-
-            </div>
-            <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
-
-            </div>
-          </div>
-        </div>
-        <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts ">
-          <div class="card " *ngFor="let photo of post.photos ">
-            <div class="card-body ">
-              <div class="col-sm-12 col-md-12">
-                Photo: <img style="height: 400px; width: 600px;" class="img-size" src="../../../assets/webtmp.png">
-                <img class="img-size" style="
-       position: absolute;
-       left: 56px;
-       height: 375px;
-       width: 475px;
-       top: 22px;" src="{{photo.photo}}">
-              </div>
-              <div class="col-sm-12 col-md-12">
-
-
-                Mobile Photo:
-                <img style="height: 400px; width: 300px;" class="img-size" src="../../../assets/phone.png">
-                <img style="position: absolute;
-                           left: 166px;
-                           height: 293px;
-                           width: 180px;
-                           top: 49px;" class="img-size" src="{{photo.photoMobile}}">
-              </div>
-              <div style="margin-top: 5%;" class="col-sm-12 col-md-12">
-                Icon:<img style="margin: 5%; " class="img-size" src="{{photo.icon}}">
-                Icon Hover :<img style="margin: 5%; " class="img-size" src="{{photo.icon2}}">
-
-              </div>
-
-              <button style="margin: 5%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(photo.id);passnumroom(post.id);">
-                Editar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </mat-tab>
-    <mat-tab label="ROOM B">
-      <br />
-      <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts_b ">
-        <div class="card ">
-          <div class="card-body ">
-            <div class="btn-group margin-gral col-sm-12 col-md-12">
-              <div class="row">
-                <div class="col-sm-12 col-md-12">
-                  <strong> Title :  </strong> {{post.title}}
-                </div>
-                <div class="col-sm-12 col-md-12">
-                  <strong> Description :  </strong> {{post.desc}}
-                </div>
-                <div class="col-sm-12 col-md-12">
-                  <strong> Price :  </strong> {{post.price}}
-                </div>
-                <button style="margin-top: 10%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="infoModal.show();passdata(post.id);">
-                  Editar info
-                </button>
-
-
-              </div>
-
-            </div>
-
-          </div>
-          <div class="chart-wrapper mt-3 mx-3" style="height:20px;">
-
-          </div>
-        </div>
-      </div>
-      <div class=" col-sm-12 col-md-12 " *ngFor="let post of posts_b ">
-        <div class="card " *ngFor="let photo of post.photos ">
-          <div class="card-body ">
-            <div class="col-sm-12 col-md-12">
-              Photo: <img style="height: 400px; width: 600px;" class="img-size" src="../../../assets/webtmp.png">
-              <img class="img-size" style="
-       position: absolute;
-       left: 56px;
-       height: 375px;
-       width: 475px;
-       top: 22px;" src="{{photo.photo}}">
-            </div>
-            <div class="col-sm-12 col-md-12">
-
-
-              Mobile Photo:
-              <img style="height: 400px; width: 300px;" class="img-size" src="../../../assets/phone.png">
-              <img style="position: absolute;
-                           left: 166px;
-                           height: 293px;
-                           width: 180px;
-                           top: 49px;" class="img-size" src="{{photo.photoMobile}}">
-            </div>
-            <div style="margin-top: 5%;" class="col-sm-12 col-md-12">
-              Icon:<img style="margin: 5%; " class="img-size" src="{{photo.icon}}">
-              Icon Hover :<img style="margin: 5%; " class="img-size" src="{{photo.icon2}}">
-
-            </div>
-
-            <button style="margin: 5%;" type="button" class="btn btn-primary margin-gral " data-toggle="modal" (click)="primaryModal.show();passdata(photo.id);passnumroom(post.id);">
-              Editar
-            </button>
-          </div>
-        </div>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-</div -->
-
-
-
-
-<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div bsModal #primaryModal="bs-modal" class="modal fade modal-fw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -390,10 +207,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
       <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
-          <div class="form__image">
+          <div class="form__image form__image--fix">
             <input 
               class="display-none"
               type="file" 
@@ -404,16 +220,22 @@
               required>
             <label class="form__image-img" for="validatedCustomFile0">
               <figure class="image_to_preview_container">
-                <img src="{{ photos_data.icon }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ photos_data.icon }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher_b.no_ico0" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
                 <strong>Icon Default:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <span class="color-red" *ngIf="form_watcher_b.no_ico0">
+                  Icon Default is required <br />
+                </span>
+                *Image resolution 350x350px.
               </span>
             </label>
           </div>
-          <div class="form__image">
+          <div class="form__image form__image--fix">
             <input 
               class="display-none"
               type="file" 
@@ -424,128 +246,83 @@
               required>
             <label class="form__image-img" for="validatedCustomFile1">
               <figure class="image_to_preview_container">
-                <img src="{{ photos_data.icon2 }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ photos_data.icon2 }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher_b.no_ico1" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
-                <strong>Icon Default:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <strong>Icon Hover:</strong> <br /> 
+                <span class="color-red" *ngIf="form_watcher_b.no_ico1">
+                  Icon Hover is required <br />
+                </span>
+                *Image resolution 350x350px.
               </span>
             </label>
           </div>
-          <div class="form__image">
+          <div class="form__image form__image--fix">
             <input 
               class="display-none"
               type="file" 
               name="image_i3_selected"
               accept="image/*"
-              (change)="readImageData($event, '350x350', 2);"
+              (change)="readImageData($event, '1920x1080', 2);"
               id="validatedCustomFile2" 
               required>
             <label class="form__image-img" for="validatedCustomFile2">
               <figure class="image_to_preview_container">
-                <img src="{{ photos_data.Photo }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ photos_data.Photo }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher_b.no_img0" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
-                <strong>Icon Default:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <strong>Desktop Photo:</strong> <br /> 
+                <span class="color-red" *ngIf="form_watcher_b.no_img0">
+                  Desktop Photo is required <br />
+                </span>
+                *Image resolution 1920x1080px.
               </span>
             </label>
           </div>
-          <div class="form__image">
+          <div class="form__image form__image--fix">
             <input 
               class="display-none"
               type="file" 
               name="image_i4_selected"
               accept="image/*"
-              (change)="readImageData($event, '350x350', 3);"
+              (change)="readImageData($event, '441x660', 3);"
               id="validatedCustomFile3" 
               required>
             <label class="form__image-img" for="validatedCustomFile3">
               <figure class="image_to_preview_container">
-                <img src="{{ photos_data.PhotoMobile }}" class="image_to_preview placeholder_image" />
+                <img 
+                  src="{{ photos_data.PhotoMobile }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher_b.no_img1" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
                 <strong>Icon Default:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <span class="color-red" *ngIf="form_watcher_b.no_img1">
+                  Desktop Photo is required <br />
+                </span>
+                *Image resolution 441x660px.
               </span>
             </label>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+          <button type="button" style="z-index: 9999;" id="close_album" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
           <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios </button>
         </div>
       </form>
-
-      <!-- form #loginForm="ngForm" autocomplete="off">
-        <div class="modal-body">
-          Imagen   la resolución debe de ser 1920px*1080px:
-          <div class="custom-file margin-gral ">
-            <input type="file" accept="image/*" class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event,0);" />
-
-
-            <div>
-              <image-cropper [imageChangedEvent]="imageChangedEvent"
-                             [maintainAspectRatio]="true"
-                             [aspectRatio]="1/ 2"
-                             [resizeToWidth]="600"
-                             [cropperMinWidth]="128"
-                             [onlyScaleDown]="true"
-                             [roundCropper]="false"
-                             format="png"
-                             outputType="both"
-                             imageQuality="100"
-                             (imageCropped)="imageCropped($event)"
-                             (imageLoaded)="imageLoaded()"
-                             (cropperReady)="cropperReady()"
-                             (loadImageFailed)="loadImageFailed()"
-                             [style.display]="showCropper ? null : 'none'"></image-cropper>
-              Mobile Image:  <img style="width:25%;  margin-bottom: 50%; " [src]="croppedImage" />
-
-
-              <button type="button" class="btn btn-dark" (click)="uploadAttachmentToServer(1)">Subir Imagen </button>
-
-            </div>
-
-            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-
-          </div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <div class="col-lg-12">
-            Icon, la resolución debe de ser 50px * 50px:
-
-            <div class="custom-file margin-gral ">
-              <input type="file" accept="image/*"
-                     (change)="prepareImages($event,2);" class="custom-file-input" id="validatedCustomFile">
-              <label class="custom-file-label" for="customFile">{{imageInputLabelicon}}</label>
-            </div>
-
-            Icon Hover, la resolución debe de ser 50px * 50px:
-            <div class="custom-file margin-gral ">
-              <input type="file" accept="image/*"
-                     (change)="prepareImages($event,3);" class="custom-file-input" id="validatedCustomFile">
-              <label class="custom-file-label" for="customFile">{{imageInputLabelicon2}}</label>
-            </div>
-          </div>
-        </div>
-        
-      </form -->
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-
-
-<div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    </div>
+  </div>
+</div>
+<div bsModal #infoModal="bs-modal" class="modal fade modal-fw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -554,11 +331,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
-
       <div class="form">
         <form #loginForm="ngForm" autocomplete="off">
-          <div class="ml-col-1 custom-input margin-top-m">
+          <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
             <input 
               type="text"
               class="custom-input__text" 
@@ -566,69 +341,59 @@
               id="room_titulo" 
               placeholder="Nombre" 
               [(ngModel)]="room_data.Title"
+              [class.custom-input__text--error]="form_watcher.no_titl"
               required />
-            <label class="custom-input__label" for="room_titulo">
+            <label class="custom-input__label custom-input__label--active" for="room_titulo">
               Title
             </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
+              Title is required
+            </span>
           </div>
-          <div class="ml-col-1 custom-input">
+          <div class="ml-col-1 custom-input margin-bottom-x">
             <textarea 
               [(ngModel)]="room_data.Description"
               class="custom-input__textarea" 
               name="room_desc" 
               id="room_desc" 
+              [class.custom-input__textarea--error]="form_watcher.no_desc"
               placeholder="Description" 
               required></textarea>
-            <label class="custom-input__label" for="room_desc">
+            <label class="custom-input__label custom-input__label--active" for="room_desc">
               Description
             </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
+              Description is required
+            </span>
           </div>
-          <div class="ml-col-1 custom-input">
+          <div class="ml-col-1 custom-input margin-bottom-x">
             <input 
               type="number"
               min="0"
               class="custom-input__text" 
               name="room_serv" 
               id="room_serv" 
-              placeholder="Nombre" 
+              placeholder="Price" 
               [(ngModel)]="room_data.Price"
+              [class.custom-input__text--error]="form_watcher.no_pric"
               required />
-            <label class="custom-input__label" for="room_serv">
+            <label class="custom-input__label custom-input__label--active" for="room_serv">
               Price
             </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_pric">
+              Price is required
+            </span>
           </div>
           <div class="modal-footer">
-            <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="infoModal.hide()">Cerrar</button>
+            <button type="button" style="z-index: 9999;" id="close_room" class="btn btn-secondary" (click)="infoModal.hide()">Cerrar</button>
             <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updateindo()">Guardar Cambios</button>
           </div>
         </form>
       </div>
-
-
-
-      <!-- form #loginForm="ngForm" autocomplete="off">
-
-        <div class="modal-body">
-          <div class="col-12  margin-gral">
-            Title:
-            <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="title" required>
-          </div>
-          <div class="col-12  margin-gral">
-            Description:
-            <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
-          </div>
-          <div class="col-12  margin-gral">
-            Price:
-            <input type="text" [(ngModel)]="price" class="form-control" name="postitle" id="postitle" placeholder="price" required>
-          </div>
-
-
-        </div>
-        
-      </form-->
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
+    </div>
+  </div>
+</div>
+<div class="black-box">
+  <img src="" id="image_data" />
+</div>
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

@@ -65,6 +65,7 @@ select:active,
   float: left;
   position: relative;
   min-height: 400px;
+  display: flex;
 
   @media screen and (max-width: 1024px) {
     width: 33.33%;
@@ -456,9 +457,24 @@ select:active,
   position: relative;
   padding-left: 10px;
   padding-right: 10px;
+  padding-bottom: 20px;
 
-  &:not(:last-child) {
-    padding-bottom: 20px;
+  &__image {
+
+    min-width: 115px;
+    min-height: 115px;
+
+    &--error {
+      border: solid 2px red;
+    }
+
+    &--errorm {
+      color: red;
+      position: absolute;
+      bottom: -5px;
+      font-size: 12px;
+    }
+
   }
 
   &__text {
@@ -476,7 +492,7 @@ select:active,
 
     &--error {
       border-color: red;
-      border-width: 0 0 4px 0;;
+      border-width: 0 0 2px 0;;
     }
 
   }
@@ -495,7 +511,7 @@ select:active,
 
     &--error {
       border-color: red;
-      border-width: 0 0 4px 0;;
+      border-width: 0 0 2px 0;;
     }
 
     &--errorm {
@@ -2266,6 +2282,7 @@ select:active,
     flex-basis: 33.33%;
     flex-grow: 0;
     padding: 20px;
+    display: flex;
   }
 
   &__card {
@@ -2302,6 +2319,15 @@ select:active,
       padding: 10px 5px;
       border-bottom: solid 1px rgba(140,140,140,.2);
       float: left;
+    }
+
+    &-dato {
+      width: 100%;
+      font-size: 12px;
+      text-align: center;
+      padding: 10px 5px;
+      float: left;
+      margin: 0;
     }
 
     &-buttons {
@@ -2777,60 +2803,13 @@ select:active,
     position: relative;
 
     &-photo {
-      width: 50%;
-      height: 50%;
+      width: 100%;
+      height: 100%;
       position: absolute;
       border-radius: 50%;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(1);
-      animation-name: waveLoader;
-      animation-iteration-count: infinite;
-      animation-duration: 7s;
-      animation-timing-function: linear;
-    }
-
-    &-spiner {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: dashed 7px #2e343a;
-      transform: rotate(0deg);
-      animation-name: rotateSpiner;
-      animation-iteration-count: infinite;
-      animation-duration: 5.5s;
-      animation-timing-function: linear;
-    }
-
-    &-spiner::after {
-      content: '';
-      top: 50%;
-      left: 50%;
-      position: absolute;
-      width: 115%;
-      height: 115%;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      border-style: inset;
-      border-width: 5px;
-      border-color: #20a8d8;
-    }
-
-    &-spiner::before {
-      content: '';
-      top: 50%;
-      left: 50%;
-      position: absolute;
-      width: 125%;
-      height: 125%;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      border-style: outset;
-      border-width: 5px;
-      border-color: #f86c6b;
     }
 
   }
@@ -3139,19 +3118,6 @@ select {
 //Animations
 @keyframes seeTheBottomX {
   100% { width: 200px; }
-}
-
-@keyframes waveLoader {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  25% { transform: translate(-50%, -50%) scale(1.2); }
-  50% { transform: translate(-50%, -50%) scale(1); }
-  75% { transform: translate(-50%, -50%) scale(1.4); }
-  100% { transform: translate(-50%, -50%) scale(1); }
-}
-
-@keyframes rotateSpiner {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 
 @keyframes systemMessageIn {

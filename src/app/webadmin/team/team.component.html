@@ -1,4 +1,60 @@
 <div class="ml-col-1 padding-general-m">
+  <div class="col-12" style="padding: 0;">
+    <h2>  Home Menu principal</h2>
+  </div>
+  <div class="row padding-bottom-m">
+    <div class="big-card" *ngFor="let post of posts, index as index;">
+      <div class="card">
+        <div class="card__row">
+          <div class="card__info card__info--reziser">
+            <p class="card__info-dato">
+              <span class="text-bold">Name: </span>
+              {{ post.name }}
+            </p>
+            <p class="card__info-dato">
+              <span class="text-bold">Lastname: </span>
+              {{ post.lastname }}
+            </p>
+            <p class="card__info-dato">
+              <span class="text-bold">Position: </span>
+              {{ post.position }}
+            </p>
+            <p class="card__info-dato">
+              <span class="text-bold">Description: </span>
+              {{ post.desc }}
+            </p>
+            <p class="card__info-dato">
+              <span class="text-bold">Linkedin: </span>
+              {{ post.link }}
+            </p>
+            <p class="card__info-dato">
+              <span class="text-bold">Twitter: </span>
+              {{ post.twitter }}
+            </p>
+          </div>
+        </div>
+        <div class="card__row" id="image_space_{{ index }}">
+          <figure class="card__image card__image--full">
+            <img src="{{post.frontphoto}}" class="card__image-img card__image-img--full" />
+          </figure>
+        </div>
+        <div class="card__row text-center">
+          <button 
+            class="button" 
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata( post );">
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="ml-col-1 padding-general-m display-none">
   <div class="col-12" style="padding:0;">
     <h2>Team Sección </h2>
     <br />

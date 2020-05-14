@@ -5,6 +5,8 @@ import { DatosService } from '../../../datos.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
 import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
+import { SystemMessage } from '../../../ts/systemMessage';
+import { LoaderComponent } from '../../../ts/loader';
 
 @Component({
   selector: 'app-homerooms',
@@ -15,6 +17,9 @@ export class HomeroomsComponent implements OnInit {
 
 
   @ViewChild(ImageCropperComponent, { read: ImageCropperComponent, static: true }) imageCropper: ImageCropperComponent;
+
+  public system_message: SystemMessage = new SystemMessage();
+  public loader: LoaderComponent = new LoaderComponent();
 
   public myModal;
   public largeModal;
@@ -239,25 +244,56 @@ export class HomeroomsComponent implements OnInit {
     };
     //debugger;
 
-    this.heroService.ServicioPostPost("UpdateHomeRooms", creadoobj).subscribe((value) => {
+    if( this.formRoomsValidator( this.room_data ) ) {
 
+      const close_room_button = document.getElementById('close_room'); 
 
-      switch (value.result) {
-        case "Error":
-          console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
+      this.loader.showLoader();
 
-          break;
-        default:
-          //debugger;
-          if (value.result == "Success") {
-            this.get_photos();
-            this.postphoto = [];
+      this.heroService.ServicioPostPost("UpdateHomeRooms", creadoobj)
+          .subscribe( (response: any) => {
 
+            if( response.result == 'Success' ) {
 
+              if( response.result == 'Success' ) {
 
-          }
-      }
-    });
+                this.system_message.showMessage({
+                  kind: 'ok',
+                  time: 4700,
+                  message: {
+                    header: 'Content updated',
+                    text: 'Content has been updated successfully'
+                  }
+                });
+  
+                close_room_button.click();
+                this.get_photos();
+  
+                setTimeout( () => this.loader.hideLoader(),777);
+
+              }
+
+            }
+
+          }, (error: any) => {
+
+          });
+
+    } else {
+
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 4700,
+        message: {
+          header: 'Form must be completed',
+          text: 'All inputs must be filled to continue'
+        }
+      });
+
+      this.sendToPageTop();
+
+    }
+
   }
 
   gotonewsfeed(id?: number) {
@@ -290,12 +326,6 @@ export class HomeroomsComponent implements OnInit {
 
   updatephoto() {
 
-    console.log('Here => ', this.photos_data );
-    //debugger;
-    //if (this.imageInputLabel != "Choose file") {
-
-      //if (this.imageInputLabeltwo != "Choose file") {
-
         var creadoobj = { 
           id: this.photos_data.id, 
           Photo: this.photos_data.Photo, 
@@ -305,42 +335,54 @@ export class HomeroomsComponent implements OnInit {
           IdCommunitiesRoomWeb: this.photos_data.IdCommunitiesRoomWeb 
         };
 
-        this.heroService.ServicioPostPost("UpdateHomeRoomphoto", creadoobj).subscribe((value) => {
+        if( this.formPhotosValidator( this.photos_data ) ) {
 
-          switch (value.result) {
-            case "Error":
-              console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-              this.showError();
-              break;
-            default:
-              //debugger;
-              if (value.result == "Success") {
-                this.get_photos();
+          const close_album_button = document.getElementById('close_album');
 
-                this.postphoto = [];
-                this.postphoto.push("assets/img/Coliving.jpg");
-                this.showSuccess();
-                this.imageInputLabel = "Choose file";
-                this.imageInputLabelfour = "Choose file";
-                this.imageInputLabelthree = "Choose file";
-                this.imageInputLabeltwo = "Choose file";
-                this.imageInputLabelicon = "Choose file";
-                this.imageInputLabelicon2 = "Choose file";
-                this.title = "";
-                this.direction = "";
-                // window.location.reload();
+          this.loader.showLoader();
+
+          this.heroService.ServicioPostPost("UpdateHomeRoomphoto", creadoobj)
+              .subscribe( (response: any) => {
+
+                if( response.result == 'Success' ) {
+
+                  this.system_message.showMessage({
+                    kind: 'ok',
+                    time: 4700,
+                    message: {
+                      header: 'Content updated',
+                      text: 'Content has been updated successfully'
+                    }
+                  });
+    
+                  close_album_button.click();
+                  this.get_photos();
+    
+                  setTimeout( () => this.loader.hideLoader(),777);
+
+                }
+
+              }, (error: any) => {
 
 
 
+              });
 
+        } else {
 
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 4700,
+            message: {
+              header: 'Form must be completed',
+              text: 'All inputs must be filled to continue'
+            }
+          });
+    
+          this.sendToPageTop();
 
-              }
-          }
-        });
-      //} else { alert("Sube la imagen móvil, por favor ") }
+        }
 
-    //} else { this.showWarning(); }
   }
 
 
@@ -554,6 +596,79 @@ export class HomeroomsComponent implements OnInit {
 
   }
 
+  public form_watcher = {
+    no_titl: false,
+    no_desc: false,
+    no_pric: false
+  }
+  public formRoomsValidator( form_data: RoomModel ):boolean {
+
+      let resuslt: boolean = false;
+
+      form_data.Title == null || form_data.Title == '' ? 
+        this.form_watcher.no_titl = true : this.form_watcher.no_titl = false; 
+
+      form_data.Description == null || form_data.Description == '' ? 
+        this.form_watcher.no_desc = true : this.form_watcher.no_desc = false; 
+
+      form_data.Price == null ? 
+        this.form_watcher.no_pric = true : this.form_watcher.no_pric = false; 
+
+      for( const dato in this.form_watcher ) {
+
+        if( this.form_watcher[dato] ) return false;
+        else resuslt = true;
+
+      }
+
+      return resuslt;
+
+  }
+
+  public form_watcher_b = {
+    no_ico0: false,
+    no_ico1: false,
+    no_img0: false,
+    no_img1: false
+  }
+  public formPhotosValidator( form_data: PhotosModelData ):boolean {
+
+    let result: boolean = false;
+
+    form_data.icon == null || form_data.icon == '' ? 
+        this.form_watcher_b.no_ico0 = true : this.form_watcher_b.no_ico0 = false; 
+
+    form_data.icon2 == null || form_data.icon2 == '' ? 
+      this.form_watcher_b.no_ico1 = true : this.form_watcher_b.no_ico1 = false; 
+
+    form_data.Photo == null || form_data.Photo == '' ? 
+      this.form_watcher_b.no_img0 = true : this.form_watcher_b.no_img0 = false; 
+
+    form_data.PhotoMobile == null || form_data.PhotoMobile == '' ? 
+      this.form_watcher_b.no_img1 = true : this.form_watcher_b.no_img1 = false;
+
+    for( const dato in this.form_watcher_b ) {
+
+      if( this.form_watcher_b[dato] ) return false;
+      else result = true;
+
+    }
+
+    return result;
+
+  }
+
+  public sendToPageTop():void {
+
+    const modal_page: any = document.getElementsByClassName('modal-fw');
+
+          modal_page.forEach( (modal: any) => {
+
+            modal.scrollTo(0,0);
+
+          });
+
+  }
 
 }
 

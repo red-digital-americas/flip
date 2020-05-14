@@ -1,11 +1,52 @@
-<div class="col-12" style="padding:0;">
-  <br />
-  <h2>Prensa</h2>
-  <br />
+<div class="ml-col-1 padding-general-m">
+  <div class="col-12" style="padding: 0;">
+    <h2>Press</h2>
+  </div>
+  <div class="row padding-bottom-m">
+    <div class="big-card" *ngFor="let post of posts, index as index;">
+      <div class="card">
+        <div class="card__row">
+          <div class="card__info card__info--reziser">
+            <p class="card__info-dato">
+              <span class="text-bold">Title: </span>
+              {{ post.title }}
+            </p>
+            <p class="card__info-dato">
+              <span class="text-bold">Short Resume: </span>
+              {{ post.reusme }}
+            </p>
+            <p class="card__info-dato">
+              <span class="text-bold">Short Resume: </span>
+              {{ post.longresume }}
+            </p>
+          </div>
+        </div>
+        <div class="card__row" id="image_space_{{ index }}">
+          <figure class="card__image card__image--full">
+            <img src="{{ post.photo }}" class="card__image-img card__image-img--full" />
+          </figure>
+        </div>
+        <div class="card__row text-center">
+          <button 
+            class="button" 
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata( post );">
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
-<div class="row">
+
+<div class="row display-none">
+  <div class="col-12" style="padding:0;">
+    <br />
+    <h2>Prensa</h2>
+    <br />
+  </div>
   <div class="col-md-3" *ngFor="let post of posts; let i = index">
     <mat-card *ngIf="i!=12" style="height: 600px; margin-bottom:15px;">
       <div class="col-sm-12 col-md-12" style="padding:0;">
@@ -19,25 +60,21 @@
         <p><strong> Long Resume :  </strong> {{post.longresume}}</p>
         <br>
       </div>
-
       <div class="col-md-12" style="text-align:center">
         <button type="button" class="btn btn-primary col-12" data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title, post.reusme, post.longresume);">
           Editar
         </button>
       </div>
     </mat-card>
-
-
-
     <mat-card *ngIf="i==12" style="background-color: #f8cd58;height: 600px; margin-bottom:15px;">
       <div class="col-sm-12 col-md-12" style="padding:0;">
         PRESS
       </div>
-    </mat-card><!--/.row-->
+    </mat-card>
   </div>
 </div>
 
-<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div bsModal #primaryModal="bs-modal" class="modal fade modal-fw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -49,38 +86,92 @@
 
       <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
-          <div class="col-12  margin-gral">
-            Title:
-            <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
+          <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="room_titulo" 
+              id="room_titulo" 
+              placeholder="Title" 
+              [(ngModel)]="press_data.Title"
+              [class.custom-input__text--error]="form_watcher.no_titl"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="room_titulo">
+              Title
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
+              Title is required
+            </span>
           </div>
-          <div class="col-12  margin-gral">
-            Short Resume:
-            <input type="text" [(ngModel)]="shortresume" class="form-control" name="shr" id="shr" placeholder="Long Desc" required>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="room_titulo" 
+              id="room_titulo" 
+              placeholder="Short Description" 
+              [(ngModel)]="press_data.Resume"
+              [class.custom-input__text--error]="form_watcher.no_sdes"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="room_titulo">
+              Short Description
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_sdes">
+              Short Description is required
+            </span>
           </div>
-          <div class="col-12  margin-gral">
-            Long Resume:
-            <input type="text" [(ngModel)]="longresume" class="form-control" name="lng" id="lng" placeholder="ShortDesc" required>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <textarea 
+              class="custom-input__textarea" 
+              name="room_desc" 
+              id="room_desc" 
+              [(ngModel)]="press_data.LongResumen"
+              [class.custom-input__textarea--error]="form_watcher.no_ldes"
+              placeholder="Long Description" 
+              required></textarea>
+            <label class="custom-input__label custom-input__label--active" for="room_desc">
+              Long Description
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_ldes">
+              Long Description is required
+            </span>
           </div>
-          La imagen de la noticia  deberá de ser de 600px * 600px
-          <div class="custom-file margin-gral ">
-
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-
+          <div class="form__image form__image--fix">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_i4_selected"
+              accept="image/*"
+              (change)="readImageData($event, '441x660', 0);"
+              id="validatedCustomFile3" 
+              required>
+            <label class="form__image-img" for="validatedCustomFile3">
+              <figure class="image_to_preview_container">
+                <img 
+                  src="{{ press_data.Photo }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_phot" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Desktop Photo :</strong> <br /> 
+                <span class="color-red" *ngIf="form_watcher.no_phot">
+                  Desktop Photo is required <br />
+                </span>
+                *Image resolution 441x660px.
+              </span>
+            </label>
           </div>
-
         </div>
       </form>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-        <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
+        <button type="button" class="btn btn-secondary" id="close_modal" (click)="primaryModal.hide()">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-
-
+    </div>
+  </div>
+</div>
+<div class="black-box">
+  <img src="" id="image_data" />
+</div>
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

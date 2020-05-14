@@ -1,31 +1,34 @@
 <div class="ml-col-1 padding-general-m">
   <div class="col-12" style="padding:0;">
-    <h2>  Design Principal</h2>
+    <h2>Design Principal</h2>
     <br />
   </div>
-  <div class="row">
-    <div class=" col-sm-6 col-md-6 " *ngFor="let post of posts">
-      <mat-card style="text-align:center; margin-bottom:15px;">
-        <a style="cursor:pointer; color:inherit">
-  
-          <div class="card-body">
-            <img class="img-size-build" src="{{post.frontphoto}}" />
+  <div class="row padding-bottom-m">
+    <div class="index-cards__container" *ngFor="let post of posts;">
+      <div class="index-cards__card card-style">
+          <figure class="index-cards__card-photo">
+              <img 
+                  src="{{ post.frontphoto == '' ? '../../../assets/14.jpg' : post.frontphoto }}" 
+                  class="index-cards__card-photo-img" />
+          </figure>
+          <h4 class="index-cards__card-titulo">
+              {{ post.posdesc }}
+          </h4>
+          <p class="ndex-cards__card-titulo text-center">
+             {{ post.desc }}
+          </p>
+          <div class="index-cards__card-buttons">
+              <button 
+                  (click)="primaryModal.show(); passdata( post );"
+                  class="index-cards__card-buttons-button button-blue">
+                  Edit
+              </button>
           </div>
-          <div class="card-footer">
-            Section : {{post.posdesc}}
-            <br>
-            Description: {{post.desc}}
-          </div>
-        </a>
-        <button style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id);">
-          Editar
-        </button>
-      </mat-card>
+      </div>
     </div>
   </div>
 </div>
-
-<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div bsModal #primaryModal="bs-modal" class="modal fade modal-fw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -34,33 +37,77 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form #loginForm="ngForm" autocomplete="off">
-        <div class="modal-body">
-          *La imagen deberá de ser de 1920px * 1080px;
-          <div class="custom-file margin-gral ">
-
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
-            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-
+      <div class="form">
+        <form #loginForm="ngForm" autocomplete="off">
+          <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="room_titulo" 
+              id="room_titulo" 
+              placeholder="Category" 
+              [(ngModel)]="desing_data.PositionDescription"
+              [class.custom-input__text--error]="form_watcher.no_titl"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="room_titulo">
+              Category
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
+              Category is required
+            </span>
           </div>
-          <div class="col-12  margin-gral">
-            Category:
-            <input type="text" [(ngModel)]="posdesc" class="form-control" name="postitle" id="postitle" placeholder="Name" required>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <textarea 
+              class="custom-input__textarea" 
+              name="room_desc" 
+              id="room_desc" 
+              [(ngModel)]="desing_data.Description"
+              [class.custom-input__textarea--error]="form_watcher.no_desc"
+              placeholder="Description" 
+              required></textarea>
+            <label class="custom-input__label custom-input__label--active" for="room_desc">
+              Description
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
+              Description is required
+            </span>
           </div>
-          <div class="col-12  margin-gral">
-            Description:
-            <input type="text" [(ngModel)]="desc" class="form-control" name="postitle" id="postitle" placeholder="Desc" required>
+          <div class="form__image form__image--fix">
+            <input 
+              class="display-none"
+              type="file" 
+              name="image_i4_selected"
+              accept="image/*"
+              (change)="readImageData($event, '1920x1080', 0);"
+              id="validatedCustomFile3" 
+              required>
+            <label class="form__image-img" for="validatedCustomFile3">
+              <figure class="image_to_preview_container">
+                <img 
+                  src="{{ desing_data.Photo }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_img0" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Desktop Photo :</strong> <br /> 
+                <span class="color-red" *ngIf="form_watcher.no_img0">
+                  Desktop Photo is required <br />
+                </span>
+                *Image resolution 1920x1080px.
+              </span>
+            </label>
           </div>
-        </div>
-      </form>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar </button>
-        <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
+        </form>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="close_modal" (click)="primaryModal.hide()">Cerrar </button>
+        <button type="button" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black-box">
+  <img src="" id="image_data" />
+</div>
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

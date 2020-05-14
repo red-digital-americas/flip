@@ -198,7 +198,6 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("id", value.user.id);
               localStorage.setItem("buildingid", value.user.buildingId);
               localStorage.setItem("SystemTypeId", value.user.systemTypeId);
-              setTimeout( () => this.loader.hideLoader(), 1777);
               this.system_message.showMessage({
                 kind: 'ok',
                 message: {
@@ -207,7 +206,8 @@ export class LoginComponent implements OnInit {
                 },
                 time: 2000
               });  ;
-              this.showSuccess();       
+              this.showSuccess(); 
+              setTimeout( () => this.loader.hideLoader(), 2200);      
             }
         }
       
