@@ -138,11 +138,11 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_i4_selected"
               accept="image/*"
-              (change)="readImageData($event, '441x660', 0);"
+              (change)="readImageData($event, '640x450', 0);"
               id="validatedCustomFile3" 
               required>
             <label class="form__image-img" for="validatedCustomFile3">
@@ -158,14 +158,20 @@
                 <span class="color-red" *ngIf="form_watcher.no_phot">
                   Desktop Photo is required <br />
                 </span>
-                *Image resolution 441x660px.
+                *Image resolution 640x450px.
               </span>
             </label>
           </div>
         </div>
       </form>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="close_modal" (click)="primaryModal.hide()">Cerrar</button>
+        <button 
+          type="button" 
+          class="btn btn-secondary"
+          id="close_modal" 
+          (click)="primaryModal.hide(); resetImagesData();">
+          Cerrar
+        </button>
         <button type="button" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
       </div>
     </div>

@@ -263,6 +263,8 @@ export class HomeammenitiesComponent implements OnInit {
   public post: PostObject = new PostObject();
   passdata( post: any ) {
 
+    this.resetImagesData();
+
     this.post.test = post.title;
     this.post.id = post.id;
     this.post.icon = post.icon;
@@ -309,6 +311,8 @@ export class HomeammenitiesComponent implements OnInit {
                       text: 'Content hast been updated successfully'
                     }
                   });
+
+                  this.get_photos();
 
                   setTimeout( () => this.loader.hideLoader(), 777);
 
@@ -485,6 +489,20 @@ export class HomeammenitiesComponent implements OnInit {
 
   }
 
+  public resetImagesData():void {
+
+    const images: any = document.getElementsByClassName('image_form'),
+          name_image: any = document.getElementsByClassName('name_image_uploaded');
+
+          for( let image = images.length; image--; ) {
+
+            images[image].value = '';
+            name_image[image].innerHTML = '';
+
+          }
+
+  }
+
   /*
    * Autor: Carlos Hernandez Hernandez
    * Contacto: carlos.hernandez@minimalist.com
@@ -569,7 +587,7 @@ export class HomeammenitiesComponent implements OnInit {
                     time: 4700,
                     message: {
                       header: 'Image Resolution',
-                      text: 'Image resolution is not acceptable.'
+                      text: 'Image resolution is not valid.'
                     }
                   });
 

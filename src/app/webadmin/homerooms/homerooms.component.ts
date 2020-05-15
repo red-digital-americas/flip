@@ -313,9 +313,11 @@ export class HomeroomsComponent implements OnInit {
   }
 
   public photos_data: PhotosModelData = new PhotosModelData();
-  public passPhotosData( album: any, id: any ):void {
+  public passPhotosData( album: any ):void {
 
-    this.photos_data.id = id;
+    this.resetImagesData();
+
+    this.photos_data.id = album.id;
     this.photos_data.icon = album.icon;
     this.photos_data.icon2 = album.icon2;
     this.photos_data.Photo = album.photo;
@@ -412,7 +414,7 @@ export class HomeroomsComponent implements OnInit {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
       let f = { file: this.newImages[indice], name: this.newImages[indice].name }; {
-        debugger;
+
         if (indice == 0) {
           this.imageInputLabel = f.name;
         }
@@ -579,10 +581,17 @@ export class HomeroomsComponent implements OnInit {
 
                 } else {
 
-                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
                   root_event.value = "";
                   root.postphoto = last_image;
                   placeh_image_data.removeAttribute('src');
+                  root.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                      header: 'Image Resolution',
+                      text: 'Image resolution is not valid'
+                    }
+                  });
 
                 }
 
@@ -667,6 +676,20 @@ export class HomeroomsComponent implements OnInit {
             modal.scrollTo(0,0);
 
           });
+
+  }
+
+  public resetImagesData():void {
+
+    const images: any = document.getElementsByClassName('image_form'),
+          name_image: any = document.getElementsByClassName('name_image_uploaded');
+
+          for( let image = images.length; image--; ) {
+
+            images[image].value = '';
+            name_image[image].innerHTML = '';
+
+          }
 
   }
 

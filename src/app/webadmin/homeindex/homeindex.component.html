@@ -1,7 +1,6 @@
 <div class="ml-col-1 padding-general-m">
   <div class="col-12" style="padding: 0;">
     <h2>  Home Menu principal</h2>
-    <br />
   </div>
   <div class="row padding-bottom-m">
     <div class="big-card" *ngFor="let post of posts, index as index;">
@@ -35,34 +34,6 @@
     </div>
   </div>
 </div>
-  <!-- Codigo fumado -->
-
-  <!-- div class=" col-sm-3 col-md-3" *ngFor="let post of posts">
-    <mat-card style="margin-bottom: 15px;">
-
-      <div class="col-sm-12 col-md-12" style="padding:0;">
-        <strong> Title : </strong>{{post.title}}
-        <br>
-        <strong> Direction :  </strong> {{post.direction}}
-        <br>
-      </div>
-      <a style="cursor:pointer; color:inherit">
-
-        <div class="card-body">
-          <img class="img-size-build" src="{{post.frontphoto}}" />
-        </div>
-      </a>
-      <div class="col-md-12" style="text-align:center;">
-        <button style="margin-top: 10%;" type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show();passdata(post.id, post.title, post.direction);">
-          Editar
-        </button>
-      </div>
-      
-    </mat-card>
-  </div -->
-
-<!-- Termina la pagina que es visible -->
-
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
@@ -72,7 +43,6 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
       <div class="form">
         <form #loginForm="ngForm" autocomplete="off">
           <div class="form__image form__image--full margin-bottom-x">
@@ -135,44 +105,10 @@
           </div>
         </form>
       </div>
-
-      <div class="black-box">
-        <img src="" id="image_data" />
-      </div>
-
-      <!-- form #loginForm="ngForm" autocomplete="off">
-        <div class="modal-body">
-          *La imagen deberá de ser de 288px * 866px;
-          <div class="custom-file margin-gral ">
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-
-          </div>
-          <div class="col-12  margin-gral">
-            Title:
-            <input type="text" [(ngModel)]="title" class="form-control" name="postitle" id="postitle" placeholder="Nombre" required>
-          </div>
-          <div class="col-12  margin-gral">
-            Direction:
-            <input type="text" [(ngModel)]="direction" class="form-control" name="dire" id="dire" placeholder="Desc" required>
-          </div>
-
-          <div class="col-12 margin-gral">
-            Comming:
-            <mat-checkbox [(ngModel)]="comming" name="dire" id="dire"></mat-checkbox>
-          </div>
-        </div>
-      </form>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-        <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
-      </div -->
-      <!--<input type="text" [(ngModel)]="direction" class="form-control" name="dire" id="dire" placeholder="Desc" required>-->
-
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
+    </div>
+  </div>
+</div>
+<div class="black-box">
+  <img src="" id="image_data" />
+</div>
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

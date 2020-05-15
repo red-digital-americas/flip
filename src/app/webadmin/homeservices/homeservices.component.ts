@@ -228,37 +228,42 @@ serv(id?: number) {
     }
   
     get_photos() {
-      // debugger;
-       var creadoobj = { buildingid: 1 , userid: this.IDUSR };
-       //debugger;
-       this.heroService.ServicioPostPost("SeeHomeServicios", creadoobj).subscribe((value) => {
+
+      var creadoobj = { buildingid: 1 , userid: this.IDUSR };
+
+      this.heroService.ServicioPostPost("SeeHomeServicios", creadoobj).subscribe((value) => {
+
+        console.log('Here =========> ', value);
+        console.log( creadoobj );
    
-   
-         switch (value.result) {
-           case "Error":
-             console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-             break;
-           default:
-             //debugger; 
-             if (value.result == "Success") {
-                //debugger;
-               this.posts = value.item;
-             }
-         }
-       });
+        switch (value.result) {
+          case "Error":
+            console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
+            break;
+          default:
+            if (value.result == "Success") {
+              this.posts = value.item;
+            }
+        }
+      });
+
      }
   
      
      public service_data: ServiceData = new ServiceData();
      passdata( post: any ){
+      
+      this.resetImagesData();
        
       this.service_data.id = post.id;
       this.service_data.title = post.title;
       this.service_data.category = post.category;
-      this.service_data.icon = post.icon;
-      this.service_data.icon2 = post.icon2;
+      this.service_data.icon = 'no_service_icon';
+      this.service_data.icon2 = 'no_service_icon';
       this.service_data.frontphoto = post.frontphoto;
       this.service_data.photomobile = post.photomobile;
+
+      this.counter.title = post.title.length;
 
      }
   
@@ -278,6 +283,8 @@ serv(id?: number) {
         Icon: this.service_data.icon, 
         Icon2: this.service_data.icon2 
       };
+
+      console.log('==========> ', creadoobj);
 
       if( this.formValidator( this.service_data ) ) {
 
@@ -379,19 +386,19 @@ serv(id?: number) {
               url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
               this.postphoto[indice]=(url);
 
-              if(indice==0){
+              /*if(indice==0){
                 this.service_data.icon = url;
               }
 
               if(indice==1){
                 this.service_data.icon2 = url;
-              }
+              }*/
 
-              if(indice==2){
+              if(indice==0){
                 this.service_data.frontphoto = url;
               }
 
-              if(indice==3){
+              if(indice==1){
                 this.service_data.photomobile = url;
               }
 
@@ -478,10 +485,17 @@ serv(id?: number) {
 
                 } else {
 
-                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
                   root_event.value = "";
                   root.postphoto = last_image;
                   placeh_image_data.removeAttribute('src');
+                  root.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                      header: 'Image Resolution',
+                      text: 'Image resolution is not valid'
+                    }
+                  });
 
                 }
 
@@ -544,7 +558,28 @@ serv(id?: number) {
 
   }
 
+  public resetImagesData():void {
 
+    const images: any = document.getElementsByClassName('image_form'),
+          name_image: any = document.getElementsByClassName('name_image_uploaded');
+
+          for( let image = images.length; image--; ) {
+
+            images[image].value = '';
+            name_image[image].innerHTML = '';
+
+          }
+
+  }
+
+  public counter = {
+    title: 0
+  }
+  public updateCharactersCount( event_data: any ):void {
+
+      this.counter.title = event_data.target.value.length;
+
+  }
 
   }
   

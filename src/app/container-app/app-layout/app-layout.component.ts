@@ -56,10 +56,38 @@ export class AppLayoutComponent {
     this.navItems = this.menuService.CreateMenu(section.id);
     this.selectedSection = section.id;
     sessionStorage.setItem('lastSectionId', this.selectedSection.toString() );
+    this.addPaddingWidthJS()
   }
 
   salir(): void {
     localStorage.clear();
     window.location.href = "/#/login";    
   }
+
+  public addPaddingWidthJS():void {
+
+    const find_sangrias: any = document.getElementsByClassName('sangria'),
+          reduce: any = document.getElementsByClassName('reduce');
+
+    setTimeout( () => {
+      find_sangrias.forEach( (option: any) => { (function(){
+          const root = option.parentElement;
+          (function(){ root.style.paddingLeft = '10px' }())
+        }());
+      });
+      reduce.forEach( (option: any) => { (function(){
+        const root = option.parentElement;
+        (function(){ root.click() }())
+      }());
+    });
+    }, 177);
+
+  }
+
+  ngOnInit() {
+
+    this.addPaddingWidthJS();
+
+  }
+
 }

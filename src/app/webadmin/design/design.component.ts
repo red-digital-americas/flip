@@ -335,10 +335,17 @@ export class DesignComponent implements OnInit {
 
                 } else {
 
-                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
                   root_event.value = "";
                   root.postphoto = last_image;
                   placeh_image_data.removeAttribute('src');
+                  root.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                      header: 'Image Resolution',
+                      text: 'Image resolution is not valid'
+                    }
+                  });
 
                 }
 
@@ -349,6 +356,20 @@ export class DesignComponent implements OnInit {
           reader.readAsDataURL( file[0] );
 
     }
+
+  }
+
+  public resetImagesData():void {
+
+    const images: any = document.getElementsByClassName('image_form'),
+          name_image: any = document.getElementsByClassName('name_image_uploaded');
+
+          for( let image = images.length; image--; ) {
+
+            images[image].value = '';
+            name_image[image].innerHTML = '';
+
+          }
 
   }
 

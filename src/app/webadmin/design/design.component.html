@@ -1,7 +1,6 @@
 <div class="ml-col-1 padding-general-m">
   <div class="col-12" style="padding:0;">
-    <h2>Design Principal</h2>
-    <br />
+    <h2>Design Section</h2>
   </div>
   <div class="row padding-bottom-m">
     <div class="index-cards__container" *ngFor="let post of posts;">
@@ -74,7 +73,7 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_i4_selected"
               accept="image/*"
@@ -101,7 +100,13 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="close_modal" (click)="primaryModal.hide()">Cerrar </button>
+        <button 
+          type="button" 
+          class="btn btn-secondary" 
+          id="close_modal" 
+          (click)="primaryModal.hide(); resetImagesData();">
+          Cerrar
+        </button>
         <button type="button" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
       </div>
     </div>

@@ -2,22 +2,22 @@
   <div class="ml-col-1 navbar__components">
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button" (click)="amm(IDBUILD)">
-        Home Ammenities
+        Build: Ammenities
       </button>
     </div>
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button" (click)="gene(IDBUILD)">
-        Home General
+        Build: General
       </button>
     </div>
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button navbar__component-button--active" (click)="serv(IDBUILD)">
-        Home Services
+        Build: Services
       </button>
     </div>
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button" (click)="room(IDBUILD)">
-        Home Room
+        Build: Room
       </button>
     </div>
   </div>
@@ -30,12 +30,12 @@
           <span class="text-bold">Titulo: </span> 
           {{ post.title }}
         </p>
-        <p class="card__info-dato">
-          <span class="text-bold">Category: </span> 
+        <p class="card__info-dato margin-bottom-x">
+          <span class="text-bold">Description: </span> 
           {{ post.category }}
         </p>
       </div>
-      <div class="ml-col-1">
+      <!-- div class="ml-col-1">
         <div class="ml-col-1 text-center">
           <div class="icon-view">
             <figure class="icon-view__icon">
@@ -48,7 +48,7 @@
             </figure>
           </div>
         </div>
-      </div>
+      </div -->
       <div class="ml-col-1 images-view">
         <div class="ml-col-7 images-view__section">
           <figure class="images-view__image">
@@ -102,33 +102,38 @@
               id="titulo_home" 
               placeholder="Title" 
               [(ngModel)]="service_data.title"
+              maxlength="14"
+              (keyup)="updateCharactersCount( $event )"
               [class.custom-input__text--error]="form_watcher.no_titl"
               required />
             <label class="custom-input__label custom-input__label--active" for="titulo_home">
               Title
             </label>
-            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
+            <span class="custom-input__text--errorm" *ngIf="form_watcher.no_titl">
               Title is required
+            </span>
+            <span class="custom-input__counter">
+              {{ counter.title }}/14
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-top-m">
-            <input 
+            <textarea 
               type="text"
-              class="custom-input__text" 
+              class="custom-input__textarea" 
               name="titulo_desc" 
               id="titulo_desc" 
               placeholder="Category" 
               [(ngModel)]="service_data.category"
               [class.custom-input__textarea--error]="form_watcher.no_cate"
-              required />
+              required></textarea>
             <label class="custom-input__label custom-input__label--active" for="titulo_desc">
-              Category
+              Description
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_cate">
-              Category is required
+              Description is required
             </span>
           </div>
-          <div class="form__image">
+          <!-- div class="form__image">
             <input 
               class="display-none"
               type="file" 
@@ -153,8 +158,8 @@
                 *Image resolution 350x350px.
               </span>
             </label>
-          </div>
-          <div class="form__image">
+          </div -->
+          <!-- div class="form__image">
             <input 
               class="display-none"
               type="file" 
@@ -179,14 +184,14 @@
                 *Image resolution 350x350px.
               </span>
             </label>
-          </div>
+          </div -->
           <div class="form__image">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_one_selected"
               accept="image/*"
-              (change)="readImageData($event, '1920x1080', 2);"
+              (change)="readImageData($event, '1920x1080', 0);"
               id="validatedCustomFile2" 
               required>
             <label class="form__image-img" for="validatedCustomFile2">
@@ -208,11 +213,11 @@
           </div>
           <div class="form__image">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_one_selected"
               accept="image/*"
-              (change)="readImageData($event, '441x660', 3);"
+              (change)="readImageData($event, '441x660', 1);"
               id="validatedCustomFile3" 
               required>
             <label class="form__image-img" for="validatedCustomFile3">
@@ -235,7 +240,14 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" style="z-index: 9999;" id="close_modal" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+        <button 
+          type="button" 
+          style="z-index: 9999;" 
+          id="close_modal" 
+          class="btn btn-secondary" 
+          (click)="primaryModal.hide(); resetImagesData();">
+          Cerrar
+        </button>
         <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
       </div>
     </div>

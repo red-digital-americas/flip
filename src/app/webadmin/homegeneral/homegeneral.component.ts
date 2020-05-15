@@ -178,6 +178,8 @@ export class HomegeneralComponent implements OnInit {
 
    passdata( post:any ){
 
+    this.resetImagesData();
+
     this.general_data.id = post.id;
     this.general_data.title = post.title;
     this.general_data.Description = post.desc;
@@ -475,6 +477,20 @@ this.router.navigate(['webadmin/homeservices/' + id])
     const modal_page: any = document.getElementById('modal-fw');
 
           modal_page.scrollTo(0,0);
+
+  }
+
+  public resetImagesData():void {
+
+    const images: any = document.getElementsByClassName('image_form'),
+          name_image: any = document.getElementsByClassName('name_image_uploaded');
+
+          for( let image = images.length; image--; ) {
+
+            images[image].value = '';
+            name_image[image].innerHTML = '';
+
+          }
 
   }
 

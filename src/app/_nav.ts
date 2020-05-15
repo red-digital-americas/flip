@@ -9,10 +9,10 @@ export class MenuService {
     { 
       name: 'Main', url: '/webadmin/webadmin', icon: 'icon-globe',
       children: [  
-        { name: 'Index', url: '/webadmin/webadmin', icon: 'icon-docs'}, 
-        { name: 'Desgin Index', url: '/webadmin/designindex', icon: 'icon-tag'}, 
-        { name: 'More Index', url: '/webadmin/moreindex', icon: 'icon-book-open' },
-        { name: 'Communities Index', url: '/webadmin/homeindex/1', icon: 'icon-globe-alt'}
+        { name: 'Index', url: '/webadmin/webadmin', icon: 'icon-docs sangria'}, 
+        { name: 'Desgin Index', url: '/webadmin/designindex', icon: 'icon-tag sangria'}, 
+        { name: 'More Index', url: '/webadmin/moreindex', icon: 'icon-book-open sangria' },
+        { name: 'Communities Index', url: '/webadmin/homeindex/1', icon: 'icon-globe-alt sangria'}
       ]
     },  
     {
@@ -21,16 +21,16 @@ export class MenuService {
         // { name: 'Home Services', url: '/webadmin/homeservices', icon: 'icon-drop' },
         // { name: 'Home Ammenities', url: '/webadmin/homeammenities', icon: 'icon-drop' },
         // { name: 'Home General', url: '/webadmin/homegeneral', icon: 'icon-drop' },
-        { name: 'Builds', url: '/webadmin/homemenu', icon: 'icon-docs' },
+        { name: 'Builds', url: '/webadmin/homemenu', icon: 'icon-docs sangria' },
       ]
     },
     { name: 'Design', type: 1, url: '/webadmin/design', icon: 'icon-grid' },
     {
-      name: 'More', type: 1, url: '/', icon: 'icon-plus',
+      name: 'More', type: 1, url: '/', icon: 'icon-plus reduce',
       children: [  
-        { name: 'Team', url: '/webadmin/team', icon: 'icon-people' },
-        { name: 'Jobs', url: '/webadmin/jobs', icon: 'icon-wrench' },
-        { name: 'Press', url: '/webadmin/press', icon: 'icon-bubbles'}
+        { name: 'Team', url: '/webadmin/team', icon: 'icon-people sangria'},
+        { name: 'Jobs', url: '/webadmin/jobs', icon: 'icon-wrench sangria'},
+        { name: 'Press', url: '/webadmin/press', icon: 'icon-bubbles sangria'}
       ]
     }
   ] 
@@ -43,7 +43,7 @@ export class MenuService {
   private booking = [
     { name: 'Booking', url: '/booking', icon: 'icon-screen-tablet' },
     { name: 'General TenanList', url: '/generalTenantlist', icon: 'icon-list' },
-    { name: ' Add Tenant', url: '/AddTenant', icon: 'icon-user-follow' },
+    { name: 'Add Tenant', url: '/AddTenant', icon: 'icon-user-follow' },
     { name: 'Users', url: '/Users', icon: 'icon-people' },
     { name: 'Roles', url: '/Roles', icon: 'icon-settings' }
   ]

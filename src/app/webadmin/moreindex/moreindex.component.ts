@@ -6,6 +6,7 @@
   import { ToasterService, ToasterConfig } from 'angular2-toaster';
   import { Utils } from '../../utils/utils';
 import { LoaderComponent } from '../../../ts/loader';
+import { SystemMessage } from '../../../ts/systemMessage';
 
 @Component({
   selector: 'app-moreindex',
@@ -14,8 +15,7 @@ import { LoaderComponent } from '../../../ts/loader';
 })
 export class MoreindexComponent implements OnInit {
 
-
-  
+    public system_message: SystemMessage = new SystemMessage();
     
     public myModal;
     public largeModal;
@@ -189,7 +189,14 @@ export class MoreindexComponent implements OnInit {
               
             this.postphoto=""; 
             this.imageInputLabel="Choose file";
-              this.showSuccess();
+            this.system_message.showMessage({
+              kind: 'ok',
+              time: 4777,
+              message: {
+                header: 'Content updated',
+                text: 'Content has been updated successfully'
+              }
+            });
             }
         }
 
@@ -316,11 +323,18 @@ export class MoreindexComponent implements OnInit {
   
                   } else {
   
-                    root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
                     root_event.value = "";
                     root.postphoto = last_image;
                     console.log('Aquiiiii => ', root.postphoto );
                     placeh_image_data.removeAttribute('src');
+                    root.system_message.showMessage({
+                      kind: 'error',
+                      time: 4777,
+                      message: {
+                        header: 'Image Resolution',
+                        text: 'Image Resolution is not valid'
+                      }
+                    });
   
                   }
   

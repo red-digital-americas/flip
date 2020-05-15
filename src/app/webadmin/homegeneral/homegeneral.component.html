@@ -123,7 +123,7 @@
           </div>
           <div class="form__image">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_one_selected"
               accept="image/*"
@@ -149,7 +149,7 @@
           </div>
           <div class="form__image">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_one_selected"
               accept="image/*"
@@ -176,7 +176,14 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" style="z-index: 9999;" id="close_modal" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
+        <button 
+          type="button" 
+          style="z-index: 9999;" 
+          id="close_modal" 
+          class="btn btn-secondary" 
+          (click)="primaryModal.hide(); resetImagesData()">
+          Cerrar
+        </button>
         <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
       </div>
     </div>

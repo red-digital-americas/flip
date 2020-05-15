@@ -5,6 +5,7 @@ import { DatosService } from '../../../datos.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../utils/utils';
 import { LoaderComponent } from '../../../ts/loader';
+import { SystemMessage } from '../../../ts/systemMessage';
 
 @Component({
   selector: 'app-designindex',
@@ -12,6 +13,8 @@ import { LoaderComponent } from '../../../ts/loader';
   styleUrls: ['./designindex.component.scss']
 })
 export class DesignindexComponent implements OnInit {
+
+    public system_message: SystemMessage = new SystemMessage();
     
     public myModal;
     public largeModal;
@@ -141,7 +144,14 @@ export class DesignindexComponent implements OnInit {
               this.get_photos();
               this.postphoto=""; 
               this.imageInputLabel="Choose file";
-              this.showSuccess();
+              this.system_message.showMessage({
+                kind: 'ok',
+                time: 4777,
+                message: {
+                  header: 'Content updated',
+                  text: 'Content has been updated successfully'
+                }
+              });
             }
         }
         
@@ -150,9 +160,6 @@ export class DesignindexComponent implements OnInit {
         setTimeout( () => this.loader.hideLoader(), 777);
 
       });    
-    }
-    else {
-      this.showWarning();
     }
   
     }
@@ -278,10 +285,17 @@ export class DesignindexComponent implements OnInit {
 
                 } else {
 
-                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
                   root_event.value = "";
                   root.postphoto = last_image;
                   placeh_image_data.removeAttribute('src');
+                  root.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                      header: 'Image Resolution',
+                      text: 'Image Resolution is not valid'
+                    }
+                  });
 
                 }
 

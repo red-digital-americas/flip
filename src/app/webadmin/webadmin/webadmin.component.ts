@@ -7,6 +7,7 @@ import { Utils } from '../../utils/utils';
 import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
 import { resolve } from 'dns';
 import { LoaderComponent } from '../../../ts/loader';
+import { SystemMessage } from '../../../ts/systemMessage';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class WebadminComponent implements OnInit {
   public dangerModal;
   public infoModal;
   public loader = new LoaderComponent();
+  public system_message: SystemMessage = new SystemMessage();
 
   constructor(private router: Router,
     private heroService: DatosService,
@@ -125,8 +127,6 @@ export class WebadminComponent implements OnInit {
   
         switch (value.result) {
           case "Error":
-            console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-            this.showError(); 
             break;
           default:
             if (value.result == "Success") {
@@ -137,7 +137,14 @@ export class WebadminComponent implements OnInit {
               this.imageInputLabel="Choose file";
               this.imageInputLabeltwo="Choose file";
 
-              this.showSuccess();
+              this.system_message.showMessage({
+                kind: 'ok',
+                time: 4777,
+                message: {
+                  header: 'Content updated',
+                  text: 'Content has been updated successfully'
+                }
+              });
               //location.reload();
             }
         }
@@ -148,11 +155,6 @@ export class WebadminComponent implements OnInit {
 
       });    
     }
-    else {
-      this.showWarning();
-    }
-  
-
 
   }
 
@@ -303,7 +305,14 @@ export class WebadminComponent implements OnInit {
 
                 } else {
 
-                  root.toasterService.pop('warning', 'Warning Toaster', 'El tamaño de la imagen es incorrecto.');
+                  root.system_message.showMessage({
+                    kind: 'error',
+                    time: 4700,
+                    message: {
+                      header: 'Image Resolution',
+                      text: 'Image Resolution is not valid'
+                    }
+                  });
                   root_event.value = "";
                   root.postphoto = last_image;
                   placeh_image_data.removeAttribute('src');

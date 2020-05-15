@@ -152,7 +152,7 @@
 
 
 
-<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div bsModal #primaryModal="bs-modal" class="modal fade modal-fw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -161,64 +161,153 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+
       <form #loginForm="ngForm" autocomplete="off">
-
-        <div class="modal-body" style="padding:0; margin-bottom:20px;">
-          <br />
-          <div class="col-12  margin-gral" style="margin-bottom:10px">
-            Name:
-            <input type="text" [(ngModel)]="Name" class="form-control" name="posname" id="posname" placeholder="Nombre" required>
+        <div class="modal-body">
+          <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="team_name" 
+              id="team_name" 
+              placeholder="Name" 
+              [(ngModel)]="team_data.Name"
+              [class.custom-input__text--error]="form_watcher.no_name"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="team_name">
+              Name
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_name">
+              Name is required
+            </span>
           </div>
-          <div class="col-12  margin-gral" style="margin-bottom:10px">
-            Lastname:
-            <input type="text" [(ngModel)]="apellido" class="form-control" name="posap" id="posap" placeholder="Apellido" required>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="team_lastname" 
+              id="team_lastname" 
+              placeholder="Lastname" 
+              [(ngModel)]="team_data.LastName"
+              [class.custom-input__text--error]="form_watcher.no_lnam"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="team_lastname">
+              Lastname
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_lnam">
+              Lastname is required
+            </span>
           </div>
-          <div class="col-12  margin-gral" style="margin-bottom:10px">
-            Position:
-            <input type="text" [(ngModel)]="position" class="form-control" name="posi" id="posi" placeholder="Puesto" required>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="team_position" 
+              id="team_position" 
+              placeholder="Position" 
+              [(ngModel)]="team_data.Position"
+              [class.custom-input__text--error]="form_watcher.no_post"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="team_position">
+              Position
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_post">
+              Position is required
+            </span>
           </div>
-          <div class="col-12  margin-gral" style="margin-bottom:10px">
-            Desc:
-            <input type="text" [(ngModel)]="Desc" class="form-control" name="posdesc" id="posdesc" placeholder="Desc" required>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <textarea 
+              class="custom-input__textarea" 
+              name="team_desc" 
+              id="team_desc" 
+              [(ngModel)]="team_data.Description"
+              [class.custom-input__textarea--error]="form_watcher.no_desc"
+              placeholder="Description" 
+              required></textarea>
+            <label class="custom-input__label custom-input__label--active" for="team_desc">
+              Description
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
+              Description is required
+            </span>
           </div>
-          <div class="col-12  margin-gral" style="margin-bottom:10px">
-            Link:
-            <input type="text" [(ngModel)]="Link" class="form-control" name="poslink" id="poslink" placeholder="Linkedin" required>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="team_link" 
+              id="team_link" 
+              placeholder="Linkedin" 
+              [(ngModel)]="team_data.LinkedinUrl"
+              [class.custom-input__text--error]="form_watcher.no_link"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="team_link">
+              Linkedin
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_link">
+              Linkedin is required
+            </span>
           </div>
-          <div class="col-12  margin-gral" style="margin-bottom:10px">
-            Twitter:
-            <input type="text" [(ngModel)]="tt" class="form-control" name="postt" id="postt" placeholder="Twitter" required>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="team_twitter" 
+              id="team_twitter" 
+              placeholder="Title"
+              [(ngModel)]="team_data.TwitterUrl" 
+              [class.custom-input__text--error]="form_watcher.no_twit"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="team_twitter">
+              Twitter
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_twit">
+              Twitter is required
+            </span>
           </div>
-
-          <div class="col-12 margin-gral">
-            Imagen Default : *La imagen deberá de ser de 350px * 350px;
-            <div class="custom-file margin-gral" style="margin-bottom:10px">
-              <input type="file" accept="image/*"
-                     (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
-              <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-
-            </div>
-            <!--Imagen  Hover : *La imagen deberá de ser de 350px * 350px;
-            <div class="custom-file margin-gral ">
-              <input type="file" accept="image/*"
-                     (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile">
-              <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
-
-            </div>-->
+          <div class="form__image form__image--fix">
+            <input 
+              class="display-none image_form"
+              type="file" 
+              name="image_i4_selected"
+              accept="image/*"
+              (change)="readImageData($event, '1920x1080', 0);"
+              id="validatedCustomFile3" 
+              required>
+            <label class="form__image-img" for="validatedCustomFile3">
+              <figure class="image_to_preview_container">
+                <img 
+                  src="{{ team_data.FrontPhoto }}" 
+                  class="image_to_preview placeholder_image custom-input__image"
+                  [class.custom-input__image--error]="form_watcher.no_img0" />
+              </figure>
+              <span class="image_to_preview_name name_image_uploaded"></span>
+              <span class="padding-tb-min">
+                <strong>Desktop Photo :</strong> <br /> 
+                <span class="color-red" *ngIf="form_watcher.no_img0">
+                  Desktop Photo is required <br />
+                </span>
+                *Image resolution 1920x1080px.
+              </span>
+            </label>
           </div>
-         
         </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-          <button type="button" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios</button>
+        <div class="modal-footer ml-col-1">
+          <button 
+            type="button" 
+            class="btn btn-secondary" 
+            id="close_modal" 
+            (click)="primaryModal.hide(); resetImagesData();">
+            Cerrar
+          </button>
+          <button type="button" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
         </div>
       </form>
-
-
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
+    </div>
+  </div>
+</div>
+<div class="black-box">
+  <img src="" id="image_data" />
+</div>
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>

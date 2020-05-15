@@ -2,22 +2,22 @@
   <div class="ml-col-1 navbar__components">
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button" (click)="amm(IDBUILD)">
-        Home Ammenities
+        Build: Ammenities
       </button>
     </div>
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button" (click)="gene(IDBUILD)">
-        Home General
+        Build: General
       </button>
     </div>
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button" (click)="serv(IDBUILD)">
-        Home Services
+        Build: Services
       </button>
     </div>
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button navbar__component-button--active" (click)="room(IDBUILD)">
-        Home Room
+        Build: Room
       </button>
     </div>
   </div>
@@ -107,7 +107,7 @@
       <div class="ml-col-1 text-center margin-tb-min">
         <button 
           data-toggle="modal" 
-          (click)="primaryModal.show(); passPhotosData( photo, post.id );"
+          (click)="primaryModal.show(); passPhotosData( photo );"
           class="button button-x">
           Editar
         </button>
@@ -211,7 +211,7 @@
         <div class="modal-body">
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_i1_selected"
               accept="image/*"
@@ -237,7 +237,7 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_i2_selected"
               accept="image/*"
@@ -263,7 +263,7 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_i3_selected"
               accept="image/*"
@@ -289,7 +289,7 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_i4_selected"
               accept="image/*"
@@ -315,7 +315,14 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" style="z-index: 9999;" id="close_album" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+          <button 
+            type="button" 
+            style="z-index: 9999;" 
+            id="close_album" 
+            class="btn btn-secondary" 
+            (click)="primaryModal.hide(); resetImagesData();">
+            Close
+          </button>
           <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios </button>
         </div>
       </form>

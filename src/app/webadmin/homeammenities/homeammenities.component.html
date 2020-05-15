@@ -248,7 +248,7 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_one_selected"
               accept="image/*"
@@ -274,7 +274,7 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_one_selected"
               accept="image/*"
@@ -300,7 +300,7 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_one_selected"
               accept="image/*"
@@ -326,7 +326,7 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_one_selected"
               accept="image/*"
@@ -352,7 +352,7 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_one_selected"
               accept="image/*"
@@ -378,7 +378,7 @@
           </div>
           <div class="form__image form__image--fix">
             <input 
-              class="display-none"
+              class="display-none image_form"
               type="file" 
               name="image_one_selected"
               accept="image/*"
@@ -404,99 +404,19 @@
           </div>
           <div class="card__row">
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" id="close_modal" (click)="primaryModal.hide()">Cerrar</button>
+              <button 
+                type="button" 
+                class="btn btn-secondary" 
+                id="close_modal" 
+                (click)="primaryModal.hide(); resetImagesData();">
+                Cerrar
+              </button>
               <button type="submit" class="btn btn-primary" (click)="updatephoto()">
                 Guardar Cambios
               </button>
             </div>
           </div>
         </form>
-      </div>
-
-
-      <form #loginForm="ngForm" autocomplete="off" class="display-none">
-        <div class="modal-body">
-          Icon, la resolución debe de ser 50px * 50px:
-          <div class="custom-file margin-gral" style="margin-bottom: 15px">
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile">
-            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-          </div>
-          Icon Hover, la resolución debe de ser 50px * 50px:
-          <div class="custom-file margin-gral" style="margin-bottom: 15px">
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile">
-            <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
-          </div>
-          Imagen Build  la resolución debe de ser 1920px*1080px:
-          <div class="custom-file margin-gral" style="margin-bottom: 15px">
-            <input type="file" accept="image/*" class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event); prepareImages($event,2);" />
-            <br />
-            <div class="col-12" style="text-align:center; margin-bottom: 15px;">
-              <image-cropper [imageChangedEvent]="imageChangedEvent"
-                             [maintainAspectRatio]="true"
-                             [aspectRatio]="1/ 2"
-                             [resizeToWidth]="600"
-                             [cropperMinWidth]="128"
-                             [onlyScaleDown]="true"
-                             [roundCropper]="false"
-                             format="png"
-                             outputType="both"
-                             imageQuality="100"
-                             (imageCropped)="imageCropped($event)"
-                             (imageLoaded)="imageLoaded()"
-                             (cropperReady)="cropperReady()"
-                             (loadImageFailed)="loadImageFailed()"
-                             [style.display]="showCropper ? null : 'none'"></image-cropper>
-              Mobile Image: <br />  <img style="width:25%;" [src]="croppedImage" />
-            </div>
-            <div style="margin-bottom: 15px; text-align:center;">
-              <button type="button" class="btn btn-dark" id="button_a" (click)="uploadAttachmentToServer(3)">Subir Imagen</button>
-            </div>
-            <label class="custom-file-label" for="customFile">{{imageInputLabelthree}}</label>
-          </div>
-          <span style="margin-top:15px;">Imagen Background :</span>
-          <div class="custom-file margin-gral" style="margin-bottom: 15px">
-            <input type="file" accept="image/*" class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent1($event); prepareImages($event,4);" />
-            <div class="col-12" style="text-align:center; margin-bottom: 15px;">
-              <image-cropper [imageChangedEvent]="imageChangedEvent1"
-                             [maintainAspectRatio]="true"
-                             [aspectRatio]="1/ 2"
-                             [resizeToWidth]="600"
-                             [cropperMinWidth]="128"
-                             [onlyScaleDown]="true"
-                             [roundCropper]="false"
-                             format="png"
-                             outputType="both"
-                             imageQuality="100"
-                             (imageCropped)="imageCropped1($event)"
-                             (imageLoaded)="imageLoaded1()"
-                             (cropperReady)="cropperReady1()"
-                             (loadImageFailed)="loadImageFailed1()"
-                             [style.display]="showCropper ? null : 'none'"></image-cropper>
-              Mobile Image: <br /> <img style="width:25%;" [src]="croppedImage1" />
-              <br />
-            </div>
-            <div style="margin-bottom: 15px; text-align:center;">
-              <button type="button" class="btn btn-dark" id="button_b" (click)="uploadAttachmentToServer(5)">Subir Imagen</button>
-            </div>
-            <label class="custom-file-label" for="customFile">{{imageInputLabelfive}}</label>
-          </div>
-          <div class="col-12  margin-gral" style="margin-bottom: 15px">
-            Title:
-            <input type="text" [(ngModel)]="test" class="form-control" name="tes" id="tes" placeholder="title" required>
-          </div>
-          <div class="col-12  margin-gral" style="margin-bottom: 15px">
-            Description:
-            <input type="text" [(ngModel)]="direction" class="form-control" name="postitle" id="des" placeholder="Desc" required>
-          </div>
-        </div>
-      </form>
-
-
-      <div class="modal-footer display-none">
-        <button type="button" style="z-index: 9999;" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
-        <button type="button" style="z-index: 9999;" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Subir Imagen</button>
       </div>
     </div>
   </div>
