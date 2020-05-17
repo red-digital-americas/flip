@@ -26,6 +26,9 @@ import { UsersComponent } from './Booking/Users/Users.component';
 import { RolesComponent } from './Booking/Roles/Roles.component';
 import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
 import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/Reservations.component';
+import { BackstageIndexComponent } from './Backstage/index.component';
+import { ColivingComponent } from './Backstage/Colving/coliving.component';
+import { MembershipComponent } from './Backstage/Memberships/memberships.component';
 
 const routes: Routes = [
   { path: '', data: { title: 'AdminApp', expectedRole: [2,4] }, canActivate: [RoleGuardService],
@@ -55,6 +58,9 @@ const routes: Routes = [
       { path: 'Users', component: UsersComponent, data: { title: 'Users' } },
       { path: 'Roles', component: RolesComponent, data: { title: 'Roles' } }, 
       { path: 'reservations', component: ProfileReservationsComponent, data: { title: 'Reservations' } }, 
+      { path: 'backstage', component: BackstageIndexComponent, data: {title: 'Backstage Index'} },
+      { path: 'coliving', component: ColivingComponent, data: {title: 'What is coliving'} },
+      { path: 'memberships', component: MembershipComponent, data: {title: 'What is coliving'} },
       
       
       // { path: 'perks/:id', loadChildren: './perks/perks.module#PerksComponentModule' },

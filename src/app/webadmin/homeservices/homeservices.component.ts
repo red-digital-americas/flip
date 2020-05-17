@@ -16,14 +16,9 @@ import { LoaderComponent } from '../../../ts/loader';
 })
 export class HomeservicesComponent implements OnInit {
 
-
-
-
   @ViewChild(ImageCropperComponent, {read: ImageCropperComponent, static: true}) imageCropper: ImageCropperComponent;
 
   @ViewChild(ImageCropperComponent, {read: ImageCropperComponent, static: true}) imageCropper1: ImageCropperComponent;
-
-
   
     public myModal;
     public largeModal;
@@ -233,7 +228,7 @@ serv(id?: number) {
 
       this.heroService.ServicioPostPost("SeeHomeServicios", creadoobj).subscribe((value) => {
 
-        console.log('Here =========> ', value);
+        console.log('Get Home Services =========> ', value);
         console.log( creadoobj );
    
         switch (value.result) {
@@ -251,46 +246,40 @@ serv(id?: number) {
   
      
      public service_data: ServiceData = new ServiceData();
-     passdata( post: any ){
+     public passdata( post: any ):void {
       
       this.resetImagesData();
        
       this.service_data.id = post.id;
       this.service_data.title = post.title;
-      this.service_data.category = post.category;
-      this.service_data.icon = 'no_service_icon';
-      this.service_data.icon2 = 'no_service_icon';
+      this.service_data.category = 'No Category/Description';
+      this.service_data.icon = post.icon;
+      this.service_data.icon2 = post.icon2;
       this.service_data.frontphoto = post.frontphoto;
       this.service_data.photomobile = post.photomobile;
+      this.service_data.communitiesServicesWebItems = post.communitiesServicesWebItems;
 
-      this.counter.title = post.title.length;
+      this.updatedIconsService();
+
+      console.log('Service From server ===> ', post);
+      console.log('My Service Send ===> ', this.service_data);
 
      }
   
      
      public system_message: SystemMessage = new SystemMessage();
      public loader: LoaderComponent = new LoaderComponent();
-     updatephoto() {
+     public updatephoto():void {
 
       const close_modal = document.getElementById('close_modal');
 
-      let creadoobj = { 
-        id: this.service_data.id, 
-        Photo: this.service_data.frontphoto, 
-        PhotoMobile: this.service_data.photomobile, 
-        Category: this.service_data.category, 
-        Title: this.service_data.title, 
-        Icon: this.service_data.icon, 
-        Icon2: this.service_data.icon2 
-      };
+      console.log('Send This ===> ', this.service_data);
 
-      console.log('==========> ', creadoobj);
-
-      if( this.formValidator( this.service_data ) ) {
+      /*if( this.formValidator( this.service_data ) ) {
 
         this.loader.showLoader();
 
-        this.heroService.ServicioPostPost("UpdateHomeServicios", creadoobj)
+        this.heroService.ServicioPostPost("UpdateHomeServicios", this.service_data)
             .subscribe( (response: any) => {
 
               if( response.result == 'Success' ) {
@@ -337,9 +326,9 @@ serv(id?: number) {
   
         this.sendToPageTop();
 
-      }  
+      } */ 
     
-}
+    }
   
   
     showSuccess() {
@@ -481,7 +470,6 @@ serv(id?: number) {
                   image_container_name.classList.remove('display-none');
                   image_container_name.innerHTML = file[0].name;
                   root.prepareImages( event_data, image_index );
-                  console.log('Index => ', image_index);
 
                 } else {
 
@@ -509,6 +497,38 @@ serv(id?: number) {
 
   }
 
+  public add_icon_button: boolean = true;
+  public updatedIconsService():void { 
+
+    console.log('Work in pro ===> ', this.service_data.communitiesServicesWebItems );
+
+    const icons_in = this.service_data.communitiesServicesWebItems;
+
+    console.log('VVeri => ', icons_in.length);
+
+    if( icons_in.length < 5 ) {
+
+      const icon_model = {
+        communitiesServiciosWeb: null,
+        communitiesServiciosWebId: 0,
+        icon: '',
+        icon2: '',
+        id: 0,
+        titleIcon: ''
+      }
+
+      icons_in.push( icon_model );
+
+      this.add_icon_button = true;
+
+    } else {
+
+      this.add_icon_button = false;
+
+    }
+
+  }
+
   public form_watcher = {
     no_titl: false,
     no_cate: false,
@@ -523,9 +543,6 @@ serv(id?: number) {
 
       form_data.title == null || form_data.title == '' ? 
         this.form_watcher.no_titl = true : this.form_watcher.no_titl = false; 
-
-      form_data.category == null || form_data.category == '' ? 
-        this.form_watcher.no_cate = true : this.form_watcher.no_cate = false; 
 
       form_data.icon == null || form_data.icon == '' ? 
         this.form_watcher.no_ico0 = true : this.form_watcher.no_ico0 = false; 
@@ -572,16 +589,7 @@ serv(id?: number) {
 
   }
 
-  public counter = {
-    title: 0
-  }
-  public updateCharactersCount( event_data: any ):void {
-
-      this.counter.title = event_data.target.value.length;
-
-  }
-
-  }
+}
   
   class ServiceData {
     id: number;
@@ -591,4 +599,5 @@ serv(id?: number) {
     icon2: string;
     frontphoto: string;
     photomobile: string;
+    communitiesServicesWebItems: any[];
   }

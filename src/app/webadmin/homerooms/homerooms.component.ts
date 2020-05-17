@@ -36,7 +36,7 @@ export class HomeroomsComponent implements OnInit {
     toasterService: ToasterService) {
     this.toasterService = toasterService;
   }
-  posts: any[];
+  posts: any;
   posts_b: any[];
   email: string;
   password: string;
@@ -180,7 +180,7 @@ export class HomeroomsComponent implements OnInit {
     //debugger;
     this.heroService.ServicioPostPost("SeeHomeRoom", creadoobj).subscribe((value) => {
 
-      console.log(value.item);
+      console.log('Home Rooms =====> ',value.item );
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
@@ -189,25 +189,9 @@ export class HomeroomsComponent implements OnInit {
           //debugger; 
           if (value.result == "Success") {
 
-            this.posts = [
-              {
-                desc: value.item[0].desc,
-                id: value.item[0].id,
-                photos: value.item[0].photos,
-                price: value.item[0].price,
-                title: value.item[0].title
-              }
-            ];
+            this.posts = [ value.item[0] ];
 
-            this.posts_b = [
-              {
-                desc: value.item[1].desc,
-                id: value.item[1].id,
-                photos: value.item[1].photos,
-                price: value.item[1].price,
-                title: value.item[1].title
-              }
-            ];
+            this.posts_b = [ value.item[1] ];
 
             console.log(this.posts);
             //for (let index = 0; index < value.item.length; index++) {
@@ -223,26 +207,28 @@ export class HomeroomsComponent implements OnInit {
   numroom: number = 0;
   public room_data: RoomModel = new RoomModel();
   passdataRoom(post: any) {
-    //this.PostId = id;
+
     this.room_data.id = post.id;
-    this.room_data.Description = post.desc;
     this.room_data.Title = post.title;
+    this.room_data.Description = post.desc;
     this.room_data.Price = post.price;
+    this.room_data.descPrice = post.descPrice;
+    this.room_data.Price1 = post.price1;
+    this.room_data.descPrice1 = post.descPrice1;
+    this.room_data.getGuide = post.getGuide;
+    this.room_data.View360 = post.view360;
+    this.room_data.photos = post.photos;
+    this.room_data.communitiesIndexId = post.communitiesIndexId;
+
   }
+
   passnumroom(id: any) {
     this.numroom = id;
   }
 
   updateindo() {
 
-    //debugger;
-    var creadoobj = { 
-      id: this.room_data.id, 
-      Description: this.room_data.Description, 
-      Title: this.room_data.Title, 
-      Price: this.room_data.Price 
-    };
-    //debugger;
+    console.log('Data ===> ', this.room_data );
 
     if( this.formRoomsValidator( this.room_data ) ) {
 
@@ -250,7 +236,7 @@ export class HomeroomsComponent implements OnInit {
 
       this.loader.showLoader();
 
-      this.heroService.ServicioPostPost("UpdateHomeRooms", creadoobj)
+      this.heroService.ServicioPostPost("UpdateHomeRooms", this.room_data)
           .subscribe( (response: any) => {
 
             if( response.result == 'Success' ) {
@@ -315,9 +301,8 @@ export class HomeroomsComponent implements OnInit {
   public photos_data: PhotosModelData = new PhotosModelData();
   public passPhotosData( album: any ):void {
 
-    this.resetImagesData();
-
     this.photos_data.id = album.id;
+    this.photos_data.titleIcon = album.titleIcon;
     this.photos_data.icon = album.icon;
     this.photos_data.icon2 = album.icon2;
     this.photos_data.Photo = album.photo;
@@ -328,62 +313,53 @@ export class HomeroomsComponent implements OnInit {
 
   updatephoto() {
 
-        var creadoobj = { 
-          id: this.photos_data.id, 
-          Photo: this.photos_data.Photo, 
-          PhotoMobile: this.photos_data.PhotoMobile, 
-          icon: this.photos_data.icon, 
-          icon2: this.photos_data.icon2, 
-          IdCommunitiesRoomWeb: this.photos_data.IdCommunitiesRoomWeb 
-        };
+    if( this.formPhotosValidator( this.photos_data ) ) {
 
-        if( this.formPhotosValidator( this.photos_data ) ) {
+      const close_album_button = document.getElementById('close_album');
 
-          const close_album_button = document.getElementById('close_album');
+      this.loader.showLoader();
 
-          this.loader.showLoader();
+      this.heroService.ServicioPostPost("UpdateHomeRoomphoto", this.photos_data)
+          .subscribe( (response: any) => {
 
-          this.heroService.ServicioPostPost("UpdateHomeRoomphoto", creadoobj)
-              .subscribe( (response: any) => {
+            if( response.result == 'Success' ) {
 
-                if( response.result == 'Success' ) {
-
-                  this.system_message.showMessage({
-                    kind: 'ok',
-                    time: 4700,
-                    message: {
-                      header: 'Content updated',
-                      text: 'Content has been updated successfully'
-                    }
-                  });
-    
-                  close_album_button.click();
-                  this.get_photos();
-    
-                  setTimeout( () => this.loader.hideLoader(),777);
-
+              this.system_message.showMessage({
+                kind: 'ok',
+                time: 4700,
+                message: {
+                  header: 'Content updated',
+                  text: 'Content has been updated successfully'
                 }
-
-              }, (error: any) => {
-
-
-
               });
 
-        } else {
+              close_album_button.click();
+              this.get_photos();
 
-          this.system_message.showMessage({
-            kind: 'error',
-            time: 4700,
-            message: {
-              header: 'Form must be completed',
-              text: 'All inputs must be filled to continue'
+              setTimeout( () => this.loader.hideLoader(),777);
+
             }
-          });
-    
-          this.sendToPageTop();
 
+          }, (error: any) => {
+
+
+
+          });
+
+    } else {
+
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 4700,
+        message: {
+          header: 'Form must be completed',
+          text: 'All inputs must be filled to continue'
         }
+      });
+
+      this.sendToPageTop();
+
+    }
 
   }
 
@@ -463,6 +439,8 @@ export class HomeroomsComponent implements OnInit {
 
 
   public showSection( event_data ,id_section:string ):void {
+
+    console.log('Aqui => ', id_section);
 
     const event = event_data.target,
           tabs_in = document.getElementsByClassName('room-data__tab');
@@ -608,7 +586,12 @@ export class HomeroomsComponent implements OnInit {
   public form_watcher = {
     no_titl: false,
     no_desc: false,
-    no_pric: false
+    no_pric: false,
+    no_pde0: false,
+    no_pri1: false,
+    no_pde1: false,
+    no_guid: false,
+    no_view: false
   }
   public formRoomsValidator( form_data: RoomModel ):boolean {
 
@@ -623,6 +606,21 @@ export class HomeroomsComponent implements OnInit {
       form_data.Price == null ? 
         this.form_watcher.no_pric = true : this.form_watcher.no_pric = false; 
 
+      form_data.descPrice == null || form_data.descPrice == '' ? 
+        this.form_watcher.no_pde0 = true : this.form_watcher.no_pde0 = false; 
+
+      form_data.Price1 == null ? 
+        this.form_watcher.no_pri1 = true : this.form_watcher.no_pri1 = false;
+
+      form_data.descPrice1 == null || form_data.descPrice1 == '' ? 
+        this.form_watcher.no_pde1 = true : this.form_watcher.no_pde1 = false; 
+
+      form_data.getGuide == null || form_data.getGuide == '' ? 
+        this.form_watcher.no_guid = true : this.form_watcher.no_guid = false;
+        
+      form_data.View360 == null || form_data.View360 == '' ? 
+        this.form_watcher.no_view = true : this.form_watcher.no_view = false;
+
       for( const dato in this.form_watcher ) {
 
         if( this.form_watcher[dato] ) return false;
@@ -635,6 +633,7 @@ export class HomeroomsComponent implements OnInit {
   }
 
   public form_watcher_b = {
+    no_name: false,
     no_ico0: false,
     no_ico1: false,
     no_img0: false,
@@ -644,8 +643,11 @@ export class HomeroomsComponent implements OnInit {
 
     let result: boolean = false;
 
+    form_data.titleIcon == null || form_data.titleIcon == '' ? 
+      this.form_watcher_b.no_name = true : this.form_watcher_b.no_name = false; 
+
     form_data.icon == null || form_data.icon == '' ? 
-        this.form_watcher_b.no_ico0 = true : this.form_watcher_b.no_ico0 = false; 
+      this.form_watcher_b.no_ico0 = true : this.form_watcher_b.no_ico0 = false; 
 
     form_data.icon2 == null || form_data.icon2 == '' ? 
       this.form_watcher_b.no_ico1 = true : this.form_watcher_b.no_ico1 = false; 
@@ -700,14 +702,23 @@ class RoomModel {
   Description: string;
   Title: String;
   Price: number;
+  View360: string;
+  getGuide: string;
+  Price1: number;
+  descPrice: string;
+  descPrice1: string;
+  photos: any;
+  communitiesIndexId: number;
 }
 
 class PhotosModelData {
   id: number;
+  Name: string;
   Photo: string;
   PhotoMobile: string;
   icon: string;
   icon2: string;
   IdCommunitiesRoomWeb: number;
+  titleIcon: string;
 }
  

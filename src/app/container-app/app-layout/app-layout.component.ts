@@ -80,7 +80,7 @@ export class AppLayoutComponent {
         (function(){ root.click() }())
       }());
     });
-    }, 177);
+    }, 77);
 
   }
 

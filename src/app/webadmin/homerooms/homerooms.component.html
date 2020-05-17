@@ -59,7 +59,43 @@
             {{ post.price }}
           </p>
         </div>
-        <div class="ml-col-1 text-center">
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Price Description: </span>
+            {{ post.descPrice }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Price 2: </span>
+            {{ post.price1 }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Price 2 Description: </span>
+            {{ post.descPrice1 }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Guide PDF: </span>
+            {{ post.getGuide }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">View 360 Url: </span>
+            {{ post.view360 }}
+          </p>
+        </div>
+        <div class="ml-col-1 custom-input__video">
+          <iframe 
+            class="custom-input__video--viewer" 
+            src="https://www.youtube.com/embed/668nUCeBHyY">
+          </iframe>
+        </div>
+        <div class="ml-col-1 text-center margin-top-x">
           <button 
             data-toggle="modal" 
             (click)="infoModal.show(); passdataRoom(post);"
@@ -70,17 +106,20 @@
       </div>
     </div>
     <div class="ml-col-1 card-style margin-bottom-m" *ngFor="let photo of post.photos, index_b as index;">
-      <div class="ml-col-1">
-        <div class="ml-col-1 text-center">
-          <div class="icon-view">
-            <figure class="icon-view__icon">
-              <span class="text-bold">Icon:</span>
-              <img class="icon-view__icon--img" src="{{ photo.icon }}" />
-            </figure>
-            <figure class="icon-view__icon">
-              <span class="text-bold">Icon hover:</span>
-              <img class="icon-view__icon--img" src="{{ photo.icon2 }}" />
-            </figure>
+      <div class="ml-col-1 margin-top-x">
+        <div class="icon-viewB">
+          <div class="icon-viewB__container">
+            <p class="icon-viewB__title text-center">
+              Icon Description: {{ photo.titleIcon }}
+            </p>
+            <div class="icon-viewB__icon">
+              <span class="icon-viewB__icon-label text-center">Icon: </span> 
+              <img class="icon-viewB__icon-img" src="{{ photo.icon }}" />
+            </div>
+            <div class="icon-viewB__icon">
+              <span class="icon-viewB__icon-label text-center">Icon Hover: </span> 
+              <img class="icon-viewB__icon-img" src="{{ photo.icon2 }}" />
+            </div>
           </div>
         </div>
       </div>
@@ -118,7 +157,7 @@
     id="room_b" 
     name="room-section"
     *ngFor="let post of posts_b, index as index;"
-    class="ml-col-1 card-style padding-general-m margin-bottom-x display-none" >
+    class="ml-col-1 card-style padding-general-m margin-bottom-x">
     <div class="ml-col-1 room-data margin-bottom-x">
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
@@ -142,7 +181,43 @@
             {{ post.price }}
           </p>
         </div>
-        <div class="ml-col-1 text-center">
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Price Description: </span>
+            {{ post.descPrice }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Price 2: </span>
+            {{ post.price1 }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Price 2 Description: </span>
+            {{ post.descPrice1 }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">Guide PDF: </span>
+            {{ post.getGuide }}
+          </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-titulo">
+            <span class="text-bold">View 360 Url: </span>
+            {{ post.view360 }}
+          </p>
+        </div>
+        <div class="ml-col-1 custom-input__video">
+          <iframe 
+            class="custom-input__video--viewer" 
+            src="https://www.youtube.com/embed/668nUCeBHyY">
+          </iframe>
+        </div>
+        <div class="ml-col-1 text-center margin-top-x">
           <button 
             data-toggle="modal" 
             (click)="infoModal.show(); passdataRoom(post);"
@@ -153,17 +228,20 @@
       </div>
     </div>
     <div class="ml-col-1 card-style margin-bottom-m" *ngFor="let photo of post.photos, index_b as index;">
-      <div class="ml-col-1">
-        <div class="ml-col-1 text-center">
-          <div class="icon-view">
-            <figure class="icon-view__icon">
-              <span class="text-bold">Icon:</span>
-              <img class="icon-view__icon--img" src="{{ photo.icon }}" />
-            </figure>
-            <figure class="icon-view__icon">
-              <span class="text-bold">Icon hover:</span>
-              <img class="icon-view__icon--img" src="{{ photo.icon2 }}" />
-            </figure>
+      <div class="ml-col-1 margin-top-x">
+        <div class="icon-viewB">
+          <div class="icon-viewB__container">
+            <p class="icon-viewB__title text-center">
+              Icon Description: {{ photo.titleIcon }}
+            </p>
+            <div class="icon-viewB__icon">
+              <span class="icon-viewB__icon-label text-center">Icon: </span> 
+              <img class="icon-viewB__icon-img" src="{{ photo.icon }}" />
+            </div>
+            <div class="icon-viewB__icon">
+              <span class="icon-viewB__icon-label text-center">Icon Hover: </span> 
+              <img class="icon-viewB__icon-img" src="{{ photo.icon2 }}" />
+            </div>
           </div>
         </div>
       </div>
@@ -209,6 +287,23 @@
       </div>
       <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
+          <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
+            <input
+              type="text"
+              class="custom-input__text" 
+              name="room_icon_name" 
+              id="room_icon_name" 
+              placeholder="Icon Name" 
+              [(ngModel)]="photos_data.titleIcon"
+              [class.custom-input__text--error]="form_watcher_b.no_name"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="room_icon_name">
+              Icon Name
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher_b.no_name">
+              Icon Name is required
+            </span>
+          </div>
           <div class="form__image form__image--fix">
             <input 
               class="display-none image_form"
@@ -390,6 +485,96 @@
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_pric">
               Price is required
             </span>
+          </div>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <textarea 
+              class="custom-input__textarea" 
+              name="room_price_0" 
+              id="room_price_0" 
+              [(ngModel)]="room_data.descPrice"
+              [class.custom-input__textarea--error]="form_watcher.no_pde0"
+              placeholder="Price Description" 
+              required></textarea>
+            <label class="custom-input__label custom-input__label--active" for="room_price_0">
+              Price Description
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_pde0">
+              Price Description is required
+            </span>
+          </div>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <input 
+              type="number"
+              min="0"
+              [(ngModel)]="room_data.Price1"
+              class="custom-input__text" 
+              name="room_price_num_1" 
+              id="room_price_num_1" 
+              placeholder="Price 2" 
+              [class.custom-input__text--error]="form_watcher.no_pri1"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="room_price_num_1">
+              Price 2
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_pri1">
+              Price 2 is required
+            </span>
+          </div>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <textarea 
+              class="custom-input__textarea" 
+              name="room_price_1" 
+              id="room_price_1" 
+              [(ngModel)]="room_data.descPrice1"
+              [class.custom-input__textarea--error]="form_watcher.no_pde1"
+              placeholder="Price 2 Description" 
+              required></textarea>
+            <label class="custom-input__label custom-input__label--active" for="room_price_1">
+              Price 2 Description
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_pde1">
+              Price 2 Description is required
+            </span>
+          </div>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <input 
+              type="text"
+              [(ngModel)]="room_data.getGuide"
+              class="custom-input__text" 
+              name="room_guide" 
+              id="room_guide" 
+              placeholder="Get Guide URL" 
+              [class.custom-input__text--error]="form_watcher.no_guid"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="room_guide">
+              Get Guide URL
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_guid">
+              Get Guide URL is required
+            </span>
+          </div>
+          <div class="ml-col-1 custom-input">
+            <input 
+              type="text"
+              class="custom-input__text" 
+              name="room_view" 
+              id="room_view" 
+              placeholder="View 360 URL" 
+              [class.custom-input__text--error]="form_watcher.no_view"
+              [(ngModel)]="room_data.View360"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="room_view">
+              View 360 URL
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_view">
+              View 360 URL is required
+            </span>
+          </div>
+          <div class="ml-col-1 custom-input__video margin-bottom-x custom-input__video--input" *ngIf="room_data.View360">
+            <iframe 
+              class="custom-input__video--viewer" 
+              src="https://www.youtube.com/embed/668nUCeBHyY">
+            </iframe>
           </div>
           <div class="modal-footer">
             <button type="button" style="z-index: 9999;" id="close_room" class="btn btn-secondary" (click)="infoModal.hide()">Cerrar</button>

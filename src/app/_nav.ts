@@ -32,6 +32,14 @@ export class MenuService {
         { name: 'Jobs', url: '/webadmin/jobs', icon: 'icon-wrench sangria'},
         { name: 'Press', url: '/webadmin/press', icon: 'icon-bubbles sangria'}
       ]
+    },
+    {
+      name: 'Backstage', type: 1, url: '/', icon: 'icon-plus reduce',
+      children: [  
+        { name: 'Index', url: '/backstage', icon: 'icon-people sangria'},
+        { name: 'What is Colving', url: '/coliving', icon: 'icon-wrench sangria'},
+        { name: 'Memberships', url: '/memberships', icon: 'icon-bubbles sangria'}
+      ]
     }
   ] 
 

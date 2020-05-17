@@ -66,6 +66,9 @@ import { UsersComponent } from './Booking/Users/Users.component';
 import { RolesComponent } from './Booking/Roles/Roles.component';
 import { ProfileComponent } from './Booking/TenantList/profile/profile.component';
 import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/Reservations.component';
+import { BackstageIndexComponent } from './Backstage/index.component';
+import { ColivingComponent } from './Backstage/Colving/coliving.component';
+import { MembershipComponent } from './Backstage/Memberships/memberships.component';
 
 @NgModule({
   imports: [    
@@ -126,7 +129,10 @@ import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/
     UsersComponent,
     RolesComponent,
     ProfileComponent,
-    ProfileReservationsComponent
+    ProfileReservationsComponent,
+    BackstageIndexComponent,
+    ColivingComponent,
+    MembershipComponent
   ],
   entryComponents: [
     DetalleComponent,
