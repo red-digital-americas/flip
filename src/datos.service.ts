@@ -64,7 +64,7 @@ export class DatosService {
 
   UploadImgSuc(fileToUpload: any): any {
     let input = new FormData();
-    input.append("file", fileToUpload);
+    input.append("file", fileToUpload); 
     return this.http.post(this.heroesUrl + "Post/UploadImg", input);
   }
 

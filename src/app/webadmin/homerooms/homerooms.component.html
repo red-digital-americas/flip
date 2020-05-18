@@ -35,64 +35,66 @@
     id="room_a" 
     name="room-section"
     *ngFor="let post of posts, index as index;"
-    class="ml-col-1 card-style padding-general-m margin-bottom-x">
+    class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x">
     <div class="ml-col-1 room-data margin-bottom-m">
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
-          <h4 class="room-data__card-titulo text-bold">
-            {{ room_selected }}
-          </h4>
           <p class="room-data__card-titulo">
             <span class="text-bold">Title: </span>
             {{ post.title }}
           </p>
         </div>
         <div class="ml-col-1">
-          <p class="room-data__card-titulo">
+          <p class="room-data__card-dato">
             <span class="text-bold">Description: </span>
             {{ post.desc }}
           </p>
         </div>
         <div class="ml-col-1">
-          <p class="room-data__card-titulo">
-            <span class="text-bold">Price: </span>
-            {{ post.price }}
-          </p>
-        </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-titulo">
-            <span class="text-bold">Price Description: </span>
-            {{ post.descPrice }}
-          </p>
-        </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-titulo">
-            <span class="text-bold">Price 2: </span>
-            {{ post.price1 }}
-          </p>
-        </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-titulo">
-            <span class="text-bold">Price 2 Description: </span>
-            {{ post.descPrice1 }}
-          </p>
-        </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-titulo">
+          <p class="room-data__card-dato">
             <span class="text-bold">Guide PDF: </span>
             {{ post.getGuide }}
           </p>
         </div>
         <div class="ml-col-1">
-          <p class="room-data__card-titulo">
+          <p class="room-data__card-dato">
             <span class="text-bold">View 360 Url: </span>
             {{ post.view360 }}
           </p>
         </div>
-        <div class="ml-col-1 custom-input__video">
+        <div class="ml-col-1 room-data__card--group">
+          <div class="ml-col-1">
+            <p class="room-data__card-dato text-center">
+              <span class="text-bold">Price Description: <br /> </span>
+              {{ post.descPrice }}
+            </p>
+          </div>
+          <div class="ml-col-1">
+            <p class="room-data__card-dato text-center">
+              <span class="text-bold">Price: <br /> </span>
+              {{ post.price | currency }}
+            </p>
+          </div>
+        </div>
+        <div class="ml-col-1">
+          <div class="ml-col-1">
+            <p class="room-data__card-dato text-center">
+              <span class="text-bold">Price 2 Description: <br /> </span>
+              {{ post.descPrice1 }}
+            </p>
+          </div>
+          <div class="ml-col-1">
+            <p class="room-data__card-dato text-center">
+              <span class="text-bold">Price 2: <br /> </span>
+              {{ post.price1 | currency }}
+            </p>
+          </div>
+        </div>
+        <div class="ml-col-1 room-data__card-video margin-top-x">
           <iframe 
-            class="custom-input__video--viewer" 
-            src="https://www.youtube.com/embed/668nUCeBHyY">
+            class="custom-input__video--viewer"
+            allowfullscreen="allowfullscreen"
+            [src]="post.get_video_url">
           </iframe>
         </div>
         <div class="ml-col-1 text-center margin-top-x">
@@ -157,64 +159,66 @@
     id="room_b" 
     name="room-section"
     *ngFor="let post of posts_b, index as index;"
-    class="ml-col-1 card-style padding-general-m margin-bottom-x">
+    class="ml-col-1 card-style size-controller padding-general-m margin-bottom-x display-none">
     <div class="ml-col-1 room-data margin-bottom-x">
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
-          <h4 class="room-data__card-titulo text-bold">
-            {{ room_selected }}
-          </h4>
           <p class="room-data__card-titulo">
             <span class="text-bold">Title: </span>
             {{ post.title }}
           </p>
         </div>
         <div class="ml-col-1">
-          <p class="room-data__card-titulo">
+          <p class="room-data__card-dato">
             <span class="text-bold">Description: </span>
             {{ post.desc }}
           </p>
         </div>
         <div class="ml-col-1">
-          <p class="room-data__card-titulo">
-            <span class="text-bold">Price: </span>
-            {{ post.price }}
-          </p>
-        </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-titulo">
-            <span class="text-bold">Price Description: </span>
-            {{ post.descPrice }}
-          </p>
-        </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-titulo">
-            <span class="text-bold">Price 2: </span>
-            {{ post.price1 }}
-          </p>
-        </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-titulo">
-            <span class="text-bold">Price 2 Description: </span>
-            {{ post.descPrice1 }}
-          </p>
-        </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-titulo">
+          <p class="room-data__card-dato">
             <span class="text-bold">Guide PDF: </span>
             {{ post.getGuide }}
           </p>
         </div>
         <div class="ml-col-1">
-          <p class="room-data__card-titulo">
+          <p class="room-data__card-dato">
             <span class="text-bold">View 360 Url: </span>
             {{ post.view360 }}
           </p>
         </div>
+        <div class="ml-col-1 room-data__card--group">
+          <div class="ml-col-1">
+            <p class="room-data__card-dato text-center">
+              <span class="text-bold">Price Description: <br /> </span>
+              {{ post.descPrice }}
+            </p>
+          </div>
+          <div class="ml-col-1">
+            <p class="room-data__card-dato text-center">
+              <span class="text-bold">Price: <br /> </span>
+              {{ post.price | currency }}
+            </p>
+          </div>
+        </div>
+        <div class="ml-col-1">
+          <div class="ml-col-1">
+            <p class="room-data__card-dato text-center">
+              <span class="text-bold">Price 2 Description: <br /> </span>
+              {{ post.descPrice1 }}
+            </p>
+          </div>
+          <div class="ml-col-1">
+            <p class="room-data__card-dato text-center">
+              <span class="text-bold">Price 2: <br /> </span>
+              {{ post.price1 | currency }}
+            </p>
+          </div>
+        </div>
         <div class="ml-col-1 custom-input__video">
           <iframe 
             class="custom-input__video--viewer" 
-            src="https://www.youtube.com/embed/668nUCeBHyY">
+            allowfullscreen="allowfullscreen"
+            [src]="post.get_video_url">
           </iframe>
         </div>
         <div class="ml-col-1 text-center margin-top-x">
@@ -429,7 +433,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+        <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -573,7 +577,8 @@
           <div class="ml-col-1 custom-input__video margin-bottom-x custom-input__video--input" *ngIf="room_data.View360">
             <iframe 
               class="custom-input__video--viewer" 
-              src="https://www.youtube.com/embed/668nUCeBHyY">
+              allowfullscreen="allowfullscreen"
+              [src]="room_data.get_video_url">
             </iframe>
           </div>
           <div class="modal-footer">

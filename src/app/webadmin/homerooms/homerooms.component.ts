@@ -7,6 +7,7 @@ import { Utils } from '../../utils/utils';
 import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
 import { SystemMessage } from '../../../ts/systemMessage';
 import { LoaderComponent } from '../../../ts/loader';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-homerooms',
@@ -33,7 +34,8 @@ export class HomeroomsComponent implements OnInit {
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
-    toasterService: ToasterService) {
+    toasterService: ToasterService,
+    public domSanitiza: DomSanitizer) {
     this.toasterService = toasterService;
   }
   posts: any;
@@ -193,15 +195,25 @@ export class HomeroomsComponent implements OnInit {
 
             this.posts_b = [ value.item[1] ];
 
-            console.log(this.posts);
-            //for (let index = 0; index < value.item.length; index++) {
-            //  this.photos = value.item[index].photos;
-            //  debugger;
-            //}
+            this.posts_b[0].get_video_url = this.domSanitiza.bypassSecurityTrustResourceUrl( this.getVideoToEmbedUrl( this.posts_b[0].view360 ) );
+            this.posts[0].get_video_url = this.domSanitiza.bypassSecurityTrustResourceUrl( this.getVideoToEmbedUrl( this.posts[0].view360 ) );
 
           }
       }
     });
+  }
+
+  public getVideoToEmbedUrl( video_url: string ):string {
+
+    let video_data: string = video_url;
+
+    const video_root = video_data.split('&')[0],
+          video_as_param = video_root.split('/')[video_root.split('/').length - 1],
+          video = video_as_param.split('=')[1],
+          video_url_embed = `https://www.youtube.com/embed/${video}`;
+
+    return video_url_embed;
+
   }
 
   numroom: number = 0;
@@ -219,6 +231,7 @@ export class HomeroomsComponent implements OnInit {
     this.room_data.View360 = post.view360;
     this.room_data.photos = post.photos;
     this.room_data.communitiesIndexId = post.communitiesIndexId;
+    this.room_data.get_video_url = post.get_video_url;
 
   }
 
@@ -227,8 +240,6 @@ export class HomeroomsComponent implements OnInit {
   }
 
   updateindo() {
-
-    console.log('Data ===> ', this.room_data );
 
     if( this.formRoomsValidator( this.room_data ) ) {
 
@@ -709,6 +720,7 @@ class RoomModel {
   descPrice1: string;
   photos: any;
   communitiesIndexId: number;
+  get_video_url: any;
 }
 
 class PhotosModelData {

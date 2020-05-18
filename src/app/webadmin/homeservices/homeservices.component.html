@@ -23,7 +23,7 @@
   </div>
 </div>
 <div class="row padding-bottom-m padding-general-m">
-  <div class="ml-col-1 card-style padding-general-m margin-bottom-x" *ngFor="let post of posts, index as index;">
+  <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x" *ngFor="let post of posts, index as index;">
     <div class="ml-col-1">
       <div class="card__info margin-bottom-x" style="height: auto !important;">
         <p class="card__info-dato">
@@ -111,168 +111,6 @@
               Title is required
             </span>
           </div>
-          <div class="ml-col-1 block-test">
-            <!-- div class="ml-col-1" *ngIf="service_data.communitiesServicesWebItems?.length > 0">
-              <div class="form__image" *ngFor="let icons of service_data.communitiesServicesWebItems">
-                <input 
-                  class="display-none"
-                  type="file" 
-                  name="image_one_selected"
-                  accept="image/*"
-                  (change)="readImageData($event, '350x350', 0);"
-                  id="validatedCustomFile" 
-                  required>
-                <label class="form__image-img" for="validatedCustomFile">
-                  <figure class="image_to_preview_container">
-                    <img 
-                      src="{{ service_data.icon }}" 
-                      class="image_to_preview placeholder_image custom-input__image"
-                      [class.custom-input__image--error]="form_watcher.no_ico0" />
-                  </figure>
-                  <span class="image_to_preview_name name_image_uploaded"></span>
-                  <span class="padding-tb-min">
-                    <strong>Icon Default:</strong> <br /> 
-                    <span class="color-red" *ngIf="form_watcher.no_ico0">
-                      Icon Default is required <br />
-                    </span>
-                    *Image resolution 350x350px.
-                  </span>
-                </label>
-              </div>
-            </div -->
-            <div class="ml-col-1" icon="block" *ngFor="let icons of service_data.communitiesServicesWebItems, index as index;">
-              <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
-                <input 
-                  type="text"
-                  class="custom-input__text" 
-                  name="icon_name_{{ 1 + index }}" 
-                  id="icon_name_{{ 1 + index }}" 
-                  placeholder="Nombre" 
-                  [class.custom-input__text--error]="form_watcher.no_titl"
-                  required />
-                <label class="custom-input__label custom-input__label--active" for="icon_name_{{ 1 + index }}">
-                  Icon Name
-                </label>
-                <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
-                  Icon Name is required
-                </span>
-              </div>
-              <div class="form__image">
-                <input 
-                  class="display-none image_form"
-                  type="file" 
-                  name="image_one_selected"
-                  accept="image/*"
-                  (change)="readImageData($event, '350x350', 2);"
-                  id="icon_upload_{{ 1 + index }}" 
-                  required />
-                <label class="form__image-img" for="icon_upload_{{ 1 + index }}">
-                  <figure class="image_to_preview_container">
-                    <img 
-                      src="../../../assets/14.jpg" 
-                      class="image_to_preview placeholder_image custom-input__image"
-                      [class.custom-input__image--error]="form_watcher.no_ico1" />
-                  </figure>
-                  <span class="image_to_preview_name name_image_uploaded"></span>
-                  <span class="padding-tb-min">
-                    <strong>Icon Default:</strong> <br /> 
-                    <span class="color-red" *ngIf="form_watcher.no_ico1">
-                      Icon Default is required <br />
-                    </span>
-                    *Image resolution 350x350px.
-                  </span>
-                </label>
-              </div>
-              <div class="form__image">
-                <input 
-                  class="display-none image_form"
-                  type="file" 
-                  name="image_one_selected"
-                  accept="image/*"
-                  (change)="readImageData($event, '350x350', 3);"
-                  id="iconH_upload_{{ 1 + index }}" 
-                  required>
-                <label class="form__image-img" for="iconH_upload_{{ 1 + index }}">
-                  <figure class="image_to_preview_container">
-                    <img 
-                      src="../../../assets/14.jpg" 
-                      class="image_to_preview placeholder_image custom-input__image"
-                      [class.custom-input__image--error]="form_watcher.no_ico0" />
-                  </figure>
-                  <span class="image_to_preview_name name_image_uploaded"></span>
-                  <span class="padding-tb-min">
-                    <strong>Icon Default:</strong> <br /> 
-                    <span class="color-red" *ngIf="form_watcher.no_ico0">
-                      Icon Default is required <br />
-                    </span>
-                    *Image resolution 350x350px.
-                  </span>
-                </label>
-              </div>
-            </div>
-            <div class="ml-col-1 ap-form__buttons">
-              <button 
-                *ngIf="add_icon_button"
-                (click)="updatedIconsService()"
-                class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-                Add Icon
-              </button>
-            </div>
-          </div>
-
-
-          <!-- div class="form__image">
-            <input 
-              class="display-none"
-              type="file" 
-              name="image_one_selected"
-              accept="image/*"
-              (change)="readImageData($event, '350x350', 0);"
-              id="validatedCustomFile" 
-              required>
-            <label class="form__image-img" for="validatedCustomFile">
-              <figure class="image_to_preview_container">
-                <img 
-                  src="{{ service_data.icon }}" 
-                  class="image_to_preview placeholder_image custom-input__image"
-                  [class.custom-input__image--error]="form_watcher.no_ico0" />
-              </figure>
-              <span class="image_to_preview_name name_image_uploaded"></span>
-              <span class="padding-tb-min">
-                <strong>Icon Default:</strong> <br /> 
-                <span class="color-red" *ngIf="form_watcher.no_ico0">
-                  Icon Default is required <br />
-                </span>
-                *Image resolution 350x350px.
-              </span>
-            </label>
-          </div>
-          <div class="form__image">
-            <input 
-              class="display-none"
-              type="file" 
-              name="image_one_selected"
-              accept="image/*"
-              (change)="readImageData($event, '350x350', 1);"
-              id="validatedCustomFile1" 
-              required>
-            <label class="form__image-img" for="validatedCustomFile1">
-              <figure class="image_to_preview_container">
-                <img 
-                  src="{{ service_data.icon2 }}" 
-                  class="image_to_preview placeholder_image custom-input__image"
-                  [class.custom-input__image--error]="form_watcher.no_ico1" />
-              </figure>
-              <span class="image_to_preview_name name_image_uploaded"></span>
-              <span class="padding-tb-min">
-                <strong>Icon Hover:</strong> <br /> 
-                <span class="color-red" *ngIf="form_watcher.no_ico1">
-                  Icon Hover is required <br />
-                </span>
-                *Image resolution 350x350px.
-              </span>
-            </label>
-          </div -->
           <div class="form__image">
             <input 
               class="display-none image_form"
@@ -325,6 +163,112 @@
               </span>
             </label>
           </div>
+          <div class="ml-col-1 custom-input">
+            <h4 class="ml-col-1 custom-input__title">
+              Icons
+            </h4>
+            <div class="ml-col-1 custom-input__icons" icon="block" *ngFor="let icons of service_data.communitiesServicesWebItems, index as index;">
+              <div class="ml-col-1 custom-input margin-top-m margin-bottom-x" id="{{ icons.id }}">
+                <input 
+                  type="text"
+                  class="custom-input__text" 
+                  name="icon_name_{{ 1 + index }}" 
+                  id="icon_name_{{ 1 + index }}" 
+                  placeholder="Icon Name" 
+                  [value]="icons.titleIcon"
+                  [class.custom-input__text--error]="icons.titleIcon == null"
+                  required />
+                <label class="custom-input__label custom-input__label--active" for="icon_name_{{ 1 + index }}">
+                  Icon Name
+                </label>
+                <span class="custom-input__text--errorm" *ngIf="icons.titleIcon == null">
+                  Icon Name is required
+                </span>
+              </div>
+              <div class="form__image">
+                <input 
+                  class="display-none image_form"
+                  type="file" 
+                  name="image_one_selected"
+                  accept="image/*"
+                  (change)="readImageData($event, '350x350', 3);"
+                  id="icon_upload_{{ 2 + index }}" 
+                  required />
+                <label class="form__image-img" for="icon_upload_{{ 2 + index }}">
+                  <figure class="image_to_preview_container">
+                    <img 
+                      *ngIf="icons.icon == null"
+                      src="../../../assets/14.jpg" 
+                      icon-image="icon"
+                      class="image_to_preview placeholder_image custom-input__image" />
+                    <img 
+                      *ngIf="icons.icon != null"
+                      src="{{ icons.icon }}" 
+                      icon-image="icon"
+                      class="image_to_preview placeholder_image custom-input__image" />
+                  </figure>
+                  <span class="image_to_preview_name name_image_uploaded"></span>
+                  <span class="padding-tb-min">
+                    <strong>Icon Default:</strong> <br /> 
+                    <span class="color-red" *ngIf="form_watcher.no_ico1">
+                      Icon Default is required <br />
+                    </span>
+                    *Image resolution 350x350px.
+                  </span>
+                </label>
+              </div>
+              <div class="form__image">
+                <input 
+                  class="display-none image_form"
+                  type="file" 
+                  name="image_one_selected"
+                  accept="image/*"
+                  (change)="readImageData($event, '350x350', 3);"
+                  id="iconH_upload_{{ 2 + index + 1 }}" 
+                  required />
+                <label class="form__image-img" for="iconH_upload_{{ 2 + index + 1 }}">
+                  <figure class="image_to_preview_container">
+                    <img 
+                      *ngIf="icons.icon2 == null"
+                      src="../../../assets/14.jpg" 
+                      icon-image="icon"
+                      class="image_to_preview placeholder_image custom-input__image"
+                      [class.custom-input__image--error]="form_watcher.no_ico1" />
+                    <img 
+                      *ngIf="icons.icon2 != null"
+                      src="{{ icons.icon2 }}" 
+                      icon-image="icon"
+                      class="image_to_preview placeholder_image custom-input__image"
+                      [class.custom-input__image--error]="form_watcher.no_ico1" />
+                  </figure>
+                  <span class="image_to_preview_name name_image_uploaded"></span>
+                  <span class="padding-tb-min">
+                    <strong>Icon Default:</strong> <br /> 
+                    <span class="color-red" *ngIf="form_watcher.no_ico0">
+                      Icon Default is required <br />
+                    </span>
+                    *Image resolution 350x350px.
+                  </span>
+                </label>
+              </div>
+              <div class="ml-col-1 ap-form__buttons">
+                <button 
+                  id="{{ icons.id }}"
+                  (click)="deleteIconsServices( $event )"
+                  class="ap-form__buttons-button ap-form__buttons-button--big button-orange">
+                  Eliminar
+                </button>
+              </div>
+            </div>
+            <div class="ml-col-1 ap-form__buttons">
+              <button 
+                *ngIf="add_icon_button"
+                (click)="updatedIconsService()"
+                class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+                Add Icon
+              </button>
+            </div>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -333,7 +277,7 @@
           style="z-index: 9999;" 
           id="close_modal" 
           class="btn btn-secondary" 
-          (click)="primaryModal.hide(); resetImagesData();">
+          (click)="primaryModal.hide(); get_photos(); resetImagesData();">
           Cerrar
         </button>
         <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>

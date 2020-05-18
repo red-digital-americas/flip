@@ -130,7 +130,7 @@ export class HomeservicesComponent implements OnInit {
 
       this.newImages[indice]=(fileToUpload);
       this.imageInputLabelfour="movil"; 
-      this.addImages(indice);
+      //this.addImages(indice);
      // debugger;
      // console.log(this.newImages);
     }
@@ -259,7 +259,7 @@ serv(id?: number) {
       this.service_data.photomobile = post.photomobile;
       this.service_data.communitiesServicesWebItems = post.communitiesServicesWebItems;
 
-      this.updatedIconsService();
+      this.updatedIconsService( false );
 
       console.log('Service From server ===> ', post);
       console.log('My Service Send ===> ', this.service_data);
@@ -271,13 +271,11 @@ serv(id?: number) {
      public loader: LoaderComponent = new LoaderComponent();
      public updatephoto():void {
 
-      const close_modal = document.getElementById('close_modal');
+      const close_modal = document.getElementById('close_modal'),
+            validation_form: boolean = this.formValidator( this.service_data ),
+            validation_icons: boolean = this.getIconsData();
 
-      this.getIconsData();
-
-      console.log('Send This ===> ', this.service_data);
-
-      /*if( this.formValidator( this.service_data ) ) {
+      if( validation_form && validation_icons ) {
 
         this.loader.showLoader();
 
@@ -328,7 +326,7 @@ serv(id?: number) {
   
         this.sendToPageTop();
 
-      } */ 
+      }
     
     }
   
@@ -350,11 +348,10 @@ serv(id?: number) {
           this.newImages[indice]=(f);
         }
       } 
-      this.addImages(indice);
+      this.addImages(indice,e);
     }
   
-  
-    addImages(indice) {
+    addImages(indice,e) { 
       let url: string = '';
       if (!Utils.isEmpty(this.newImages)) {
         for (let f of this.newImages) {
@@ -377,20 +374,20 @@ serv(id?: number) {
               url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
               this.postphoto[indice]=(url);
 
-              /*if(indice==0){
-                this.service_data.icon = url;
-              }
-
-              if(indice==1){
-                this.service_data.icon2 = url;
-              }*/
-
               if(indice==0){
                 this.service_data.frontphoto = url;
               }
 
               if(indice==1){
                 this.service_data.photomobile = url;
+              }
+
+              if( indice == 3 ) {
+
+                const root_element = e.target,
+                      image_container = root_element.parentElement.querySelectorAll('[icon-image="icon"]');
+                      image_container[0].src = url;
+
               }
 
             }
@@ -500,52 +497,104 @@ serv(id?: number) {
   }
 
   public add_icon_button: boolean = true;
-  public updatedIconsService():void { 
-
-    console.log('Work in pro ===> ', this.service_data.communitiesServicesWebItems );
+  public updatedIconsService( add_in: boolean = true ):void { 
 
     const icons_in = this.service_data.communitiesServicesWebItems;
 
-    console.log('VVeri => ', icons_in.length);
+    setTimeout( () => {
 
-    if( icons_in.length < 5 ) {
+      let icons_length = icons_in.length != 5 ? icons_in.length + 1 : 6;
 
-      const icon_model = {
-        communitiesServiciosWeb: null,
-        communitiesServiciosWebId: 0,
-        icon: '',
-        icon2: '',
-        id: 0,
-        titleIcon: ''
+      if( icons_length > 5 ) {
+
+        this.add_icon_button = false;
+
+      } else if ( add_in ) {
+
+        const icon_model = {
+          communitiesServiciosWeb: null,
+          communitiesServiciosWebId: 0,
+          icon: null,
+          icon2: null,
+          id: icons_length,
+          titleIcon: ''
+        }
+
+        icons_in.push( icon_model );
+
+        icons_length >= 5 ? 
+          this.add_icon_button = false : 
+          this.add_icon_button = true; 
+
+      } else {
+
+        this.add_icon_button = true;
+
       }
 
-      icons_in.push( icon_model );
-
-      this.add_icon_button = true;
-
-    } else {
-
-      this.add_icon_button = false;
-
-    }
+    }, 477);
 
   }
 
-  public getIconsData():void {
+  public getIconsData():boolean {
 
-    const icons_form: any = document.querySelectorAll('[icon="block"]'); 
+    const icons_form: any = document.querySelectorAll('[icon="block"]');
+    
+    let new_icons_object: any[] = [],
+        result: boolean = true;
 
     icons_form.forEach( (icon_form: any) => {
 
-      const icon_inputs: any = icon_form.querySelectorAll('input');
+      const icon_inputs: any = icon_form.querySelectorAll('input')[0],
+            icon_url: any = icon_form.querySelectorAll('[icon-image="icon"]')[0],
+            icon_url2: any = icon_form.querySelectorAll('[icon-image="icon"]')[1],
+            icon_model = {
+              communitiesServiciosWeb: null,
+              communitiesServiciosWebId: this.service_data.id,
+              icon: '',
+              icon2: '',
+              id: 0,
+              titleIcon: ''
+            };
 
-      icon_inputs.forEach( (input: any) => {
+            icon_model.id = 0;
 
-        console.log('Here ===> ', input.value );
+            icon_inputs.value == '' || icon_inputs.value == null ?
+              icon_model.titleIcon = null :
+              icon_model.titleIcon = icon_inputs.value;
 
-      });
+            icon_model.icon = icon_url.src;
+            icon_model.icon2 = icon_url2.src;
+
+            new_icons_object.push( icon_model );
 
     });
+
+    for( let icon = 0; icon < new_icons_object.length ; icon += 1 ) {
+
+      if( new_icons_object[icon].titleIcon == null ) {
+
+        result = false;
+
+      }
+
+    }
+
+    this.service_data.communitiesServicesWebItems = new_icons_object;
+
+    return result;
+
+  }
+
+  public deleteIconsServices( event_data: any ):void {
+
+    const icons_in = this.service_data.communitiesServicesWebItems,
+          delete_event = event_data.target,
+          delete_this = icons_in.findIndex( (icons: any) => icons.id == delete_event.id );
+
+          icons_in.splice( delete_this, 1 );
+
+          this.updatedIconsService( false );
 
   }
 
