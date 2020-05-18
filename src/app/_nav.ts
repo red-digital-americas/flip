@@ -64,9 +64,9 @@ export class MenuService {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   private navSections = [
-    {id:1, name: 'Flip Web', url: '/webadmin', permisos: [1, 4]},
-    {id:2, name: 'Admin App', url: '/communities', permisos: [2, 4]},
-    {id:3, name: 'Booking', url: '/booking', permisos: [3, 4]},
+    {id:1, name: 'Web Content Manager', url: '/webadmin', permisos: [1, 4]},
+    {id:2, name: 'App Content Manager', url: '/communities', permisos: [2, 4]},
+    {id:3, name: 'Building Operation', url: '/booking', permisos: [3, 4]},
   ]
 
   public CreateNavSections(systemType:number) {
