@@ -17,7 +17,8 @@
 
     <!--font-awesome.min.css-->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-
+    <script src="carga_dinamica/config.js"></script>
+    <script src="carga_dinamica/backstage.js"></script>
 
     <!--flaticon.css-->
     <link rel="stylesheet" href="assets/css/flaticon.css">
@@ -94,13 +95,13 @@
                                                     <!-- Wrapper for slides -->
                                                     <div class="carousel-inner">
                                                         <div class="item active ">
-                                                            <img src="assets/images/backstage/background1.jpg" alt="Los Angeles">
+                                                            <img id="img-backstage-01" src="assets/images/backstage/background1.jpg" alt="FLIP BACKSTAGE">
                                                             <div id="hidegallmap" class="header-backstage ">
                                                                 <div class="col-md-12 globalheigt  text-center">
                                                                     <div class="col-md-8 margin-center-back">
                                                                         <br>
                                                                         <br>
-                                                                        <span class="align-left-text"> <p  class="align-left-text" >
+                                                                        <span class="align-left-text"> <p  class="align-left-text" id="p-backstage-01">
                                                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                                                             Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro.
                                                                             Lorem ipsum dolor sit amet, an his etiam torquatos.
@@ -142,20 +143,13 @@
                                                             <img src="assets/images/backstage/live.jpg" alt="Los Angeles">
                                                             <div class="header-text-room  ">
                                                                 <div class="col-md-12 text-center">
-
-
-
                                                                     <br>
                                                                     <span>
                                                                         <div class="row"> 
-
                                                                             <div class="col-sm-6" style="margin-left: -2%;">
                                                                                 <br> 
-                                                                                <p class="textamen">
-                                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque.
-                                                                                    <br> 
-                                                                                    <br> 
-                                                                                    Quisque convallis pharetra tempor. lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque.
+                                                                                <p id= "p-what-01" class="textamen">
+                                                                                 Whats Incliuded
                                                                                 </p>
                                                                             </div> 
                                                                             <div class="col-sm-6">
@@ -168,72 +162,63 @@
                                                                                 <br> 
                                                                                 <div class ="col-sm-6 icondiv" >
 
-                                                                                    <label   data-target="#myCarousel7" data-slide-to="0"   class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                            <img id="icon-01-01-01"  class="iconsback" src="assets/images/icon_test1.svg" 
                                                                                                  onmouseover="this.src='assets/images/icon_test2.svg'"
                                                                                                  onmouseout="this.src='assets/images/icon_test1.svg'"
                                                                                                  border="0" alt=""/></a>
-                                                                                        Lorem impsum </label>
+                                                                                                &nbsp;<span id="label-01-01-01" > labelLorem impsum</span> </label>
 
                                                                                     <br>
-                                                                                    <label  data-target="#myCarousel6" data-slide-to="1"  class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                                 onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                                 onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                                 border="0" alt=""/></a>Lorem impsum   </label> <br> 
+                                                                                            <img id="icon-01-02-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-01-02-01" > labelLorem impsum</span> </label>
 
                                                                                 </div>
 
                                                                                 <div class ="col-sm-6 icondiv" >
-                                                                                    <label   data-target="#myCarousel7" data-slide-to="0"   class="">   <a href="#">
-                                                                                        <img  class="iconsback" src="assets/images/icon_test1.svg" 
-                                                                                             onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                             onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                             border="0" alt=""/></a>
-                                                                                        Lorem impsum </label>
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
+                                                                                        <a href="#">
+                                                                                            <img id="icon-01-03-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-01-03-01" > labelLorem impsum</span> </label>
 
                                                                                     <br>
-                                                                                    <label  data-target="#myCarousel6" data-slide-to="1"  class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                                 onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                                 onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                                 border="0" alt=""/></a>Lorem impsum   </label> <br> 
+                                                                                            <img id="icon-01-04-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-01-04-01" > labelLorem impsum</span> </label> <br> 
 
                                                                                 </div>
 
                                                                             </div>
-
-
                                                                             <br>
-
-
                                                                         </div>
-
-
                                                                     </span>
-
                                                                     <br> 
                                                                 </div>
                                                             </div><!-- /header-text -->
                                                         </div>
-
                                                         <div class="item">
                                                             <img src="assets/images/backstage/work.jpg" alt="Chicago">
                                                             <div class="header-text-room  ">
                                                                 <div class="col-md-12 text-center">
-
-
-
                                                                     <br>
                                                                     <span>
                                                                         <div class="row"> 
-
                                                                             <div class="col-sm-6" style="margin-left: -2%;">
                                                                                 <br> 
-                                                                                <p class="textamen">
+                                                                                <p id="p-what-02" class="textamen">
                                                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque.
                                                                                     <br> 
                                                                                     <br> 
@@ -246,43 +231,45 @@
                                                                                         <span id="comserv-activetext"  class="beneficios-title" style="    font-size: 0.75em;">¿WHAT IS INCLUDED?</span>
                                                                                     </h2> 
                                                                                 </div>
-
                                                                                 <br> 
                                                                                 <div class ="col-sm-6 icondiv" >
 
-                                                                                    <label   data-target="#myCarousel7" data-slide-to="0"   class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                            <img id="icon-02-01-01"  class="iconsback" src="assets/images/icon_test1.svg" 
                                                                                                  onmouseover="this.src='assets/images/icon_test2.svg'"
                                                                                                  onmouseout="this.src='assets/images/icon_test1.svg'"
                                                                                                  border="0" alt=""/></a>
-                                                                                        Lorem impsum </label>
+                                                                                                &nbsp;<span id="label-02-01-01" > labelLorem impsum</span> </label>
 
                                                                                     <br>
-                                                                                    <label  data-target="#myCarousel6" data-slide-to="1"  class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                                 onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                                 onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                                 border="0" alt=""/></a>Lorem impsum   </label> <br> 
+                                                                                            <img id="icon-02-02-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-02-02-01" > labelLorem impsum</span> </label>
 
                                                                                 </div>
 
                                                                                 <div class ="col-sm-6 icondiv" >
-                                                                                    <label   data-target="#myCarousel7" data-slide-to="0"   class="">   <a href="#">
-                                                                                        <img  class="iconsback" src="assets/images/icon_test1.svg" 
-                                                                                             onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                             onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                             border="0" alt=""/></a>
-                                                                                        Lorem impsum </label>
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
+                                                                                        <a href="#">
+                                                                                            <img id="icon-02-03-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-02-03-01" > labelLorem impsum</span> </label>
 
                                                                                     <br>
-                                                                                    <label  data-target="#myCarousel6" data-slide-to="1"  class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                                 onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                                 onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                                 border="0" alt=""/></a>Lorem impsum   </label> <br> 
+                                                                                            <img id="icon-02-04-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-02-04-01" > labelLorem impsum</span> </label> <br> 
 
                                                                                 </div>
 
@@ -306,16 +293,13 @@
                                                             <img src="assets/images/backstage/create.jpg" alt="Chicago">
                                                             <div class="header-text-room  ">
                                                                 <div class="col-md-12 text-center">
-
-
-
                                                                     <br>
                                                                     <span>
                                                                         <div class="row"> 
 
                                                                             <div class="col-sm-6" style="margin-left: -2%;">
                                                                                 <br> 
-                                                                                <p class="textamen">
+                                                                                <p id="p-what-03" class="textamen">
                                                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque.
                                                                                     <br> 
                                                                                     <br> 
@@ -324,8 +308,6 @@
                                                                             </div> 
                                                                             <div class="col-sm-6">
                                                                                 <div class="text-center">
-
-
                                                                                     <h2>
                                                                                         <span id="comserv-activetext"  class="beneficios-title" style="    font-size: 0.75em;">¿WHAT IS INCLUDED?</span>
                                                                                     </h2> 
@@ -333,39 +315,42 @@
                                                                                 <br> 
                                                                                 <div class ="col-sm-6 icondiv" >
 
-                                                                                    <label   data-target="#myCarousel7" data-slide-to="0"   class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                            <img id="icon-03-01-01"  class="iconsback" src="assets/images/icon_test1.svg" 
                                                                                                  onmouseover="this.src='assets/images/icon_test2.svg'"
                                                                                                  onmouseout="this.src='assets/images/icon_test1.svg'"
                                                                                                  border="0" alt=""/></a>
-                                                                                        Lorem impsum </label>
+                                                                                                &nbsp;<span id="label-03-01-01" > labelLorem impsum</span> </label>
 
                                                                                     <br>
-                                                                                    <label  data-target="#myCarousel6" data-slide-to="1"  class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                                 onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                                 onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                                 border="0" alt=""/></a> Lorem impsum   </label> <br> 
+                                                                                            <img id="icon-03-02-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-03-02-01" > labelLorem impsum</span> </label>
 
                                                                                 </div>
 
                                                                                 <div class ="col-sm-6 icondiv" >
-                                                                                    <label   data-target="#myCarousel7" data-slide-to="0"   class="">   <a href="#">
-                                                                                        <img  class="iconsback" src="assets/images/icon_test1.svg" 
-                                                                                             onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                             onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                             border="0" alt=""/></a>
-                                                                                        Lorem impsum </label>
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
+                                                                                        <a href="#">
+                                                                                            <img id="icon-03-03-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-03-03-01" > labelLorem impsum</span> </label>
 
                                                                                     <br>
-                                                                                    <label  data-target="#myCarousel6" data-slide-to="1"  class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                                 onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                                 onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                                 border="0" alt=""/></a> Lorem impsum   </label> <br> 
+                                                                                            <img id="icon-03-04-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-03-04-01" > labelLorem impsum</span> </label> <br> 
 
                                                                                 </div>
 
@@ -398,7 +383,7 @@
 
                                                                             <div class="col-sm-6" style="margin-left: -2%;">
                                                                                 <br> 
-                                                                                <p class="textamen">
+                                                                                <p id="p-what-04" class="textamen">
                                                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque.
                                                                                     <br> 
                                                                                     <br> 
@@ -415,39 +400,42 @@
                                                                                 <br> 
                                                                                 <div class ="col-sm-6 icondiv" >
 
-                                                                                    <label   data-target="#myCarousel7" data-slide-to="0"   class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                            <img id="icon-04-01-01"  class="iconsback" src="assets/images/icon_test1.svg" 
                                                                                                  onmouseover="this.src='assets/images/icon_test2.svg'"
                                                                                                  onmouseout="this.src='assets/images/icon_test1.svg'"
                                                                                                  border="0" alt=""/></a>
-                                                                                        Lorem impsum </label>
+                                                                                                &nbsp;<span id="label-04-01-01" > labelLorem impsum</span> </label>
 
                                                                                     <br>
-                                                                                    <label  data-target="#myCarousel6" data-slide-to="1"  class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                                 onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                                 onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                                 border="0" alt=""/></a>Lorem impsum   </label> <br> 
+                                                                                            <img id="icon-04-02-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-04-02-01" > labelLorem impsum</span> </label>
 
                                                                                 </div>
 
                                                                                 <div class ="col-sm-6 icondiv" >
-                                                                                    <label   data-target="#myCarousel7" data-slide-to="0"   class="">   <a href="#">
-                                                                                        <img  class="iconsback" src="assets/images/icon_test1.svg" 
-                                                                                             onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                             onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                             border="0" alt=""/></a>
-                                                                                        Lorem impsum </label>
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
+                                                                                        <a href="#">
+                                                                                            <img id="icon-04-03-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-04-03-01" > labelLorem impsum</span> </label>
 
                                                                                     <br>
-                                                                                    <label  data-target="#myCarousel6" data-slide-to="1"  class="">
+                                                                                    <label    data-target="#myCarousel7" data-slide-to="0"   class="">
                                                                                         <a href="#">
-                                                                                            <img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                                 onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                                 onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                                 border="0" alt=""/></a>Lorem impsum   </label> <br> 
+                                                                                            <img id="icon-04-04-01"  class="iconsback" src="assets/images/icon_test1.svg" 
+                                                                                                 onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                 onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                 border="0" alt=""/></a>
+                                                                                                &nbsp;<span id="label-04-04-01" > labelLorem impsum</span> </label> <br> 
 
                                                                                 </div>
 
@@ -1052,7 +1040,7 @@
                                                             <div id="lateral-menucom" class="portfolio-preview-3  Room2 globalheigt">
                                                                 <!-- <img   id="loginbar" src="assets/images/signin.png" class="pointer movilhidden"/> -->
 
-                                                                <div  id="RoomA" class="    textmenucommunities globalheigt  ">¿QUÉ ES COLIVING? 
+                                                                <div  id="d-backstage-01" class="    textmenucommunities globalheigt  ">¿QUÉ ES COLIVING? 
 
                                                                 </div>
                                                             </div>
@@ -1061,7 +1049,7 @@
                                                         <div class="backchange globalheigt">
                                                             <div id="colivingdiv" class="portfolio-preview-3  globalheigt">
                                                                 <!-- <img   id="loginbar2" src="assets/images/signin.png" class="pointer movilhidden"/> -->
-                                                                <div class=" textmenucommunities globalheigt pointer "> <p id="textmenuamenidades">¿QUÉ ES COLIVING? </p>
+                                                                <div id="d-backstage-02" class=" textmenucommunities globalheigt pointer "> <p id="textmenuamenidades">¿QUÉ ES COLIVING? </p>
                                                                 </div>
                                                             </div>
                                                             <div id="sevadicdiv"class="portfolio-preview-3 hiddens globalheigt ">
@@ -1179,13 +1167,15 @@
             <div class="modal-content" style="width: 47.0%;">
                 <span class="close">  <img style="width: 20%; height: 20%;
                     margin-left: 75%;" src="assets/images/error.svg"> </span>
-                <p id="getguidetext" style="font-size: 19px; padding-bottom: 25px;">Buscar</p>
+                <p id="getguidetext" style="font-size: 19px; padding-bottom: 25px;">FAQS</p>
                 <form style="padding-right: 0;">
                     <div class="form-group">
-                        <label for="name" style="margin-left: 0;">Pregunta a buscar:</label>
-                        <input type="text" class="form-control" id="name" placeholder="Describe your issue" required>
+                        <input type="text" class="form-control" id="name" placeholder="Describe your question" required>
                     </div>
-                    <button type="submit" class="btn btn-default">Buscar</button>
+                    <div id="d-faqs-01" class="form-group">
+                      FAQS LIST
+                    </div>
+                    
                 </form>
             </div>
 
