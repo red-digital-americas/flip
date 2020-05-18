@@ -1,0 +1,26 @@
+<div class="card card-height-newsfeed">
+  <div class="card-body">
+    <form action="">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 ">
+
+          <div class="form-row">
+            <div *ngIf="invalidError" style="color:red">
+              {{ invalidError.message }}
+            </div>
+
+            <div class="col-12  margin-gral">
+              <stripe-card #stripeCard (catch)="onStripeError($event)" [(invalid)]="invalidError"
+                (tokenChange)="setStripeToken($event)" (sourceChange)="setStripeSource($event)" class="form-control">
+              </stripe-card>
+            </div>
+          </div>
+          <button type="button" (click)="stripeCard.createToken(extraData)"
+            class="btn btn-outline-dark margin-gral">createToken</button>
+
+        </div>
+      </div>
+      <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+    </form>
+  </div>
+</div>

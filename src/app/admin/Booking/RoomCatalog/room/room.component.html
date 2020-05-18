@@ -1,0 +1,189 @@
+<div class="ml-col-1">
+    <booking-navbar [section]="section"></booking-navbar>
+    <div class="ml-col-1">
+        <div class="ml-col-1 padding-general-m margin-bottom-g">
+            <div class="ml-col-1 margin-top-m folder">
+                <div class="ml-col-1 margin-top-x" >
+                <form 
+                class="ap-form ap-form--no-tl-br ml-col-1 card-style"
+                action="submit"
+                (submit)="update()">
+                <div class="ml-col-1">
+                    <h4 class="ap-form__titulo text-left">
+                        Edit Room
+                    </h4>
+                </div>
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="text" 
+                                placeholder="Name*"
+                                id="profile_name" 
+                                name="profile_name"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_name"
+                                [(ngModel)]="roomObj.name" />
+                                <label 
+                                for="profile_name" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="roomObj.name != ''">
+                                Name <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_name">
+                                Name is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="text" 
+                                placeholder="Description*"
+                                id="profile_description" 
+                                name="profile_description"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_description"
+                                [(ngModel)]="roomObj.description" />
+                                <label 
+                                for="profile_description" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="roomObj.description != ''">
+                                Description <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_description">
+                                Description is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <input 
+                                required
+                                type="number" 
+                                placeholder="Beds*"
+                                id="profile_price" 
+                                name="profile_price"
+                                class="ap-form__input-text"
+                                [class.form_error_found]="form_required.no_price"
+                                [(ngModel)]="roomObj.totalBeds" />
+                                <label 
+                                for="profile_price" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="roomObj.totalBeds != ''">
+                                Total Beds <span class="color-red text-bold">*</span>
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_price">
+                                Bed is required*
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <select
+                                required
+                                placeholder="typeRoom"
+                                id="profile_typeRoom" 
+                                name="typeRoom"
+                                class="ap-form__input-text"
+                                [(ngModel)]="roomObj.typeRoomId">
+                                <option value="null" disabled>Type Room*</option>
+                                <option *ngFor="let room of typeRoomList;" [value]="room.id">
+                                    {{ room.type }}
+                                </option>
+                                </select>
+                                <label 
+                                for="profile_typeRoom" 
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="roomObj.typeRoomId != null">
+                                Type Room <span class="color-red text-bold">*</span> 
+                                </label>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-col-3">
+                            <div class="ap-form__input">
+                              <input 
+                                type="checkbox"
+                                id="profile_active" 
+                                name="profile_active"
+                                [checked]="roomObj.active"
+                                [(ngModel)]="roomObj.active"
+                                [ngModelOptions]="{standalone: true}"
+                                class="ap-form__input-checkbox display-none" />
+                              <label for="profile_active" class="ap-form__label ap-form__label-checkbox">
+                                Active
+                              </label>
+                            </div>
+                        </div>   
+                          
+                        <div class="ml-col-1 ap-form__gallery padding-general-m" id="images_on_gallery">
+                            <div class="ml-col-1">
+                              <h4 class="ap-form__titulo text-left">
+                                Gallery
+                              </h4>
+                            </div>
+                            <div class="ap-form__gallery-image margin-top-x" *ngFor="let image of images_in_gallery, index as index;">
+                              <input
+                                class="ap-form__input-image display-none" 
+                                id="gallery_input_{{ image.id }}"
+                                name="gallery_input_{{ image.id }}"
+                                type="file"
+                                gallery="image"
+                                (change)="validateImageUpload( $event, '320x180', 'gallery_img_' + image.id, 'gallery_img_name_' + image.id, image.id );" />
+                              <label for="gallery_input_{{ image.id }}" class="ap-form__label-gallery">
+                                <figure class="ap-form__image">
+                                  <img class="ap-form__image-image ap-form__image-image--gallery no-image" 
+                                       id="gallery_img_{{ image.id }}"
+                                       src="{{ image.src }}" />
+                                  <span class="ap-form__image-data text-center" id="gallery_img_name_{{ image.id }}">
+                                    La imagen debe medir <br />
+                                    <span class="text-bold">320x180</span> 
+                                  </span>
+                                  <button 
+                                    *ngIf="image.can_delete"
+                                    type="button"
+                                    (click)="deleteImageFromGallery( image )"
+                                    class="ap-form__gallery-delete">x
+                                  </button>
+                                </figure>
+                              </label>
+                              <button 
+                                *ngIf="image.last_one"
+                                type="button"
+                                (click)="addOneImageToGallery()"
+                                class="ap-form__gallery-adder-button">+
+                              </button>
+                            </div>
+                          </div>
+                        
+                          <div class="black-box">
+                            <img src="" id="image_real_dimension" />
+                          </div>
+                          
+                        <!---->
+                        <div class="ml-col-1 ap-form__buttons">
+                            <button 
+                            type="submit"
+                            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+                            Save
+                            </button>
+                        </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

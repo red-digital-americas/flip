@@ -62,8 +62,9 @@ import { Router } from '@angular/router';
     public goToProfile( profile: any ):void { 
 
         sessionStorage.setItem('id_section_active', profile.id );
+        sessionStorage.setItem('name_section_active', profile.build );
         sessionStorage.setItem('name_build', profile.build );
-        this.goToPage(`app-profile/${ profile.idUser }`);
+        this.goToPage(`app-profile/${ profile.idUser }/${ profile.idBooking }`);
 
     }
 

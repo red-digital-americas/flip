@@ -29,6 +29,8 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
+import { Module as StripeModule } from "stripe-angular"
+
 const APP_CONTAINERS = [
   DefaultLayoutComponent
 ];
@@ -91,6 +93,7 @@ import { MatCardModule } from '@angular/material/card';
     ImageCropperModule,
     // MaterialModule,
  
+    StripeModule.forRoot()
   ],
   declarations: [
     AppComponent,

@@ -10,7 +10,7 @@ import { MessageUsersComponent } from '../../modals/message-users/message-users/
 import { Contact, ContactSend, Info } from '../../models/contact';
 import { type } from 'os';
 import { MessageData, Conversation } from '../../models/message';
-
+import { ActivatedRoute } from '@angular/router';
 
 class MessageCustom {
     public message;
@@ -32,10 +32,10 @@ export class MessagesComponent implements OnInit {
 
     constructor(private router: Router,
         private heroService: DatosService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
         // public modalController: ModalController,
         // public toastController: ToastController
-    
+        private route: ActivatedRoute,
       ) {
     
       }
@@ -64,9 +64,10 @@ export class MessagesComponent implements OnInit {
         timeout: 3000,
         positionClass: "toast-top-center",
       });
+      build;
       ngOnInit() {
         //debugger;
-    
+        this.build = this.route.snapshot.paramMap.get('id');
         this.user = JSON.parse(localStorage.getItem("user"));
         console.log(this.user);
         this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
@@ -108,8 +109,8 @@ export class MessagesComponent implements OnInit {
     
       get_chats() {
         //debugger;
-        var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
-        this.heroService.ServicioPostMessage("SeeChats", creadoobj).subscribe((value) => {
+        var creadoobj = { buildingid: this.build, userid: this.IDUSR };
+        this.heroService.ServicioPostMessage("SeeChatsConsierge", creadoobj).subscribe((value) => {
           //debugger;
           switch (value.result) {
             case "Error":
@@ -125,7 +126,7 @@ export class MessagesComponent implements OnInit {
       }
     
       get_users() {
-        var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
+        var creadoobj = { buildingid: this.build, userid: this.IDUSR };
         this.heroService.ServicioPostMessage("SeeUsers", creadoobj).subscribe((value) => {
           switch (value.result) {
             case "Error":
@@ -207,8 +208,8 @@ export class MessagesComponent implements OnInit {
     
       private GetConversationUser(id) {
         //debugger;
-        var creadoobj = { conversationId: id, userId: this.IDUSR };
-        this.heroService.service_general_get_with_params("Message/GetConversationUser", creadoobj).subscribe((value) => {
+        var creadoobj = { conversationId: id, buildingid: this.build };
+        this.heroService.service_general_get_with_params("Message/GetConversationUserConsierge", creadoobj).subscribe((value) => {
           switch (value.result) {
             case "Error":
               console.log("Ocurrio un error " + value.detalle);
@@ -224,8 +225,8 @@ export class MessagesComponent implements OnInit {
     
       private GetMessages() {
         //debugger;
-        var creadoobj = { conversationId: this.conversationId, userId: this.IDUSR };
-        this.heroService.service_general_get_with_params("Message/GetMessages", creadoobj).subscribe((value) => {
+        var creadoobj = { conversationId: this.conversationId, buildingid: this.build };
+        this.heroService.service_general_get_with_params("Message/GetMessagesConsierge", creadoobj).subscribe((value) => {
           switch (value.result) {
             case "Error":
               console.log("Ocurrio un error " + value.detalle);
@@ -339,7 +340,7 @@ export class MessagesComponent implements OnInit {
           SendTXT = 'SentMessage';
           this.selectedContacts.push(this.userSendMessage);
           let userIdList = this.selectedContacts.map(contact => contact.info.iduser);
-          message = { message1: this.messageInput, conversationId: this.conversationId, userId: this.IDUSR };
+          message = { message1: this.messageInput, conversationId: this.conversationId, userId: this.build };
     
           if (this.messageInput.length <= 0) { return; }
           if (this.messageInput.trim().replace('/\r?\n|\r/', '').length <= 0) { return; }
@@ -356,7 +357,7 @@ export class MessagesComponent implements OnInit {
         // });
     
         // console.log(newMessageModel); return;
-        this.heroService.service_general_post("Message/SentMessage", message).subscribe((value) => {
+        this.heroService.service_general_post("Message/SentMessageConsierge", message).subscribe((value) => {
           switch (value.result) {
             case "Error":
               console.log("Ocurrio un error " + value.detalle);
