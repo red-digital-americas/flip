@@ -273,6 +273,8 @@ serv(id?: number) {
 
       const close_modal = document.getElementById('close_modal');
 
+      this.getIconsData();
+
       console.log('Send This ===> ', this.service_data);
 
       /*if( this.formValidator( this.service_data ) ) {
@@ -526,6 +528,24 @@ serv(id?: number) {
       this.add_icon_button = false;
 
     }
+
+  }
+
+  public getIconsData():void {
+
+    const icons_form: any = document.querySelectorAll('[icon="block"]'); 
+
+    icons_form.forEach( (icon_form: any) => {
+
+      const icon_inputs: any = icon_form.querySelectorAll('input');
+
+      icon_inputs.forEach( (input: any) => {
+
+        console.log('Here ===> ', input.value );
+
+      });
+
+    });
 
   }
 

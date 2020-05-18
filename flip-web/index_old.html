@@ -1,0 +1,1980 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="js no-touch csstransitions uk-notouch"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        .jquery-ripples {
+            position: relative;
+            z-index: 0;
+        }
+    </style>
+    <!-- META DATA -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <title>FLIP</title>
+
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="carga_dinamica/index.js"></script>
+
+</head>
+    <body>
+
+
+
+
+
+
+        <div id="preloader" class=""> </div>
+        <!--LOAD-->
+        <div id="preloadermobile" class="preloader " >
+            <div class="preloader-inner-area">
+                <div class="loader-overlay">
+                    <div class="l-preloader">
+                        <div class="c-preloader"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="wrapper">
+
+        </div>
+        <!--<link rel="shortcut icon" href="http://template.helloxpart.com/picasso/picasso/images/favicon.ico" type="image/x-icon">-->
+
+        <!--animation-->
+        <link rel="stylesheet" href="assets/css/animation.css">
+
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <!--flaticon.css-->
+        <link rel="stylesheet" href="assets/css/flaticon.css">
+        <!--material-design-icon-->
+        <link rel="stylesheet" href="assets/css/material-design-iconic-font.min.css">
+        <!--animate.css-->
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <!--meanmenu.min.css-->
+        <link rel="stylesheet" href="assets/css/meanmenu.min.css">
+        <!--jquery.fancybox.min.css-->
+        <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
+        <!--owl.carousel.min.css-->
+        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+        <!--jquery-ui.min.css-->
+        <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+        <!--change-text.css-->
+        <link rel="stylesheet" href="assets/css/change-text.css">
+        <!--lightbox.css-->
+        <link rel="stylesheet" href="assets/css/lightbox.css">
+        <!--MASTER SLIDER CSS-->
+
+        <!--bootstrap.min.css and bootsnav.css-->
+        <link rel="stylesheet" href="assets/css/bootsnav.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <!--circle.css-->
+        <link rel="stylesheet" href="assets/css/circle.css">
+        <!--style.css-->
+        <link rel="stylesheet" href="assets/css/styleflip.css">
+        <!--Menu_responsive.css-->
+        <link rel="stylesheet" href="assets/css/Menu_responsive.css"> 
+        <!--responsive.css-->
+        <link rel="stylesheet" href="assets/css/responsive.css">
+
+        <!--FIN LOAD -->
+        <div  id="allpage" class="wrapper hiddens">
+
+
+
+            <div id="pportfolio2">
+                <div class="pportfolio2 text-center">
+                    <div class="container-fluid">
+                        <!--INICIO VIDEO -->
+                        <div class="videos"  style="position: fixed" id="repvid">
+                            <script src="https://fast.wistia.com/embed/medias/5ifjhb987h.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+                            <button id="myBtn2"    class="close hiddens" aria-label="Close">
+                                <span aria-hidden="true"><img style="width: 20%; height: 20%;     margin-left: 75%;" src="assets/images/error.svg"></span>
+                            </button>
+                            <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+                                <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+                                    <div class="wistia_embed wistia_async_5ifjhb987h videoFoam=true" style="height:100%;position:relative;width:100%">
+                                        <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
+                                            <img src="https://fast.wistia.com/embed/medias/5ifjhb987h/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" onload="this.parentNode.style.opacity=1;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+
+                        <div  style="position: fixed; right: 0px; " class="col-md-5 hiddens" id="loginform">
+
+
+                            <div class="col-md-12 formloginindex ">
+                                <div class="loginopen"> <img   id="closelogin" src="assets/images/signin.png" class="pointer"
+                                                             class="movilhidden"/></div>
+                                <br> 
+
+
+                                <div class="col-md-12">
+                                    <form name="login" method="post" action=""
+                                          enctype="multipart/form-data">
+                                        <div class="form-group" style="text-align: left;">
+                                            <label style="margin-left: 0px; text-align: left;" for="email"><h4>Email address:
+                                                </h4></label>
+                                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        </div>
+                                        <div class="form-group" style="text-align: left;" >
+                                            <label style="margin-left: 0px; text-align: left; " for="name"><h4>Password
+                                                </h4></label>
+                                            <input type="password" class="form-control" id="name" placeholder="name" required>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-default">Login</button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div> 
+
+
+                        <!--FIN VIDEO --->
+                        <!--INICIO GRIDS -->
+                        <div id="generalgrid">
+                            <!--Fin More -->
+                            <!--Inicio Index -->
+
+                            <div id="indexgrid" class="pportfolio2-container portfolio-1 text-center"  style="position: relative; height: 861.75px;" >
+                                <div class="pportfolio2-sizer"></div>
+                                <a id="closecommunities"class="fbackmore  pointer hiddens" href="#" >
+                                    <span>
+                                        <img src="assets/images/F.png" alt="back">
+                                    </span>
+                                </a>
+                                <a id="closemore"class="fbackmore hiddens" href="#" >
+                                    <span>
+                                        <img src="assets/images/F.png" alt="back">
+                                    </span>
+                                </a>
+                                <a id="closedesign"class="fbackmore hiddens" href="#" >
+                                    <span>
+                                        <img src="assets/images/F.png" alt="back">
+                                    </span>
+                                </a>
+
+                                <a id="insta"class="iconsocialnet hiddens" href="#" >
+                                    <span>
+                                        <img src="assets/images/instagram.png">
+                                    </span>
+                                </a>
+                                <a id="frontphoto"class="iconsocialnet hiddens" href="#" >
+                                    <span>
+                                        <img src="assets/images/facebook-logo.png">
+                                    </span>
+                                </a>
+                                <a id="youtube"class="iconsocialnet hiddens" href="#" >
+                                    <span>
+                                        <img src="assets/images/youtube-logo.png">
+                                    </span>
+                                </a>
+                                <a id="twit" class="iconsocialnet hiddens" href="#" >
+                                    <span>
+                                        <img  src="assets/images/twitter-logo-silhouette.png">
+                                    </span>
+                                </a>
+                                <div id="cardmore2x11" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 0px; top: 0px;">
+                                    <div id="card_more1" class="card">
+                                        <div class="hover-img frontchange ">
+                                            <img id="frontphoto1" src="assets/images/avatares/face9-1.jpg" class="img1" />
+                                            <img id="backphoto1" src="assets/images/avatares/face9.jpg" class="img2" />
+                                        </div>
+                                        <div class="backchange  ">
+                                            <img id="moreflip2x12" src="assets/images/more/grid-more-2.jpg" alt="Images">
+                                            <span class="hiddens textbuildscomm pointer" id="communitiesflip2x12text">
+                                                <h2 style="font-weight: 500; font-size: 20px; width: 52%; ">
+                                                    ALTATA 7
+                                                </h2>
+                                                <p style="    width: 100%;">
+                                                    <img src="assets/images/gps.svg" alt="Images" style="height: 20px; width: 20px; " />  Condesa , Ciudad de México
+                                                </p>
+                                            </span>
+                                            <img class="hiddens pointer" id="communitiesflip2x12" src="assets/images/comm/Altata.jpg" alt="Images">
+                                            <img class="hiddens" id="designflip2x12" src="assets/images/design/grid-design-2.jpg" alt="Images">
+                                        </div>
+                                    </div>
+                                    
+                                </div> 
+                                <div  id="cardindex2" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 movilhidden square "   style="position: absolute; left: 287px; top: 0px;" >
+                                    <div id="cardgrid2" class="card"> 
+                                        <div class="hover-img frontchange ">  
+                                            <img id="frontphoto2" src="assets/images/avatares/face2.jpg" class="img1"/>
+                                            <img id="backphoto2" src="assets/images/avatares/face2-1.jpg" class="img2"/>
+                                        </div> 
+                                        <div class="backchange">
+                                            <span class=" textdesignindex pointer leftmoreindex " id="moreflip1x12text"  >
+                                                <h2 style="font-weight: 500; font-size: 20px; width: 52%; color: black; ">
+                                                    <strong> TEAM </strong>
+                                                </h2>
+                                            </span>
+
+
+                                            <img  class="pointer"id="moreflip1x12" src="assets/images/more/MORE1.jpg" alt="Images"  >
+                                            <img  class="hiddens" id="communitiesflip1x12" src="assets/images/comm/grid-2.jpg" alt="Images"  >
+
+
+                                            <span class="hiddens textdesignindex pointer" id="designflip2x1x1text"  >
+                                                <h2 style="font-weight: 500; font-size: 20px; width: 52%; ">
+                                                    <strong> DESIGN </strong> PROCESS 
+                                                </h2>
+                                            </span>
+
+                                            <img class="hiddens pointer" id="designflip2x1x1" src="assets/images/design/home-design-3.jpg" alt="Images"  >
+                                        </div> 
+                                    </div>
+
+
+                                </div>
+                                <div id="cardmore2x13" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square"   id="comDesignIndex" style="position: absolute; left: 1141px; top: 232px;  "  onclick="communties()"   >
+                                    <div id="card_more2" class="card"> 
+                                        <div class="hover-img frontchange pointer">  
+                                            <h2 class="titulo_sec  titulo_ter  pointer">HOMES</h2>
+                                            <img id="frontphoto3" class="img1" src="assets/images/communities.jpg" alt="Images"  >
+                                            <img id="backphoto3" class="img2 pointer" src="assets/images/communities_2.jpg" alt="Images ">
+                                        </div> 
+                                        <div class="backchange">
+                                            <img id="moreflip2x1x3" src="assets/images/more/grid-more-3.jpg" alt="Images"  >
+                                            <span class="hiddens textbuildscomm" id="communitiesflip2x13text"  >
+                                                <h1 style="font-size: 26px; width: 120% ; margin-top: -123%; " >
+                                                    PROXIMAMENTE
+                                                </h1>
+                                                <h2 style="font-weight: 500; font-size: 20px; width: 120% ;     margin-top: 110%; ">ALVARO OBREGON 7
+                                                </h2>
+                                                <p>
+                                                    <img  src="assets/images/gps.svg" alt="Images" style="height: 20px; width: 20px; "  />  Roma , Ciudad de México
+                                                </p> 
+                                            </span>
+                                            <img  class="hiddens"  style=" opacity: .5;    -webkit-filter: grayscale(100%); filter: grayscale(100%);" id="communitiesflip2x13" src="assets/images/comm/AlvaroObregon.jpg" alt="Images"  >
+                                            <img class="hiddens" id="designflip2x13" src="assets/images/design/grid-design-3.jpg" alt="Images"  >
+                                        </div> 
+                                    </div>
+
+
+                                </div>
+                                <div id ="cardindex4" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  movilhidden square  " style="position: absolute; left: 861px; top: 0px;" >
+                                    <div id="cardgrid3" class="card"> 
+                                        <div class="hover-img frontchange "> 
+                                            <img id="frontphoto4" src="assets/images/avatares/face3-1.jpg" class="img1"/>
+                                            <img id="backphoto4" src="assets/images/avatares/face3.jpg" class="img2"/>
+                                        </div> 
+                                        <div class="backchange">
+                                            <span class=" textdesignindex pointer leftmoreindex" id="moreflip1x14text"  >
+                                                <h2 style="font-weight: 500; font-size: 20px; width: 52%; color: black; ">
+                                                    <strong>
+                                                        CAREERS
+                                                    </strong>
+                                                </h2>
+                                            </span>
+
+
+                                            <img  class="pointer"  id="moreflip1x14" src="assets/images/more/MORE5.jpg" alt="Images"  >
+                                            <img  class="hiddens" id="communitiesflip1x14" src="assets/images/comm/grid-3.jpg" alt="Images"  >
+                                            <span class="hiddens textdesignindex pointer" id="designflip2x1x4text"  >
+                                                <h2 style="font-weight: 500; font-size: 20px; width: 52%; ">
+                                                    <strong>ACABADOS</strong>
+                                                </h2>
+                                            </span>
+
+
+                                            <img class="hiddens pointer" id="designflip2x1x4" src="assets/images/design/home-design-6.jpg" alt="Images"  >
+                                        </div> 
+                                    </div>
+
+                                </div>
+                                <div  id="cardmore2x15" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 861px; top: 0px;" >
+                                    <div id="card_more4" class="card"> 
+                                        <!-- <img   id="loginbar"src="assets/images/signin.png" class="pointer"
+                                             class="movilhidden"/> -->
+                                        <div class="hover-img frontchange ">
+                                            <img id="frontphoto5" src="assets/images/avatares/face4.jpg" class="img1"/>
+                                            <img id="backphoto5" src="assets/images/avatares/face4-1.jpg" class="img2"/>
+                                        </div> 
+                                        <div class="backchange">
+                                            <img id="moreflip2x15" src="assets/images/more/grid-more-4.jpg" alt="Images"  >
+                                            <img class="hiddens" id="communitiesflip2x15" src="assets/images/comm/grid-add-1.jpg" alt="Images"  >
+                                            <img class="hiddens" id="designflip2x16" src="assets/images/design/grid-add-1.jpg" alt="Images"  >
+                                        </div> 
+                                    </div>
+
+                                </div>
+
+                                <div id="backquitmore" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 custom_uno square pointer" style="position: absolute; left: 1141px; top: 232px;">
+                                    <div class="frontchange custom_uno-img" style="position: relative; height: 220px;">  
+                                        <h2 class="custom_uno-title">ABOUT</h2>
+                                        <img  id="frontphoto6" class="img1" src="assets/images/backstage.jpg" alt="Images"  >
+                                        <img  id="backphoto6" class="img2" src="assets/images/backstage_2.jpg" alt="Images "> 
+                                    </div>
+                                    <div class="custom_uno-about" style="display: none;">
+                                        <a class="about__text" href="/backstage.html">
+                                            <span>
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi veritatis odit aut tempore doloremque fuga nemo eaque dicta. Aliquam quibusdam vitae odio rerum labore debitis adipisci laborum reprehenderit in iste?
+                                            </span>
+                                        </a>
+                                        <div class="about__links">
+                                            <a href="/backstage.html" style="background: rgba(77,163,189,.5);" class="about__link">¿QUÉ ES COLIVING?</a>
+                                            <a href="/backstage.html" style="background: rgba(95,185,209,.7);" class="about__link">MEMBRESÍAS</a>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div id="cardmore2x12" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square" style="position: absolute; left: 287px; top: 232px;" contenteditable="false" >
+                                    <div id="card" class="card">
+                                        <div class="hover-img frontchange ">
+                                            <img id="frontphoto7" src="assets/images/avatares/face5-1.jpg" class="img1" />
+                                            <img id="backphoto7" src="assets/images/avatares/face5.jpg" class="img2" />
+                                        </div>
+                                        <!--onclick="moreback()"-->
+                                        <div class="backchange  ">
+                                            <img class="pointer" id="moreflip2x1" src="assets/images/more/grid-more-1.jpg" alt="Images">
+
+                                            <span class="hiddens textbuildscomm" id="commflip2x1text">
+                                                <h1 style="font-size: 26px; width: 120% ; margin-top: -123%; " >
+                                                    PROXIMAMENTE
+                                                </h1>
+                                                <h2 style="font-weight: 500; font-size: 20px; width: 120% ;     margin-top: 110%; ">
+                                                    COAHUILA 189
+                                                </h2>
+                                                <p>
+                                                    <img src="assets/images/gps.svg" alt="Images" style="height: 20px; width: 20px; " /> Condesa, CDMX
+                                                </p>
+                                            </span>
+                                            <img class="hiddens pointer" style=" opacity: .5; -webkit-filter: grayscale(100%); filter: grayscale(100%);" id="commflip2x1" src="assets/images/comm/Cuahuila.jpg" alt="Images">
+                                            <img class="hiddens" id="desigflip2x1" src="assets/images/design/home-design-1.jpg" alt="Images">
+                                        </div>
+
+                                    </div>
+                                </div><!--.pportfolio2-item-->
+                                <div  id="fliplogo" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 square " style="position: absolute; left: 574px; top: 232px;" >
+                                    <div class="flipper">
+                                        <div class="front">
+                                            <img id="frontphoto8" src="assets/images/14.jpg" alt="Images">
+                                        </div>
+                                        <div class="back">
+                                            <div class="playposition">
+                                                <div id="card8" class="hover-img">
+                                                    <!--<video autoplay loop muted playsinline> <source src="assets/images/gif.webm" type="video/webm"></video>--> 
+                                                    <!--<button id ="play"type="button" class="btn .btn-primary btn-sm"><span class="glyphicon playbut glyphicon-play trans-play"></span> </button>--> 
+                                                    <span  id ="play"class="input-group-addon  playbut pointer " >
+                                                        <img  onmouseout="this.src='assets/images/play.png';"  onmouseover="this.src='assets/images/play_after.png';"  class="img1" id="playempty" src="assets/images/play.png">
+                                                    </span>   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!--.pportfolio2-item-->
+                                <div  id="cardmore2x14"  class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 861px; top: 232px;" >
+                                    <div id="card_more3" class="card"> 
+                                        <div class="hover-img frontchange ">
+                                            <img id="frontphoto9" src="assets/images/avatares/face1-1.jpg" class="img1"/>
+                                            <img id="backphoto9" src="assets/images/avatares/face1.jpg" class="img2"/>
+
+
+                                        </div> 
+                                        <div class="backchange  ">
+                                            <img id="moreflip2x14" src="assets/images/more/grid-more-5.jpg" alt="Images"  >
+
+
+                                            <span class="hiddens textbuildscomm" id="communitiesflip2x14text"  >
+                                                <h1 style="font-size: 26px; width: 120% ; margin-top: -123%; " >
+                                                    PROXIMAMENTE
+                                                </h1>
+                                            </span>
+
+                                            <img  class="hiddens " style=" opacity: .5;    -webkit-filter: grayscale(100%); filter: grayscale(100%);" id="communitiesflip2x14" src="assets/images/comm/grid-build-4.jpg" alt="Images"  >
+                                            <img class="hiddens" id="designflip2x14" src="assets/images/design/grid-design-4.jpg" alt="Images"  >
+                                        </div> 
+                                    </div>
+
+                                </div>
+                                <div   class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square "   id="comGridIndex"style="position: absolute; left: 1141px; top: 232px;   "   onclick="design()"   >
+                                    <div id="designindexmenu" class="hover-img frontchange pointer ">
+                                        <h2 class="titulo_sec titulo_ter pointer">DESIGN</h2>
+                                        <img  id="frontphoto10" class="img1" src="assets/images/design.jpg" alt="Images" >
+                                        <img  id="backphoto10" class="img2"  src="assets/images/design_2.jpg" alt="Images">
+
+                                    </div> 
+
+                                    <!--</a>-->   
+                                </div>
+                                <div id="cardindex11" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  movilhidden square " style="position: absolute; left: 0px; top: 464px;" >
+                                    <div id="cardgrid" class="card"> 
+                                        <img   id="chatwithus"src="assets/images/chat.png" class="pointer"
+                                             >
+                                        <div class="hover-img frontchange ">   
+                                            <img id="frontphoto11" src="assets/images/avatares/face6-1.jpg" class="img1"/>
+                                            <img id="backphoto11" src="assets/images/avatares/face6.jpg"class="img2"/>
+                                        </div> 
+                                        <div class="backchange">
+                                            <span class=" textdesignindex pointer leftmoreindex" id="moreflip1x11text"  >
+                                                <h2 style="font-weight: 500; font-size: 20px;  color: black; width: 129%;
+                                                           margin-left: -37%;">
+                                                    <strong>
+                                                        PARTNER WITH US 
+                                                    </strong>
+                                                </h2>
+                                            </span>
+                                            <img class="pointer" id="moreflip1x11" src="assets/images/more/MORE1.jpg" alt="Images"  >
+                                            <img  class="hiddens" id="communitiesflip1x11" src="assets/images/comm/grid-1.jpg" alt="Images"  >
+                                            <span class="hiddens textdesignindex pointer textphilo" id="designflip1x11text"  >
+                                                <h2 style="font-weight: 500; font-size: 20px; width: 52%; ">
+                                                    <strong> PHILOSOPHY </strong>
+                                                </h2>
+                                            </span>
+                                            <img  class="hiddens  pointer" id="designflip1x11" src="assets/images/design/home-design-2.jpg" alt="Images"  >
+                                        </div> 
+                                    </div>
+
+                                </div><!--.pportfolio2-item-->
+                                <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  movilhidden square " id="dudequitmore" style="position: absolute; left: 287px; top: 464px;" >
+
+
+                                    <div class="hover-img">
+                                        <img id="frontphoto12" src="assets/images/avatares/face7-1.jpg" class="img1"/>
+                                        <img id="backphoto12" src="assets/images/avatares/face7.jpg" class="img2"/>
+
+                                    </div>
+
+                                </div><!--.pportfolio2-item onclick="mores()"  id="comMoreIndex" -->
+                                <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square"                   
+                                     style="position: relative; left: 1141px; top: 232px;   z-index: 10;"  
+                                     onclick="mores()"  id="flip" >
+
+
+                                    <div id="cardgrid5" class="card"> 
+                                        <div class="hover-img frontchange "> 
+                                            <h2 class="titulo_sec titulo_ter pointer">MORE</h2>
+                                            <img  id="frontphoto13" class="img1 pointer" src="assets/images/more.jpg"  alt="Images"  >
+                                            <img  id="backphoto13" class="img2" src="assets/images/more_2.jpg"  alt="Images ">
+
+                                        </div> 
+
+
+                                        <div class="backchange">
+
+                                            <span class=" textdesignindex pointer leftmoreindex " id="moreflip1x1x4text"  >
+                                                <h2 style="font-weight: 500; font-size: 20px; width: 52%; color: black; ">
+                                                    <strong>
+                                                        PRESS
+                                                    </strong>
+                                                </h2>
+                                            </span>
+
+                                            <img id="moreflip1x1x4" src="assets/images/more/MORE3.jpg"  class="  pointer" alt="Images"  >
+                                            <img  class="hiddens" id="communitiesflip1x1x4" src="assets/images/comm/grid-4.jpg" alt="Images"  >
+                                            <span class="hiddens textdesignindex pointer" id="designflip1x1x4text"  >
+                                                <h2 style="font-weight: 500; font-size: 20px; width: 52%; ">
+                                                    <strong> INTERIOR </strong>
+                                                    DESIGN
+                                                </h2>
+                                            </span>
+                                            <img class="hiddens pointer" id="designflip1x1x4" src="assets/images/design/home-design-4.jpg" alt="Images"  >
+
+
+                                        </div> 
+                                    </div>
+
+                                </div>
+                                <div id="girlquitmore" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 square " style="position: absolute; left: 861px; top: 464px;"   >
+
+                                    <div class="hover-img">
+                                        <img id="frontphoto14" src="assets/images/avatares/face8-1.jpg" class="img1"/>
+                                        <img id="backphoto14" src="assets/images/avatares/face8.jpg" class="img2"/>
+
+                                    </div>
+                                </div>
+                                <div id="cardindex15" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 movilhidden square " style="position: absolute; left: 1141px; top: 464px; position: relative"  >
+                                    <div  class="card"> 
+                                        <div class="frontchange ">  
+                                            <img id="frontphoto15" src="assets/images/book-now.jpg" alt="book_now" class="super">
+                                            <a  href="https://landing.minimalist.mx/flip/"  target="_blank">    
+                                            <img src="assets/images/book-now.png" alt="book_now" class="growmax pointer"  style=" width: 60%;   height: auto ;"></a>
+                                        </div> 
+                                        <div class="backchange">
+                                            <img id="moreflip1x15" src="assets/images/more/grids-more-5.jpg" alt="Images"  >
+                                            <img  class="hiddens" id="communitiesflip1x15" src="assets/images/comm/grid-6.jpg" alt="Images"  >
+                                            <img class="hiddens" id="designflip2x15" src="assets/images/design/grids-5.jpg" alt="Images"  >
+                                        </div> 
+                                    </div>
+
+
+                                </div> 
+
+                            </div>
+                            <!--Fin Index -->
+                        </div>
+                        <!--FIN GRIDS--->
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="icon-bar">
+                <a href="#" class="talktous"><img src="assets/images/talktous.png" alt="book_now" ></a> 
+                <a href="#" class="signin"><i class="glyphicon glyphicon-user	
+                    "></i></a> 
+                <a href="#" class="book"><img src="assets/images/book-now.png" alt="book_now" > </a> 
+
+            </div>
+
+
+
+            <div id="myModal" class="modal" style="    z-index: 9999999;">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span id="closemodal" class="close"><img style="width: 20%; height: 20%;     margin-left: 75%;" src="assets/images/error.svg"></span>
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3 class="content-more-title modalcont" style="margin-top: 0px;">#ABOUT <strong> PARTNER WITH US  </strong></h3>             
+                            <br>
+                            <p class="content-more-text" style="padding-left: 7%; padding-top: 0%;">Lorem 
+                                ipsum 
+                                dolor sit 
+                                amet, 
+                                consectetu
+                                r 
+                                adipiscing
+                                elit. 
+                                Mauris 
+                                aliquet 
+                                malesuada 
+                                feugiat. 
+                                Curabitur 
+                                fermentum 
+                                bibendum 
+                                nulla, 
+                                non 
+                                dictum 
+                                ipsum 
+                                tincidunt 
+                                non. 
+                                Quisque 
+                                convallis 
+                                pharetra 
+                                tempor. 
+                                Donec id 
+                                pretium 
+                                leo. 
+                                Pellentesq
+                                ue luctus 
+                                massa non 
+                                elit 
+                                viverra 
+                                pellentesq
+                                ue. Cras 
+                                vitae 
+                                neque 
+                                molestie, 
+                                rhoncus 
+                                ipsum sit 
+                                amet, 
+                                lobortis 
+                                dui. 
+                                Fusce in 
+                                urna sem. 
+                                Vivamus 
+                                vehicula 
+                                dignissim 
+                                augue et 
+                                scelerisqu
+                                e. Etiam 
+                                quam nisi,
+                                molestie 
+                                ac dolor 
+                                in, 
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <form name="formulario" method="post" action=""
+                                  enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label style="margin-left: 0px" for="name">Name:</label>
+                                    <input type="text" class="form-control" id="name" placeholder="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label style="margin-left: 0px" for="email">Email address:</label>
+                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label  style="margin-left: 0px" for="telephone">Telephone:</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Put your # phone here "
+                                           maxlength="15"
+                                           minlength="10"
+                                           required>
+                                </div>
+                                <!--<input type="file" name="adjunto" accept=".pdf,.jpg,.png,.doc, .docx"  class="inputfile" > --> 
+                                <button type="submit" class="btn btn-default">Submit</button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        
+        
+            <footer >
+                <div class="footer">
+                    <ul class="footer_menu"> 
+                        <br class ="brhide hiddens">
+
+                        <li class="movilhidden "><img src="assets/images/14.jpg" alt="FLIP_LOGO"></li>    
+
+                        <li><a href="mcommunities.html">Communities</a></li>
+                        <li><a href="mbackstage.html">Backstage</a></li>
+                        <li><a href="mdesign.html">Design</a></li>
+                        <li><a href="mmore.html">More</a></li>
+                        <li class="movilhidden"><hr></li>
+
+                        <li class="">
+
+                            <a  id="partnerfooter"  style="font-weight: 600;                 font-family: GothamProLight;" href="#">Partner</a></li>
+                        <li class="">
+                            <a style="font-weight: 600;                 font-family: GothamProLight; "  href="mjobs.html">Carrers</a></li>
+                        <li class="" ><a  style="font-weight: 600;                 font-family: GothamProLight; " href="mteam.html">Team</a></li>
+
+                        <br class="brhide hiddens">
+                        <br class="brhide hiddens">
+
+
+                        <li > <a id="frontphotofooter" href="#" class="facebook"><i class="fa fa-facebook fa-2x"></i></a> 
+                        </li>
+                        <li ><a id="frontphotofooter" href="#" class="twitter"><i class="fa fa-twitter fa-2x"></i></a> 
+                        </li>
+                        <li ><a id="frontphotofooter" href="#" class="youtube"><i class="fa fa-youtube fa-2x"></i></a> 
+                        </li>
+                        <li ><a id="frontphotofooter" href="#" class="instagram"><i class="fa fa-instagram fa-2x"></i></a> 
+
+                        </li>
+                    </ul>
+
+                    <br class="brhide hiddens">
+                    <br class ="brhide hiddens">
+                    <br class ="brhide hiddens">
+
+                </div><!--#footer-->
+            </footer>
+
+
+        <!--jquery.min.js-->
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <!--modernizr and waypoints -->
+        <script type="text/javascript" src="assets/js/modernizr.js"></script>
+        <script type="text/javascript" src="assets/js/waypoints.min.js"></script>
+        <!--bootstrap and bootsnav-->
+        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="assets/js/bootsnav.js"></script>
+        <!-- uikit.min.js and sticky.min.js -->
+        <script type="text/javascript" src="assets/js/uikit.min.js"></script>
+        <script type="text/javascript" src="assets/js/sticky.min.js"></script>
+        <!-- MasterSlider -->
+        <script type='text/javascript' src='assets/js/masterslider.min.js'></script>
+        <!--meanmenu.min.js-->
+        <script type="text/javascript" src="assets/js/jquery.meanmenu.min.js"></script>
+        <!--lightbox.min.js-->
+        <script type="text/javascript" src="assets/js/lightbox.min.js"></script>
+        <!--isotope.pkgd.min.js-->
+        <script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
+        <!--ripples-min.js-->
+        <script type="text/javascript" src="assets/js/ripples-min.js"></script>
+        <!--owl.carousel.min.js-->
+        <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+        <!--jquery-ui.min.js-->
+        <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+        <!--bxslider.js-->
+        <script type="text/javascript" src="assets/js/jquery.bxslider.js"></script>
+        <!--change-text.js-->
+        <script type="text/javascript" src="assets/js/change-text.js"></script>
+        <!--gmaps-->
+        <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4RM7zOgOKq6n2fv407hX28xiL-M6vLdY"></script>--> 
+        <script type="text/javascript" src="assets/js/gmaps.js" ></script>
+        <!--parallax.js-->
+        <script type="text/javascript" src="assets/js/parallax.js"></script>
+        <!--fancybox.min.js-->
+        <script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
+        <!--wow.min.js-->
+        <script type="text/javascript" src="assets/js/wow.min.js"></script>
+        <!--counterup.min.js-->
+        <script type="text/javascript" src="assets/js/jquery.counterup.min.js"></script>
+        <!--circliful.js-->
+        <script type="text/javascript" src="assets/js/jquery.circliful.min.js"></script>
+        <!--mixitup.js-->
+        <script type="text/javascript" src="assets/js/jquery.mixitup.js"></script>
+        <!--showcase-slider.js-->
+        <script type="text/javascript" src="assets/js/showcase-slider.js"></script>
+        <!--bootstrap-progressbar.js-->
+        <script type="text/javascript" src="assets/js/bootstrap-progressbar.js"></script>
+        <!--SLIDER REVOLUTION SCRIPTS -->
+        <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+        <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+        <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  -->
+        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
+        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
+        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
+        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
+        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
+        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
+        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
+
+        <script  type="text/javascript"src="assets/js/jquery.flip.js"></script>
+        <!--custom.js-->
+        <script type="text/javascript" src="assets/js/custom.js"></script>
+        <script type = "text/javascript" 
+                src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
+        </script>
+        <script type="text/javascript" src="assets/js/custommenu.js"></script>
+        <script>
+
+
+            window.resizecont =0;
+            window.resizesablecont =0;
+            window.indexcont = 1;
+            window.morecont = 0;
+            window.designcont = 0;
+            window.communtiescont=0; 
+            window.orientation =0; 
+
+            function resizeHandler(e) {
+
+                console.log(e.type + ' triggered.' );
+                window.resizesablecont +=1; 
+                window.globalheightindex = $('#indexgrid').height();
+                window.globalwidthindex = $('#indexgrid').width();
+                console.log(window.globalheightindex);
+                console.log(window.globalwidthindex);
+            }
+            var fullscreenCount = 0;
+            var changeHandler = function() {                                           
+
+                fullscreenCount ++;
+
+                if(fullscreenCount % 2 === 0)
+                {
+                    console.log('fullscreen exit');
+                    window.resizecont +=1;
+                    //  alert(window.resizecont);
+
+                }
+                else
+                {
+                    console.log('fullscreened');
+                    window.resizecont +=1;
+
+                }
+
+            }                                                                         
+            document.addEventListener("fullscreenchange", changeHandler, false);      
+            document.addEventListener("webkitfullscreenchange", changeHandler, false);
+            document.addEventListener("mozfullscreenchange", changeHandler, false);
+            document.addEventListener("MSFullscreenChanges", changeHandler, false);
+
+            window.addEventListener("orientationchange", function() {
+                window.orientation+=1; 
+                $('#ComBuild').slideDown(500);
+                $('#ComBuild').stop().slideUp(500);
+                $('#MoreSection').slideDown(500);
+                $('#MoreSection').stop().slideUp(500);
+                $('#DesignSection').slideDown(500);
+                $('#DesignSection').stop().slideUp(500);
+                $('#allpage').slideDown(1);
+                window.dispatchEvent(new Event('resize'));
+            }, false);
+
+            $(function($) {
+                $(".card").flip(); 
+            });
+
+
+            var video = document.getElementById("myVideo");
+            var btn = document.getElementById("myBtn");
+
+            function myFunction() {
+                if (video.paused) {
+                    video.play();
+                    btn.innerHTML = "Pause";
+                } else {
+                    video.pause();
+                    btn.innerHTML = "Play";
+                }
+            }
+        </script>
+        <script>
+            var modal = document.getElementById('myModal');
+            var span = document.getElementById("closemodal");
+            var buttonmore = document.getElementById("moreflip1x11");
+            var buttonmore2 = document.getElementById("moreflip1x11text");
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+            buttonmore.onclick = function()  {
+                modal.style.display = "block";
+
+            }
+            buttonmore2.onclick = function()  {
+                modal.style.display = "block";
+
+            }
+        </script>
+        <script>
+            window.globalini = 0 ;
+            window.globalfin =0; 
+            window.globaltime =0; 
+            window.globalini = new Date;
+            function tiempo_carga(){
+                window.globalfin = new Date;
+                window.globaltime  = (window.globalfin-window.globalini)/1000;
+                console.log(window.globaltime);
+            }
+
+            function RedirectIndexmobil() 
+            {  
+                var url = "/flip_movil.html";    
+                $(location).attr('href',url);
+
+
+            } 
+
+
+             if (!localStorage.noFirstVisit) {
+                console.log('Primera vez ');
+                localStorage.noFirstVisit = "1";
+            }else {
+                console.log('No es la primera vez ');
+                // localStorage.noFirstVisit = "";
+            }
+
+            $(document).ready(function() {
+                var xmobile = window.matchMedia("(max-width: 812px)");
+                if (xmobile.matches){
+                    setTimeout('RedirectIndexmobil()', 1);   
+                }
+                else {
+                    $("#preloader").removeClass("hiddens");
+                    $("#allpage").removeClass("hiddens");
+                }
+            });
+
+
+            function  compareTime (dateString, now) {
+                console.log("variable:"+ dateString);
+                console.log("ahora:"+ now);
+                var variabletime  =  new Date(dateString); 
+
+                var d = new Date(now);
+                d.setMinutes(d.getMinutes()); // timestamp
+                d = new Date(d) ; // Date object
+
+                console.log("Now"+d);
+                console.log("time delay"+ variabletime);
+
+                const diffTime = Math.abs(variabletime.getTime() - d.getTime());
+                var diferencetime =diffTime/(1000*60)
+                console.log("diferencia "+diferencetime);
+                if ( diferencetime > 5)
+                {
+                    console.log("Nueva variables");
+                    localStorage.noFirstVisit = "1";
+                    $("#prelaoder").delay(4200).fadeOut("slow");
+
+                }
+            }
+
+
+
+
+
+            window.onload = function() {
+                var xmobile = window.matchMedia("(max-width: 812px)");
+                if (xmobile.matches){
+                    setTimeout('RedirectIndexmobil()', 0);   
+                }
+                else {
+                    //$("#preloader").removeClass("hiddens");
+                }
+                tiempo_carga();
+                var xmobile = window.matchMedia("(max-width: 812px)");
+                if (xmobile.matches){
+                    setTimeout('RedirectIndexmobil()', 1);   
+                }
+                if (localStorage.noFirstVisit==1) {
+                    console.log('Primera vez ');
+                    var object = {timestamp: new Date().getTime()}
+                                        localStorage.setItem("flags", "true");
+
+                    localStorage.setItem("key", JSON.stringify(object));
+                    if (localStorage.flags=="true"){
+                        $("#preloader").delay((5-window.globaltime)*1000).fadeOut("slow");
+                        console.log((4-window.globaltime)*1000);
+                    }
+                    localStorage.noFirstVisit="0"; 
+                    
+                }else {
+                    console.log('No es la primera vez ');
+                    try {
+                        var object = JSON.parse(localStorage.getItem("key")); 
+                        dateString =  object.timestamp; 
+                        console.log("fecha"+dateString);
+                        now = new Date().getTime();
+                        $("#preloader").addClass("hiddens");
+                        compareTime(dateString, now);
+
+                        $("#preloader").delay(4000).fadeOut("slow");
+                        $("#preloader").addClass("hiddens");
+                        tiempo_carga();
+                    }
+                    catch(error) {
+                        $("#preloader").delay(4000).fadeOut("slow");
+                        $("#preloader").addClass("hiddens");
+                        tiempo_carga();
+                    }
+
+
+                    /* dateString =  object.timestamp; 
+                console.log("fecha"+dateString);
+                now = new Date().getTime();
+                $("#preloader").addClass("hiddens");
+                compareTime(dateString, now);
+                $("#preloader").delay(4000).fadeOut("slow");
+                $("#preloader").addClass("hiddens");
+                tiempo_carga();*/
+
+                }
+
+                // $("#preloader").delay(200).fadeOut("slow");
+
+                // console.log((4-window.globaltime)*1000);
+                //$("#preloader").delay(1000).fadeOut("slow");
+                //$('#preloader').fadeOut('slow',function(){$(this).remove();}); 
+
+                window.addEventListener('resize', resizeHandler);
+                var resizeEventLoad = new Event('resize');
+
+
+
+
+                $("#myBtn2").removeClass('hiddens');
+                //$('#myBtn2').trigger('click');
+
+                window.leftdsg = $('#cardmore2x13').offset().left;
+                window.leftcom = $('#comGridIndex').offset().left;
+                window.leftmore = $('#flip').offset().left;
+                window.wh = $('#indexgrid').height();
+                window.whcom = $('#ComBuild').height();
+
+                //$('#flip').trigger('click');
+
+                //$("#card").flip();
+                var getUrlParameter = function getUrlParameter(sParam) {
+                    var sPageURL = window.location.search.substring(1),
+                        sURLVariables = sPageURL.split('&'),
+                        sParameterName,
+                        i;
+
+                    for (i = 0; i < sURLVariables.length; i++) {
+                        sParameterName = sURLVariables[i].split('=');
+
+                        if (sParameterName[0] === sParam) {
+                            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                        }
+                    }
+                };
+                var come = getUrlParameter('come'); //design , more , commu
+                console.log(come);
+                if(come!=""){
+                    if (come=="design"){
+                        $("#desigflip2x1").removeClass("hiddens");
+                        $("#designflip2x13").removeClass("hiddens");
+                        $("#designflip2x12").removeClass("hiddens");
+                        $("#designflip2x14").removeClass("hiddens");
+                        $("#designflip2x15").removeClass("hiddens");
+                        $("#designflip2x16").removeClass("hiddens");
+                        $("#designflip2x1x1").removeClass("hiddens");
+                        $("#designflip2x1x1text").removeClass("hiddens");
+                        $("#designflip2x1x4").removeClass("hiddens");
+                        $("#designflip2x1x4text").removeClass("hiddens");
+                        $("#designflip1x11").removeClass("hiddens");
+                        $("#designflip1x1x4").removeClass("hiddens");
+                        $("#designflip1x1x4text").removeClass("hiddens");
+
+                        $("#designflip1x11").removeClass("hiddens");
+                        $("#designflip1x11text").removeClass("hiddens");
+
+                        $("#closedesign").removeClass("hiddens");
+
+                        $("#moreflip2x1").addClass("hiddens");
+                        $("#moreflip2x12").addClass("hiddens");
+                        $("#moreflip1x15").addClass("hiddens");
+                        $("#moreflip1x11").addClass("hiddens");
+                        $("#moreflip1x11text").addClass("hiddens");
+                        $("#moreflip2x15").addClass("hiddens");
+                        $("#moreflip2x1x3").addClass("hiddens");
+                        $("#moreflip2x14").addClass("hiddens");
+                        $("#moreflip1x12").addClass("hiddens");
+                        $("#moreflip1x12text").addClass("hiddens");
+                        $("#moreflip1x14").addClass("hiddens");
+                        $("#moreflip1x14text").addClass("hiddens");
+                        $("#moreflip1x1x4").addClass("hiddens");
+                        $("#moreflip1x1x4text").addClass("hiddens");
+
+
+
+
+                        $(".card").flip(true);
+                        $("#cardmore2x11").removeClass("pportfolio2-item");
+                        $("#cardmore2x12").removeClass("pportfolio2-item");
+                        $("#cardmore2x13").removeClass("pportfolio2-item");
+                        $("#cardmore2x14").removeClass("pportfolio2-item");
+                        $("#cardmore2x15").removeClass("pportfolio2-item");
+                        $("#cardmore2x13").removeClass("bordermore");
+                        $("#flip").removeClass("bordermore");
+
+                        $("#cardmore2x12").addClass("pportfolioCom-item");
+                        $("#cardmore2x13").addClass("pportfolioCom-item");
+                        $("#cardmore2x14").addClass("pportfolioCom-item");
+                        $("#cardmore2x15").addClass("pportfolioCom-item");
+                        $("#cardmore2x11").addClass("pportfolioCom-item");
+
+
+                        $( "#backquitmore" ).addClass( "hiddens" );
+                        $( "#fliplogo" ).addClass( "hiddens" );
+                        $( "#dudequitmore" ).addClass( "hiddens" );
+                        $( "#girlquitmore" ).addClass( "hiddens" );
+                        $( "#comGridIndex" ).addClass( "hiddens" );
+
+                        $( "#loginbar" ).addClass( "hiddens" );
+
+                    }
+                    if(come=="more"){
+
+                        $(".card").flip(true);
+                        $("#cardmore2x11").removeClass("pportfolio2-item");
+                        $("#cardmore2x12").removeClass("pportfolio2-item");
+                        $("#cardmore2x13").removeClass("pportfolio2-item");
+                        $("#cardmore2x14").removeClass("pportfolio2-item");
+                        $("#cardmore2x15").removeClass("pportfolio2-item");
+                        $("#cardmore2x13").removeClass("bordermore");
+                        $("#flip").removeClass("bordermore");
+                        $("#closemore").removeClass("hiddens");
+
+                        $("#insta").removeClass("hiddens");
+                        $("#face").removeClass("hiddens");
+                        $("#youtube").removeClass("hiddens");
+                        $("#twit").removeClass("hiddens");
+
+                        $("#cardmore2x12").addClass("pportfolioCom-item");
+                        $("#cardmore2x13").addClass("pportfolioCom-item");
+                        $("#cardmore2x14").addClass("pportfolioCom-item");
+                        $("#cardmore2x15").addClass("pportfolioCom-item");
+                        $("#cardmore2x11").addClass("pportfolioCom-item");
+
+
+
+                        $( "#backquitmore" ).addClass( "hiddens" );
+                        $( "#fliplogo" ).addClass( "hiddens" );
+                        $( "#dudequitmore" ).addClass( "hiddens" );
+                        $( "#girlquitmore" ).addClass( "hiddens" );
+                        $( "#comGridIndex" ).addClass( "hiddens" );
+
+                        $( "#loginbar" ).addClass( "hiddens" );
+                    }
+                    if(come=="commu"){
+                        //$("#comGridIndex").trigger("click");
+
+                    }
+                }
+                else{
+
+                }
+
+
+            }
+
+
+
+
+
+        </script>
+        <script>
+            var z = window.matchMedia("(max-width: 812px)")
+            if (z.matches){
+                div1 = $('#cardmore2x15');
+                div2 = $('#backquitmore');
+
+                tdiv1 = div1.clone();
+                tdiv2 = div2.clone();
+
+                div1.replaceWith(tdiv2);
+                div2.replaceWith(tdiv1);
+                $(".brhide").removeClass("hiddens");
+            }
+            $("#loginbar").click(function(){
+                //document.getElementById('loginform').style.position="initial";
+                $("#loginform").removeClass("hiddens");
+                document.getElementById('indexgrid').style.position="initial";    
+                setTimeout('HideIndexLogin()', 500);   
+            });
+            function HideIndexLogin() 
+            {  
+
+                $("#comGridIndex").hide( "slide", { direction: "down"  }, 750 );                     
+                $("#cardmore2x14").hide( "slide", { direction: "down"  }, 750 );                     
+
+
+                $("#cardmore2x15").slideUp(750); 
+                $("#cardindex4").slideUp(750); 
+
+
+            }
+            $("#closelogin").click(function(){
+                $("#loginform").addClass("hiddens");
+                document.getElementById('indexgrid').style.position="initial";    
+                setTimeout('ShowIndexLogin()', 500);   
+
+            });
+
+            function ShowIndexLogin() 
+            {  
+
+                $("#comGridIndex").show( "slide", { direction: "down"  }, 750 );                     
+                $("#cardmore2x14").show( "slide", { direction: "down"  }, 750 );                     
+
+
+                $("#cardmore2x15").slideDown(750); 
+                $("#cardindex4").slideDown(750); 
+
+
+            }
+
+
+            $('#play').click(function(){
+
+                window.ww = $(window).width();
+
+                document.getElementById('repvid').style.position="initial";
+                document.getElementById('indexgrid').style.position="initial";
+
+
+                setTimeout('HideIndexIntern()', 500);   
+                $("#myBtn").trigger("click");
+                // alert("ww:"+window.ww +"wh"+window.wh); 
+
+            });
+            function HideIndexIntern() 
+            {  
+                $("#cardindex2").slideUp(750);              
+                $("#cardindex4").slideUp(750);
+                $("#cardmore2x13").slideUp(750);
+
+                $("#fliplogo").hide( "slide", { direction: "down"  }, 500 ); ;  
+
+                // $("#cardmore2x12").toggle( "left" ); 
+                $("#cardmore2x12").hide( "slide", { direction: "left"  }, 750 );             
+                $("#cardmore2x14").hide( "slide", { direction: "right"  }, 750 );             
+                // $("#cardmore2x12").animate({width: "toggle"});
+                //$('#cardmore2x14').hide('slide', {direction: 'left'}, 500,);
+                // $("#cardmore2x14").animate({width: "toggle",direction:'right'});
+
+                //$("#cardmore2x14").slideToggle("right");
+                $("#dudequitmore").hide( "slide", { direction: "down"  }, 750 );
+                $("#flip").hide( "slide", { direction: "down"  }, 750 );
+                $("#girlquitmore").hide( "slide", { direction: "down"  }, 750 );
+
+
+                //$("#dudequitmore").toggle(500);
+                //$("#flip").toggle(500);
+                //$("#girlquitmore").toggle(500);
+                setTimeout('HideIndexExtern()', 750);           
+
+            } 
+            function HideIndexExtern() 
+            {  
+                $("#cardmore2x11").slideUp(750); 
+                $("#backquitmore").hide( "slide", { direction: "left"  }, 750 );             
+                $("#comGridIndex").hide( "slide", { direction: "right"  }, 750 );           
+                //$("#backquitmore").slideUp(500); 
+                // $("#cardindex11").slideUp(500); 
+                $("#cardindex11").hide( "slide", { direction: "down"  }, 750 );                     
+                $("#cardindex15").hide( "slide", { direction: "down"  }, 750 );                     
+                $("#cardmore2x15").slideUp(750); 
+                // $("#comGridIndex").slideUp(500); 
+                //s $("#cardindex15").slideUp(500);                     
+                $("#indexgrid").slideUp(1500);                     
+
+            } 
+
+            function ShowIndexIntern() 
+            {  
+                $("#indexgrid").slideDown(200); 
+
+                $("#cardindex2").slideDown(750);              
+                $("#cardindex4").slideDown(750);
+                $("#cardmore2x13").slideDown(750);
+
+                $("#fliplogo").show( "slide", { direction: "up"  }, 500 ); ;  
+
+                // $("#cardmore2x12").toggle( "left" ); 
+                $("#cardmore2x12").show( "slide", { direction: "right"  }, 750 );             
+                $("#cardmore2x14").show( "slide", { direction: "left"  }, 750 );             
+                // $("#cardmore2x12").animate({width: "toggle"});
+                //$('#cardmore2x14').hide('slide', {direction: 'left'}, 500,);
+                // $("#cardmore2x14").animate({width: "toggle",direction:'right'});
+
+                //$("#cardmore2x14").slideToggle("right");
+                $("#dudequitmore").show( "slide", { direction: "up"  }, 750 );
+                $("#flip").show( "slide", { direction: "up"  }, 750 );
+                $("#girlquitmore").show( "slide", { direction: "up"  }, 750 );
+                /*
+                $("#cardmore2x14").toggle (500);
+                $("#fliplogo").toggle(500);  
+                $("#cardmore2x12").toggle(500);   
+                $("#dudequitmore").toggle(500);
+                $("#flip").toggle(500);
+                $("#girlquitmore").toggle(500);
+                $("#cardindex4").toggle(500);
+                $("#cardmore2x13").toggle(500);
+                $("#cardindex2").toggle(500);*/ 
+                setTimeout('ShowIndexExtern()', 750);           
+
+            } 
+            function ShowIndexExtern() 
+            {  
+                $("#cardmore2x11").slideDown(750); 
+                $("#backquitmore").show( "slide", { direction: "right"  }, 750 );             
+                $("#comGridIndex").show( "slide", { direction: "left"  }, 750 );           
+                //$("#backquitmore").slideUp(500); 
+                // $("#cardindex11").slideUp(500); 
+                $("#cardindex11").show( "slide", { direction: "up"  }, 750);                     
+                $("#cardindex15").show( "slide", { direction: "up"  }, 750 );                     
+                $("#cardmore2x15").slideDown(500); 
+
+
+                setTimeout('HideVideo()', 750);     
+
+
+            }
+            function HideVideo(){
+                document.getElementById('repvid').style.position="fixed";  
+                document.getElementById("backquitmore").style.display = null;
+                document.getElementById("dudequitmore").style.display = null;
+                document.getElementById("fliplogo").style.display = null;
+                document.getElementById("girlquitmore").style.display = null;
+                document.getElementById("comGridIndex").style.display = null;
+
+            }
+
+            $('#myBtn2').click(function(){
+
+
+                setTimeout('ShowIndexIntern()', 1000);   
+
+
+
+                var y = window.matchMedia("(max-width: 760px)")
+                if (y.matches){
+
+                    var obj = document.getElementById('indexgrid'); obj.style.height = window.wh+"px";  
+
+                }
+                var obj = document.getElementById('indexgrid'); obj.style.height = window.wh+"px";  
+
+
+
+                var designmenuindex = document.getElementById('flip'); designmenuindex.style.left = window.dsg+"px";  
+
+
+
+
+            });
+            $("#moreflip1x12").click(function(){
+                var url = "/team.html";    
+                $(location).attr('href',url);
+
+            });
+            $("#moreflip1x12text").click(function(){
+                var url = "/team.html";    
+                $(location).attr('href',url);
+
+            });
+            $("#moreflip1x1x4").click(function(){
+                var url = "/press.html";    
+                $(location).attr('href',url);
+
+            });
+            $("#moreflip1x1x4text").click(function(){
+                var url = "/press.html";    
+                $(location).attr('href',url);
+
+            });
+
+            $("#moreflip1x14").click(function(){
+                var url = "/jobs.html";    
+                $(location).attr('href',url);
+
+            });
+
+            $("#moreflip1x14text").click(function(){
+                var url = "/jobs.html";    
+                $(location).attr('href',url);
+
+            });
+
+            $("#commflip2x1").click(function(){
+                //var url = "/coahuila.html";    
+                // $(location).attr('href',url);
+            });
+            $("#commflip2x1text").click(function(){
+               
+                //var url = "/coahuila.html";    
+               // $(location).attr('href',url);
+            });
+
+            $("#communitiesflip2x12").click(function(){
+                var url = "/altata.html";    
+                $(location).attr('href',url);
+            });
+            $("#communitiesflip2x12text").click(function(){
+                var url = "/altata.html";    
+                $(location).attr('href',url);
+            });
+            
+            $("#designflip1x11").click(function(){
+                var url = "/philosophy.html";    
+                $(location).attr('href',url);
+            });
+            $("#designflip1x11text").click(function(){
+                var url = "/philosophy.html";    
+                $(location).attr('href',url);
+            });
+
+            $("#designflip1x1x4").click(function(){
+                var url = "/interior-design.html";    
+                $(location).attr('href',url);
+            }); $("#designflip1x1x4text").click(function(){
+                var url = "/interior-design.html";    
+                $(location).attr('href',url);
+            });
+
+            $("#designflip2x1x1").click(function(){
+                var url = "/design-process.html";    
+                $(location).attr('href',url);
+            });
+            $("#designflip2x1x1text").click(function(){
+                var url = "/design-process.html";    
+                $(location).attr('href',url);
+            });
+            $("#designflip2x1x4").click(function(){
+                var url = "/acabados.html";    
+                $(location).attr('href',url);
+            });
+            $("#designflip2x1x4text").click(function(){
+                var url = "/acabados.html";    
+                $(location).attr('href',url);
+            });
+
+
+
+
+            function mores() {
+                var x = window.matchMedia("(max-width: 812px)")
+                if (x.matches){
+                    var url = "/mmore.html";    
+                    $(location).attr('href',url);
+
+
+                    $('body, html').animate({
+                        scrollTop: '0px'
+                    }, 500);
+
+
+                    if (window.resizecont>=1){
+                        if (x.matches){
+                            var comm = document.getElementById('generalgrid');     comm.style.height = window.whcom+"px"; 
+                        }
+                        else {
+                            var general = document.getElementById('generalgrid'); general.style.height = window.wh+"px";  
+
+                        }
+
+                    }
+
+
+                }
+                else {
+                    console.log("MÁS DE 700");
+                    $(".card").flip(true);
+                    $("#cardmore2x11").removeClass("pportfolio2-item");
+                    $("#cardmore2x12").removeClass("pportfolio2-item");
+                    $("#cardmore2x13").removeClass("pportfolio2-item");
+                    $("#cardmore2x14").removeClass("pportfolio2-item");
+                    $("#cardmore2x15").removeClass("pportfolio2-item");
+                    $("#cardmore2x13").removeClass("bordermore");
+                    $("#flip").removeClass("bordermore");
+                    $("#closemore").removeClass("hiddens");
+
+                    $("#insta").removeClass("hiddens");
+                    $("#face").removeClass("hiddens");
+                    $("#youtube").removeClass("hiddens");
+                    $("#twit").removeClass("hiddens");
+
+                    $("#cardmore2x12").addClass("pportfolioCom-item");
+                    $("#cardmore2x13").addClass("pportfolioCom-item");
+                    $("#cardmore2x14").addClass("pportfolioCom-item");
+                    $("#cardmore2x15").addClass("pportfolioCom-item");
+                    $("#cardmore2x11").addClass("pportfolioCom-item");
+
+
+
+                    $( "#backquitmore" ).addClass( "hiddens" );
+                    $( "#fliplogo" ).addClass( "hiddens" );
+                    $( "#dudequitmore" ).addClass( "hiddens" );
+                    $( "#girlquitmore" ).addClass( "hiddens" );
+                    $( "#comGridIndex" ).addClass( "hiddens" );
+                    $("#designindexmenu").addClass("hiddens");
+
+
+                    $( "#loginbar" ).addClass( "hiddens" );
+
+                }
+
+            }
+            /*   $("#flip").click(function(){
+                  $(".card").flip(true);
+                  $("#cardmore2x11").removeClass("pportfolio2-item");
+                  $("#cardmore2x12").removeClass("pportfolio2-item");
+                  $("#cardmore2x13").removeClass("pportfolio2-item");
+                  $("#cardmore2x14").removeClass("pportfolio2-item");
+                  $("#cardmore2x15").removeClass("pportfolio2-item");
+                  $("#cardmore2x13").removeClass("bordermore");
+                  $("#flip").removeClass("bordermore");
+
+                   $("#cardmore2x12").addClass("pportfolioCom-item");
+                  $("#cardmore2x13").addClass("pportfolioCom-item");
+                  $("#cardmore2x14").addClass("pportfolioCom-item");
+                  $("#cardmore2x15").addClass("pportfolioCom-item");
+                    $("#cardmore2x11").addClass("pportfolioCom-item");
+
+
+
+                  $( "#backquitmore" ).addClass( "hiddens" );
+                  $( "#fliplogo" ).addClass( "hiddens" );
+                  $( "#dudequitmore" ).addClass( "hiddens" );
+                  $( "#girlquitmore" ).addClass( "hiddens" );
+                  $( "#comGridIndex" ).addClass( "hiddens" );
+                });*/
+
+
+            $("#closemore").click(function(){
+                $(".card").flip(false);
+                $( "#backquitmore" ).removeClass( "hiddens" );
+                $( "#fliplogo" ).removeClass( "hiddens" );
+                $( "#dudequitmore" ).removeClass( "hiddens" );
+                $( "#girlquitmore" ).removeClass( "hiddens" );
+                $( "#comGridIndex" ).removeClass( "hiddens" );
+
+
+                $("#cardmore2x12").removeClass("pportfolioCom-item");
+                $("#cardmore2x13").removeClass("pportfolioCom-item");
+                $("#cardmore2x14").removeClass("pportfolioCom-item");
+                $("#cardmore2x15").removeClass("pportfolioCom-item");
+                $("#cardmore2x11").removeClass("pportfolioCom-item");
+                $("#designindexmenu").removeClass("hiddens");
+
+
+
+                $("#cardmore2x11").addClass("pportfolio2-item");
+                $("#cardmore2x12").addClass("pportfolio2-item");
+                $("#cardmore2x13").addClass("pportfolio2-item");
+                $("#cardmore2x14").addClass("pportfolio2-item");
+                $("#cardmore2x15").addClass("pportfolio2-item");
+
+                $( "#loginbar" ).removeClass( "hiddens" );
+                $( "#closemore" ).addClass( "hiddens" );
+
+                $("#insta").addClass("hiddens");
+                $("#face").addClass("hiddens");
+                $("#youtube").addClass("hiddens");
+                $("#twit").addClass("hiddens");
+                // $("#cardmore2x13").addClass("bordermore");
+                //    $("#flip").addClass("bordermore");
+
+
+            });
+            $("#closecommunities").click(function(){
+                $(".card").flip(false);
+                $( "#backquitmore" ).removeClass( "hiddens" );
+                $( "#fliplogo" ).removeClass( "hiddens" );
+                $( "#dudequitmore" ).removeClass( "hiddens" );
+                $( "#girlquitmore" ).removeClass( "hiddens" );
+                $( "#comGridIndex" ).removeClass( "hiddens" );
+
+                $("#cardmore2x12").removeClass("pportfolioCom-item");
+                $("#cardmore2x13").removeClass("pportfolioCom-item");
+                $("#cardmore2x14").removeClass("pportfolioCom-item");
+                $("#cardmore2x15").removeClass("pportfolioCom-item");
+                $("#cardmore2x11").removeClass("pportfolioCom-item");
+
+
+
+                $("#cardmore2x11").addClass("pportfolio2-item");
+                $("#cardmore2x12").addClass("pportfolio2-item");
+                $("#cardmore2x13").addClass("pportfolio2-item");
+                $("#cardmore2x14").addClass("pportfolio2-item");
+                $("#cardmore2x15").addClass("pportfolio2-item");
+                // $("#cardmore2x13").addClass("bordermore");
+                //$("#flip").addClass("bordermore");
+
+                $("#commflip2x1").addClass("hiddens");
+                $("#closecommunities").addClass("hiddens");
+                $("#communitiesflip2x13").addClass("hiddens");
+                $("#communitiesflip2x13text").addClass("hiddens");
+                $("#communitiesflip2x12").addClass("hiddens");
+                $("#communitiesflip2x12text").addClass("hiddens");
+                $("#commflip2x1text").addClass("hiddens");
+
+                $("#communitiesflip2x14").addClass("hiddens");
+                $("#communitiesflip2x14text").addClass("hiddens");
+                $("#communitiesflip2x15").addClass("hiddens");
+                $("#communitiesflip1x15").addClass("hiddens");
+                $("#communitiesflip1x12").addClass("hiddens");
+                $("#communitiesflip1x14").addClass("hiddens");
+                $("#communitiesflip1x11").addClass("hiddens");
+                $("#communitiesflip1x1x4").addClass("hiddens");
+
+
+
+                $("#moreflip2x1").removeClass("hiddens");
+                $("#moreflip2x1x3").removeClass("hiddens");
+                $("#moreflip1x12").removeClass("hiddens");
+                $("#moreflip1x12text").removeClass("hiddens");
+                $("#designindexmenu").removeClass("hiddens");
+
+
+                $("#moreflip1x14").removeClass("hiddens");
+                $("#moreflip1x14text").removeClass("hiddens");
+                $("#moreflip2x14").removeClass("hiddens");
+                $("#moreflip1x15").removeClass("hiddens");
+                $("#moreflip1x11").removeClass("hiddens");
+                $("#moreflip1x11text").removeClass("hiddens");
+                $("#moreflip2x15").removeClass("hiddens");
+                $("#moreflip2x12").removeClass("hiddens");
+                $("#moreflip1x1x4").removeClass("hiddens");
+                $("#moreflip1x1x4text").removeClass("hiddens");
+
+                $( "#loginbar" ).removeClass( "hiddens" );
+
+
+
+
+            });
+
+            $("#closedesign").click(function(){
+                $(".card").flip(false);
+                $( "#backquitmore" ).removeClass( "hiddens" );
+                $( "#fliplogo" ).removeClass( "hiddens" );
+                $( "#dudequitmore" ).removeClass( "hiddens" );
+                $( "#girlquitmore" ).removeClass( "hiddens" );
+                $( "#comGridIndex" ).removeClass( "hiddens" );
+                $( "#closedesign" ).addClass( "hiddens" );
+
+                $("#cardmore2x12").removeClass("pportfolioCom-item");
+                $("#cardmore2x13").removeClass("pportfolioCom-item");
+                $("#cardmore2x14").removeClass("pportfolioCom-item");
+                $("#cardmore2x15").removeClass("pportfolioCom-item");
+                $("#cardmore2x11").removeClass("pportfolioCom-item");
+
+
+
+                $("#cardmore2x11").addClass("pportfolio2-item");
+                $("#cardmore2x12").addClass("pportfolio2-item");
+                $("#cardmore2x13").addClass("pportfolio2-item");
+                $("#cardmore2x14").addClass("pportfolio2-item");
+                $("#cardmore2x15").addClass("pportfolio2-item");
+                //  $("#cardmore2x13").addClass("bordermore");
+                // $("#flip").addClass("bordermore");
+
+                $("#desigflip2x1").addClass("hiddens");
+                $("#designflip2x13").addClass("hiddens");
+                $("#designflip2x12").addClass("hiddens");
+
+
+                $("#designflip2x14").addClass("hiddens");
+                $("#designflip2x15").addClass("hiddens");
+                $("#designflip2x16").addClass("hiddens");
+                $("#designflip2x1x1").addClass("hiddens");
+                $("#designflip2x1x1text").addClass("hiddens");
+                $("#designflip2x1x4").addClass("hiddens");       
+                $("#designflip2x1x4text").addClass("hiddens");       
+                $("#designflip1x11").addClass("hiddens");       
+                $("#designflip1x11text").addClass("hiddens");       
+                $("#designflip1x1x4").addClass("hiddens");
+                $("#designflip1x1x4text").addClass("hiddens");
+
+
+                $("#communitiesflip2x15").addClass("hiddens");
+                $("#communitiesflip1x15").addClass("hiddens");
+                $("#communitiesflip1x12").addClass("hiddens");
+                $("#communitiesflip1x14").addClass("hiddens");
+                $("#communitiesflip1x11").addClass("hiddens");
+                $("#communitiesflip1x1x4").addClass("hiddens");
+
+                $("#designindexmenu").removeClass("hiddens");
+
+
+                $("#moreflip2x1").removeClass("hiddens");
+                $("#moreflip2x1x3").removeClass("hiddens");
+                $("#moreflip1x12").removeClass("hiddens");
+                $("#moreflip1x12text").removeClass("hiddens");
+                $("#moreflip1x14").removeClass("hiddens");
+                $("#moreflip1x14text").removeClass("hiddens");
+                $("#moreflip2x14").removeClass("hiddens");
+                $("#moreflip1x15").removeClass("hiddens");
+                $("#moreflip1x11").removeClass("hiddens");
+                $("#moreflip1x11text").removeClass("hiddens");
+                $("#moreflip2x15").removeClass("hiddens");
+                $("#moreflip2x12").removeClass("hiddens");
+                $("#moreflip1x1x4").removeClass("hiddens");
+                $("#moreflip1x1x4text").removeClass("hiddens");
+
+
+                $( "#loginbar" ).removeClass( "hiddens" );
+
+
+
+            });
+
+            function communties() {
+                var x = window.matchMedia("(max-width: 812px)")
+                if (x.matches){
+                    var url = "/mcommunities.html";    
+                    $(location).attr('href',url);
+
+
+                    $('body, html').animate({
+                        scrollTop: '0px'
+                    }, 500);
+
+
+                    if (window.resizecont>=1){
+                        if (x.matches){
+                            var comm = document.getElementById('generalgrid');     comm.style.height = window.whcom+"px"; 
+                        }
+                        else {
+                            var general = document.getElementById('generalgrid'); general.style.height = window.wh+"px";  
+
+                        }
+
+                    }
+
+
+                }
+                else{
+                    $("#commflip2x1").removeClass("hiddens");
+
+                    $("#closecommunities").removeClass("hiddens");
+
+                    $("#communitiesflip2x13").removeClass("hiddens");
+                    $("#communitiesflip2x13text").removeClass("hiddens");
+                    $("#communitiesflip2x12").removeClass("hiddens");
+                    $("#communitiesflip2x12text").removeClass("hiddens");
+                    $("#commflip2x1text").removeClass("hiddens");
+                    $("#communitiesflip2x14").removeClass("hiddens");
+                    $("#communitiesflip2x14text").removeClass("hiddens");
+                    $("#communitiesflip2x15").removeClass("hiddens");
+                    $("#communitiesflip1x15").removeClass("hiddens");
+                    $("#communitiesflip1x12").removeClass("hiddens");
+                    $("#communitiesflip1x14").removeClass("hiddens");
+                    $("#communitiesflip1x1x4").removeClass("hiddens");
+                    $("#communitiesflip1x11").removeClass("hiddens");
+
+                    $("#moreflip2x1").addClass("hiddens");
+                    $("#moreflip2x12").addClass("hiddens");
+                    $("#moreflip1x15").addClass("hiddens");
+                    $("#moreflip1x11").addClass("hiddens");
+                    $("#moreflip1x11text").addClass("hiddens");
+                    $("#moreflip2x15").addClass("hiddens");
+                    $("#moreflip2x1x3").addClass("hiddens");
+                    $("#moreflip2x14").addClass("hiddens");
+                    $("#moreflip1x12").addClass("hiddens");
+                    $("#moreflip1x12text").addClass("hiddens");
+                    $("#moreflip1x14").addClass("hiddens");
+                    $("#moreflip1x14text").addClass("hiddens");
+                    $("#moreflip1x1x4").addClass("hiddens");
+                    $("#moreflip1x1x4text").addClass("hiddens");
+                    $("#designindexmenu").addClass("hiddens");
+
+
+
+
+                    $(".card").flip(true);
+                    $("#cardmore2x11").removeClass("pportfolio2-item");
+                    $("#cardmore2x12").removeClass("pportfolio2-item");
+                    $("#cardmore2x13").removeClass("pportfolio2-item");
+                    $("#cardmore2x14").removeClass("pportfolio2-item");
+                    $("#cardmore2x15").removeClass("pportfolio2-item");
+                    $("#cardmore2x13").removeClass("bordermore");
+                    $("#flip").removeClass("bordermore");
+
+                    $("#cardmore2x12").addClass("pportfolioCom-item");
+                    $("#cardmore2x13").addClass("pportfolioCom-item");
+                    $("#cardmore2x14").addClass("pportfolioCom-item");
+                    $("#cardmore2x15").addClass("pportfolioCom-item");
+                    $("#cardmore2x11").addClass("pportfolioCom-item");
+
+
+                    $( "#backquitmore" ).addClass( "hiddens" );
+                    $( "#fliplogo" ).addClass( "hiddens" );
+                    $( "#dudequitmore" ).addClass( "hiddens" );
+                    $( "#girlquitmore" ).addClass( "hiddens" );
+                    $( "#comGridIndex" ).addClass( "hiddens" );
+                    $( "#loginbar" ).addClass( "hiddens" );
+
+                }
+
+
+
+
+                /*     $('body, html').animate({
+                    scrollTop: '0px'
+                }, 500);*/ 
+
+
+            } 
+            function design() {
+                window.designcont = 1 ; 
+                var x = window.matchMedia("(max-width: 812px)")
+                if (x.matches){
+                    var url = "/mdesign.html";    
+                    $(location).attr('href',url);
+
+
+                    $('body, html').animate({
+                        scrollTop: '0px'
+                    }, 500);
+
+
+                    if (window.resizecont>=1){
+                        if (x.matches){
+                            var comm = document.getElementById('generalgrid');     comm.style.height = window.whcom+"px"; 
+                        }
+                        else {
+                            var general = document.getElementById('generalgrid'); general.style.height = window.wh+"px";  
+
+                        }
+
+                    }
+
+
+                }
+                else {
+                    $("#desigflip2x1").removeClass("hiddens");
+                    $("#designflip2x13").removeClass("hiddens");
+                    $("#designflip2x12").removeClass("hiddens");
+                    $("#designflip2x14").removeClass("hiddens");
+                    $("#designflip2x15").removeClass("hiddens");
+                    $("#designflip2x16").removeClass("hiddens");
+                    $("#designflip2x1x1").removeClass("hiddens");
+                    $("#designflip2x1x1text").removeClass("hiddens");
+                    $("#designflip2x1x4").removeClass("hiddens");
+                    $("#designflip2x1x4text").removeClass("hiddens");
+                    $("#designflip1x11").removeClass("hiddens");
+                    $("#designflip1x1x4").removeClass("hiddens");
+                    $("#designflip1x1x4text").removeClass("hiddens");
+
+                    $("#designflip1x11").removeClass("hiddens");
+                    $("#designflip1x11text").removeClass("hiddens");
+
+                    $("#closedesign").removeClass("hiddens");
+
+                    $("#moreflip2x1").addClass("hiddens");
+                    $("#moreflip2x12").addClass("hiddens");
+                    $("#moreflip1x15").addClass("hiddens");
+                    $("#moreflip1x11").addClass("hiddens");
+                    $("#moreflip1x11text").addClass("hiddens");
+                    $("#moreflip2x15").addClass("hiddens");
+                    $("#moreflip2x1x3").addClass("hiddens");
+                    $("#moreflip2x14").addClass("hiddens");
+                    $("#moreflip1x12").addClass("hiddens");
+                    $("#moreflip1x12text").addClass("hiddens");
+                    $("#moreflip1x14").addClass("hiddens");
+                    $("#moreflip1x14text").addClass("hiddens");
+                    $("#moreflip1x1x4").addClass("hiddens");
+                    $("#moreflip1x1x4text").addClass("hiddens");
+                    $("#designindexmenu").addClass("hiddens");
+
+
+
+
+                    $(".card").flip(true);
+                    $("#cardmore2x11").removeClass("pportfolio2-item");
+                    $("#cardmore2x12").removeClass("pportfolio2-item");
+                    $("#cardmore2x13").removeClass("pportfolio2-item");
+                    $("#cardmore2x14").removeClass("pportfolio2-item");
+                    $("#cardmore2x15").removeClass("pportfolio2-item");
+                    $("#cardmore2x13").removeClass("bordermore");
+                    $("#flip").removeClass("bordermore");
+
+                    $("#cardmore2x12").addClass("pportfolioCom-item");
+                    $("#cardmore2x13").addClass("pportfolioCom-item");
+                    $("#cardmore2x14").addClass("pportfolioCom-item");
+                    $("#cardmore2x15").addClass("pportfolioCom-item");
+                    $("#cardmore2x11").addClass("pportfolioCom-item");
+
+
+                    $( "#backquitmore" ).addClass( "hiddens" );
+                    $( "#fliplogo" ).addClass( "hiddens" );
+                    $( "#dudequitmore" ).addClass( "hiddens" );
+                    $( "#girlquitmore" ).addClass( "hiddens" );
+                    $( "#comGridIndex" ).addClass( "hiddens" );
+
+                    $( "#loginbar" ).addClass( "hiddens" );
+
+
+
+
+                }
+
+
+
+            }
+
+
+
+            function hover(element) {
+                $("#cbottom").hide();
+                $("#ctop").show(); 
+                if(window.resizecont>=1){
+
+                    var designmenuindex = document.getElementById('cardmore2x13'); designmenuindex.style.left = window.leftdsg+"px";
+                }
+                // document.getElementById('cbottom').style.display='none';
+            }
+            function hover2(element) {
+                $("#cbottom2").hide();
+                $("#ctop2").show(); 
+                // document.getElementById('cbottom').style.display='none';
+            }
+            function hover3(element) {
+                $("#cbottom3").hide();
+                $("#ctop3").show(); 
+                if(window.resizecont>=1){
+                    var commindex = document.getElementById('comGridIndex'); commindex.style.left = window.leftcom+"px";  
+                }
+
+                // document.getElementById('cbottom').style.display='none';
+            }
+            function hover4(element) {
+                $("#cbottom4").hide();
+                $("#ctop4").show(); 
+                if(window.resizecont>=1){
+                    var moreindex = document.getElementById('flip'); moreindex.style.left = window.leftmore+"px";
+                }
+                // document.getElementById('cbottom').style.display='none';
+            }
+            function unhover(element) {
+                $("#cbottom").show();
+                if(window.resizecont>=1){
+                    var designmenuindex = document.getElementById('cardmore2x13'); designmenuindex.style.left = window.leftdsg+"px"; 
+                }
+                //document.getElementById('ctop').style.display='none';
+            }
+            function unhover2(element) {
+                $("#cbottom2").show();
+                //document.getElementById('ctop').style.display='none';
+            }
+            function unhover3(element) {
+                $("#cbottom3").show();
+                if(window.resizecont>=1){
+                    var commindex = document.getElementById('comGridIndex'); commindex.style.left = window.leftcom+"px"; 
+                }
+
+
+                //document.getElementById('ctop').style.display='none';
+            }
+            function unhover4(element) {
+                $("#cbottom4").show();
+                if(window.resizecont>=1){
+                    var moreindex = document.getElementById('flip'); moreindex.style.left = window.leftmore+"px";  
+                }
+
+                //document.getElementById('ctop').style.display='none';
+            }   
+            /*   $.ajax( {
+                type: 'POST',
+                url: "http://localhost:49314/api/Post/SeeIndex",
+                data: JSON.stringify({userid:1 , buildingid:1}),
+                contentType: "application/json",
+                 dataType: "text",
+
+                success: function(data, textStatus, jqXHR)  {
+                    console.log(data)
+                }, 
+                error: function(jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
+
+            }); 
+            */
+
+            //$("#backquitmore").click(function(){
+            //    var url = "/backstage.html";    
+            //    $(location).attr('href',url);
+            //});
+
+            const custom_uno = document.getElementsByClassName('custom_uno')[0];
+                
+                  custom_uno.addEventListener('mouseenter', function showImage() {
+                    custom_uno.children[0].children[1].style.display = 'none';
+                  }, !1);
+
+                  custom_uno.addEventListener('click', function deployModal() { 
+
+                    !custom_uno.children[1].classList.contains('custom__uno-about-on') ?
+                        (function IIFE() {
+                            custom_uno.style.width = '100%';
+                            custom_uno.children[0].style.width = '20%';
+                            custom_uno.children[1].style.display = 'block';
+                            custom_uno.children[1].classList.add('custom__uno-about-on');
+                        }()) : 
+                        (function IIFE() {
+                            custom_uno.children[0].children[1].style.display = 'block';
+                            custom_uno.children[1].style.display = 'none';
+                            custom_uno.children[1].classList.remove('custom__uno-about-on');
+                            custom_uno.style.width = '20%';
+                            custom_uno.children[0].style.width = '100%';
+                        }());
+                  }, !1);
+
+        </script> 
+        <script>
+           
+        </script>
+
+    </body>[
+</html>

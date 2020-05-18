@@ -1,0 +1,26 @@
+body { background-color: #222; overflow: hidden; color: #aaa; font-family: Arial }
+b {color: #fff}
+#container {
+    position: relative;
+    display: block;
+}
+
+.box {
+    width: 150px; height: 150px;
+    position: absolute; top:50px; left: 10px;
+    color: #fff;
+    font-size: 40px;
+    line-height:150px;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.b1 { background-color: #9C27B0; }
+.b2 { background-color: #2196F3; }
+.b3 { background-color: #FF5722; }
+.box1 {left: 50px; background-color: #9C27B0;}
+.box2 {left: 250px; background-color: #673AB7;}
+.box3 {left: 450px; background-color: #E91E63;}
+.box4 {left: 650px; background-color: #FF5722;}

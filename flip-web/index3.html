@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free coming soon template with jQuery countdown">
+
+  <title>Flip en Construcción </title>
+
+  <!-- Bootstrap -->
+  <link href="assets/css/bootstrap.css" rel="stylesheet">
+  <link href="assets/css/bootstrap-theme.css" rel="stylesheet">
+  <link href="assets/css/font-awesome.css" rel="stylesheet">
+
+  <!-- siimple style -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+    Theme Name: WeBuild
+    Theme URL: https://bootstrapmade.com/free-bootstrap-coming-soon-template-countdwon/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+</head>
+
+<body>
+
+  <div id="wrapper">
+    <div class="container">
+      <div class="row">
+       
+          <h1>FLIP en construcción</h1>
+         
+          
+        
+        
+      </div>
+
+    <div class="row">
+        
+        <img src="assets/img/14.jpg" /> 
+        
+        </div>
+
+      <div class="row">
+      
+          <p class="copyright">&copy; FLIP - All Rights Reserved</p>
+          <div class="credits">
+        
+          </div>
+       
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/jquery.countdown.min.js"></script>
+  <script type="text/javascript">
+    $('#countdown').countdown('2019/01/01', function(event) {
+      $(this).html(event.strftime('%w weeks %d days <br /> %H:%M:%S'));
+    });
+  </script>
+
+  <script src="contactform/contactform.js"></script>
+
+</body>
+
+</html>

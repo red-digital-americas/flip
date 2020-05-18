@@ -1,0 +1,70 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 08/06/2017 06:14
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("../fonts/Flaticon.eot");
+  src: url("../fonts/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon.woff") format("woff"),
+       url("../fonts/Flaticon.ttf") format("truetype"),
+       url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+/*        font-size: 20px;*/
+font-style: normal;
+/*margin-left: 20px;*/
+}
+
+.flaticon-ball:before { content: "\f100"; }
+.flaticon-bouncing-ball-toy:before { content: "\f101"; }
+.flaticon-electric-light-bulb:before { content: "\f102"; }
+.flaticon-light-bulb-on:before { content: "\f103"; }
+.flaticon-light-bulb-1:before { content: "\f104"; }
+.flaticon-light-bulb:before { content: "\f105"; }
+.flaticon-food-1:before { content: "\f106"; }
+.flaticon-tea-cup:before { content: "\f107"; }
+.flaticon-settings:before { content: "\f108"; }
+.flaticon-next:before { content: "\f109"; }
+.flaticon-phone-call:before { content: "\f10a"; }
+.flaticon-glasses:before { content: "\f10b"; }
+.flaticon-vector-1:before { content: "\f10c"; }
+.flaticon-artboard:before { content: "\f10d"; }
+.flaticon-shopping-cart:before { content: "\f10e"; }
+.flaticon-picture:before { content: "\f10f"; }
+.flaticon-alloy-wheel:before { content: "\f110"; }
+.flaticon-paint-palette-and-brush:before { content: "\f111"; }
+.flaticon-photo-camera:before { content: "\f112"; }
+.flaticon-digital-brush:before { content: "\f113"; }
+.flaticon-envato:before { content: "\f114"; }
+.flaticon-facebook:before { content: "\f115"; }
+.flaticon-google-plus-logo:before { content: "\f116"; }
+.flaticon-trophy-cup-silhouette:before { content: "\f117"; }
+.flaticon-food:before { content: "\f118"; }
+.flaticon-tap:before { content: "\f119"; }
+.flaticon-one-finger-tap-gesture-of-outlined-hand-symbol:before { content: "\f11a"; }
+.flaticon-arrow:before { content: "\f11b"; }
+.flaticon-targeting:before { content: "\f11c"; }
+.flaticon-paint:before { content: "\f11d"; }
+.flaticon-glasses-and-moustache:before { content: "\f11e"; }
+.flaticon-moustache:before { content: "\f11f"; }
+.flaticon-pencil:before { content: "\f120"; }
+.flaticon-technology-1:before { content: "\f121"; }
+.flaticon-home:before { content: "\f122"; }
+.flaticon-open-envelope:before { content: "\f123"; }
+.flaticon-briefcase:before { content: "\f124"; }
+.flaticon-coffee-cup:before { content: "\f125"; }
+.flaticon-trophy:before { content: "\f126"; }
+.flaticon-magic-trick:before { content: "\f127"; }
+.flaticon-pencil-box-1:before { content: "\f128"; }
+.flaticon-pencil-box:before { content: "\f129"; }
+.flaticon-vector:before { content: "\f12a"; }
+.flaticon-technology:before { content: "\f12b"; }
+.flaticon-smiling-emoticon-square-face:before { content: "\f12c"; }
+.flaticon-idea:before { content: "\f12d"; }

@@ -1,0 +1,697 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="js no-touch csstransitions uk-notouch">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/flip.ico" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        .jquery-ripples {
+            position: relative;
+            z-index: 0;
+        }
+    </style>
+    <!-- META DATA -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <title>FLIP</title>
+
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="carga_dinamica/press.js"></script>
+
+</head>
+<body>
+    <link rel="stylesheet" href="/assets/css/animation.css">
+
+    <!--font-awesome.min.css-->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <!--flaticon.css-->
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <!--material-design-icon-->
+    <link rel="stylesheet" href="assets/css/material-design-iconic-font.min.css">
+    <!--animate.css-->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <!--meanmenu.min.css-->
+    <link rel="stylesheet" href="assets/css/meanmenu.min.css">
+    <!--jquery.fancybox.min.css-->
+    <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
+    <!--owl.carousel.min.css-->
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <!--jquery-ui.min.css-->
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <!--change-text.css-->
+    <link rel="stylesheet" href="assets/css/change-text.css">
+    <!--lightbox.css-->
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <!--MASTER SLIDER CSS-->
+    <!--bootstrap.min.css and bootsnav.css-->
+    <link rel="stylesheet" href="assets/css/bootsnav.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!--circle.css-->
+    <link rel="stylesheet" href="assets/css/circle.css">
+    <!--style.css-->
+    <link rel="stylesheet" href="assets/css/styleflip.css">
+    <!--Menu_responsive.css-->
+    <link rel="stylesheet" href="assets/css/Menu_responsive.css">
+    <!--responsive.css-->
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!--FIN LOAD -->
+    <div id="preloadermobile" class="preloader ">
+        <div class="preloader-inner-area">
+            <div class="loader-overlay">
+                <div class="l-preloader">
+                    <div class="c-preloader"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="allpage" class="wrapper">
+
+
+        <div id="pportfolio2">
+            <div class="pportfolio2 text-center">
+                <div class="container-fluid">
+                    <!--INICIO GRIDS -->
+                    <div id="generalgrid">
+                        <!--Fin More -->
+                        <!--Inicio Index -->
+
+                        <div id="indexgrid" class="pportfolio2-container portfolio-1 text-center" style="position: relative; height: 861.75px;">
+                            <div class="pportfolio2-sizer"></div>
+                            <img id="loginbarmore" src="assets/images/signin.png" class="pointer  movilhidden" />
+                            <a class="fbackmore" href="index.html">
+                                <span>
+                                    <img src="assets/images/F.png" alt="back">
+                                </span>
+                            </a>
+                            <a id="closemore"
+                               class="fclose-more pointer">
+                                <span>
+                                    <img src="assets/images/closebut_black.svg" alt="Close">
+                                </span>
+                            </a>
+
+                            <div id="cardmore2x11" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 0px; top: 0px;">
+                                <div id="card" class="card">
+                                    <div class="flipper ">
+                                        <div class="front content-more ">
+                                            <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-00"></span></h3>
+                                            <p id="p-descripcion-00" class="content-more-text align-left-text justify"></p>
+
+                                        </div>
+                                        <div class="back backpress  content-morepress">
+                                            <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                            <p class="content-more-text">
+                                                <a href="#" onClick="press(0)">
+                                                    <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 287px; top: 0px;">
+                                <div id="cardgrid2" class="card">
+                                    <div class="flipper ">
+                                        <div class="front content-more ">
+                                            <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-01"></span></h3>
+                                            <p id="p-descripcion-01" class="content-more-text align-left-text justify"></p>
+
+                                        </div>
+                                        <div class="back backpress  content-morepress">
+                                            <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                            <p class="content-more-text">
+                                                <a href="#" onClick="press(1)">
+                                                    <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div id="cardmore2x13" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square" id="comDesignIndex" style="position: absolute; left: 1141px; top: 232px;">
+
+                                <div id="card_more2" class="card">
+                                    <div class="flipper ">
+                                        <div class="front content-more ">
+                                            <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-02"></span></h3>
+                                            <p id="p-descripcion-02" class="content-more-text align-left-text justify"></p>
+
+                                        </div>
+                                        <div class="back backpress  content-morepress">
+                                            <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                            <p class="content-more-text">
+                                                <a href="#" onClick="press(3)">
+                                                    <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  movilhidden square  " style="position: absolute; left: 861px; top: 0px;">
+                                <div id="cardgrid3" class="card">
+                                    <div class="flipper ">
+                                        <div class="front content-more ">
+                                            <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-03"></span></h3>
+                                            <p id="p-descripcion-03" class="content-more-text align-left-text justify"></p>
+
+                                        </div>
+                                        <div class="back backpress  content-morepress">
+                                            <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                            <p class="content-more-text">
+                                                <a href="#" onClick="press(3)">
+                                                    <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div id="cardmore2x15" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 861px; top: 0px;">
+                                <div id="card_more4" class="card">
+                                    <div class="flipper ">
+                                        <div class="front content-more ">
+                                            <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-04"></span></h3>
+                                            <p id="p-descripcion-04" class="content-more-text align-left-text justify"></p>
+
+                                        </div>
+                                        <div class="back backpress  content-morepress">
+                                            <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                            <p class="content-more-text">
+                                                <a href="#" onClick="press(4)">
+                                                    <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4   square " style="position: absolute; left: 1141px; top: 232px;   " id="backquitmore">
+
+                                <div class="flipper ">
+                                    <div class="front content-more ">
+                                        <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-05"></span></h3>
+                                        <p id="p-descripcion-05" class="content-more-text align-left-text justify"></p>
+
+                                    </div>
+                                    <div class="back backpress  content-morepress">
+                                        <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                        <p class="content-more-text">
+                                            <a href="#" onClick="press(5)">
+                                                <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="cardmore2x12" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square" style="position: absolute; left: 287px; top: 232px;" contenteditable="false">
+                                <div id="card_more1" class="card">
+                                    <div class="flipper ">
+                                        <div class="front content-more ">
+                                            <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-06"></span></h3>
+                                            <p id="p-descripcion-06" class="content-more-text align-left-text justify"></p>
+
+                                        </div>
+                                        <div class="back backpress  content-morepress">
+                                            <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                            <p class="content-more-text">
+                                                <a href="#" onClick="press(6)">
+                                                    <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div><!--.pportfolio2-item-->
+                            <div id="fliplogo" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 square " style="position: absolute; left: 574px; top: 232px;">
+                                <div id="card_more1" class="card">
+                                    <div class="flipper ">
+                                        <div class="front content-more ">
+                                            <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-07"></span></h3>
+                                            <p id="p-descripcion-07" class="content-more-text align-left-text justify"></p>
+
+                                        </div>
+                                        <div class="back backpress  content-morepress">
+                                            <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                            <p class="content-more-text">
+                                                <a href="#" onClick="press(7)">
+                                                    <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div><!--.pportfolio2-item-->
+                            <div id="cardmore2x14" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 861px; top: 232px;">
+                                <div id="card_more3" class="card">
+                                    <div class="flipper ">
+                                        <div class="front content-more ">
+                                            <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-08"></span></h3>
+                                            <p id="p-descripcion-08" class="content-more-text align-left-text justify"></p>
+
+                                        </div>
+                                        <div class="back backpress  content-morepress">
+                                            <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                            <p class="content-more-text">
+                                                <a href="#" onClick="press(8)">
+                                                    <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " id="comGridIndex" style="position: absolute; left: 1141px; top: 232px;   " onclick="communties()">
+                                <div class="flipper ">
+                                    <div class="front content-more ">
+                                        <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-09"></span></h3>
+                                        <p id="p-descripcion-09" class="content-more-text align-left-text justify"></p>
+
+                                    </div>
+                                    <div class="back backpress  content-morepress">
+                                        <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                        <p class="content-more-text">
+                                            <a href="#" onClick="press(9)">
+                                                <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  movilhidden square " style="position: absolute; left: 0px; top: 464px;">
+                                <div class="flipper ">
+                                    <div class="front content-more ">
+                                        <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-10"></span></h3>
+                                        <p id="p-descripcion-10" class="content-more-text align-left-text justify"></p>
+
+                                    </div>
+                                    <div class="back backpress  content-morepress">
+                                        <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                        <p class="content-more-text">
+                                            <a href="#" onClick="press(10)">
+                                                <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                            </div><!--.pportfolio2-item-->
+                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  movilhidden square " id="dudequitmore" style="position: absolute; left: 287px; top: 464px;">
+
+                                <div class="flipper ">
+                                    <div class="front content-more ">
+                                        <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-11"></span></h3>
+                                        <p id="p-descripcion-11" class="content-more-text align-left-text justify"></p>
+
+                                    </div>
+                                    <div class="back backpress  content-morepress">
+                                        <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                        <p class="content-more-text">
+                                            <a href="#" onClick="press(11)">
+                                                <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div><!--.pportfolio2-item onclick="mores()"  id="comMoreIndex" -->
+                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square"
+                                 style="position: relative; left: 1141px; top: 232px;   z-index: 1;"
+                                 onclick="mores()" id="flip">
+
+
+                                <div id="cardgrid5" class="card">
+                                    <img class="content-more-image" src="assets/images/thepress.png">
+
+
+
+                                </div>
+
+                            </div>
+                            <div id="girlquitmore" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  movilhidden square " style="position: absolute; left: 861px; top: 464px;">
+
+                                <div class="flipper ">
+                                    <div class="front content-more ">
+                                        <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-12"></span></h3>
+                                        <p id="p-descripcion-12" class="content-more-text align-left-text justify"></p>
+
+                                    </div>
+                                    <div class="back backpress  content-morepress">
+                                        <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                        <p class="content-more-text">
+                                            <a href="#" onClick="press(12)">
+                                                <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 movilhidden square " style="position: absolute; left: 1141px; top: 464px; position: relative">
+                                <div class="card">
+                                    <div class="flipper ">
+                                        <div class="front content-more ">
+                                            <h3 class="content-more-title align-left-text" style="margin-top: 5%; font-weight: 700">#<span id="span-nombre-13"></span></h3>
+                                            <p id="p-descripcion-13" class="content-more-text align-left-text justify"></p>
+
+                                        </div>
+                                        <div class="back backpress  content-morepress">
+                                            <h3 class="content-more-title" style="padding-top: 15%; ">#LEER MÁS</h3>
+                                            <p class="content-more-text">
+                                                <a href="#" onClick="press(13)">
+                                                    <img src="assets/images/mas.svg" style="    height: 30px;
+                                                    width: 30px;" class="linkedin">
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <!--Fin Index -->
+                    </div>
+                    <!--FIN GRIDS--->
+                </div>
+            </div>
+        </div>
+        <div id="loginmodal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="closelogin" class="close">&times;</span>
+                <p id="">LOGIN</p>
+
+                <form name="login" method="post" action=""
+                      enctype="multipart/form-data">
+                    <div class="form-group" style="text-align: left;">
+                        <label style="margin-left: 0px; text-align: left;" for="email">
+                            <h4>
+                                Email address:
+                            </h4>
+                        </label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <label style="margin-left: 0px; text-align: left; " for="name">
+                            <h4>
+                                Password
+                            </h4>
+                        </label>
+                        <input type="password" class="form-control" id="name" placeholder="name" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Login</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="icon-bar">
+            <a href="#" class="talktous"><img src="assets/images/talktous.png" alt="book_now"></a>
+            <a href="#" class="signin">
+                <i class="glyphicon glyphicon-user
+                    "></i>
+            </a>
+            <a href="#" class="book"><img src="assets/images/book-now.png" alt="book_now"> </a>
+
+        </div>
+
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="closemodal" class="close">
+                    <img style="width: 30%;" src="assets/images/closebut_black.svg" alt="Close">
+                </span>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3 class="content-more-title modalcont" style="margin-top: 0px; ">#ABOUT <strong> <span id="span_modal_title"></span> </strong></h3>
+                        <br>
+                        <p class="content-more-text" style="text-align: justify; "><span id="span_modal_desc"></span></p>
+                        <button id="gotonews" class="btn btn-default" type="submit">IR A LA NOTICIA</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <img src="assets/images/more/press/press.jpg" class="img-responsive pddngbttn">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <footer>
+        <div class="footer">
+            <ul class="footer_menu">
+                <br class="brhide hiddens">
+
+                <li class="movilhidden "><img src="assets/images/14.jpg" alt="FLIP_LOGO"></li>
+
+                <li><a href="#">Communities</a></li>
+                <li><a href="#">Backstage</a></li>
+                <li><a href="#">Design</a></li>
+                <li><a href="#">More</a></li>
+                <li class="movilhidden"><hr></li>
+
+                <li class="">
+
+                    <a id="partnerfooter" style="font-weight: 600;                 font-family: GothamProLight;" href="#">Partner</a>
+                </li>
+                <li class="">
+                    <a style="font-weight: 600;                 font-family: GothamProLight; " href="#">Carrers</a>
+                </li>
+                <li class=""><a style="font-weight: 600;                 font-family: GothamProLight; " href="#">Team</a></li>
+                <li class=""><a style="font-weight: 600;                 font-family: GothamProLight; " href="#">FAQ</a></li>
+                <br class="brhide hiddens">
+                <br class="brhide hiddens">
+
+
+                <li>
+                    <a id="facefooter" href="#" class="facebook"><i class="fa fa-facebook fa-2x"></i></a>
+                </li>
+                <li>
+                    <a id="facefooter" href="#" class="twitter"><i class="fa fa-twitter fa-2x"></i></a>
+                </li>
+                <li>
+                    <a id="facefooter" href="#" class="youtube"><i class="fa fa-youtube fa-2x"></i></a>
+                </li>
+                <li>
+                    <a id="facefooter" href="#" class="instagram"><i class="fa fa-instagram fa-2x"></i></a>
+
+                </li>
+            </ul>
+
+            <br class="brhide hiddens">
+            <br class="brhide hiddens">
+            <br class="brhide hiddens">
+
+        </div><!--#footer-->
+    </footer>
+
+    <!--jquery.min.js-->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!--modernizr and waypoints -->
+    <script type="text/javascript" src="assets/js/modernizr.js"></script>
+    <script type="text/javascript" src="assets/js/waypoints.min.js"></script>
+    <!--bootstrap and bootsnav-->
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootsnav.js"></script>
+    <!-- uikit.min.js and sticky.min.js -->
+    <script type="text/javascript" src="assets/js/uikit.min.js"></script>
+    <script type="text/javascript" src="assets/js/sticky.min.js"></script>
+    <!-- MasterSlider -->
+    <script type='text/javascript' src='assets/js/masterslider.min.js'></script>
+    <!--meanmenu.min.js-->
+    <script type="text/javascript" src="assets/js/jquery.meanmenu.min.js"></script>
+    <!--lightbox.min.js-->
+    <script type="text/javascript" src="assets/js/lightbox.min.js"></script>
+    <!--isotope.pkgd.min.js-->
+    <script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
+    <!--ripples-min.js-->
+    <script type="text/javascript" src="assets/js/ripples-min.js"></script>
+    <!--owl.carousel.min.js-->
+    <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+    <!--jquery-ui.min.js-->
+    <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+    <!--bxslider.js-->
+    <script type="text/javascript" src="assets/js/jquery.bxslider.js"></script>
+    <!--change-text.js-->
+    <script type="text/javascript" src="assets/js/change-text.js"></script>
+    <!--gmaps-->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4RM7zOgOKq6n2fv407hX28xiL-M6vLdY"></script>-->
+    <script type="text/javascript" src="assets/js/gmaps.js"></script>
+    <!--parallax.js-->
+    <script type="text/javascript" src="assets/js/parallax.js"></script>
+    <!--fancybox.min.js-->
+    <script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
+    <!--wow.min.js-->
+    <script type="text/javascript" src="assets/js/wow.min.js"></script>
+    <!--counterup.min.js-->
+    <script type="text/javascript" src="assets/js/jquery.counterup.min.js"></script>
+    <!--circliful.js-->
+    <script type="text/javascript" src="assets/js/jquery.circliful.min.js"></script>
+    <!--mixitup.js-->
+    <script type="text/javascript" src="assets/js/jquery.mixitup.js"></script>
+    <!--showcase-slider.js-->
+    <script type="text/javascript" src="assets/js/showcase-slider.js"></script>
+    <!--bootstrap-progressbar.js-->
+    <script type="text/javascript" src="assets/js/bootstrap-progressbar.js"></script>
+    <!--SLIDER REVOLUTION SCRIPTS -->
+    <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  -->
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/jquery.flip.js"></script>
+    <!--custom.js-->
+    <script type="text/javascript" src="assets/js/custom.js"></script>
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
+    </script>
+    <script type="text/javascript" src="assets/js/custommenu.js"></script>
+    <script>
+        function tiempo_carga() {
+            window.globalfin = new Date;
+            window.globaltime = (window.globalfin - window.globalini) / 1000;
+            console.log(window.globaltime);
+        }
+
+        window.onload = function () {
+
+
+            tiempo_carga();
+            var xmobile = window.matchMedia("(max-width: 812px)")
+
+
+            if (window.globaltime < 4) {
+
+                if (localStorage.getItem('ingreso')) {
+                    debugger;
+
+                    $("#preloader").delay((5 - window.globaltime) * 1000).fadeOut("slow");
+                    console.log((4 - window.globaltime) * 1000);    // estableces el localstorage en 1 para que no se vuelva a cumplir la condicion
+                    localStorage.setItem('ingreso', 1);
+
+                } else {
+                    $("#preloader").addClass("hiddens");
+                    console.log("no es tu primera vez ");
+                    console.log(document.referrer);
+                }
+
+            }
+            else {
+                $("#preloader").delay(4000).fadeOut("slow");
+
+            }
+        }
+
+        $("#closemore").click(function () {
+            window.location = 'index.html?come=more';
+        });
+        var modal = document.getElementById('myModal');
+
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementById("closemodal");
+
+
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        var modal2 = document.getElementById('loginmodal');
+
+        // Get the button that opens the modal
+        var btn2 = document.getElementById("loginbarmore");
+
+        // Get the <span> element that closes the modal
+        var span2 = document.getElementById("closelogin");
+
+        // When the user clicks on the button, open the modal
+        btn2.onclick = function () {
+            modal2.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span2.onclick = function () {
+            modal2.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal2) {
+                modal2.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+                                        
+.centerMe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.leftme {
+  position: absolute;
+  top: 40%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+}
+.rightme {
+  position: absolute;
+  top: 30%;
+  right: 60%;
+}
+button {
+  display: flex;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  outline: 0;
+  overflow: hidden;
+}
+button .icon {
+  position: relative;
+  
+  line-height: 30px;
+ text-align: center;
+  color: #fff;
+  font-size: 18px;
+  transition: 0.2s color;
+  border-radius: 2px;
+    width: 40px;
+   height: 40px;
+   background: black; 
+   -moz-border-radius: 70px; 
+   -webkit-border-radius: 70px; 
+   border-radius: 70px;
+}
+button .icon .fa {
+  width: 30px;
+  transition: 0.2s all;
+}
+button .icon .fa-check {
+  color: #38b87c;
+}
+button .icon .fa-question {
+  color: #2492ff;
+}
+button .icon:after {
+  content: ' ';
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  background: #OOO;
+  top: 12.5px;
+  right: 1px;
+  transition: 0.2s right;
+  z-index: 1;
+}
+button .text {
+  position: relative;
+  width: 0;
+  height: 30px;
+  overflow: hidden;
+  background: #000;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  font-weight: 300;
+  transition: 0.2s all;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+        left: -13px;
+    top: 3px;
+}
+button .text span {
+  width: 100%;
+  opacity: 0;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 0.3s all;
+}
+button:hover .icon {
+  color: #fff;
+  border-radius: 70px;
+  
+}
+button:hover .icon:after {
+  right: -2px;
+}
+button:hover .text {
+  width: 120px;
+}
+button:hover .text span {
+  opacity: 1;
+  top: 0;
+}
+button.confirm .icon {
+  border-radius: 0;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+button.confirm .icon .fa {
+  transform: translateY(-30px);
+}
+button.confirm .icon:after {
+  right: -2px;
+}
+button.confirm .text {
+  background: #2492ff;
+  width: 120px;
+}
+button.confirm .text span {
+  opacity: 1;
+  top: 0;
+}
+button.done .icon {
+  border-radius: 0;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+button.done .icon .fa {
+  transform: translateY(-60px);
+}
+button.done .icon:after {
+  right: -2px;
+}
+button.done .text {
+  background: #38b87c;
+  width: 120px;
+}
+button.done .text span {
+  opacity: 1;
+  top: 0;
+}
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.icon{
+    padding: 6px;
+    right: 0px; 
+}
