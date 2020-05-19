@@ -45,6 +45,9 @@ export class HomegeneralComponent implements OnInit {
   PostId: number ;
   posttext: string = "";
   posttitle: string = "";
+  namebuilding: string = "";
+  post_blanck: any;
+  lengthpost: number = 0;
 
   title: string = "";
 
@@ -156,7 +159,7 @@ export class HomegeneralComponent implements OnInit {
 
   get_photos() {
     // debugger;
-     var creadoobj = { buildingid: 1 , userid: this.IDUSR };
+     var creadoobj = { buildingid: this.IDBUILD , userid: this.IDUSR };
      //debugger;
      this.heroService.ServicioPostPost("SeeHomeGeneral", creadoobj).subscribe((value) => {
  
@@ -170,6 +173,8 @@ export class HomegeneralComponent implements OnInit {
            if (value.result == "Success") {
               //debugger;
              this.posts = value.item;
+             this.lengthpost = this.posts.length;
+             this.namebuilding = value.detalle;
            }
        }
      });

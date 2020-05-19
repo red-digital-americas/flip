@@ -22,16 +22,28 @@
     </div>
   </div>
 </div>
-<div class="row padding-bottom-m padding-general-m">
+<div class="row">
+  <h3 style="padding-left: 55px; padding-top: 15px; padding-bottom: -55px;"> {{ namebuilding}}</h3>
+  <!-- *ngIf="this.lengthpost < 4" -->
+  <div *ngIf="this.lengthpost < 4" style="padding-left: 555px; padding-top: 15px; float: right; ">
+    <button 
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata(this.post_blanck);"
+            class="button button-x">
+            Add Slide
+    </button>
+  </div>
+</div>
+<div class="row padding-bottom-m padding-general-m" style="padding-top: 15px;">
   <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x" *ngFor="let post of posts, index as index;">
     <div class="ml-col-1">
       <div class="card__info margin-bottom-x" style="height: auto !important;">
         <p class="card__info-dato">
-          <span class="text-bold">Titulo: </span> 
+          <span class="text-bold">Name Slide: </span> 
           {{ post.title }}
         </p>
         <p class="card__info-dato">
-          <span class="text-bold">Description: </span> 
+          <span class="text-bold">Description Slide: </span> 
           {{ post.desc }}
         </p>
       </div>
@@ -39,7 +51,7 @@
         <div class="ml-col-7 images-view__section">
           <figure class="images-view__image">
             <span class="text-bold text-center images-view__image--title">
-              Build Photo:
+              Slide Photo:
             </span>
             <img src="../../../assets/webtmp.png" class="images-view__image--mask" />
             <img src="{{ post.frontphoto }}" class="images-view__image--image" />
@@ -48,7 +60,7 @@
         <div class="ml-col-3o images-view__section">
           <figure class="images-view__image">
             <span class="text-bold text-center images-view__image--title">
-              Build Movile Photo:
+              Slide Movile Photo:
             </span>
             <img src="../../../assets/phone.png" class="images-view__image--maskm" />
             <img src="{{ post.photomobile }}" class="images-view__image--imagem" />
@@ -60,7 +72,7 @@
           data-toggle="modal" 
           (click)="primaryModal.show();passdata(post);"
           class="button button-x">
-          Editar
+          Edit
         </button>
       </div>
     </div>

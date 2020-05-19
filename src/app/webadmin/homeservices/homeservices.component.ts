@@ -47,7 +47,10 @@ export class HomeservicesComponent implements OnInit {
     PostId: number ;
     posttext: string = "";
     posttitle: string = "";
-  
+    namebuilding: string = "";
+    post_blanck: any;
+    lengthpost: number = 0;
+
     title: string = "";
   
     direction: string = "";
@@ -90,6 +93,22 @@ export class HomeservicesComponent implements OnInit {
   
       }
     }
+
+     set_post_blanck(){
+      this.post_blanck = {
+        "Id" : 0,
+        "Photo" :  "",
+        "Icon2" :  "",
+        "Icon" :  "",
+        "Title" :  "",
+        "Category" :  "",
+        "PhotoMobile" :  "",
+        "CommunitiesIndexId" :this.IDBUILD, 
+             "communitiesServicesWebItems": []
+           }
+    }
+
+
     imageChangedEvent: any = '';
     croppedImage: any = '';
     showCropper = false;
@@ -223,8 +242,8 @@ serv(id?: number) {
     }
   
     get_photos() {
-
-      var creadoobj = { buildingid: 1 , userid: this.IDUSR };
+      this.set_post_blanck()
+      var creadoobj = { buildingid: this.IDBUILD , userid: this.IDUSR };
 
       this.heroService.ServicioPostPost("SeeHomeServicios", creadoobj).subscribe((value) => {
 
@@ -238,6 +257,8 @@ serv(id?: number) {
           default:
             if (value.result == "Success") {
               this.posts = value.item;
+              this.lengthpost = this.posts.length;
+              this.namebuilding = value.detalle;
             }
         }
       });
@@ -292,7 +313,7 @@ serv(id?: number) {
                     text: 'Content has been updated successfully'
                   }
                 });
-  
+                this.set_post_blanck();
                 close_modal.click();
                 this.get_photos();
   

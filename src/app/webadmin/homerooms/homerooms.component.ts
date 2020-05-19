@@ -51,6 +51,9 @@ export class HomeroomsComponent implements OnInit {
   PostId: number;
   posttext: string = "";
   posttitle: string = "";
+  namebuilding: string = "";
+  post_blanck: any;
+  lengthpost: number = 0;
 
   title: string = "";
   price: string = "";
@@ -178,7 +181,7 @@ export class HomeroomsComponent implements OnInit {
 
   get_photos() {
     // debugger;
-    var creadoobj = { buildingid: 1, userid: this.IDUSR };
+    var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
     //debugger;
     this.heroService.ServicioPostPost("SeeHomeRoom", creadoobj).subscribe((value) => {
 
@@ -188,16 +191,21 @@ export class HomeroomsComponent implements OnInit {
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
           break;
         default:
-          //debugger; 
+          debugger; 
           if (value.result == "Success") {
+          
+            this.lengthpost = value.item.length;
+            this.namebuilding = value.detalle;
 
-            this.posts = [ value.item[0] ];
-
-            this.posts_b = [ value.item[1] ];
-
-            this.posts_b[0].get_video_url = this.domSanitiza.bypassSecurityTrustResourceUrl( this.getVideoToEmbedUrl( this.posts_b[0].view360 ) );
-            this.posts[0].get_video_url = this.domSanitiza.bypassSecurityTrustResourceUrl( this.getVideoToEmbedUrl( this.posts[0].view360 ) );
-
+            if(value.item.length > 0)
+            {
+              this.posts = [ value.item[0] ];
+              this.posts_b = [ value.item[1] ];
+              this.posts_b[0].get_video_url = this.domSanitiza.bypassSecurityTrustResourceUrl( this.getVideoToEmbedUrl( this.posts_b[0].view360 ) );
+              this.posts[0].get_video_url = this.domSanitiza.bypassSecurityTrustResourceUrl( this.getVideoToEmbedUrl( this.posts[0].view360 ) );
+  
+            }
+          
           }
       }
     });
