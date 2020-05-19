@@ -22,13 +22,25 @@
     </div>
   </div>
 </div>
-<div class="row padding-bottom-m padding-general-m">
-  <div class="ml-col-1 room-data__tabs text-center">
+<div class="row">
+  <h3 style="padding-left: 55px; padding-top: 15px; padding-bottom: -55px;"> {{ namebuilding}}</h3>
+  <!-- *ngIf="this.lengthpost < 4" -->
+  <div *ngIf="this.lengthpost < 4" style="padding-left: 555px; padding-top: 15px; float: right;">
+    <button 
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata(this.post_blanck);"
+            class="button button-x">
+            Add Silde in Room
+    </button>
+  </div>
+</div>
+<div class="row padding-bottom-m padding-general-m" style="padding-top: 15px;">
+  <div class="ml-col-1 room-data__tabs text-center" *ngIf="this.lengthpost > 0">
     <span class="room-data__tab room-data__tab--active" (click)="showSection( $event, 'room_a')">
-      Room A
+      Room Type 1
     </span>
     <span class="room-data__tab" (click)="showSection( $event ,'room_b')">
-      Room B
+      Room Type 2
     </span>
   </div>
   <div 
@@ -39,7 +51,12 @@
     <div class="ml-col-1 room-data margin-bottom-m">
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
-          <p class="room-data__card-titulo">
+           <p class="room-data__card-titulo">
+             Type Room General Information 
+           </p>
+        </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-dato">
             <span class="text-bold">Title: </span>
             {{ post.title }}
           </p>
@@ -56,20 +73,15 @@
             {{ post.getGuide }}
           </p>
         </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-dato">
-            <span class="text-bold">View 360 Url: </span>
-            {{ post.view360 }}
-          </p>
-        </div>
-        <div class="ml-col-1 room-data__card--group">
-          <div class="ml-col-1">
+        
+        <div class="ml-col-1 ">
+          <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
               <span class="text-bold">Price Description: <br /> </span>
               {{ post.descPrice }}
             </p>
           </div>
-          <div class="ml-col-1">
+          <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
               <span class="text-bold">Price: <br /> </span>
               {{ post.price | currency }}
@@ -77,20 +89,27 @@
           </div>
         </div>
         <div class="ml-col-1">
-          <div class="ml-col-1">
+          <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
               <span class="text-bold">Price 2 Description: <br /> </span>
               {{ post.descPrice1 }}
             </p>
           </div>
-          <div class="ml-col-1">
+          <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
               <span class="text-bold">Price 2: <br /> </span>
               {{ post.price1 | currency }}
             </p>
           </div>
         </div>
+        <div class="ml-col-1">
+          <p class="room-data__card-dato">
+            <span class="text-bold">View 360 Url: </span>
+            {{ post.view360 }}
+          </p>
+        </div>
         <div class="ml-col-1 room-data__card-video margin-top-x">
+          <span class="text-bold">Preview Video: </span>
           <iframe 
             class="custom-input__video--viewer"
             allowfullscreen="allowfullscreen"

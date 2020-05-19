@@ -1,4 +1,5 @@
 <div class="row">
+  
   <div class="ml-col-1 navbar__components">
     <div class="navbar__component ml-col-4">
       <button class="navbar__component-button" (click)="amm(IDBUILD)">
@@ -22,12 +23,24 @@
     </div>
   </div>
 </div>
-<div class="row padding-bottom-m padding-general-m">
+<div class="row">
+  <h3 style="padding-left: 55px; padding-top: 15px; padding-bottom: -55px;"> {{ namebuilding}} </h3>
+  <!-- *ngIf="this.lengthpost < 4" -->
+  <div *ngIf="this.lengthpost < 4" style="padding-left: 555px; padding-top: 15px; float: right; ">
+    <button 
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata(this.post_blanck);"
+            class="button button-x">
+            Add Service
+    </button>
+  </div>
+</div>
+<div class="row padding-bottom-m padding-general-m" style="padding-top: 15px;">
   <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x" *ngFor="let post of posts, index as index;">
     <div class="ml-col-1">
       <div class="card__info margin-bottom-x" style="height: auto !important;">
         <p class="card__info-dato">
-          <span class="text-bold">Titulo: </span> 
+          <span class="text-bold">Service: </span> 
           {{ post.title }}
         </p>
       </div>
@@ -35,7 +48,7 @@
         <div class="icon-viewB">
           <div class="icon-viewB__container" *ngFor="let icon of post.communitiesServicesWebItems;">
             <p class="icon-viewB__title">
-              Icon Description: {{ icon.titleIcon }}
+              Caracteristic: {{ icon.titleIcon }}
             </p>
             <div class="icon-viewB__icon">
               <span class="icon-viewB__icon-label">Icon: </span> 
@@ -52,7 +65,7 @@
         <div class="ml-col-7 images-view__section">
           <figure class="images-view__image">
             <span class="text-bold text-center images-view__image--title">
-              Build Photo:
+              Service Slide Photo:
             </span>
             <img src="../../../assets/webtmp.png" class="images-view__image--mask" />
             <img src="{{ post.frontphoto }}" class="images-view__image--image" />
@@ -61,7 +74,7 @@
         <div class="ml-col-3o images-view__section">
           <figure class="images-view__image">
             <span class="text-bold text-center images-view__image--title">
-              Build Movile Photo:
+              Service Slide Photo:
             </span>
             <img src="../../../assets/phone.png" class="images-view__image--maskm" />
             <img src="{{ post.photomobile }}" class="images-view__image--imagem" />
@@ -191,7 +204,7 @@
                   type="file" 
                   name="image_one_selected"
                   accept="image/*"
-                  (change)="readImageData($event, '350x350', 3);"
+                  (change)="readImageData($event, '512x512', 3);"
                   id="icon_upload_{{ 2 + index }}" 
                   required />
                 <label class="form__image-img" for="icon_upload_{{ 2 + index }}">
@@ -213,7 +226,7 @@
                     <span class="color-red" *ngIf="form_watcher.no_ico1">
                       Icon Default is required <br />
                     </span>
-                    *Image resolution 350x350px.
+                    *Image resolution 512x512px.
                   </span>
                 </label>
               </div>
@@ -223,7 +236,7 @@
                   type="file" 
                   name="image_one_selected"
                   accept="image/*"
-                  (change)="readImageData($event, '350x350', 3);"
+                  (change)="readImageData($event, '512x512', 3);"
                   id="iconH_upload_{{ 2 + index + 1 }}" 
                   required />
                 <label class="form__image-img" for="iconH_upload_{{ 2 + index + 1 }}">
@@ -247,7 +260,7 @@
                     <span class="color-red" *ngIf="form_watcher.no_ico0">
                       Icon Default is required <br />
                     </span>
-                    *Image resolution 350x350px.
+                    *Image resolution 512x512px.
                   </span>
                 </label>
               </div>

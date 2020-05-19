@@ -50,6 +50,9 @@ export class HomeammenitiesComponent implements OnInit {
   PostId: number;
   posttext: string = "";
   posttitle: string = "";
+  namebuilding: string = "";
+  post_blanck: any;
+  lengthpost: number = 0;
 
   title: string = "";
 
@@ -252,6 +255,8 @@ export class HomeammenitiesComponent implements OnInit {
           if (value.result == "Success") {
             // 
             this.posts = value.item;
+            this.lengthpost = this.posts.length;
+             this.namebuilding = value.detalle;
           }
       }
     });
