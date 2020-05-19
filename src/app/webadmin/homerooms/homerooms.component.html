@@ -56,12 +56,6 @@
             {{ post.getGuide }}
           </p>
         </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-dato">
-            <span class="text-bold">View 360 Url: </span>
-            {{ post.view360 }}
-          </p>
-        </div>
         <div class="ml-col-1 room-data__card--group">
           <div class="ml-col-1">
             <p class="room-data__card-dato text-center">
@@ -89,6 +83,12 @@
               {{ post.price1 | currency }}
             </p>
           </div>
+        </div>
+        <div class="ml-col-1 room-data__card--group">
+          <p class="room-data__card-dato">
+            <span class="text-bold">View 360 Url: </span>
+            {{ post.view360 }}
+          </p>
         </div>
         <div class="ml-col-1 room-data__card-video margin-top-x">
           <iframe 
@@ -180,12 +180,6 @@
             {{ post.getGuide }}
           </p>
         </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-dato">
-            <span class="text-bold">View 360 Url: </span>
-            {{ post.view360 }}
-          </p>
-        </div>
         <div class="ml-col-1 room-data__card--group">
           <div class="ml-col-1">
             <p class="room-data__card-dato text-center">
@@ -214,7 +208,13 @@
             </p>
           </div>
         </div>
-        <div class="ml-col-1 custom-input__video">
+        <div class="ml-col-1 room-data__card--group">
+          <p class="room-data__card-dato">
+            <span class="text-bold">View 360 Url: </span>
+            {{ post.view360 }}
+          </p>
+        </div>
+        <div class="ml-col-1 custom-input__video margin-top-x">
           <iframe 
             class="custom-input__video--viewer" 
             allowfullscreen="allowfullscreen"

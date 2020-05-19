@@ -586,15 +586,9 @@ serv(id?: number) {
 
   }
 
-  public deleteIconsServices( event_data: any ):void {
+  public deleteIconsServices( index: number ):void {
 
-    const icons_in = this.service_data.communitiesServicesWebItems,
-          delete_event = event_data.target,
-          delete_this = icons_in.findIndex( (icons: any) => icons.id == delete_event.id );
-
-          icons_in.splice( delete_this, 1 );
-
-          this.updatedIconsService( false );
+    this.service_data.communitiesServicesWebItems.splice(index, 1);
 
   }
 

@@ -1,1 +1,265 @@
-Index Component
+<div class="ml-col-1">
+    <div class="ml-col-1 padding-general-m">
+        <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x">
+            <div class="ml-col-1 position-relative">
+                <h4 class="ap-form__titulo text-left">
+                    Backstage Index
+                </h4>
+            </div>
+            <div class="ml-col-1">
+                <div class="card__info margin-bottom-x" style="height: auto !important;">
+                <p class="card__info-dato">
+                    <span class="text-bold">Title: </span> 
+                    {{ back_stage_data.whatIstitle }}
+                </p>
+                <p class="card__info-dato">
+                    <span class="text-bold">Membership Name: </span> 
+                    {{ back_stage_data.membershipTitle }}
+                </p>
+                <p class="card__info-dato">
+                    <span class="text-bold">Description: </span> 
+                    {{ back_stage_data.description }}
+                </p>
+                </div>
+                <div class="ml-col-1 images-view">
+                <div class="ml-col-7 images-view__section">
+                    <figure class="images-view__image">
+                    <span class="text-bold text-center images-view__image--title">
+                        Build Photo:
+                    </span>
+                    <img src="../../../assets/webtmp.png" class="images-view__image--mask" />
+                    <img src="{{ back_stage_data.photoSlider }}" class="images-view__image--image" />
+                    </figure>
+                </div>
+                <div class="ml-col-3o images-view__section">
+                    <figure class="images-view__image">
+                    <span class="text-bold text-center images-view__image--title">
+                        Build Movile Photo:
+                    </span>
+                    <img src="../../../assets/phone.png" class="images-view__image--maskm" />
+                    <img src="{{ back_stage_data.photoMobileSlider }}" class="images-view__image--imagem" />
+                    </figure>
+                </div>
+                </div>
+                <h4 class="ml-col-1 card__subtitulo text-center margin-top-x">
+                    FAQ's
+                </h4>
+                <div class="ml-col-1" *ngFor="let faq of back_stage_data.faqs;">
+                    <div class="ml-col-1 text-center bottom-separator padding-bottom-x margin-bottom-x">
+                        <div class="ml-col-1 text-bold">
+                            {{ faq.question }}
+                        </div>
+                        <div class="ml-col-1">
+                            {{ faq.answer }}
+                        </div>
+                    </div>
+                </div>
+                <div class="ml-col-1 text-center margin-top-m">
+                <button 
+                    data-toggle="modal" 
+                    (click)="primaryModal.show();"
+                    class="button button-x">
+                    Editar
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div 
+  bsModal 
+  #primaryModal="bs-modal" 
+  class="modal fade modal-fw" 
+  tabindex="-1" 
+  role="dialog" 
+  aria-labelledby="myModalLabel" 
+  aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">
+            Edit Backstage information
+        </h4>
+        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="form">
+        <form #loginForm="ngForm" autocomplete="off">
+            <div class="ml-col-1 custom-input margin-top-m">
+                <input 
+                  type="text"
+                  class="custom-input__text" 
+                  name="titulo_home" 
+                  id="titulo_home" 
+                  placeholder="Title" 
+                  [(ngModel)]="back_stage_data.whatIstitle"
+                  [class.custom-input__text--error]="form_watcher.no_titl"
+                  required />
+                <label class="custom-input__label custom-input__label--active" for="titulo_home">
+                  Title
+                </label>
+                <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
+                  Title is required
+                </span>
+            </div>
+            <div class="ml-col-1 custom-input margin-top-m">
+                <input 
+                  type="text"
+                  class="custom-input__text" 
+                  name="titulo_home" 
+                  id="titulo_home" 
+                  placeholder="Membership Name" 
+                  [(ngModel)]="back_stage_data.membershipTitle"
+                  [class.custom-input__text--error]="form_watcher.no_mnam"
+                  required />
+                <label class="custom-input__label custom-input__label--active" for="titulo_home">
+                    Membership Name
+                </label>
+                <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_mnam">
+                    Membership Name is required
+                </span>
+            </div>
+            <div class="ml-col-1 custom-input margin-top-x">
+                <textarea 
+                  class="custom-input__textarea" 
+                  name="descripcion_home" 
+                  id="descripcion_home" 
+                  placeholder="Description" 
+                  [(ngModel)]="back_stage_data.description"
+                  [class.custom-input__textarea--error]="form_watcher.no_desc"
+                  required></textarea>
+                <label class="custom-input__label custom-input__label--active" for="descripcion_home">
+                    Description
+                </label>
+                <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
+                    Description is required
+                </span>
+            </div>
+            <div class="form__image form__image--fix">
+                <input 
+                  class="display-none image_form"
+                  type="file" 
+                  name="image_one_selected"
+                  accept="image/*"
+                  (change)="readImageData($event, '1920x1080', 0);"
+                  id="validatedCustomFile" 
+                  required />
+                <label class="form__image-img" for="validatedCustomFile">
+                  <figure class="image_to_preview_container">
+                    <img 
+                      [src]="back_stage_data.photoSlider" 
+                      class="image_to_preview placeholder_image custom-input__image"
+                      [class.custom-input__image--error]="form_watcher.no_img0" />
+                  </figure>
+                  <span class="image_to_preview_name name_image_uploaded"></span>
+                  <span class="padding-tb-min">
+                    <strong>Slide Image:</strong> <br /> 
+                    <span class="color-red" *ngIf="form_watcher.no_img0">
+                        Slide Image is required <br />
+                    </span>
+                    *Image resolution 1920x1080px.
+                  </span>
+                </label>
+            </div>
+            <div class="form__image form__image--fix">
+                <input 
+                  class="display-none image_form"
+                  type="file" 
+                  name="image_one_selected"
+                  accept="image/*"
+                  (change)="readImageData($event, '940x1080', 1);"
+                  id="validatedCustomFile1" 
+                  required />
+                <label class="form__image-img" for="validatedCustomFile1">
+                  <figure class="image_to_preview_container">
+                    <img 
+                      [src]="back_stage_data.photoMobileSlider" 
+                      class="image_to_preview placeholder_image custom-input__image"
+                      [class.custom-input__image--error]="form_watcher.no_img1" />
+                  </figure>
+                  <span class="image_to_preview_name name_image_uploaded"></span>
+                  <span class="padding-tb-min">
+                    <strong>Mobile Slide Image:</strong> <br /> 
+                    <span class="color-red" *ngIf="form_watcher.no_img1">
+                        Mobile Slide Image is required <br />
+                    </span>
+                    *Image resolution 350x350px.
+                  </span>
+                </label>
+            </div>
+            <div class="ml-col-1 custom-input">
+                <h4 class="ml-col-1 custom-input__title">FAQ's</h4>
+                <div class="ml-col-1" faq="faq" *ngFor="let faq of back_stage_data.faqs, index as index;">
+                    <div class="ml-col-1 custom-input margin-top-m">
+                        <input 
+                          type="text"
+                          class="custom-input__text" 
+                          name="faq_question_{{ index }}" 
+                          id="faq_question_{{ index }}" 
+                          value="{{ faq.question }}"
+                          placeholder="Membership Name" 
+                          [class.custom-input__text--error]="faq.question == null"
+                          required />
+                        <label class="custom-input__label custom-input__label--active" for="faq_question_{{ index }}">
+                            Question
+                        </label>
+                        <span class="custom-input__textarea--errorm" *ngIf="faq.question == null">
+                            Question is required
+                        </span>
+                    </div>
+                    <div class="ml-col-1 custom-input margin-top-m">
+                        <input 
+                          type="text"
+                          class="custom-input__text" 
+                          name="ans_question_{{ index }}" 
+                          id="ans_question_{{ index }}" 
+                          value="{{ faq.answer }}"
+                          placeholder="Membership Name" 
+                          [class.custom-input__text--error]="faq.answer == null"
+                          required />
+                        <label class="custom-input__label custom-input__label--active" for="ans_question_{{ index }}">
+                            Answer
+                        </label>
+                        <span class="custom-input__textarea--errorm" *ngIf="faq.answer == null">
+                            Answer is required
+                        </span>
+                    </div>
+                    <div class="ml-col-1 ap-form__buttons bottom-separator">
+                        <button 
+                          (click)="deleteThisFaq( index )"
+                          class="ap-form__buttons-button ap-form__buttons-button--big button-orange">
+                          Eliminar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-1 ap-form__buttons">
+                <button 
+                  (click)="addNewQuestion()"
+                  class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+                  Add Question
+                </button>
+            </div>
+            <div class="card__row">
+                <div class="modal-footer">
+                  <button 
+                    type="button" 
+                    class="btn btn-secondary" 
+                    id="close_modal" 
+                    (click)="primaryModal.hide(); resetImagesData(); getBackStageData();">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary" (click)="sendBackstageData()">
+                    Guardar Cambios
+                  </button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black-box">
+    <img src="" id="image_data" />
+</div>

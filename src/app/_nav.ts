@@ -34,11 +34,11 @@ export class MenuService {
       ]
     },
     {
-      name: 'Backstage', type: 1, url: '/', icon: 'icon-plus reduce',
+      name: 'Backstage', type: 1, url: '/', icon: 'icon-organization reduce',
       children: [  
-        { name: 'Index', url: '/backstage', icon: 'icon-people sangria'},
-        { name: 'What is Colving', url: '/coliving', icon: 'icon-wrench sangria'},
-        { name: 'Memberships', url: '/memberships', icon: 'icon-bubbles sangria'}
+        { name: 'Index', url: '/backstage', icon: 'icon-globe sangria'},
+        { name: 'What is Colving', url: '/coliving', icon: 'icon-book-open sangria'},
+        { name: 'Memberships', url: '/memberships', icon: 'icon-people sangria'}
       ]
     }
   ] 
