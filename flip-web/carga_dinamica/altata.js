@@ -8,6 +8,9 @@
 
 var respuesta;
 var _html;
+let params = new URLSearchParams(location.search);
+var buildingid = params.get('buildingid');
+
 $(document).ready(function () {
     $.ajax({
         type: 'POST',
@@ -42,14 +45,16 @@ $(document).ready(function () {
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
     });
 
+    //alert(buildingid)
     $.ajax({
         type: 'POST',
         url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeAmmenities",
-        data: JSON.stringify({ userid: 1 }),
+        data: JSON.stringify({ buildingid: buildingid, userid: 1 }),
         contentType: "application/json",
         dataType: "text",
 
         success: function (data, textStatus, jqXHR) {
+            debugger;
             respuesta = JSON.parse(data);
             console.log('Home 123 ===> ',respuesta.item);
 
@@ -65,6 +70,7 @@ $(document).ready(function () {
             //ICONOS 1
             $("#amenidadesrightimg1").attr("src", respuesta.item[0].build);
             $("#amenidadesrightimgm1").attr("src", respuesta.item[0].buildmobile);
+            
             $("#icon-altata-amenities-slide-00").attr("src", respuesta.item[0].icon);
             $("#icon-altata-amenities-slide-00").mouseover(function () {
                 $("#icon-altata-amenities-slide-00").attr("src", respuesta.item[0].icon2);
@@ -268,17 +274,10 @@ $(document).ready(function () {
 
             //DESCRIPCION
             $("#p-altata-desc-00").text(respuesta.item[0].desc);
-            $("#p-altata-desc-01").text(respuesta.item[0].desc);
-            $("#p-altata-desc-02").text(respuesta.item[0].desc);
-            $("#p-altata-desc-03").text(respuesta.item[0].desc);
-            $("#p-altata-desc-04").text(respuesta.item[0].desc);
-
-            //Movil
-            $("#img-maltata-amenities-slide-00").attr("src", respuesta.item[0].photomobile);
-            $("#img-maltata-amenities-slide-01").attr("src", respuesta.item[1].photomobile);
-            $("#img-maltata-amenities-slide-02").attr("src", respuesta.item[2].photomobile);
-            $("#img-maltata-amenities-slide-03").attr("src", respuesta.item[3].photomobile);
-            $("#img-maltata-amenities-slide-04").attr("src", respuesta.item[4].photomobile);
+            $("#p-altata-desc-01").text(respuesta.item[1].desc);
+            $("#p-altata-desc-02").text(respuesta.item[2].desc);
+            $("#p-altata-desc-03").text(respuesta.item[3].desc);
+            $("#p-altata-desc-04").text(respuesta.item[4].desc);
 
             //Titulo
             $("#p-altata-amenities-title-00").text(respuesta.item[0].title);
@@ -286,6 +285,15 @@ $(document).ready(function () {
             $("#p-altata-amenities-title-02").text(respuesta.item[2].title);
             $("#p-altata-amenities-title-03").text(respuesta.item[3].title);
             $("#p-altata-amenities-title-04").text(respuesta.item[4].title);
+
+
+    ////////////////////////////Movil //////////////////////////////////////////////////////////
+            $("#img-maltata-amenities-slide-00").attr("src", respuesta.item[0].photomobile);
+            $("#img-maltata-amenities-slide-01").attr("src", respuesta.item[1].photomobile);
+            $("#img-maltata-amenities-slide-02").attr("src", respuesta.item[2].photomobile);
+            $("#img-maltata-amenities-slide-03").attr("src", respuesta.item[3].photomobile);
+            $("#img-maltata-amenities-slide-04").attr("src", respuesta.item[4].photomobile);
+
 
         }, 
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },

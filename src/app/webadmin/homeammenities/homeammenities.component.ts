@@ -149,7 +149,7 @@ export class HomeammenitiesComponent implements OnInit {
 
     if (indice == 3) {
       const fileToUpload: File = new File([this.blob], 'filename.png');
-      //debugger;
+      ////debugger;
       this.newImages[indice] = (fileToUpload);
       this.imageInputLabelfour = "movil";
     }
@@ -237,11 +237,11 @@ export class HomeammenitiesComponent implements OnInit {
   }
 
   get_photos() {
-    //  
-    var creadoobj = { buildingid: 1, userid: this.IDUSR };
+    //debugger;
+    var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
     // 
     this.heroService.ServicioPostPost("SeeHomeAmmenities", creadoobj).subscribe((value) => {
-
+      //debugger;
 
       switch (value.result) {
         case "Error":
@@ -386,7 +386,7 @@ export class HomeammenitiesComponent implements OnInit {
     let url: string = '';
     if (!Utils.isEmpty(this.newImages)) {
       let f = { file: this.newImages[indice], name: this.newImages[indice].name }; {
-        //debugger;
+        ////debugger;
         if (indice == 0) {
           this.imageInputLabel = f.name;
         }
@@ -425,7 +425,7 @@ export class HomeammenitiesComponent implements OnInit {
             if (indice == 5) {
               this.post.photomobile = url;
             }
-            //debugger;
+            ////debugger;
           }
         })
       }
@@ -531,7 +531,7 @@ export class HomeammenitiesComponent implements OnInit {
               const dimension_calc = dimension.split('x'),
                     width = dimension_calc[0],
                     height = dimension_calc[1];
-
+                    //debugger
               return {
                 width: Number( width ),
                 height: Number( height )
@@ -554,7 +554,7 @@ export class HomeammenitiesComponent implements OnInit {
               placeh_image_data.setAttribute('src',  e.target.result );
 
               setTimeout(() => {
-
+//debugger;
                 const image_dimension = {
                   width: placeh_image_data.offsetWidth,
                   height: placeh_image_data.offsetHeight
@@ -569,7 +569,7 @@ export class HomeammenitiesComponent implements OnInit {
             parse_my_image.then( ( image_data:any ) => {
 
               const limits = dimension_limits.get_dimension_limits();
-
+//debugger;
                 if( limits.width == image_data.width && limits.height == image_data.height ) {
 
                   img_target.src = e.target.result; 

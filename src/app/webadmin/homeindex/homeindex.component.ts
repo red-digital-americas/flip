@@ -102,7 +102,7 @@ export class HomeindexComponent implements OnInit {
      var creadoobj = { buildingid: 1 , userid: this.IDUSR };
      //debugger;
      this.heroService.ServicioPostPost("SeeHomeIndex", creadoobj).subscribe((value) => {
- 
+ debugger;
  
        switch (value.result) {
          case "Error":
@@ -119,10 +119,12 @@ export class HomeindexComponent implements OnInit {
    }
 
 
-   passdata(id:any , title:any , direction:any ){
+   passdata(id:any , title:any , direction:any , comming: any){
+     
     this.PostId = id ; 
     this.title=title;
     this.direction=direction; 
+    this.comming = comming;
    }
    gotonewsfeed(id?: number) {
     this.router.navigate(['webadmin/homeindex/' + id])
@@ -148,9 +150,9 @@ this.router.navigate(['webadmin/homeservices/' + id])
      if (this.imageInputLabel != "Choose file") {
 
        this.loader.showLoader();
-
+debugger;
        var creadoobj = { id: this.PostId, Photo: this.postphoto, Title: this.title, Direction: this.direction, IsComming: this.comming,  Position: this.PostId };
-
+       debugger;
     this.heroService.ServicioPostPost("UpdateHomeIndex", creadoobj).subscribe((value) => {
 
 
@@ -165,7 +167,7 @@ this.router.navigate(['webadmin/homeservices/' + id])
             this.get_photos();
             this.title="";
             this.direction="";
-            
+            this.comming = false;
             this.postphoto=""; 
             this.imageInputLabel="Choose file";
             this.system_message.showMessage({

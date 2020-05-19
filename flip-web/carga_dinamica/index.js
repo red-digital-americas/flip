@@ -5,6 +5,11 @@
 
 /////////////////////////////////////// INDEX HOME ///////////////////////////////////////////////////////////
 
+$(document).ready(function () {
+    // alert(urlbase_api);
+    
+
+
 $.ajax({
     type: 'POST',
     url: "http://34.237.214.147/back/api_flip/api/Post/SeeIndex",

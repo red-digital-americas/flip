@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
         <link rel="shortcut icon" type="image/x-icon" href="./assets/flip.ico" />
+        <script src="carga_dinamica/config.js"></script>
         <style>
         
             *, *::after, *::before {
@@ -1026,19 +1027,19 @@
             </div>
             <div class="about__container" id="about_container">
                 <div class="about__text">
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa omnis maxime, eius, aut ullam harum sed voluptatibus id earum consequatur voluptate consequuntur neque voluptatum deserunt nulla vitae natus reiciendis eum!</span>
+                    <span id="p-backstage-01">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa omnis maxime, eius, aut ullam harum sed voluptatibus id earum consequatur voluptate consequuntur neque voluptatum deserunt nulla vitae natus reiciendis eum!</span>
                 </div>
                 <div class="about__links">
                     <div class="about__link">
-                        <a href="/backstage.html">
-                            ¿QUÉ ES COLIVING?
-                            <button id="about_colving">Ver más</button>
+                        <a href="./backstage.html">
+                            <button id="about_colving">See more</button>
+                            <span id="s_backstage_01">¿QUÉ ES COLIVING?</span>
                         </a>
                     </div>
                     <div class="about__link">
-                        <a href="/backstage.html">
-                            MEMBRESÍAS
-                            <button id="about_membresia">Ver más</button>
+                        <a href="./backstage.html">
+                            <button id="about_membresia">Se more</button>
+                            <span id= "membre">MEMBRESÍAS</span>
                         </a>
                     </div>
                 </div>
@@ -1219,6 +1220,19 @@
                     return the_element;
 
             }
+            
+
+            ////SET CUADROS BACKSTAGE
+            ajaxRequest({where_to_go: urlbase_api +"Post/SeeHomeBackstage"}).then( home_content => {
+                var p_backstage_01 = document.getElementById('p-backstage-01')
+                 p_backstage_01.innerHTML = home_content.item[0].description;
+                 var s_backstage_01 = document.getElementById('s_backstage_01')
+                 s_backstage_01.innerHTML = home_content.item[0].whatIstitle;
+                 var membre = document.getElementById('membre')
+                 membre.innerHTML = home_content.item[0].membershipTitle;
+                }, !1);
+
+               
 
             ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeIndex'}).then( cards => { 
 
@@ -1318,8 +1332,8 @@
 
             function bringMeAllConetent() {
 
-                ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeHomeIndex'}).then( home_content => {
-
+                ajaxRequest({where_to_go: urlbase_api +'Post/SeeHomeIndex'}).then( home_content => {
+debugger;
                     let home_bg_images = [
                         'assets/images/comm/grid-1.jpg',
                         'assets/images/comm/grid-2.jpg',
@@ -1336,8 +1350,8 @@
                             index % 2 == 0 ? 
                              (function IIFE() {
                                 dom_home_card += '<figure class="card__big-img">'; 
-                                if( home_card.id > 1 /*!home_card.iscomming*/ ) {
-                                    dom_home_card += '<span class="card__proximamente">proximamente</span>';  
+                                if(home_card.iscomming ) {
+                                    dom_home_card += '<span  class="card__proximamente">Coming soon</span>';  
                                     dom_home_card += '<img class="card--desactive" src="' + home_card.frontphoto + '" />'; 
                                 } else {
                                     dom_home_card += '<img src="' + home_card.frontphoto + '" />';
@@ -1346,7 +1360,7 @@
                                 dom_home_card += '<span class="card__geodata-title">' + home_card.title + '</span>';
                                 dom_home_card += '<span class="card__geodata-info">';
                                 dom_home_card += '<img src="assets/images/gps.svg" />';
-                                dom_home_card += '<span>' + home_card.direction + '</span>';            
+                                dom_home_card += '<span style="max-width: 215px; font-weight: lighter;">' + home_card.direction + '</span>';            
                                 dom_home_card += '</span>';
                                 dom_home_card += '</span>';
                                 dom_home_card += '</figure>';
@@ -1355,8 +1369,8 @@
                              (function IIFE() {
                                 dom_home_card += '<img src="' + home_bg_images[index] + '" class="card__big-ext" />';
                                 dom_home_card += '<figure class="card__big-img">'; 
-                                if( home_card.id > 1 /*!home_card.iscomming*/ ) {
-                                    dom_home_card += '<span class="card__proximamente">proximamente</span>';  
+                                if(home_card.iscomming ) {
+                                    dom_home_card += '<span class="card__proximamente">Coming soon</span>';  
                                     dom_home_card += '<img class="card--desactive" src="' + home_card.frontphoto + '" />'; 
                                 } else {
                                     dom_home_card += '<img src="' + home_card.frontphoto + '" />';
@@ -1365,7 +1379,7 @@
                                 dom_home_card += '<span class="card__geodata-title">' + home_card.title + '</span>';
                                 dom_home_card += '<span class="card__geodata-info">';
                                 dom_home_card += '<img src="assets/images/gps.svg" />';
-                                dom_home_card += '<span>' + home_card.direction + '</span>';            
+                                dom_home_card += '<span style="max-width:215px; font-weight: lighter;">' + home_card.direction + '</span>';            
                                 dom_home_card += '</span>';
                                 dom_home_card += '</span>';
                                 dom_home_card += '</figure>';
@@ -1799,7 +1813,7 @@
 
                         home_card_element[1].querySelectorAll('.card__big-img')[0].addEventListener('click', function goToPage() {
 
-                            location.href = '/altata.html';
+                            location.href = '/altata.html?buildingid=1';
 
                         }, !1);
 

@@ -27,11 +27,13 @@
     <div class="ml-col-1">
       <div class="card__info margin-bottom-x" style="height: auto !important;">
         <p class="card__info-dato">
-          <span class="text-bold">Titulo: </span> 
+          <span class="text-bold">
+            Title of the amenity: </span> 
           {{ post.title }}
         </p>
+        <br><br>
         <p class="card__info-dato">
-          <span class="text-bold">Description: </span> 
+          <span class="text-bold">Slide description: </span> 
           {{ post.desc }}
         </p>
       </div>
@@ -142,7 +144,7 @@
               type="file" 
               name="image_one_selected"
               accept="image/*"
-              (change)="readImageData($event, '350x350', 0);"
+              (change)="readImageData($event, '512x512', 0);"
               id="validatedCustomFile" 
               required />
             <label class="form__image-img" for="validatedCustomFile">
@@ -158,7 +160,7 @@
                 <span class="color-red" *ngIf="form_watcher.no_ico0">
                   Icon Default is required <br />
                 </span>
-                *Image resolution 350x350px.
+                *Image resolution 512x512px.
               </span>
             </label>
           </div>
@@ -168,7 +170,7 @@
               type="file" 
               name="image_one_selected"
               accept="image/*"
-              (change)="readImageData($event, '350x350', 1);"
+              (change)="readImageData($event, '512x512', 1);"
               id="validatedCustomFile1" 
               required>
             <label class="form__image-img" for="validatedCustomFile1">
@@ -184,7 +186,7 @@
                 <span class="color-red" *ngIf="form_watcher.no_ico1">
                   Icon Hover is required <br />
                 </span>
-                *Image resolution 350x350px.
+                *Image resolution 512x512px.
               </span>
             </label>
           </div>
