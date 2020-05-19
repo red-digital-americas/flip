@@ -1,68 +1,66 @@
 <div class="ml-col-1">
     <div class="ml-col-1 padding-general-m">
         <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x">
-            <div class="ml-col-1 position-relative">
-                <h4 class="ap-form__titulo text-left">
-                    Backstage Index
-                </h4>
-            </div>
-            <div class="ml-col-1">
-                <div class="card__info margin-bottom-x" style="height: auto !important;">
-                <p class="card__info-dato">
-                    <span class="text-bold">Title: </span> 
-                    {{ back_stage_data.whatIstitle }}
-                </p>
-                <p class="card__info-dato">
-                    <span class="text-bold">Membership Name: </span> 
-                    {{ back_stage_data.membershipTitle }}
-                </p>
-                <p class="card__info-dato">
-                    <span class="text-bold">Description: </span> 
-                    {{ back_stage_data.description }}
-                </p>
-                </div>
-                <div class="ml-col-1 images-view">
-                <div class="ml-col-7 images-view__section">
-                    <figure class="images-view__image">
-                    <span class="text-bold text-center images-view__image--title">
-                        Build Photo:
-                    </span>
-                    <img src="../../../assets/webtmp.png" class="images-view__image--mask" />
-                    <img src="{{ back_stage_data.photoSlider }}" class="images-view__image--image" />
-                    </figure>
-                </div>
-                <div class="ml-col-3o images-view__section">
-                    <figure class="images-view__image">
-                    <span class="text-bold text-center images-view__image--title">
-                        Build Movile Photo:
-                    </span>
-                    <img src="../../../assets/phone.png" class="images-view__image--maskm" />
-                    <img src="{{ back_stage_data.photoMobileSlider }}" class="images-view__image--imagem" />
-                    </figure>
-                </div>
-                </div>
-                <h4 class="ml-col-1 card__subtitulo text-center margin-top-x">
-                    FAQ's
-                </h4>
-                <div class="ml-col-1" *ngFor="let faq of back_stage_data.faqs;">
-                    <div class="ml-col-1 text-center bottom-separator padding-bottom-x margin-bottom-x">
-                        <div class="ml-col-1 text-bold">
-                            {{ faq.question }}
-                        </div>
-                        <div class="ml-col-1">
-                            {{ faq.answer }}
-                        </div>
-                    </div>
-                </div>
-                <div class="ml-col-1 text-center margin-top-m">
-                <button 
-                    data-toggle="modal" 
-                    (click)="primaryModal.show();"
-                    class="button button-x">
-                    Editar
-                </button>
-                </div>
-            </div>
+          <h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
+            Backstage Index
+          </h4>
+          <div class="ml-col-1">
+              <div class="card__info margin-bottom-x" style="height: auto !important;">
+              <p class="card__info-dato">
+                  <span class="text-bold">Title: </span> 
+                  {{ back_stage_data.whatIstitle }}
+              </p>
+              <p class="card__info-dato">
+                  <span class="text-bold">Membership Name: </span> 
+                  {{ back_stage_data.membershipTitle }}
+              </p>
+              <p class="card__info-dato">
+                  <span class="text-bold">Description: </span> 
+                  {{ back_stage_data.description }}
+              </p>
+              </div>
+              <div class="ml-col-1 images-view">
+              <div class="ml-col-7 images-view__section">
+                  <figure class="images-view__image">
+                  <span class="text-bold text-center images-view__image--title">
+                      Build Photo:
+                  </span>
+                  <img src="../../../assets/webtmp.png" class="images-view__image--mask" />
+                  <img src="{{ back_stage_data.photoSlider }}" class="images-view__image--image" />
+                  </figure>
+              </div>
+              <div class="ml-col-3o images-view__section">
+                  <figure class="images-view__image">
+                  <span class="text-bold text-center images-view__image--title">
+                      Build Movile Photo:
+                  </span>
+                  <img src="../../../assets/phone.png" class="images-view__image--maskm" />
+                  <img src="{{ back_stage_data.photoMobileSlider }}" class="images-view__image--imagem" />
+                  </figure>
+              </div>
+              </div>
+              <h4 class="ml-col-1 card__subtitulo text-center margin-top-x">
+                  FAQ's
+              </h4>
+              <div class="ml-col-1" *ngFor="let faq of back_stage_data.faqs;">
+                  <div class="ml-col-1 text-center bottom-separator padding-bottom-x margin-bottom-x">
+                      <div class="ml-col-1 text-bold">
+                          {{ faq.question }}
+                      </div>
+                      <div class="ml-col-1">
+                          {{ faq.answer }}
+                      </div>
+                  </div>
+              </div>
+              <div class="ml-col-1 text-center margin-top-m">
+              <button 
+                  data-toggle="modal" 
+                  (click)="primaryModal.show();"
+                  class="button button-x">
+                  Editar
+              </button>
+              </div>
+          </div>
         </div>
     </div>
 </div>
