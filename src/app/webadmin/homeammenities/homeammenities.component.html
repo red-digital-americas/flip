@@ -25,8 +25,10 @@
 <div class="row">
   <h3 style="padding-left: 55px; padding-top: 15px; padding-bottom: -55px;"> {{ namebuilding}}</h3>
   <!-- *ngIf="this.lengthpost < 4" -->
-  <div *ngIf="this.lengthpost < 4" style="padding-left: 555px; padding-top: 15px; float: right;">
-    <button 
+  <div *ngIf="this.lengthpost < 4" class="ml-col-1 position-relative margin-bottom-x">
+    <button style="position: absolute;
+    right: 40px;
+    top: -37px;"
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(this.post_blanck);"
             class="button button-x">
