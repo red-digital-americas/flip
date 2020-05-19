@@ -54,7 +54,7 @@ $(document).ready(function () {
         dataType: "text",
 
         success: function (data, textStatus, jqXHR) {
-            debugger;
+
             respuesta = JSON.parse(data);
             console.log('Home 123 ===> ',respuesta.item);
 
@@ -303,6 +303,7 @@ $(document).ready(function () {
 function change_image(item) {
     //Imagen que cambia 
     $("#amenidadesrightimg1").attr("src", respuesta.item[item].build);
+    $("#amenidadesrightimgm1").attr("src", respuesta.item[item].build);
 }
 
 function change_image_movil(item) {
@@ -348,11 +349,7 @@ function getRoomsData() {
 
                 const ws_data = JSON.parse( root.responseText ).item;
 
-                for( let index = 0; index < 2; index += 1 ) {
-                    
-                    console.log('Rooms => ', ws_data[index]);
-
-                }
+                appendRoomContentToPage( ws_data );
 
             }
 
@@ -363,24 +360,77 @@ function getRoomsData() {
 
 }
 
-function appendContentToPage( data ) {
+function appendContentToPage( data ) { 
 
     for( let index = 0; index < 4; index += 1 ) {
 
         const title_section = document.querySelectorAll('[service="name"]')[index],
               description_section = document.querySelectorAll('[service="description"]')[index],
               image_section = document.querySelectorAll('[service="image"]')[index],
-              service = data[index];
-
+              icons_container = document.querySelectorAll('[service="icons"]')[index],
+              service = data[index],
+              service_icons_data = service.communitiesServicesWebItems;
+        
               title_section.innerHTML = service.title;
               description_section.innerHTML = service.title;
               image_section.src = service.frontphoto;
+
+              if( icons_container != undefined ) {
+
+                service_icons_data.forEach( (icon) => {
+
+                    let icon_content = `<figure class="icons-section__icon">
+                                            <img src="${ icon.icon }" class="icons-section__icona" />
+                                            <img src="${ icon.icon2 }" class="icons-section__iconb" />
+                                            <span class="icons-section__name">
+                                                ${ icon.titleIcon }
+                                            </span>
+                                        </figure>`;
+
+                    icons_container.innerHTML += icon_content;
+
+                });
+
+              }
 
     }
 
 }
 
-(function () {
+function appendRoomContentToPage( rooms_data ) {
+
+    for( let index = 0; index < rooms_data.length; index += 1 ) {
+
+        const room = rooms_data[index],
+              room_card_name = document.querySelectorAll('[room="card_name"]')[index],
+              room_card_desc_o = document.querySelectorAll('[room="card_desc_one"]')[index],
+              room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
+              room_card_prie_o = document.querySelectorAll('[room="card_price_one"]')[index],
+              room_card_prie_t = document.querySelectorAll('[room="card_price_two"]')[index];
+              
+        if( room_card_name != undefined ) {
+
+            room_card_name.innerHTML = room.title;
+            room_card_desc_o.innerHTML = `${room.descPrice}<br>
+                                        <p style="font-weight: 700; font-size: 1.5em;">
+                                            $ ${room.price}
+                                            <br>
+                                        </p>`;
+            room_card_desc_t.innerHTML = `${room.descPrice1}<br>
+                                        <p style="font-weight: 700; font-size: 1.5em;">
+                                            $ ${room.price1}
+                                            <br>
+                                        </p>`;
+
+            console.log('Room ====> ', room);
+
+        }
+
+    }
+
+}
+
+(function IIFE() {
 
     getServiceData();
     getRoomsData();

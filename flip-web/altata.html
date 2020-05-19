@@ -25,6 +25,61 @@
             text-align: left;
         }
 
+        .icons-section {
+            width: 100%;
+            margin-left: 17.5px;
+            height: 60px;
+        }
+
+        .icons-section__icon {
+            width: 20%;
+            height: 100%;
+            float: left;
+            position: relative;
+            margin: 0;
+        }
+
+        .icons-section__icona,
+        .icons-section__iconb {
+            width: 55px;
+            height: 55px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 5px;
+            border-radius: 50%;
+            z-index: 1;
+            cursor: pointer;
+            transition: all .57s ease;
+        }
+
+        .icons-section__iconb {
+            opacity: 0;
+        }
+
+        .icons-section__icona {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .icons-section__icona:hover {
+            opacity: 0;
+        }
+
+        .icons-section__icona:hover + .icons-section__iconb {
+            opacity: 1;
+        }
+
+        .icons-section__name {
+            position: absolute;
+            top: 50%;
+            left: 70px;
+            font-size: 14px;
+            position: absolute;
+            transform: translateY(-50%);
+            white-space: nowrap;
+        }
+
     </style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -236,7 +291,9 @@
                                                                 </h3>
                                                                 <br>
 
-                                                                <div class=" col-md-3  icondiv left_align_nback" style="border: solid 2px white">
+                                                                <div class="icons-section" service="icons"></div>
+
+                                                                <!-- div class=" col-md-3  icondiv left_align_nback" style="border: solid 2px white">
                                                                     <span>
                                                                         <label class="pointer" data-target="#myCarousel2" data-slide-to="0" id="Lorem">
                                                                             <img class="iconscom" src="assets/images/svg_icon_w/Recurso%2032.svg"
@@ -246,8 +303,8 @@
                                                                         </label>
 
                                                                     </span>
-                                                                </div>
-                                                                <div class=" col-md-3  icondiv" style="border: solid 2px white">
+                                                                </div -->
+                                                                <!-- div class=" col-md-3  icondiv" style="border: solid 2px white">
                                                                     <span>
                                                                         <label class="pointer" data-target="#myCarousel2" data-slide-to="1" id="bussines">
                                                                             <img class="iconscom" src="assets/images/svg_icon_w/Recurso%2015.svg"
@@ -256,8 +313,8 @@
                                                                                  border="0" alt="" />  Lorem
                                                                         </label>
                                                                     </span>
-                                                                </div>
-                                                                <div class=" col-md-3  icondiv" style="border: solid 2px white">
+                                                                </div -->
+                                                                <!-- div class=" col-md-3  icondiv" style="border: solid 2px white">
                                                                     <span>
                                                                         <label class="pointer"
                                                                                data-target="#myCarousel2" data-slide-to="2" id="pool">
@@ -269,8 +326,8 @@
                                                                             Lorem
                                                                         </label>
                                                                     </span>
-                                                                </div>
-                                                                <div class=" col-md-3  icondiv" style="border: solid 2px white">
+                                                                </div -->
+                                                                <!-- div class=" col-md-3  icondiv" style="border: solid 2px white">
                                                                     <span>
                                                                         <label class="pointer" data-target="#myCarousel2" data-slide-to="3" id="Lorem">
                                                                             <img class="iconscom" src="assets/images/svg_icon_w/Recurso%2028.svg"
@@ -282,7 +339,7 @@
                                                                     </span>
 
                                                                     <br>
-                                                                </div>
+                                                                </div-->
                                                             </div>
                                                         </div><!-- /header-text -->
                                                     </div>
@@ -303,7 +360,10 @@
                                                                     </span>
                                                                 </h3>
                                                                 <br>
-                                                                <div class=" col-md-3  icondiv" style="margin-left: -1%;">
+
+                                                                <div class="icons-section" service="icons"></div>
+
+                                                                <!-- div class=" col-md-3  icondiv" style="margin-left: -1%;">
                                                                     <span>
                                                                         <label class="pointer" data-target="#myCarousel3" data-slide-to="0" id="Lorem">
                                                                             <img class="iconscom" src="assets/images/icon_test4.svg"
@@ -312,8 +372,8 @@
                                                                                  border="0" alt="" /> Lorem
                                                                         </label>
                                                                     </span>
-                                                                </div>
-                                                                <div class=" col-md-3  icondiv">
+                                                                </div -->
+                                                                <!-- div class=" col-md-3  icondiv">
 
                                                                     <span>
 
@@ -326,7 +386,7 @@
 
                                                                         <br>
                                                                     </span>
-                                                                </div>
+                                                                </div -->
 
                                                                 <br>
                                                             </div>
@@ -349,7 +409,9 @@
                                                                 </h3>
                                                                 <br>
 
-                                                                <div class=" col-md-3  icondiv">
+                                                                <div class="icons-section" service="icons"></div>
+
+                                                                <!-- div class=" col-md-3  icondiv">
 
                                                                     <span>
                                                                         <label class="pointer" data-target="#myCarousel4" data-slide-to="0" id="space1">
@@ -360,16 +422,16 @@
                                                                         </label>
 
                                                                     </span>
-                                                                </div>
-                                                                <div class=" col-md-3  icondiv">
+                                                                </div -->
+                                                                <!-- div class=" col-md-3  icondiv">
                                                                     <label class="pointer" data-target="#myCarousel4" data-slide-to="1" id="bussines">
                                                                         <img class="iconscom" src="assets/images/icon_test4.svg"
                                                                              onmouseover="this.src='assets/images/icon_test3.svg'"
                                                                              onmouseout="this.src='assets/images/icon_test4.svg'"
                                                                              border="0" alt="" />  Lorem
                                                                     </label>
-                                                                </div>
-                                                                <div class=" col-md-3  icondiv">
+                                                                </div -->
+                                                                <!-- div class=" col-md-3  icondiv">
                                                                     <span>
                                                                         <label class="pointer"
                                                                                data-target="#myCarousel4" data-slide-to="2" id="pool">
@@ -381,7 +443,7 @@
 
                                                                         <br>
                                                                     </span>
-                                                                </div>
+                                                                </div -->
                                                                 <br>
                                                             </div>
                                                         </div><!-- /header-text -->
@@ -402,7 +464,10 @@
                                                                     </span>
                                                                 </h3>
                                                                 <br>
-                                                                <div class=" col-md-3  icondiv" style="margin-left: -1%;">
+
+                                                                <div class="icons-section" service="icons"></div>
+
+                                                                <!-- div class=" col-md-3  icondiv" style="margin-left: -1%;">
                                                                     <span>
                                                                         <label class="pointer" data-target="#myCarousel5" data-slide-to="0" id="Lorem">
                                                                             <img class="iconscom" src="assets/images/icon_test4.svg"
@@ -411,8 +476,8 @@
                                                                                  border="0" alt="" />  Lorem
                                                                         </label>
                                                                     </span>
-                                                                </div>
-                                                                <div class=" col-md-3  icondiv">
+                                                                </div -->
+                                                                <!-- div class=" col-md-3  icondiv">
                                                                     <span>
 
                                                                         <label class="pointer" data-target="#myCarousel5" data-slide-to="1" id="bussines">
@@ -423,7 +488,7 @@
                                                                         </label>
                                                                         <br>
                                                                     </span>
-                                                                </div>
+                                                                </div -->
                                                                 <br>
                                                             </div>
                                                         </div><!-- /header-text -->
@@ -1630,11 +1695,11 @@
                                                                 <img class="hiddens amenidadesright" id="amenidadesrightimg1" alt="Images">
                                                                 <!--<img class="hiddens amenidadesright" id="amenidadesrightimg2" src="assets/images/Communities/Coahuila/s_gym.jpg" alt="Images">-->
                                                                 <div id="RoomA" class=" hiddens textmenucommunities   globalheigt" style="flex-direction: column">
-                                                                    <p style="font-weight: 700">
+                                                                    <p style="font-weight: 700" room="card_name">
                                                                         ROOM A
                                                                     </p>
                                                                     <br>
-                                                                    <span class="tamanoroom">
+                                                                    <span class="tamanoroom" room="card_desc_one">
                                                                         Morbi
                                                                         urna
                                                                         justo,
@@ -1648,14 +1713,14 @@
 
                                                                         </p>
                                                                     </span>
-                                                                    <span class="tamanoroom">
+                                                                    <span class="tamanoroom" room="card_desc_two">
                                                                         Morbi
                                                                         urna
                                                                         justo,
                                                                         pulvinar
                                                                         id
                                                                         <br>
-                                                                        <p style="font-weight: 700;     font-size: 1.5em;">
+                                                                        <p style="font-weight: 700;     font-size: 1.5em;" room="card_price_two">
 
                                                                             $0.0000
                                                                             <br>
@@ -1692,10 +1757,10 @@
                                                                 COMFORT
                                                             </div>
                                                             <div id="RoomB" class="  globalheigt textmenucommunities hiddens  " style="flex-direction: column">
-                                                                <p style="font-weight: 700"> ROOM B </p>
+                                                                <p style="font-weight: 700" room="card_name"> ROOM B </p>
                                                                 <br>
 
-                                                                <span class="tamanoroom">
+                                                                <span class="tamanoroom" room="card_desc_one">
                                                                     Morbi
                                                                     urna
                                                                     justo,
@@ -1707,7 +1772,7 @@
                                                                         <br>
                                                                     </p>
                                                                 </span>
-                                                                <span class="tamanoroom">
+                                                                <span class="tamanoroom"  room="card_desc_two">
                                                                     Morbi
                                                                     urna
                                                                     justo,

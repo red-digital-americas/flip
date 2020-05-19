@@ -1230,7 +1230,7 @@
                  s_backstage_01.innerHTML = home_content.item[0].whatIstitle;
                  var membre = document.getElementById('membre')
                  membre.innerHTML = home_content.item[0].membershipTitle;
-                }, !1);
+            }, !1);
 
                
 
@@ -1333,7 +1333,7 @@
             function bringMeAllConetent() {
 
                 ajaxRequest({where_to_go: urlbase_api +'Post/SeeHomeIndex'}).then( home_content => {
-debugger;
+
                     let home_bg_images = [
                         'assets/images/comm/grid-1.jpg',
                         'assets/images/comm/grid-2.jpg',
@@ -1348,12 +1348,13 @@ debugger;
                             dom_home_card += '<div class="card__front">';
                             dom_home_card += '<div class="card__big">'; 
                             index % 2 == 0 ? 
-                             (function IIFE() {
-                                dom_home_card += '<figure class="card__big-img">'; 
+                             (function IIFE() { 
                                 if(home_card.iscomming ) {
+                                    dom_home_card += '<figure class="card__big-img">';
                                     dom_home_card += '<span  class="card__proximamente">Coming soon</span>';  
                                     dom_home_card += '<img class="card--desactive" src="' + home_card.frontphoto + '" />'; 
                                 } else {
+                                    dom_home_card += '<figure class="card__big-img" onclick="location.href=' + `'./altata.html?buildingid=${ home_card.id }'` + '">';
                                     dom_home_card += '<img src="' + home_card.frontphoto + '" />';
                                 }
                                 dom_home_card += '<span class="card__geodata">';
@@ -1368,11 +1369,12 @@ debugger;
                              }()) : 
                              (function IIFE() {
                                 dom_home_card += '<img src="' + home_bg_images[index] + '" class="card__big-ext" />';
-                                dom_home_card += '<figure class="card__big-img">'; 
                                 if(home_card.iscomming ) {
+                                    dom_home_card += '<figure class="card__big-img">'; 
                                     dom_home_card += '<span class="card__proximamente">Coming soon</span>';  
                                     dom_home_card += '<img class="card--desactive" src="' + home_card.frontphoto + '" />'; 
                                 } else {
+                                    dom_home_card += '<figure class="card__big-img" onclick="location.href=' + `'./altata.html?buildingid=${ home_card.id }'` + '">'; 
                                     dom_home_card += '<img src="' + home_card.frontphoto + '" />';
                                 }
                                 dom_home_card += '<span class="card__geodata">';
@@ -1805,7 +1807,7 @@ debugger;
 
             function temporals() {
 
-                if( !isItMobil ) {
+                /*if( !isItMobil ) {
 
                     home_card_element = document.getElementsByClassName('home_card_element'); 
 
@@ -1813,13 +1815,13 @@ debugger;
 
                         home_card_element[1].querySelectorAll('.card__big-img')[0].addEventListener('click', function goToPage() {
 
-                            location.href = '/altata.html?buildingid=1';
+                            location.href = './altata.html?buildingid=1';
 
                         }, !1);
 
                     }, 700);
 
-                }
+                }*/
 
             }
             
