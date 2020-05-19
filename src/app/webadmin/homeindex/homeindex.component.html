@@ -8,25 +8,31 @@
         <div class="card__row">
           <div class="card__info card__info--reziser">
             <p class="card__info-dato">
-              <span class="text-bold">Titulo: </span>
+              <span class="text-bold">Building: </span>
               {{post.title}}
             </p>
             <p class="card__info-dato">
-              <span class="text-bold">Descripcion: </span>
+              <span class="text-bold">Address: </span>
               {{post.direction}}
             </p>
           </div>
+          <p class="card__info-dato">
+            <span class="text-bold">Coming soon: </span>
+            {{post.iscomming}}
+          </p>
         </div>
+      <br>
         <div class="card__row" id="image_space_{{ index }}">
           <figure class="card__image card__image--full">
             <img src="{{post.frontphoto}}" class="card__image-img card__image-img--full" />
           </figure>
         </div>
+        <br>
         <div class="card__row text-center">
           <button 
             class="button" 
             data-toggle="modal" 
-            (click)="primaryModal.show(); passdata(post.id, post.title, post.direction); showImagesSpaces( 'image_space_' + index );">
+            (click)="primaryModal.show(); passdata(post.id, post.title, post.direction, post.iscomming); showImagesSpaces( 'image_space_' + index );">
             Editar
           </button>
         </div>
@@ -87,7 +93,18 @@
                 placeholder="Nombre" 
                 required></textarea>
               <label class="custom-input__label" for="descripcion_home">
-                Descripción
+                Dirección
+              </label>
+            </div>
+            <div class="ml-col-1 custom-input">
+                <input 
+                type="checkbox"
+                id="profile_active" 
+                name="profile_active"
+                [(ngModel)]="comming"
+                class="ap-form__input-checkbox display-none" />
+              <label for="profile_active" class="ap-form__label ap-form__label-checkbox">
+                Cooming soon
               </label>
             </div>
           </div>
