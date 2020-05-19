@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { StripeScriptTag } from "stripe-angular"
 
 @Component({
   // tslint:disable-next-line
@@ -7,7 +8,10 @@ import { Router, NavigationEnd } from '@angular/router';
   template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) { }
+  private publishableKey:string = "pk_test_WiAYJgrEz6XKxL2MwKD89oqO00bfPcrlOF";
+  constructor(private router: Router, public StripeScriptTag:StripeScriptTag) {
+    this.StripeScriptTag.setPublishableKey(this.publishableKey);
+  }
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {

@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit {
   scholarShip;
   payementMethods;
   idUser;
+  idBooking;
   name = '';
   lastName = '';
   firstName = '';
@@ -57,6 +58,7 @@ export class ProfileComponent implements OnInit {
 
     this.section = 'tenantList';
     this.idUser = this.route.snapshot.paramMap.get('id');
+    this.idBooking = this.route.snapshot.paramMap.get('booking');
     //console.log(this.location.getState());
     this.buildingId = this.location.getState();
     //console.log(this.buildingId);
@@ -935,7 +937,7 @@ export class ProfileComponent implements OnInit {
   public goToPage( page: string ):void {
 
     sessionStorage.setItem('user_id', this.profile_data.id.toString() );
-
+    sessionStorage.setItem('booking_id', this.idBooking);
     this.router.navigateByUrl( page );
 
   }

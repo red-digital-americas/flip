@@ -69,6 +69,13 @@ import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/
 import { BackstageIndexComponent } from './Backstage/index.component';
 import { ColivingComponent } from './Backstage/Colving/coliving.component';
 import { MembershipComponent } from './Backstage/Memberships/memberships.component';
+import { DetailComponent } from './Booking/Membership/detail/detail.component';
+import { RoomComponent } from './Booking/RoomCatalog/room/room.component';
+import { RoomNewComponent } from './Booking/RoomCatalog/room-new/room-new.component';
+import { MembershipNewComponent } from './Booking/Membership/membership-new/membership-new.component';
+import { UserDetailComponent } from './Booking/Users/user-detail/user-detail.component';
+import { UserNewComponent } from './Booking/Users/user-new/user-new.component';
+
 
 @NgModule({
   imports: [    
@@ -132,7 +139,13 @@ import { MembershipComponent } from './Backstage/Memberships/memberships.compone
     ProfileReservationsComponent,
     BackstageIndexComponent,
     ColivingComponent,
-    MembershipComponent
+    MembershipComponent,
+    DetailComponent,
+    RoomComponent,
+    RoomNewComponent,
+    MembershipNewComponent,
+    UserDetailComponent,
+    UserNewComponent
   ],
   entryComponents: [
     DetalleComponent,
