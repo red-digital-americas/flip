@@ -264,7 +264,7 @@ export class WebadminComponent implements OnInit {
 
             }
           },
-          last_image = this.postphoto;
+          last_image = this.postphoto; 
 
     if( file && file[0] ) {
 
@@ -301,7 +301,6 @@ export class WebadminComponent implements OnInit {
                   image_container_name.classList.remove('display-none');
                   image_container_name.innerHTML = file[0].name;
                   root.prepareImages( event_data, image_index );
-                  console.log('Si pasa => ', last_image );
 
                 } else {
 

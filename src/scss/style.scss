@@ -140,6 +140,17 @@ select:active,
     box-shadow: 0 4px 6px -6px rgba(0,0,0,.4);
     font-weight: 600;
     padding: 6px 0 6px;
+    border-bottom: solid 1px rgba($color: #2e343a, $alpha: .4);
+  }
+
+  &__subtitulo {
+    font-size: 16px;
+    margin: 0;
+    width: 100%;
+    margin-bottom: 12px;
+    font-weight: 400;
+    padding: 6px 0 6px;
+    border-bottom: solid 1px rgba($color: #2e343a, $alpha: .2);
   }
 
   &__image {
@@ -2622,10 +2633,6 @@ select:active,
   margin-top: 40px;
 }
 
-.margin-top-m {
-  margin-top: 40px;
-}
-
 .margin-tb-min {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -2648,6 +2655,10 @@ select:active,
 .padding-tb-m {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.padding-bottom-x {
+  padding-bottom: 10px;
 }
 
 .padding-bottom-m {
@@ -2696,6 +2707,10 @@ select:active,
 
 .position-relative {
   position: relative;
+}
+
+.bottom-separator {
+  border-bottom: solid 1px rgba($color: #2e343a, $alpha: .2);
 }
 
 .block-test {
