@@ -35,7 +35,7 @@ export class RoomAvailavilityComponent implements OnInit {
         'roomateFlip',
         'status',
         'viewMore',
-        // 'addBooking'
+        'addBooking'
     ];
     roomList: any;
     buildingId;
@@ -83,6 +83,11 @@ export class RoomAvailavilityComponent implements OnInit {
         if (this.roomList.paginator) {
           this.roomList.paginator.firstPage();
         }
+    }
+
+    roomDetail (element: any) {
+        console.log('Element', element);
+        this._router.navigateByUrl( `roomDetail/${ element.id }`, { state: { id: 1, name: 'To Detail' } });
     }
 
 }

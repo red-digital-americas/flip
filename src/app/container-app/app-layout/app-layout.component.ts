@@ -16,7 +16,7 @@ export class AppLayoutComponent {
 
   public selectedSection:number;
   public navSections = []
-
+  public dataUser;
   constructor(
     private menuService:MenuService,
     private router:Router
@@ -28,7 +28,8 @@ export class AppLayoutComponent {
     this.changes.observe(<Element>this.element, {
       attributes: true
     });
-
+    this.dataUser = JSON.parse(localStorage.getItem('user')).avatar;
+    console.log(this.dataUser);
     if (localStorage.getItem("SystemTypeId") == undefined ) { return; }
     let systemTypeId = parseInt(localStorage.getItem("SystemTypeId"));        
     // console.log("AppLayout-SystemTypeId: "+systemTypeId);  
@@ -87,7 +88,7 @@ export class AppLayoutComponent {
   ngOnInit() {
 
     this.addPaddingWidthJS();
-
+    
   }
 
 }
