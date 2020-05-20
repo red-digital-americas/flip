@@ -27,7 +27,7 @@ import { Router } from '@angular/router';
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-    public table_colums: any[] = ['build','room','name','age','membership','dateInit','dateEnd','amountOutstanding','more'];
+    public table_colums: any[] = ['build','room','name','age','membership','dateInit','dateEnd','amountOutstanding', 'totalBeds', 'roomateFlip','more'];
 
     public tenantList: any;
     public getTenantList():void {
