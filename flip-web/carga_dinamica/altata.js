@@ -303,6 +303,7 @@ $(document).ready(function () {
 function change_image(item) {
     //Imagen que cambia 
     $("#amenidadesrightimg1").attr("src", respuesta.item[item].build);
+    $("#amenidadesrightimgm1").attr("src", respuesta.item[item].build);
 }
 
 $('.fix-click-left').click(function() { test( 'to_l' ) });
@@ -325,12 +326,10 @@ $('.fix-click-right').click(function() { test( 'to_r' ) });
             if( direction == 'to_r' ) {
 
                 index = i + 1 == 5 ? 0 : i + 1;
-                console.log('This one => ', index);
 
             } else {
 
                 index = i - 1 == -1 ? 4 : i - 1;
-                console.log('This one => ', index);
 
             }
 
@@ -397,30 +396,6 @@ function getRoomsData( id_build ) {
 
 }
 
-function getAmmenitiesData( id_build ) {
-
-    const ws_data = { buildingid: id_build }
-
-    let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function( response ) {
-
-            const root = response.target;
-
-            if( root.readyState == 4 && root.status == 200 ) {
-
-                const ws_data = JSON.parse( root.responseText ).item;
-
-                console.log('Ammenities Data ==> ', ws_data );
-
-            }
-
-        };
-        xhttp.open('POST','http://34.237.214.147/back/api_flip/api/Post/SeeHomeAmmenities', true);
-        xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-        xhttp.send( JSON.stringify( ws_data ) );
-
-}
-
 function appendContentToPage( data ) { 
 
     for( let index = 0; index < 4; index += 1 ) {
@@ -466,6 +441,9 @@ function appendRoomContentToPage( rooms_data ) {
               room_card_name = document.querySelectorAll('[room="card_name"]')[index],
               room_card_desc_o = document.querySelectorAll('[room="card_desc_one"]')[index],
               room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index];
+              room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
+              room_card_prie_o = document.querySelectorAll('[room="card_price_one"]')[index],
+              room_card_prie_t = document.querySelectorAll('[room="card_price_two"]')[index];
               
         if( room_card_name != undefined ) {
 
