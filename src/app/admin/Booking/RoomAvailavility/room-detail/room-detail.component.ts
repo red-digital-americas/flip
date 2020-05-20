@@ -35,16 +35,18 @@ export class RoomDetailComponent implements OnInit {
     'room',
     'name',
     'description',
+    'price'
   ];
 
   ////////////////////////// ACTIVE //////////////////////////////////
+  activeLenght;
   activeObj;
-  activeDisplayedColumns: string[] = ['typeRoom', 'name', 'age', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'idUser'];
+  activeDisplayedColumns: string[] = ['name', 'age', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'idUser'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   ////////////////////////// INACTIVE ///////////////////////////////
   inactiveObj;
-  inactiveDisplayedColumns: string[] = ['typeRoom', 'name', 'age', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'idUser'];
+  inactiveDisplayedColumns: string[] = ['name', 'age', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'idUser'];
   @ViewChild(MatPaginator, { static: true }) paginatorInactive: MatPaginator;
   @ViewChild(MatSort, { static: true }) sortInactive: MatSort;
 
@@ -72,6 +74,7 @@ export class RoomDetailComponent implements OnInit {
       this.roomObj = value.item.room;
       this.membershipRelationshipObj = new MatTableDataSource(value.item.room.membershipRelationship);
 
+      this.activeLenght = value.item.active.length;
       this.activeObj = new MatTableDataSource(value.item.active);
       this.activeObj.paginator = this.paginator;
       this.activeObj.sort = this.sort;

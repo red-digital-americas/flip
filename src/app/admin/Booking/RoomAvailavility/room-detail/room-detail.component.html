@@ -6,41 +6,60 @@
                 <h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
                   Room detail
                 </h4>
+                <button 
+                class="ap-form__titulo-button"
+                (click)="goToPage('AddTenant')">
+                Add Booking
+            </button>
             </div>
-            <div class="ap-form ml-col-1 card-style" >
-                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
-                    <div class="ml-col-1">
-                      Name: 
-                      <span class="text-bold">
-                        {{ roomObj.name }}     
-                      </span>
+            <div class="ml-col-1 card-style">
+                <div class="ml-col-1 padding-general-m card-style" >
+                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                        <div class="ml-col-1">
+                          Name: 
+                          <span class="text-bold">
+                            {{ roomObj.name }}     
+                          </span>
+                        </div>
+                    </div>
+                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
+                        <div class="ml-col-1">
+                            Description: 
+                          <span class="text-bold">
+                            {{ roomObj.description }}     
+                          </span>
+                        </div>
+                    </div>
+                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
+                        <div class="ml-col-1">
+                            Disponibility: 
+                          <span class="text-bold">
+                            {{ roomObj.totalBeds }}     
+                          </span>
+                        </div>
+                    </div>
+                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-right">
+                        <div class="ml-col-1">
+                            Type room: 
+                          <span class="text-bold">
+                            {{ roomObj.typeRoom }}     
+                          </span>
+                        </div>
                     </div>
                 </div>
-                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
-                    <div class="ml-col-1">
-                        Description: 
-                      <span class="text-bold">
-                        {{ roomObj.description }}     
-                      </span>
-                    </div>
-                </div>
-                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
-                    <div class="ml-col-1">
-                        Total beds: 
-                      <span class="text-bold">
-                        {{ roomObj.totalBeds }}     
-                      </span>
-                    </div>
-                </div>
-                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-right">
-                    <div class="ml-col-1">
-                        Type room: 
-                      <span class="text-bold">
-                        {{ roomObj.typeRoom }}     
-                      </span>
+    
+                <div class="ml-col-1 padding-general-m card-style" >
+                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                        <div class="ml-col-1">
+                            Date Unemployment: 
+                          <span class="text-bold">
+                            {{ roomObj.dateUnemployment }}     
+                          </span>
+                        </div>
                     </div>
                 </div>
             </div>
+            
             
             
             <div class="ml-col-1 padding-general-m card-style" *ngIf="displayMembership">
@@ -48,8 +67,8 @@
                 <table mat-table mat-sort [dataSource]="membershipRelationshipObj" class="mat-elevation-z8" style="width: 100%;">
                     
                     <ng-container matColumnDef="room">
-                        <th mat-header-cell *matHeaderCellDef fxFlex="40" class="table__header">Room</th>
-                        <td mat-cell *matCellDef="let element" fxFlex="40" class="table__data">{{ roomObj.name }}</td>
+                        <th mat-header-cell *matHeaderCellDef fxFlex="40" class="table__header">Type Room</th>
+                        <td mat-cell *matCellDef="let element" fxFlex="40" class="table__data">{{ roomObj.typeRoom }}</td>
                     </ng-container>
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef class="table__header">Name</th>
@@ -58,6 +77,10 @@
                     <ng-container matColumnDef="description">
                         <th mat-header-cell *matHeaderCellDef class="table__header">Description</th>
                         <td mat-cell *matCellDef="let element" class="table__data">{{ element.description }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="price">
+                        <th mat-header-cell *matHeaderCellDef class="table__header">Price</th>
+                        <td mat-cell *matCellDef="let element" class="table__data">{{ element.price | currency }}</td>
                     </ng-container>
                     
                     <tr mat-header-row *matHeaderRowDef="membershipDisplayColumns"></tr>
@@ -70,16 +93,12 @@
             </div>
 
             <div class="ml-col-1 padding-general-m card-style" *ngIf="displayActive">
-                <span class="text-bold">Rooms active</span>
+                <span class="text-bold">Active Booking :</span>
                 <mat-form-field>
                     <mat-label>Filter</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
                 </mat-form-field>
                 <table mat-table mat-sort [dataSource]="activeObj" class="mat-elevation-z8">
-                    <ng-container matColumnDef="typeRoom">
-                        <th mat-header-cell *matHeaderCellDef class="table__header"> Type Room</th>
-                        <td mat-cell *matCellDef="let element" class="table__data"> {{element.typeRoom}} </td>
-                    </ng-container>
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef class="table__header"> Name </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.firstName}} </td>
@@ -112,6 +131,14 @@
                             <ng-template #thenBlock>{{element.membership.priceMembership + element.amountOutstanding | currency }}</ng-template>
                             <ng-template #elseBlock>{{element.amountOutstanding | currency }}</ng-template>
                         </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalBeds">
+                        <th mat-header-cell *matHeaderCellDef class="table__header"> Deperture date </th>
+                        <td mat-cell *matCellDef="let element" class="table__data"> {{element.totalBeds}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="roomateFlip">
+                        <th mat-header-cell *matHeaderCellDef class="table__header"> Deperture date </th>
+                        <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
                     </ng-container>
                     <ng-container matColumnDef="idUser">
                         <th mat-header-cell *matHeaderCellDef> </th>
@@ -135,16 +162,12 @@
             </div>
 
             <div class="ml-col-1 padding-general-m card-style" *ngIf="displayinactive">
-                <span class="text-bold">Rooms inactive</span>
+                <span class="text-bold">Active Booking :</span>
                 <mat-form-field>
                     <mat-label>Filter</mat-label>
                     <input matInput (keyup)="applyFilterInactive($event)" placeholder="Ex. Mia">
                 </mat-form-field>
                 <table mat-table mat-sort [dataSource]="inactiveObj" class="mat-elevation-z8">
-                    <ng-container matColumnDef="typeRoom">
-                        <th mat-header-cell *matHeaderCellDef class="table__header"> Type Room</th>
-                        <td mat-cell *matCellDef="let element" class="table__data"> {{element.typeRoom}} </td>
-                    </ng-container>
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef class="table__header"> Name </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.firstName}} </td>
@@ -177,6 +200,14 @@
                             <ng-template #thenBlock>{{element.membership.priceMembership + element.amountOutstanding | currency }}</ng-template>
                             <ng-template #elseBlock>{{element.amountOutstanding | currency }}</ng-template>
                         </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalBeds">
+                        <th mat-header-cell *matHeaderCellDef class="table__header"> Deperture date </th>
+                        <td mat-cell *matCellDef="let element" class="table__data"> {{element.totalBeds}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="roomateFlip">
+                        <th mat-header-cell *matHeaderCellDef class="table__header"> Deperture date </th>
+                        <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
                     </ng-container>
                     <ng-container matColumnDef="idUser">
                         <th mat-header-cell *matHeaderCellDef> </th>
