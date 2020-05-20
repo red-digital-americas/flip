@@ -62,9 +62,6 @@ export class HomeroomsComponent implements OnInit {
   public user: string[];
 
   postphoto: any[] = [];
-
-
-
   comment: string = "";
 
   public newImages: any[] = [];

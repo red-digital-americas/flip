@@ -80,6 +80,49 @@
             white-space: nowrap;
         }
 
+        .modal-video {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            background-color: rgba(0,0,0,.777);
+        }
+
+        .modal-video__video {
+            position: absolute;
+            width: 77%;
+            height: 77%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: none;
+            outline: none;
+        }
+
+        .modal-video__close {
+            text-transform: uppercase;
+            position: absolute;
+            right: 40px;
+            top: 5.5%;
+            height: 10px;
+            font-size: 37px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+        }
+
+        .modal-video__close:focus {
+            outline: none;
+            border: none;
+        }
+
+        .display-none {
+            display: none;
+        }
+
     </style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -91,7 +134,6 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <link rel="stylesheet" href="/assets/css/animation.css">
-    <script src="carga_dinamica/altata.js"></script>
 
     <!--font-awesome.min.css-->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -128,7 +170,15 @@
 </head>
 <body>
 
-
+    <div class="modal-video display-none" id="modal-video">
+        <button class="modal-video__close" id="modal_video_close">x</button>
+        <iframe 
+            id="video_frame"
+            class="modal-video__video" 
+            src="" 
+            allowfullscreen="allowfullscreen">
+        </iframe>
+    </div>
 
     <!--FIN LOAD -->
 
@@ -1242,13 +1292,10 @@
                                                 </div>
 
                                                 <!-- Left and right controls -->
-                                                <a class="left carousel-control" href="#myCarousel6" data-slide="prev">
-
+                                                <a class="left carousel-control fix-click-left" href="#myCarousel6" data-slide="prev">
                                                     <img src="assets/images/arrow-izqu.png" />
                                                 </a>
-                                                <a class="right carousel-control" href="#myCarousel6" data-slide="next">
-
-
+                                                <a class="right carousel-control fix-click-right" href="#myCarousel6" data-slide="next">
                                                     <img src="assets/images/arrow-derecha.png" />
                                                 </a>
 
@@ -1265,16 +1312,12 @@
                                                 <!-- Wrapper for slides -->
                                                 <div class="carousel-inner">
                                                     <div class="item active ">
-                                                        <img src="assets/images/Communities/Coahuila/coahuila3.jpg" alt="Los Angeles">
+                                                        <img src="assets/images/Communities/Coahuila/coahuila3.jpg" alt="Los Angeles" room="slide-image-0" />
                                                         <div class="header-text-room hidden-xs">
                                                             <div class="col-md-12  text-center">
-
-
                                                                 <span class="btn_rooms_span">
                                                                     <button id="booknowbtn" type="button" class="button_menu_rooms btn-form btn" style="margin-right: 20px;">BOOK A TOUR  </button>
-
-                                                                    <button type="button" class="button_menu_rooms  btn-form btn ">VIEW 360° <hr style="margin-left: 15px;"> </button>
-
+                                                                    <button type="button" class="button_menu_rooms  btn-form btn view_video_0">VIEW 360° <hr style="margin-left: 15px;"> </button>
                                                                     <button type="button" id="getguidebtn" class="button_menu_rooms btn-form btn">GET GUIDE  <hr style="margin-left: 15px;"></button>
                                                                 </span>
                                                                 <br>
@@ -1284,54 +1327,60 @@
                                                                             <br>
                                                                             <h2 class="aux-back-amen" style="">
                                                                                 <span id="comserv-activetext beneficios-title ">
-                                                                                    <p style="font-weight: 500; margin-top: 7%;">
+                                                                                    <p style="font-weight: 500; margin-top: 7%;" room="slide-title-0">
                                                                                         ROOM A
-                                                                                        <br>
                                                                                     </p>
                                                                                 </span>
                                                                             </h2>
-                                                                            <p class="textamen" style="margin-top: 5%;">
+                                                                            <p class="textamen" style="margin-top: 5%;" room="slide-desc-0">
                                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus
                                                                             </p>
                                                                         </div>
                                                                         <br>
-                                                                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                                                                            <label data-target="#myCarousel7" data-slide-to="0" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a>
-                                                                                Lorem
-                                                                            </label>
 
-                                                                            <br>
-                                                                            <label data-target="#myCarousel7" data-slide-to="1" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test4.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a> Lorem
-                                                                            </label>
-
-                                                                        </div>
-
-                                                                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                                                                            <label data-target="#myCarousel7" data-slide-to="0" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a>
-                                                                                Lorem
-                                                                            </label>
-
-                                                                            <br>
-
-
+                                                                        <div room="icons-sections-0">
+                                                                            <div class="col-sm-3 icondiv" style="margin-top: 50px;">
+                                                                                <label data-target="#myCarousel7" data-slide-to="0" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                             onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                             onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                             border="0" alt="" />
+                                                                                    </a>
+                                                                                    Lorem
+                                                                                </label>
+                                                                                <br>
+                                                                                <label data-target="#myCarousel6" data-slide-to="1" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test4.svg"
+                                                                                             onmouseover="this.src='assets/images/icon_test3.svg'"
+                                                                                             onmouseout="this.src='assets/images/icon_test4.svg'"
+                                                                                             border="0" alt="" />
+                                                                                    </a> 
+                                                                                    Lorem
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-3 icondiv" style="margin-top: 50px;">
+                                                                                <label data-target="#myCarousel7" data-slide-to="2" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                                onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                border="0" alt="" />
+                                                                                    </a>
+                                                                                    Lorem
+                                                                                </label>
+                                                                                <br>
+                                                                                <label data-target="#myCarousel7" data-slide-to="3" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                                onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                border="0" alt="" />
+                                                                                    </a>
+                                                                                    Lorem
+                                                                                </label>
+                                                                            </div>
                                                                         </div>
 
 
@@ -1349,17 +1398,92 @@
                                                     </div>
 
                                                     <div class="item">
-                                                        <img src="assets/images/Communities/Coahuila/coahuila3.jpg" alt="Chicago">
-
+                                                        <img src="assets/images/Communities/Coahuila/coahuila3.jpg" alt="Chicago" room="slide-image-0" />
                                                         <div class="header-text-room hidden-xs">
                                                             <div class="col-md-12  text-center">
-
-
                                                                 <span class="btn_rooms_span">
                                                                     <button id="booknowbtn2" type="button" class="button_menu_rooms btn-form btn " style="margin-right: 20px;">BOOK A TOUR  </button>
+                                                                    <button type="button" class="button_menu_rooms  btn-form btn view_video_0">VIEW 360° <hr style="margin-left: 15px;"> </button>
+                                                                    <button type="button" id="getguidebtn2" class="button_menu_rooms btn-form btn">GET GUIDE  <hr style="margin-left: 15px;"></button>
+                                                                </span>
+                                                                <br>
+                                                                <span>
+                                                                <div class="row">
+                                                                    <div class="col-sm-6" style="margin-left: -2%;">
+                                                                        <br>
+                                                                        <h2 class="aux-back-amen" style=" ">
+                                                                            <span id="comserv-activetext beneficios-title ">
+                                                                                <p style="font-weight: 500; margin-top: 7%;" room="slide-title-0">
+                                                                                    ROOM A 
+                                                                                </p>
+                                                                            </span>
+                                                                        </h2>
+                                                                        <p class="textamen" style="margin-top: 5%;" room="slide-desc-0">
+                                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus
+                                                                        </p>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div room="icons-sections-0">
+                                                                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
+                                                                            <label data-target="#myCarousel7" data-slide-to="0" class="">
+                                                                                <a href="#">
+                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                         border="0" alt="" />
+                                                                                </a>
+                                                                                Lorem
+                                                                            </label>
+                                                                            <br>
+                                                                            <label data-target="#myCarousel6" data-slide-to="1" class="">
+                                                                                <a href="#">
+                                                                                    <img class="iconscom" src="assets/images/icon_test4.svg"
+                                                                                         onmouseover="this.src='assets/images/icon_test3.svg'"
+                                                                                         onmouseout="this.src='assets/images/icon_test4.svg'"
+                                                                                         border="0" alt="" />
+                                                                                </a> 
+                                                                                Lorem
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
+                                                                            <label data-target="#myCarousel7" data-slide-to="2" class="">
+                                                                                <a href="#">
+                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                            onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                            onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                            border="0" alt="" />
+                                                                                </a>
+                                                                                Lorem
+                                                                            </label>
+                                                                            <br>
+                                                                            <label data-target="#myCarousel7" data-slide-to="3" class="">
+                                                                                <a href="#">
+                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                            onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                            onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                            border="0" alt="" />
+                                                                                </a>
+                                                                                Lorem
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                </div>
+                                                                </span>
+                                                                <br>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                                    <button type="button" class="button_menu_rooms  btn-form btn ">VIEW 360° <hr style="margin-left: 15px;"> </button>
 
+                                                    <!-- Slide Room A: Slide Start; -->
+                                                    <div class="item">
+                                                        <img src="" alt="Chicago" room="slide-image-0" />
+                                                        <div class="header-text-room hidden-xs">
+                                                            <div class="col-md-12  text-center">
+                                                                <span class="btn_rooms_span">
+                                                                    <button id="booknowbtn2" type="button" class="button_menu_rooms btn-form btn " style="margin-right: 20px;">BOOK A TOUR  </button>
+                                                                    <button type="button" class="button_menu_rooms  btn-form btn view_video_0">VIEW 360° <hr style="margin-left: 15px;"> </button>
                                                                     <button type="button" id="getguidebtn2" class="button_menu_rooms btn-form btn">GET GUIDE  <hr style="margin-left: 15px;"></button>
                                                                 </span>
                                                                 <br>
@@ -1369,70 +1493,153 @@
                                                                             <br>
                                                                             <h2 class="aux-back-amen" style=" ">
                                                                                 <span id="comserv-activetext beneficios-title ">
-                                                                                    <p style="font-weight: 500; margin-top: 7%;">
+                                                                                    <p style="font-weight: 500; margin-top: 7%;" room="slide-title-0">
                                                                                         ROOM A
-                                                                                        <br>
                                                                                     </p>
                                                                                 </span>
                                                                             </h2>
-                                                                            <p class="textamen" style="margin-top: 5%;">
+                                                                            <p class="textamen" style="margin-top: 5%;" room="slide-desc-0">
                                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus
                                                                             </p>
                                                                         </div>
                                                                         <br>
-                                                                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                                                                            <label data-target="#myCarousel7" data-slide-to="0" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a>
-                                                                                Lorem
-                                                                            </label>
 
-                                                                            <br>
-                                                                            <label data-target="#myCarousel6" data-slide-to="1" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test4.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a> Lorem
-                                                                            </label>
-
+                                                                        <div room="icons-sections-0">
+                                                                            <div class="col-sm-3 icondiv" style="margin-top: 50px;">
+                                                                                <label data-target="#myCarousel7" data-slide-to="0" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                             onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                             onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                             border="0" alt="" />
+                                                                                    </a>
+                                                                                    Lorem
+                                                                                </label>
+                                                                                <br>
+                                                                                <label data-target="#myCarousel6" data-slide-to="1" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test4.svg"
+                                                                                             onmouseover="this.src='assets/images/icon_test3.svg'"
+                                                                                             onmouseout="this.src='assets/images/icon_test4.svg'"
+                                                                                             border="0" alt="" />
+                                                                                    </a> 
+                                                                                    Lorem
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-3 icondiv" style="margin-top: 50px;">
+                                                                                <label data-target="#myCarousel7" data-slide-to="2" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                                onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                border="0" alt="" />
+                                                                                    </a>
+                                                                                    Lorem
+                                                                                </label>
+                                                                                <br>
+                                                                                <label data-target="#myCarousel7" data-slide-to="3" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                                onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                border="0" alt="" />
+                                                                                    </a>
+                                                                                    Lorem
+                                                                                </label>
+                                                                            </div>
                                                                         </div>
-
-                                                                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                                                                            <label data-target="#myCarousel7" data-slide-to="0" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a>
-                                                                                Lorem
-                                                                            </label>
-
-                                                                            <br>
-
-
-                                                                        </div>
-
-
                                                                         <br>
-
-
                                                                     </div>
-
-
                                                                 </span>
-
                                                                 <br>
                                                             </div>
-                                                        </div><!-- /header-text -->
-
+                                                        </div>
                                                     </div>
+                                                    <!-- Slide Room A: Slide Ends; -->
+
+                                                    <!-- Slide Room A: Slide Start; -->
+                                                    <div class="item">
+                                                        <img src="" alt="Chicago" room="slide-image-0" />
+                                                        <div class="header-text-room hidden-xs">
+                                                            <div class="col-md-12  text-center">
+                                                                <span class="btn_rooms_span">
+                                                                    <button id="booknowbtn2" type="button" class="button_menu_rooms btn-form btn " style="margin-right: 20px;">BOOK A TOUR  </button>
+                                                                    <button type="button" class="button_menu_rooms  btn-form btn view_video_0">VIEW 360° <hr style="margin-left: 15px;"> </button>
+                                                                    <button type="button" id="getguidebtn2" class="button_menu_rooms btn-form btn">GET GUIDE  <hr style="margin-left: 15px;"></button>
+                                                                </span>
+                                                                <br>
+                                                                <span>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6" style="margin-left: -2%;">
+                                                                            <br>
+                                                                            <h2 class="aux-back-amen" style=" ">
+                                                                                <span id="comserv-activetext beneficios-title ">
+                                                                                    <p style="font-weight: 500; margin-top: 7%;" room="slide-title-0">
+                                                                                        ROOM A
+                                                                                    </p>
+                                                                                </span>
+                                                                            </h2>
+                                                                            <p class="textamen" style="margin-top: 5%;" room="slide-desc-0">
+                                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus
+                                                                            </p>
+                                                                        </div>
+                                                                        <br>
+
+                                                                        <div room="icons-sections-0">
+                                                                            <div class="col-sm-3 icondiv" style="margin-top: 50px;">
+                                                                                <label data-target="#myCarousel7" data-slide-to="0" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                             onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                             onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                             border="0" alt="" />
+                                                                                    </a>
+                                                                                    Lorem
+                                                                                </label>
+                                                                                <br>
+                                                                                <label data-target="#myCarousel6" data-slide-to="1" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test4.svg"
+                                                                                             onmouseover="this.src='assets/images/icon_test3.svg'"
+                                                                                             onmouseout="this.src='assets/images/icon_test4.svg'"
+                                                                                             border="0" alt="" />
+                                                                                    </a> 
+                                                                                    Lorem
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-3 icondiv" style="margin-top: 50px;">
+                                                                                <label data-target="#myCarousel7" data-slide-to="2" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                                onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                border="0" alt="" />
+                                                                                    </a>
+                                                                                    Lorem
+                                                                                </label>
+                                                                                <br>
+                                                                                <label data-target="#myCarousel7" data-slide-to="3" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="assets/images/icon_test1.svg"
+                                                                                                onmouseover="this.src='assets/images/icon_test2.svg'"
+                                                                                                onmouseout="this.src='assets/images/icon_test1.svg'"
+                                                                                                border="0" alt="" />
+                                                                                    </a>
+                                                                                    Lorem
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <br>
+                                                                    </div>
+                                                                </span>
+                                                                <br>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Slide Room A: Slide Ends; -->
+
+
                                                 </div>
 
                                                 <!-- Left and right controls -->
@@ -1459,16 +1666,14 @@
                                                 <!-- Wrapper for slides -->
                                                 <div class="carousel-inner">
                                                     <div class="item active ">
-                                                        <img src="assets/images/Communities/Coahuila/coahuila3.jpg" alt="Los Angeles">
+                                                        <img src="assets/images/Communities/Coahuila/coahuila3.jpg" room="slide-image-1" alt="Los Angeles" />
                                                         <div class="header-text-room hidden-xs">
                                                             <div class="col-md-12  text-center">
 
 
                                                                 <span class="btn_rooms_span">
                                                                     <button id="booknowbtn3" type="button" class="button_menu_rooms btn-form btn " style="margin-right: 20px;">BOOK A TOUR  </button>
-
-                                                                    <button type="button" class="button_menu_rooms  btn-form btn ">VIEW 360° <hr style="margin-left: 15px;"> </button>
-
+                                                                    <button type="button" class="button_menu_rooms  btn-form btn view_video_1">VIEW 360° <hr style="margin-left: 15px;"> </button>
                                                                     <button type="button" id="getguidebtn3" class="button_menu_rooms btn-form btn">GET GUIDE  <hr style="margin-left: 15px;"></button>
                                                                 </span>
                                                                 <br>
@@ -1478,55 +1683,20 @@
                                                                             <br>
                                                                             <h2 class="aux-back-amen" style=" ">
                                                                                 <span id="comserv-activetext beneficios-title ">
-                                                                                    <p style="font-weight: 500; margin-top: 7%;">
+                                                                                    <p style="font-weight: 500; margin-top: 7%;" room="slide-title-1">
                                                                                         ROOM B
                                                                                         <br>
                                                                                     </p>
                                                                                 </span>
                                                                             </h2>
-                                                                            <p class="textamen">
+                                                                            <p class="textamen" room="slide-desc-1">
                                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus
                                                                             </p>
                                                                         </div>
                                                                         <br>
-                                                                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                                                                            <label data-target="#myCarousel7" data-slide-to="0" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a>
-                                                                                Lorem
-                                                                            </label>
+                                                                        
 
-                                                                            <br>
-                                                                            <label data-target="#myCarousel6" data-slide-to="1" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test4.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a> Lorem
-                                                                            </label>
-
-                                                                        </div>
-
-                                                                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                                                                            <label data-target="#myCarousel7" data-slide-to="0" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a>
-                                                                                Lorem
-                                                                            </label>
-
-                                                                            <br>
-
-
-                                                                        </div>
+                                                                        <div room="icons-sections-1"></div>
 
 
                                                                         <br>
@@ -1544,16 +1714,12 @@
                                                     </div>
 
                                                     <div class="item">
-                                                        <img src="assets/images/Communities/Coahuila/coahuila3.jpg" alt="Chicago">
+                                                        <img src="assets/images/Communities/Coahuila/coahuila3.jpg" room="slide-image-1" alt="Chicago" />
                                                         <div class="header-text-room hidden-xs">
                                                             <div class="col-md-12  text-center">
-
-
                                                                 <span class="btn_rooms_span">
                                                                     <button id="booknowbtn4" type="button" class="button_menu_rooms btn-form btn " style="margin-right: 20px;">BOOK A TOUR   </button>
-
-                                                                    <button type="button" class="button_menu_rooms  btn-form btn ">VIEW 360° <hr style="margin-left: 15px;"> </button>
-
+                                                                    <button type="button" class="button_menu_rooms  btn-form btn view_video_1">VIEW 360° <hr style="margin-left: 15px;"> </button>
                                                                     <button type="button" id="getguidebtn4" class="button_menu_rooms btn-form btn">GET GUIDE  <hr style="margin-left: 15px;"></button>
                                                                 </span>
                                                                 <br>
@@ -1563,70 +1729,101 @@
                                                                             <br>
                                                                             <h2 class="aux-back-amen" style=" ">
                                                                                 <span id="comserv-activetext beneficios-title ">
-                                                                                    <p style="font-weight: 500; margin-top: 7%;">
+                                                                                    <p style="font-weight: 500; margin-top: 7%;" room="slide-title-1">
                                                                                         ROOM B
                                                                                         <br>
                                                                                     </p>
                                                                                 </span>
                                                                             </h2>
-                                                                            <p class="textamen">
+                                                                            <p class="textamen" room="slide-desc-1">
                                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus
                                                                             </p>
                                                                         </div>
                                                                         <br>
-                                                                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                                                                            <label data-target="#myCarousel7" data-slide-to="0" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a>
-                                                                                Lorem
-                                                                            </label>
-
-                                                                            <br>
-                                                                            <label data-target="#myCarousel6" data-slide-to="1" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test4.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a> Lorem
-                                                                            </label>
-
-                                                                        </div>
-
-                                                                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                                                                            <label data-target="#myCarousel7" data-slide-to="0" class="">
-                                                                                <a href="#">
-                                                                                    <img class="iconscom" src="assets/images/icon_test1.svg"
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt="" />
-                                                                                </a>
-                                                                                Lorem
-                                                                            </label>
-
-                                                                            <br>
-
-
-                                                                        </div>
-
-
+                                                                        <div room="icons-sections-1"></div>
+                                                                        
                                                                         <br>
-
-
                                                                     </div>
-
-
                                                                 </span>
-
                                                                 <br>
                                                             </div>
-
-                                                        </div><!-- /header-text -->
+                                                        </div>
                                                     </div>
+
+                                                    <div class="item">
+                                                        <img src="assets/images/Communities/Coahuila/coahuila3.jpg" room="slide-image-1" alt="Chicago" />
+                                                        <div class="header-text-room hidden-xs">
+                                                            <div class="col-md-12  text-center">
+                                                                <span class="btn_rooms_span">
+                                                                    <button id="booknowbtn4" type="button" class="button_menu_rooms btn-form btn " style="margin-right: 20px;">BOOK A TOUR   </button>
+                                                                    <button type="button" class="button_menu_rooms  btn-form btn view_video_1">VIEW 360° <hr style="margin-left: 15px;"> </button>
+                                                                    <button type="button" id="getguidebtn4" class="button_menu_rooms btn-form btn">GET GUIDE  <hr style="margin-left: 15px;"></button>
+                                                                </span>
+                                                                <br>
+                                                                <span>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6" style="margin-left: -2%;">
+                                                                            <br>
+                                                                            <h2 class="aux-back-amen" style=" ">
+                                                                                <span id="comserv-activetext beneficios-title ">
+                                                                                    <p style="font-weight: 500; margin-top: 7%;" room="slide-title-1">
+                                                                                        ROOM B
+                                                                                        <br>
+                                                                                    </p>
+                                                                                </span>
+                                                                            </h2>
+                                                                            <p class="textamen" room="slide-desc-1">
+                                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus
+                                                                            </p>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div room="icons-sections-1"></div>
+                                                                        
+                                                                        <br>
+                                                                    </div>
+                                                                </span>
+                                                                <br>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="item">
+                                                        <img src="assets/images/Communities/Coahuila/coahuila3.jpg" room="slide-image-1"alt="Chicago" />
+                                                        <div class="header-text-room hidden-xs">
+                                                            <div class="col-md-12  text-center">
+                                                                <span class="btn_rooms_span">
+                                                                    <button id="booknowbtn4" type="button" class="button_menu_rooms btn-form btn " style="margin-right: 20px;">BOOK A TOUR   </button>
+                                                                    <button type="button" class="button_menu_rooms  btn-form btn view_video_1">VIEW 360° <hr style="margin-left: 15px;"> </button>
+                                                                    <button type="button" id="getguidebtn4" class="button_menu_rooms btn-form btn">GET GUIDE  <hr style="margin-left: 15px;"></button>
+                                                                </span>
+                                                                <br>
+                                                                <span>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6" style="margin-left: -2%;">
+                                                                            <br>
+                                                                            <h2 class="aux-back-amen" style=" ">
+                                                                                <span id="comserv-activetext beneficios-title ">
+                                                                                    <p style="font-weight: 500; margin-top: 7%;" room="slide-title-1">
+                                                                                        ROOM B
+                                                                                        <br>
+                                                                                    </p>
+                                                                                </span>
+                                                                            </h2>
+                                                                            <p class="textamen" room="slide-desc-1">
+                                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus
+                                                                            </p>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div room="icons-sections-1"></div>
+                                                                        
+                                                                        <br>
+                                                                    </div>
+                                                                </span>
+                                                                <br>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <!-- Left and right controls -->
@@ -1695,9 +1892,7 @@
                                                                 <img class="hiddens amenidadesright" id="amenidadesrightimg1" alt="Images">
                                                                 <!--<img class="hiddens amenidadesright" id="amenidadesrightimg2" src="assets/images/Communities/Coahuila/s_gym.jpg" alt="Images">-->
                                                                 <div id="RoomA" class=" hiddens textmenucommunities   globalheigt" style="flex-direction: column">
-                                                                    <p style="font-weight: 700" room="card_name">
-                                                                        ROOM A
-                                                                    </p>
+                                                                    <p style="font-weight: 700" room="card_name"></p>
                                                                     <br>
                                                                     <span class="tamanoroom" room="card_desc_one">
                                                                         Morbi
@@ -2206,6 +2401,7 @@
             src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
     </script>
     <script type="text/javascript" src="assets/js/custommenu.js"></script>
+    <script src="carga_dinamica/altata.js"></script>
     <script>
         function resizeHandler(e) {
             console.log(e.type + ' triggered.');
