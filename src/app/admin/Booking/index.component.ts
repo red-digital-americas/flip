@@ -104,12 +104,12 @@ export class BookingIndexComponent implements OnInit {
     * Variables Out: service_data, cards
     */
     private service_data = {
-        buildingid: JSON.parse(localStorage.getItem("user")).id, 
-        userid: JSON.parse(localStorage.getItem("user")).buildingId
+        buildingid: JSON.parse(localStorage.getItem("user")).buildingId, 
+        userid: JSON.parse(localStorage.getItem("user")).id
     };
     public cards:any = [];
     public requestIndexContent():void {
-        
+        console.log('service_data =>', this.service_data);
         this.services.ServicioPostBuilds("SeeBuilding", this.service_data)
             .subscribe( (response:any) => {
 
