@@ -24,9 +24,11 @@ import { resolve } from 'dns';
     public loader: LoaderComponent = new LoaderComponent();
     public system_message: SystemMessage = new SystemMessage();
     public table_colums: any[] = ['service','type','sdate','edate','xcost'];
-    public table_history_colums: any[] = ['build','room','membership','adate','ddate','aout','button'];
-    public table_payHistory_colums: any[] = ['membership','dateStart','dateEnd','payday','ammount','card'];
-    public table_serHistory_colums: any[] = ['name','price','payday','dateStart','dateEnd','card'];
+    public table_colums_pending: any[] = ['icon','service','type','lapse','sdate','edate','xcost'];
+    public table_colums_paid_services: any[] = ['icon','service','type','lapse','sdate','edate','cclue','xcost'];
+    public table_history_colums: any[] = ['build','room','beds','membership','adate','ddate','aout','button'];
+    public table_payHistory_colums: any[] = ['membership', 'payday','dateStart','dateEnd','card','ammount'];
+    public table_serHistory_colums: any[] = ['name','payday','dateStart','dateEnd','card','price'];
     public table_adding_services: any[] = ['icon','service','description','recurrent','once','select'];
     public name_build: string;
     public user_id: number;
@@ -56,16 +58,20 @@ import { resolve } from 'dns';
 
     public beds_section: boolean = false;
     public history_section: boolean = false;
+    public toggle_label_button: string = 'Show';
+    public toggle1_label_button: String = 'Show';
     public showSection( section_to_show: string ):void {
 
         switch( section_to_show ) {
 
             case 'beds':
                 this.beds_section ? this.beds_section = false : this.beds_section = true;
+                this.beds_section ? this.toggle_label_button = 'Hide' : this.toggle_label_button = 'Show'; 
                 break;
 
             case 'history_section':
                 this.history_section ? this.history_section = false : this.history_section = true;
+                this.history_section ? this.toggle1_label_button = 'Hide' : this.toggle1_label_button = 'Show'; 
                 break;
 
         }
@@ -88,6 +94,7 @@ import { resolve } from 'dns';
     public bill_services_topay: number;
     public check_in_active: boolean;
     public check_out_active: boolean;
+    public card_month_year_data: string;
     public getReservationData():void {
 
         const user_data = {
@@ -148,6 +155,9 @@ import { resolve } from 'dns';
                         }
 
                     });
+                    this.card_month_year_data = `${ this.current_card.month }/${this.current_card.year.slice(-2)}`;
+
+                    console.log('Card date ==> ', this.card_month_year_data);
 
                 }
 
@@ -294,6 +304,7 @@ import { resolve } from 'dns';
                 if( response.result == 'Success' ) {
 
                     this.all_services_gotted = response.item;
+                    console.log('All Services got ===> ', this.all_services_gotted);
 
                 }
 
@@ -693,6 +704,8 @@ import { resolve } from 'dns';
             }
 
         });
+
+        console.log('The Data ======> ', this.history_selected_servicesHis);
 
         this.history_selected.customDateDif = 
                     this.dateWorker('calc' , this.history_selected.dateStart, this.history_selected.dateEnd );
