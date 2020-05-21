@@ -17,6 +17,7 @@ export class AppLayoutComponent {
   public selectedSection:number;
   public navSections = []
   public dataUser;
+  public userId;
   constructor(
     private menuService:MenuService,
     private router:Router
@@ -29,6 +30,7 @@ export class AppLayoutComponent {
       attributes: true
     });
     this.dataUser = JSON.parse(localStorage.getItem('user')).avatar;
+    this.userId = JSON.parse(localStorage.getItem('user')).id;
     console.log(this.dataUser);
     if (localStorage.getItem("SystemTypeId") == undefined ) { return; }
     let systemTypeId = parseInt(localStorage.getItem("SystemTypeId"));        
@@ -63,6 +65,10 @@ export class AppLayoutComponent {
   salir(): void {
     localStorage.clear();
     window.location.href = "/#/login";    
+  }
+
+  goToProfile(path) {
+    this.router.navigateByUrl( `Users-Detail/${ path }`, { state: { id: 1, name: 'UserList To Users-Detail' } });
   }
 
   public addPaddingWidthJS():void {
