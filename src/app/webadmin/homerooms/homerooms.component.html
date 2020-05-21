@@ -25,17 +25,19 @@
 <div class="row">
   <h3 style="padding-left: 55px; padding-top: 15px; padding-bottom: -55px;"> {{ namebuilding}}</h3>
   <!-- *ngIf="this.lengthpost < 4" -->
-  <div *ngIf="this.lengthpost < 4" style="padding-left: 555px; padding-top: 15px; float: right;">
-    <button 
+  <div *ngIf="this.lengthpost < 4" class="ml-col-1 position-relative margin-bottom-x">
+    <button style="position: absolute;
+    right: 40px;
+    top: -37px;"
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(this.post_blanck);"
             class="button button-x">
-            Add Silde in Room
+            Add Room Type
     </button>
   </div>
 </div>
-<div class="row padding-bottom-m padding-general-m" style="padding-top: 15px;">
-  <div class="ml-col-1 room-data__tabs text-center" *ngIf="this.lengthpost > 0">
+<div class="row padding-bottom-m padding-general-m" style="padding-top: 0px;">
+  <div class="ml-col-1 room-data__tabs text-center">
     <span class="room-data__tab room-data__tab--active" (click)="showSection( $event, 'room_a')">
       Room Type 1
     </span>
@@ -48,15 +50,10 @@
     name="room-section"
     *ngFor="let post of posts, index as index;"
     class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x">
-    <div class="ml-col-1 room-data margin-bottom-m">
+    <div class="ml-col-1 room-data margin-bottom-m" style="padding-bottom: 0px;">
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
-           <p class="room-data__card-titulo">
-             Type Room General Information 
-           </p>
-        </div>
-        <div class="ml-col-1">
-          <p class="room-data__card-dato">
+          <p class="room-data__card-titulo">
             <span class="text-bold">Title: </span>
             {{ post.title }}
           </p>
@@ -116,6 +113,7 @@
           </iframe>
         </div>
         <div class="ml-col-1 text-center margin-top-x">
+          <br>
           <button 
             data-toggle="modal" 
             (click)="infoModal.show(); passdataRoom(post);"
@@ -125,12 +123,39 @@
         </div>
       </div>
     </div>
+    <div *ngIf="this.lengthpost < 4" style="padding-left: 555px;  float: right;">
+     
+      <button 
+              data-toggle="modal" 
+              (click)="primaryModal.show(); passdata(this.post_blanck);"
+              class="button button-x">
+              Add Silde in Room
+      </button>
+      <br> <br>
+    </div>
     <div class="ml-col-1 card-style margin-bottom-m" *ngFor="let photo of post.photos, index_b as index;">
+     /// {{index_b}}
+      <div class="ml-col-1 margin-top-x">
+        <div class="room-data__card ml-col-1">
+          <div class="ml-col-1">
+            <p class="room-data__card-dato">
+              <span class="text-bold">Slide Title: </span>
+              {{ photo.title }}
+            </p>
+          </div>
+          <div class="ml-col-1">
+            <p class="room-data__card-dato">
+              <span class="text-bold">Slide Description: </span>
+              {{ photo.description }}
+            </p>
+          </div>
+        </div>
+      </div>
       <div class="ml-col-1 margin-top-x">
         <div class="icon-viewB">
           <div class="icon-viewB__container">
             <p class="icon-viewB__title text-center">
-              Icon Description: {{ photo.titleIcon }}
+              Icon Title: {{ photo.titleIcon }}
             </p>
             <div class="icon-viewB__icon">
               <span class="icon-viewB__icon-label text-center">Icon: </span> 
@@ -149,7 +174,7 @@
             <span class="text-bold text-center images-view__image--title">
               Build Photo:
             </span>
-            <img src="../../../assets/webtmp.png" class="images-view__image--mask" />
+            <img src="../../../assets/webtmpr.png" class="images-view__image--mask" />
             <img src="{{ photo.photo }}" class="images-view__image--image" />
           </figure>
         </div>
@@ -182,13 +207,13 @@
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
           <p class="room-data__card-titulo">
-            <span class="text-bold">Title: </span>
+            <span class="text-bold">Slide Title: </span>
             {{ post.title }}
           </p>
         </div>
         <div class="ml-col-1">
           <p class="room-data__card-dato">
-            <span class="text-bold">Description: </span>
+            <span class="text-bold">Slide Description: </span>
             {{ post.desc }}
           </p>
         </div>
@@ -198,14 +223,14 @@
             {{ post.getGuide }}
           </p>
         </div>
-        <div class="ml-col-1 room-data__card--group">
-          <div class="ml-col-1">
+        <div class="ml-col-1 ">
+          <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
               <span class="text-bold">Price Description: <br /> </span>
               {{ post.descPrice }}
             </p>
           </div>
-          <div class="ml-col-1">
+          <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
               <span class="text-bold">Price: <br /> </span>
               {{ post.price | currency }}
@@ -213,33 +238,35 @@
           </div>
         </div>
         <div class="ml-col-1">
-          <div class="ml-col-1">
+          <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
               <span class="text-bold">Price 2 Description: <br /> </span>
               {{ post.descPrice1 }}
             </p>
           </div>
-          <div class="ml-col-1">
+          <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
               <span class="text-bold">Price 2: <br /> </span>
               {{ post.price1 | currency }}
             </p>
           </div>
         </div>
-        <div class="ml-col-1 room-data__card--group">
+        <div class="ml-col-1">
           <p class="room-data__card-dato">
             <span class="text-bold">View 360 Url: </span>
             {{ post.view360 }}
           </p>
         </div>
-        <div class="ml-col-1 custom-input__video margin-top-x">
+        <div class="ml-col-1 room-data__card-video margin-top-x">
+          <span class="text-bold">Preview Video: </span>
           <iframe 
-            class="custom-input__video--viewer" 
+            class="custom-input__video--viewer"
             allowfullscreen="allowfullscreen"
             [src]="post.get_video_url">
           </iframe>
         </div>
         <div class="ml-col-1 text-center margin-top-x">
+          <br>
           <button 
             data-toggle="modal" 
             (click)="infoModal.show(); passdataRoom(post);"
@@ -273,7 +300,7 @@
             <span class="text-bold text-center images-view__image--title">
               Build Photo:
             </span>
-            <img src="../../../assets/webtmp.png" class="images-view__image--mask" />
+            <img src="../../../assets/webtmpr.png" class="images-view__image--mask" />
             <img src="{{ photo.photo }}" class="images-view__image--image" />
           </figure>
         </div>
@@ -302,7 +329,7 @@
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+        <h4 class="modal-title">Complete the slide information</h4>
         <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -313,6 +340,39 @@
             <input
               type="text"
               class="custom-input__text" 
+              name="title_slide_name" 
+              id="title_slide_name" 
+              placeholder="Icon Name" 
+              [(ngModel)]="photos_data.title"
+              [class.custom-input__text--error]="form_watcher_b.no_name"
+              required />
+            <label class="custom-input__label custom-input__label--active" for="title_slide_name">
+              Title Slide
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher_b.no_name">
+              Tile Slide is required
+            </span>
+          </div>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <textarea 
+              [(ngModel)]="photos_data.description"
+              class="custom-input__textarea" 
+              name="room_slide_desc" 
+              id="room_slide_desc" 
+              [class.custom-input__textarea--error]="form_watcher.no_desc"
+              placeholder="Description" 
+              required></textarea>
+            <label class="custom-input__label custom-input__label--active" for="room_slide_desc">
+              Slide Description  
+            </label>
+            <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
+              Slide Description is required
+            </span>
+          </div>
+          <div class="ml-col-1 custom-input margin-bottom-x">
+            <input
+              type="text"
+              class="custom-input__text" 
               name="room_icon_name" 
               id="room_icon_name" 
               placeholder="Icon Name" 
@@ -320,10 +380,10 @@
               [class.custom-input__text--error]="form_watcher_b.no_name"
               required />
             <label class="custom-input__label custom-input__label--active" for="room_icon_name">
-              Icon Name
+              Icon Title
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher_b.no_name">
-              Icon Name is required
+              Icon Tile is required
             </span>
           </div>
           <div class="form__image form__image--fix">
@@ -332,7 +392,7 @@
               type="file" 
               name="image_i1_selected"
               accept="image/*"
-              (change)="readImageData($event, '350x350', 0);"
+              (change)="readImageData($event, '512x512', 0);"
               id="validatedCustomFile0" 
               required>
             <label class="form__image-img" for="validatedCustomFile0">
@@ -348,7 +408,7 @@
                 <span class="color-red" *ngIf="form_watcher_b.no_ico0">
                   Icon Default is required <br />
                 </span>
-                *Image resolution 350x350px.
+                *Image resolution 512x512px.
               </span>
             </label>
           </div>
@@ -358,7 +418,7 @@
               type="file" 
               name="image_i2_selected"
               accept="image/*"
-              (change)="readImageData($event, '350x350', 1);"
+              (change)="readImageData($event, '512x512', 1);"
               id="validatedCustomFile1" 
               required>
             <label class="form__image-img" for="validatedCustomFile1">
@@ -374,7 +434,7 @@
                 <span class="color-red" *ngIf="form_watcher_b.no_ico1">
                   Icon Hover is required <br />
                 </span>
-                *Image resolution 350x350px.
+                *Image resolution 512x512px.
               </span>
             </label>
           </div>
@@ -450,7 +510,7 @@
   <div class="modal-dialog modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
+        <h4 class="modal-title">Complete the Room information</h4>
         <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

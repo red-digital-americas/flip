@@ -126,6 +126,15 @@ export class HomeindexComponent implements OnInit {
     this.direction=direction; 
     this.comming = comming;
    }
+
+   passdata_blank(){
+     
+    this.PostId = 0 ; 
+    this.title= "";
+    this.direction= ""; 
+    this.comming = false;
+   }
+
    gotonewsfeed(id?: number) {
     this.router.navigate(['webadmin/homeindex/' + id])
  }

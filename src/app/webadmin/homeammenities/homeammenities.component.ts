@@ -242,7 +242,7 @@ export class HomeammenitiesComponent implements OnInit {
   get_photos() {
     //debugger;
     var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
-    // 
+      this.loader.showLoader();
     this.heroService.ServicioPostPost("SeeHomeAmmenities", creadoobj).subscribe((value) => {
       //debugger;
 
@@ -257,6 +257,7 @@ export class HomeammenitiesComponent implements OnInit {
             this.posts = value.item;
             this.lengthpost = this.posts.length;
              this.namebuilding = value.detalle;
+             setTimeout( () => { this.loader.hideLoader(); }, 1277);
           }
       }
     });

@@ -1,10 +1,11 @@
 <div class="animated fadeIn">
   <div class="container-fluid">   
-    <div class="col-12" style="padding: 0;">
-      <h2>Content management by building</h2>
+    <div class="col-12" >
+      <br>
+      <h2 style="padding-top: 25;">Content management by building</h2>
     </div>
     <div class="row">
-      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4" *ngFor="let post of posts">
+     <!-- <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4" *ngFor="let post of posts">
         <div class="card">
           <a (click)="gotonewsfeed(post.idbuild)" style="cursor:pointer; color:inherit">
 
@@ -14,8 +15,8 @@
             <div class="card-footer">{{post.name}}</div>
             </a>
         </div>
-      </div><!--/.col-->
-      <div class="ml-col-1 padding-general-m">
+      </div>/.col-->
+      <div class="row padding-bottom-m padding-general-m" style="padding-top: 15px;">
         <div class="row padding-bottom-m">
           <div class="big-card" *ngFor="let post of posts, index as index;">
             <div class="card">
@@ -47,7 +48,7 @@
                   class="button" 
                   data-toggle="modal" 
                   (click)='gotonewsfeed(post.idbuild)'>
-                    Go to build
+                    Content
                 </button>
               </div>
             </div>

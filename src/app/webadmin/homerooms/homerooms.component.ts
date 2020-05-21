@@ -39,7 +39,7 @@ export class HomeroomsComponent implements OnInit {
     this.toasterService = toasterService;
   }
   posts: any;
-  posts_b: any[];
+  posts_b: any;
   email: string;
   password: string;
   token: boolean;
@@ -54,6 +54,7 @@ export class HomeroomsComponent implements OnInit {
   namebuilding: string = "";
   post_blanck: any;
   lengthpost: number = 0;
+  room_blanck: any;
 
   title: string = "";
   price: string = "";
@@ -94,7 +95,7 @@ export class HomeroomsComponent implements OnInit {
       this.IDBUILD = parseInt(this.route.snapshot.params['id']);
       this.get_photos();
 
-
+      
     }
   }
   imageChangedEvent: any = '';
@@ -102,6 +103,14 @@ export class HomeroomsComponent implements OnInit {
   showCropper = false;
   blob: any = '';
 
+  public set_room_empty_obj(): RoomModel[]
+  {
+    debugger;
+     
+    var room_blanck_ = new RoomModel();
+    this.room_blanck =  new Array(room_blanck_) 
+    return this.room_blanck;
+  }
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -180,6 +189,7 @@ export class HomeroomsComponent implements OnInit {
     // debugger;
     var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
     //debugger;
+    this.loader.showLoader();
     this.heroService.ServicioPostPost("SeeHomeRoom", creadoobj).subscribe((value) => {
 
       console.log('Home Rooms =====> ',value.item );
@@ -188,13 +198,18 @@ export class HomeroomsComponent implements OnInit {
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
           break;
         default:
-          debugger; 
+         // debugger; 
           if (value.result == "Success") {
           
             this.lengthpost = value.item.length;
             this.namebuilding = value.detalle;
 
-            if(value.item.length > 0)
+            if(value.item.length > 1)
+            {
+              this.posts = [ value.item[0] ];
+              this.posts[0].get_video_url = this.domSanitiza.bypassSecurityTrustResourceUrl( this.getVideoToEmbedUrl( this.posts[0].view360 ) );
+            }
+            else if(value.item.length > 1)           
             {
               this.posts = [ value.item[0] ];
               this.posts_b = [ value.item[1] ];
@@ -202,7 +217,14 @@ export class HomeroomsComponent implements OnInit {
               this.posts[0].get_video_url = this.domSanitiza.bypassSecurityTrustResourceUrl( this.getVideoToEmbedUrl( this.posts[0].view360 ) );
   
             }
-          
+            else
+            {debugger;
+              this.posts_b = this.set_room_empty_obj();
+              this.posts = this.set_room_empty_obj();
+              
+            }
+
+            setTimeout( () => { this.loader.hideLoader(); }, 1277);
           }
       }
     });
@@ -324,7 +346,8 @@ export class HomeroomsComponent implements OnInit {
     this.photos_data.Photo = album.photo;
     this.photos_data.PhotoMobile = album.photoMobile;
     this.photos_data.IdCommunitiesRoomWeb = album.idCommunitiesRoomWeb;
-
+    this.photos_data.title = album.title;
+    this.photos_data.description = album.description;
   }
 
   updatephoto() {
@@ -737,5 +760,7 @@ class PhotosModelData {
   icon2: string;
   IdCommunitiesRoomWeb: number;
   titleIcon: string;
+  title: string;
+  description: string;
 }
  
