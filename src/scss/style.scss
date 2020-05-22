@@ -2297,9 +2297,9 @@ select:active,
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
+  width: 80%;
   background-color: white;
-  padding: 10px;
+  padding: 0;
   float: left;
 
   &--selecting {
@@ -2314,22 +2314,19 @@ select:active,
     float: left;
     position: relative;
     font-size: 20px;
-    padding: 42.5px 0 5px;
+    padding: 19px 0 19px 12px;
     margin-bottom: 10px;
-    color: #20a8d8;
-    border-bottom: solid 1px #20a8d8;
+    color: #2e343a;
 
     &-photo {
-      right: 0;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
       border-radius: 50%;
-      width: 51px;
-      height: 51px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
       position: absolute;
-      border: solid 1px #20a8d8;
     }
 
   }
@@ -2337,13 +2334,12 @@ select:active,
   &__chat {
 
     width: 100%;
-    height: 360px;
+    height: 340px;
     padding: 20px 0 30px;
     float: left;
-    border-radius: 5px;
-    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2) inset;
     margin-bottom: 12.5px;
     overflow-y: scroll;
+    background-color: rgba(0,0,0,.04);
     
     @media screen and (min-width: 1920px) {
       height: 540px;
@@ -2363,12 +2359,12 @@ select:active,
 
         &-own {
           float: left;
-          border: solid 1px #2e343a;
+          background-color: rgba(0, 0, 0, 0.1);
         }
 
         &-from {
           float: right;
-          border: solid 1px #20a8d8;
+          background-color: #c0efff;
         }
 
       }
@@ -2380,17 +2376,20 @@ select:active,
   &__message {
 
     width: 100%;
-    height: 40px;
+    height: 85px;
     float: left;
+    padding: 12px;
+    height: 90px;
+    position: relative;
 
     &-message {
-      min-width: 83%;
-      max-width: 83%;
+      min-width: 90%;
+      max-width: 90%;
       float: left;
       border: none;
       outline: none;
-      min-height: 100%;
-      max-height: 100%;
+      min-height: 70px;
+      max-height: 70px;
       padding: 5px;
     }
 
@@ -2400,12 +2399,19 @@ select:active,
     }
 
     &-send {
-      float: right;
-      color: white;
-      height: 100%;
-      width: 15%;
-      border-radius: 5px;
-      background-color: #20a8d8;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      right: 12px;
+      background-color: #f57eb6;
+      outline: none;
+    }
+
+    &-send:focus {
+      outline: none;
     }
 
   }
