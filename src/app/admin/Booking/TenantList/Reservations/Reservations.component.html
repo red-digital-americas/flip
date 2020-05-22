@@ -84,7 +84,7 @@
                 Room:
             </div>
             <div class="ml-col-1 text-bold">
-                Harcodeado
+                {{ current_membership?.roomName }}
             </div>
         </div>
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
@@ -289,13 +289,10 @@
         <div class="ml-col-1">
             <div class="ml-col-4o margin-bottom-x">
                 <div class="ml-col-1 text-bold margin-bottom-x">
-                    Premium Membership 
+                   {{ current_membership?.membresia }}
                 </div>
                 <div class="ml-col-1 padding-right-m">
-                    Hoy soy poeta con emoción a domicilio
-                    Escribo en el exilio voluntario
-                    Dado que siempre hay alguien que me llama para echar algo en el barrio
-                    Azuara tiene el tiempo envasado al vacío
+                    {{ current_membership?.memdesc }}
                 </div>
             </div>
             <div class="ml-col-15">
@@ -321,10 +318,10 @@
             <div class="ml-col-15">
                 <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
                     <div class="ml-col-1 padding-bottom-x">
-                        Roomate Type:
+                        Room Type:
                     </div>
                     <div class="ml-col-1 text-bold">
-                        {{ current_membership?.roomateType }}
+                        {{ current_membership?.typeRoom }}
                     </div>
                 </div>
             </div>
@@ -341,7 +338,7 @@
         </div>
         <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
             <div class="ml-col-1 text-bold">
-                Paid/Services Included 
+                Paid Services 
             </div>
         </div>
         <table mat-table mat-sort [dataSource]="current_aditionals" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
@@ -349,7 +346,7 @@
                 <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"></th>
                 <td mat-cell *matCellDef="let element" class="table__data table__icon--width table__data-center">
                     <figure class="table__icon">
-                        <img src="https://board-en.darkorbit.com/attachments/sl-03-gif.6242/" 
+                        <img src="{{ element.icon }}" 
                              class="table__icon-img filter-brightness" />
                     </figure>
                 </td>
@@ -360,7 +357,7 @@
             </ng-container>
             <ng-container matColumnDef="type">
                 <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Type</th>
-                <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.type }}</td>
+                <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.typeService }}</td>
             </ng-container>
             <ng-container matColumnDef="lapse">
                 <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Lapse</th>
@@ -417,7 +414,7 @@
                 <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"></th>
                 <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                     <figure class="table__icon">
-                        <img src="https://board-en.darkorbit.com/attachments/sl-03-gif.6242/" 
+                        <img src="{{ element.icon }}" 
                              class="table__icon-img filter-brightness" />
                     </figure>
                 </td>
@@ -428,11 +425,11 @@
             </ng-container>
             <ng-container matColumnDef="type">
                 <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Type</th>
-                <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.type }}</td>
+                <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.typeService }}</td>
             </ng-container>
             <ng-container matColumnDef="lapse">
                 <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Lapse</th>
-                <td mat-cell *matCellDef="let element" class="table__data table__data-center">Lapse</td>
+                <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.type }}</td>
             </ng-container>
             <ng-container matColumnDef="sdate">
                 <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Start Date</th>
@@ -744,12 +741,22 @@
             </span>
         </div>   
         <div class="ml-col-1 margin-top-x" id="form_services_added" *ngIf="services_selected != 0">
-            <div class="ml-col-1 padding-general-min card-style margin-bottom-x" service="added" *ngFor="let service of services_selected;">
-                <div class="ml-col-1 ap-form__sdato margin-bottom-x">
-                    <div class="ml-col-1 ap-form__sdato--bbottom">
+            <div class="ml-col-1 padding-general-x card-style margin-bottom-x" service="added" *ngFor="let service of services_selected;">
+                <!-- div class="ml-col-1 ap-form__sdato margin-bottom-x">
+                    <div class="ml-col-1">
                       <span class="text-bold">Service selected:</span> 
-                      {{ service.name }}
+                      
                     </div>
+                </div -->
+                <div class="ml-col-1 margin-bottom-x">
+                    <button 
+                        (click)="removeServices( service.id )"
+                        class="ap-form__rButton button-red">
+                        Remove service
+                    </button>
+                    <h4 class="ap-form__titulo ap-form__titulo--auto-width">
+                        {{ service.name }}
+                    </h4>
                 </div>
                 <div class="ml-col-4">
                     <div class="ml-col-1">
@@ -847,9 +854,9 @@
             <div class="ml-col-1 ap-form__buttons">
                 <button 
                   type="button"
-                  (click)="showModal(); clearServicesSelected()"
+                  (click)="showModal()"
                   class="ap-form__buttons-button button-pink">
-                  Cancelar
+                  Cancel
                 </button>
                 <button 
                   type="button"
@@ -864,26 +871,6 @@
                   Pay services
                 </button>
             </div>
-        </div>
-    </div>
-    <div class="ml-modal__pop" *ngIf="modal_to_show == 'confirm_payment_services'"> 
-        <p class="ml-modal__pop-titulo margin-bottom-m">
-            Pay services
-        </p>
-        <p class="ml-modal__pop-text">
-            Are you sure to pay it?
-        </p>
-        <div class="ml-modal__pop-buttons">
-            <button 
-                (click)="payServicesConfirm( false )"
-                class="ml-modal__pop-buttons-button button-pink">
-                Cancel
-            </button>
-            <button 
-                (click)="saveOrPayServicesSelected('pay')"
-                class="ml-modal__pop-buttons-button button-black">
-                Confirm Payment
-            </button>
         </div>
     </div>
     <form class="ml-modal__content ml-modal__content--min card-style" *ngIf="modal_to_show == 'edit_end_date'"> 
@@ -1048,21 +1035,21 @@
         </div -->
     </form>
     <div class="ml-modal__pop" *ngIf="modal_to_show == 'confirm_pay_endDate'"> 
-        <p class="ml-modal__pop-titulo">
-            Pay
+        <p class="ml-modal__pop-titulo margin-bottom-m">
+            Change End Date
         </p>
         <p class="ml-modal__pop-text">
-            Are you sure to pay it?
+            Are you sure to change End Date?
         </p>
         <div class="ml-modal__pop-buttons">
             <button 
-                (click)="updateEndDateConfirm( false )"
-                class="ml-modal__pop-buttons-button button-orange">
+                (click)="updateEndDateConfirm( false );"
+                class="ml-modal__pop-buttons-button button-pink">
                 Cancel
             </button>
             <button 
                 (click)="updateEndDate()"
-                class="ml-modal__pop-buttons-button button-blue">
+                class="ml-modal__pop-buttons-button button-black">
                 Confirm Payment
             </button>
         </div>
@@ -1131,7 +1118,7 @@
                     Room:
                 </div>
                 <div class="ml-col-1 text-bold">
-                    Harcodeado
+                    {{ history_selected?.roomName }}
                 </div>
             </div>
             <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
@@ -1305,6 +1292,59 @@
                 </div>
             </div>
         </div>
+        <h4 class="ap-form__titulo">
+            Payments
+        </h4>
+        <div class="ml-col-1">
+            <div class="ml-col-4o margin-bottom-x">
+                <div class="ml-col-1 text-bold margin-bottom-x">
+                   {{ history_selected?.membresia }}
+                </div>
+                <div class="ml-col-1 padding-right-m">
+                    {{ history_selected?.memdesc }}
+                </div>
+            </div>
+            <div class="ml-col-15">
+                <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
+                    <div class="ml-col-1 padding-bottom-x">
+                        Nights reserved:
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ history_selected?.customDateDif }}
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-15">
+                <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
+                    <div class="ml-col-1 padding-bottom-x">
+                        Beds:
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ history_selected?.beds + history_selected?.additionalBeds.length }} 
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-15">
+                <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
+                    <div class="ml-col-1 padding-bottom-x">
+                        Room Type:
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ history_selected?.typeRoom }}
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-15">
+                <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-right">
+                    <div class="ml-col-1 padding-bottom-x">
+                        Ammount:
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ history_selected?.price | currency }}
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- div class="ml-col-1 ap-membership">
             <div class="ap-membership__container ap-membership__container--c">
                 <p class="ap-membership__text ml-col-1">
@@ -1330,7 +1370,7 @@
         <div class="ml-col-1 margin-tb-min">
             <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
                 <div class="ml-col-1">
-                    Paid/Services Included 
+                    Paid Services 
                 </div>
             </div>
             <table mat-table mat-sort [dataSource]="history_selected?.servicesAditional" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
@@ -1338,7 +1378,7 @@
                     <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"></th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         <figure class="table__icon">
-                            <img src="https://board-en.darkorbit.com/attachments/sl-03-gif.6242/" 
+                            <img src="{{ element.icon }}" 
                                  class="table__icon-img filter-brightness" />
                         </figure>
                     </td>
@@ -1349,10 +1389,10 @@
                 </ng-container>
                 <ng-container matColumnDef="type">
                     <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Type</th>
-                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.type }}</td>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.typeService }}</td>
                 </ng-container>
                 <ng-container matColumnDef="lapse">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Type</th>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Lapse</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.type }}</td>
                 </ng-container>
                 <ng-container matColumnDef="sdate">
@@ -1481,21 +1521,43 @@
         </div>
     </div>
     <div class="ml-modal__pop" *ngIf="modal_to_show == 'confirm_payment'"> 
-        <p class="ml-modal__pop-titulo">
-            Pay
+        <p class="ml-modal__pop-titulo margin-bottom-m">
+            Pay Pending Services
         </p>
         <p class="ml-modal__pop-text">
-            Are you sure to pay it?
+            Are you sure to pay Pending Services?
         </p>
         <div class="ml-modal__pop-buttons">
             <button 
                 (click)="showModal()"
-                class="ml-modal__pop-buttons-button button-orange">
+                class="ml-modal__pop-buttons-button button-pink">
                 Cancel
             </button>
             <button 
                 (click)="payPendingItems()"
-                class="ml-modal__pop-buttons-button button-blue">
+                class="ml-modal__pop-buttons-button button-black">
+                Confirm Payment
+            </button>
+        </div>
+    </div>
+</div>
+<div class="ml-modal ml-modal--up ml-modal--bg-black" *ngIf="popup_payment_service">
+    <div class="ml-modal__pop">
+        <p class="ml-modal__pop-titulo margin-bottom-m">
+            Pay services
+        </p>
+        <p class="ml-modal__pop-text">
+            Are you sure to pay services selected?
+        </p>
+        <div class="ml-modal__pop-buttons">
+            <button 
+                (click)="payServicesConfirm( false );"
+                class="ml-modal__pop-buttons-button button-pink">
+                Cancel
+            </button>
+            <button 
+                (click)="saveOrPayServicesSelected('pay')"
+                class="ml-modal__pop-buttons-button button-black">
                 Confirm Payment
             </button>
         </div>

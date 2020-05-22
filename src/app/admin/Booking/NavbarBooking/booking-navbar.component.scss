@@ -4,12 +4,13 @@
 
         text-align: center;
         padding: 20px;
-        font-size: 22px;
+        font-size: 24px;
         font-weight: 400;
         background-color: white;
         border-bottom: solid 1px rgba(0,0,0,.5);
         margin: 0;
         position: relative;
+        font-family: headerFont;
 
         &__back {
             position: absolute;
@@ -39,7 +40,6 @@
         flex-wrap: wrap;
         flex-direction: row;
         background-color: white;
-        box-shadow: 0 4px 6px -4px rgba(0,0,0,.5);
 
         &__item {
 
@@ -50,6 +50,7 @@
             font-size: 14px;
             font-weight: normal;
             cursor: pointer;
+            border-bottom: solid 1px rgba($color: #2e343a, $alpha: .4);
 
             &--active {
                 font-weight: bold;

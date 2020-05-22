@@ -1,5 +1,5 @@
 <div class="login">
-  <img src="../../../assets/img/Builds/altata6.jpg" class="login--background" />
+  <img src="../../../assets/img/Builds/resp_1.jpg" class="login--background" />
   <div class="login__container card-style">
     <form 
       class="ap-form ml-col-1 login--logo login-form" 
@@ -7,13 +7,13 @@
       onsubmit="return false;"
       (submit)="loginEvent()" 
       *ngIf="login_action">
-      <div class="ml-col-1">
-        <h4 class="ap-form__titulo text-left">
+      <div class="ml-col-1 margin-bottom-x">
+        <h4 class="ap-form__titulo ap-form__titulo--header text-left">
           Login
         </h4>
       </div>
       <div class="ml-col-1">
-        <div class="ap-form__input">
+        <div class="ap-form__input ap-form__input--full-width">
           <input 
             type="text" 
             placeholder="Email"
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="ml-col-1">
-        <div class="ap-form__input">
+        <div class="ap-form__input ap-form__input--full-width">
           <input 
             type="password" 
             placeholder="Password"
@@ -60,10 +60,10 @@
           </span>
         </div>
       </div>
-      <div class="ml-col-1 ap-form__buttons">
+      <div class="ml-col-1 ap-form__buttons margin-top-m">
         <button 
           type="submit"
-          class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+          class="ap-form__buttons-button ap-form__buttons-button--big button-black">
           Login
         </button>
         <span class="ml-col-1 padding-general-min image-name cursor-pointer" (click)="recoverPassword()">

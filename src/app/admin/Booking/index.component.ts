@@ -42,10 +42,10 @@ export class BookingIndexComponent implements OnInit {
                 this.new_build_button = true;
                 this.edit_build_button = false;
                 this.resetSettings();
-                this.booking_form_action = 'Nuevo Edificio';
+                this.booking_form_action = 'Add New Build';
             break;
 
-            case 'edit': console.log('Editable => ', editable);
+            case 'edit': 
                 this.show_booking_form = true;
                 this.new_build_button = false;
                 this.edit_build_button = true;
@@ -59,7 +59,7 @@ export class BookingIndexComponent implements OnInit {
                 this.booking_data.status = editable.status;
                 this.booking_data.photo = editable.photo;
                 this.getRoomsToEdit(  editable.typeRoom );
-                this.booking_form_action = 'Editar Edificio';
+                this.booking_form_action = 'Edit Build';
             break;
 
             case 'hide':
@@ -275,7 +275,6 @@ export class BookingIndexComponent implements OnInit {
 
   public confirmDeleteRoom():void {
 
-    console.log('Consumir servicio para eliminarlo');
     this.loader.showLoader();
     setTimeout( () => { this.loader.hideLoader(); this.confirmDeleteRoomModal(); }, 407);
     this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === this.room_to_delete.id ), 1);
@@ -347,7 +346,7 @@ debugger;
 
                 this.booking_data.typeroom = this.getRoomsData('edit');
 
-                this.loader.showLoader(); console.log('this one => ', this.booking_data);
+                this.loader.showLoader(); 
 
                 this.services.ServicioEditBuild( this.booking_data )
                     .subscribe( (response: any) => { 
@@ -387,6 +386,19 @@ debugger;
                     });
 
             }
+
+        } else {
+
+            this.sendPageToTop();
+
+            this.system_message.showMessage({
+                kind: 'error',
+                message: {
+                  header: 'Inputs required',
+                  text: 'All inputs must be fill to continue'
+                },
+                time: 4777
+              });
 
         }
 
@@ -647,6 +659,11 @@ debugger;
         
     }
 
+    public sendPageToTop():void {
+
+        window.scrollTo(0,0);
+
+    }
 
     /** Welcomeback Mr. Anderson We missed you... */
     ngOnInit() {

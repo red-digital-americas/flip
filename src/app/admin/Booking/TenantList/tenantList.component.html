@@ -1,43 +1,48 @@
 <div class="ml-col-1">
     <booking-navbar [section]="section"></booking-navbar>
-    <div class="ml-col-1 padding-general-m margin-bottom-m">
-        <div class="ml-col-1 padding-general-m card-style">
+    <div class="ml-col-1 padding-general-m margin-bottom-g background-white">
+        <div class="ml-col-1 margin-bottom-x">
+            <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+               Reservations
+             </h4>
+        </div>
+        <div class="ml-col-1">
             <mat-form-field>
                 <mat-label>Filter</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
             </mat-form-field>
-            <table mat-table mat-sort [dataSource]="tenantList" class="mat-elevation-z8">
+            <table mat-table mat-sort [dataSource]="tenantList" class="mat-elevation-z8 table--no-shadow">
                 <ng-container matColumnDef="typeRoom">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Type Room</th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> {{element.typeRoom}} </td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"> Type Room</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center"> {{element.typeRoom}} </td>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Name </th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> {{element.firstName}} </td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"> Name </th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center"> {{element.firstName}} </td>
                 </ng-container>
                 <ng-container matColumnDef="age">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Age </th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> {{element.age}} </td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"> Age </th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center"> {{element.age}} </td>
                 </ng-container>
                 <ng-container matColumnDef="membership">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Membership </th>
-                    <td mat-cell *matCellDef="let element" class="table__data">
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Membership </th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
                         <ng-template #thenBlock>{{element.membership.membershipType}}</ng-template>
                         <ng-template #elseBlock>None</ng-template>
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="dateInit">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Arrival date </th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> {{element.dateInit}} </td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"> Arrival date </th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center"> {{element.dateInit}} </td>
                 </ng-container>
         
                 <ng-container matColumnDef="dateEnd">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Deperture date </th>
-                    <td mat-cell *matCellDef="let element" class="table__data"> {{element.dateEnd}} </td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"> Deperture date </th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center"> {{element.dateEnd}} </td>
                 </ng-container>
                 <ng-container matColumnDef="amountOutstanding">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Amount Outstanding </th>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"> Amount Outstanding </th>
                     <td mat-cell *matCellDef="let element" class="table__data"> 
                         <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
                         <ng-template #thenBlock>{{element.membership.priceMembership + element.amountOutstanding | currency }}</ng-template>
@@ -45,11 +50,11 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="totalBeds">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Total Beds </th>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"> Total Beds </th>
                     <td mat-cell *matCellDef="let element" class="table__data"> {{element.totalBeds}} </td>
                 </ng-container>
                 <ng-container matColumnDef="roomateFlip">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Roomate Flip </th>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"> Roomate Flip </th>
                     <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
                 </ng-container>
                 <ng-container matColumnDef="idUser">

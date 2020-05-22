@@ -1,6 +1,22 @@
 <booking-navbar [section]="section"></booking-navbar>
 <div class="ml-col-1">
   <div class="ml-col-1 padding-general-m margin-bottom-g">
+    <div class="ml-col-1 margin-bottom-x ap-form ap-form__sdato--no-padding">
+      <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+         Profile
+       </h4>
+       <button 
+          class="ap-form__rButton button-black padding-lateral-m"
+          (click)="goToPage('reservations')">
+          Reservations
+      </button>
+       <!-- button 
+          type="button"
+          class="folder__button button-blue"
+          (click)="">
+          Reservations
+      </button --> 
+    </div>
     <div class="ml-col-1 margin-top-m folder">
       <!-- Tabs Section: Begin -->
       <div class="folder__tabs ap-form">
@@ -17,12 +33,6 @@
           Payment methods
         </div>
       </div>
-      <button 
-          type="button"
-          class="folder__button button-blue"
-          (click)="goToPage('reservations')">
-          Reservations
-      </button> 
       <!-- Tabs Section: End -->
       <!-- Form Profile Section: Begin -->
       <form 
@@ -33,11 +43,6 @@
         tabs-family="root" 
         tab-id="tenant_profile" 
         tab-visible="on">
-        <div class="ml-col-1 position-relative">
-          <h4 class="ap-form__titulo text-left">
-            Profile
-          </h4>
-        </div>
         <div class="ml-col-1 margin-bottom-x">
           <div class="ap-form__input">
             <p class="ap-form__input-radio-titulo">
@@ -725,7 +730,7 @@
         <div class="ml-col-1 ap-form__buttons">
           <button 
             type="submit"
-            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
             Save
           </button>
         </div>
@@ -740,19 +745,14 @@
         tab-id="tenant_income" 
         tab-visible="off"
         (submit)="sendIncomeData()">
-        <div class="ml-col-1">
-          <h4 class="ap-form__titulo text-left">
-            Income
-          </h4>
-        </div>
-        <div class="ml-col-1 ap-form__sdato padding-tb-m">
+        <div class="ml-col-1 ap-form__sdato padding-tb-x">
           <div class="ml-col-1 text-bold">
             Profile Type: {{ !profile_data.clientKind ? 'Personal' : 'Business' }}
           </div>
         </div>
         <div class="ml-col-1" *ngIf="!profile_data.clientKind">
           <div class="ml-col-1 ap-form__sdato padding-tb-x">
-            <div class="ml-col-1 ap-form__sdato--bbottom">
+            <div class="ml-col-1">
               Workplace
             </div>
           </div>
@@ -992,8 +992,8 @@
           </div>
         </div>
         <div class="ml-col-1" *ngIf="profile_data.clientKind">
-          <div class="ml-col-1 ap-form__sdato padding-tb-x">
-            <div class="ml-col-1 ap-form__sdato--bbottom">
+          <div class="ml-col-1 ap-form__sdato margin-bottom-x">
+            <div class="ml-col-1">
               Tell us more about the company
             </div>
           </div>
@@ -1081,7 +1081,7 @@
             </div>
           </div>
           <div class="ml-col-1 ap-form__sdato padding-tb-x">
-            <div class="ml-col-1 ap-form__sdato--bbottom">
+            <div class="ml-col-1">
               Head office address
             </div>
           </div>
@@ -1204,10 +1204,10 @@
             </div>
           </div>
         </div>
-        <div class="ml-col-1 ap-form__buttons">
+        <div class="ml-col-1 ap-form__buttons margin-top-x">
           <button 
             type="submit"
-            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
             Save
           </button>
         </div>
@@ -1222,11 +1222,6 @@
         tab-id="tenant_references" 
         tab-visible="off"
         (submit)="sendReferencesData()">
-        <div class="ml-col-1">
-          <h4 class="ap-form__titulo text-left">
-            References
-          </h4>
-        </div>
         <div class="ml-col-1 ap-form__sdato padding-tb-m">
           <div class="ml-col-1 text-bold">
             Profile Type: {{ !profile_data.clientKind ? 'Personal' : 'Business' }}
@@ -1383,7 +1378,7 @@
         </div>
         <div class="ml-col-1" *ngIf="!profile_data.clientKind">
           <div class="ml-col-1 ap-form__sdato padding-tb-x">
-            <div class="ml-col-1 ap-form__sdato--bbottom">
+            <div class="ml-col-1">
               First owner reference
             </div>
           </div>
@@ -1448,10 +1443,10 @@
             </div>
           </div>
         </div>
-        <div class="ml-col-1 ap-form__buttons">
+        <div class="ml-col-1 ap-form__buttons margin-top-x">
           <button 
             type="submit"
-            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
             Save
           </button>
         </div>
@@ -1463,12 +1458,7 @@
         tabs-family="root" 
         tab-id="tenant_payment" 
         tab-visible="off">
-        <div class="ml-col-1">
-          <h4 class="ap-form__titulo text-left">
-            Payment Methods
-          </h4>
-        </div>
-        <div class="ml-col-1" *ngIf="!show_payment_form">
+        <div class="ml-col-1 padding-top-m" *ngIf="!show_payment_form">
           <div *ngFor="let payment of payment_cards;" class="ml-col-3">
             <div class="credit-card">
               <div class="credit-card__container">
@@ -1502,7 +1492,7 @@
               <div class="credit-card__buttons">
                 <button 
                   (click)="showPaymentForm( payment )"
-                  class="credit-card__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--aceptar">
+                  class="credit-card__buttons-button ap-form__buttons-button--no-margin button-pink">
                   Edit
                 </button>
               </div>
@@ -1700,12 +1690,12 @@
                 <button 
                   type="button"
                   (click)="showPaymentForm()"
-                  class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--cancelar">
+                  class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--cancelar button-pink">
                   Cancelar
                 </button>
                 <button 
                   type="submit"
-                  class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+                  class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
                   Save
                 </button>
               </div>

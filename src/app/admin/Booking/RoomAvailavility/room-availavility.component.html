@@ -1,23 +1,33 @@
 <div class="ml-col-1">
     <booking-navbar [section]="section"></booking-navbar>
     <div class="ml-col-1 padding-general-m margin-bottom-m">
-        <div class="ml-col-1 padding-general-m card-style">
-            <h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
+        <div class="ml-col-1">
+            <!-- h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
                 Room avaibility list
                 <button 
                     class="ap-form__titulo-button"
                     (click)="goToPage('AddTenant')">
                     Add Booking
                 </button>
-            </h4>
+            </h4 -->
+            <div class="ml-col-1 margin-bottom-x">
+                <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+                    Room Avaibility
+                </h4>
+                <button 
+                    class="ap-form__rButton button-pink padding-lateral-m"
+                    (click)="goToPage( 'AddTenant' )">
+                    Add Booking
+                </button>
+            </div>
             <mat-form-field style="width: 100%;">
                 <mat-label>Filter</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
             </mat-form-field>
-            <table mat-table mat-sort [dataSource]="roomList" class="mat-elevation-z8" style="width: 100%;">
+            <table mat-table mat-sort [dataSource]="roomList" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
                 <ng-container matColumnDef="active">
-                    <th mat-header-cell *matHeaderCellDef fxFlex="40" class="table__header">Active</th>
-                    <td mat-cell *matCellDef="let element" fxFlex="40" class="table__data">
+                    <th mat-header-cell *matHeaderCellDef fxFlex="40" class="table__header table__header-center">Active</th>
+                    <td mat-cell *matCellDef="let element" fxFlex="40" class="table__data table__data-center">
                         <div *ngIf="element.active">
                             <label class="icon-check"></label>
                         </div>
@@ -27,32 +37,32 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="room">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Room</th>
-                    <td mat-cell *matCellDef="let element" class="table__data">{{ element.room }}</td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Room</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.room }}</td>
                 </ng-container>
                 <ng-container matColumnDef="beds">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Beds</th>
-                    <td mat-cell *matCellDef="let element" class="table__data">{{ element.beds }}</td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Beds</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.beds }}</td>
                 </ng-container>
                 <ng-container matColumnDef="disponibility">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Occupation</th>
-                    <td mat-cell *matCellDef="let element" class="table__data">{{ element.disponibility + '/' + element.beds }}</td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Occupation</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.disponibility + '/' + element.beds }}</td>
                 </ng-container>
                 <ng-container matColumnDef="reservationsActive">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Reservations Active</th>
-                    <td mat-cell *matCellDef="let element" class="table__data">{{ element.reservationsActive + element.disponibility }}</td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Reservations Active</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.reservationsActive + element.disponibility }}</td>
                 </ng-container>
                 <ng-container matColumnDef="dateUnemployment">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Date Unemployment</th>
-                    <td mat-cell *matCellDef="let element" class="table__data">{{ element.dateUnemployment }}</td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Date Unemployment</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.dateUnemployment }}</td>
                 </ng-container>
                 <ng-container matColumnDef="amountStanding">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Amount Standing</th>
-                    <td mat-cell *matCellDef="let element" class="table__data">{{ element.amountStanding  | currency}}</td>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Amount Standing</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.amountStanding  | currency}}</td>
                 </ng-container>
                 <ng-container matColumnDef="roomateFlip">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Roomate Flip</th>
-                    <td mat-cell *matCellDef="let element" class="table__data">
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Roomate Flip</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         <div *ngIf="element.roomateFlip">
                             <label class="icon-check"></label>
                         </div>
@@ -62,8 +72,8 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Status</th>
-                    <td mat-cell *matCellDef="let element" class="table__data">
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Status</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         <div *ngIf="element.status">
                             <label class="icon-check"></label>
                         </div>
@@ -74,7 +84,7 @@
                 </ng-container>
                 <ng-container matColumnDef="viewMore">
                     <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let element" class="table__data">
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         <button 
                             (click)="roomDetail( element )"
                             mat-raised-button color="accent"
@@ -85,13 +95,13 @@
                 </ng-container>
                 <ng-container matColumnDef="addBooking">
                     <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let element" class="table__data">
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         <button 
                             [disabled]="element.disponibility === element.beds"
                             (click)="viewDetail( element )"
                             mat-raised-button color="accent"
                             class="table__data-button">
-                            add booking
+                            Add booking
                         </button>   
                     </td>
                 </ng-container>
