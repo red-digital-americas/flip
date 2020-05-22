@@ -12,16 +12,18 @@ let params = new URLSearchParams(location.search);
 var buildingid = params.get('buildingid');
 
 $(document).ready(function () {
+   // debugger;
     $.ajax({
         type: 'POST',
-        url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeGeneral",
-        data: JSON.stringify({ userid: 1 }),
+        url: urlbase_api +"Post/SeeHomeGeneral",
+       // url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeGeneral",
+        data: JSON.stringify({ buildingid: buildingid, userid: 1 }),
         contentType: "application/json",
         dataType: "text",
 
         success: function (data, textStatus, jqXHR) {
             respuesta = JSON.parse(data);
-            console.log(' ========> ',respuesta);
+            console.log(' General ========> ',respuesta);
             $("#img-altata-00").attr("src", respuesta.item[0].frontphoto);
             $("#img-maltata-00").attr("src", respuesta.item[0].photomobile);
             $("#p-altata-00").text(respuesta.item[0].desc);
@@ -38,17 +40,18 @@ $(document).ready(function () {
             $("#img-maltata-03").attr("src", respuesta.item[3].photomobile);
             $("#p-altata-03").text(respuesta.item[3].desc);
 
-            $("#img-altata-04").attr("src", respuesta.item[4].frontphoto);
-            $("#img-maltata-04").attr("src", respuesta.item[4].photomobile);
-            $("#p-altata-04").text(respuesta.item[4].desc);
+            // $("#img-altata-04").attr("src", respuesta.item[4].frontphoto);
+            // $("#img-maltata-04").attr("src", respuesta.item[4].photomobile);
+            // $("#p-altata-04").text(respuesta.item[4].desc);
         },
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
     });
 
     //alert(buildingid)
+    
     $.ajax({
         type: 'POST',
-        url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeAmmenities",
+        url: urlbase_api + "Post/SeeHomeAmmenities",
         data: JSON.stringify({ buildingid: buildingid, userid: 1 }),
         contentType: "application/json",
         dataType: "text",
@@ -366,7 +369,7 @@ function getServiceData( id_build ) {
             }
 
         };
-        xhttp.open('POST','http://34.237.214.147/back/api_flip/api/Post/SeeHomeServicios', true);
+        xhttp.open('POST', urlbase_api + 'Post/SeeHomeServicios', true);
         xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhttp.send( JSON.stringify( ws_data ) );
 
@@ -390,7 +393,7 @@ function getRoomsData( id_build ) {
             }
 
         };
-        xhttp.open('POST','http://34.237.214.147/back/api_flip/api/Post/SeeHomeRoom', true);
+        xhttp.open('POST',urlbase_api + 'Post/SeeHomeRoom', true);
         xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhttp.send( JSON.stringify( ws_data ) );
 
@@ -441,7 +444,7 @@ function appendRoomContentToPage( rooms_data ) {
               room_card_name = document.querySelectorAll('[room="card_name"]')[index],
               room_card_desc_o = document.querySelectorAll('[room="card_desc_one"]')[index],
               room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index];
-              room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
+            //  room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
               room_card_prie_o = document.querySelectorAll('[room="card_price_one"]')[index],
               room_card_prie_t = document.querySelectorAll('[room="card_price_two"]')[index];
               
@@ -593,6 +596,6 @@ function getBuildId() {
 
     getServiceData( build_id );
     getRoomsData( build_id );
-    getAmmenitiesData( build_id );
+    //getAmmenitiesData( build_id );
 
 }());

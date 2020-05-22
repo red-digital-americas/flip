@@ -1332,8 +1332,8 @@
 
             function bringMeAllConetent() {
 
-                ajaxRequest({where_to_go: urlbase_api +'Post/SeeHomeIndex'}).then( home_content => {
-
+                ajaxRequest({where_to_go: urlbase_api +'Post/SeeHomeIndex2'}).then( home_content => {
+debugger;
                     let home_bg_images = [
                         'assets/images/comm/grid-1.jpg',
                         'assets/images/comm/grid-2.jpg',
@@ -1341,7 +1341,9 @@
                         'assets/images/comm/grid-3.jpg'
                     ];
                 
-                    home_content.item.forEach( ( home_card, index ) => { 
+                    home_content.item.forEach( ( home_card, index ) => 
+                  // for (var index = 0; index < home_card.length; index++)
+                    { 
 
                         let dom_home_card = '<div class="main__card home_card_element big_card cursor-pointer display-none">';
                             dom_home_card += '<div class="card home-container-card card-show-back-face">';
@@ -1349,18 +1351,23 @@
                             dom_home_card += '<div class="card__big">'; 
                             index % 2 == 0 ? 
                              (function IIFE() { 
-                                if(home_card.iscomming ) {
+                                 debugger;
+                                if(home_card.iscomming) {
                                     dom_home_card += '<figure class="card__big-img">';
                                     dom_home_card += '<span  class="card__proximamente">Coming soon</span>';  
                                     dom_home_card += '<img class="card--desactive" src="' + home_card.frontphoto + '" />'; 
                                 } else {
-                                    dom_home_card += '<figure class="card__big-img" onclick="location.href=' + `'./altata.html?buildingid=${ home_card.id }'` + '">';
+                                    if(home_card.id > 0)
+                                        dom_home_card += '<figure class="card__big-img" onclick="location.href=' + `'./altata.html?buildingid=${ home_card.id }'` + '">';
+                                    else
+                                    dom_home_card += '<figure class="card__big-img">';
                                     dom_home_card += '<img src="' + home_card.frontphoto + '" />';
                                 }
                                 dom_home_card += '<span class="card__geodata">';
                                 dom_home_card += '<span class="card__geodata-title">' + home_card.title + '</span>';
                                 dom_home_card += '<span class="card__geodata-info">';
-                                dom_home_card += '<img src="assets/images/gps.svg" />';
+                                if(home_card.id > 0)
+                                    dom_home_card += '<img src="assets/images/gps.svg" />';
                                 dom_home_card += '<span style="max-width: 215px; font-weight: lighter;">' + home_card.direction + '</span>';            
                                 dom_home_card += '</span>';
                                 dom_home_card += '</span>';
@@ -1374,13 +1381,17 @@
                                     dom_home_card += '<span class="card__proximamente">Coming soon</span>';  
                                     dom_home_card += '<img class="card--desactive" src="' + home_card.frontphoto + '" />'; 
                                 } else {
-                                    dom_home_card += '<figure class="card__big-img" onclick="location.href=' + `'./altata.html?buildingid=${ home_card.id }'` + '">'; 
+                                    if(home_card.id > 0)
+                                        dom_home_card += '<figure class="card__big-img" onclick="location.href=' + `'./altata.html?buildingid=${ home_card.id }'` + '">';
+                                    else
+                                    dom_home_card += '<figure class="card__big-img">';
                                     dom_home_card += '<img src="' + home_card.frontphoto + '" />';
                                 }
                                 dom_home_card += '<span class="card__geodata">';
                                 dom_home_card += '<span class="card__geodata-title">' + home_card.title + '</span>';
                                 dom_home_card += '<span class="card__geodata-info">';
-                                dom_home_card += '<img src="assets/images/gps.svg" />';
+                                if(home_card.id > 0)
+                                    dom_home_card += '<img src="assets/images/gps.svg" />';
                                 dom_home_card += '<span style="max-width:215px; font-weight: lighter;">' + home_card.direction + '</span>';            
                                 dom_home_card += '</span>';
                                 dom_home_card += '</span>';
@@ -1395,7 +1406,7 @@
                             home_container.innerHTML += dom_home_card;
 
                     }, !1);
-
+                    let dom_home_card_balnck =""
                 });
 
                 ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeDesignIndex'}).then( desing_data => {

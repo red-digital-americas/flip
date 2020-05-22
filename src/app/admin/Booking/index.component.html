@@ -255,7 +255,7 @@
             <button 
               type="submit"
               class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-              Guardar
+              Save
             </button>
         </div>
     </form>
@@ -267,21 +267,21 @@
         *ngIf="!show_booking_form"
         (click)="toggleSectionForm( 'new' )"
         class="button button-see-x button-black button-x right-element-absolute">
-        Agregar Nuevo Edificio
+        Add Building
     </button>
     <button 
         type="button" 
         *ngIf="show_booking_form"
         (click)="toggleSectionForm()"
         class="button button-blue button-x right-element-absolute">
-        Edificios
+        Building List
     </button>
 </div>
 
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop">
     <p class="ml-modal__pop-titulo">
-      Eliminar elemento
+      Delete Element
     </p>
     <p class="ml-modal__pop-text">
       Estas seguro que deseas eliminar el elemento <br />
@@ -291,12 +291,12 @@
       <button 
         (click)="confirmDeleteRoomModal()"
         class="ml-modal__pop-buttons-button button-blue">
-        Cancelar
+        Cancel
       </button>
       <button 
         (click)="confirmDeleteRoom()"
         class="ml-modal__pop-buttons-button button-orange">
-        Eliminar
+        Delete
       </button>
     </div>
   </div>
