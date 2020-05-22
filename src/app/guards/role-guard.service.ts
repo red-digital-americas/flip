@@ -9,6 +9,7 @@ export class RoleGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): boolean {    
     const expectedRole:number[] = route.data.expectedRole;
+    // console.log('Expected Roles', expectedRole);
     const systemTypeId:number = parseInt(localStorage.getItem("SystemTypeId"));
           
     if (!expectedRole.includes(systemTypeId)) {

@@ -32,7 +32,7 @@
                     </div>
                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
                         <div class="ml-col-1">
-                            Disponibility: 
+                            Occupation: 
                           <span class="text-bold">
                             {{ roomObj.totalBeds }}     
                           </span>
@@ -133,11 +133,11 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="totalBeds">
-                        <th mat-header-cell *matHeaderCellDef class="table__header"> Deperture date </th>
+                        <th mat-header-cell *matHeaderCellDef class="table__header"> TOTAL BEDS	 </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.totalBeds}} </td>
                     </ng-container>
                     <ng-container matColumnDef="roomateFlip">
-                        <th mat-header-cell *matHeaderCellDef class="table__header"> Deperture date </th>
+                        <th mat-header-cell *matHeaderCellDef class="table__header"> ROOMATE FLIP </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
                     </ng-container>
                     <ng-container matColumnDef="idUser">
@@ -155,14 +155,28 @@
                     <tr mat-row *matRowDef="let row; columns: activeDisplayedColumns;"></tr>
                 </table>
                 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                <div class="ml-col-1 card-style">
+                    <div class="ml-col-1 padding-general-m card-style" >
+                        <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                            <div class="ml-col-1">
+                              Total Amount Outstanding: 
+                              <span class="text-bold">
+                                {{ activeTotal | currency }}     
+                              </span>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
             </div>
+
+             
 
             <div class="ml-col-1 padding-general-m card-style" *ngIf="!displayActive">
                 <span class="text-bold">Active Booking :</span> No Data
             </div>
 
             <div class="ml-col-1 padding-general-m card-style" *ngIf="displayinactive">
-                <span class="text-bold">Active Booking :</span>
+                <span class="text-bold">History Booking :</span>
                 <mat-form-field>
                     <mat-label>Filter</mat-label>
                     <input matInput (keyup)="applyFilterInactive($event)" placeholder="Ex. Mia">
@@ -202,11 +216,11 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="totalBeds">
-                        <th mat-header-cell *matHeaderCellDef class="table__header"> Deperture date </th>
+                        <th mat-header-cell *matHeaderCellDef class="table__header"> TOTAL BEDS	 </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.totalBeds}} </td>
                     </ng-container>
                     <ng-container matColumnDef="roomateFlip">
-                        <th mat-header-cell *matHeaderCellDef class="table__header"> Deperture date </th>
+                        <th mat-header-cell *matHeaderCellDef class="table__header"> ROOMATE FLIP </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
                     </ng-container>
                     <ng-container matColumnDef="idUser">
@@ -224,6 +238,19 @@
                     <tr mat-row *matRowDef="let row; columns: inactiveDisplayedColumns;"></tr>
                 </table>
                 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+                <div class="ml-col-1 card-style">
+                    <div class="ml-col-1 padding-general-m card-style" >
+                        <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                            <div class="ml-col-1">
+                              Total Amount Outstanding: 
+                              <span class="text-bold">
+                                {{ inactiveTotal | currency }}     
+                              </span>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
             </div>
 
             <div class="ml-col-1 padding-general-m card-style" *ngIf="!displayinactive">

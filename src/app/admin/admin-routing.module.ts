@@ -38,7 +38,7 @@ import { UserNewComponent } from './Booking/Users/user-new/user-new.component';
 import { RoomDetailComponent } from './Booking/RoomAvailavility/room-detail/room-detail.component';
 
 const routes: Routes = [
-  { path: '', data: { title: 'AdminApp', expectedRole: [2,4] }, canActivate: [RoleGuardService],
+  { path: '', data: { title: 'AdminApp', expectedRole: [4, 5, 1, 3] }, canActivate: [RoleGuardService],
     children: [
       { path: '', redirectTo: 'communities' },
       { path: 'newsfeed/:id', component: NewsfeedComponent, data: {title:'newsfeed'} },
