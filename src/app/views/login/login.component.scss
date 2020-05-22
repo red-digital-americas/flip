@@ -23,7 +23,7 @@
 
     &__container {
         width: 480px;
-        padding: 20px;
+        padding: 20px 20px 0;
     }
 
     &--background {
@@ -45,7 +45,7 @@
         position: absolute;
         top: -17.5%;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%) rotate(0deg);
         width: 77px;
         height: 77px;
         background-image: url('../../../assets/flipF.png');

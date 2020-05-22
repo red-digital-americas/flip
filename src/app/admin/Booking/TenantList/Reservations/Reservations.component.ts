@@ -298,6 +298,8 @@ import { resolve } from 'dns';
             idBooking: this.current_membership.idBooking
         };
 
+        this.clearServicesSelected();
+
         this._services.service_general_get_with_params('HistoricalServices/GetBookedAndBuildingAdmin' ,user_data)
             .subscribe( (response: any) => {
 
@@ -342,6 +344,14 @@ import { resolve } from 'dns';
 
     }
 
+    public removeServices( service_id: any ):void {
+
+        const service_container = document.getElementById(`service_list_${ service_id }`);
+
+              service_container.click();
+
+    }
+
     public updateServiceSelectedPrice( service: any ,event_data: any ):void {
 
         service.service_lapse = event_data.value;
@@ -362,13 +372,14 @@ import { resolve } from 'dns';
 
     }
 
+    public popup_payment_service: boolean = false;
     public payServicesConfirm( action: boolean = true ):void {
 
         if( this.validateServicesSelectedForm() ) {
 
-            !action ? 
-                this.modal_to_show = 'add_service' :
-                this.modal_to_show = 'confirm_payment_services';
+            action ?
+                this.popup_payment_service = true :
+                this.popup_payment_service = false;
 
         } else this.system_message.showMessage({
                 kind: 'error',
@@ -381,7 +392,6 @@ import { resolve } from 'dns';
 
     }
 
-    private get_token: string;
     public saveOrPayServicesSelected( action: string = '' ):void {
 
         if( this.validateServicesSelectedForm() ) {
@@ -413,8 +423,6 @@ import { resolve } from 'dns';
 
                                     if( response.result == 'Success' ) {
 
-                                        console.log('Here ===> ', this.services_to_send);
-
                                         this.services_to_send.forEach( (service: any) => {
 
                                             service.idUserPaymentServiceNavigation.id = 0;
@@ -427,12 +435,16 @@ import { resolve } from 'dns';
                                         });
 
                                         this.saveOrPayServices();
+                                        this.popup_payment_service = false;
+
 
                                     }
 
                                 }, (error: any) => {
 
                                     console.error('WS PayService => ', error);
+                                    this.popup_payment_service = false;
+
 
                                 });
 
@@ -441,6 +453,8 @@ import { resolve } from 'dns';
                     }, (error: any) => {
 
                         console.error('Error WS Stripe => ', error);
+                        this.popup_payment_service = false;
+
 
                     });
 
@@ -464,8 +478,6 @@ import { resolve } from 'dns';
 
     public saveOrPayServices():void {
 
-        console.log('Pal Erick => ', this.services_to_send);
-
         this._services.service_general_post('BookingServiceAdmin/PostBookingService', this.services_to_send )
             .subscribe( (response: any) => {
 
@@ -481,8 +493,8 @@ import { resolve } from 'dns';
                 });
 
                 this.getReservationData();
-                this.showModal();
                 this.clearServicesSelected();
+                this.showModal();
 
                 setTimeout( () => this.loader.hideLoader(), 1777 );
 
@@ -705,7 +717,7 @@ import { resolve } from 'dns';
 
         });
 
-        console.log('The Data ======> ', this.history_selected_servicesHis);
+        console.log('The Data ======> ', this.history_selected);
 
         this.history_selected.customDateDif = 
                     this.dateWorker('calc' , this.history_selected.dateStart, this.history_selected.dateEnd );
@@ -737,7 +749,7 @@ import { resolve } from 'dns';
         
     }
 
-    public updateEndDateConfirm( action: boolean = true ):void {
+    public updateEndDateConfirm( action: boolean = true ):void { 
 
         if( this.endDateFormValidator( this.endDateData ) ) {
 
@@ -783,8 +795,6 @@ import { resolve } from 'dns';
                             .subscribe( (response: any) => {
 
                                 if( response.result == 'Success' ) {
-
-                                    console.log('WS Data => ', ws_data);
 
                                     this._services.service_general_post('Booking/UpdateBooking', ws_data)
                                         .subscribe( (response: any) => {

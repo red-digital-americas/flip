@@ -1,4 +1,14 @@
-<div class="ml-col-1 padding-general-m margin-bottom-m">
+<div class="ml-col-1 padding-general-m margin-bottom-m background-white">
+  <div class="ml-col-1" *ngIf="!show_booking_form">
+     <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+        Reservations
+      </h4>
+      <button 
+          class="ap-form__rButton button-pink padding-lateral-m"
+          (click)="toggleSectionForm( 'new' )">
+          New Build
+      </button>
+    </div>
     <div class="ml-col-1 index-cards" *ngIf="!show_booking_form">
         <div class="index-cards__container" *ngFor="let card of cards;">
             <div class="index-cards__card card-style">
@@ -25,17 +35,21 @@
             </div>
         </div>
     </div>
-    <form (submit)="sendBookingData()" onsubmit="return false;" class="ap-form ml-col-1 card-style" *ngIf="show_booking_form">
-        <div class="ml-col-1">
-          <h4 class="ap-form__titulo text-left">
+    <form 
+      (submit)="sendBookingData()" 
+      onsubmit="return false;" 
+      class="ap-form ml-col-1 padding-general-m card-style" 
+      *ngIf="show_booking_form">
+        <div class="ml-col-1" *ngIf="show_booking_form">
+          <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
             {{ booking_form_action }}
-            <button 
-              type="button"
-              class="ap-form__close button-orange" 
-              (click)="toggleSectionForm()">x
-            </button> 
-          </h4>
-        </div>
+           </h4>
+           <button 
+               class="ap-form__rButton button-red padding-lateral-m"
+               (click)="toggleSectionForm()">
+               Cancel
+           </button>
+         </div>
         <div class="ml-col-7 margin-top-x">
             <div class="ml-col-1">
                 <div class="ap-form__input">
@@ -181,16 +195,16 @@
                 </label>
             </div>
         </div>
-        <div class="ml-col-1 ap-form__rooms padding-general-min" id="rooms_added">
+        <div class="ml-col-1 ap-form__rooms" id="rooms_added">
             <div class="ml-col-1">
               <h4 class="ap-form__titulo text-left">
                 Rooms Category
               </h4>
             </div>
             <div class="ap-form__rooms-room room" *ngFor="let room of rooms;" room="added">
-              <div class="ml-col-1 padding-tb-m card-style">
+              <div class="ml-col-1 padding-general-x card-style">
                 <div class="ml-col-1">
-                  <div class="ap-form__input">
+                  <div class="ap-form__input ap-form__input--full-width">
                     <input 
                       type="text"
                       placeholder="Room Type"
@@ -207,7 +221,7 @@
                   </div>
                 </div>
                 <div class="ml-col-1">
-                  <div class="ap-form__input">
+                  <div class="ap-form__input ap-form__input--full-width">
                     <textarea 
                       type="text"
                       placeholder="Description"
@@ -251,33 +265,21 @@
               </div>
             </div>
         </div>
-        <div class="ml-col-1 ap-form__buttons">
-            <button 
-              type="submit"
-              class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-              Guardar
-            </button>
+        <div class="ml-col-1 ap-form__buttons margin-top-x">
+          <button 
+            type="button"
+            (click)="toggleSectionForm()"
+            class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
+            Cancel
+          </button>
+          <button 
+            type="submit"
+            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+            Save
+          </button>
         </div>
     </form>
 </div>
-
-<div class="bottom-container">
-    <button 
-        type="button" 
-        *ngIf="!show_booking_form"
-        (click)="toggleSectionForm( 'new' )"
-        class="button button-see-x button-black button-x right-element-absolute">
-        Agregar Nuevo Edificio
-    </button>
-    <button 
-        type="button" 
-        *ngIf="show_booking_form"
-        (click)="toggleSectionForm()"
-        class="button button-blue button-x right-element-absolute">
-        Edificios
-    </button>
-</div>
-
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop">
     <p class="ml-modal__pop-titulo">
@@ -301,7 +303,6 @@
     </div>
   </div>
 </div>
-
 <div class="black-box">
     <img src="" id="image_real_dimension_nb" />
 </div>
