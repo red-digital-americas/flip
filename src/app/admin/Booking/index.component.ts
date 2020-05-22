@@ -294,7 +294,7 @@ export class BookingIndexComponent implements OnInit {
     */
     public booking_data: BookingData = new BookingData();
     public sendBookingData():void {
-
+debugger;
         if( this.validatingNewBuildFields( this.booking_data ) ) {
 
             if( this.new_build_button && !this.edit_build_button ) { 
