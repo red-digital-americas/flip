@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../_nav';
 import { Router } from '@angular/router';
-
+import { DatosService } from '../../../datos.service';
 
 
 @Component({
@@ -19,24 +19,26 @@ export class AppLayoutComponent {
   public dataUser;
   public userId;
   constructor(
-    private menuService:MenuService,
-    private router:Router
+    private menuService: MenuService,
+    private router: Router,
+    public services: DatosService,
   ) {
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
     });
-   
+
     this.changes.observe(<Element>this.element, {
       attributes: true
     });
     this.dataUser = JSON.parse(localStorage.getItem('user')).avatar;
     this.userId = JSON.parse(localStorage.getItem('user')).id;
+    this.getActions(this.userId);
     console.log(this.dataUser);
     if (localStorage.getItem("SystemTypeId") == undefined ) { return; }
     let systemTypeId = parseInt(localStorage.getItem("SystemTypeId"));        
     // console.log("AppLayout-SystemTypeId: "+systemTypeId);  
     this.navSections = this.menuService.CreateNavSections(systemTypeId);
-
+    console.log(this.navSections);
     let last_section = sessionStorage.getItem('lastSectionId');
 
     if( last_section != null || last_section != undefined  ) {
@@ -52,7 +54,28 @@ export class AppLayoutComponent {
     }
 
   }
-  
+
+  actions;
+  actionsCount = 0;
+  alerts;
+  alertsCount = 0;
+  messages;
+  messagesCount = 0;
+  getActions(id: any) {
+    let obj = { userId: id };
+    this.services.service_general_get_with_params('UsersAdmin/GetAlerts', obj).subscribe((value) => {
+      console.log('ACTIONS', value);
+      
+      this.actions = value.actions;
+      this.actionsCount = value.actions.length;
+
+      this.alerts = value.alerts;
+      this.alertsCount = value.alerts.length;
+
+      this.messages = value.messages;
+      this.messagesCount = value.messages.length;
+    })
+  }
   GoSection (section : { id:number, name:string, url:string}) { 
     // console.log(section);
     this.router.navigate([section.url]);
