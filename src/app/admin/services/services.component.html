@@ -2,12 +2,19 @@
 
 <div class="ml-col-1">
   <div class="ml-col-1 padding-general-m margin-bottom-g">
-    <div class="ml-col-1 card-style" *ngIf="!show_service_form">
+    <div class="ml-col-1" *ngIf="!show_service_form">
       <div class="ap-cards">
-        <h4 class="ap-cards__titulo">
-          Services
-        </h4>
-        <div class="ap-cards__container margin-top-x" *ngFor="let service of servicesArray;">
+        <div class="ml-col-1 margin-bottom-x">
+          <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+            Services
+          </h4>
+          <button 
+            class="ap-form__rButton button-black padding-lateral-m"
+            (click)="toggleSectionForm( 'new' )">
+            New Service
+          </button>
+        </div>
+        <div class="ap-cards__container margin-bottom-x" *ngFor="let service of servicesArray;">
           <div class="ap-cards__card ap-cards__card--bbuttons card-style">
             <h4 class="ap-cards__card-titulo">
               {{ service.name }}
@@ -29,13 +36,13 @@
             <div class="ap-cards__card-buttons">
               <button 
                 (click)="toggleSectionForm( 'edit', service )"
-                class="ap-cards__card-button ap-cards__card-button--aceptar">
-                Editar Servicio
+                class="ap-cards__card-button button-green">
+                Edit Service
               </button>
               <button 
                 (click)="deleteThisService( service )"
-                class="ap-cards__card-button ap-cards__card-button--eliminar">
-                Eliminar
+                class="ap-cards__card-button button-black">
+                Delete
               </button>
             </div>
             <figure class="ap-cards__card-icon">
@@ -49,21 +56,21 @@
 
     <form (submit)="sendServiceData()" onsubmit="return false;" class="ap-form ml-col-1 card-style" *ngIf="show_service_form">
       <div class="ml-col-1">
-        <h4 class="ap-form__titulo text-left">
+        <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
           {{ service_form_action }}
-          <button 
-            type="button"
-            class="ap-form__close button-orange" 
-            (click)="toggleSectionForm()">x
-          </button>
-        </h4>
-      </div>
+         </h4>
+         <button 
+             class="ap-form__rButton button-red padding-lateral-m"
+             (click)="toggleSectionForm()">
+             Cancel
+         </button>
+       </div>
       <div class="ml-col-6 margin-top-x">
         <div class="ml-col-1">
           <div class="ap-form__input">
             <input 
               type="text"
-              placeholder="Titulo"
+              placeholder="Title"
               id="new_service_title" 
               name="new_service_title"
               [class.form_error_found]="form_service.no_name"
@@ -73,10 +80,10 @@
               for="new_service_title" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_service.name != ''">
-              Titulo
+              Title
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_name">
-              El campo es obligatorio*
+              Title is required*
             </span>
           </div>
         </div>
@@ -85,7 +92,7 @@
             <textarea 
               id="new_service_desc"
               name="new_service_desc"
-              placeholder="Descripcion"
+              placeholder="Description"
               [class.form_error_found]="form_service.no_desc"
               [(ngModel)]="data_service.description"
               class="ap-form__label ap-form__input-textarea"></textarea>
@@ -93,10 +100,10 @@
               for="new_service_desc" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_service.description != ''">
-              Descripción
+              Description
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_desc">
-              El campo es obligatorio*
+              Description is required*
             </span>
           </div>
         </div>
@@ -117,7 +124,7 @@
               Provider
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_prov">
-              El campo es obligatorio*
+              Provider is required*
             </span>
           </div>
         </div>
@@ -138,7 +145,7 @@
               Price
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_pric">
-              El campo es obligatorio*
+              Price is required*
             </span>
           </div>
         </div>
@@ -159,7 +166,7 @@
               Unit Price
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_puni">
-              El campo es obligatorio*
+              Unit Price is required*
             </span>
           </div>
         </div>
@@ -180,11 +187,11 @@
                      [class.forms_errors_nimage]="form_service.no_phot"
                      src="{{ data_service.photo }}" />
                 <span class="ap-form__image-data text-center" id="nuevo_servicio_name_0">
-                  La imagen debe medir <br />
+                  Image size must be <br />
                   <span class="text-bold">350x350</span> 
                 </span>
                 <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_phot">
-                  El campo es obligatorio*
+                  Image is required*
                 </span>
               </figure>
             </label>
@@ -205,22 +212,35 @@
                      [class.forms_errors_nimage]="form_service.no_icon"
                      src="{{ data_service.icon }}" />
                 <span class="ap-form__image-data text-center" id="nuevo_servicio_name_0">
-                  La imagen debe medir <br />
+                  Image size must be<br />
                   <span class="text-bold">150x150</span> 
                 </span>
                 <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_icon">
-                  El campo es obligatorio*
+                  Image is required*
                 </span>
               </figure>
             </label>
           </div>
         </div>
       </div>
-      <div class="ml-col-1 ap-form__buttons">
+      <!-- div class="ml-col-1 ap-form__buttons">
         <button 
           type="submit"
           class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
           Guardar
+        </button>
+      </div -->
+      <div class="ml-col-1 ap-form__buttons margin-top-x">
+        <button 
+          type="button"
+          (click)="toggleSectionForm()"
+          class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
+          Cancel
+        </button>
+        <button 
+          type="submit"
+          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+          Save
         </button>
       </div>
     </form>
@@ -228,7 +248,7 @@
 </div>
 
 
-<div class="bottom-container">
+<!-- div class="bottom-container">
   <button 
     class="button button-black button-see-x right-element-absolute"
     *ngIf="!show_service_form"
@@ -241,26 +261,26 @@
     (click)="toggleSectionForm()">
     Lista de Servicios
   </button>
-</div>
+</div -->
 
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
-    <p class="ml-modal__pop-titulo">
-      Room will be deleted
+    <p class="ml-modal__pop-titulo margin-bottom-m">
+      Delete Service
     </p>
     <p class="ml-modal__pop-text">
-      Confirm to delete element <br />
-      <span class="text-bold">"{{ service_to_delete.name }}"</span>
+      Are you sure to delete service<br />
+      <span class="text-bold">"{{ service_to_delete.name }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="toggleSectionForm('delete')"
-        class="ml-modal__pop-buttons-button button-blue">
+        class="ml-modal__pop-buttons-button button-pink">
         Cancel
       </button>
       <button 
         (click)="confirmDeleteElement()"
-        class="ml-modal__pop-buttons-button button-orange">
+        class="ml-modal__pop-buttons-button button-black">
         Delete
       </button>
     </div>

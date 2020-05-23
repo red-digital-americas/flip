@@ -221,7 +221,7 @@ export class AmenitiesComponent implements OnInit {
         this.data_amenity.name = '';
         this.data_amenity.description = '';
         this.data_amenity.photo = '../../../assets/14.jpg';
-        this.ammenity_form_action = 'Añadir Amenidad';
+        this.ammenity_form_action = 'New Ammenity';
         this.new_amenity_button = true;
         this.edit_amenity_button = false;
         break;
@@ -232,7 +232,7 @@ export class AmenitiesComponent implements OnInit {
         this.data_amenity_edit.name = editable.name;
         this.data_amenity_edit.description = editable.description;
         this.data_amenity_edit.photo = editable.photo;
-        this.ammenity_form_action = 'Editar Amenidad';
+        this.ammenity_form_action = 'Edit Ammenity';
         this.new_amenity_button = false;
         this.edit_amenity_button = true;
         break;

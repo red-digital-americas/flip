@@ -261,7 +261,7 @@ export class PerksDetailComponent implements OnInit {
         this.data_promo.startDate = '';
         this.data_promo.endDate = '';
         this.data_promo.photo = '../../../../assets/14.jpg';
-        this.show_dperk_form_action = 'Añadir Promoción';
+        this.show_dperk_form_action = 'Add Promotion';
         break;
 
       case 'edit':
@@ -275,7 +275,7 @@ export class PerksDetailComponent implements OnInit {
         this.data_promo.startDate = editable.startDate;
         this.data_promo.endDate = editable.endDate;
         this.data_promo.photo = editable.photo;
-        this.show_dperk_form_action = 'Editar Promoción';
+        this.show_dperk_form_action = 'Edit Promotion';
         break;
 
       case 'hide':

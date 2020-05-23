@@ -440,7 +440,7 @@ export class ServicesComponent implements OnInit {
         this.data_service.photo = '../../../assets/14.jpg';
         this.new_service_action = true;
         this.edit_service_action = false;
-        this.service_form_action = 'Añadir Servicio';
+        this.service_form_action = 'New Service';
         break;
 
       case 'edit':
@@ -456,7 +456,7 @@ export class ServicesComponent implements OnInit {
         this.data_service.photo = editable.photo;
         this.new_service_action = false;
         this.edit_service_action = true;
-        this.service_form_action = 'Editar Servicio';
+        this.service_form_action = 'Edit Service';
         break;
 
       case 'hide':

@@ -90,6 +90,7 @@ export class CommunitiesComponent implements OnInit {
         default:
           if (value.result == "Success") {
             this.posts = value.item;
+            console.log('Aqui ===> ', this.posts);
           }
       }
     });

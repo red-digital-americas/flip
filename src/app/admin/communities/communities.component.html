@@ -81,8 +81,41 @@
     </form>
   </mat-card>
 
-  <div class="row padding-bottom-g margin-top-x">
-    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4" *ngFor="let post of posts">
+
+
+
+  <div class="ml-col-1 padding-general-m margin-bottom-m background-white">
+    <div class="ml-col-1">
+       <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+          Communities
+        </h4>
+      </div>
+      <div class="ml-col-1 index-cards">
+          <div class="index-cards__container" *ngFor="let card of posts;">
+              <div class="index-cards__card card-style cursor-pointer" (click)="gotonewsfeed(card.id, card.name)">
+                  <figure class="index-cards__card-photo">
+                      <img 
+                          src="{{ card.photo }}" 
+                          class="index-cards__card-photo-img" />
+                  </figure>
+                  <h4 class="index-cards__card-titulo index-cards__card-titulo--no-border padding-top-min text-bold">
+                    {{ card.name }}
+                  </h4>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+
+  <div class="row padding-general-m margin-top-x display-none">
+    <div class="ml-col-1">
+      <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+        Communities
+      </h4>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4 margin-top-x" *ngFor="let post of posts">
       <div class="card">
         <a (click)="gotonewsfeed(post.id, post.name)" style="cursor:pointer; color:inherit">
 
@@ -94,6 +127,7 @@
       </div>
     </div>
   </div>
+
 
   <div class="ml-modal ap-form--to-center ml-modal--bg-black display-none" modal_toggle="nueva_comunidad">
     <div class="ap-form ap-form__center card-style">

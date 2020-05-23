@@ -253,7 +253,7 @@ export class PerksComponent implements OnInit {
         this.new_perk_button = true;
         this.edit_perk_button = false;
         this.data_perk.photo = '../../../assets/14.jpg';
-        this.perk_form_action = 'Añadir Perk';
+        this.perk_form_action = 'New Perk';
         break;
 
       case 'edit':
@@ -275,7 +275,7 @@ export class PerksComponent implements OnInit {
         this.new_perk_button = false;
         this.edit_perk_button = true;
         this.getPerkGallery( this.data_perk.id );
-        this.perk_form_action = 'Editar Perk';
+        this.perk_form_action = 'Edit Perk';
         break;
 
       case 'hide':

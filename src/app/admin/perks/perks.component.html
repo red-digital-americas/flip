@@ -2,11 +2,21 @@
 
 <div class="ml-col-1">
   <div class="ml-col-1 padding-general-m margin-bottom-g">
-    <div class="ml-col-1 card-style" *ngIf="!show_perk_form">
+    <div class="ml-col-1" *ngIf="!show_perk_form">
       <div class="ap-cards">
-        <h4 class="ap-cards__titulo">
+        <!-- h4 class="ap-cards__titulo">
           Perks
-        </h4>
+        </h4 -->
+        <div class="ml-col-1 margin-bottom-x">
+          <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+            Perks
+          </h4>
+          <button 
+            class="ap-form__rButton button-black padding-lateral-m"
+            (click)="toggleSectionForm( 'new' )">
+            New Perk
+          </button>
+        </div>
         <div class="ap-cards__container" *ngFor="let perk of perksArray;">
           <div class="ap-cards__card ap-cards__card--bbuttonsx card-style">
             <h4 class="ap-cards__card-titulo">
@@ -21,18 +31,18 @@
             <div class="ap-cards__card-buttons ap-cards__card-buttons--levels">
               <button 
                 (click)="DetailPerk( perk.id )"
-                class="ap-cards__card-button ap-cards__card-button--other">
-                Ver Promociones
+                class="ap-cards__card-button ap-cards__card-button--other button-yellow">
+                See Promotions
               </button>
               <button 
                 (click)="toggleSectionForm( 'edit', perk)"
-                class="ap-cards__card-button ap-cards__card-button--aceptar">
-                Editar Perk
+                class="ap-cards__card-button button-green">
+                Edit Perk
               </button>
               <button 
                 (click)="deleteThisPerk( perk )"
-                class="ap-cards__card-button ap-cards__card-button--eliminar">
-                Eliminar
+                class="ap-cards__card-button button-black">
+                Delete
               </button>
             </div>
           </div>
@@ -41,21 +51,21 @@
     </div>
     <form class="ap-form ml-col-1 card-style" (submit)="sendPerkData()" onsubmit="return false;" *ngIf="show_perk_form"> <!-- El formulario -->
       <div class="ml-col-1">
-        <h4 class="ap-form__titulo text-left">
+        <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
           {{ perk_form_action }}
-          <button 
-            type="button"
-            class="ap-form__close button-orange" 
-            (click)="toggleSectionForm()">x
-          </button>
-        </h4>
-      </div>
+         </h4>
+         <button 
+             class="ap-form__rButton button-red padding-lateral-m"
+             (click)="toggleSectionForm()">
+             Cancel
+         </button>
+       </div>
       <div class="ml-col-7 margin-top-x">
         <div class="ml-col-1">
           <div class="ap-form__input">
             <input 
               type="text"
-              placeholder="Titulo"
+              placeholder="Title"
               id="new_perk_title" 
               name="new_perk_title"
               [(ngModel)]="data_perk.name"
@@ -77,7 +87,7 @@
             <textarea 
               id="new_perk_desc"
               name="new_perk_desc"
-              placeholder="Descripcion"
+              placeholder="Description"
               [class.form_error_found]="form_data.no_desc"
               [(ngModel)]="data_perk.description"
               class="ap-form__label ap-form__input-textarea"></textarea>
@@ -113,7 +123,7 @@
               Category
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_cate">
-              El campo es obligatorio*
+              Category is required*
             </span>
           </div>
         </div>
@@ -134,7 +144,7 @@
               Street
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_stre">
-              El campo es obligatorio*
+              Street is required*
             </span>
           </div>
         </div>
@@ -155,7 +165,7 @@
               City
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_city">
-              El campo es obligatorio*
+              City is required*
             </span>
           </div>
         </div>
@@ -176,7 +186,7 @@
               State Provincy
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_stat">
-              El campo es obligatorio*
+              State Provincy is required*
             </span>
           </div>
         </div>
@@ -198,7 +208,7 @@
               Zip
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_zip">
-              El campo es obligatorio*
+              Zip is required*
             </span>
           </div>
         </div>
@@ -219,7 +229,7 @@
               Country
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_coun">
-              El campo es obligatorio*
+              Country is required*
             </span>
           </div>
         </div>
@@ -227,7 +237,7 @@
           <div class="ap-form__input">
             <input 
               type="number"
-              placeholder="Latitud"
+              placeholder="Latitude"
               id="new_perk_latitud" 
               name="new_perk_latitud"
               [(ngModel)]="data_perk.latitude"
@@ -237,10 +247,10 @@
               for="new_perk_latitud" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_perk.latitude != null">
-              Latitud
+              Latitude
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
-              El campo es obligatorio*
+              Latitude is required*
             </span>
           </div>
         </div>
@@ -248,7 +258,7 @@
           <div class="ap-form__input">
             <input 
               type="number"
-              placeholder="Longitud"
+              placeholder="Longitude"
               id="new_perk_longitud" 
               name="new_perk_longitud"
               [class.form_error_found]="form_data.no_long"
@@ -258,10 +268,10 @@
               for="new_perk_longitud" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_perk.longitude != null">
-              Longitud
+              Longitude
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">
-              El campo es obligatorio*
+              Longitude is required*
             </span>
           </div>
         </div>
@@ -282,17 +292,17 @@
                    [class.forms_errors_nimage]="form_data.no_phot"
                    src="{{ data_perk.photo }}" />
               <span class="ap-form__image-data text-center" id="new_serv_name_0">
-                La imagen debe medir <br />
+                Image size must be <br />
                 <span class="text-bold">350x350</span> 
               </span>
               <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
-                El campo es obligatorio*
+                Image is required*
               </span>
             </figure>
           </label>
         </div>
       </div>
-      <div class="ml-col-1 ap-form__gallery padding-general-m" id="images_on_gallery">
+      <div class="ml-col-1 ap-form__gallery margin-top-x" id="images_on_gallery">
         <div class="ml-col-1">
           <h4 class="ap-form__titulo text-left">
             Gallery
@@ -312,7 +322,7 @@
                    id="gallery_img_{{ image.id }}"
                    src="{{ image.src }}" />
               <span class="ap-form__image-data text-center display-none" id="gallery_img_name_{{ image.id }}">
-                La imagen debe medir <br />
+                Image Size must be <br />
                 <span class="text-bold">350x350</span> 
               </span>
               <button 
@@ -331,18 +341,31 @@
           </button>
         </div>
       </div>
-      <div class="ml-col-1 ap-form__buttons">
+      <!-- div class="ml-col-1 ap-form__buttons">
         <button 
           type="submit"
           class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
           Guardar
+        </button>
+      </div -->
+      <div class="ml-col-1 ap-form__buttons margin-top-x">
+        <button 
+          type="button"
+          (click)="toggleSectionForm()"
+          class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
+          Cancel
+        </button>
+        <button 
+          type="submit"
+          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+          Save
         </button>
       </div>
     </form>
   </div>
 </div>
 
-<div class="bottom-container">
+<!-- div class="bottom-container">
   <button 
     class="button button-black button-see-x right-element-absolute"
     *ngIf="!show_perk_form"
@@ -355,28 +378,28 @@
     (click)="toggleSectionForm()">
     Lista de Perks
   </button>
-</div>
+</div -->
 
 
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
-    <p class="ml-modal__pop-titulo">
-      Eliminar elemento
+    <p class="ml-modal__pop-titulo margin-bottom-m">
+      Delete Perk
     </p>
     <p class="ml-modal__pop-text">
-      Estas seguro que deseas eliminar el elemento <br />
-      <span class="text-bold">"{{ perk_to_delete.name }}"</span>
+      Are you sure to delete perk<br />
+      <span class="text-bold">"{{ perk_to_delete.name }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="showModal()"
-        class="ml-modal__pop-buttons-button button-blue">
-        Cancelar
+        class="ml-modal__pop-buttons-button button-pink">
+        Cancel
       </button>
       <button 
         (click)="confirmDeleteElement()"
-        class="ml-modal__pop-buttons-button button-orange">
-        Eliminar
+        class="ml-modal__pop-buttons-button button-black">
+        Delete
       </button>
     </div>
   </div>

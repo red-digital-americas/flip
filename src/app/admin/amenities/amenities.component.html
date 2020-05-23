@@ -1,15 +1,21 @@
 <app-nav [section]="section"></app-nav>
-
 <div class="ml-col-1">
   <div class="ml-col-1 padding-general-m margin-bottom-g">
-    <div class="ml-col-1 card-style" *ngIf="!show_ammenity_form">
+    <div class="ml-col-1" *ngIf="!show_ammenity_form">
       <div class="ap-cards">
-        <h4 class="ap-cards__titulo">
-          Ammenities
-        </h4>
+        <div class="ml-col-1 margin-bottom-x">
+          <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+            Ammenities
+          </h4>
+          <button 
+            class="ap-form__rButton button-black padding-lateral-m"
+            (click)="toggleSectionForm( 'new' )">
+            New Ammenity
+          </button>
+        </div>
         <div class="ap-cards__container" *ngFor="let amenity of amenitiesArray;">
           <div class="ap-cards__card ap-cards__card--bbuttons card-style">
-            <h4 class="ap-cards__card-titulo">
+            <h4 class="ap-cards__card-titulo text-bold">
               {{ amenity.name }}
             </h4>
             <p class="ap-cards__card-desc">
@@ -21,13 +27,13 @@
             <div class="ap-cards__card-buttons">
               <button 
                 (click)="toggleSectionForm( 'edit', amenity )"
-                class="ap-cards__card-button ap-cards__card-button--aceptar">
-                Editar
+                class="ap-cards__card-button button-green">
+                Edit Ammenity
               </button>
               <button 
                 (click)="deleteThisAmenity( amenity )"
-                class="ap-cards__card-button ap-cards__card-button--eliminar">
-                Eliminar
+                class="ap-cards__card-button button-black">
+                Delete
               </button>
             </div>
           </div>
@@ -36,15 +42,15 @@
     </div>
     <form (submit)="sendAmenityData()" onsubmit="return false;" class="ap-form ml-col-1 card-style" *ngIf="show_ammenity_form">
       <div class="ml-col-1">
-        <h4 class="ap-form__titulo text-left">
+        <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
           {{ ammenity_form_action }}
-          <button 
-            type="button"
-            class="ap-form__close button-orange" 
-            (click)="toggleSectionForm()">x
-          </button> 
-        </h4>
-      </div>
+         </h4>
+         <button 
+             class="ap-form__rButton button-red padding-lateral-m"
+             (click)="toggleSectionForm()">
+             Cancel
+         </button>
+       </div>
       <div class="ml-col-7 margin-top-x">
         <div class="ml-col-1">
           <div class="ap-form__input">
@@ -53,7 +59,7 @@
               type="text" 
               [(ngModel)]="data_amenity.name"
               [class.form_error_found]="form_amenity.no_name"
-              placeholder="Titulo"
+              placeholder="Title"
               id="new_amm_title" 
               name="new_amm_title"
               class="ap-form__input-text" />
@@ -62,7 +68,7 @@
               type="text" 
               [(ngModel)]="data_amenity_edit.name"
               [class.form_error_found]="form_amenity.no_name"
-              placeholder="Titulo"
+              placeholder="Title"
               id="new_amm_title" 
               name="new_amm_title"
               class="ap-form__input-text" />
@@ -71,17 +77,17 @@
               for="new_amm_title" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_amenity.name != ''">
-              Titulo
+              Title
             </label>
             <label
               *ngIf="edit_amenity_button" 
               for="new_amm_title" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_amenity_edit.name != ''">
-              Titulo
+              Title
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_amenity.no_name">
-              El campo es obligatorio*
+              Title is required*
             </span>
           </div>
         </div>
@@ -93,7 +99,7 @@
               *ngIf="new_amenity_button"
               [(ngModel)]="data_amenity.description"
               [class.form_error_found]="form_amenity.no_desc"
-              placeholder="Descripcion"
+              placeholder="Description"
               class="ap-form__label ap-form__input-textarea"></textarea>
             <textarea 
               id="new_amm_desc"
@@ -101,24 +107,24 @@
               *ngIf="edit_amenity_button"
               [(ngModel)]="data_amenity_edit.description"
               [class.form_error_found]="form_amenity.no_desc"
-              placeholder="Descripcion"
+              placeholder="Description"
               class="ap-form__label ap-form__input-textarea"></textarea>
             <label
               *ngIf="new_amenity_button" 
               for="new_amm_desc" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_amenity.description != ''">
-              Descripción
+              Description
             </label>
             <label
               *ngIf="edit_amenity_button" 
               for="new_amm_desc" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_amenity_edit.description != ''">
-              Descripción
+              Description
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_amenity.no_desc">
-              El campo es obligatorio*
+              Description is required*
             </span>
           </div>
         </div>
@@ -144,28 +150,41 @@
                    [class.forms_errors_nimage]="form_amenity.no_photo"
                    src="{{ data_amenity_edit.photo }}" />
               <span class="ap-form__image-data text-center" id="new_amm_name_0">
-                La imagen debe medir <br />
+                Image resolution must be <br />
                 <span class="text-bold">350x350</span> 
               </span>
               <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_amenity.no_photo">
-                El campo es obligatorio*
+                Image is required*
               </span>
             </figure>
           </label>
         </div>
       </div>
-      <div class="ml-col-1 ap-form__buttons">
+      <!-- div class="ml-col-1 ap-form__buttons">
         <button 
           type="submit"
           class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
           Guardar
+        </button>
+      </div -->
+      <div class="ml-col-1 ap-form__buttons margin-top-x">
+        <button 
+          type="button"
+          (click)="toggleSectionForm()"
+          class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
+          Cancel
+        </button>
+        <button 
+          type="submit"
+          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+          Save
         </button>
       </div>
     </form>
   </div>
 </div>
 
-<div class="bottom-container">
+<!-- div class="bottom-container">
   <button 
     class="button button-black button-see-x right-element-absolute"
     *ngIf="!show_ammenity_form"
@@ -178,7 +197,7 @@
     (click)="toggleSectionForm()">
     Lista de Amenidades
   </button>
-</div>
+</div -->
 
 <div class="black-box">
   <img src="" id="image_real_dimension" />
@@ -186,22 +205,22 @@
   
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
-    <p class="ml-modal__pop-titulo">
-      Eliminar elemento
+    <p class="ml-modal__pop-titulo margin-bottom-m">
+      Delete Amenity
     </p>
     <p class="ml-modal__pop-text">
-      Estas seguro que deseas eliminar el elemento <br />
-      <span class="text-bold">"{{ amenity_to_delete.name }}"</span>
+      Are you sure to delete amenity<br />
+      <span class="text-bold">"{{ amenity_to_delete.name }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="toggleSectionForm('delete')"
-        class="ml-modal__pop-buttons-button button-blue">
+        class="ml-modal__pop-buttons-button button-pink">
         Cancelar
       </button>
       <button 
         (click)="confirmDeleteElement()"
-        class="ml-modal__pop-buttons-button button-orange">
+        class="ml-modal__pop-buttons-button button-black">
         Eliminar
       </button>
     </div>

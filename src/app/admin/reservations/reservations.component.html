@@ -1,8 +1,17 @@
 <app-nav [section]="section"></app-nav>
-  
 <div class="ml-col-1 ap-calendar">
   <div class="ml-col-1 padding-general-m margin-bottom-g">
-    <form class="ap-form ml-col-1 card-style margin-bottom-x">
+    <div class="ml-col-1">
+      <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+        Reservations
+      </h4>
+      <button 
+        class="ap-form__rButton button-black padding-lateral-m"
+        (click)="Refresh()">
+        Update Calendar
+      </button>
+    </div>
+    <form class="ap-form ap-form__sdato--no-padding ml-col-2 margin-bottom-x">
       <div class="ap-form__input">
         <select 
           class="ap-form__input-text" 
@@ -46,10 +55,10 @@
       ></full-calendar>
     </div>
   </div>
-  <button 
+  <!-- button 
     (click)="Refresh()"
     class="ap-calendar__refresh card-style">
-  </button>
+  </button -->
 </div>
 
   <!--div class="card display-none">    
