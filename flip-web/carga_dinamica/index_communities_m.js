@@ -1,21 +1,22 @@
 ﻿//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////// LLAMADOS A SERVICOS ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//let params = new URLSearchParams(location.search);
+//var buildingid = params.get('buildingid');
 
 /////////////////////////////////////// INDEX HOME ///////////////////////////////////////////////////////////
-
+//alert(buildingid);
 $.ajax({
     type: 'POST',
-    url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeIndex",
+    url: urlbase_api +"Post/SeeHomeIndex2",
     data: JSON.stringify({ userid: 1, buildingid: 1 }),
     contentType: "application/json",
     dataType: "text",
 
     success: function (data, textStatus, jqXHR) {
         var respuesta = JSON.parse(data);
-      
-        //console.log(respuesta);
+     // console.log("====================>");
+        console.log(respuesta);
 
         fill_grid_home_images(respuesta);
     },
@@ -26,43 +27,70 @@ $.ajax({
 //////////////////////////////////////// FUNCIONES DE CARGA DINAMICA 1////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////// INDEX  HOMES ///////////////////////////////////////////////////////////
+/////////////////////////////////////// INDEX  HOMES //////////soon0/////////////////////////////////////////////////
 
 function fill_grid_home_images(respuesta) {
      
-    document.getElementById('0_frontphoto').src = respuesta.item[0].frontphoto;
+    document.getElementById('communitiesflip2x12').src = respuesta.item[0].frontphoto;
     document.getElementById('0_title').innerHTML = respuesta.item[0].title;
-    document.getElementById('0_direction').innerHTML = respuesta.item[0].direction;
-
+    if(respuesta.item[0].direction.length > 0)
+        document.getElementById('0_direction').innerHTML =  '<img src="assets/images/gps.svg" alt="Images" style="height: 15px; width: 15px; " /> ' + respuesta.item[0].direction;
+    if(respuesta.item[0].iscomming) {
+        document.getElementById('communitiesflip2x12').style.opacity = "0.7";
+        document.getElementById('communitiesflip2x12').style.filter = "grayscale(100%)";
+        document.getElementById('soon0').innerHTML = "COOMING SOON";
+    }
+    else{
+        document.getElementById('0_direction').innerHTML
+       document.getElementById('soon0').innerHTML = "";
+    }
+   // filter: grayscale(1);
+   // opacity: .7;
 
     document.getElementById('commflip2x11').src = respuesta.item[1].frontphoto;
     document.getElementById('1_title').innerHTML = respuesta.item[1].title;
-    document.getElementById('1_direction').innerHTML = respuesta.item[1].direction;
-    document.getElementById('commflip2x11').style.opacity = "0.5";
-    document.getElementById('commflip2x11').style.filter = "grayscale(100%)";
+    if(respuesta.item[1].direction.length > 0)
+        document.getElementById('1_direction').innerHTML =  '<img src="assets/images/gps.svg" alt="Images" style="height: 15px; width: 15px; " /> ' + respuesta.item[1].direction;
+     if(respuesta.item[1].iscomming) {
+        document.getElementById('commflip2x11').style.opacity = "0.7";
+        document.getElementById('commflip2x11').style.filter = "grayscale(100%)";
+        document.getElementById('soon1').innerHTML = "COOMING SOON";
+    }
+    else{
+        document.getElementById('soon1').innerHTML = "";
+        document.getElementById('1_direction').innerHTML
+    }
+
 
     document.getElementById('communitiesflip2x13').src = respuesta.item[2].frontphoto;
     document.getElementById('2_title').innerHTML = respuesta.item[2].title;
-    document.getElementById('2_direction').innerHTML = respuesta.item[2].direction;
-    document.getElementById('communitiesflip2x13').style.opacity = "0.5";
-    document.getElementById('communitiesflip2x13').style.filter = "grayscale(100%)";
+    if(respuesta.item[2].direction.length > 0)
+        document.getElementById('2_direction').innerHTML =  '<img src="assets/images/gps.svg" alt="Images" style="height: 15px; width: 15px; " /> ' + respuesta.item[2].direction;
+    
+    if(respuesta.item[2].iscomming) {
+        document.getElementById('communitiesflip2x13').style.opacity = "0.7";
+        document.getElementById('communitiesflip2x13').style.filter = "grayscale(100%)";
+        document.getElementById('soon2').innerHTML = "COOMING SOON";
+    }
+    else{
+        document.getElementById('soon2').innerHTML = "";
+        document.getElementById('3_direction').innerHTML
+    }
+
 
     document.getElementById('communitiesflip2x14').src = respuesta.item[3].frontphoto;
     document.getElementById('3_title').innerHTML = respuesta.item[3].title;
-    document.getElementById('3_direction').innerHTML = respuesta.item[3].direction;
-    document.getElementById('communitiesflip2x14').style.opacity = "0.5";
-    document.getElementById('communitiesflip2x14').style.filter = "grayscale(100%)";
-
-    //  for (var i = 0; respuesta.item.length > i; i++) {
-    //     if(respuesta.item[i].id == 1)
-    //     {
-            
-    //      document.getElementById('commflip2x1')
-    //     }
-    //     else{
-
-    //     }
-    //  }
-
-    // opacity: .5; -webkit-filter: grayscale(100%); filter: grayscale(100%);  style="font-weight: 500; font-size: 15px; width: 120% ; margin-top: 100%; "
+    if(respuesta.item[3].direction.length > 0)
+        document.getElementById('3_direction').innerHTML =  '<img src="assets/images/gps.svg" alt="Images" style="height: 15px; width: 15px; " /> ' + respuesta.item[3].direction;
+    
+    if(respuesta.item[3].iscomming) {
+        document.getElementById('communitiesflip2x14').style.opacity = "0.7";
+        document.getElementById('communitiesflip2x14').style.filter = "grayscale(100%)";
+        document.getElementById('soon3').innerHTML = "COOMING SOON";
+    }
+    else{
+        document.getElementById('soon3').innerHTML = "";
+        document.getElementById('3_direction').innerHTML
+    }
+   
 }

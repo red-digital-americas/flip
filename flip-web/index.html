@@ -1333,7 +1333,7 @@
             function bringMeAllConetent() {
 
                 ajaxRequest({where_to_go: urlbase_api +'Post/SeeHomeIndex2'}).then( home_content => {
-debugger;
+//debugger;
                     let home_bg_images = [
                         'assets/images/comm/grid-1.jpg',
                         'assets/images/comm/grid-2.jpg',
@@ -1351,7 +1351,7 @@ debugger;
                             dom_home_card += '<div class="card__big">'; 
                             index % 2 == 0 ? 
                              (function IIFE() { 
-                                 debugger;
+                                 ////debugger;
                                 if(home_card.iscomming) {
                                     dom_home_card += '<figure class="card__big-img">';
                                     dom_home_card += '<span  class="card__proximamente">Coming soon</span>';  
@@ -1605,7 +1605,7 @@ debugger;
 
                     } else {
 
-                        location.href = '/mbackstage.html';
+                        location.href = './mbackstage.html';
 
                     }
 
@@ -1785,11 +1785,11 @@ debugger;
                             switch( footer_link_selected ) {
 
                                 case 'communities':
-                                    footer_link[button].setAttribute('href', '/altata.html');
+                                    footer_link[button].setAttribute('href', './altata.html');
                                     break;
 
                                 case 'backstage':
-                                    footer_link[button].setAttribute('href', '/backstage.html');
+                                    footer_link[button].setAttribute('href', './backstage.html');
                                     break;
 
                             }        
@@ -1799,11 +1799,11 @@ debugger;
                             switch( footer_link_selected ) {
 
                                 case 'communities':
-                                    footer_link[button].setAttribute('href', '/maltata.html');
+                                    footer_link[button].setAttribute('href', './maltata.html');
                                     break;
 
                                 case 'backstage':
-                                    footer_link[button].setAttribute('href', '/mbackstage.html');
+                                    footer_link[button].setAttribute('href', './mbackstage.html');
                                     break;
 
                             }   
@@ -1892,7 +1892,7 @@ debugger;
 
                     } else {
 
-                        location.href = '/mcommunities.html';
+                        location.href = './mcommunities.html';
 
                     }
 
