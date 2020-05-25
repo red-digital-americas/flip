@@ -19,7 +19,7 @@ $.ajax({
 
     success: function (data, textStatus, jqXHR) {
         var respuesta = JSON.parse(data);
-        //  debugger;
+        //  //debugger;
         //  console.log(respuesta);
 
         fill_grid_images(respuesta);
@@ -144,12 +144,12 @@ function fill_grid_images(respuesta) {
         var id_obj_back = "backphoto" + respuesta.item[i].id;
         var elem = document.getElementById(id_obj);
         var elem_back = document.getElementById(id_obj_back);
-        // debugger;
+        // //debugger;
         if (elem == null || elem == 'undefined') {
             console.log(id_obj + " No existe")
         }
         else {
-            //   debugger;
+            //   //debugger;
             var index_ = faces.indexOf(elem);
             if (index_ > -1) {
                 faces[index_].src = respuesta.item[i].frontphoto;
@@ -159,7 +159,7 @@ function fill_grid_images(respuesta) {
             console.log(id_obj + " No existe")
         }
         else {
-            //   debugger;
+            //   //debugger;
             var index_ = faces_back.indexOf(elem_back);
             if (index_ > -1) {
                 faces_back[index_].src = respuesta.item[i].backphoto;
@@ -172,7 +172,7 @@ function fill_grid_images(respuesta) {
 /////////////////////////////////////// INDEX  DESIGN ///////////////////////////////////////////////////////////
 
 function fill_grid_design_images(respuesta) {
-    debugger;
+    //debugger;
     document.getElementById('desigflip2x1').src = respuesta.item[0].frontphoto;
     document.getElementById('designflip2x12').src = respuesta.item[1].frontphoto;
     document.getElementById('designflip2x13').src = respuesta.item[2].frontphoto;
@@ -182,7 +182,7 @@ function fill_grid_design_images(respuesta) {
 /////////////////////////////////////// INDEX  HOMES ///////////////////////////////////////////////////////////
 
 function fill_grid_home_images(respuesta) {
-    debugger;
+    //debugger;
     document.getElementById('commflip2x1').src = respuesta.item[0].frontphoto;
     document.getElementById('communitiesflip2x12').src = respuesta.item[1].frontphoto;
     document.getElementById('communitiesflip2x13').src = respuesta.item[2].frontphoto;
@@ -192,7 +192,7 @@ function fill_grid_home_images(respuesta) {
 /////////////////////////////////////// INDEX  MORE ///////////////////////////////////////////////////////////
 
 function fill_grid_more_images(respuesta) {
-    debugger;
+    //debugger;
     document.getElementById('moreflip2x1').src = respuesta.item[0].frontphoto;
     document.getElementById('moreflip2x12').src = respuesta.item[1].frontphoto;
     document.getElementById('moreflip2x1x3').src = respuesta.item[2].frontphoto;
