@@ -53,7 +53,7 @@ export class MenuService {
     { name: 'General TenanList', url: '/generalTenantlist', icon: 'icon-list' },
     { name: 'Add Tenant', url: '/AddTenant', icon: 'icon-user-follow' },
     { name: 'Users', url: '/Users', icon: 'icon-people' },
-    { name: 'Roles', url: '/Roles', icon: 'icon-settings' }
+    // { name: 'Roles', url: '/Roles', icon: 'icon-settings' }
   ]
 
   public CreateMenu(sectionId:number) {
@@ -65,20 +65,23 @@ export class MenuService {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   private navSections = [
     {id:1, name: 'Web Content Manager', url: '/webadmin', permisos: [1, 4]},
-    {id:2, name: 'App Content Manager', url: '/communities', permisos: [2, 4]},
+    {id:2, name: 'App Content Manager', url: '/communities', permisos: [4, 5]},
     {id:3, name: 'Building Operation', url: '/booking', permisos: [3, 4]},
   ]
 
   public CreateNavSections(systemType:number) {
     let sections = [];
 
-    this.navSections.filter(r => r.permisos.includes(systemType)).forEach(r => {      
+    this.navSections.filter(r => r.permisos.includes(systemType)).forEach(r => {
       sections.push({ id: r.id, name: r.name, url: r.url});
-    })
+    });
+    // console.log('Sections', sections);
     return sections;
   }
 
   public GetFirstURLSection(systemType:number) {
+    // console.log('System type', systemType);
+    // console.log('First URL', this.navSections.filter(r => r.permisos.includes(systemType))[0].url);
     return this.navSections.filter(r => r.permisos.includes(systemType))[0].url;
   }
 

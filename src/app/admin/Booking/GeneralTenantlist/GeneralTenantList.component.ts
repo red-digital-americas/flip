@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { LoaderComponent } from '../../../../ts/loader';
+import { SystemMessage } from '../../../../ts/systemMessage';
 
 @Component({
     selector: 'general_tenantlist',
@@ -16,6 +18,10 @@ import { Router } from '@angular/router';
         public _router: Router
     ) {}
 
+    loader = new LoaderComponent();
+    systemMessage = new SystemMessage();
+
+
     ngOnInit() {
 
         this.getTenantList();
@@ -27,16 +33,15 @@ import { Router } from '@angular/router';
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-    public table_colums: any[] = ['build','room','name','age','membership','dateInit','dateEnd','amountOutstanding', 'totalBeds', 'roomateFlip','more'];
+    public table_colums: any[] = ['build','room','name','membership','dateInit','dateEnd','amountOutstanding', 'totalBeds', 'roomateFlip', 'checkIn', 'checkOut','more'];
 
     public tenantList: any;
     public getTenantList():void {
-
+        this.loader.showLoader();
         this._services.service_general_get('Tenant/getGeneralTenantList')
             .subscribe( (response: any) => {
-
+                this.loader.hideLoader();
                 if( response.result == 'Sucess' ) {
-
                     this.tenantList = new MatTableDataSource(response.item);
                     this.tenantList.paginator = this.paginator;
                     this.tenantList.sort = this.sort;
@@ -46,7 +51,7 @@ import { Router } from '@angular/router';
                 }
 
             }, (error: any) => {
-
+                this.loader.hideLoader();
                 console.log('Error GetList => ', error);
 
             })

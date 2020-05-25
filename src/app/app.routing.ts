@@ -16,6 +16,7 @@ import { Wizard3Component } from './views/wizard3/wizard3.component';
 import { Wizard4Component } from './views/wizard4/wizard4.component';
 import { Wizard5Component } from './views/wizard5/wizard5.component';
 import { RecoverpassComponent } from './recoverpass/recoverpass.component';
+import { CommunitiesComponent } from './admin/communities/communities.component';
 
 import { FooterComponent } from './footer/footer.component';
 import { RoleGuardService } from './guards/role-guard.service';
@@ -39,6 +40,8 @@ export const routes: Routes = [
     children: [
       { path: '', loadChildren: './admin/admin.module#AdminModule', data: { title: '' } },
       { path: 'webadmin', loadChildren: './webadmin/webadmin.module#WebadminModule', canActivate: [RoleGuardService], data: { expectedRole: [1,4] } },
+      { path: 'communities', loadChildren: './admin/admin.module#AdminModule', canActivate: [RoleGuardService], data: { expectedRole: [4, 5] } },
+      { path: 'booking', loadChildren: './admin/admin.module#AdminModule', canActivate: [RoleGuardService], data: { expectedRole: [3, 4] } }
     ]
   },
   {

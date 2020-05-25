@@ -6,6 +6,9 @@ import { LoaderComponent } from '../../../../../ts/loader';
 import { SystemMessage } from '../../../../../ts/systemMessage';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Utils } from '../../../../utils/utils';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-user-detail',
@@ -30,10 +33,24 @@ export class UserDetailComponent implements OnInit {
     active: true,
     birth: '',
     rfc: '',
-    email: ''
+    email: '',
+    userBuildings: [],
+    userPermissions: []
   };
 
+  buildingList;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  public table_adding_building: any[] = ['name', 'description', 'direction', 'status', 'select'];
+
+  permissionsList;
+  @ViewChild(MatPaginator, { static: true }) paginatorPermission: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sortPermission: MatSort;
+  public table_adding_permission: any[] = ['permission1', 'description', 'active', 'selectPermission'];
+
   systemType = [{ id: NaN, name: 'System type'}];
+  systemTypeId;
+  show = true;
 
   loader = new LoaderComponent();
   systemMessage = new SystemMessage();
@@ -62,6 +79,12 @@ export class UserDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.systemTypeId = JSON.parse(localStorage.getItem('user')).systemTypeId;
+    if (this.systemTypeId === 3 || this.systemTypeId === 4) {
+      this.show = false;
+    } else {
+      this.show = true;
+    }
     this.userId = this.route.snapshot.paramMap.get('id');
     this.getUser();
   }
@@ -74,6 +97,8 @@ export class UserDetailComponent implements OnInit {
       console.log('Reponse Memberships ', this.userObj);
       this.loader.hideLoader();
       this.getSystemTypeLs(this.systemTypeInitial);
+      this.getBuildings();
+      this.getPermissions();
     });
   }
 
@@ -87,9 +112,95 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  getBuildings() {
+    this.services.service_general_get('UsersAdmin/Buildings').subscribe((value) => {
+      console.log('Data building', value.item);
+      this.buildingList = new MatTableDataSource(value.item);
+      console.log('Reponse Services ', this.buildingList);
+      this.buildingList.paginator = this.paginator;
+      this.buildingList.sort = this.sort;
+
+      this.userObj.userBuildings.forEach(element => {
+        value.item.forEach(item => {
+          if (item.id === element.buildingId) {
+            this.selectingbuildings(item);
+          }
+        });
+      });
+    });
+  }
+
+  services_selected: any[] = [];
+  selectingbuildings(service_data: any) {
+    const finder = (service: any) => service_data.id === service.id;
+    if (this.services_selected.findIndex(finder) === -1) {
+      service_data.active = true;
+      this.services_selected.push(service_data);
+    } else {
+      service_data.active = false;
+      this.services_selected.splice(this.services_selected.findIndex(finder), 1);
+    }
+    console.log('Services selected => ', this.services_selected);
+  }
+
+  getPermissions() {
+    this.services.service_general_get('UsersAdmin/Permission').subscribe((value) => {
+      console.log('Data building', value.item);
+      this.permissionsList = new MatTableDataSource(value.item);
+      console.log('Reponse Services ', this.permissionsList);
+      this.permissionsList.paginator = this.paginatorPermission;
+      this.permissionsList.sort = this.sortPermission;
+
+      this.userObj.userPermissions.forEach(element => {
+        value.item.forEach(item => {
+          if (item.id === element.permissionId) {
+            this.selectingpermissions(item);
+          }
+        });
+      });
+    });
+  }
+
+  permissions_selected: any[] = [];
+  selectingpermissions(element_data: any) {
+    const finder = (service: any) => element_data.id === service.id;
+    if (this.permissions_selected.findIndex(finder) === -1) {
+      element_data.selected = true;
+      this.permissions_selected.push(element_data);
+    } else {
+      element_data.selected = false;
+      this.permissions_selected.splice(this.permissions_selected.findIndex(finder), 1);
+    }
+    console.log('Permission selected => ', this.permissions_selected);
+  }
+
   update(): void {
     if (this.validateDataForm()) {
       this.loader.showLoader();
+      //////////// BUILDINGS ////////////////////////
+      const buildings: any[] = [];
+      this.services_selected.forEach(element => {
+        let build = {
+          id: 0,
+          buildingId: element.id,
+          userId: this.userObj.id
+        };
+        buildings.push(build);
+      });
+      this.userObj.userBuildings = buildings;
+      ///////////// END BUILDING //////////////////
+      ///////////// PERMISSION ///////////////////
+      const permissions: any[] = [];
+      this.permissions_selected.forEach(element => {
+        let permission = {
+          id: 0,
+          permissionId: element.id,
+          userId: this.userObj.id
+        };
+        permissions.push(permission);
+      });
+      this.userObj.userPermissions = permissions;
+      ///////////// END PERMISSION //////////////////
       console.log('User Object', this.userObj);
       this.callUpdateService();
     } else {

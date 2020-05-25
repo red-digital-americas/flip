@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
     private http: HttpModule,
     private heroService: DatosService,
     toasterService: ToasterService,
-    private menuService:MenuService
+    private menuService:MenuService,
+    private _router: Router
   ) {
     this.toasterService = toasterService;
   }
@@ -55,8 +56,10 @@ export class LoginComponent implements OnInit {
   
 
   showSuccess() {
-    //this.toasterService.pop('success', 'Success ', 'You will be redirected ');        
-    window.location.href = "/#"+this.menuService.GetFirstURLSection(parseInt(localStorage.getItem("SystemTypeId"))); // partial redirection
+    //this.toasterService.pop('success', 'Success ', 'You will be redirected ');   
+    console.log('HERE!!!!!!!!!!!!', parseInt(localStorage.getItem("SystemTypeId")));
+    this._router.navigate([this.menuService.GetFirstURLSection(parseInt(localStorage.getItem("SystemTypeId")))]);
+    // window.location.href = "/#"+this.menuService.GetFirstURLSection(parseInt(localStorage.getItem("SystemTypeId"))); // partial redirection
     // window.location.href = "/communities"; // full redirection (loading again page)
   }
 

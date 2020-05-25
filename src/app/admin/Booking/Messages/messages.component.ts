@@ -105,6 +105,10 @@ export class MessagesComponent implements OnInit {
           .catch(err => console.log('Error while establishing connection :('));
     
         // this.IDBUILD = this.route.snapshot.params['id'];  
+        let conversationId = JSON.parse(localStorage.getItem('conversationId'));
+        if (conversationId !== undefined || conversationId !== null) {
+          this.showConversation(conversationId, conversationId.iduser, event.target);
+        }
       }
     
       get_chats() {
@@ -120,6 +124,7 @@ export class MessagesComponent implements OnInit {
               console.log("Post==>", value.item);
               if (value.result == "Success") {
                 this.posts = value.item;
+                console.log(this.posts);
               }
           }
         });

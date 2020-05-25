@@ -95,6 +95,10 @@ else if (permisos == 3){
   menu = [
     { name: 'Communities', url: '/communities', icon: 'icon-drop' }
   ] 
+} else if (permisos == 5) {
+  menu = [
+    { name: 'Communities', url: '/communities', icon: 'icon-drop' }
+  ]
 }
 else {
   menu = [

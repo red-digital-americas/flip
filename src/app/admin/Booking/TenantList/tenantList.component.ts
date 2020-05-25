@@ -4,6 +4,8 @@ import { DatosService } from '../../../../datos.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { LoaderComponent } from '../../../../ts/loader';
+import { SystemMessage } from '../../../../ts/systemMessage';
 
 @Component({
     selector: 'tenantList',
@@ -22,10 +24,14 @@ export class TenantListComponent implements OnInit {
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-    displayedColumns: string[] = ['typeRoom', 'name', 'age', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'idUser'];
+    displayedColumns: string[] = ['typeRoom', 'name', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'checkIn', 'checkOut', 'idUser'];
     tenantList;
     buildingId;
     public section: string;
+
+    loader = new LoaderComponent();
+    systemMessage = new SystemMessage();
+
     ngOnInit() {
         this.section = 'tenantList';
         this.buildingId = this.route.snapshot.paramMap.get('id');
@@ -34,9 +40,11 @@ export class TenantListComponent implements OnInit {
     }
 
     getTenantList(id) {
+        this.loader.showLoader();
         let obj = { buildingId: id };
         this.services.service_general_get_with_params('Tenant/getTenantList', obj).subscribe((value) => {
             this.tenantList = new MatTableDataSource(value.item);
+            this.loader.hideLoader();
             console.info('Response', this.tenantList);
             this.tenantList.paginator = this.paginator;
             this.tenantList.sort = this.sort;
