@@ -1,73 +1,77 @@
 <div class="ml-col-1">
     <booking-navbar [section]="section"></booking-navbar>
-    <div class="ml-col-1 ap-chat">
-        <div class="ap-chat__people-person ap-chat__people-person--me">
-            <figure class="ap-chat__people-person-photo">
-                <img [src]="userInfo.avatar?userInfo.avatar:'src\assets\avatar-def.png'" />
-            </figure>
-            <p class="ap-chat__people-person-name">
-                {{userInfo.name}} {{userInfo.lastName}}
-            </p>
-            <p class="ap-chat__people-person-dato">
-                Mis chats
-            </p>
+    <div class="ml-col-1 padding-general-m margin-bottom-g background-white">
+        <div class="ml-col-1 margin-bottom-x">
+            <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+               Messages
+             </h4>
         </div>
-        <div class="ap-chat__people-person ap-chat__people-person--contacts" (click)="openModal()">
-            <p class="ap-chat__people-person-name">
-                Enviar Mensajes
-            </p>
-            <p class="ap-chat__people-person-dato">
-                Ver contactos
-            </p>
-        </div>
-        <div class="ap-chat__people">
-            <div class="ml-col-1">
-                <div 
-                    *ngFor="let friend of posts;"
-                    (click)="showConversation(friend, friend.iduser, $event)" 
-                    class="ap-chat__people-person ap-chat__people-person--friend">
-                    <span class="ap-chat__people-person--mask"></span>
+        <div class="ml-col-1 position-relative">
+            <div class="ml-col-1 ap-chat">
+                <div class="ap-chat__people-person ap-chat__people-person--me">
                     <figure class="ap-chat__people-person-photo">
                         <img [src]="userInfo.avatar?userInfo.avatar:'src\assets\avatar-def.png'" />
                     </figure>
                     <p class="ap-chat__people-person-name">
-                        {{ friend.name }} {{ friend.lastname }}
-                    </p>
-                    <p class="ap-chat__people-person-dato">
-                        {{ (friend?.lastMessage?.length>35)? (friend?.lastMessage | slice:0:35)+'...':(friend?.lastMessage) }}
+                        {{userInfo.name}} {{userInfo.lastName}}
                     </p>
                 </div>
-            </div>
-        </div>
-        <div class="ap-chat__chat">
-            <div class="chatm card-style" *ngIf="showChat">
-                <h4 class="chatm__datos">
-                    {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
-                    <img class="chatm__datos-photo" 
-                         src="{{ userSendMessage.info.photo }}" />
-                </h4>
-                <div class="chatm__chat" id="chat_messages">
-                    <div *ngFor="let message of messages"
-                         class="chatm__chat-message">
-                        <span class="chatm__chat-message-msg"
-                              [ngClass]="{'chatm__chat-message-msg-own': IDUSR == message.message.userId, 
-                                          'chatm__chat-message-msg-from': IDUSR != message.message.userId}">
-                            {{ message.message.message1 }}
-                        </span>
-                    </div>
-                </div>
-                <div class="chatm__message">
-                    <textarea class="chatm__message-message card-style" [(ngModel)]="messageInput"></textarea>
-                    <button 
-                        (click)="SentMessage(1)"
-                        class="chatm__message-send">
-                        Enviar
+                <div class="ap-chat__people-person ap-chat__people-person--contacts block-tets" (click)="openModal()">
+                    <p class="ap-chat__people-person-name ap-chat__people-person--contacts-subtitle">
+                        Conversations
+                    </p>
+                    <button class="ap-chat__people-person--contacts-button">
+                        New Message
                     </button>
                 </div>
+                <div class="ap-chat__people margin-top-m">
+                    <div class="ml-col-1">
+                        <div 
+                            *ngFor="let friend of posts;"
+                            (click)="showConversation(friend, friend.iduser, $event)" 
+                            class="ap-chat__people-person ap-chat__people-person--friend">
+                            <span class="ap-chat__people-person--mask"></span>
+                            <figure class="ap-chat__people-person-photo ap-chat__people-person-photo--friend">
+                                <img [src]="userInfo.avatar?userInfo.avatar:'src\assets\avatar-def.png'" />
+                            </figure>
+                            <p class="ap-chat__people-person-name ap-chat__people-person-name--friend">
+                                {{ friend.name }} {{ friend.lastname }}
+                            </p>
+                            <span class="ap-chat__people-person-on"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ap-chat__chat">
+                    <div class="chatm card-style" *ngIf="showChat">
+                        <h4 class="chatm__datos">
+                            {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
+                            <img class="chatm__datos-photo" 
+                                 src="{{ userSendMessage.info.photo }}" />
+                        </h4>
+                        <div class="chatm__chat" id="chat_messages">
+                            <div *ngFor="let message of messages"
+                                 class="chatm__chat-message">
+                                <span class="chatm__chat-message-msg"
+                                      [ngClass]="{'chatm__chat-message-msg-own': IDUSR == message.message.userId, 
+                                                  'chatm__chat-message-msg-from': IDUSR != message.message.userId}">
+                                    {{ message.message.message1 }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="chatm__message">
+                            <textarea class="chatm__message-message card-style" [(ngModel)]="messageInput"></textarea>
+                            <button 
+                                (click)="SentMessage(1)"
+                                class="chatm__message-send">
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                    <span class="chatm--selecting center-element-absolute" *ngIf="!showChat">
+                        Select a conversation or start one
+                    </span>
+                </div>
             </div>
-            <span class="chatm--selecting center-element-absolute" *ngIf="!showChat">
-                Selecciona una conversación
-            </span>
-        </div>
+        </div>  
     </div>
 </div>
