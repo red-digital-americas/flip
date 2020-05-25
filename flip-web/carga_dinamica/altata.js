@@ -22,6 +22,7 @@ $(document).ready(function () {
         dataType: "text",
 
         success: function (data, textStatus, jqXHR) {
+         //   debugger;
             respuesta = JSON.parse(data);
             console.log(' General ========> ',respuesta);
             $("#img-altata-00").attr("src", respuesta.item[0].frontphoto);
@@ -40,11 +41,11 @@ $(document).ready(function () {
             $("#img-maltata-03").attr("src", respuesta.item[3].photomobile);
             $("#p-altata-03").text(respuesta.item[3].desc);
 
-            // $("#img-altata-04").attr("src", respuesta.item[4].frontphoto);
-            // $("#img-maltata-04").attr("src", respuesta.item[4].photomobile);
-            // $("#p-altata-04").text(respuesta.item[4].desc);
         },
-        error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
+        error: function (jqXHR, textStatus, errorThrown) { 
+            debugger;
+            console.log(jqXHR, textStatus, errorThrown); 
+        },
     });
 
     //alert(buildingid)
@@ -352,7 +353,7 @@ function change_image_movil(item) {
 }
 
 function getServiceData( id_build ) {
-
+//debugger;
     const ws_data = { buildingid: id_build }
 
     let xhttp = new XMLHttpRequest();
@@ -400,9 +401,9 @@ function getRoomsData( id_build ) {
 }
 
 function appendContentToPage( data ) { 
-
+    
     for( let index = 0; index < 4; index += 1 ) {
-
+        debugger;
         const title_section = document.querySelectorAll('[service="name"]')[index],
               description_section = document.querySelectorAll('[service="description"]')[index],
               image_section = document.querySelectorAll('[service="image"]')[index],
@@ -425,7 +426,7 @@ function appendContentToPage( data ) {
                                                 ${ icon.titleIcon }
                                             </span>
                                         </figure>`;
-
+debugger;
                     icons_container.innerHTML += icon_content;
 
                 });
