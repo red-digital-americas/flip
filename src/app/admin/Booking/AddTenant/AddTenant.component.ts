@@ -179,7 +179,7 @@ import { MatSort } from '@angular/material/sort';
                     lastName: '',
                     motherName: '',
                     name: '',
-                    birth: '',
+                    birth: this.today,
                     idBooking: null,
                     active: null,
                     phone: null,
@@ -340,6 +340,8 @@ import { MatSort } from '@angular/material/sort';
                     bed.email == 'no_data' ||
                     bed.phone == 'no_data'
                 ) result = false;
+
+                bed.phone = Number(bed.phone);
 
               });
 
@@ -760,9 +762,88 @@ import { MatSort } from '@angular/material/sort';
 
     }
 
+    public booking_post_data: BookingPostDetailModel = new BookingPostDetailModel();
     public completeBookingsDetail():void {
 
-        console.log('Aqui hay que pedir el WS y sha!');
+        this.booking_post_data.idMembership = this.membership_selected.id;
+        this.booking_post_data.Booking.dateInitProgram = this.booking_data.startDate;
+        this.booking_post_data.Booking.dateEndProgram = this.booking_data.finishDate;
+        this.booking_post_data.Booking.idRommateType = this.booking_data.roomateFlip;
+        this.booking_post_data.Booking.reservedBeds = Number( this.booking_data.totalBeds ) + 1;
+        this.booking_post_data.Booking.idRoom = this.room_selected.id;
+        this.booking_post_data.aditionalBeds = this.beds_to_add;
+        this.booking_post_data.serviceBooking = this.servicesModelWorker( this.all_services_selected );
+
+        this.loader.showLoader();
+
+        this._services.service_general_post('Tenant/PostBooking', this.booking_post_data)
+            .subscribe( (response: any) => {
+                
+                if( response.result == 'Sucess' ) {
+
+                    this.system_message.showMessage({
+                        kind: 'ok',
+                        time: 4777,
+                        message: {
+                            header: 'Booking detail created',
+                            text: 'Booking detail has been created successfully.'
+                        }
+                    });
+
+                    this.iHaveCompletedStep(0);
+
+                    setTimeout( () => this.loader.hideLoader(), 1777);
+
+                }
+
+            }, (error: any) => {
+
+                this.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                        header: 'Fatal Error',
+                        text: 'Error Fatal'
+                    }
+                });
+
+                setTimeout( () => this.loader.hideLoader(), 1777);
+
+            });
+
+
+        console.log('Service completed => ', this.booking_post_data );
+        
+    }
+    
+    public servicesModelWorker( services: any ):any {
+
+        let services_worked: any[] = [];
+
+        services.forEach( (service: any) => {
+
+            const service_model = {
+                idService: service.id,
+                dateStart: service.startDate,
+                dateEnd: service.endDate,
+                recurrent: service.lapse,
+                fromMembership: this.membership_selected.id,
+                amount: service.total_ammount,
+                idUserPaymentService: 0,
+                idUserPaymentServiceNavigation: {
+                    id: 0,
+                    idCreditCard: null,
+                    idServiceBooking: 0,
+                    payment: 0,
+                    paymentDate: ""
+                }
+            }
+
+            services_worked.push( service_model );
+
+        });
+
+        return services_worked;
 
     }
 
@@ -897,20 +978,32 @@ class BookingDetailModel {
     totalBeds: number = null;
 }
 
+class BookingPostDetailModel {
+    idMembership: number;
+    Booking: {
+        dateInitProgram: string;
+        dateEndProgram: string;
+        idRommateType: number;
+        reservedBeds: number;
+        idRoom: number;
+    } = {
+        dateInitProgram: '',
+        dateEndProgram: '',
+        idRommateType: 0,
+        reservedBeds: 0,
+        idRoom: 0
+    };
+    amount: number;
+    serviceBooking: any;
+    aditionalBeds: any;
+}   
+
 
 /*
 
 {
-	"idMembership": 11,
-	"Booking": {
-		"dateInitProgram": "2020-07-01",
-		"dateEndProgram": "2020-07-30",
-		"idRommateType": 1,
-		"reservedBeds": 2,
-		"idRoom": 10
-	},
-	"amount": 110000,
-	"serviceBooking": [
+	
+	"": [
 		{
 			"idService": 33,
 			"dateStart": "2020-07-01",
@@ -926,25 +1019,9 @@ class BookingDetailModel {
 				"payment": 0,
 				"paymentDate": ""
 			}
-		},
-		{
-			"idService": 31,
-			"dateStart": "2020-07-01",
-			"dateEnd": "2020-07-30",
-			"recurrent": 1,
-			"fromMembership": 11,
-			"idUserPaymentService": 0,
-			"amount": 100,
-			"idUserPaymentServiceNavigation": {
-				"id": 0,
-				"idCreditCard": null,
-				"idServiceBooking": 0,
-				"payment": 0,
-				"paymentDate": ""
-			}
 		}
 	],
-	"aditionalBeds": [
+	"": [
 		{
 		"email": "luis@emial.com",
 		"lastName": "Gutierres",
