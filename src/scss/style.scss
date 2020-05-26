@@ -2886,6 +2886,60 @@ select:active,
 
 }
 
+.table-as {
+
+  &__row {
+
+    &-i {
+      width: 5%;
+      float: left;
+    }
+
+    &-s {
+      width: 18%;
+      float: left;
+    }
+
+    &-d {
+      width: 5%;
+      float: left;
+      color: #a61919;
+    }
+
+    &-i {
+      border: solid 2px transparent;
+    }
+
+    &-s, 
+    &-d {
+      text-align: center;
+      padding-top: 7.5px;
+    }
+
+  }
+
+  &__icon {
+
+    float: left;
+    width: 100%;
+    height: 30px;
+    position: relative;
+    margin: 0;
+
+    &-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: 80%;
+      filter: brightness(0);
+    }
+
+  }
+
+}
+
 .text-ultra {
   font-family: headerFont;
 }
@@ -3149,11 +3203,11 @@ select:active,
 }
 
 .bottom-separator {
-  border-bottom: solid 1px rgba($color: #2e343a, $alpha: .2);
+  border-bottom: solid 1px rgba($color: #2e343a, $alpha: .2) !important;
 }
 
 .top-separator {
-  border-top: solid 1px rgba($color: #2e343a, $alpha: .2);
+  border-top: solid 1px rgba($color: #2e343a, $alpha: .2) !important;
 }
 
 .block-test {
@@ -3684,7 +3738,7 @@ select:active,
     border-top: solid 1px rgba($color: #2e343a, $alpha: .6);
 
     &--no-border-top {
-      border-bottom: solid 1px transparent;
+      border-top: solid 1px transparent;
     }
 
     &-dato {
