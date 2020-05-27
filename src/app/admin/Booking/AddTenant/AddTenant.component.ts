@@ -23,6 +23,7 @@ import { MatSort } from '@angular/material/sort';
     ngOnInit() {
 
         this.getAddTenantData();
+        this.getToday();
 
     }
 
@@ -37,8 +38,6 @@ import { MatSort } from '@angular/material/sort';
                 if( response.result == 'Sucess' ) {
 
                     this.builds_list = response.item;
-
-                    console.log('Builds => ', this.builds_list);
 
                 }
 
@@ -68,13 +67,12 @@ import { MatSort } from '@angular/material/sort';
         this.builds_list.forEach( (build: any) => {
 
             if( build_selected.value == build.id ) {
-
+                
                 this.build_selected = build.id;
                 this.current_build = build;
                 this.getTypeRoomCatalog();
                 this.getRoomateTypeCatalog();
-
-                console.log('Build Selected ====> ', this.current_build);
+                this.able_section_two = false;
 
             }
 
@@ -95,8 +93,6 @@ import { MatSort } from '@angular/material/sort';
                 if( response.result == 'Success' ) {
 
                     this.typesrooms_catalog = response.item;
-
-                    console.log('Type room Catalog => ', this.typesrooms_catalog);
 
                 } else {
 
@@ -135,8 +131,6 @@ import { MatSort } from '@angular/material/sort';
                 if( response.result == 'Sucess' ) {
 
                     this.roomates_catalog = response.item;
-
-                    console.log('Roomate Catalog => ', this.roomates_catalog);
 
                 } else {
 
@@ -185,7 +179,7 @@ import { MatSort } from '@angular/material/sort';
                     lastName: '',
                     motherName: '',
                     name: '',
-                    birth: '',
+                    birth: this.today,
                     idBooking: null,
                     active: null,
                     phone: null,
@@ -204,9 +198,13 @@ import { MatSort } from '@angular/material/sort';
 
     }
 
-    
+
     public booking_data: BookingDetailModel = new BookingDetailModel();
     public validateBookingDetailForm():void {
+
+        this.room_selected = null;
+        this.membership_selected = null;
+        this.additional_services_section = false;
 
         const validations_booking_detail = {
             form_booking_detail: this.formBookingDetailValidator( this.booking_data ),
@@ -343,6 +341,8 @@ import { MatSort } from '@angular/material/sort';
                     bed.phone == 'no_data'
                 ) result = false;
 
+                bed.phone = Number(bed.phone);
+
               });
 
             return result;
@@ -374,9 +374,6 @@ import { MatSort } from '@angular/material/sort';
 
                     this.memberships_cards = response.membershipsAvaible;
                     this.rooms_cards = response.roomsAvaible;
-
-                    console.log('Memberships => ', this.memberships_cards);
-                    console.log('Rooms => ', this.rooms_cards);
 
                 } else {
 
@@ -431,7 +428,7 @@ import { MatSort } from '@angular/material/sort';
 
         this.memberships_cards.forEach( (card: any) => {
 
-            card.membership.id == this.membership_selected.membership.id ?
+            card.id == this.membership_selected.id ?
                 card.active = true : card.active = false; 
 
         });
@@ -442,17 +439,17 @@ import { MatSort } from '@angular/material/sort';
 
     public additional_services_list: any[];
     public additional_services_section: boolean = false;
+    public table_additional_services: any[] = ['icon','service','description','recurrent','once','able'];
+    public additional_services_table: any;
     public getAddiotionalServices():void {
-
-        console.log('R => ', this.room_selected);
-        console.log('M => ',this.membership_selected);
 
         if( this.room_selected != null && this.membership_selected != null ) {
 
             this.additional_services_section = true; 
+            this.joinAllMyServices();
 
             const ws_data = {
-                idMembership: this.membership_selected.membership.id,
+                idMembership: this.membership_selected.id,
                 idBuilding: this.current_build.id
             }
 
@@ -463,7 +460,13 @@ import { MatSort } from '@angular/material/sort';
 
                         this.additional_services_list = response.services;
 
-                        console.log('Services additionals => ', this.additional_services_list);
+                        this.additional_services_list.forEach( (service: any) => {
+
+                            service.active = true;
+
+                        });
+
+                        this.additional_services_table = this.additional_services_list;
 
                     }
 
@@ -484,7 +487,365 @@ import { MatSort } from '@angular/material/sort';
 
     }
 
-    public additonal_services_selected: any[] = [];
+    public additional_services_selected: any[] = [];
+    public selectingAdditionalServices( service_selected: any ):void {
+
+        this.additional_services_table = this.additional_services_list.filter( (service: any) => {
+
+            if( service_selected.id == service.id ) {
+
+                service.active = false;
+                this.additional_services_selected.push( service );
+
+            }
+
+            if( service.active ) {
+
+                return service;
+
+            }
+
+        });
+
+    }
+
+    public removeAdditionalServiceSelected( service_selected: any ):void {
+
+        this.additional_services_table = this.additional_services_list.filter( (service: any) => {
+
+            if( service_selected.id == service.id ) {
+
+                service.active = true;
+                this.additional_services_selected
+                    .splice(this.additional_services_selected.findIndex( (service: any) => service.id == service_selected.id ),1);
+
+            }
+
+            if( service.active ) {
+
+                return service;
+
+            }
+
+        });
+
+    }
+
+    public getAdditionalServicesSelected():void {
+
+        if( this.validateAdditionalServices() ) {
+
+            this.system_message.showMessage({
+                kind: 'ok',
+                time: 4777,
+                message: {
+                    header: 'Additional services added',
+                    text: 'Additional services has been added successfully.'
+                }
+            });
+
+            this.joinAllMyServices();
+            this.showModal();
+
+        } else {
+
+            this.system_message.showMessage({
+                kind: 'error',
+                time: 4777,
+                message: {
+                    header: 'Required data',
+                    text: 'All inputs must be filled to continue.'
+                }
+            });
+
+        }
+
+    }
+
+    public validateAdditionalServices():boolean {
+
+        let result: boolean = true;
+
+        const additional_services = document.getElementById('form_services_added'),
+              additional_service:any = additional_services.querySelectorAll('[service="added"]');
+
+        additional_service.forEach( (service_add: any) => {
+
+            const inputs = service_add.querySelectorAll('input'),
+                select = service_add.querySelectorAll('select'),
+                sDate = inputs[0].value,
+                eDate = inputs[1].value,
+                lapse = select[0].value,
+                id_service = inputs[0].id.split('_')[inputs[0].id.split('_').length - 1];
+
+                this.additional_services_selected.forEach( (service_find: any) => {
+
+                    if( service_find.id == id_service ) {
+
+                        service_find.startDate = sDate;
+                        service_find.endDate = eDate;
+                        service_find.lapse = lapse;
+                        service_find.validator = {
+                            no_sdat: false,
+                            no_edat: false,
+                            no_laps: false,
+                        }
+
+                        service_find.startDate == '' ?
+                            service_find.validator.no_sdat = true : 
+                            service_find.validator.no_sdat = false;
+
+                        service_find.endDate == '' ?
+                            service_find.validator.no_edat = true : 
+                            service_find.validator.no_edat = false;
+
+                        service_find.lapse == '' ?
+                            service_find.validator.no_laps = true : 
+                            service_find.validator.no_laps = false;
+
+                    }
+
+                });
+
+        });
+
+        this.additional_services_selected.forEach( (service: any) => {
+
+            for( let field in service.validator ) {
+
+                if( service.validator[field] ) {
+
+                    result = false;
+
+                }                
+
+            }
+
+        });
+
+        return result;
+
+    }
+
+    public updateLapseService( event_data: any, service: any ) {
+
+        const event_root: any = event_data.target;
+
+        service.lapse = event_root.value;
+
+        if( service.startDate != '' && service.endDate != '' ) {
+
+            service.lapse == '1' ?
+                service.total_ammount = service.price * service.day_diff :
+                service.total_ammount = service.priceUnit * service.day_diff;
+
+        }
+
+    }
+
+    public getAdditionalServiceAmmount( event_data: any, date_position: number, service: any ):void {
+
+        const root_event: any = event_data.target;
+
+        date_position == 0 ? 
+            service.startDate = root_event.value :
+            service.endDate = root_event.value;
+
+        if( service.startDate != '' && service.endDate ) {
+
+            const days_diff = getDaysDifference(service.startDate, service.endDate);
+
+            service.day_diff = days_diff == 0 ? 1 : days_diff;
+
+            if( service.lapse != '' ) {
+
+                service.lapse == '1' ?
+                    service.total_ammount = service.price * service.day_diff :
+                    service.total_ammount = service.priceUnit * service.day_diff;
+
+            }
+
+        }
+
+        function getDaysDifference( sDate, eDate ):number {
+
+            const start_date: any = new Date( sDate ),
+                end_date: any = new Date( eDate ),
+                diff_time = Math.abs( start_date - end_date ),
+                diff_days = Math.ceil(diff_time / (1000 * 60 * 60 * 24));
+
+            return diff_days + 1;
+
+        }
+
+    }
+
+    public all_services_selected: any[] = [];
+    public total_services_ammount: number = 0;
+    public joinAllMyServices():void {
+
+        this.all_services_selected = [];
+
+        this.current_build.services.forEach( (service: any) => {
+
+            service.type_service = 'Included';
+            service.lapse = '1';
+            service.startDate = this.booking_data.startDate;
+            service.endDate = this.booking_data.finishDate;
+            service.total_ammount = 0;
+
+            this.all_services_selected.push( service );
+
+        });
+
+        this.additional_services_selected.forEach( (service: any) => {
+
+            service.type_service = 'Extra';
+
+            this.all_services_selected.push( service );
+
+        });
+
+        this.all_services_selected.forEach( (service) => {
+
+            this.total_services_ammount += service.total_ammount;
+
+        });
+
+    }
+
+    public getNameRoomateType( id_roomtype: string ):string {
+
+        let result: string = 'No Data';
+
+        this.roomates_catalog.forEach( (roomate: any) => {
+
+            if( roomate.id == Number( id_roomtype ) ) {
+
+                result = roomate.roomateType1;
+
+            }
+
+        });
+
+        return result;
+
+    }
+
+    public getDaysReserved():number {
+
+        const start_date: any = new Date( this.booking_data.startDate ),
+            end_date: any = new Date( this.booking_data.finishDate ),
+            diff_time = Math.abs( start_date - end_date ),
+            diff_days = Math.ceil(diff_time / (1000 * 60 * 60 * 24));
+
+        return diff_days;
+
+    }
+
+    public getTotalBeds( beds: string ):number {
+
+        const num_beds = Number( beds );
+
+        return num_beds + 1;
+
+    }
+
+    public getTotalAmmount():number {
+
+        const days_reserved = this.getDaysReserved(),
+            beds_reserved = this.getTotalBeds( this.booking_data.totalBeds.toString() ),
+            price_membership = this.membership_selected.price,
+            total = ( price_membership * days_reserved ) * beds_reserved;
+
+        return total;
+
+    }
+
+    public booking_post_data: BookingPostDetailModel = new BookingPostDetailModel();
+    public completeBookingsDetail():void {
+
+        this.booking_post_data.idMembership = this.membership_selected.id;
+        this.booking_post_data.Booking.dateInitProgram = this.booking_data.startDate;
+        this.booking_post_data.Booking.dateEndProgram = this.booking_data.finishDate;
+        this.booking_post_data.Booking.idRommateType = this.booking_data.roomateFlip;
+        this.booking_post_data.Booking.reservedBeds = Number( this.booking_data.totalBeds ) + 1;
+        this.booking_post_data.Booking.idRoom = this.room_selected.id;
+        this.booking_post_data.aditionalBeds = this.beds_to_add;
+        this.booking_post_data.serviceBooking = this.servicesModelWorker( this.all_services_selected );
+
+        this.loader.showLoader();
+
+        this._services.service_general_post('Tenant/PostBooking', this.booking_post_data)
+            .subscribe( (response: any) => {
+                
+                if( response.result == 'Sucess' ) {
+
+                    this.system_message.showMessage({
+                        kind: 'ok',
+                        time: 4777,
+                        message: {
+                            header: 'Booking detail created',
+                            text: 'Booking detail has been created successfully.'
+                        }
+                    });
+
+                    this.iHaveCompletedStep(0);
+
+                    setTimeout( () => this.loader.hideLoader(), 1777);
+
+                }
+
+            }, (error: any) => {
+
+                this.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                        header: 'Fatal Error',
+                        text: 'Error Fatal'
+                    }
+                });
+
+                setTimeout( () => this.loader.hideLoader(), 1777);
+
+            });
+
+
+        console.log('Service completed => ', this.booking_post_data );
+        
+    }
+    
+    public servicesModelWorker( services: any ):any {
+
+        let services_worked: any[] = [];
+
+        services.forEach( (service: any) => {
+
+            const service_model = {
+                idService: service.id,
+                dateStart: service.startDate,
+                dateEnd: service.endDate,
+                recurrent: service.lapse,
+                fromMembership: this.membership_selected.id,
+                amount: service.total_ammount,
+                idUserPaymentService: 0,
+                idUserPaymentServiceNavigation: {
+                    id: 0,
+                    idCreditCard: null,
+                    idServiceBooking: 0,
+                    payment: 0,
+                    paymentDate: ""
+                }
+            }
+
+            services_worked.push( service_model );
+
+        });
+
+        return services_worked;
+
+    }
 
     public visible_step: any = {
         step_1: true,
@@ -527,9 +888,78 @@ import { MatSort } from '@angular/material/sort';
         
         if( step_completed == 2 ) {
 
-            console.log('Teminas el proceso');
+
 
         }
+
+    }
+
+    public show_modal_content: string = '';
+    public show_modal: boolean = false;
+    public showModal( section: string = 'deafult' ):void {
+
+        !this.show_modal ? 
+            this.show_modal = true : this.show_modal = false; 
+
+        this.show_modal_content = section;
+
+    }
+
+    public ableDateSelection(id_date_start: string, id_date_end: string, extra: string = ''):void {
+
+        const date_start: any = document.getElementById( id_date_start ),
+              date_end: any = document.getElementById( id_date_end );
+
+        if( date_start.value != '' && date_end.value == '' ) {
+
+            date_end.removeAttribute('disabled');
+            date_end.setAttribute('min', date_start.value);
+
+        } else if( date_start.value != '' && date_end.value != '' ) {
+
+            date_end.value = '';
+            date_end.setAttribute('min', date_start.value);
+
+            switch( extra ) {
+
+                case 'booking':
+                    this.booking_data.finishDate = '';
+                    break;
+    
+            }
+
+        }
+
+    }
+
+    public today: string = '';
+    public getToday():void {
+
+        const date = new Date(),
+              today = {
+                  day: date.getDate(),
+                  month: date.getMonth() + 1,
+                  year: date.getFullYear()
+              },
+              format_date = {
+                  day: function() {
+
+                    let day = today.day < 10 ? `0${today.day}` : today.day;
+
+                    return day;
+
+                  },
+                  month: function() {
+
+                    let month = today.month < 10 ? `0${today.month}` : today.month;
+
+                    return month;
+
+                  }
+              },
+              new_date = `${ today.year }-${ format_date.month() }-${ format_date.day() }`;
+              
+        this.today = new_date;
 
     }
 
@@ -547,3 +977,62 @@ class BookingDetailModel {
     roomatePreferences: boolean = null;
     totalBeds: number = null;
 }
+
+class BookingPostDetailModel {
+    idMembership: number;
+    Booking: {
+        dateInitProgram: string;
+        dateEndProgram: string;
+        idRommateType: number;
+        reservedBeds: number;
+        idRoom: number;
+    } = {
+        dateInitProgram: '',
+        dateEndProgram: '',
+        idRommateType: 0,
+        reservedBeds: 0,
+        idRoom: 0
+    };
+    amount: number;
+    serviceBooking: any;
+    aditionalBeds: any;
+}   
+
+
+/*
+
+{
+	
+	"": [
+		{
+			"idService": 33,
+			"dateStart": "2020-07-01",
+			"dateEnd": "2020-07-30",
+			"recurrent": 1,
+			"fromMembership": 11,
+			"amount": 100,
+			"idUserPaymentService": 0,
+			"idUserPaymentServiceNavigation": {
+				"id": 0,
+				"idCreditCard": null,
+				"idServiceBooking": 0,
+				"payment": 0,
+				"paymentDate": ""
+			}
+		}
+	],
+	"": [
+		{
+		"email": "luis@emial.com",
+		"lastName": "Gutierres",
+		"motherName": "Lara",
+		"name": "Luis",
+		"birth": "2020-01-01",
+		"active": true,
+		"phone": 345678901,
+		"genderId": 1
+	}
+	]
+}
+
+*/
