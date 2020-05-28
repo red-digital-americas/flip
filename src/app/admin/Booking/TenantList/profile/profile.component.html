@@ -10,18 +10,18 @@
           (click)="goToPage('reservations')">
           Booking detail
       </button>
-       <!-- button 
+      <button 
           type="button"
-          class="folder__button button-blue"
-          (click)="">
-          Reservations
-      </button --> 
+          class="ap-form__rButton button-black padding-lateral-m"
+          (click)="addBooking()">
+          Add New Booking
+      </button>
     </div>
     <div class="ml-col-1 margin-top-m folder">
       <!-- Tabs Section: Begin -->
       <div class="folder__tabs ap-form">
         <div class="folder__tab" tabs-family="root" tab-show-content="tenant_profile">
-            Rrofile
+            Profile
         </div>
         <div class="folder__tab" tabs-family="root" tab-show-content="tenant_income" (click)="getIncomeData()">
             Income

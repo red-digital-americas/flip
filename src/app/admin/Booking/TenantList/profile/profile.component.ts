@@ -942,6 +942,10 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  addBooking() {
+    this.router.navigateByUrl('AddTenantPay/' + this.profile_data.id.toString());
+  }
+
   /*
    * Autor: Carlos Hernandez Hernandez
    * Contacto: carlos.hernandez@minimalist.com

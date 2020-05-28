@@ -22,7 +22,7 @@ export class RoomCatalogComponent implements OnInit {
 
     buildingId;
     roomList;
-    displayedColumns: string[] = ['active', 'name', 'bed', 'description', 'typeRoom', 'id'];
+    displayedColumns: string[] = ['active', 'name', 'bed', 'description', 'floor', 'typeRoom', 'id'];
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
