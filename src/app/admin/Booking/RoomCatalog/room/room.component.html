@@ -114,6 +114,31 @@
                         </div>
 
                         <div class="ml-col-3">
+                          <div class="ml-col-1">
+                          <div class="ap-form__input">
+                              <input 
+                              required
+                              type="text" 
+                              placeholder="Floor*"
+                              id="profile_floor" 
+                              name="profile_floor"
+                              class="ap-form__input-text"
+                              [class.form_error_found]="form_required.no_floor"
+                              [(ngModel)]="roomObj.floor" />
+                              <label 
+                              for="profile_floor" 
+                              class="ap-form__label ap-form__label-text"
+                              [class.ap-form__label-text--active]="roomObj.floor != ''">
+                              Floor <span class="color-red text-bold">*</span>
+                              </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_floor">
+                              Floor is required*
+                              </span>
+                          </div>
+                          </div>
+                      </div>
+
+                        <div class="ml-col-3">
                             <div class="ap-form__input">
                               <input 
                                 type="checkbox"

@@ -33,7 +33,8 @@ export class RoomComponent implements OnInit {
     name: '',
     price: 0,
     typeRoomId: 0,
-    totalBeds: 0
+    totalBeds: 0,
+    floor: ''
   };
   imageRooms;
   typeRoomList;
@@ -49,6 +50,7 @@ export class RoomComponent implements OnInit {
     no_name: false,
     no_description: false,
     no_price: false,
+    no_floor: false,
     perkPhotoCtrl: this._formBuilder.group({ labelCtrl: ['Choose file'], photoCtrl: [], serverUrlCtrl: [] }),
   };
 
@@ -63,7 +65,7 @@ export class RoomComponent implements OnInit {
     this.loader.showLoader();
     this.services.service_general_get_with_params('Room/getRoomById', obj).subscribe((value) => {
       this.roomObj = value.item;
-      console.log('Reponse Memberships ', this.roomObj);
+      console.log('Reponse Room ', this.roomObj);
 
       if( value.item.imageRooms.length != 0 ) this.images_in_gallery.shift();
           value.item.imageRooms.forEach( (image_gallery: any) => {
@@ -110,6 +112,12 @@ export class RoomComponent implements OnInit {
       this.loader.hideLoader();
     } else if (this.roomObj.totalBeds === 0 || this.roomObj.totalBeds === null) {
       this.form_required.no_price = true;
+      this.form_required.no_name = false;
+      this.form_required.no_description = false;
+      this.loader.hideLoader();
+    } else if (this.roomObj.floor.length === 0) {
+      this.form_required.no_floor = true;
+      this.form_required.no_price = false;
       this.form_required.no_name = false;
       this.form_required.no_description = false;
       this.loader.hideLoader();

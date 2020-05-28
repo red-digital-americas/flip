@@ -33,7 +33,8 @@ export class RoomNewComponent implements OnInit {
     name: '',
     price: 0,
     typeRoomId: 0,
-    totalBeds: 0
+    totalBeds: 0,
+    floor: ''
   };
   imageRooms;
   typeRoomList;
@@ -49,6 +50,7 @@ export class RoomNewComponent implements OnInit {
     no_name: false,
     no_description: false,
     no_price: false,
+    no_floor: false,
     perkPhotoCtrl: this._formBuilder.group({ labelCtrl: ['Choose file'], photoCtrl: [], serverUrlCtrl: [] }),
   };
 
@@ -80,6 +82,12 @@ export class RoomNewComponent implements OnInit {
       this.form_required.no_name = false;
       this.form_required.no_description = false;
       this.loader.hideLoader();
+    } else if (this.roomObj.floor.length === 0) {
+      this.form_required.no_floor = true;
+      this.form_required.no_price = false;
+      this.form_required.no_name = false;
+      this.form_required.no_description = false;
+      this.loader.hideLoader();
     } else {
       let gallery: any[] = [];
       this.images_in_gallery.forEach(element => {
@@ -90,7 +98,6 @@ export class RoomNewComponent implements OnInit {
           photoUrl: element.src
         };
         gallery.push(data);
-       
       });
       console.log('New Gallery', gallery);
       this.roomObj.imageRooms = gallery;
