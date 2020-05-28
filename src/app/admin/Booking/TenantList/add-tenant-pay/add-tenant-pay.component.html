@@ -1,883 +1,886 @@
 <booking-navbar [section]="section"></booking-navbar>
-<div class="ml-col-1">
-  <div class="ml-col-1 padding-general-m margin-bottom-m">
+<div class="ap-form ap-form--parent ml-col-1 background-white">
     <div class="ml-col-1">
-
-      <div class="ml-col-1 step-bar">
-        <div class="step-bar__item">
-            <span 
-                class="step-bar__steper"
-                [ngClass]="{'step-bar__steper--on': visible_step.step_1,
-                            'step-bar__steper--off': !visible_step.step_1}">1
-            </span>
-        </div>
-        <div class="step-bar__item">
-            <span 
-                class="step-bar__steper step-bar__steper--right"
-                [ngClass]="{'step-bar__steper--on': visible_step.step_2,
-                            'step-bar__steper--off': !visible_step.step_2}">2
-            </span>
-        </div>
-    </div>
-
-    <div class="ml-col-1" *ngIf="visible_step.step_1" step-form="one">
-      <div class="ml-col-1 margin-tb-min">
-          <h4 class="ap-form__titulo ap-form__titulo--auto-width">
-              Booking Configuration
-          </h4>
-      </div>
-      <div class="ml-col-1">
-          <div class="ml-col-3">
-              <div class="ml-col-1">
-                <div class="ap-form__input">
-                  <select
-                    required
-                    placeholder="Gender"
-                    id="profile_gender" 
-                    name="profile_gender"
-                    (change)="buildSelected( $event )"
-                    class="ap-form__input-text">
-                    <option value="null" disabled>Build*</option>
-                    <option *ngFor="let build of builds_list;" [value]="build.id">
-                      {{ build.name }}
-                    </option> 
-                  </select>
-                  <label 
-                    for="profile_gender" 
-                    class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                    Build
-                  </label>
+        <div class="ml-col-1 padding-general-m margin-bottom-g">
+          <div class="ml-col-1">
+      
+            <div class="ml-col-1 step-bar">
+              <div class="step-bar__item">
+                  <span 
+                      class="step-bar__steper"
+                      [ngClass]="{'step-bar__steper--on': visible_step.step_1,
+                                  'step-bar__steper--off': !visible_step.step_1}">1
+                  </span>
+              </div>
+              <div class="step-bar__item">
+                  <span 
+                      class="step-bar__steper step-bar__steper--right"
+                      [ngClass]="{'step-bar__steper--on': visible_step.step_2,
+                                  'step-bar__steper--off': !visible_step.step_2}">2
+                  </span>
+              </div>
+          </div>
+      
+          <div class="ml-col-1" *ngIf="visible_step.step_1" step-form="one">
+            <div class="ml-col-1 margin-tb-min">
+                <h4 class="ap-form__titulo ap-form__titulo--auto-width">
+                    Booking Configuration
+                </h4>
+            </div>
+            <div class="ml-col-1">
+                <div class="ml-col-3">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <select
+                          required
+                          placeholder="Gender"
+                          id="profile_gender" 
+                          name="profile_gender"
+                          (change)="buildSelected( $event )"
+                          class="ap-form__input-text">
+                          <option value="null" disabled>Build*</option>
+                          <option *ngFor="let build of builds_list;" [value]="build.id">
+                            {{ build.name }}
+                          </option> 
+                        </select>
+                        <label 
+                          for="profile_gender" 
+                          class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                          Build
+                        </label>
+                      </div>
+                    </div>
                 </div>
-              </div>
-          </div>
-      </div>
-      <div class="ml-col-1" *ngIf="build_selected != null">
-          <div class="ml-col-1 margin-top-x">
-              <div class="ml-col-1 margin-bottom-m">
-                  <div class="ap-form__titulo">
-                     {{ current_build.name }}
-                  </div>
-                  <div class="ml-col-1 padding-tb-x color-grey">
-                      {{ current_build.direction }}
-                  </div>
-                  <div class="ml-col-1">
-                      {{ current_build.description }}
-                  </div>
-              </div>
-              <div class="ml-col-1 margin-bottom-x">
-                  <div class="ap-form__titulo margin-bottom-x">
-                     Services Included
-                  </div>
-                  <div class="ml-col-8">
-                      <div class="ml-col-4 margin-bottom-x" *ngFor="let service_included of current_build.services">
-                          <div class="at-service">
-                              <figure class="at-service__icon">
-                                  <img src="{{ service_included.icon }}" class="at-service__icon-img" />
-                              </figure>
-                              <div class="at-service__data color-grey">
-                                  {{ service_included.name }}
-                              </div>
-                          </div>
-                      </div>
-                      <div class="ml-col-1" *ngIf="current_build.services.length == 0">
-                          No Services included
-                      </div>
-                  </div>
-              </div>
-              <div class="ml-col-1 margin-bottom-x">
-                  <div class="ap-form__titulo margin-bottom-x">
-                     Room Types
-                  </div>
-                  <div class="ml-col-4o" *ngIf="current_build.roomType.length != 0">
-                      <div class="at-room__rooms">
-                          <div class="ml-col-1 at-room__rooms-header">
-                              <div class="ml-col-3">Room Type</div>
-                              <div class="ml-col-3">Rooms</div>
-                              <div class="ml-col-3">Active</div>
-                          </div>
-                          <div class="ml-col-1 at-room__rooms-data" *ngFor="let room_included of current_build.roomType;">
-                              <div class="ml-col-3">{{ room_included.name }}</div>
-                              <div class="ml-col-3">{{ room_included.rooms }}</div>
-                              <div class="ml-col-3">{{ room_included.active ? 'Yes' : 'No' }}</div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-1" *ngIf="current_build.roomType.length == 0">
-                      No rooms included
-                  </div>
-              </div>
-              <div class="ml-col-1 top-separator">
-                  <div class="ap-form__titulo margin-tb-min">
-                      Booking Detail
-                  </div>
-                  <div class="ml-col-4">
-                      <div class="ml-col-1">
-                        <div class="ap-form__input">
-                          <input 
-                            required
-                            type="date" 
-                            placeholder="Start Date"
-                            id="bd_sDate" 
-                            name="bd_sDate"
-                            class="ap-form__input-text"
-                            [min]="today"
-                            (change)="ableDateSelection('bd_sDate', 'bd_eDate', 'booking')"
-                            [class.form_error_found]="bt_form_data.no_sdat"
-                            [disabled]="able_section_two"
-                            [(ngModel)]="booking_data.startDate" />
-                          <label 
-                            for="bd_sDate" 
-                            class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                            Start Date
-                          </label>
-                          <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_sdat">
-                              Start date is required*
-                          </span>
+            </div>
+            <div class="ml-col-1" *ngIf="build_selected != null">
+                <div class="ml-col-1 margin-top-x">
+                    <div class="ml-col-1 margin-bottom-m">
+                        <div class="ap-form__titulo">
+                           {{ current_build.name }}
                         </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-4">
-                      <div class="ml-col-1">
-                        <div class="ap-form__input">
-                          <input 
-                            required
-                            type="date" 
-                            placeholder="End Date"
-                            id="bd_eDate" 
-                            name="bd_eDate"
-                            disabled
-                            [class.form_error_found]="bt_form_data.no_edat"
-                            [disabled]="able_section_two"
-                            [(ngModel)]="booking_data.finishDate"
-                            class="ap-form__input-text" />
-                          <label 
-                            for="bd_eDate" 
-                            class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                            End Date
-                          </label>
-                          <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_edat">
-                              End date is required*
-                          </span>
+                        <div class="ml-col-1 padding-tb-x color-grey">
+                            {{ current_build.direction }}
                         </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-4">
-                      <div class="ml-col-1">
-                          <div class="ap-form__input">
-                            <select
-                              required
-                              placeholder="Beds required"
-                              id="bd_aBeds" 
-                              name="bd_aBeds"
-                              [disabled]="able_section_two"
-                              [class.form_error_found]="bt_form_data.no_beds"
-                              [(ngModel)]="booking_data.totalBeds"
-                              (change)="setBedsSelected( $event )"
-                              class="ap-form__input-text">
-                              <option value="null" disabled>Beds required*</option>
-                              <option value="0">No additional bed</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                            </select>
-                            <label 
-                              for="bd_aBeds" 
-                              class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                              Beds required
-                            </label>
-                            <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_beds">
-                              Beds is required*
-                            </span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-4">
-                      <div class="ml-col-1">
-                          <div class="ap-form__input">
-                            <select
-                              required
-                              placeholder="Roomate Type"
-                              id="bd_roomate" 
-                              name="bd_roomate"
-                              [disabled]="able_section_two"
-                              [class.form_error_found]="bt_form_data.no_rtyp"
-                              [(ngModel)]="booking_data.roomateFlip"
-                              class="ap-form__input-text">
-                              <option value="null" disabled>Roomate Type*</option>
-                              <option *ngFor="let roommate of roomates_catalog;" value="{{ roommate.id }}">
-                                  {{ roommate.roomateType1 }}
-                              </option>
-                            </select>
-                            <label 
-                              for="bd_roomate" 
-                              class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                              Roomate Type
-                            </label>
-                            <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_rtyp">
-                              Roomate is required*
-                            </span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-4">
-                      <div class="ml-col-1">
-                          <div class="ap-form__input">
-                            <select
-                              required
-                              placeholder="Roomate gender preference"
-                              id="bd_gender" 
-                              name="bd_gender"
-                              [disabled]="able_section_two"
-                              [class.form_error_found]="bt_form_data.no_gend"
-                              [(ngModel)]="booking_data.roomatePreferences"
-                              class="ap-form__input-text">
-                              <option value="null" disabled>Roomate gender preference*</option>
-                              <option value="1">Male</option>
-                              <option value="2">Female</option>
-                            </select>
-                            <label 
-                              for="bd_gender" 
-                              class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                              Roomate gender preference
-                            </label>
-                            <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_gend">
-                              Roomate gender is required*
-                            </span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-4">
-                      <div class="ml-col-1">
-                          <div class="ap-form__input">
-                            <select
-                              required
-                              placeholder="Do you smoke?"
-                              id="bd_smoke" 
-                              name="bd_smoke"
-                              [disabled]="able_section_two"
-                              [class.form_error_found]="bt_form_data.no_smok"
-                              [(ngModel)]="booking_data.smoke"
-                              class="ap-form__input-text">
-                              <option value="null" disabled>Do you smoke?*</option>
-                              <option value="true">Yes</option>
-                              <option value="false">No</option>
-                            </select>
-                            <label 
-                              for="bd_smoke" 
-                              class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                              Do you smoke?
-                            </label>
-                            <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_smok">
-                              Do you smoke? is required*
-                            </span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-4">
-                      <div class="ml-col-1">
-                          <div class="ap-form__input">
-                            <select
-                              required
-                              placeholder="Pets"
-                              id="bd_pets" 
-                              name="bd_pets"
-                              [disabled]="able_section_two"
-                              [class.form_error_found]="bt_form_data.no_pets"
-                              [(ngModel)]="booking_data.pets"
-                              class="ap-form__input-text">
-                              <option value="null" disabled>Pets*</option>
-                              <option value="true">Yes</option>
-                              <option value="false">No</option>
-                            </select>
-                            <label 
-                              for="bd_pets" 
-                              class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                              Pets
-                            </label>
-                            <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_pets">
-                              Pets is required*
-                            </span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-4">
-                      <div class="ml-col-1">
-                          <div class="ap-form__input">
-                            <select
-                              required
-                              placeholder="Room Type"
-                              id="bd_room" 
-                              name="bd_room"
-                              [disabled]="able_section_two"
-                              [class.form_error_found]="bt_form_data.no_room"
-                              [(ngModel)]="booking_data.roomType"
-                              class="ap-form__input-text">
-                              <option value="null" disabled>Room Type*</option>
-                              <option *ngFor="let typeroom of typesrooms_catalog;" value="{{ typeroom.id }}">
-                                  {{ typeroom.type }}
-                              </option>
-                            </select>
-                            <label 
-                              for="bd_room" 
-                              class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                              Room Type
-                            </label>
-                            <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_room">
-                              Room Type is required*
-                            </span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-1" *ngIf="show_beds_section">
-                      <div class="ap-form__titulo margin-tb-min">
-                          Additional Beds
-                      </div>
-                      <div class="ml-col-1">
-                          <div 
-                              class="ml-col-1 padding-general-m card-style margin-bottom-x" 
-                              *ngFor="let bed of beds_to_add, index as index;">
-                              <div class="ml-col-1" bed="additional">
-                                  <div class="ml-col-4">
-                                      <div class="ml-col-1">
-                                          <div class="ap-form__input">
-                                              <input 
-                                                  required
-                                                  type="text" 
-                                                  placeholder="Name*"
-                                                  id="ab_name_{{ index }}" 
-                                                  name="ab_name_{{ index }}"
-                                                  class="ap-form__input-text"
-                                                  [disabled]="able_section_two"
-                                                  [class.form_error_found]="bed.name == 'no_data'"
-                                                  value="" />
-                                              <label 
-                                                  for="ab_name_{{ index }}" 
-                                                  class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                  Name*
-                                              </label>
-                                              <span class="ml-col-1 form_error_found_label" *ngIf="bed.name == 'no_data'">
-                                                  Name is required*
-                                              </span>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="ml-col-4">
-                                      <div class="ml-col-1">
-                                          <div class="ap-form__input">
-                                              <input 
-                                                  required
-                                                  type="text" 
-                                                  placeholder="Last Name*"
-                                                  id="ab_lname_{{ index }}" 
-                                                  name="ab_lname_{{ index }}"
-                                                  class="ap-form__input-text"
-                                                  [disabled]="able_section_two"
-                                                  [class.form_error_found]="bed.lastName == 'no_data'"
-                                                  value="" />
-                                              <label 
-                                                  for="ab_lname_{{ index }}" 
-                                                  class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                  Last Name* 
-                                              </label>
-                                              <span class="ml-col-1 form_error_found_label" *ngIf="bed.lastName == 'no_data'">
-                                                  Last Name is required*
-                                              </span>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="ml-col-4">
-                                      <div class="ml-col-1">
-                                          <div class="ap-form__input">
-                                              <input 
-                                                  required
-                                                  type="text" 
-                                                  placeholder="Mother Name*"
-                                                  id="ab_mname_{{ index }}" 
-                                                  name="ab_mname_{{ index }}"
-                                                  class="ap-form__input-text"
-                                                  [disabled]="able_section_two"
-                                                  [class.form_error_found]="bed.motherName == 'no_data'"
-                                                  value="" />
-                                              <label 
-                                                  for="ab_mname_{{ index }}" 
-                                                  class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                  Mother Name* 
-                                              </label>
-                                              <span class="ml-col-1 form_error_found_label" *ngIf="bed.motherName == 'no_data'">
-                                                  Mother Name is required*
-                                              </span>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="ml-col-4">
-                                      <div class="ml-col-1">
-                                          <div class="ap-form__input">
-                                              <select
-                                                required
-                                                placeholder="Roomate Type"
-                                                id="profile_gender_{{ index }}" 
-                                                name="profile_gender_{{ index }}"
-                                                [disabled]="able_section_two"
-                                                [class.form_error_found]="bed.genderId == 'no_data'"
-                                                class="ap-form__input-text">
-                                                <option value="0" disabled>Select One*</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                              </select>
-                                              <label 
-                                                for="profile_gender_{{ index }}" 
-                                                class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                Gender
-                                              </label>
-                                              <span class="ml-col-1 form_error_found_label" *ngIf="bed.genderId == 'no_data'">
-                                                  Gender is required*
-                                              </span>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="ml-col-4">
-                                      <div class="ml-col-1">
-                                          <div class="ap-form__input">
-                                              <input 
-                                                  required
-                                                  type="text" 
-                                                  placeholder="Email*"
-                                                  id="ab_mail_{{ index }}" 
-                                                  name="ab_mail_{{ index }}"
-                                                  class="ap-form__input-text"
-                                                  [disabled]="able_section_two"
-                                                  [class.form_error_found]="bed.email == 'no_data'"
-                                                  value="" />
-                                              <label 
-                                                  for="ab_mail_{{ index }}" 
-                                                  class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                  Email* 
-                                              </label>
-                                              <span class="ml-col-1 form_error_found_label" *ngIf="bed.email == 'no_data'">
-                                                  Email is required*
-                                              </span>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="ml-col-4">
-                                      <div class="ml-col-1">
-                                          <div class="ap-form__input">
-                                              <input 
-                                                  required
-                                                  type="text" 
-                                                  placeholder="Phone Number*"
-                                                  id="ab_phone_{{ index }}" 
-                                                  name="ab_phone_{{ index }}"
-                                                  class="ap-form__input-text"
-                                                  [disabled]="able_section_two"
-                                                  [class.form_error_found]="bed.phone == 'no_data'"
-                                                  value="" />
-                                              <label 
-                                                  for="ab_phone_{{ index }}" 
-                                                  class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                  Phone Number* 
-                                              </label>
-                                              <span class="ml-col-1 form_error_found_label" *ngIf="bed.phone == 'no_data'">
-                                                  Phone Number is required*
-                                              </span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-1 ap-form__buttons margin-top-x">
-                      <button 
-                          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
-                          *ngIf="!able_section_two"
-                          (click)="validateBookingDetailForm()">
-                          Next
-                      </button>
-                      <button 
-                          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
-                          *ngIf="able_section_two"
-                          (click)="ableBookingDetail( false )">
-                          Edit Booking Detail
-                      </button>
-                  </div>
-              </div>
-              <div class="ml-col-1" *ngIf="able_section_two">
-                  <div class="ml-col-1 top-separator margin-top-x">
-                      <div class="ap-form__titulo margin-tb-min">
-                          Select Room
-                      </div>
-                      <div class="ml-col-1 at-bcard">
-                          <div 
-                              class="at-bcard__container cursor-pointer" 
-                              *ngFor="let room of rooms_cards;"
-                              (click)="selectThisRoom( room )"
-                              [class.at-bcard__container--selected]="room?.active">
-                              <div class="ml-col-1 at-bcard__title text-bold margin-bottom-x">
-                                  {{ room.name }}
-                              </div>
-                              <div class="ml-col-1">
-                                  {{ room.description }}
-                              </div>
-                              <div class="ml-col-1 margin-top-x">
-                                  <div class="ml-col-2">
-                                      <div class="ml-col-1">
-                                          Beds:
-                                      </div>
-                                      <div class="ml-col-1">
-                                          {{ room.totalBeds }}
-                                      </div>
-                                  </div>
-                                  <div class="ml-col-2">
-                                      <div class="ml-col-1">
-                                          Floor:
-                                      </div>
-                                      <div class="ml-col-1">
-                                          {{ room.totalBeds }}
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="ml-col-1 margin-top-x">
-                                  <div class="ml-col-1 at-bcard__stitle">Photos</div>
-                                  <figure class="ml-col-1 margin-tb-x at-bcard__album">
-                                      <img *ngFor="let room_image of room.imageRooms;" 
-                                          src="{{ room_image.photoUrl }}" 
-                                          class="at-bcard__album-photo" />
-                                  </figure>
-                              </div>
-                          </div>
-                          <div class="ml-col-1" *ngIf="rooms_cards?.length == 0">
-                              No Rooms avaible
-                          </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-1 top-separator margin-top-x">
-                      <div class="ap-form__titulo margin-tb-min">
-                          Avaible Memberships
-                      </div>
-                      <div class="ml-col-1 at-bcard">
-                          <div 
-                              class="at-bcard__container cursor-pointer" 
-                              *ngFor="let membership of memberships_cards;"
-                              (click)="selectThisMembership( membership )"
-                              [class.at-bcard__container--selected]="membership?.active">
-                              <div class="ml-col-1 at-bcard__title text-bold margin-bottom-x">
-                                  {{ membership.name }}
-                              </div>
-                              <div class="ml-col-1">
-                                  {{ membership.description }}
-                              </div>
-                              <div class="ml-col-1 margin-top-x">
-                                  <div class="ml-col-7">
-                                      <div class="ml-col-1 at-bcard__stitle margin-bottom-x">Characteristics</div>
-                                      <div class="ml-col-2 ap-form__sdato ap-form__sdato--no-padding">
-                                          <div class="ml-col-1">
-                                              Room type:
-                                          </div>
-                                          <div class="ml-col-1">
-                                              {{ membership.name }}
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="ml-col-3o">
-                                      <div class="ml-col-1 margin-bottom-x at-bcard__stitle">Cost per person</div>
-                                      <div class="ml-col-2 ap-form__sdato ap-form__sdato--no-padding">
-                                          <div class="ml-col-1 at-bcard__cost text-ultra">
-                                              {{ membership.price | currency }}
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="ml-col-1 margin-top-x">
-                                  <div class="ml-col-1 margin-bottom-x at-bcard__stitle">Services Included</div>
-                                  <div class="ml-col-1">
-                                      <div class="ml-col-4 margin-bottom-x" *ngFor="let room_service of membership.services">
-                                          <span class="color-yellow">*</span>{{ room_service.name }}
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="ml-col-1" *ngIf="memberships_cards?.length == 0">
-                              No Memberships avaible
-                          </div>
-                      </div>
-                  </div>
-                  <div class="ml-col-1 margin-bottom-m top-separator" *ngIf="additional_services_section">
-                      <div class="ml-col-1 margin-tb-min">
-                          <div class="ap-form__titulo ap-form__titulo--auto-width">
-                              Additional Services
-                          </div>
-                          <button 
-                              class="ap-form__rButton button-green"
-                              (click)="showModal('services')">
-                              Add service
-                          </button>
-                      </div>
-                      <div class="ml-col-1 margin-bottom-m" *ngIf="additional_services_selected.length != 0">
-                          <div class="at-room__rooms">
-                              <div class="ml-col-1 at-room__rooms-header">
-                                  <div class="table-as__row-i"></div>
-                                  <div class="table-as__row-s text-left">Service</div>
-                                  <div class="table-as__row-s">Lapse</div>
-                                  <div class="table-as__row-s">Start Date</div>
-                                  <div class="table-as__row-s">End Date</div>
-                                  <div class="table-as__row-s">Ammount</div>
-                                  <div class="table-as__row-d"></div>
-                              </div>
-                              <div class="ml-col-1 at-room__rooms-data" *ngFor="let service of additional_services_selected;">
-                                  <div class="table-as__row-i">
-                                      <figure class="table-as__icon">
-                                          <img src="{{ service.icon }}" class="table-as__icon-img" />
-                                      </figure> 
-                                  </div>
-                                  <div class="table-as__row-s text-left">{{ service.name }}</div>
-                                  <div class="table-as__row-s">{{ service.lapse == '1' ? 'Recurrent' : 'Once' }}</div>
-                                  <div class="table-as__row-s">{{ service.startDate | date }}</div>
-                                  <div class="table-as__row-s">{{ service.endDate | date }}</div>
-                                  <div class="table-as__row-s">{{ service.total_ammount | currency }}</div>
-                                  <div class="table-as__row-d">
-                                      <span 
-                                          class="text-bold cursor-pointer"
-                                          (click)="removeAdditionalServiceSelected( service )">x
-                                      </span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="ml-col-1 top-separator margin-bottom-m">
-                          <div class="ml-col-1 margin-tb-min">
-                              <div class="ap-form__titulo">
-                                  Resume
-                              </div>
-                          </div>
-                          <div class="ml-col-1 margin-bottom-x">
-                              <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
-                                  <div class="ml-col-1">
-                                      Start Date
-                                  </div>
-                                  <div class="ml-col-1 text-bold">
-                                      {{ booking_data.startDate | date }}
-                                  </div>
-                              </div>
-                              <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
-                                  <div class="ml-col-1">
-                                      End Date
-                                  </div>
-                                  <div class="ml-col-1 text-bold">
-                                      {{ booking_data.finishDate | date }}
-                                  </div>
-                              </div>
-                              <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
-                                  <div class="ml-col-1">
-                                      Total Beds
-                                  </div>
-                                  <div class="ml-col-1 text-bold">
-                                      {{ getTotalBeds( booking_data.totalBeds ) }}
-                                  </div>
-                              </div>
-                              <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
-                                  <div class="ml-col-1">
-                                      Roomate Type
-                                  </div>
-                                  <div class="ml-col-1 text-bold">
-                                      {{ getNameRoomateType( booking_data.roomateFlip ) }}
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="ml-col-1 margin-bottom-x">
-                              <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
-                                  <div class="ml-col-1">
-                                      Roomate Gender Preference
-                                  </div>
-                                  <div class="ml-col-1 text-bold">
-                                      {{ booking_data.roomatePreferences == '1' ? 'Male' : 'Female' }}
-                                  </div>
-                              </div>
-                              <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
-                                  <div class="ml-col-1">
-                                      Could you smoke?
-                                  </div>
-                                  <div class="ml-col-1 text-bold">
-                                      {{ booking_data.smoke == 'true' ? 'Yes' : 'No' }}
-                                  </div>
-                              </div>
-                              <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
-                                  <div class="ml-col-1">
-                                      Pet friendly
-                                  </div>
-                                  <div class="ml-col-1 text-bold">
-                                      {{ booking_data.pets == 'true' ? 'Yes' : 'No' }}
-                                  </div>
-                              </div>
-                              <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
-                                  <div class="ml-col-1">
-                                      Room Type
-                                  </div>
-                                  <div class="ml-col-1 text-bold">
-                                      {{ room_selected.name }}
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="ml-col-1 margin-top-m">
-                              <div class="ml-col-2 margin-bottom-x">
-                                  <div class="ml-col-1 text-bold margin-bottom-x">
-                                     {{ membership_selected.name }}
-                                  </div>
-                                  <div class="ml-col-1 padding-right-m">
-                                      {{ membership_selected.description }}
-                                  </div>
-                              </div>
-                              <div class="ml-col-5e3">
-                                  <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
-                                      <div class="ml-col-1 padding-bottom-x">
-                                          Nights reserved:
-                                      </div>
-                                      <div class="ml-col-1 text-bold">
-                                          {{ getDaysReserved() }}
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="ml-col-5e3">
-                                  <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
-                                      <div class="ml-col-1 padding-bottom-x">
-                                          Total Beds:
-                                      </div>
-                                      <div class="ml-col-1 text-bold">
-                                          {{ getTotalBeds( booking_data.totalBeds ) }}
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="ml-col-5e3">
-                                  <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-right">
-                                      <div class="ml-col-1 padding-bottom-x">
-                                          Ammount:
-                                      </div>
-                                      <div class="ml-col-1 text-bold">
-                                          {{ getTotalAmmount() | currency }}
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="ml-col-1">
-                              <div class="ml-col-1 text-bold margin-bottom-x">
-                                  Services 
-                              </div>
-                          </div>
-                          <table 
-                              mat-table 
-                              mat-sort 
-                              [dataSource]="all_services_selected" 
-                              class="mat-elevation-z8 table--no-shadow margin-bottom-min" 
-                              style="width: 100%;">
-                              <ng-container matColumnDef="icon">
-                                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"></th>
-                                  <td mat-cell *matCellDef="let element" class="table__data table__icon--width table__data-center">
-                                      <figure class="table__icon">
-                                          <img src="{{ element.icon }}" 
-                                               class="table__icon-img filter-brightness" />
-                                      </figure>
-                                  </td>
-                              </ng-container>
-                              <ng-container matColumnDef="service">
-                                  <th mat-header-cell *matHeaderCellDef class="table__header">Service</th>
-                                  <td mat-cell *matCellDef="let element" class="table__data">
-                                      {{ element.name }}
-                                  </td>
-                              </ng-container>
-                              <ng-container matColumnDef="type">
-                                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Type</th>
-                                  <td mat-cell *matCellDef="let element" class="table__data table__data-center">
-                                      {{ element.type_service }}
-                                  </td>
-                              </ng-container>
-                              <ng-container matColumnDef="lapse">
-                                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Lapse</th>
-                                  <td mat-cell *matCellDef="let element" class="table__data table__data-center">
-                                      {{ element.lapse == '1' ? 'Recurrent' : 'Once' }}
-                                  </td>
-                              </ng-container>
-                              <ng-container matColumnDef="sdate">
-                                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Start Date</th>
-                                  <td mat-cell *matCellDef="let element" class="table__data table__data-center">
-                                      {{ element.startDate | date }}
-                                  </td>
-                              </ng-container>
-                              <ng-container matColumnDef="edate">
-                                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">End Date</th>
-                                  <td mat-cell *matCellDef="let element" class="table__data table__data-center">
-                                      {{ element.endDate | date }}
-                                  </td>
-                              </ng-container>
-                              <ng-container matColumnDef="ammount">
-                                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-right">Ammount</th>
-                                  <td mat-cell *matCellDef="let element" class="table__data table__data-right">
-                                      {{ element.total_ammount | currency }}
-                                  </td>
-                              </ng-container>
-                              <tr mat-header-row *matHeaderRowDef="table_services_resumen"></tr>
-                              <tr mat-row *matRowDef="let row; columns: table_services_resumen;"></tr>
-                          </table>
-                          <div class="table__footer top-separator table__footer--no-border-top">
-                              <div class="table__footer-dato">
-                                  <p class="table__footer-dato-a">Total:</p> 
-                                  <span class="text-bold table__footer-dato-b table__footer-dato--big">
-                                      {{ total_services_ammount | currency }}
-                                  </span>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="ml-col-2 padding-top-m" *ngIf="!show_payment_form">
-                        <div class="credit-card">
-                          <div class="credit-card__container" >
-                            <div class="credit-card__card card-style">
-                              <button class="credit-card__card-favorite"
-                                [class.credit-card__card-favorite--desactive]="ccObj.main == 0">
-                              </button>
-                              <h4 class="credit-card__card-titulo">
-                                {{ ccObj.name }}
-                              </h4>
-                              <p class="credit-card__card-number credit-card__card-number--icon" [ngClass]="{
-                                'credit-card__card-number--visa' : ccObj.kind == 'visa',
-                                'credit-card__card-number--mcard' : ccObj.kind == 'mcard',
-                                'credit-card__card-number--american' : ccObj.kind == 'american',
-                                'credit-card__card-number--default' : ccObj.kind == ''
-                              }">
-                                <span>****</span>
-                                <span>****</span>
-                                <span>****</span>
-                                <span>{{ ccObj.number | slice:-4 }}</span>
-                              </p>
-                              <p class="credit-card__card-date">
-                                {{ ccObj.month }}/{{ ccObj.year | slice:-2 }}
-                              </p>
+                        <div class="ml-col-1">
+                            {{ current_build.description }}
+                        </div>
+                    </div>
+                    <div class="ml-col-1 margin-bottom-x">
+                        <div class="ap-form__titulo margin-bottom-x">
+                           Services Included
+                        </div>
+                        <div class="ml-col-8">
+                            <div class="ml-col-4 margin-bottom-x" *ngFor="let service_included of current_build.services">
+                                <div class="at-service">
+                                    <figure class="at-service__icon">
+                                        <img src="{{ service_included.icon }}" class="at-service__icon-img" />
+                                    </figure>
+                                    <div class="at-service__data color-grey">
+                                        {{ service_included.name }}
+                                    </div>
+                                </div>
                             </div>
-                          </div>
+                            <div class="ml-col-1" *ngIf="current_build.services.length == 0">
+                                No Services included
+                            </div>
                         </div>
-                      </div>
-
-                      <div class="ml-col-1">
-                          <button 
-                              class="ap-form__rButton button-black button-big"
-                              (click)="PayBooking()">
-                              Confirm Pay
-                          </button>
-                      </div>
-                  </div>
-              </div>
+                    </div>
+                    <div class="ml-col-1 margin-bottom-x">
+                        <div class="ap-form__titulo margin-bottom-x">
+                           Room Types
+                        </div>
+                        <div class="ml-col-4o" *ngIf="current_build.roomType.length != 0">
+                            <div class="at-room__rooms">
+                                <div class="ml-col-1 at-room__rooms-header">
+                                    <div class="ml-col-3">Room Type</div>
+                                    <div class="ml-col-3">Rooms</div>
+                                    <div class="ml-col-3">Active</div>
+                                </div>
+                                <div class="ml-col-1 at-room__rooms-data" *ngFor="let room_included of current_build.roomType;">
+                                    <div class="ml-col-3">{{ room_included.name }}</div>
+                                    <div class="ml-col-3">{{ room_included.rooms }}</div>
+                                    <div class="ml-col-3">{{ room_included.active ? 'Yes' : 'No' }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-1" *ngIf="current_build.roomType.length == 0">
+                            No rooms included
+                        </div>
+                    </div>
+                    <div class="ml-col-1 top-separator">
+                        <div class="ap-form__titulo margin-tb-min">
+                            Booking Detail
+                        </div>
+                        <div class="ml-col-4">
+                            <div class="ml-col-1">
+                              <div class="ap-form__input">
+                                <input 
+                                  required
+                                  type="date" 
+                                  placeholder="Start Date"
+                                  id="bd_sDate" 
+                                  name="bd_sDate"
+                                  class="ap-form__input-text"
+                                  [min]="today"
+                                  (change)="ableDateSelection('bd_sDate', 'bd_eDate', 'booking')"
+                                  [class.form_error_found]="bt_form_data.no_sdat"
+                                  [disabled]="able_section_two"
+                                  [(ngModel)]="booking_data.startDate" />
+                                <label 
+                                  for="bd_sDate" 
+                                  class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                  Start Date
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_sdat">
+                                    Start date is required*
+                                </span>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-4">
+                            <div class="ml-col-1">
+                              <div class="ap-form__input">
+                                <input 
+                                  required
+                                  type="date" 
+                                  placeholder="End Date"
+                                  id="bd_eDate" 
+                                  name="bd_eDate"
+                                  disabled
+                                  [class.form_error_found]="bt_form_data.no_edat"
+                                  [disabled]="able_section_two"
+                                  [(ngModel)]="booking_data.finishDate"
+                                  class="ap-form__input-text" />
+                                <label 
+                                  for="bd_eDate" 
+                                  class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                  End Date
+                                </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_edat">
+                                    End date is required*
+                                </span>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-4">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <select
+                                    required
+                                    placeholder="Beds required"
+                                    id="bd_aBeds" 
+                                    name="bd_aBeds"
+                                    [disabled]="able_section_two"
+                                    [class.form_error_found]="bt_form_data.no_beds"
+                                    [(ngModel)]="booking_data.totalBeds"
+                                    (change)="setBedsSelected( $event )"
+                                    class="ap-form__input-text">
+                                    <option value="null" disabled>Beds required*</option>
+                                    <option value="0">No additional bed</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                  </select>
+                                  <label 
+                                    for="bd_aBeds" 
+                                    class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                    Beds required
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_beds">
+                                    Beds is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-4">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <select
+                                    required
+                                    placeholder="Roomate Type"
+                                    id="bd_roomate" 
+                                    name="bd_roomate"
+                                    [disabled]="able_section_two"
+                                    [class.form_error_found]="bt_form_data.no_rtyp"
+                                    [(ngModel)]="booking_data.roomateFlip"
+                                    class="ap-form__input-text">
+                                    <option value="null" disabled>Roomate Type*</option>
+                                    <option *ngFor="let roommate of roomates_catalog;" value="{{ roommate.id }}">
+                                        {{ roommate.roomateType1 }}
+                                    </option>
+                                  </select>
+                                  <label 
+                                    for="bd_roomate" 
+                                    class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                    Roomate Type
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_rtyp">
+                                    Roomate is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-4">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <select
+                                    required
+                                    placeholder="Roomate gender preference"
+                                    id="bd_gender" 
+                                    name="bd_gender"
+                                    [disabled]="able_section_two"
+                                    [class.form_error_found]="bt_form_data.no_gend"
+                                    [(ngModel)]="booking_data.roomatePreferences"
+                                    class="ap-form__input-text">
+                                    <option value="null" disabled>Roomate gender preference*</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                  </select>
+                                  <label 
+                                    for="bd_gender" 
+                                    class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                    Roomate gender preference
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_gend">
+                                    Roomate gender is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-4">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <select
+                                    required
+                                    placeholder="Do you smoke?"
+                                    id="bd_smoke" 
+                                    name="bd_smoke"
+                                    [disabled]="able_section_two"
+                                    [class.form_error_found]="bt_form_data.no_smok"
+                                    [(ngModel)]="booking_data.smoke"
+                                    class="ap-form__input-text">
+                                    <option value="null" disabled>Do you smoke?*</option>
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                  </select>
+                                  <label 
+                                    for="bd_smoke" 
+                                    class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                    Do you smoke?
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_smok">
+                                    Do you smoke? is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-4">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <select
+                                    required
+                                    placeholder="Pets"
+                                    id="bd_pets" 
+                                    name="bd_pets"
+                                    [disabled]="able_section_two"
+                                    [class.form_error_found]="bt_form_data.no_pets"
+                                    [(ngModel)]="booking_data.pets"
+                                    class="ap-form__input-text">
+                                    <option value="null" disabled>Pets*</option>
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                  </select>
+                                  <label 
+                                    for="bd_pets" 
+                                    class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                    Pets
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_pets">
+                                    Pets is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-4">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <select
+                                    required
+                                    placeholder="Room Type"
+                                    id="bd_room" 
+                                    name="bd_room"
+                                    [disabled]="able_section_two"
+                                    [class.form_error_found]="bt_form_data.no_room"
+                                    [(ngModel)]="booking_data.roomType"
+                                    class="ap-form__input-text">
+                                    <option value="null" disabled>Room Type*</option>
+                                    <option *ngFor="let typeroom of typesrooms_catalog;" value="{{ typeroom.id }}">
+                                        {{ typeroom.type }}
+                                    </option>
+                                  </select>
+                                  <label 
+                                    for="bd_room" 
+                                    class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                    Room Type
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_room">
+                                    Room Type is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-1" *ngIf="show_beds_section">
+                            <div class="ap-form__titulo margin-tb-min">
+                                Additional Beds
+                            </div>
+                            <div class="ml-col-1">
+                                <div 
+                                    class="ml-col-1 padding-general-m card-style margin-bottom-x" 
+                                    *ngFor="let bed of beds_to_add, index as index;">
+                                    <div class="ml-col-1" bed="additional">
+                                        <div class="ml-col-4">
+                                            <div class="ml-col-1">
+                                                <div class="ap-form__input">
+                                                    <input 
+                                                        required
+                                                        type="text" 
+                                                        placeholder="Name*"
+                                                        id="ab_name_{{ index }}" 
+                                                        name="ab_name_{{ index }}"
+                                                        class="ap-form__input-text"
+                                                        [disabled]="able_section_two"
+                                                        [class.form_error_found]="bed.name == 'no_data'"
+                                                        value="" />
+                                                    <label 
+                                                        for="ab_name_{{ index }}" 
+                                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                                        Name*
+                                                    </label>
+                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.name == 'no_data'">
+                                                        Name is required*
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-col-4">
+                                            <div class="ml-col-1">
+                                                <div class="ap-form__input">
+                                                    <input 
+                                                        required
+                                                        type="text" 
+                                                        placeholder="Last Name*"
+                                                        id="ab_lname_{{ index }}" 
+                                                        name="ab_lname_{{ index }}"
+                                                        class="ap-form__input-text"
+                                                        [disabled]="able_section_two"
+                                                        [class.form_error_found]="bed.lastName == 'no_data'"
+                                                        value="" />
+                                                    <label 
+                                                        for="ab_lname_{{ index }}" 
+                                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                                        Last Name* 
+                                                    </label>
+                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.lastName == 'no_data'">
+                                                        Last Name is required*
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-col-4">
+                                            <div class="ml-col-1">
+                                                <div class="ap-form__input">
+                                                    <input 
+                                                        required
+                                                        type="text" 
+                                                        placeholder="Mother Name*"
+                                                        id="ab_mname_{{ index }}" 
+                                                        name="ab_mname_{{ index }}"
+                                                        class="ap-form__input-text"
+                                                        [disabled]="able_section_two"
+                                                        [class.form_error_found]="bed.motherName == 'no_data'"
+                                                        value="" />
+                                                    <label 
+                                                        for="ab_mname_{{ index }}" 
+                                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                                        Mother Name* 
+                                                    </label>
+                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.motherName == 'no_data'">
+                                                        Mother Name is required*
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-col-4">
+                                            <div class="ml-col-1">
+                                                <div class="ap-form__input">
+                                                    <select
+                                                      required
+                                                      placeholder="Roomate Type"
+                                                      id="profile_gender_{{ index }}" 
+                                                      name="profile_gender_{{ index }}"
+                                                      [disabled]="able_section_two"
+                                                      [class.form_error_found]="bed.genderId == 'no_data'"
+                                                      class="ap-form__input-text">
+                                                      <option value="0" disabled>Select One*</option>
+                                                      <option value="1">Male</option>
+                                                      <option value="2">Female</option>
+                                                    </select>
+                                                    <label 
+                                                      for="profile_gender_{{ index }}" 
+                                                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                                      Gender
+                                                    </label>
+                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.genderId == 'no_data'">
+                                                        Gender is required*
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-col-4">
+                                            <div class="ml-col-1">
+                                                <div class="ap-form__input">
+                                                    <input 
+                                                        required
+                                                        type="text" 
+                                                        placeholder="Email*"
+                                                        id="ab_mail_{{ index }}" 
+                                                        name="ab_mail_{{ index }}"
+                                                        class="ap-form__input-text"
+                                                        [disabled]="able_section_two"
+                                                        [class.form_error_found]="bed.email == 'no_data'"
+                                                        value="" />
+                                                    <label 
+                                                        for="ab_mail_{{ index }}" 
+                                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                                        Email* 
+                                                    </label>
+                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.email == 'no_data'">
+                                                        Email is required*
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-col-4">
+                                            <div class="ml-col-1">
+                                                <div class="ap-form__input">
+                                                    <input 
+                                                        required
+                                                        type="text" 
+                                                        placeholder="Phone Number*"
+                                                        id="ab_phone_{{ index }}" 
+                                                        name="ab_phone_{{ index }}"
+                                                        class="ap-form__input-text"
+                                                        [disabled]="able_section_two"
+                                                        [class.form_error_found]="bed.phone == 'no_data'"
+                                                        value="" />
+                                                    <label 
+                                                        for="ab_phone_{{ index }}" 
+                                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                                        Phone Number* 
+                                                    </label>
+                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.phone == 'no_data'">
+                                                        Phone Number is required*
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-1 ap-form__buttons margin-top-x">
+                            <button 
+                                class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
+                                *ngIf="!able_section_two"
+                                (click)="validateBookingDetailForm()">
+                                Next
+                            </button>
+                            <button 
+                                class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
+                                *ngIf="able_section_two"
+                                (click)="ableBookingDetail( false )">
+                                Edit Booking Detail
+                            </button>
+                        </div>
+                    </div>
+                    <div class="ml-col-1" *ngIf="able_section_two">
+                        <div class="ml-col-1 top-separator margin-top-x">
+                            <div class="ap-form__titulo margin-tb-min">
+                                Select Room
+                            </div>
+                            <div class="ml-col-1 at-bcard">
+                                <div 
+                                    class="at-bcard__container cursor-pointer" 
+                                    *ngFor="let room of rooms_cards;"
+                                    (click)="selectThisRoom( room )"
+                                    [class.at-bcard__container--selected]="room?.active">
+                                    <div class="ml-col-1 at-bcard__title text-bold margin-bottom-x">
+                                        {{ room.name }}
+                                    </div>
+                                    <div class="ml-col-1">
+                                        {{ room.description }}
+                                    </div>
+                                    <div class="ml-col-1 margin-top-x">
+                                        <div class="ml-col-2">
+                                            <div class="ml-col-1">
+                                                Beds:
+                                            </div>
+                                            <div class="ml-col-1">
+                                                {{ room.totalBeds }}
+                                            </div>
+                                        </div>
+                                        <div class="ml-col-2">
+                                            <div class="ml-col-1">
+                                                Floor:
+                                            </div>
+                                            <div class="ml-col-1">
+                                                {{ room.totalBeds }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-1 margin-top-x">
+                                        <div class="ml-col-1 at-bcard__stitle">Photos</div>
+                                        <figure class="ml-col-1 margin-tb-x at-bcard__album">
+                                            <img *ngFor="let room_image of room.imageRooms;" 
+                                                src="{{ room_image.photoUrl }}" 
+                                                class="at-bcard__album-photo" />
+                                        </figure>
+                                    </div>
+                                </div>
+                                <div class="ml-col-1" *ngIf="rooms_cards?.length == 0">
+                                    No Rooms avaible
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-1 top-separator margin-top-x">
+                            <div class="ap-form__titulo margin-tb-min">
+                                Avaible Memberships
+                            </div>
+                            <div class="ml-col-1 at-bcard">
+                                <div 
+                                    class="at-bcard__container cursor-pointer" 
+                                    *ngFor="let membership of memberships_cards;"
+                                    (click)="selectThisMembership( membership )"
+                                    [class.at-bcard__container--selected]="membership?.active">
+                                    <div class="ml-col-1 at-bcard__title text-bold margin-bottom-x">
+                                        {{ membership.name }}
+                                    </div>
+                                    <div class="ml-col-1">
+                                        {{ membership.description }}
+                                    </div>
+                                    <div class="ml-col-1 margin-top-x">
+                                        <div class="ml-col-7">
+                                            <div class="ml-col-1 at-bcard__stitle margin-bottom-x">Characteristics</div>
+                                            <div class="ml-col-2 ap-form__sdato ap-form__sdato--no-padding">
+                                                <div class="ml-col-1">
+                                                    Room type:
+                                                </div>
+                                                <div class="ml-col-1">
+                                                    {{ membership.name }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-col-3o">
+                                            <div class="ml-col-1 margin-bottom-x at-bcard__stitle">Cost per person</div>
+                                            <div class="ml-col-2 ap-form__sdato ap-form__sdato--no-padding">
+                                                <div class="ml-col-1 at-bcard__cost text-ultra">
+                                                    {{ membership.price | currency }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-1 margin-top-x">
+                                        <div class="ml-col-1 margin-bottom-x at-bcard__stitle">Services Included</div>
+                                        <div class="ml-col-1">
+                                            <div class="ml-col-4 margin-bottom-x" *ngFor="let room_service of membership.services">
+                                                <span class="color-yellow">*</span>{{ room_service.name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ml-col-1" *ngIf="memberships_cards?.length == 0">
+                                    No Memberships avaible
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-1 margin-bottom-m top-separator" *ngIf="additional_services_section">
+                            <div class="ml-col-1 margin-tb-min">
+                                <div class="ap-form__titulo ap-form__titulo--auto-width">
+                                    Additional Services
+                                </div>
+                                <button 
+                                    class="ap-form__rButton button-green"
+                                    (click)="showModal('services')">
+                                    Add service
+                                </button>
+                            </div>
+                            <div class="ml-col-1 margin-bottom-m" *ngIf="additional_services_selected.length != 0">
+                                <div class="at-room__rooms">
+                                    <div class="ml-col-1 at-room__rooms-header">
+                                        <div class="table-as__row-i"></div>
+                                        <div class="table-as__row-s text-left">Service</div>
+                                        <div class="table-as__row-s">Lapse</div>
+                                        <div class="table-as__row-s">Start Date</div>
+                                        <div class="table-as__row-s">End Date</div>
+                                        <div class="table-as__row-s">Ammount</div>
+                                        <div class="table-as__row-d"></div>
+                                    </div>
+                                    <div class="ml-col-1 at-room__rooms-data" *ngFor="let service of additional_services_selected;">
+                                        <div class="table-as__row-i">
+                                            <figure class="table-as__icon">
+                                                <img src="{{ service.icon }}" class="table-as__icon-img" />
+                                            </figure> 
+                                        </div>
+                                        <div class="table-as__row-s text-left">{{ service.name }}</div>
+                                        <div class="table-as__row-s">{{ service.lapse == '1' ? 'Recurrent' : 'Once' }}</div>
+                                        <div class="table-as__row-s">{{ service.startDate | date }}</div>
+                                        <div class="table-as__row-s">{{ service.endDate | date }}</div>
+                                        <div class="table-as__row-s">{{ service.total_ammount | currency }}</div>
+                                        <div class="table-as__row-d">
+                                            <span 
+                                                class="text-bold cursor-pointer"
+                                                (click)="removeAdditionalServiceSelected( service )">x
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ml-col-1 top-separator margin-bottom-m">
+                                <div class="ml-col-1 margin-tb-min">
+                                    <div class="ap-form__titulo">
+                                        Resume
+                                    </div>
+                                </div>
+                                <div class="ml-col-1 margin-bottom-x">
+                                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                                        <div class="ml-col-1">
+                                            Start Date
+                                        </div>
+                                        <div class="ml-col-1 text-bold">
+                                            {{ booking_data.startDate | date }}
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                                        <div class="ml-col-1">
+                                            End Date
+                                        </div>
+                                        <div class="ml-col-1 text-bold">
+                                            {{ booking_data.finishDate | date }}
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                                        <div class="ml-col-1">
+                                            Total Beds
+                                        </div>
+                                        <div class="ml-col-1 text-bold">
+                                            {{ getTotalBeds( booking_data.totalBeds ) }}
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                                        <div class="ml-col-1">
+                                            Roomate Type
+                                        </div>
+                                        <div class="ml-col-1 text-bold">
+                                            {{ getNameRoomateType( booking_data.roomateFlip ) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ml-col-1 margin-bottom-x">
+                                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                                        <div class="ml-col-1">
+                                            Roomate Gender Preference
+                                        </div>
+                                        <div class="ml-col-1 text-bold">
+                                            {{ booking_data.roomatePreferences == '1' ? 'Male' : 'Female' }}
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                                        <div class="ml-col-1">
+                                            Could you smoke?
+                                        </div>
+                                        <div class="ml-col-1 text-bold">
+                                            {{ booking_data.smoke == 'true' ? 'Yes' : 'No' }}
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                                        <div class="ml-col-1">
+                                            Pet friendly
+                                        </div>
+                                        <div class="ml-col-1 text-bold">
+                                            {{ booking_data.pets == 'true' ? 'Yes' : 'No' }}
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                                        <div class="ml-col-1">
+                                            Room Type
+                                        </div>
+                                        <div class="ml-col-1 text-bold">
+                                            {{ room_selected.name }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ml-col-1 margin-top-m">
+                                    <div class="ml-col-2 margin-bottom-x">
+                                        <div class="ml-col-1 text-bold margin-bottom-x">
+                                           {{ membership_selected.name }}
+                                        </div>
+                                        <div class="ml-col-1 padding-right-m">
+                                            {{ membership_selected.description }}
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-5e3">
+                                        <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
+                                            <div class="ml-col-1 padding-bottom-x">
+                                                Nights reserved:
+                                            </div>
+                                            <div class="ml-col-1 text-bold">
+                                                {{ getDaysReserved() }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-5e3">
+                                        <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
+                                            <div class="ml-col-1 padding-bottom-x">
+                                                Total Beds:
+                                            </div>
+                                            <div class="ml-col-1 text-bold">
+                                                {{ getTotalBeds( booking_data.totalBeds ) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ml-col-5e3">
+                                        <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-right">
+                                            <div class="ml-col-1 padding-bottom-x">
+                                                Ammount:
+                                            </div>
+                                            <div class="ml-col-1 text-bold">
+                                                {{ getTotalAmmount() | currency }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ml-col-1">
+                                    <div class="ml-col-1 text-bold margin-bottom-x">
+                                        Services 
+                                    </div>
+                                </div>
+                                <table 
+                                    mat-table 
+                                    mat-sort 
+                                    [dataSource]="all_services_selected" 
+                                    class="mat-elevation-z8 table--no-shadow margin-bottom-min" 
+                                    style="width: 100%;">
+                                    <ng-container matColumnDef="icon">
+                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"></th>
+                                        <td mat-cell *matCellDef="let element" class="table__data table__icon--width table__data-center">
+                                            <figure class="table__icon">
+                                                <img src="{{ element.icon }}" 
+                                                     class="table__icon-img filter-brightness" />
+                                            </figure>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="service">
+                                        <th mat-header-cell *matHeaderCellDef class="table__header">Service</th>
+                                        <td mat-cell *matCellDef="let element" class="table__data">
+                                            {{ element.name }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="type">
+                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Type</th>
+                                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                                            {{ element.type_service }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="lapse">
+                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Lapse</th>
+                                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                                            {{ element.lapse == '1' ? 'Recurrent' : 'Once' }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="sdate">
+                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Start Date</th>
+                                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                                            {{ element.startDate | date }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="edate">
+                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">End Date</th>
+                                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                                            {{ element.endDate | date }}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="ammount">
+                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-right">Ammount</th>
+                                        <td mat-cell *matCellDef="let element" class="table__data table__data-right">
+                                            {{ element.total_ammount | currency }}
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="table_services_resumen"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: table_services_resumen;"></tr>
+                                </table>
+                                <div class="table__footer top-separator table__footer--no-border-top">
+                                    <div class="table__footer-dato">
+                                        <p class="table__footer-dato-a">Total:</p> 
+                                        <span class="text-bold table__footer-dato-b table__footer-dato--big">
+                                            {{ total_services_ammount | currency }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+      
+                            <div class="ml-col-2 padding-top-m" *ngIf="!show_payment_form">
+                              <div class="credit-card">
+                                <div class="credit-card__container" >
+                                  <div class="credit-card__card card-style">
+                                    <button class="credit-card__card-favorite"
+                                      [class.credit-card__card-favorite--desactive]="ccObj.main == 0">
+                                    </button>
+                                    <h4 class="credit-card__card-titulo">
+                                      {{ ccObj.name }}
+                                    </h4>
+                                    <p class="credit-card__card-number credit-card__card-number--icon" [ngClass]="{
+                                      'credit-card__card-number--visa' : ccObj.kind == 'visa',
+                                      'credit-card__card-number--mcard' : ccObj.kind == 'mcard',
+                                      'credit-card__card-number--american' : ccObj.kind == 'american',
+                                      'credit-card__card-number--default' : ccObj.kind == ''
+                                    }">
+                                      <span>****</span>
+                                      <span>****</span>
+                                      <span>****</span>
+                                      <span>{{ ccObj.number | slice:-4 }}</span>
+                                    </p>
+                                    <p class="credit-card__card-date">
+                                      {{ ccObj.month }}/{{ ccObj.year | slice:-2 }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+      
+                            <div class="ml-col-1">
+                                <button 
+                                    class="ap-form__rButton button-black button-big"
+                                    (click)="PayBooking()">
+                                    Confirm Pay
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- <div class="ml-col-1 ap-form__buttons">
+              <button (click)="PayBooking()"
+                class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+                Confirm Pay
+              </button>
+            </div> -->
           </div>
+        </div>
       </div>
-  </div>
-      <!-- <div class="ml-col-1 ap-form__buttons">
-        <button (click)="PayBooking()"
-          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
-          Confirm Pay
-        </button>
-      </div> -->
-    </div>
-  </div>
 </div>
+
 
 <div class="ml-modal ml-modal--bg-black" *ngIf="show_modal">
   <div class="ml-modal__content card-style" *ngIf="show_modal_content == 'services'">
