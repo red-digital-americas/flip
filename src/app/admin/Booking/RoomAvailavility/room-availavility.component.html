@@ -15,7 +15,7 @@
                     Room Avaibility
                 </h4>
                 <button 
-                    class="ap-form__rButton button-pink padding-lateral-m"
+                    class="ap-form__rButton button-black padding-lateral-m"
                     (click)="goToPage( 'AddTenant' )">
                     Add Booking
                 </button>
@@ -96,13 +96,13 @@
                 <ng-container matColumnDef="addBooking">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">
-                        <button 
+                        <!-- button 
                             [disabled]="element.disponibility === element.beds"
                             (click)="viewDetail( element )"
                             mat-raised-button color="accent"
-                            class="table__data-button">
+                            class="table__data-button display-none">
                             Add booking
-                        </button>   
+                        </button -->   
                     </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

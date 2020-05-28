@@ -803,6 +803,8 @@ import { MatSort } from '@angular/material/sort';
 
         this.iHaveCompletedStep(0);
 
+        console.log('Mamadas => ', this.booking_post_data);
+
         /*this.loader.showLoader();
 
         this._services.service_general_post('Tenant/PostBooking', this.booking_post_data)
@@ -949,6 +951,9 @@ import { MatSort } from '@angular/material/sort';
         if( this.profileFormValidator() ) {
 
             this.profile_section_card = true;
+            this.profileInputsState('off');
+            
+            console.log('Modelo en profile => ', this.general_user_data);
 
         } else {
 
@@ -967,6 +972,100 @@ import { MatSort } from '@angular/material/sort';
 
     }
 
+    public profileInputsState( state: string ):void {
+
+        const profile_inputs: any = document.querySelectorAll('[input-family="profile"]');
+
+        profile_inputs.forEach( (input) => {
+
+            state == 'off' ? 
+                input.setAttribute('disabled', 'disabled') :
+                input.removeAttribute('disabled');
+
+        });
+
+    }
+
+    public credit_card_data: CreditCardModel = new CreditCardModel();
+    public getCardDataSection():void {
+
+        console.log('Credit card data ==> ', this.credit_card_data);
+        console.log('Credit card validator => ', this.creditCardValidator() );
+
+        if( this.creditCardValidator() ) {
+
+
+
+        } else {
+
+            this.system_message.showMessage({
+                kind: 'error',
+                time: 4777,
+                message: {
+                    header: 'Inputs required',
+                    text: 'Some inputs must be fill to continue.'
+                }
+            });
+
+        }
+
+    }
+
+    public changeSectionNavigation( action: string ):void {
+
+        switch( action ) {
+
+            case 'edit_profile':
+                this.profile_section_card = false;
+                this.profileInputsState( 'on' ); 
+                break;
+
+        }
+
+    }
+
+    public credit_card_form: any = {
+        no_name: false,
+        no_numb: false,
+        no_mont: false,
+        no_year: false,
+        no_ccv: false
+    }
+    public creditCardValidator():boolean {
+
+        let result: boolean = false;
+
+        this.credit_card_data.name == '' ? 
+            this.credit_card_form.no_name = true :
+            this.credit_card_form.no_name = false;
+
+        this.credit_card_data.number == '' ? 
+            this.credit_card_form.no_numb = true :
+            this.credit_card_form.no_numb = false;
+
+        this.credit_card_data.month == null ? 
+            this.credit_card_form.no_mont = true :
+            this.credit_card_form.no_mont = false;
+
+        this.credit_card_data.year == null ? 
+            this.credit_card_form.no_year = true :
+            this.credit_card_form.no_year = false;
+
+        this.credit_card_data.ccv == null ? 
+            this.credit_card_form.no_ccv = true :
+            this.credit_card_form.no_ccv = false;
+
+        for( let field in this.credit_card_form ) {
+
+            if( this.credit_card_form[field] ) return false;
+            else result = true;
+
+        }
+
+        return result;
+
+    }
+
     public form_profile_validator: any = {
         no_name: false,
         no_lnam: false,
@@ -975,6 +1074,14 @@ import { MatSort } from '@angular/material/sort';
         no_mail_valid: false,
         no_phon: false,
         no_gend: false
+    }
+    public form_profile_buss = {
+        no_name: false,
+        no_acti: false,
+        no_trad: false,
+        no_rfc: false,
+        no_patr: false,
+        no_phon: false
     }
     public profileFormValidator():boolean {
 
@@ -1006,10 +1113,33 @@ import { MatSort } from '@angular/material/sort';
                 this.form_profile_validator.no_mail_valid = true :
                 this.form_profile_validator.no_mail_valid = false );
 
-
         this.general_user_data.userData.genderId == '' ? 
             this.form_profile_validator.no_gend = true :
             this.form_profile_validator.no_gend = false;
+
+        this.general_user_data.userTaxData.name == '' ?
+            this.form_profile_buss.no_name = true :
+            this.form_profile_buss.no_name = false;
+
+        this.general_user_data.userTaxData.activity == '' ?
+            this.form_profile_buss.no_acti = true :
+            this.form_profile_buss.no_acti = false;
+
+        this.general_user_data.userTaxData.tradeName == '' ?
+            this.form_profile_buss.no_trad = true :
+            this.form_profile_buss.no_trad = false;
+
+        this.general_user_data.userTaxData.rfc == '' ?
+            this.form_profile_buss.no_rfc = true :
+            this.form_profile_buss.no_rfc = false;
+
+        this.general_user_data.userTaxData.legalRepresentative == '' ?
+            this.form_profile_buss.no_patr = true :
+            this.form_profile_buss.no_patr = false;
+
+        this.general_user_data.userTaxData.phone == '' ?
+            this.form_profile_buss.no_phon = true :
+            this.form_profile_buss.no_phon = false;
 
         if(
             this.terms_of_use == 'short_t' &&
@@ -1022,7 +1152,26 @@ import { MatSort } from '@angular/material/sort';
             !this.form_profile_validator.no_gend
         ) {
 
-            result = true;
+            if( !this.single_profile ) {
+
+                if(
+                    !this.form_profile_buss.no_name &&
+                    !this.form_profile_buss.no_acti &&
+                    !this.form_profile_buss.no_trad &&
+                    !this.form_profile_buss.no_rfc &&
+                    !this.form_profile_buss.no_patr &&
+                    !this.form_profile_buss.no_phon
+                ) {
+
+                    result = true;
+
+                } else result = false;
+
+            } else {
+
+                result = true;
+
+            }
 
         } else result = false;
 
@@ -1175,6 +1324,17 @@ import { MatSort } from '@angular/material/sort';
     
     }
 
+    public getDigits( the_string: any, how_many: number ):string {
+
+        let this_chain = '',
+            string_to = the_string.toString();
+
+        this_chain = string_to.substr( string_to.length - how_many );
+
+        return this_chain;
+
+    }
+
 }
 
 class BookingDetailModel {
@@ -1212,6 +1372,7 @@ class BookingPostDetailModel {
 class BookingCompleted {
     booking: BookingPostDetailModel;
     user: GeneralUserData;
+    creditCard: CreditCardModel;
 }
 
 class GeneralUserData {
@@ -1259,6 +1420,13 @@ class UserBussinessData {
     rfc: string = '';
 }
 
-
-
-
+class CreditCardModel {
+    id: number = 0;
+    active: boolean = true;
+    ccv: number = null;
+    month: number = null;
+    name: string = ''; 
+    number: string = '';
+    year: number = null;
+    main: number = 0;  
+}

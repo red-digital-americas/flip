@@ -90,4 +90,10 @@ export class RoomAvailavilityComponent implements OnInit {
         this._router.navigateByUrl( `roomDetail/${ element.id }`, { state: { id: 1, name: 'To Detail' } });
     }
 
+    public goToPage( to_where: string ):void {
+
+        this._router.navigateByUrl( to_where );
+
+    }
+
 }

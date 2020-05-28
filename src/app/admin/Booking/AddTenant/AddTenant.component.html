@@ -469,10 +469,7 @@
                                                     [disabled]="able_section_two"
                                                     [class.form_error_found]="bed.email == 'no_data'"
                                                     [class.form_error_found]="bed.email == 'no_valid'"
-                                                    value="{{
-                                                        bed?.email == 'no_data' ? '' : bed?.email ||
-                                                        bed?.email == 'no_valid' ? '' : bed?.email
-                                                    }}" />
+                                                    value="{{ bed?.email }}" />
                                                 <label 
                                                     for="ab_mail_{{ index }}" 
                                                     class="ap-form__label ap-form__label-text ap-form__label-text--active">
@@ -498,8 +495,8 @@
                                                     name="ab_phone_{{ index }}"
                                                     class="ap-form__input-text"
                                                     [disabled]="able_section_two"
-                                                    [class.form_error_found]="bed.phone == 'no_data'"
-                                                    value="" />
+                                                    value="{{ bed?.phone }}"
+                                                    [class.form_error_found]="bed.phone == 'no_data'" />
                                                 <label 
                                                     for="ab_phone_{{ index }}" 
                                                     class="ap-form__label ap-form__label-text ap-form__label-text--active">
@@ -956,6 +953,7 @@
                                 name="profile_type"
                                 value="1"
                                 checked="checked"
+                                input-family="profile"
                                 (change)="changeProfileType( $event )"
                                 class="ap-form__input-radio display-none" />
                             <label for="profile_single" class="ap-form__label-radio">
@@ -970,6 +968,7 @@
                                 id="profile_buss" 
                                 name="profile_type"
                                 value="2"
+                                input-family="profile"
                                 (change)="changeProfileType( $event )"
                                 class="ap-form__input-radio display-none" />
                             <label for="profile_buss" class="ap-form__label-radio">
@@ -987,6 +986,7 @@
                           placeholder="Name*"
                           id="profile_name" 
                           name="profile_name"
+                          input-family="profile"
                           [(ngModel)]="general_user_data.name"
                           [class.form_error_found]="form_profile_validator.no_name"
                           class="ap-form__input-text" />
@@ -1011,6 +1011,7 @@
                           placeholder="Last Name*"
                           id="profile_lname" 
                           name="profile_lname"
+                          input-family="profile"
                           [class.form_error_found]="form_profile_validator.no_lnam"
                           [(ngModel)]="general_user_data.lastName"
                           class="ap-form__input-text" />
@@ -1033,6 +1034,7 @@
                         class="ap-form__input-image display-none" 
                         id="profile_avatar"
                         name="profile_avatar"
+                        input-family="profile"
                         type="file"
                         accept="image/*" />
                       <label for="profile_avatar" class="ap-form__label-image">
@@ -1056,6 +1058,7 @@
                           type="text" 
                           placeholder="Second Name*"
                           id="profile_sname" 
+                          input-family="profile"
                           [(ngModel)]="general_user_data.motherName"
                           [class.form_error_found]="form_profile_validator.no_mnam"
                           name="profile_sname"
@@ -1082,6 +1085,7 @@
                           placeholder="Phone*"
                           id="profile_phone" 
                           name="profile_phone"
+                          input-family="profile"
                           [(ngModel)]="general_user_data.phone"
                           [class.form_error_found]="form_profile_validator.no_phon"
                           class="ap-form__input-text" />
@@ -1106,6 +1110,7 @@
                           placeholder="*Mail"
                           id="profile_mail" 
                           name="profile_mail"
+                          input-family="profile"
                           [(ngModel)]="general_user_data.email"
                           [class.form_error_found]="form_profile_validator.no_mail"
                           [class.form_error_found]="form_profile_validator.no_mail_valid"
@@ -1134,6 +1139,7 @@
                           id="profile_gender" 
                           name="profile_gender"
                           class="ap-form__input-text"
+                          input-family="profile"
                           [class.form_error_found]="form_profile_validator.no_gend"
                           [(ngModel)]="general_user_data.userData.genderId">
                           <option value="" disabled>Gender</option>
@@ -1161,6 +1167,7 @@
                           placeholder="Nationality"
                           id="profile_nationality" 
                           name="profile_nationality"
+                          input-family="profile"
                           class="ap-form__input-text"
                           [(ngModel)]="general_user_data.userData.countryId">
                           <option value="" disabled>Nationality</option>
@@ -1186,6 +1193,7 @@
                           id="profile_bplace" 
                           name="profile_bplace"
                           class="ap-form__input-text"
+                          input-family="profile"
                           [(ngModel)]="general_user_data.userData.stateId">
                           <option value="" disabled>Birthplace</option>
                           <option *ngFor="let list of birthplace_list_gotten;" [value]="list.id">
@@ -1209,6 +1217,7 @@
                           type="date" 
                           placeholder="Birthday"
                           id="profile_bday" 
+                          input-family="profile"
                           [(ngModel)]="general_user_data.bith"
                           name="profile_bday"
                           class="ap-form__input-text" />
@@ -1228,6 +1237,7 @@
                           type="text" 
                           placeholder="Linked In"
                           id="profile_linkedin" 
+                          input-family="profile"
                           name="profile_linkedin"
                           class="ap-form__input-text" />
                         <label 
@@ -1246,6 +1256,7 @@
                           type="text" 
                           placeholder="Twitter"
                           id="profile_twitter" 
+                          input-family="profile"
                           name="profile_twitter"
                           class="ap-form__input-text" />
                         <label 
@@ -1264,6 +1275,7 @@
                           type="text" 
                           placeholder="Facebook"
                           id="profile_facebook" 
+                          input-family="profile"
                           name="profile_facebook"
                           class="ap-form__input-text" />
                         <label 
@@ -1283,6 +1295,7 @@
                             placeholder="Civil Status"
                             id="profile_cstatus" 
                             name="profile_cstatus"
+                            input-family="profile"
                             class="ap-form__input-text"
                             [(ngModel)]="general_user_data.userData.civilStatusId">
                             <option value="" disabled>Civil Status</option>
@@ -1307,6 +1320,7 @@
                             placeholder="Scholarship"
                             id="profile_scholarship" 
                             name="profile_scholarship"
+                            input-family="profile"
                             class="ap-form__input-text"
                             [(ngModel)]="general_user_data.userData.scholarshipId">
                             <option value="" disabled>Scholarship</option>
@@ -1331,6 +1345,7 @@
                             type="text" 
                             placeholder="RFC"
                             id="profile_rfc" 
+                            input-family="profile"
                             name="profile_rfc"
                             [(ngModel)]="general_user_data.rfc"
                             class="ap-form__input-text" />
@@ -1350,6 +1365,7 @@
                             required 
                             placeholder="Have you ever rented?"
                             id="profile_rented" 
+                            input-family="profile"
                             name="profile_rented"
                             class="ap-form__input-text"
                             [(ngModel)]="general_user_data.userData.rent">
@@ -1373,6 +1389,7 @@
                             required 
                             placeholder="Do you bring pets?"
                             id="profile_pets" 
+                            input-family="profile"
                             name="profile_pets"
                             class="ap-form__input-text"
                             [(ngModel)]="general_user_data.userData.pet">
@@ -1396,6 +1413,7 @@
                             required 
                             type="number"
                             min="0"
+                            input-family="profile"
                             placeholder="How many cars will you bring?"
                             id="profile_cars" 
                             name="profile_cars"
@@ -1417,6 +1435,7 @@
                             required
                             min="0"
                             type="number" 
+                            input-family="profile"
                             placeholder="Money spend monthly in food?"
                             id="profile_mfood" 
                             name="profile_mfood"
@@ -1440,6 +1459,7 @@
                             type="number" 
                             placeholder="Money spend monthly on Free Time?"
                             id="profile_mtime" 
+                            input-family="profile"
                             name="profile_mtime"
                             [(ngModel)]="general_user_data.userData.howMuchMax"
                             class="ap-form__input-text" />
@@ -1458,6 +1478,7 @@
                           type="checkbox"
                           id="profile_active" 
                           name="profile_active"
+                          input-family="profile"
                           [checked]="general_user_data.active"
                           [(ngModel)]="general_user_data.active"
                           class="ap-form__input-checkbox display-none" />
@@ -1483,8 +1504,10 @@
                             type="text" 
                             placeholder="Name*"
                             id="profile_bname" 
+                            input-family="profile"
                             name="profile_bname"
                             class="ap-form__input-text"
+                            [class.form_error_found]="form_profile_buss.no_name"
                             [(ngModel)]="general_user_data.userTaxData.name" />
                           <label 
                             for="profile_bname" 
@@ -1492,6 +1515,9 @@
                             [class.ap-form__label-text--active]="general_user_data.userTaxData.name != ''">
                             Name
                           </label>
+                          <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_buss.no_name">
+                            Name is required*
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -1501,10 +1527,12 @@
                           <input 
                             required
                             type="text" 
+                            input-family="profile"
                             placeholder="Activity/Routine business*"
                             id="profile_bactivity" 
                             name="profile_bactivity"
                             class="ap-form__input-text"
+                            [class.form_error_found]="form_profile_buss.no_acti"
                             [(ngModel)]="general_user_data.userTaxData.activity" />
                           <label 
                             for="profile_bactivity" 
@@ -1512,6 +1540,9 @@
                             [class.ap-form__label-text--active]="general_user_data.userTaxData.activity != ''">
                             Activity/Routine business
                           </label>
+                          <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_buss.no_acti">
+                            Activity/Routine business is required*
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -1521,17 +1552,22 @@
                           <input 
                             required
                             type="text" 
+                            input-family="profile"
                             placeholder="Trade name*"
                             id="profile_btrade" 
                             name="profile_btrade"
                             class="ap-form__input-text"
+                            [class.form_error_found]="form_profile_buss.no_trad"
                             [(ngModel)]="general_user_data.userTaxData.tradeName" />
                           <label 
                             for="profile_btrade" 
                             class="ap-form__label ap-form__label-text"
-                            [class.ap-form__label-text--active]="general_user_data.userTaxData.tradeName != ''">
+                            [class.ap-form__label-text--active]="general_user_data.userTaxData?.tradeName != ''">
                             Trade name
                           </label>
+                          <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_buss.no_trad">
+                            Trade name is required*
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -1540,11 +1576,13 @@
                         <div class="ap-form__input">
                           <input 
                             required
-                            type="text" 
+                            type="text"
+                            input-family="profile" 
                             placeholder="RFC*"
                             id="profile_brfc" 
                             name="profile_brfc"
                             class="ap-form__input-text"
+                            [class.form_error_found]="form_profile_buss.no_rfc"
                             [(ngModel)]="general_user_data.userTaxData.rfc" 
                             [class.ap-form__label-text--active]="general_user_data.userTaxData.rfc != ''" />
                           <label 
@@ -1553,6 +1591,9 @@
                             [class.ap-form__label-text--active]="general_user_data.userTaxData.rfc != ''">
                             RFC
                           </label>
+                          <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_buss.no_rfc">
+                            RFC is required*
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -1562,10 +1603,12 @@
                           <input 
                             required
                             type="text" 
+                            input-family="profile"
                             placeholder="Counsel for the Firm*"
                             id="profile_bfirm" 
                             name="profile_bfirm"
                             class="ap-form__input-text"
+                            [class.form_error_found]="form_profile_buss.no_patr"
                             [(ngModel)]="general_user_data.userTaxData.legalRepresentative" />
                           <label 
                             for="profile_bfirm" 
@@ -1573,6 +1616,9 @@
                             [class.ap-form__label-text--active]="general_user_data.userTaxData.legalRepresentative != ''">
                             Counsel for the Firm
                           </label>
+                          <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_buss.no_patr">
+                            Counsel for the Firm is required*
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -1585,24 +1631,35 @@
                             placeholder="Phone*"
                             id="profile_bphone" 
                             name="profile_bphone"
+                            input-family="profile"
                             class="ap-form__input-text"
-                            [(ngModel)]="general_user_data.userTaxData.phone" 
-                            [class.ap-form__label-text--active]="general_user_data.userTaxData.phone != ''" />
+                            [class.form_error_found]="form_profile_buss.no_phon"
+                            [(ngModel)]="general_user_data.userTaxData.phone"  />
                           <label 
                             for="profile_bphone" 
                             class="ap-form__label ap-form__label-text"
                             [class.ap-form__label-text--active]="general_user_data.userTaxData.phone != ''">
                             Phone
                           </label>
+                          <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_buss.no_phon">
+                            Phone is required*
+                          </span>
                         </div>
                       </div>
                     </div>
+                  </div>
+                  <div class="ml-col-1 ap-form__buttons" *ngIf="profile_section_card">
+                    <button 
+                        class="ap-form__buttons-button ap-form__buttons-button--big button-green"
+                        (click)="changeSectionNavigation( 'edit_profile' )">
+                        Edit Profile
+                    </button>
                   </div>
 
 
 
 
-                  <div class="ml-col-1 margin-top-x" *ngIf="profile_section_card">
+                  <div class="ml-col-1 margin-top-m" *ngIf="profile_section_card">
                     <div class="ml-col-1 margin-bottom-x">
                         <h4 class="ap-form__titulo text-left">
                           Payment method
@@ -1614,17 +1671,19 @@
                             <div class="credit-card__container credit-card__container--left-side credit-card--no-padding-top">
                               <div class="credit-card__card card-style">
                                 <h4 class="credit-card__card-titulo">
-                                  Nombre de la tarjeta
+                                  {{ credit_card_data.name == '' ? 'Card Name' : credit_card_data.name }}
                                 </h4>
                                 <p 
                                   class="credit-card__card-number credit-card__card-number--visa">
                                   <span>****</span>
                                   <span>****</span>
                                   <span>****</span>
-                                  <span>7777</span>
+                                  <span>
+                                    {{ getDigits( credit_card_data.number, 4 ) }}
+                                  </span>
                                 </p>
                                 <p class="credit-card__card-date">
-                                  10/07
+                                  {{ getDigits( credit_card_data.month, 2 ) }}/07
                                 </p>
                               </div>
                             </div>
@@ -1641,15 +1700,21 @@
                                   <input 
                                     required
                                     type="text" 
-                                    placeholder="Name"
+                                    placeholder="Name*"
                                     id="card_name" 
                                     name="card_name"
-                                    class="ap-form__input-text" />
+                                    class="ap-form__input-text" 
+                                    [(ngModel)]="credit_card_data.name"
+                                    [class.form_error_found]="credit_card_form.no_name" />
                                   <label 
                                     for="card_name" 
-                                    class="ap-form__label ap-form__label-text">
-                                    Name
+                                    class="ap-form__label ap-form__label-text"
+                                    [class.ap-form__label-text--active]="credit_card_data.name != ''">
+                                    Name <span class="color-red">*</span>
                                   </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="credit_card_form.no_name">
+                                    Name is required*
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -1661,16 +1726,21 @@
                                     min="0"
                                     max="9999999999999999"
                                     type="number" 
-                                    placeholder="Number"
+                                    placeholder="Number*"
                                     id="card_number" 
                                     name="card_number"
+                                    [(ngModel)]="credit_card_data.number"
                                     class="ap-form__input-text"
-                                    (change)="kindCardDetecter( $event.target.value )" />
+                                    [class.form_error_found]="credit_card_form.no_numb" />
                                   <label 
                                     for="card_number" 
-                                    class="ap-form__label ap-form__label-text">
-                                    Number
+                                    class="ap-form__label ap-form__label-text"
+                                    [class.ap-form__label-text--active]="credit_card_data.number != ''">
+                                    Number <span class="color-red">*</span>
                                   </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="credit_card_form.no_numb">
+                                    Number is required*
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -1681,15 +1751,21 @@
                                     required
                                     type="number" 
                                     min="0"
-                                    placeholder="Expiration month"
+                                    placeholder="Expiration month*"
                                     id="card_day" 
+                                    [(ngModel)]="credit_card_data.month"
                                     name="card_day"
-                                    class="ap-form__input-text" />
+                                    class="ap-form__input-text"
+                                    [class.form_error_found]="credit_card_form.no_mont" />
                                   <label 
                                     for="card_day" 
-                                    class="ap-form__label ap-form__label-text">
-                                    Expiration month
+                                    class="ap-form__label ap-form__label-text"
+                                    [class.ap-form__label-text--active]="credit_card_data.month != null">
+                                    Expiration month <span class="color-red">*</span>
                                   </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="credit_card_form.no_mont">
+                                    Month is required*
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -1699,16 +1775,23 @@
                                   <input 
                                     required
                                     min="0"
+                                    max="12"
                                     type="number" 
-                                    placeholder="Expiration year"
+                                    placeholder="Expiration year*"
                                     id="card_year" 
                                     name="card_year"
-                                    class="ap-form__input-text" />
+                                    [(ngModel)]="credit_card_data.year"
+                                    class="ap-form__input-text"
+                                    [class.form_error_found]="credit_card_form.no_year"  />
                                   <label 
                                     for="card_year" 
-                                    class="ap-form__label ap-form__label-text">
-                                    Expiration year
+                                    class="ap-form__label ap-form__label-text"
+                                    [class.ap-form__label-text--active]="credit_card_data.year != null">
+                                    Expiration year <span class="color-red">*</span>
                                   </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="credit_card_form.no_year">
+                                    Year is required*
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -1718,29 +1801,35 @@
                                   <input 
                                     required
                                     type="number" 
-                                    placeholder="CVV"
+                                    placeholder="CVV*"
                                     min="0"
                                     id="card_cvv" 
                                     name="card_cvv"
+                                    [(ngModel)]="credit_card_data.ccv"
+                                    [class.form_error_found]="credit_card_form.no_ccv"
                                     class="ap-form__input-text" />
                                   <label 
                                     for="card_cvv" 
-                                    class="ap-form__label ap-form__label-text">
-                                    CVV
+                                    class="ap-form__label ap-form__label-text"
+                                    [class.ap-form__label-text--active]="credit_card_data.ccv != null">
+                                    CVV <span class="color-red">*</span>
                                   </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="credit_card_form.no_ccv">
+                                    CVV is required*
+                                  </span>
                                 </div>
                               </div>
                             </div>
                             <div class="ml-col-1 text-center margin-top-x">
                               Required fields <span class="color-red text-bold">*</span>
                             </div>
-                            <div class="ml-col-1 ap-form__buttons">
+                            <!-- div class="ml-col-1 ap-form__buttons">
                               <button 
                                 type="submit"
                                 class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
                                 Save
                               </button>
-                            </div>
+                            </div -->
                           </form>
                         </div>
                       </div>
@@ -1761,20 +1850,21 @@
                         class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
                         *ngIf="!profile_section_card"
                         (click)="profileTenantCompleted()">
-                        Next
+                        Continue
                     </button>
                     <button 
                         class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
+                        (click)="getCardDataSection()"
                         *ngIf="profile_section_card">
                         Continue
                     </button>
                   </div>
-                  <div class="ml-col-1 ap-form__buttons margin-top-x" *ngIf="terms_of_use == 'long_t'">
+                  <!--div class="ml-col-1 ap-form__buttons margin-top-x" *ngIf="terms_of_use == 'long_t'">
                     <button 
                         class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
                         Income
                     </button>
-                  </div>
+                  </div -->
             </form>
         <!-- div class="ml-col-1 margin-tb-min">
             <button 
