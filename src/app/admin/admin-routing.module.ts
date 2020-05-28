@@ -36,7 +36,7 @@ import { MembershipNewComponent } from './Booking/Membership/membership-new/memb
 import { UserDetailComponent } from './Booking/Users/user-detail/user-detail.component';
 import { UserNewComponent } from './Booking/Users/user-new/user-new.component';
 import { RoomDetailComponent } from './Booking/RoomAvailavility/room-detail/room-detail.component';
-
+import { AddTenantPayComponent } from './Booking/TenantList/add-tenant-pay/add-tenant-pay.component';
 const routes: Routes = [
   { path: '', data: { title: 'AdminApp', expectedRole: [4, 5, 1, 3] }, canActivate: [RoleGuardService],
     children: [
@@ -77,7 +77,7 @@ const routes: Routes = [
       { path: 'Roles', component: RolesComponent, data: { title: 'Roles' } },
       { path: 'reservations', component: ProfileReservationsComponent, data: { title: 'Reservations' } },
       { path: 'roomDetail/:id', component: RoomDetailComponent, data: {id: 1, title: 'Room Avaibility Detail' } },
-      
+      { path: 'AddTenantPay/:id', component: AddTenantPayComponent, data: { title: 'Add Tenant Pay' } },
       // { path: 'perks/:id', loadChildren: './perks/perks.module#PerksComponentModule' },
       { path: '', loadChildren: './perks/perks.module#PerksComponentModule', data: { title: 'Perks'} },
       { path: '', loadChildren: './services/services.module#ServicesComponentModule', data: { title: 'Services'}  }
