@@ -113,7 +113,14 @@ export class AppLayoutComponent {
     sessionStorage.setItem('id_section_active', element.buildingId.toString() );
     sessionStorage.setItem('name_section_active', element.name );
     sessionStorage.setItem('name_build', element.name );
-    this.router.navigateByUrl( `tenantList/${ element.buildingId }`, { state: { id: 1, name: 'UserList To Users-Detail' } });
+    sessionStorage.setItem('user_id', element.idUser.toString() );
+    sessionStorage.setItem('booking_id', element.id);
+    console.log('Current URL', this.router.url);
+    if (this.router.url === '/reservations') {
+      window.location.reload();
+    } else {
+      this.router.navigateByUrl( 'reservations' );
+    }
   }
 
   goToProfile(path) {
