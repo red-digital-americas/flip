@@ -73,6 +73,9 @@ import { MatSort } from '@angular/material/sort';
                 this.getTypeRoomCatalog();
                 this.getRoomateTypeCatalog();
                 this.able_section_two = false;
+                this.additional_services_selected = [];
+                this.all_services_selected = [];
+                this.total_services_ammount = 0;
 
             }
 
@@ -182,8 +185,8 @@ import { MatSort } from '@angular/material/sort';
                     birth: this.today,
                     idBooking: null,
                     active: null,
-                    phone: null,
-                    genderId: null
+                    phone: '',
+                    genderId: '0'
                 }
 
                 this.beds_to_add.push( add_new_bed );
@@ -205,6 +208,9 @@ import { MatSort } from '@angular/material/sort';
         this.room_selected = null;
         this.membership_selected = null;
         this.additional_services_section = false;
+        this.additional_services_selected = [];
+        this.all_services_selected = [];
+        this.total_services_ammount = 0;
 
         const validations_booking_detail = {
             form_booking_detail: this.formBookingDetailValidator( this.booking_data ),
@@ -323,12 +329,16 @@ import { MatSort } from '@angular/material/sort';
                     bed_in.genderId = 'no_data' : bed_in.genderId = bed_select[0].value;
 
                 bed_inputs[3].value == '' ?
-                    bed_in.email = 'no_data' : bed_in.email = bed_inputs[3].value;
+                    bed_in.email = 'no_data' : 
+                    ( !this.isEmailValid( bed_inputs[3].value ) ? 
+                        bed_in.email = 'no_valid' : bed_in.email = bed_inputs[3].value );
 
                 bed_inputs[4].value == '' ?
                     bed_in.phone = 'no_data' : bed_in.phone = bed_inputs[4].value;
 
               });
+
+              console.log('Beds to add => ', this.beds_to_add);
 
               this.beds_to_add.forEach( (bed: any) => {
 
@@ -338,10 +348,9 @@ import { MatSort } from '@angular/material/sort';
                     bed.motherName == 'no_data' ||
                     bed.genderId == 'no_data' ||
                     bed.email == 'no_data' ||
+                    bed.email == 'no_valid' ||
                     bed.phone == 'no_data'
                 ) result = false;
-
-                bed.phone = Number(bed.phone);
 
               });
 
@@ -396,10 +405,12 @@ import { MatSort } from '@angular/material/sort';
                     kind: 'error',
                     time: 4777,
                     message: {
-                        header: 'Fatal Error',
-                        text: 'Error Fatal'
+                        header: 'System Error',
+                        text: 'Error has been detected, please try later.'
                     }
                 });
+
+                this.loader.hideLoader();
 
             });
 
@@ -409,6 +420,9 @@ import { MatSort } from '@angular/material/sort';
     public selectThisRoom( room: any ):void {
 
         this.room_selected = room;
+        this.additional_services_selected = [];
+        this.all_services_selected = [];
+        this.total_services_ammount = 0;
 
         this.rooms_cards.forEach( (card: any) => {
 
@@ -425,6 +439,9 @@ import { MatSort } from '@angular/material/sort';
     public selectThisMembership( membership: any ):void {
 
         this.membership_selected = membership;
+        this.additional_services_selected = [];
+        this.all_services_selected = [];
+        this.total_services_ammount = 0;
 
         this.memberships_cards.forEach( (card: any) => {
 
@@ -528,6 +545,8 @@ import { MatSort } from '@angular/material/sort';
             }
 
         });
+
+        this.joinAllMyServices();
 
     }
 
@@ -682,6 +701,7 @@ import { MatSort } from '@angular/material/sort';
 
     public all_services_selected: any[] = [];
     public total_services_ammount: number = 0;
+    public booking_detail_total_ammount: number = 0;
     public joinAllMyServices():void {
 
         this.all_services_selected = [];
@@ -712,6 +732,8 @@ import { MatSort } from '@angular/material/sort';
 
         });
 
+        this.booking_detail_total_ammount = this.getTotalAmmount() + this.total_services_ammount;
+
     }
 
     public getNameRoomateType( id_roomtype: string ):string {
@@ -732,12 +754,15 @@ import { MatSort } from '@angular/material/sort';
 
     }
 
+    public terms_of_use: string = '';
     public getDaysReserved():number {
 
         const start_date: any = new Date( this.booking_data.startDate ),
             end_date: any = new Date( this.booking_data.finishDate ),
             diff_time = Math.abs( start_date - end_date ),
             diff_days = Math.ceil(diff_time / (1000 * 60 * 60 * 24));
+
+            this.terms_of_use = diff_days < 8 ? 'short_t' : 'long_t';
 
         return diff_days;
 
@@ -774,11 +799,15 @@ import { MatSort } from '@angular/material/sort';
         this.booking_post_data.aditionalBeds = this.beds_to_add;
         this.booking_post_data.serviceBooking = this.servicesModelWorker( this.all_services_selected );
 
-        this.loader.showLoader();
+        this.getUsersDataList();
+
+        this.iHaveCompletedStep(0);
+
+        /*this.loader.showLoader();
 
         this._services.service_general_post('Tenant/PostBooking', this.booking_post_data)
             .subscribe( (response: any) => {
-                
+
                 if( response.result == 'Sucess' ) {
 
                     this.system_message.showMessage({
@@ -809,7 +838,7 @@ import { MatSort } from '@angular/material/sort';
 
                 setTimeout( () => this.loader.hideLoader(), 1777);
 
-            });
+            });*/
 
 
         console.log('Service completed => ', this.booking_post_data );
@@ -847,6 +876,168 @@ import { MatSort } from '@angular/material/sort';
 
     }
 
+    /* Section two begins =====> */
+    /* Section two refers to profile tenant
+     * Section two refers to profile tenant
+     * Section two refers to profile tenant
+     * Section two refers to profile tenant
+     * Section two refers to profile tenant
+    */
+    public general_user_data: GeneralUserData = new GeneralUserData();
+
+    public single_profile: boolean = true;
+    public changeProfileType( event_data: any ):void {
+
+        const type_profile = event_data.target;
+
+        type_profile.value == '1' ? 
+            this.general_user_data.systemTypeId = 1 :
+            this.general_user_data.systemTypeId = 2;
+
+        this.single_profile =  this.general_user_data.systemTypeId == 1 ? true : false;   
+
+    }
+
+    public gender_list_gotten: any = [];
+    public relationship_list_gotten: any = [];
+    public scholarship_list_gotten: any = [];
+    public country_list_gotten: any = [];
+    public companytype_list_gotten: any = [];
+    public civilstatus_list_gotten: any = [];
+    public birthplace_list_gotten: any = [];
+    public getUsersDataList():void {
+
+        this.loader.showLoader();
+
+        this._services.service_general_get('Tenant/getCatalogsUser')
+            .subscribe( (response: any) => {
+
+                if( response.result == 'Sucess' ) {
+
+                    this.gender_list_gotten = response.genderList;
+                    this.country_list_gotten = response.country;
+                    this.birthplace_list_gotten = response.birthPlace;
+                    this.civilstatus_list_gotten = response.civilStatus;
+                    this.scholarship_list_gotten = response.scholarShip;
+                    this.companytype_list_gotten = response.companyTypeList;
+                    this.relationship_list_gotten = response.relationship;
+
+                    this.loader.hideLoader();
+
+                }
+
+            }, (error: any) => {
+
+                this.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                        header: 'Error to load',
+                        text: 'Error loading information, please try again.'
+                    }
+                });
+
+                setTimeout( () => this.loader.hideLoader(), 1777);
+
+            })
+
+    }
+
+    public profile_section_card: boolean = false;
+    public profileTenantCompleted():void {
+
+        if( this.profileFormValidator() ) {
+
+            this.profile_section_card = true;
+
+        } else {
+
+            this.system_message.showMessage({
+                kind: 'error',
+                time: 4777,
+                message: {
+                    header: 'Inputs required',
+                    text: 'Some inputs must be fill to continue.'
+                }
+            });
+
+            this.profile_section_card = false;
+
+        }
+
+    }
+
+    public form_profile_validator: any = {
+        no_name: false,
+        no_lnam: false,
+        no_mnam: false,
+        no_mail: false,
+        no_mail_valid: false,
+        no_phon: false,
+        no_gend: false
+    }
+    public profileFormValidator():boolean {
+
+        let result: boolean = false;
+
+        this.general_user_data.name == '' ? 
+            this.form_profile_validator.no_name = true :
+            this.form_profile_validator.no_name = false;
+
+        this.general_user_data.lastName == '' ? 
+            this.form_profile_validator.no_lnam = true :
+            this.form_profile_validator.no_lnam = false;
+
+        this.general_user_data.motherName == '' ? 
+            this.form_profile_validator.no_mnam = true :
+            this.form_profile_validator.no_mnam = false;
+
+        this.general_user_data.phone == '' ? 
+            this.form_profile_validator.no_phon = true :
+            this.form_profile_validator.no_phon = false;
+
+        this.general_user_data.email == '' ? 
+            this.form_profile_validator.no_mail = true :
+            this.form_profile_validator.no_mail = false;
+
+        this.general_user_data.email == '' ? 
+            this.form_profile_validator.no_mail = true :
+            ( !this.isEmailValid( this.general_user_data.email ) ? 
+                this.form_profile_validator.no_mail_valid = true :
+                this.form_profile_validator.no_mail_valid = false );
+
+
+        this.general_user_data.userData.genderId == '' ? 
+            this.form_profile_validator.no_gend = true :
+            this.form_profile_validator.no_gend = false;
+
+        if(
+            this.terms_of_use == 'short_t' &&
+            !this.form_profile_validator.no_name &&
+            !this.form_profile_validator.no_lnam &&
+            !this.form_profile_validator.no_mnam &&
+            !this.form_profile_validator.no_phon &&
+            !this.form_profile_validator.no_mail &&
+            !this.form_profile_validator.no_mail_valid &&
+            !this.form_profile_validator.no_gend
+        ) {
+
+            result = true;
+
+        } else result = false;
+
+        return result;
+
+    }
+
+
+    /* Utilities ====================================================================> */
+    /* Utilities and steper app section
+     * Utilities and steper app section
+     * Utilities and steper app section
+     * Utilities and steper app section
+     * Utilities and steper app section
+     */
     public visible_step: any = {
         step_1: true,
         step_2: false,
@@ -963,8 +1154,28 @@ import { MatSort } from '@angular/material/sort';
 
     }
 
-}
+    public isEmailValid( email: string ): boolean {
 
+        let result = false;
+    
+        const email_split = email.split('@'); 
+    
+        if( email_split.length > 1 ) {
+    
+            const email_nick_nosp = email_split[0].match(/[^a-zA-Z0-9.\-_]/),
+                email_doma_nosp = email_split[1].match(/[^a-zA-Z0-9.]/);
+
+            email_nick_nosp == null && email_doma_nosp == null ? 
+                ( email_split[1].length < 4 ? result = false : result = true ) :
+                result = false;
+    
+        } else result = false;
+    
+        return result;
+    
+    }
+
+}
 
 class BookingDetailModel {
     building: number = null;
@@ -998,41 +1209,56 @@ class BookingPostDetailModel {
     aditionalBeds: any;
 }   
 
-
-/*
-
-{
-	
-	"": [
-		{
-			"idService": 33,
-			"dateStart": "2020-07-01",
-			"dateEnd": "2020-07-30",
-			"recurrent": 1,
-			"fromMembership": 11,
-			"amount": 100,
-			"idUserPaymentService": 0,
-			"idUserPaymentServiceNavigation": {
-				"id": 0,
-				"idCreditCard": null,
-				"idServiceBooking": 0,
-				"payment": 0,
-				"paymentDate": ""
-			}
-		}
-	],
-	"": [
-		{
-		"email": "luis@emial.com",
-		"lastName": "Gutierres",
-		"motherName": "Lara",
-		"name": "Luis",
-		"birth": "2020-01-01",
-		"active": true,
-		"phone": 345678901,
-		"genderId": 1
-	}
-	]
+class BookingCompleted {
+    booking: BookingPostDetailModel;
+    user: GeneralUserData;
 }
 
-*/
+class GeneralUserData {
+    name: string = '';
+    password: string = '';
+    email: string = '';
+    lastName: string = '';
+    motherName: string = '';
+    avatar: string = '';
+    systemTypeId: number = 1;
+    phone: string = '';
+    cellphone: string = '';
+    workplace: string = '';
+    aboutMe: string = '';
+    active: boolean = true;
+    bith: string = '';
+    rfc: string = '';
+    userData: PersonaUserInfo = new PersonaUserInfo();
+    userTaxData: UserBussinessData = new UserBussinessData();
+}
+
+class PersonaUserInfo {
+    pet: boolean = null;
+    civilStatusId: string = '';
+    scholarshipId: string = '';
+    countryId: string = '';
+    stateId: any = '';
+    genderId: string = '';
+    rent: boolean = null;
+    car: number = null;
+    howMuchMax: number = null;
+    howMuchMin: number = null;
+    country: any = null;
+    gender: any = null;
+    scholarship: any = null;
+    state: any = null;
+}
+
+class UserBussinessData {
+    name: string = '';
+    activity: string = '';
+    tradeName: string = '';
+    legalRepresentative: string = '';
+    phone: string = '';
+    rfc: string = '';
+}
+
+
+
+

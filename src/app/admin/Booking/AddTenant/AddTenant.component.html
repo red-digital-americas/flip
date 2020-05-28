@@ -185,7 +185,7 @@
                             <div class="ap-form__input">
                               <select
                                 required
-                                placeholder="Beds required"
+                                placeholder="Additional beds"
                                 id="bd_aBeds" 
                                 name="bd_aBeds"
                                 [disabled]="able_section_two"
@@ -203,10 +203,10 @@
                               <label 
                                 for="bd_aBeds" 
                                 class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                Beds required
+                                Additional beds
                               </label>
                               <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_beds">
-                                Beds is required*
+                                Additional beds is required*
                               </span>
                             </div>
                         </div>
@@ -369,7 +369,7 @@
                                                     class="ap-form__input-text"
                                                     [disabled]="able_section_two"
                                                     [class.form_error_found]="bed.name == 'no_data'"
-                                                    value="" />
+                                                    value="{{ bed?.name == 'no_data' ? '' : bed?.name }}" />
                                                 <label 
                                                     for="ab_name_{{ index }}" 
                                                     class="ap-form__label ap-form__label-text ap-form__label-text--active">
@@ -393,7 +393,7 @@
                                                     class="ap-form__input-text"
                                                     [disabled]="able_section_two"
                                                     [class.form_error_found]="bed.lastName == 'no_data'"
-                                                    value="" />
+                                                    value="{{ bed?.lastName == 'no_data' ? '' : bed?.lastName }}" />
                                                 <label 
                                                     for="ab_lname_{{ index }}" 
                                                     class="ap-form__label ap-form__label-text ap-form__label-text--active">
@@ -417,7 +417,7 @@
                                                     class="ap-form__input-text"
                                                     [disabled]="able_section_two"
                                                     [class.form_error_found]="bed.motherName == 'no_data'"
-                                                    value="" />
+                                                    value="{{ bed?.motherName == 'no_data' ? '' : bed?.motherName }}" />
                                                 <label 
                                                     for="ab_mname_{{ index }}" 
                                                     class="ap-form__label ap-form__label-text ap-form__label-text--active">
@@ -439,6 +439,7 @@
                                                   name="profile_gender_{{ index }}"
                                                   [disabled]="able_section_two"
                                                   [class.form_error_found]="bed.genderId == 'no_data'"
+                                                  value="{{ bed?.genderId == 'no_data' ? '0' : bed?.genderId }}"
                                                   class="ap-form__input-text">
                                                   <option value="0" disabled>Select One*</option>
                                                   <option value="1">Male</option>
@@ -467,7 +468,11 @@
                                                     class="ap-form__input-text"
                                                     [disabled]="able_section_two"
                                                     [class.form_error_found]="bed.email == 'no_data'"
-                                                    value="" />
+                                                    [class.form_error_found]="bed.email == 'no_valid'"
+                                                    value="{{
+                                                        bed?.email == 'no_data' ? '' : bed?.email ||
+                                                        bed?.email == 'no_valid' ? '' : bed?.email
+                                                    }}" />
                                                 <label 
                                                     for="ab_mail_{{ index }}" 
                                                     class="ap-form__label ap-form__label-text ap-form__label-text--active">
@@ -475,6 +480,9 @@
                                                 </label>
                                                 <span class="ml-col-1 form_error_found_label" *ngIf="bed.email == 'no_data'">
                                                     Email is required*
+                                                </span>
+                                                <span class="ml-col-1 form_error_found_label" *ngIf="bed.email == 'no_valid'">
+                                                    Email format is not valid*
                                                 </span>
                                             </div>
                                         </div>
@@ -553,7 +561,7 @@
                                             Floor:
                                         </div>
                                         <div class="ml-col-1">
-                                            {{ room.totalBeds }}
+                                            {{ room.floor }}
                                         </div>
                                     </div>
                                 </div>
@@ -841,7 +849,7 @@
                                 <div class="table__footer-dato">
                                     <p class="table__footer-dato-a">Total:</p> 
                                     <span class="text-bold table__footer-dato-b table__footer-dato--big">
-                                        {{ total_services_ammount | currency }}
+                                        {{ booking_detail_total_ammount | currency }}
                                     </span>
                                 </div>
                             </div>
@@ -883,15 +891,898 @@
 
 
 
-    <div class="ml-col-1 block-test" step-form="two">
-    <!-- div class="ml-col-1 block-test" *ngIf="visible_step.step_2" step-form="two" -->
-        <div class="ml-col-1 margin-tb-min">
+
+
+
+
+
+
+    <div class="ml-col-1 margin-top-m" step-form="two" *ngIf="visible_step.step_2">
+            <div class="ml-col-1">
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                        Start Date
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ booking_data.startDate | date }}
+                    </div>
+                </div>
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                        End Date
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ booking_data.finishDate | date }}
+                    </div>
+                </div>
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                        Nights reserved
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ getDaysReserved() }}
+                    </div>
+                </div>
+                <div class="ml-col-4 ml-col-r">
+                    <div class="tenant-label">
+                        {{ terms_of_use == 'short_t' ? 'short term' : 'long term' }}
+                    </div>
+                </div>
+            </div>
+            <form 
+                class="ap-form ap-form--full-width ap-form--no-padding ap-form__sdato--no-padding ml-col-1" 
+                onsubmit="return false;" 
+                name="post_profile">
+                <div class="ml-col-1 margin-top-x">
+                    <div class="ml-col-1">
+                        <h4 class="ap-form__titulo text-left">
+                          Information
+                        </h4>
+                    </div>
+                 </div>
+                <div class="ml-col-1">
+                    <div class="ml-col-1">
+                        <div class="ap-form__input">
+                            <p class="ml-col-1">
+                                Profile Type
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ml-col-15">
+                        <div class="ap-form__input-radio-opc">
+                            <input 
+                                type="radio" 
+                                id="profile_single"
+                                name="profile_type"
+                                value="1"
+                                checked="checked"
+                                (change)="changeProfileType( $event )"
+                                class="ap-form__input-radio display-none" />
+                            <label for="profile_single" class="ap-form__label-radio">
+                              Single
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ml-col-15">
+                        <div class="ap-form__input-radio-opc">
+                            <input 
+                                type="radio" 
+                                id="profile_buss" 
+                                name="profile_type"
+                                value="2"
+                                (change)="changeProfileType( $event )"
+                                class="ap-form__input-radio display-none" />
+                            <label for="profile_buss" class="ap-form__label-radio">
+                              Business
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input 
+                          required
+                          type="text" 
+                          placeholder="Name*"
+                          id="profile_name" 
+                          name="profile_name"
+                          [(ngModel)]="general_user_data.name"
+                          [class.form_error_found]="form_profile_validator.no_name"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_name" 
+                          class="ap-form__label ap-form__label-text"
+                          [class.ap-form__label-text--active]="general_user_data.name != ''">
+                          Name
+                        </label>
+                        <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_validator.no_name">
+                            Name is required*
+                        </span>
+                      </div>
+                    </div>
+                </div>
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input 
+                          required
+                          type="text" 
+                          placeholder="Last Name*"
+                          id="profile_lname" 
+                          name="profile_lname"
+                          [class.form_error_found]="form_profile_validator.no_lnam"
+                          [(ngModel)]="general_user_data.lastName"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_lname" 
+                          class="ap-form__label ap-form__label-text"
+                          [class.ap-form__label-text--active]="general_user_data.lastName != ''">
+                          Last Name
+                        </label>
+                        <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_validator.no_lnam">
+                            Last Name is required*
+                        </span>
+                      </div>
+                    </div>
+                </div>
+                <div class="ml-col-4 ml-col-r">
+                    <div class="ap-form__input">
+                      <input
+                        required
+                        class="ap-form__input-image display-none" 
+                        id="profile_avatar"
+                        name="profile_avatar"
+                        type="file"
+                        accept="image/*" />
+                      <label for="profile_avatar" class="ap-form__label-image">
+                        <figure class="ap-form__image">
+                          <img class="ap-form__image-image no-image" 
+                              id="profile_avatar_img"
+                              src="../../../../assets/14.jpg" />
+                          <span class="ap-form__image-data text-center" id="profile_avatar_name">
+                            Image size must be <br />
+                            <span class="text-bold">350x350px</span> 
+                          </span>
+                        </figure>
+                      </label>
+                    </div>
+                </div>
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input 
+                          required
+                          type="text" 
+                          placeholder="Second Name*"
+                          id="profile_sname" 
+                          [(ngModel)]="general_user_data.motherName"
+                          [class.form_error_found]="form_profile_validator.no_mnam"
+                          name="profile_sname"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_sname" 
+                          class="ap-form__label ap-form__label-text"
+                          [class.ap-form__label-text--active]="general_user_data.motherName != ''">
+                          Second Name
+                        </label>
+                        <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_validator.no_mnam">
+                            Second Name is required*
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input 
+                          required
+                          type="text" 
+                          min="0"
+                          placeholder="Phone*"
+                          id="profile_phone" 
+                          name="profile_phone"
+                          [(ngModel)]="general_user_data.phone"
+                          [class.form_error_found]="form_profile_validator.no_phon"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_phone" 
+                          class="ap-form__label ap-form__label-text"
+                          [class.ap-form__label-text--active]="general_user_data.phone != ''">
+                          Phone
+                        </label>
+                        <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_validator.no_phon">
+                            Phone is required*
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input
+                          required
+                          type="text" 
+                          placeholder="*Mail"
+                          id="profile_mail" 
+                          name="profile_mail"
+                          [(ngModel)]="general_user_data.email"
+                          [class.form_error_found]="form_profile_validator.no_mail"
+                          [class.form_error_found]="form_profile_validator.no_mail_valid"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_mail" 
+                          class="ap-form__label ap-form__label-text"
+                          [class.ap-form__label-text--active]="general_user_data.email != ''">
+                          Mail
+                        </label>
+                        <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_validator.no_mail">
+                            Mail is required*
+                        </span>
+                        <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_validator.no_mail_valid">
+                            Mail format is incorrect*
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <select
+                          required
+                          placeholder="Gender"
+                          id="profile_gender" 
+                          name="profile_gender"
+                          class="ap-form__input-text"
+                          [class.form_error_found]="form_profile_validator.no_gend"
+                          [(ngModel)]="general_user_data.userData.genderId">
+                          <option value="" disabled>Gender</option>
+                          <option *ngFor="let list of gender_list_gotten;" [value]="list.id">
+                              {{ list.name }}
+                          </option>
+                        </select>
+                        <label 
+                          for="profile_gender" 
+                          class="ap-form__label ap-form__label-text"
+                          [class.ap-form__label-text--active]="general_user_data.userData.genderId != ''">
+                          Gender
+                        </label>
+                        <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_validator.no_gend">
+                            Gender is required*
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <select
+                          required 
+                          placeholder="Nationality"
+                          id="profile_nationality" 
+                          name="profile_nationality"
+                          class="ap-form__input-text"
+                          [(ngModel)]="general_user_data.userData.countryId">
+                          <option value="" disabled>Nationality</option>
+                          <option *ngFor="let list of country_list_gotten;" [value]="list.id">
+                            {{ list.name }}
+                           </option>
+                        </select>
+                        <label 
+                          for="profile_nationality" 
+                          class="ap-form__label ap-form__label-text"
+                          [class.ap-form__label-text--active]="general_user_data.userData.countryId != ''">
+                          Nationality
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <select
+                          required 
+                          placeholder="Birthplace"
+                          id="profile_bplace" 
+                          name="profile_bplace"
+                          class="ap-form__input-text"
+                          [(ngModel)]="general_user_data.userData.stateId">
+                          <option value="" disabled>Birthplace</option>
+                          <option *ngFor="let list of birthplace_list_gotten;" [value]="list.id">
+                            {{ list.name }}
+                           </option>
+                        </select>
+                        <label 
+                          for="profile_bplace" 
+                          class="ap-form__label ap-form__label-text"
+                          [class.ap-form__label-text--active]="general_user_data.userData.stateId != ''">
+                          Birthplace
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input 
+                          required
+                          type="date" 
+                          placeholder="Birthday"
+                          id="profile_bday" 
+                          [(ngModel)]="general_user_data.bith"
+                          name="profile_bday"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_bday" 
+                          class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                          Birthday
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input 
+                          required
+                          type="text" 
+                          placeholder="Linked In"
+                          id="profile_linkedin" 
+                          name="profile_linkedin"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_linkedin" 
+                          class="ap-form__label ap-form__label-text">
+                          Linked In
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input 
+                          required
+                          type="text" 
+                          placeholder="Twitter"
+                          id="profile_twitter" 
+                          name="profile_twitter"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_twitter" 
+                          class="ap-form__label ap-form__label-text">
+                          Twitter
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-4">
+                    <div class="ml-col-1">
+                      <div class="ap-form__input">
+                        <input 
+                          required
+                          type="text" 
+                          placeholder="Facebook"
+                          id="profile_facebook" 
+                          name="profile_facebook"
+                          class="ap-form__input-text" />
+                        <label 
+                          for="profile_facebook" 
+                          class="ap-form__label ap-form__label-text">
+                          Facebook
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-1">
+                    <div class="ml-col-4">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <select
+                            required 
+                            placeholder="Civil Status"
+                            id="profile_cstatus" 
+                            name="profile_cstatus"
+                            class="ap-form__input-text"
+                            [(ngModel)]="general_user_data.userData.civilStatusId">
+                            <option value="" disabled>Civil Status</option>
+                            <option *ngFor="let list of civilstatus_list_gotten;" [value]="list.id">
+                                {{ list.name }}
+                            </option>
+                          </select>
+                          <label 
+                            for="profile_cstatus" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userData.civilStatusId != ''">
+                            Civil Status
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-4">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <select
+                            required 
+                            placeholder="Scholarship"
+                            id="profile_scholarship" 
+                            name="profile_scholarship"
+                            class="ap-form__input-text"
+                            [(ngModel)]="general_user_data.userData.scholarshipId">
+                            <option value="" disabled>Scholarship</option>
+                            <option *ngFor="let list of scholarship_list_gotten;" [value]="list.id">
+                                {{ list.name }}
+                            </option>
+                          </select>
+                          <label 
+                            for="profile_scholarship" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userData.scholarshipId != ''">
+                            Scholarship
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-4">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            type="text" 
+                            placeholder="RFC"
+                            id="profile_rfc" 
+                            name="profile_rfc"
+                            [(ngModel)]="general_user_data.rfc"
+                            class="ap-form__input-text" />
+                          <label 
+                            for="profile_rfc" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.rfc != ''">
+                            RFC
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-4">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <select
+                            required 
+                            placeholder="Have you ever rented?"
+                            id="profile_rented" 
+                            name="profile_rented"
+                            class="ap-form__input-text"
+                            [(ngModel)]="general_user_data.userData.rent">
+                            <option value="null" disabled>Have you ever rented?</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                          </select>
+                          <label 
+                            for="profile_rented" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userData.rent != null">
+                            Have you ever rented?
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-4">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <select
+                            required 
+                            placeholder="Do you bring pets?"
+                            id="profile_pets" 
+                            name="profile_pets"
+                            class="ap-form__input-text"
+                            [(ngModel)]="general_user_data.userData.pet">
+                            <option value="null" disabled>Do you bring pets?</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                          </select>
+                          <label 
+                            for="profile_pets" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userData.pet != null">
+                            Do you bring pets?
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-4">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required 
+                            type="number"
+                            min="0"
+                            placeholder="How many cars will you bring?"
+                            id="profile_cars" 
+                            name="profile_cars"
+                            [(ngModel)]="general_user_data.userData.car"
+                            class="ap-form__input-text" />
+                          <label 
+                            for="profile_cars" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userData.car != null">
+                            How many cars will you bring?
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-4">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            min="0"
+                            type="number" 
+                            placeholder="Money spend monthly in food?"
+                            id="profile_mfood" 
+                            name="profile_mfood"
+                            [(ngModel)]="general_user_data.userData.howMuchMin"
+                            class="ap-form__input-text" />
+                          <label 
+                            for="profile_mfood" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userData.howMuchMin != null">
+                            Money spend monthly in food?
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-4">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            min="0"
+                            type="number" 
+                            placeholder="Money spend monthly on Free Time?"
+                            id="profile_mtime" 
+                            name="profile_mtime"
+                            [(ngModel)]="general_user_data.userData.howMuchMax"
+                            class="ap-form__input-text" />
+                          <label 
+                            for="profile_mtime" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userData.howMuchMax != null">
+                            Money spend monthly on Free Time?
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-4">
+                      <div class="ap-form__input ap-form__input--no-padding">
+                        <input 
+                          type="checkbox"
+                          id="profile_active" 
+                          name="profile_active"
+                          [checked]="general_user_data.active"
+                          [(ngModel)]="general_user_data.active"
+                          class="ap-form__input-checkbox display-none" />
+                        <label for="profile_active" class="ap-form__label ap-form__label-checkbox">
+                          Active
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-col-1" *ngIf="!single_profile"> <!-- *ngIf="profile_data.clientKind" -->
+                    <div class="ml-col-1">
+                        <div class="ap-form__input">
+                            <p class="ap-form__titulo ap-form__titulo--auto-width">
+                                About Business
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ml-col-3">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            type="text" 
+                            placeholder="Name*"
+                            id="profile_bname" 
+                            name="profile_bname"
+                            class="ap-form__input-text"
+                            [(ngModel)]="general_user_data.userTaxData.name" />
+                          <label 
+                            for="profile_bname" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userTaxData.name != ''">
+                            Name
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-3">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            type="text" 
+                            placeholder="Activity/Routine business*"
+                            id="profile_bactivity" 
+                            name="profile_bactivity"
+                            class="ap-form__input-text"
+                            [(ngModel)]="general_user_data.userTaxData.activity" />
+                          <label 
+                            for="profile_bactivity" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userTaxData.activity != ''">
+                            Activity/Routine business
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-3">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            type="text" 
+                            placeholder="Trade name*"
+                            id="profile_btrade" 
+                            name="profile_btrade"
+                            class="ap-form__input-text"
+                            [(ngModel)]="general_user_data.userTaxData.tradeName" />
+                          <label 
+                            for="profile_btrade" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userTaxData.tradeName != ''">
+                            Trade name
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-3">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            type="text" 
+                            placeholder="RFC*"
+                            id="profile_brfc" 
+                            name="profile_brfc"
+                            class="ap-form__input-text"
+                            [(ngModel)]="general_user_data.userTaxData.rfc" 
+                            [class.ap-form__label-text--active]="general_user_data.userTaxData.rfc != ''" />
+                          <label 
+                            for="profile_brfc" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userTaxData.rfc != ''">
+                            RFC
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-3">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            type="text" 
+                            placeholder="Counsel for the Firm*"
+                            id="profile_bfirm" 
+                            name="profile_bfirm"
+                            class="ap-form__input-text"
+                            [(ngModel)]="general_user_data.userTaxData.legalRepresentative" />
+                          <label 
+                            for="profile_bfirm" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userTaxData.legalRepresentative != ''">
+                            Counsel for the Firm
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-col-3">
+                      <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            type="text" 
+                            placeholder="Phone*"
+                            id="profile_bphone" 
+                            name="profile_bphone"
+                            class="ap-form__input-text"
+                            [(ngModel)]="general_user_data.userTaxData.phone" 
+                            [class.ap-form__label-text--active]="general_user_data.userTaxData.phone != ''" />
+                          <label 
+                            for="profile_bphone" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="general_user_data.userTaxData.phone != ''">
+                            Phone
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="ml-col-1 margin-top-x" *ngIf="profile_section_card">
+                    <div class="ml-col-1 margin-bottom-x">
+                        <h4 class="ap-form__titulo text-left">
+                          Payment method
+                        </h4>
+                    </div>
+                    <div class="ml-col-1">
+                        <div class="ml-col-3">
+                          <div class="credit-card">
+                            <div class="credit-card__container credit-card__container--left-side credit-card--no-padding-top">
+                              <div class="credit-card__card card-style">
+                                <h4 class="credit-card__card-titulo">
+                                  Nombre de la tarjeta
+                                </h4>
+                                <p 
+                                  class="credit-card__card-number credit-card__card-number--visa">
+                                  <span>****</span>
+                                  <span>****</span>
+                                  <span>****</span>
+                                  <span>7777</span>
+                                </p>
+                                <p class="credit-card__card-date">
+                                  10/07
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="ml-col-32">
+                          <form 
+                            class="ap-form ap-form--no-tl-br ml-col-1 card-style ap-form--full-width" 
+                            onsubmit="return false;" 
+                            name="post_form">
+                            <div class="ml-col-2">
+                              <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="text" 
+                                    placeholder="Name"
+                                    id="card_name" 
+                                    name="card_name"
+                                    class="ap-form__input-text" />
+                                  <label 
+                                    for="card_name" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Name
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="ml-col-2">
+                              <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    min="0"
+                                    max="9999999999999999"
+                                    type="number" 
+                                    placeholder="Number"
+                                    id="card_number" 
+                                    name="card_number"
+                                    class="ap-form__input-text"
+                                    (change)="kindCardDetecter( $event.target.value )" />
+                                  <label 
+                                    for="card_number" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Number
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="ml-col-3">
+                              <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="number" 
+                                    min="0"
+                                    placeholder="Expiration month"
+                                    id="card_day" 
+                                    name="card_day"
+                                    class="ap-form__input-text" />
+                                  <label 
+                                    for="card_day" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Expiration month
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="ml-col-3">
+                              <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    min="0"
+                                    type="number" 
+                                    placeholder="Expiration year"
+                                    id="card_year" 
+                                    name="card_year"
+                                    class="ap-form__input-text" />
+                                  <label 
+                                    for="card_year" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Expiration year
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="ml-col-3">
+                              <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="number" 
+                                    placeholder="CVV"
+                                    min="0"
+                                    id="card_cvv" 
+                                    name="card_cvv"
+                                    class="ap-form__input-text" />
+                                  <label 
+                                    for="card_cvv" 
+                                    class="ap-form__label ap-form__label-text">
+                                    CVV
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="ml-col-1 text-center margin-top-x">
+                              Required fields <span class="color-red text-bold">*</span>
+                            </div>
+                            <div class="ml-col-1 ap-form__buttons">
+                              <button 
+                                type="submit"
+                                class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+                                Save
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                  </div>
+
+
+
+
+
+
+
+                  <div class="ml-col-1 ap-form__buttons margin-top-m" *ngIf="terms_of_use == 'short_t'">
+                    <button 
+                        class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
+                        Income
+                    </button>
+                    <button 
+                        class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
+                        *ngIf="!profile_section_card"
+                        (click)="profileTenantCompleted()">
+                        Next
+                    </button>
+                    <button 
+                        class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
+                        *ngIf="profile_section_card">
+                        Continue
+                    </button>
+                  </div>
+                  <div class="ml-col-1 ap-form__buttons margin-top-x" *ngIf="terms_of_use == 'long_t'">
+                    <button 
+                        class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+                        Income
+                    </button>
+                  </div>
+            </form>
+        <!-- div class="ml-col-1 margin-tb-min">
             <button 
                 class="ap-form__rButton button-black button-big"
                 (click)="iHaveCompletedStep(1)">
                 Confirm
             </button>
-        </div>
+        </div -->
     </div>
 
 
