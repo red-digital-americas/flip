@@ -13,7 +13,7 @@
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-    <link rel="stylesheet" href="/assets/css/animation.css">
+    <!-- <link rel="stylesheet" href="/assets/css/animation.css"> -->
 
     <!--font-awesome.min.css-->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -46,7 +46,8 @@
     <link rel="stylesheet" href="assets/css/Menu_responsive.css"> 
     <!--responsive.css-->
     <link rel="stylesheet" href="assets/css/responsive.css">
-
+    <script src="carga_dinamica/config.js"></script>
+    <script src="carga_dinamica/mrooms.js"></script>
 
     </head>
     <body>
@@ -112,12 +113,12 @@
                                                    
                                                      
                                                     
-                                                    <a class="fback" style="top:3%; left: 3%;" href="index.html" >
+                                                    <a class="fback" style="top:3%; left: 3%;" href="./index.html" >
                                                         <span>
                                                             <img src="assets/images/F.png" alt="Los Angeles">
                                                         </span>
                                                     </a>
-                                                     <a class="fbackclosemobil" style="top:3%; right: 0px; width: 12%; " href="maltata.html" >
+                                                     <a class="fbackclosemobil" style="top:3%; right: 0px; width: 12%; " id="tache" >
                                                         <!-- span>
                                                             <img style="width: 40%; height: 40%;" src="assets/images/closebut.svg" alt="Los Angeles">
                                                         </span -->
@@ -164,7 +165,7 @@
                                                             <img src="assets/images/F.png" alt="Los Angeles">
                                                         </span>
                                                     </a>
-                                                     <a class="fbackclosemobil" style="top:3%; right: 0px; width: 12%; " href="maltata.html" >
+                                                     <a class="fbackclosemobil" style="top:3%; right: 0px; width: 12%; " >
                                                         <!-- span>
                                                             <img style="width: 40%; height: 40%;" src="assets/images/closebut.svg" alt="Los Angeles">
                                                         </span -->
@@ -466,7 +467,7 @@
                var modal2 = document.getElementById('loginmodal');
 
             // Get the button that opens the modal
-            var btn2 = document.getElementById("signinmov");
+            var btn2 = document.getElementById("tache");
             
           
 
@@ -474,9 +475,11 @@
             var span2 = document.getElementById("closelogin");
 
             // When the user clicks on the button, open the modal 
-            btn2.onclick = function() {
-                modal2.style.display = "block";
-            }
+             btn2.onclick = function() {
+                 
+                window.location = './maltata.html?buildingid='+ buildingid;
+            //     modal2.style.display = "block";
+             }
 
             // When the user clicks on <span> (x), close the modal
             span2.onclick = function() {

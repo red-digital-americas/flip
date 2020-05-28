@@ -198,13 +198,13 @@ export class HomeroomsComponent implements OnInit {
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
           break;
         default:
-         // debugger; 
+          debugger; 
           if (value.result == "Success") {
           
             this.lengthpost = value.item.length;
             this.namebuilding = value.detalle;
 
-            if(value.item.length > 1)
+            if(value.item.length == 1)
             {
               this.posts = [ value.item[0] ];
               this.posts[0].get_video_url = this.domSanitiza.bypassSecurityTrustResourceUrl( this.getVideoToEmbedUrl( this.posts[0].view360 ) );
@@ -480,7 +480,7 @@ export class HomeroomsComponent implements OnInit {
   public showSection( event_data ,id_section:string ):void {
 
     console.log('Aqui => ', id_section);
-
+debugger;
     const event = event_data.target,
           tabs_in = document.getElementsByClassName('room-data__tab');
 
@@ -512,8 +512,7 @@ export class HomeroomsComponent implements OnInit {
 
             }
 
-            let section_to_show = document.getElementById( section );
-
+            let section_to_show = document.getElementById(section);
                 section_to_show.classList.remove('display-none');
 
           }

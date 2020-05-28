@@ -292,12 +292,12 @@
                                                     <a style="margin-top: 50%;margin-right: -10%;" class="right carousel-control" href="#myCarousel2" data-slide="next">
                                                     <img   src="assets/images/arrow-derecha.png" />      
                                                     </a>
-                                                    <a class="fback" style="top:3%; left: 3%;" href="index.html" >
+                                                    <a class="fback" style="top:3%; left: 3%;" href="./index.html" >
                                                         <span>
                                                             <img src="assets/images/F.png" alt="Los Angeles">
                                                         </span>
                                                     </a>
-                                                     <a class="fbackclosemobil" style="top:3%; right: 0px; width: 12%; " href="maltata.html" >
+                                                     <a class="fbackclosemobil" id="tache" style="top:3%; right: 0px; width: 12%; " >
                                                     </a>
                                                     
                                                     <span style="    margin-left: 9%;" class="titlepagesection" >
@@ -478,7 +478,7 @@
                var modal2 = document.getElementById('loginmodal');
 
             // Get the button that opens the modal
-            var btn2 = document.getElementById("signinmov");
+            var btn2 = document.getElementById("tache");
             
           
 
@@ -486,9 +486,11 @@
             var span2 = document.getElementById("closelogin");
 
             // When the user clicks on the button, open the modal 
-            // btn2.onclick = function() {
-            //     modal2.style.display = "block";
-            // }
+             btn2.onclick = function() {
+                // modal2.style.display = "block";
+                //debugger;
+                window.location = './maltata.html?buildingid='+ buildingid;
+             }
 
             // When the user clicks on <span> (x), close the modal
             span2.onclick = function() {
