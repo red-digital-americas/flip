@@ -989,12 +989,9 @@ import { MatSort } from '@angular/material/sort';
     public credit_card_data: CreditCardModel = new CreditCardModel();
     public getCardDataSection():void {
 
-        console.log('Credit card data ==> ', this.credit_card_data);
-        console.log('Credit card validator => ', this.creditCardValidator() );
-
         if( this.creditCardValidator() ) {
 
-
+            this.iHaveCompletedStep(1);
 
         } else {
 
@@ -1327,9 +1324,16 @@ import { MatSort } from '@angular/material/sort';
     public getDigits( the_string: any, how_many: number ):string {
 
         let this_chain = '',
+            string_to = '';
+
+        if( the_string != null ) {
+
+            this_chain = '',
             string_to = the_string.toString();
 
-        this_chain = string_to.substr( string_to.length - how_many );
+            this_chain = string_to.substr( string_to.length - how_many );
+
+        }
 
         return this_chain;
 

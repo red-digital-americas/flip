@@ -1683,7 +1683,7 @@
                                   </span>
                                 </p>
                                 <p class="credit-card__card-date">
-                                  {{ getDigits( credit_card_data.month, 2 ) }}/07
+                                  {{ getDigits( credit_card_data.month, 2 ) }}/{{ getDigits( credit_card_data.year, 2 ) }}
                                 </p>
                               </div>
                             </div>
@@ -1703,6 +1703,7 @@
                                     placeholder="Name*"
                                     id="card_name" 
                                     name="card_name"
+                                    maxlength="22"
                                     class="ap-form__input-text" 
                                     [(ngModel)]="credit_card_data.name"
                                     [class.form_error_found]="credit_card_form.no_name" />
@@ -1904,24 +1905,226 @@
 
 
 
-    <div class="ml-col-1 block-test" *ngIf="visible_step.step_3" step-form="three">
-        Step 3
-        <div class="ml-col-1 margin-tb-min">
-            <button 
-                class="ap-form__rButton button-black button-big"
-                (click)="iHaveCompletedStep(2)">
-                Save
-            </button>
+    <div class="ml-col-1" *ngIf="visible_step.step_3" step-form="three">
+        <div class="ml-col-1 top-separator margin-bottom-m">
+            <div class="ml-col-1 margin-tb-min">
+                <div class="ap-form__titulo">
+                    Resume
+                </div>
+            </div>
+            <div class="ml-col-1 margin-bottom-x">
+                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                    <div class="ml-col-1">
+                        Start Date
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ booking_data.startDate | date }}
+                    </div>
+                </div>
+                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                    <div class="ml-col-1">
+                        End Date
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ booking_data.finishDate | date }}
+                    </div>
+                </div>
+                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                    <div class="ml-col-1">
+                        Total Beds
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ getTotalBeds( booking_data.totalBeds ) }}
+                    </div>
+                </div>
+                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                    <div class="ml-col-1">
+                        Roomate Type
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ getNameRoomateType( booking_data.roomateFlip ) }}
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-1 margin-bottom-x">
+                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                    <div class="ml-col-1">
+                        Roomate Gender Preference
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ booking_data.roomatePreferences == '1' ? 'Male' : 'Female' }}
+                    </div>
+                </div>
+                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                    <div class="ml-col-1">
+                        Could you smoke?
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ booking_data.smoke == 'true' ? 'Yes' : 'No' }}
+                    </div>
+                </div>
+                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                    <div class="ml-col-1">
+                        Pet friendly
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ booking_data.pets == 'true' ? 'Yes' : 'No' }}
+                    </div>
+                </div>
+                <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                    <div class="ml-col-1">
+                        Room Type
+                    </div>
+                    <div class="ml-col-1 text-bold">
+                        {{ room_selected.name }}
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-1 margin-top-m">
+                <div class="ml-col-2 margin-bottom-x">
+                    <div class="ml-col-1 text-bold margin-bottom-x">
+                       {{ membership_selected.name }}
+                    </div>
+                    <div class="ml-col-1 padding-right-m">
+                        {{ membership_selected.description }}
+                    </div>
+                </div>
+                <div class="ml-col-5e3">
+                    <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
+                        <div class="ml-col-1 padding-bottom-x">
+                            Nights reserved:
+                        </div>
+                        <div class="ml-col-1 text-bold">
+                            {{ getDaysReserved() }}
+                        </div>
+                    </div>
+                </div>
+                <div class="ml-col-5e3">
+                    <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
+                        <div class="ml-col-1 padding-bottom-x">
+                            Total Beds:
+                        </div>
+                        <div class="ml-col-1 text-bold">
+                            {{ getTotalBeds( booking_data.totalBeds ) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="ml-col-5e3">
+                    <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-right">
+                        <div class="ml-col-1 padding-bottom-x">
+                            Ammount:
+                        </div>
+                        <div class="ml-col-1 text-bold">
+                            {{ getTotalAmmount() | currency }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-1">
+                <div class="ml-col-1 text-bold margin-bottom-x">
+                    Services 
+                </div>
+            </div>
+            <table 
+                mat-table 
+                mat-sort 
+                [dataSource]="all_services_selected" 
+                class="mat-elevation-z8 table--no-shadow margin-bottom-min" 
+                style="width: 100%;">
+                <ng-container matColumnDef="icon">
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"></th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__icon--width table__data-center">
+                        <figure class="table__icon">
+                            <img src="{{ element.icon }}" 
+                                 class="table__icon-img filter-brightness" />
+                        </figure>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="service">
+                    <th mat-header-cell *matHeaderCellDef class="table__header">Service</th>
+                    <td mat-cell *matCellDef="let element" class="table__data">
+                        {{ element.name }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Type</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                        {{ element.type_service }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="lapse">
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Lapse</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                        {{ element.lapse == '1' ? 'Recurrent' : 'Once' }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="sdate">
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Start Date</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                        {{ element.startDate | date }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="edate">
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">End Date</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                        {{ element.endDate | date }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="ammount">
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-right">Ammount</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-right">
+                        {{ element.total_ammount | currency }}
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="table_services_resumen"></tr>
+                <tr mat-row *matRowDef="let row; columns: table_services_resumen;"></tr>
+            </table>
+            <div class="table__footer top-separator table__footer--no-border-top">
+                <div class="table__footer-dato">
+                    <p class="table__footer-dato-a">Total:</p> 
+                    <span class="text-bold table__footer-dato-b table__footer-dato--big">
+                        {{ booking_detail_total_ammount | currency }}
+                    </span>
+                </div>
+            </div>
+        </div>  
+        <div class="ml-col-1">
+            <div class="ml-col-1 margin-bottom-x">
+                <h4 class="ap-form__titulo text-left">
+                  Payment method
+                </h4>
+            </div>
+            <div class="ml-col-3">
+              <div class="credit-card">
+                <div class="credit-card__container credit-card__container--left-side credit-card--no-padding-top">
+                  <div class="credit-card__card card-style">
+                    <h4 class="credit-card__card-titulo">
+                      {{ credit_card_data.name == '' ? 'Card Name' : credit_card_data.name }}
+                    </h4>
+                    <p 
+                      class="credit-card__card-number credit-card__card-number--visa">
+                      <span>****</span>
+                      <span>****</span>
+                      <span>****</span>
+                      <span>
+                        {{ getDigits( credit_card_data.number, 4 ) }}
+                      </span>
+                    </p>
+                    <p class="credit-card__card-date">
+                      {{ getDigits( credit_card_data.month, 2 ) }}/{{ getDigits( credit_card_data.year, 2 ) }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
         <div class="ml-col-1 margin-tb-min">
             <button 
-                class="ap-form__rButton button-pink button-big"
-                (click)="iHaveCompletedStep(2)">
+                class="ap-form__rButton button-black ap-form__buttons-button--big button-big">
                 Confirm Payment
             </button>
         </div>
     </div>
-</div>
 
 
 
