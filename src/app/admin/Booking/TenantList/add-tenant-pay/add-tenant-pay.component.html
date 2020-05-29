@@ -330,165 +330,132 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="ml-col-1" *ngIf="show_beds_section">
-                            <div class="ap-form__titulo margin-tb-min">
-                                Additional Beds
-                            </div>
-                            <div class="ml-col-1">
-                                <div 
-                                    class="ml-col-1 padding-general-m card-style margin-bottom-x" 
-                                    *ngFor="let bed of beds_to_add, index as index;">
-                                    <div class="ml-col-1" bed="additional">
-                                        <div class="ml-col-4">
-                                            <div class="ml-col-1">
-                                                <div class="ap-form__input">
-                                                    <input 
-                                                        required
-                                                        type="text" 
-                                                        placeholder="Name*"
-                                                        id="ab_name_{{ index }}" 
-                                                        name="ab_name_{{ index }}"
-                                                        class="ap-form__input-text"
-                                                        [disabled]="able_section_two"
-                                                        [class.form_error_found]="bed.name == 'no_data'"
-                                                        value="" />
-                                                    <label 
-                                                        for="ab_name_{{ index }}" 
-                                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                        Name*
-                                                    </label>
-                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.name == 'no_data'">
-                                                        Name is required*
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="ml-col-4">
-                                            <div class="ml-col-1">
-                                                <div class="ap-form__input">
-                                                    <input 
-                                                        required
-                                                        type="text" 
-                                                        placeholder="Last Name*"
-                                                        id="ab_lname_{{ index }}" 
-                                                        name="ab_lname_{{ index }}"
-                                                        class="ap-form__input-text"
-                                                        [disabled]="able_section_two"
-                                                        [class.form_error_found]="bed.lastName == 'no_data'"
-                                                        value="" />
-                                                    <label 
-                                                        for="ab_lname_{{ index }}" 
-                                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                        Last Name* 
-                                                    </label>
-                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.lastName == 'no_data'">
-                                                        Last Name is required*
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="ml-col-4">
-                                            <div class="ml-col-1">
-                                                <div class="ap-form__input">
-                                                    <input 
-                                                        required
-                                                        type="text" 
-                                                        placeholder="Mother Name*"
-                                                        id="ab_mname_{{ index }}" 
-                                                        name="ab_mname_{{ index }}"
-                                                        class="ap-form__input-text"
-                                                        [disabled]="able_section_two"
-                                                        [class.form_error_found]="bed.motherName == 'no_data'"
-                                                        value="" />
-                                                    <label 
-                                                        for="ab_mname_{{ index }}" 
-                                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                        Mother Name* 
-                                                    </label>
-                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.motherName == 'no_data'">
-                                                        Mother Name is required*
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="ml-col-4">
-                                            <div class="ml-col-1">
-                                                <div class="ap-form__input">
-                                                    <select
-                                                      required
-                                                      placeholder="Roomate Type"
-                                                      id="profile_gender_{{ index }}" 
-                                                      name="profile_gender_{{ index }}"
-                                                      [disabled]="able_section_two"
-                                                      [class.form_error_found]="bed.genderId == 'no_data'"
-                                                      class="ap-form__input-text">
-                                                      <option value="0" disabled>Select One*</option>
-                                                      <option value="1">Male</option>
-                                                      <option value="2">Female</option>
-                                                    </select>
-                                                    <label 
-                                                      for="profile_gender_{{ index }}" 
-                                                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                      Gender
-                                                    </label>
-                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.genderId == 'no_data'">
-                                                        Gender is required*
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="ml-col-4">
-                                            <div class="ml-col-1">
-                                                <div class="ap-form__input">
-                                                    <input 
-                                                        required
-                                                        type="text" 
-                                                        placeholder="Email*"
-                                                        id="ab_mail_{{ index }}" 
-                                                        name="ab_mail_{{ index }}"
-                                                        class="ap-form__input-text"
-                                                        [disabled]="able_section_two"
-                                                        [class.form_error_found]="bed.email == 'no_data'"
-                                                        value="" />
-                                                    <label 
-                                                        for="ab_mail_{{ index }}" 
-                                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                        Email* 
-                                                    </label>
-                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.email == 'no_data'">
-                                                        Email is required*
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="ml-col-4">
-                                            <div class="ml-col-1">
-                                                <div class="ap-form__input">
-                                                    <input 
-                                                        required
-                                                        type="text" 
-                                                        placeholder="Phone Number*"
-                                                        id="ab_phone_{{ index }}" 
-                                                        name="ab_phone_{{ index }}"
-                                                        class="ap-form__input-text"
-                                                        [disabled]="able_section_two"
-                                                        [class.form_error_found]="bed.phone == 'no_data'"
-                                                        value="" />
-                                                    <label 
-                                                        for="ab_phone_{{ index }}" 
-                                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                                        Phone Number* 
-                                                    </label>
-                                                    <span class="ml-col-1 form_error_found_label" *ngIf="bed.phone == 'no_data'">
-                                                        Phone Number is required*
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
+                          <div class="ap-form__titulo margin-tb-min">
+                            Additional Beds
+                          </div>
+                          <div class="ml-col-1">
+                            <div class="ml-col-1 padding-general-m card-style margin-bottom-x"
+                              *ngFor="let bed of beds_to_add, index as index;">
+                              <div class="ml-col-1" bed="additional">
+                                <div class="ml-col-4">
+                                  <div class="ml-col-1">
+                                    <div class="ap-form__input">
+                                      <input required type="text" placeholder="Name*" id="ab_name_{{ index }}"
+                                        name="ab_name_{{ index }}" class="ap-form__input-text"
+                                        [disabled]="able_section_two" [class.form_error_found]="bed.name == 'no_data'"
+                                        value="{{ bed?.name == 'no_data' ? '' : bed?.name }}" />
+                                      <label for="ab_name_{{ index }}"
+                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                        Name*
+                                      </label>
+                                      <span class="ml-col-1 form_error_found_label" *ngIf="bed.name == 'no_data'">
+                                        Name is required*
+                                      </span>
                                     </div>
+                                  </div>
                                 </div>
+                                <div class="ml-col-4">
+                                  <div class="ml-col-1">
+                                    <div class="ap-form__input">
+                                      <input required type="text" placeholder="Last Name*" id="ab_lname_{{ index }}"
+                                        name="ab_lname_{{ index }}" class="ap-form__input-text"
+                                        [disabled]="able_section_two"
+                                        [class.form_error_found]="bed.lastName == 'no_data'"
+                                        value="{{ bed?.lastName == 'no_data' ? '' : bed?.lastName }}" />
+                                      <label for="ab_lname_{{ index }}"
+                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                        Last Name*
+                                      </label>
+                                      <span class="ml-col-1 form_error_found_label" *ngIf="bed.lastName == 'no_data'">
+                                        Last Name is required*
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="ml-col-4">
+                                  <div class="ml-col-1">
+                                    <div class="ap-form__input">
+                                      <input required type="text" placeholder="Mother Name*" id="ab_mname_{{ index }}"
+                                        name="ab_mname_{{ index }}" class="ap-form__input-text"
+                                        [disabled]="able_section_two"
+                                        [class.form_error_found]="bed.motherName == 'no_data'"
+                                        value="{{ bed?.motherName == 'no_data' ? '' : bed?.motherName }}" />
+                                      <label for="ab_mname_{{ index }}"
+                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                        Mother Name*
+                                      </label>
+                                      <span class="ml-col-1 form_error_found_label" *ngIf="bed.motherName == 'no_data'">
+                                        Mother Name is required*
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="ml-col-4">
+                                  <div class="ml-col-1">
+                                    <div class="ap-form__input">
+                                      <select required placeholder="Roomate Type" id="profile_gender_{{ index }}"
+                                        name="profile_gender_{{ index }}" [disabled]="able_section_two"
+                                        [class.form_error_found]="bed.genderId == 'no_data'"
+                                        value="{{ bed?.genderId == 'no_data' ? '0' : bed?.genderId }}"
+                                        class="ap-form__input-text">
+                                        <option value="0" disabled>Select One*</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                      </select>
+                                      <label for="profile_gender_{{ index }}"
+                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                        Gender
+                                      </label>
+                                      <span class="ml-col-1 form_error_found_label" *ngIf="bed.genderId == 'no_data'">
+                                        Gender is required*
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="ml-col-4">
+                                  <div class="ml-col-1">
+                                    <div class="ap-form__input">
+                                      <input required type="text" placeholder="Email*" id="ab_mail_{{ index }}"
+                                        name="ab_mail_{{ index }}" class="ap-form__input-text"
+                                        [disabled]="able_section_two" [class.form_error_found]="bed.email == 'no_data'"
+                                        [class.form_error_found]="bed.email == 'no_valid'" value="{{ bed?.email }}" />
+                                      <label for="ab_mail_{{ index }}"
+                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                        Email*
+                                      </label>
+                                      <span class="ml-col-1 form_error_found_label" *ngIf="bed.email == 'no_data'">
+                                        Email is required*
+                                      </span>
+                                      <span class="ml-col-1 form_error_found_label" *ngIf="bed.email == 'no_valid'">
+                                        Email format is not valid*
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="ml-col-4">
+                                  <div class="ml-col-1">
+                                    <div class="ap-form__input">
+                                      <input required type="text" placeholder="Phone Number*" id="ab_phone_{{ index }}"
+                                        name="ab_phone_{{ index }}" class="ap-form__input-text"
+                                        [disabled]="able_section_two" value="{{ bed?.phone }}"
+                                        [class.form_error_found]="bed.phone == 'no_data'" />
+                                      <label for="ab_phone_{{ index }}"
+                                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                        Phone Number*
+                                      </label>
+                                      <span class="ml-col-1 form_error_found_label" *ngIf="bed.phone == 'no_data'">
+                                        Phone Number is required*
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
+                          </div>
                         </div>
+
                         <div class="ml-col-1 ap-form__buttons margin-top-x">
                             <button 
                                 class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
@@ -823,7 +790,7 @@
                                     <div class="table__footer-dato">
                                         <p class="table__footer-dato-a">Total:</p> 
                                         <span class="text-bold table__footer-dato-b table__footer-dato--big">
-                                            {{ total_services_ammount | currency }}
+                                            {{ booking_detail_total_ammount | currency }}
                                         </span>
                                     </div>
                                 </div>
