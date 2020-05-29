@@ -1,6 +1,6 @@
 <div class="ml-col-1 padding-general-m">
   <div class="col-12" style="padding: 0;">
-    <h2>  Home Menu principal</h2>
+    <h2 Class="text-ultra">  Team</h2>
   </div>
   <div class="row padding-bottom-m">
     <div class="big-card" *ngFor="let post of posts, index as index;">
@@ -272,7 +272,7 @@
               type="file" 
               name="image_i4_selected"
               accept="image/*"
-              (change)="readImageData($event, '1920x1080', 0);"
+              (change)="readImageData($event, '350x350', 0);"
               id="validatedCustomFile3" 
               required>
             <label class="form__image-img" for="validatedCustomFile3">
@@ -288,7 +288,7 @@
                 <span class="color-red" *ngIf="form_watcher.no_img0">
                   Desktop Photo is required <br />
                 </span>
-                *Image resolution 1920x1080px.
+                *Image resolution 350x350px.
               </span>
             </label>
           </div>

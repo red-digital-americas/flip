@@ -1417,9 +1417,21 @@
                         { img: 'assets/images/design/home-design-4.jpg', text: 'Interior desing'},
                         { img: 'assets/images/design/home-design-6.jpg', text: 'Acabados'}
                     ];
-
+                    
                     desing_data.item.forEach( ( desing_card, index ) => {
-
+                        let tarjet = "#"; 
+                        if( !isItMobil ) {
+                            if(index == 0) tarjet = "window.location.href = './philosophy.html'"; 
+                            if(index == 1) tarjet = "window.location.href = './desing-process.html'"
+                            if(index == 2) tarjet = "window.location.href = './interior-desing.html'"
+                            if(index == 3) tarjet = "window.location.href = './acabados.html'"
+                        }
+                        else{
+                            if(index == 0) tarjet = "window.location.href = './mphilosophy.html'"; 
+                            if(index == 1) tarjet = "window.location.href = './mdesing-process.html'"
+                            if(index == 2) tarjet = "window.location.href = './minterior-desing.html'"
+                            if(index == 3) tarjet = "window.location.href = './macabados.html'"
+                        }
                         let dom_desing_card = '<div class="main__card desing_card_element big_card cursor-pointer display-none">';
                             dom_desing_card += '<div class="card home-container-card card-show-back-face">';
                             dom_desing_card += '<div class="card__front">';
@@ -1430,12 +1442,12 @@
                                 dom_desing_card += '<img class="card--desactive" src="' + desing_card.frontphoto + '" />'; 
                                 dom_desing_card += '<img src="' + desing_card.frontphoto + '" />';
                                 dom_desing_card += '</figure>';
-                                dom_desing_card += '<img src="' + desing_bg_images[index].img + '" class="card__big-ext" />';
-                                dom_desing_card += '<span class="card__big-ext--text card__big-ext--text-a">' + desing_bg_images[index].text + '</span>';
+                                dom_desing_card += '<img  onclick="'+ tarjet +'" src="' + desing_bg_images[index].img + '" class="card__big-ext" />';
+                                dom_desing_card += '<span  onclick="'+ tarjet +'" class="card__big-ext--text card__big-ext--text-a">' + desing_bg_images[index].text + '</span>';
                              }()) : 
                              (function IIFE() {
-                                dom_desing_card += '<img src="' + desing_bg_images[index].img + '" class="card__big-ext" />';
-                                dom_desing_card += '<span class="card__big-ext--text card__big-ext--text-b">' + desing_bg_images[index].text + '</span>';
+                                dom_desing_card += '<img  onclick="'+ tarjet +'"  src="' + desing_bg_images[index].img + '" class="card__big-ext" />';
+                                dom_desing_card += '<span  onclick="'+ tarjet +'"  class="card__big-ext--text card__big-ext--text-b">' + desing_bg_images[index].text + '</span>';
                                 dom_desing_card += '<figure class="card__big-img">';  
                                 dom_desing_card += '<img class="card--desactive" src="' + desing_card.frontphoto + '" />'; 
                                 dom_desing_card += '<img src="' + desing_card.frontphoto + '" />';
@@ -1453,16 +1465,31 @@
 
                 }, !1);
 
+            
+
+
                 ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex'}).then( more_data => {
 
                     let more_bg_images = [
-                        { img: 'assets/images/more/MORE1.jpg', text: 'philosophy'},
-                        { img: 'assets/images/more/MORE1.jpg', text: 'Desing process'},
-                        { img: 'assets/images/more/MORE3.jpg', text: 'Interior desing'},
-                        { img: 'assets/images/more/MORE5.jpg', text: 'Acabados'}
+                        { img: 'assets/images/more/MORE1.jpg', text: 'Team'},
+                        { img: 'assets/images/more/MORE1.jpg', text: 'Press'},
+                        { img: 'assets/images/more/MORE3.jpg', text: 'Carrers'},
+                        { img: 'assets/images/more/MORE5.jpg', text: ''}
                     ];
 
                     more_data.item.forEach( ( more_card, index ) => {
+                        let tarjet = "#"; 
+                        if( !isItMobil ) {
+                            if(index == 0) tarjet = "window.location.href = './team.html'"; 
+                            if(index == 1) tarjet = "window.location.href = './press.html'"
+                            if(index == 2) tarjet = "window.location.href = './jobs.html'"
+                        }
+                        else{
+                            if(index == 0) tarjet = "window.location.href = './mteam.html'"; 
+                            if(index == 1) tarjet = "window.location.href = './mpress.html'"
+                            if(index == 2) tarjet = "window.location.href = './mjobs.html'"
+                        }
+                        
 
                         let dom_more_card = '<div class="main__card more_card_element big_card cursor-pointer display-none">';
                             dom_more_card += '<div class="card home-container-card card-show-back-face">';
@@ -1474,12 +1501,12 @@
                                 dom_more_card += '<img src="' + more_card.frontphoto + '" />'; 
                                 dom_more_card += '<img src="' + more_card.frontphoto + '" />';
                                 dom_more_card += '</figure>';
-                                dom_more_card += '<img src="' + more_bg_images[index].img + '" class="card__big-ext" />';
-                                dom_more_card += '<span class="card__big-ext--text card__big-ext--text-a">' + more_bg_images[index].text + '</span>';
+                                dom_more_card += '<img onclick="'+ tarjet +'" src="' + more_bg_images[index].img + '" class="card__big-ext" />';
+                                dom_more_card += '<span onclick="'+ tarjet +'" class="card__big-ext--text card__big-ext--text-a">' + more_bg_images[index].text + '</span>';
                              }()) : 
                              (function IIFE() {
-                                dom_more_card += '<img src="' + more_bg_images[index].img + '" class="card__big-ext" />';
-                                dom_more_card += '<span class="card__big-ext--text card__big-ext--text-b">' + more_bg_images[index].text + '</span>';
+                                dom_more_card += '<img onclick="'+ tarjet +'"  src="' + more_bg_images[index].img + '" class="card__big-ext" />';
+                                dom_more_card += '<span onclick="'+ tarjet +'" class="card__big-ext--text card__big-ext--text-b">' + more_bg_images[index].text + '</span>';
                                 dom_more_card += '<figure class="card__big-img">';  
                                 dom_more_card += '<img src="' + more_card.frontphoto + '" />'; 
                                 dom_more_card += '<img src="' + more_card.frontphoto + '" />';
