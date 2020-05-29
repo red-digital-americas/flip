@@ -100,6 +100,7 @@ export class AddTenantPayComponent implements OnInit {
       id: this.ccObj.id
     };
     console.log(card_data);
+    this.loader.showLoader();
     this._service.service_general_post('Stripe', card_data).subscribe((value) => {
       console.log('Stripe', value);
       this.booking_post_data.idUser = this.userId;
@@ -124,8 +125,8 @@ export class AddTenantPayComponent implements OnInit {
         amount: this.booking_detail_total_ammount
       };
       console.log('DATA Booking', obj);
-      return;
       this._service.service_general_post('Tenant/NewTenantExist', obj).subscribe((value) => {
+        this.loader.hideLoader();
         this.systemMessage.showMessage({
           kind: 'ok',
           message: {
@@ -136,6 +137,7 @@ export class AddTenantPayComponent implements OnInit {
         });
         this.goToPage();
       }, (error) => {
+        this.loader.hideLoader();
         console.log('PostBooking', error);
         this.systemMessage.showMessage({
           kind: 'error',
@@ -147,6 +149,7 @@ export class AddTenantPayComponent implements OnInit {
         });
       });
     }, (error) => {
+      this.loader.hideLoader();
       console.log('Stripe', error);
       this.systemMessage.showMessage({
         kind: 'error',
