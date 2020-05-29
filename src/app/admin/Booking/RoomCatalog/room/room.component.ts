@@ -102,26 +102,8 @@ export class RoomComponent implements OnInit {
   }
 
   update () {
-    this.loader.showLoader();
-    if (this.roomObj.name.length === 0) {
-      this.form_required.no_name = true;
-      this.loader.hideLoader();
-    } else if (this.roomObj.description.length === 0) {
-      this.form_required.no_name = false;
-      this.form_required.no_description = true;
-      this.loader.hideLoader();
-    } else if (this.roomObj.totalBeds === 0 || this.roomObj.totalBeds === null) {
-      this.form_required.no_price = true;
-      this.form_required.no_name = false;
-      this.form_required.no_description = false;
-      this.loader.hideLoader();
-    } else if (this.roomObj.floor.length === 0) {
-      this.form_required.no_floor = true;
-      this.form_required.no_price = false;
-      this.form_required.no_name = false;
-      this.form_required.no_description = false;
-      this.loader.hideLoader();
-    } else {
+    if (this.validateDataForm()) {
+      this.loader.showLoader();
       let gallery: any[] = [];
       this.images_in_gallery.forEach(element => {
         let data = {
@@ -131,7 +113,6 @@ export class RoomComponent implements OnInit {
           photoUrl: element.src
         };
         gallery.push(data);
-       
       });
       console.log('New Gallery', gallery);
       this.roomObj.imageRooms = gallery;
@@ -154,7 +135,37 @@ export class RoomComponent implements OnInit {
             break;
         }
       });
+    } else {
+      this.systemMessage.showMessage({
+        kind: 'error',
+        message: {
+          header: 'Error',
+          text: 'Form incomplete'
+        },
+        time: 2400
+      });
     }
+  }
+
+  private validateDataForm(): boolean {
+    let result: boolean;
+    this.form_required.no_floor = this.roomObj.floor === '' || this.roomObj.floor === null ? true : false;
+    this.form_required.no_price = this.roomObj.totalBeds === 0 || this.roomObj.totalBeds === null ? true : false;
+    this.form_required.no_name = this.roomObj.name === '' || this.roomObj.name === null ? true : false;
+    this.form_required.no_description = this.roomObj.description === '' || this.roomObj.description === null ? true : false;
+    
+    if (!this.form_required.no_name &&
+      !this.form_required.no_price &&
+      !this.form_required.no_description &&
+      !this.form_required.no_floor
+      ) {
+        console.log('true', this.form_required);
+        result = true;
+      } else {
+        console.log('false', this.form_required);
+        result = false;
+      }
+    return result;
   }
 
   public addOneImageToGallery():void {
