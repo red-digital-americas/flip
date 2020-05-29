@@ -4,6 +4,8 @@ import { DatosService } from '../../../../datos.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { LoaderComponent } from '../../../../ts/loader';
+import { SystemMessage } from '../../../../ts/systemMessage';
 
 @Component({
     selector: 'membership-catalog',
@@ -25,6 +27,9 @@ import { MatTableDataSource } from '@angular/material/table';
     buildingId;
     membershipList;
 
+    loader = new LoaderComponent();
+    systemMessage = new SystemMessage();
+
     ngOnInit() {
         this.section = 'MembershipCatalog';
         this.buildingId = this.route.snapshot.paramMap.get('id');
@@ -34,7 +39,9 @@ import { MatTableDataSource } from '@angular/material/table';
 
     getMembershipList(id) {
         let obj = { buildingId: id };
+        this.loader.showLoader();
         this.services.service_general_get_with_params('Membership/GetMemberships', obj).subscribe((value) => {
+            this.loader.hideLoader();
             console.log('Reponse Total ', value);
             this.membershipList = new MatTableDataSource(value.item);
             console.info('Response', this.membershipList);

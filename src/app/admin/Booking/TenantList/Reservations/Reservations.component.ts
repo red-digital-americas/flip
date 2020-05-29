@@ -101,10 +101,10 @@ import { resolve } from 'dns';
             userid: this.user_id,
             bookingId: this.booking_id
         };
-
+        this.loader.showLoader();
         this._services.service_general_post('Booking/SeeStateAccountAdmin', user_data)
             .subscribe( (response: any) => {
-
+                this.loader.hideLoader();
                 if( response.result == 'Success' ) {
 
                     this.current_membership = response.infoMembership;
@@ -172,7 +172,7 @@ import { resolve } from 'dns';
                 console.log('Credit => ', this.current_card);
 
             }, (error: any) => {
-
+                this.loader.hideLoader();
                 console.error('Error Get Reservation => ', error);
 
             });
