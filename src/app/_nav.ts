@@ -29,7 +29,7 @@ export class MenuService {
       name: 'More', type: 1, url: '/', icon: 'icon-plus reduce',
       children: [  
         { name: 'Team', url: '/webadmin/team', icon: 'icon-people sangria'},
-        { name: 'Jobs', url: '/webadmin/jobs', icon: 'icon-wrench sangria'},
+        { name: 'Carrers', url: '/webadmin/jobs', icon: 'icon-wrench sangria'},
         { name: 'Press', url: '/webadmin/press', icon: 'icon-bubbles sangria'}
       ]
     },
