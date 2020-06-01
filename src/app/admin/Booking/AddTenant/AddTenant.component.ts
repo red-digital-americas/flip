@@ -4,6 +4,8 @@ import { LoaderComponent } from '../../../../ts/loader';
 import { SystemMessage } from '../../../../ts/systemMessage';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import * as CryptoJS from 'crypto-js';
+import { Utils } from '../../../utils/utils';
 
 @Component({
     selector: 'add-tenant-component',
@@ -803,7 +805,7 @@ import { MatSort } from '@angular/material/sort';
 
         this.iHaveCompletedStep(0);
 
-        console.log('Mamadas => ', this.booking_post_data);
+        this.sendToTopPage();
 
         /*this.loader.showLoader();
 
@@ -886,6 +888,8 @@ import { MatSort } from '@angular/material/sort';
      * Section two refers to profile tenant
     */
     public general_user_data: GeneralUserData = new GeneralUserData();
+    public join_all_data: BookingCompleted = new BookingCompleted();
+    public credit_card_data: CreditCardModel = new CreditCardModel();
 
     public single_profile: boolean = true;
     public changeProfileType( event_data: any ):void {
@@ -948,12 +952,20 @@ import { MatSort } from '@angular/material/sort';
     public profile_section_card: boolean = false;
     public profileTenantCompleted():void {
 
-        if( this.profileFormValidator() ) {
+        const form_validation_result = {
+            information: this.profileFormValidator(),
+            pay_method: this.creditCardValidator() 
+        }
+
+        if( form_validation_result.information && form_validation_result.pay_method ) {
 
             this.profile_section_card = true;
-            this.profileInputsState('off');
+            this.join_all_data.booking = this.booking_post_data;
+            this.join_all_data.user = this.general_user_data;
+            this.join_all_data.creditCard = this.credit_card_data;
+            this.iHaveCompletedStep(1);
             
-            console.log('Modelo en profile => ', this.general_user_data);
+            console.log('Modelo en profile => ', this.join_all_data);
 
         } else {
 
@@ -966,13 +978,20 @@ import { MatSort } from '@angular/material/sort';
                 }
             });
 
-            this.profile_section_card = false;
+            this.sendToTopPage();
 
         }
 
     }
 
-    public profileInputsState( state: string ):void {
+    public kind_card: string = '';
+    public cardDataDriver():void {
+
+        this.kind_card = this.kindCardDetecter( this.credit_card_data.number.toString() );
+
+    }
+
+    /*public profileInputsState( state: string ):void {
 
         const profile_inputs: any = document.querySelectorAll('[input-family="profile"]');
 
@@ -984,10 +1003,12 @@ import { MatSort } from '@angular/material/sort';
 
         });
 
-    }
+    }*/
 
-    public credit_card_data: CreditCardModel = new CreditCardModel();
-    public getCardDataSection():void {
+    
+    /*public getCardDataSection():void {
+
+        console.log('Here => ', this.general_user_data );
 
         if( this.creditCardValidator() ) {
 
@@ -1006,9 +1027,9 @@ import { MatSort } from '@angular/material/sort';
 
         }
 
-    }
+    }*/
 
-    public changeSectionNavigation( action: string ):void {
+    /*public changeSectionNavigation( action: string ):void {
 
         switch( action ) {
 
@@ -1019,7 +1040,7 @@ import { MatSort } from '@angular/material/sort';
 
         }
 
-    }
+    }*/
 
     public credit_card_form: any = {
         no_name: false,
@@ -1048,7 +1069,7 @@ import { MatSort } from '@angular/material/sort';
             this.credit_card_form.no_year = true :
             this.credit_card_form.no_year = false;
 
-        this.credit_card_data.ccv == null ? 
+        this.credit_card_data.ccv == '' ? 
             this.credit_card_form.no_ccv = true :
             this.credit_card_form.no_ccv = false;
 
@@ -1056,6 +1077,42 @@ import { MatSort } from '@angular/material/sort';
 
             if( this.credit_card_form[field] ) return false;
             else result = true;
+
+        }
+
+        if( result ) {
+
+            const card_data = {
+                number: this.credit_card_data.number,
+                expYear: Number( this.credit_card_data.year ),
+                expMonth: Number( this.credit_card_data.month ),
+                cvc:  this.credit_card_data.ccv,
+            }
+    
+            this._services.service_general_post('Stripe', card_data)
+                .subscribe( ( response: any ) => {
+    
+                    if( response.result == 'Success' ) {
+                        
+                        result = true;
+                        this.join_all_data.token = response.item;
+
+                    }
+    
+                }, ( error: any ) => {
+
+                    result = false;
+    
+                    this.system_message.showMessage({
+                        kind: 'error',
+                        time: 4777,
+                        message: {
+                            header: 'System error',
+                            text: 'We found an error please try later.'
+                        }
+                    });
+    
+                });
 
         }
 
@@ -1173,6 +1230,47 @@ import { MatSort } from '@angular/material/sort';
         } else result = false;
 
         return result;
+
+    }
+
+    /** Final step ==============================================> */
+    public completeAddTenantProcess():void {
+
+        this.credit_card_data.name = this.encryptData( this.credit_card_data.name );
+        this.credit_card_data.ccv = this.encryptData( this.credit_card_data.ccv );
+        this.join_all_data.amount = this.booking_detail_total_ammount.toString();
+
+        console.log('Sending this => ', this.join_all_data);
+
+        this.loader.showLoader();
+
+        this._services.service_general_post('Tenant/NewTenant', this.join_all_data)
+            .subscribe( (response: any) => {
+
+                console.log('Response ===> ', response);
+
+                if( response.result == 'Success' ) {  
+
+                    //Aqui terminas el proceso
+
+                }
+
+                setTimeout( () => this.loader.hideLoader(), 1777);
+
+            }, (error: any) => {
+
+                this.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                        header: 'System error',
+                        text: 'We found an error please try later.'
+                    }
+                });
+
+                setTimeout( () => this.loader.hideLoader(), 1777);
+
+            });
 
     }
 
@@ -1339,6 +1437,163 @@ import { MatSort } from '@angular/material/sort';
 
     }
 
+    public sendToTopPage():void {
+
+        window.scrollTo(0,0);
+
+    }
+
+    public kindCardDetecter( card_number: string ):any {
+
+        let card_kind = '';
+        
+        const visa_regex = new RegExp("^4[0-9]{12}(?:[0-9]{3})?$"),
+              mcard_regex = new RegExp("^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$"),
+              american_regex = new RegExp("^3[47][0-9]{13}$");
+    
+        if( visa_regex.test( card_number ) && 
+            card_number.length >= 13 && 
+            card_number.length <= 16 ) card_kind = 'visa';
+    
+        if( mcard_regex.test( card_number ) && 
+            card_number.length == 16 ) card_kind = 'mcard';
+    
+        if( american_regex.test( card_number ) && 
+            card_number.length == 15 ) card_kind = 'american';
+    
+        return card_kind;
+    
+    }
+
+    private encryptSecretKey = 'Llave';
+    public decryptData(data) {
+        try {
+          const bytes = CryptoJS.AES.decrypt(data, this.encryptSecretKey);
+          if (bytes.toString()) {
+            var decrypt = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+          }
+    
+          return decrypt;
+        } catch (e) { console.log(e); }
+    }
+    
+    public encryptData(data) {
+        try {
+            var crypt = CryptoJS.AES.encrypt(JSON.stringify(data), this.encryptSecretKey).toString();
+            // console.log(this.crypt)
+            // this.decryptData(this.crypt);
+            return crypt;
+        } catch (e) { console.log(e); }
+    }
+
+    public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
+
+        const event = event_data.target,
+              dimensions_image_data = {
+                get_dimensions: ( function() {
+    
+                  const dimensions_split = dimensions_image.split('x'),
+                        width = Number( dimensions_split[0] ),
+                        height = Number( dimensions_split[1] );
+    
+                  return {
+                    width: width,
+                    height: height
+                  }
+    
+                }())
+              },
+              image_limit_width = dimensions_image_data.get_dimensions.width,
+              image_limit_height = dimensions_image_data.get_dimensions.height,
+              id_image_container:any = document.getElementById( target_image ),
+              name_image_container = document.getElementById( name_image ),
+              native_image_uploaded = document.getElementById('image_real_dimension'),
+              root_data = this;
+    
+        if( event.files && event.files[0] ) {
+    
+          const reader = new FileReader();
+    
+                reader.onload = function(e:any) {
+    
+                  const image_convert:any = e.target.result,
+                        validating_image = new Promise( (resolve) => {
+    
+                          native_image_uploaded.setAttribute('src', image_convert);
+                          
+                          setTimeout( () => {
+    
+                            const native_image_dimension = {
+                              image: image_convert,
+                              width: native_image_uploaded.offsetWidth,
+                              height: native_image_uploaded.offsetHeight
+                            };
+    
+                            resolve( native_image_dimension );
+    
+                          }, 277);
+                  
+                        });
+    
+                        validating_image.then( ( image_data:any ) => {
+    
+                          if( image_limit_width === image_data.width && image_limit_height === image_data.height ) {
+                            
+                            id_image_container.setAttribute('src', image_data.image );
+                            name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
+                            id_image_container.classList.remove('no-image');
+                            root_data.prepareImages( event_data );
+    
+                          } else {
+    
+                            id_image_container.src = '../../../assets/14.jpg';
+                            root_data.general_user_data.avatar = '';
+                            name_image_container.innerHTML = `Image must be <br /><span class="text-bold">${ dimensions_image }px</span>`;
+                            id_image_container.classList.add('no-image');
+    
+                          }
+                          
+                        });
+    
+                }
+    
+                reader.readAsDataURL( event.files[0] );
+    
+        }
+        
+    }
+
+    public newImages: any[] = [];
+    prepareImages(e) {
+        
+        if (Utils.isDefined(e.srcElement.files)) {
+        for (let f of e.srcElement.files) {
+            
+            this.newImages.push(f);
+        }
+        }
+        this.addImages();
+
+    }
+
+    addImages() {
+        let url: string = '';
+        if (!Utils.isEmpty(this.newImages)) {
+        for (let f of this.newImages) {
+            this._services.UploadImgSuc(f).subscribe((r) => {
+            if (Utils.isDefined(r)) {
+                url = <string>r.message;
+                
+                url = url.replace('/Imagenes', this._services.getURL() + 'Flip');
+                this.general_user_data.avatar = url;
+                
+                this.newImages = [];
+            }
+            })
+        }
+        }
+    }
+
 }
 
 class BookingDetailModel {
@@ -1377,6 +1632,8 @@ class BookingCompleted {
     booking: BookingPostDetailModel;
     user: GeneralUserData;
     creditCard: CreditCardModel;
+    token: string;
+    amount: string;
 }
 
 class GeneralUserData {
@@ -1396,6 +1653,8 @@ class GeneralUserData {
     rfc: string = '';
     userData: PersonaUserInfo = new PersonaUserInfo();
     userTaxData: UserBussinessData = new UserBussinessData();
+    income: IncomeData = new IncomeData();
+    reference: ReferenceData = new ReferenceData();
 }
 
 class PersonaUserInfo {
@@ -1427,10 +1686,183 @@ class UserBussinessData {
 class CreditCardModel {
     id: number = 0;
     active: boolean = true;
-    ccv: number = null;
+    ccv: string = '';
     month: number = null;
     name: string = ''; 
     number: string = '';
     year: number = null;
     main: number = 0;  
 }
+
+class IncomeData {
+    nameEmployer: string = '';
+    industry: string = '';
+    contactNumber: string = '';
+    tenureId: number = null;
+    creditHistory: boolean = null;
+    splitRent: boolean = null;
+    companyTypeId: number = null;
+    employeeId: number = null;
+    jobPosition: string = '';
+    mainSource: string = '';
+    monthlyIncome: number = null;
+    billLastYear: number = null;
+    companyYearStart: number = null;
+    branchoffice: number = null;
+    streetHo: string = '';
+    numberHo: string = '';
+    intNumberHo: string = '';
+    cityHo: string = '';
+    communityHo: string = '';
+    departamentHo: string = '';
+}
+
+class ReferenceData {
+    name: string = '';
+    firstName: string = '';
+    lastName: string = '';
+    relationshipId: number = null;
+    mail: string = '';
+    phone: string = '';
+    firstRent: boolean = null;
+    NameLandlord: string = '';
+    EmailLandLord: string = '';
+    PhoneLandLord: string = '';
+}
+
+/* 
+{
+	"booking": {
+		"idMembership": 11,
+		"Booking": {
+			"dateInitProgram": "2020-07-01",
+			"dateEndProgram": "2020-07-30",
+			"idRommateType": 1,
+			"reservedBeds": 2,
+			"idRoom": 10
+		},
+		"amount": 110000,
+		"serviceBooking": [
+			{
+				"idService": 33,
+				"dateStart": "2020-07-01",
+				"dateEnd": "2020-07-30",
+				"recurrent": 1,
+				"fromMembership": 11,
+				"amount": 100,
+				"idUserPaymentService": 0,
+				"idUserPaymentServiceNavigation": {
+					"id": 0,
+					"idCreditCard": null,
+					"idServiceBooking": 0,
+					"payment": 0,
+					"paymentDate": ""
+				}
+			},
+			{
+				"idService": 31,
+				"dateStart": "2020-07-01",
+				"dateEnd": "2020-07-30",
+				"recurrent": 1,
+				"fromMembership": 11,
+				"idUserPaymentService": 0,
+				"amount": 100,
+				"idUserPaymentServiceNavigation": {
+					"id": 0,
+					"idCreditCard": null,
+					"idServiceBooking": 0,
+					"payment": 0,
+					"paymentDate": ""
+				}
+			}
+		],
+		"aditionalBeds": []
+	},
+	"creditCard": {
+		"id": 0,
+		"active": true,
+		"ccv": "U2FsdGVkX1980/LKUDWS7ZekZJAow5gbvmBCWdVi69w=",
+		"month": 7,
+		"name": "Card XXX",
+		"number": "U2FsdGVkX1/h+yZ0TmBGOC8AwwV6cizaP0VRKz6ZdAvqY6Az7m2HihlopkGMeRfY",
+		"year": 2026,
+		"main": 0
+	},
+	"user": {
+		"name": "Admin",
+		"password": "admin123",
+		"email": "admin@minimalist.mx",
+		"lastName": "To",
+		"motherName": "Altata",
+		"avatar": "",
+		"systemTypeId": 1,
+		"phone": "0987654321",
+		"cellphone": "1234567890",
+		"workplace": "FLIP!",
+		"aboutMe": "Admin from web admin",
+		"active": true,
+		"birth": "2000-01-01",
+		"rfc": "XAXX010101000",
+		"income": {
+			"nameEmployer": "Minimalist 7",
+			"industry": "tecnology7",
+			"contactNumber": "123456",
+			"tenureId": 578,
+			"creditHistory": false,
+			"splitRent": true,
+			"companyTypeId": 2,
+			"employeeId": 60,
+			"jobPosition": "EL Jefesito",
+			"mainSource": "Proyectos",
+			"monthlyIncome": 420000000,
+			"billLastYear": 123456789,
+			"companyYearStart": 2010,
+			"branchoffice": 22,
+			"streetHo": "Alta tension",
+			"numberHo": "Entrada 4 Dep 14",
+			"intNumberHo": "100",
+			"cityHo": "Mexico",
+			"communityHo": "Hidalgo",
+			"departamentHo": "23"
+		},
+		"reference": {
+			"name": "Lorem",
+			"firstName": "Ipsum",
+			"lastName": "Ipsum",
+			"relationshipId": 1,
+			"mail": "random@mail.com",
+			"phone": 1234567890,
+			"firstRent": true,
+			"NameLandlord": "",
+			"EmailLandLord": "",
+			"PhoneLandLord": ""
+		},
+		"userData": {
+			"pet": true,
+			"civilStatusId": 2,
+			"scholarshipId": 4,
+			"countryId": 1,
+			"stateId": null,
+			"genderId": 2,
+			"rent": null,
+			"car": null,
+			"howMuchMax": null,
+			"howMuchMin": null,
+			"country": null,
+			"gender": null,
+			"scholarship": null,
+			"state": null
+		},
+		"userTaxData": {
+			"name": "",
+			"activity": "",
+			"tradeName": "",
+			"legalRepresentative": "",
+			"phone": null,
+			"rfc": ""
+		}
+	},
+	"token": "tok_1GnXNMAttdY9MyOvwsCGDCQ0",
+	"amount": "10000"
+}
+*/
