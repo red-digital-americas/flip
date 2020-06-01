@@ -186,7 +186,7 @@ export class HomeroomsComponent implements OnInit {
   }
 
   get_photos() {
-    // debugger;
+     debugger;
     var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
     //debugger;
     this.loader.showLoader();

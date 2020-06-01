@@ -4,6 +4,7 @@
 
 
 
+
 /////////////////////////////////////// BACKSTAGE ///////////////////////////////////////////////////////////
 
 var respuesta;
@@ -262,6 +263,24 @@ $(document).ready(function () {
             $("#micon-04-04-01").mouseover(function () {
                 $("#micon-04-04-01").attr("src", respuesta.item[3].icon2);
             });
+        }, 
+        error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: urlbase_api +"Post/SeeBackstageMembershipSections",
+        data: JSON.stringify({ userid: 1 }),
+        contentType: "application/json",
+        dataType: "text",
+
+        success: function (data, textStatus, jqXHR) {
+            respuesta = JSON.parse(data);
+            console.log("========MEMBERSHIP====>");
+            console.log(respuesta);
+            $("#span_title_mem1").text(respuesta.item[0].title);
+            $("#p_title_mem1").text(respuesta.item[0].title);
+           // alert(respuesta.item[0].title);
         }, 
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
     });
