@@ -70,6 +70,10 @@ body::-webkit-scrollbar-thumb {
   border-radius: 50px;
 }
 
+button {
+  border-color: transparent;
+}
+
 .app-footer {
   border-top: solid 0px transparent;
 }
@@ -2656,8 +2660,8 @@ select:active,
     overflow: hidden;
 
     @media screen and (min-width: 1920px){
-      width: 55%;
-      margin: 0 22.5%;
+      width: 60%;
+      margin: 0 20%;
     }
 
   }
@@ -3364,7 +3368,7 @@ select:active,
         height: 35px;
         top: -50px;
         left: 7px;
-        border: solid 1px red;
+        background-color: rgba($color: #ffd700, $alpha: .4);
         border-radius: 5px;
       }
 
