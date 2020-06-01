@@ -143,7 +143,7 @@ export class AddTenantPayComponent implements OnInit {
           kind: 'error',
           message: {
             header: 'Error',
-            text: error.detalle
+            text: error
           },
           time: 2000
         });
