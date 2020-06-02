@@ -1471,7 +1471,8 @@ import { Router } from '@angular/router';
 
                 if( response.result == 'Success' ) {  
 
-                    this._router.navigateByUrl(`tenantList/${ this.build_selected }`);
+                    //this._router.navigateByUrl(`tenantList/${ this.build_selected }`);
+                    this._router.navigateByUrl('generalTenantlist');
 
                 }
 
