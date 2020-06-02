@@ -35,12 +35,12 @@ export class AppLayoutComponent {
     this.dataUser = JSON.parse(localStorage.getItem('user')).avatar;
     this.userId = JSON.parse(localStorage.getItem('user')).id;
     this.getActions(this.userId);
-    console.log(this.dataUser);
+    ////console.log(this.dataUser);
     if (localStorage.getItem("SystemTypeId") == undefined ) { return; }
     this.systemTypeId = parseInt(localStorage.getItem("SystemTypeId"));        
-    // console.log("AppLayout-SystemTypeId: "+systemTypeId);  
+    // //console.log("AppLayout-SystemTypeId: "+systemTypeId);  
     this.navSections = this.menuService.CreateNavSections(this.systemTypeId);
-    console.log(this.navSections);
+    //console.log(this.navSections);
     let last_section = sessionStorage.getItem('lastSectionId');
 
     if( last_section != null || last_section != undefined  ) {
@@ -66,7 +66,7 @@ export class AppLayoutComponent {
   getActions(id: any) {
     let obj = { userId: id };
     this.services.service_general_get_with_params('UsersAdmin/GetAlerts', obj).subscribe((value) => {
-      console.log('ACTIONS', value);
+      //console.log('ACTIONS', value);
       
       this.actions = value.actions;
       this.actionsCount = value.actions.length;
@@ -79,7 +79,7 @@ export class AppLayoutComponent {
     })
   }
   GoSection (section : { id:number, name:string, url:string}) { 
-    // console.log(section);
+    // //console.log(section);
     this.router.navigate([section.url]);
     this.navItems = this.menuService.CreateMenu(section.id);
     this.selectedSection = section.id;
@@ -93,7 +93,7 @@ export class AppLayoutComponent {
   }
 
   goMessage(element: any) {
-    console.log(element);
+    //console.log(element);
     sessionStorage.setItem('id_section_active', element.buildingId.toString() );
     sessionStorage.setItem('name_section_active', element.buildingName );
     sessionStorage.setItem('name_build', element.buildingName );
@@ -109,13 +109,13 @@ export class AppLayoutComponent {
   }
 
   goActions(element: any) {
-    console.log(element);
+    //console.log(element);
     sessionStorage.setItem('id_section_active', element.buildingId.toString() );
     sessionStorage.setItem('name_section_active', element.name );
     sessionStorage.setItem('name_build', element.name );
     sessionStorage.setItem('user_id', element.idUser.toString() );
     sessionStorage.setItem('booking_id', element.id);
-    console.log('Current URL', this.router.url);
+    //console.log('Current URL', this.router.url);
     if (this.router.url === '/reservations') {
       window.location.reload();
     } else {

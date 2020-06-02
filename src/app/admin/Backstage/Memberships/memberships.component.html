@@ -1,8 +1,389 @@
-<div class="ml-col-1">
+<!-- <div class="row">
+    <div class="ml-col-1 navbar__components">
+      <div class="navbar__component ml-col-4">
+        <button class="navbar__component-button navbar__component-button--active" (click)="amm(IDBUILD)">
+          Memberships
+        </button>
+      </div>
+      <div class="navbar__component ml-col-4">
+        <button class="navbar__component-button" (click)="serv(IDBUILD)">
+          Additional Services
+        </button>
+      </div>
+      <div class="navbar__component ml-col-4">
+        <button class="navbar__component-button" (click)="room(IDBUILD)">
+          Flip network
+        </button>
+      </div>
+    </div>
+  </div> -->
+<div class="row">
     <h3 Class="text-ultra" style="padding-left: 55px; padding-top: 25px;"> Memberships</h3>
-    <div class="ml-col-1 padding-general-m">
-        <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x">
-            <!-- <h4 class="ap-form__titulo ap-form__titulo--no-border text-left">What is Coliving?</h4> -->
+</div>
+<div class="row padding-bottom-m padding-general-m" style="padding-top: 15px;">
+    <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x" *ngFor="let post of back_stage_data_array, let i = index;">
+        <h2 Class="" style="font-family: headerFont;
+        font-size: large; padding-bottom: 25px;">
+             Section: {{ post.id }}
+        </h2>
+      <div class="ml-col-1">
+        <div class="card__info margin-bottom-x" style="height: auto !important;">
+          <p class="card__info-dato">
+            <span class="text-bold">Title Slide: </span> 
+            {{ post.title }}
+          </p>
         </div>
+        <div class="card__info margin-bottom-x" style="height: auto !important;"  *ngIf="post.id != '4'">
+            <p class="card__info-dato">
+              <span class="text-bold">Price1: </span> 
+              {{ post.price | currency }} 
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="text-bold">Price2: </span> 
+              {{ post.price1 | currency}}
+            </p>
+            
+          </div>
+        <!--   <div class="card__info margin-bottom-x" style="height: auto !important;">
+            <p class="card__info-dato">
+              <span class="text-bold">Price2: </span> 
+              {{ post.price1 | currency}}
+            </p>
+          </div> -->
+        <div *ngIf="post.id == '4'" class="card__info margin-bottom-x" style="height: auto !important;">
+            <p class="card__info-dato">
+              <span class="text-bold">Description Slide: </span> 
+              {{ post.description }}
+            </p>
+        </div>
+
+        <div class="ml-col-1 images-view" *ngIf="post.id != '4'">
+          <div class="ml-col-7 images-view__section">
+            <figure class="images-view__image">
+              <span class="text-bold text-center images-view__image--title">
+                Service Slide Photo:
+              </span>
+              <img src="../../../assets/webtmprb.png" class="images-view__image--mask" />
+              <img src="{{ post.photoSlider }}" class="images-view__image--image" />
+            </figure>
+          </div>
+          <div class="ml-col-3o images-view__section">
+            <figure class="images-view__image">
+              <span class="text-bold text-center images-view__image--title">
+                Service Slide Photo:
+              </span>
+              <img src="../../../assets/phone.png" class="images-view__image--maskm" />
+              <img src="{{ post.photoMobileSlider }}" class="images-view__image--imagem" />
+            </figure>
+          </div>
+        </div>
+        <h3 *ngIf="post.id != '4'" Class="" style="font-family: headerFont; 
+        font-size: large; padding-bottom: 25px;">
+             Feature icons section: {{ post.id }}
+        </h3>
+
+        <div class="ml-col-1">
+            <div class="icon-viewB">
+              <div class="icon-viewB__container" syle="flex-basis: 20%;" *ngFor="let icon of post.backstageMembershipItems;">
+                <p class="icon-viewB__title">
+                  <span class="text-bold">Feature : </span> 
+                  <span style="font-weight: lighter;">{{ icon.titleIcon }}</span> 
+                </p>
+                <div class="icon-viewB__icon">
+                  <span class="icon-viewB__icon-label">Icon: </span> 
+                  <img class="icon-viewB__icon-img" style="left: 20%;" src="{{ icon.icon }}" />
+                </div>
+                <div class="icon-viewB__icon">
+                  <span class="icon-viewB__icon-label">Icon Hover: </span> 
+                  <img class="icon-viewB__icon-img" style="left: 20%;" src="{{ icon.icon2 }}" />
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="ml-col-1 text-center margin-top-m">
+          <button 
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata(post);"
+            class="button button-x">
+            Edit
+          </button>
+        </div>
+      </div>
     </div>
 </div>
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-fw">
+    <div class="modal-dialog modal-primary" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            Edit information in section: {{back_stage_data.id}}
+          </h4>
+          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="form">
+          <form #loginForm="ngForm" autocomplete="off">
+            <div class="ml-col-1 custom-input margin-top-m">
+              <input 
+                type="text"
+                class="custom-input__text" 
+                name="titulo_home" 
+                id="titulo_home" 
+                placeholder="Title" 
+                [(ngModel)]="back_stage_data.title"
+                maxlength="20"
+                [class.custom-input__text--error]="form_watcher.no_titl"
+                required />
+              <label class="custom-input__label custom-input__label--active" for="titulo_home">
+                Title
+              </label>
+              <span class="custom-input__text--errorm" *ngIf="form_watcher.no_titl">
+                Title is required
+              </span>
+            </div>
+            <div class="ml-col-1 custom-input margin-top-m"  *ngIf="back_stage_data.id != '4'">
+                <input 
+                  type="text"
+                  class="custom-input__text" 
+                  name="precio" 
+                  id="precio" 
+                  placeholder="Title" 
+                  [(ngModel)]="back_stage_data.price"
+                  maxlength="20"
+                  [class.custom-input__text--error]="form_watcher.no_p"
+                  required />
+                <label class="custom-input__label custom-input__label--active" for="precio">
+                  Price
+                </label>
+                <span class="custom-input__text--errorm" *ngIf="form_watcher.no_p">
+                  Price is required
+                </span>
+              </div>
+              <div class="ml-col-1 custom-input margin-top-m"  *ngIf="back_stage_data.id != '4'">
+                <input 
+                  type="text"
+                  class="custom-input__text" 
+                  name="precio1" 
+                  id="precio1" 
+                  placeholder="Title" 
+                  [(ngModel)]="back_stage_data.price1"
+                  maxlength="20"
+                  [class.custom-input__text--error]="form_watcher.no_p1"
+                  required />
+                <label class="custom-input__label custom-input__label--active" for="precio1">
+                  Price 1  
+                </label>
+                <span class="custom-input__text--errorm" *ngIf="form_watcher.no_p1">
+                  Proce 1 is required
+                </span>
+              </div>
+          <!--   <div class="ml-col-1 custom-input margin-top-m" *ngIf="back_stage_data.id == '4'">
+                <input 
+                  type="text"
+                  class="custom-input__text" 
+                  name="no_desc" 
+                  id="no_desc" 
+                  placeholder="Title" 
+                  [(ngModel)]="back_stage_data.description"
+                  maxlength="500"
+                  [class.custom-input__text--error]="form_watcher.no_titl"
+                  required />
+                <label class="custom-input__label custom-input__label--active" for="no_desc">
+                  Description
+                </label>
+                <span class="custom-input__text--errorm" *ngIf="form_watcher.no_titl">
+                  Description is required
+                </span>
+              </div> -->
+              <div class="ml-col-1 custom-input margin-top-m" *ngIf="back_stage_data.id == '4'">
+                <textarea 
+                  class="custom-input__textarea" 
+                  name="descripcion_home" 
+                  id="descripcion_home" 
+                  placeholder="Description" 
+                  [(ngModel)]="back_stage_data.description"
+                  [class.custom-input__textarea--error]="form_watcher.no_desc"
+                  required></textarea>
+                <label class="custom-input__label custom-input__label--active" for="descripcion_home">
+                    Description
+                </label>
+                <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
+                    Description is required
+                </span>
+                </div>
+            <div class="form__image">
+              <input 
+                class="display-none image_form"
+                type="file" 
+                name="image_one_selected"
+                accept="image/*"
+                (change)="readImageData($event, '1920x1080', 0);"
+                id="validatedCustomFile2" 
+                required>
+              <label class="form__image-img" for="validatedCustomFile2">
+                <figure class="image_to_preview_container">
+                  <img 
+                    src="{{ back_stage_data.photoSlider }}" 
+                    class="image_to_preview placeholder_image custom-input__image"
+                    [class.custom-input__image--error]="form_watcher.no_img0" />
+                </figure>
+                <span class="image_to_preview_name name_image_uploaded"></span>
+                <span class="padding-tb-min">
+                  <strong>Desktop photo:</strong> <br /> 
+                  <span class="color-red" *ngIf="form_watcher.no_img0">
+                    Desktop photo is required <br />
+                  </span>
+                  *Image resolution 1920x1080px.
+                </span>
+              </label>
+            </div>
+            <div class="form__image">
+              <input 
+                class="display-none image_form"
+                type="file" 
+                name="image_one_selected"
+                accept="image/*"
+                (change)="readImageData($event, '441x660', 1);"
+                id="validatedCustomFile3" 
+                required>
+              <label class="form__image-img" for="validatedCustomFile3">
+                <figure class="image_to_preview_container">
+                  <img 
+                    src="{{ back_stage_data.photoMobileSlider }}" 
+                    class="image_to_preview placeholder_image custom-input__image"
+                    [class.custom-input__image--error]="form_watcher.no_img1" />
+                </figure>
+                <span class="image_to_preview_name name_image_uploaded"></span>
+                <span class="padding-tb-min">
+                  <strong>Desktop mobile:</strong> <br /> 
+                  <span class="color-red" *ngIf="form_watcher.no_img1">
+                    Desktop mobile is required <br />
+                  </span>
+                  *Image resolution 441x660px.
+                </span>
+              </label>
+            </div>
+            <div class="ml-col-1 custom-input"  *ngIf="back_stage_data.id != '4'">
+              <h3 class="ml-col-1 custom-input__title">
+                Icons 
+              </h3>
+              <div class="ml-col-1 custom-input__icons" icon="block" *ngFor="let icons of back_stage_data.backstageMembershipItems, index as index;">
+                <div class="ml-col-1 custom-input margin-top-m margin-bottom-x" id="{{ icons.id }}">
+                  <input 
+                    type="text"
+                    class="custom-input__text" 
+                    name="icon_name_{{ 1 + index }}" 
+                    id="icon_name_{{ 1 + index }}" 
+                    placeholder="Icon Name" 
+                    maxlength="14"
+                    [value]="icons.titleIcon"
+                    [class.custom-input__text--error]="icons.titleIcon == null"
+                    required />
+                  <label class="custom-input__label custom-input__label--active" for="icon_name_{{ 1 + index }}">
+                    Icon Name
+                  </label>
+                  <span class="custom-input__text--errorm" *ngIf="icons.titleIcon == null">
+                    Icon Name is required
+                  </span>
+                </div>
+                <div class="form__image">
+                  <input 
+                    class="display-none image_form"
+                    type="file" 
+                    name="image_one_selected"
+                    accept="image/*"
+                    (change)="readImageData($event, '512x512', 3);"
+                    id="icon_upload_{{ 2 + index }}" 
+                    required />
+                  <label class="form__image-img" for="icon_upload_{{ 2 + index }}">
+                    <figure class="image_to_preview_container">
+                      <img 
+                        *ngIf="icons.icon == null"
+                        src="../../../assets/14.jpg" 
+                        icon-image="icon"
+                        class="image_to_preview placeholder_image custom-input__image" />
+                      <img 
+                        *ngIf="icons.icon != null"
+                        src="{{ icons.icon }}" 
+                        icon-image="icon"
+                        class="image_to_preview placeholder_image custom-input__image" />
+                    </figure>
+                    <span class="image_to_preview_name name_image_uploaded"></span>
+                    <span class="padding-tb-min">
+                      <strong>Icon Default:</strong> <br /> 
+                      <span class="color-red" *ngIf="form_watcher.no_ico1">
+                        Icon Default is required <br />
+                      </span>
+                      *Image resolution 512x512px.
+                    </span>
+                  </label>
+                </div>
+                <div class="form__image">
+                  <input 
+                    class="display-none image_form"
+                    type="file" 
+                    name="image_one_selected"
+                    accept="image/*"
+                    (change)="readImageData($event, '512x512', 3);"
+                    id="iconH_upload_{{ 2 + index + 1 }}" 
+                    required />
+                  <label class="form__image-img" for="iconH_upload_{{ 2 + index + 1 }}">
+                    <figure class="image_to_preview_container">
+                      <img 
+                        *ngIf="icons.icon2 == null"
+                        src="../../../assets/14.jpg" 
+                        icon-image="icon"
+                        class="image_to_preview placeholder_image custom-input__image"
+                        [class.custom-input__image--error]="form_watcher.no_ico1" />
+                      <img 
+                        *ngIf="icons.icon2 != null"
+                        src="{{ icons.icon2 }}" 
+                        icon-image="icon"
+                        class="image_to_preview placeholder_image custom-input__image"
+                        [class.custom-input__image--error]="form_watcher.no_ico1" />
+                    </figure>
+                    <span class="image_to_preview_name name_image_uploaded"></span>
+                    <span class="padding-tb-min">
+                      <strong>Icon Default:</strong> <br /> 
+                      <span class="color-red" *ngIf="form_watcher.no_ico0">
+                        Icon Default is required <br />
+                      </span>
+                      *Image resolution 512x512px.
+                    </span>
+                  </label>
+                </div>
+                <div class="ml-col-1 ap-form__buttons">
+                  <button 
+                    id="{{ icons.id }}"
+                    (click)="deleteIconsServices( index )"
+                    class="ap-form__buttons-button ap-form__buttons-button--big button-orange">
+                    Delete
+                  </button>
+                </div>
+              </div>
+              <div class="ml-col-1 ap-form__buttons">
+                <button 
+                  *ngIf="add_icon_button"
+                  (click)="updatedIconsService()"
+                  class="ap-form__buttons-button ap-form__buttons-button--big button-green">
+                  Add Icon
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button 
+            type="button" 
+            style="z-index: 9999;" 
+            id="close_modal" 
+            class="ap-form__buttons-button ap-form__buttons-button button-red" 
+            (click)="primaryModal.hide(); getBackStageData(); resetImagesData();">
+            Close
+          </button>
+          <button type="button" style="z-index: 9999;" class="ap-form__buttons-button ap-form__buttons-button button-black" (click)="updatephoto()">Save changes</button>
+        </div>
+      </div>
+    </div>
+</div>
+ 
