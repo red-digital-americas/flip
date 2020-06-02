@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import * as CryptoJS from 'crypto-js';
 import { Utils } from '../../../utils/utils';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'add-tenant-component',
@@ -18,7 +19,8 @@ import { Utils } from '../../../utils/utils';
     public table_services_resumen: any[] = ['icon','service','type','lapse','sdate','edate','ammount'];
 
     constructor(
-        public _services: DatosService
+        public _services: DatosService,
+        public _router: Router
     ) {}
 
     /*Welcome back Mr.Anderson we missed you.*/
@@ -64,7 +66,7 @@ import { Utils } from '../../../utils/utils';
     public current_build: any;
     public buildSelected( event_data: any ):void {
 
-        const build_selected = event_data.target;
+        const build_selected = event_data.target; 
 
         this.builds_list.forEach( (build: any) => {
 
@@ -950,37 +952,304 @@ import { Utils } from '../../../utils/utils';
     }
 
     public profile_section_card: boolean = false;
-    public profileTenantCompleted():void {
+    public profileTenantCompleted( is_short_term: boolean = true ):void {
 
         const form_validation_result = {
             information: this.profileFormValidator(),
             pay_method: this.creditCardValidator() 
         }
 
-        if( form_validation_result.information && form_validation_result.pay_method ) {
+        console.log('Form Information => ', form_validation_result.information );
+        console.log('Payment Information => ', form_validation_result.pay_method );
 
-            this.profile_section_card = true;
-            this.join_all_data.booking = this.booking_post_data;
-            this.join_all_data.user = this.general_user_data;
-            this.join_all_data.creditCard = this.credit_card_data;
-            this.iHaveCompletedStep(1);
-            
-            console.log('Modelo en profile => ', this.join_all_data);
+        if( is_short_term ) {
+
+            if( form_validation_result.information && form_validation_result.pay_method ) {
+
+                this.profile_section_card = true;
+                this.join_all_data.booking = this.booking_post_data;
+                this.join_all_data.user = this.general_user_data;
+                this.join_all_data.creditCard = this.credit_card_data;
+                this.iHaveCompletedStep(1);
+                
+                console.log('Modelo en profile => ', this.join_all_data);
+    
+            } else {
+    
+                this.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                        header: 'Inputs required',
+                        text: 'Some inputs must be fill to continue.'
+                    }
+                });
+    
+                this.sendToTopPage();
+    
+            } 
+
+        }
+
+        if( !is_short_term ) {
+
+            const additional_forms: any = {
+                income_form: this.incomeFormValidator(),
+                reference_form: this.referenceFormValidator()
+            }
+
+            console.log('Income Form validation => ', additional_forms.income_form);
+            console.log('Reference Form validation => ', additional_forms.reference_form);
+
+            if( 
+                form_validation_result.information && 
+                form_validation_result.pay_method &&
+                additional_forms.income_form &&
+                additional_forms.reference_form ) {
+
+                this.profile_section_card = true;
+                this.join_all_data.booking = this.booking_post_data;
+                this.join_all_data.user = this.general_user_data;
+                this.join_all_data.creditCard = this.credit_card_data;
+                this.iHaveCompletedStep(1);
+                
+                console.log('Modelo en profile => ', this.join_all_data);
+    
+            } else {
+    
+                this.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                        header: 'Inputs required',
+                        text: 'Some inputs must be fill to continue.'
+                    }
+                });
+    
+                this.sendToTopPage();
+    
+            } 
+
+        }
+
+    }
+
+    public income_form_validator_single: any = {
+        no_enam: false,
+        no_indu: false,
+        no_phon: false,
+        no_tenu: false,
+        no_chis: false,
+        no_spli: false,
+        no_kcom: false,
+        no_empl: false,
+        no_char: false,
+        no_main: false,
+        no_minc: false
+    }
+    public income_form_validator_buss: any = {
+        no_year: false,
+        no_lche: false,
+        no_empl: false,
+        no_stor: false,
+        no_city: false,
+        no_comm: false,
+        no_stre: false,
+        no_nstr: false,
+        no_snum: false
+    }
+    public incomeFormValidator():boolean {
+
+        const income_data = this.general_user_data.income;
+
+        let result: boolean = false;
+
+        if( this.single_profile ) {
+
+            income_data.nameEmployer == '' ?
+                this.income_form_validator_single.no_enam = true :
+                this.income_form_validator_single.no_enam = false;
+
+            income_data.industry == '' ?
+                this.income_form_validator_single.no_indu = true :
+                this.income_form_validator_single.no_indu = false;
+
+            income_data.contactNumber == '' ?
+                this.income_form_validator_single.no_phon = true :
+                this.income_form_validator_single.no_phon = false;
+
+            income_data.tenureId == null ?
+                this.income_form_validator_single.no_tenu = true :
+                this.income_form_validator_single.no_tenu = false;
+
+            income_data.creditHistory == null ?
+                this.income_form_validator_single.no_chis = true :
+                this.income_form_validator_single.no_chis = false;
+
+            income_data.splitRent == null ?
+                this.income_form_validator_single.no_spli = true :
+                this.income_form_validator_single.no_spli = false;
+
+            income_data.companyTypeId == null ?
+                this.income_form_validator_single.no_kcom = true :
+                this.income_form_validator_single.no_kcom = false;
+
+            income_data.employeeId == null ?
+                this.income_form_validator_single.no_empl = true :
+                this.income_form_validator_single.no_empl = false;
+
+            income_data.jobPosition == '' ?
+                this.income_form_validator_single.no_char = true :
+                this.income_form_validator_single.no_char = false;
+
+            income_data.mainSource == '' ?
+                this.income_form_validator_single.no_main = true :
+                this.income_form_validator_single.no_main = false;
+
+            income_data.monthlyIncome == null ?
+                this.income_form_validator_single.no_minc = true :
+                this.income_form_validator_single.no_minc = false;
+
+            for( let field in this.income_form_validator_single ) {
+
+                if( this.income_form_validator_single[field] ) return false;
+                else result = true;
+
+            }
 
         } else {
 
-            this.system_message.showMessage({
-                kind: 'error',
-                time: 4777,
-                message: {
-                    header: 'Inputs required',
-                    text: 'Some inputs must be fill to continue.'
-                }
-            });
+            income_data.companyYearStart == '' ?
+                this.income_form_validator_buss.no_year = true :
+                this.income_form_validator_buss.no_year = false;
 
-            this.sendToTopPage();
+            income_data.billLastYear == null ?
+                this.income_form_validator_buss.no_lche = true :
+                this.income_form_validator_buss.no_lche = false;
+
+            income_data.employeeId == null ?
+                this.income_form_validator_buss.no_empl = true :
+                this.income_form_validator_buss.no_empl = false;
+
+            income_data.branchoffice == null ?
+                this.income_form_validator_buss.no_stor = true :
+                this.income_form_validator_buss.no_stor = false;
+
+            income_data.cityHo == '' ?
+                this.income_form_validator_buss.no_city = true :
+                this.income_form_validator_buss.no_city = false;
+
+            income_data.communityHo == '' ?
+                this.income_form_validator_buss.no_comm = true :
+                this.income_form_validator_buss.no_comm = false;
+
+            income_data.streetHo == '' ?
+                this.income_form_validator_buss.no_stre = true :
+                this.income_form_validator_buss.no_stre = false;
+
+            income_data.intNumberHo == '' ?
+                this.income_form_validator_buss.no_snum = true :
+                this.income_form_validator_buss.no_snum = false;
+
+            income_data.numberHo == '' ?
+                this.income_form_validator_buss.no_nstr = true :
+                this.income_form_validator_buss.no_nstr = false;
+
+            for( let field in this.income_form_validator_buss ) {
+
+                if( this.income_form_validator_buss[field] ) return false;
+                else result = true;
+
+            }
 
         }
+
+        return result;
+
+    }
+
+    public reference_form_validator: any = {
+        no_name: false,
+        no_fnam: false,
+        no_lnam: false,
+        no_rela: false,
+        no_mail: false,
+        no_phon: false,
+        no_rent: false,
+        no_lord: false,
+        no_lmai: false,
+        no_lpho: false
+    }
+    public referenceFormValidator():boolean {
+
+        let result: boolean = false;
+
+        const reference_form = this.general_user_data.reference;
+
+        reference_form.name == '' ?
+                this.reference_form_validator.no_name = true :
+                this.reference_form_validator.no_name = false;
+                
+        reference_form.firstName == '' ?
+            this.reference_form_validator.no_fnam = true :
+            this.reference_form_validator.no_fnam = false; 
+
+        reference_form.lastName == '' ?
+            this.reference_form_validator.no_lnam = true :
+            this.reference_form_validator.no_lnam = false; 
+
+        reference_form.relationshipId == null ?
+            this.reference_form_validator.no_rela = true :
+            this.reference_form_validator.no_rela = false; 
+
+        reference_form.mail == '' ?
+            this.reference_form_validator.no_mail = true :
+            this.reference_form_validator.no_mail = false; 
+
+        reference_form.phone == '' ?
+            this.reference_form_validator.no_phon = true :
+            this.reference_form_validator.no_phon = false; 
+
+        reference_form.firstRent == null ?
+            this.reference_form_validator.no_rent = true :
+            this.reference_form_validator.no_rent = false; 
+
+        reference_form.NameLandlord == '' ?
+            this.reference_form_validator.no_lord = true :
+            this.reference_form_validator.no_lord = false; 
+        
+        reference_form.EmailLandLord == '' ?
+            this.reference_form_validator.no_lmai = true :
+            this.reference_form_validator.no_lmai = false; 
+
+        reference_form.PhoneLandLord == '' ?
+            this.reference_form_validator.no_lpho = true :
+            this.reference_form_validator.no_lpho = false; 
+
+        if( this.single_profile ) {
+
+            for( let field in this.reference_form_validator  ) {
+
+                if( this.reference_form_validator[field] ) return false;
+                else result = true; 
+    
+            }
+
+        } else {
+
+            if(
+                !this.reference_form_validator.no_name &&
+                !this.reference_form_validator.no_fnam &&
+                !this.reference_form_validator.no_lnam &&
+                !this.reference_form_validator.no_rela &&
+                !this.reference_form_validator.no_mail &&
+                !this.reference_form_validator.no_phon
+            ) result = true;
+            else result = false;
+
+        }
+
+        return result;
 
     }
 
@@ -990,57 +1259,6 @@ import { Utils } from '../../../utils/utils';
         this.kind_card = this.kindCardDetecter( this.credit_card_data.number.toString() );
 
     }
-
-    /*public profileInputsState( state: string ):void {
-
-        const profile_inputs: any = document.querySelectorAll('[input-family="profile"]');
-
-        profile_inputs.forEach( (input) => {
-
-            state == 'off' ? 
-                input.setAttribute('disabled', 'disabled') :
-                input.removeAttribute('disabled');
-
-        });
-
-    }*/
-
-    
-    /*public getCardDataSection():void {
-
-        console.log('Here => ', this.general_user_data );
-
-        if( this.creditCardValidator() ) {
-
-            this.iHaveCompletedStep(1);
-
-        } else {
-
-            this.system_message.showMessage({
-                kind: 'error',
-                time: 4777,
-                message: {
-                    header: 'Inputs required',
-                    text: 'Some inputs must be fill to continue.'
-                }
-            });
-
-        }
-
-    }*/
-
-    /*public changeSectionNavigation( action: string ):void {
-
-        switch( action ) {
-
-            case 'edit_profile':
-                this.profile_section_card = false;
-                this.profileInputsState( 'on' ); 
-                break;
-
-        }
-
-    }*/
 
     public credit_card_form: any = {
         no_name: false,
@@ -1095,6 +1313,11 @@ import { Utils } from '../../../utils/utils';
                     if( response.result == 'Success' ) {
                         
                         result = true;
+                        this.join_all_data.token = response.item;
+
+                    } else {
+
+                        result = false;
                         this.join_all_data.token = response.item;
 
                     }
@@ -1196,7 +1419,6 @@ import { Utils } from '../../../utils/utils';
             this.form_profile_buss.no_phon = false;
 
         if(
-            this.terms_of_use == 'short_t' &&
             !this.form_profile_validator.no_name &&
             !this.form_profile_validator.no_lnam &&
             !this.form_profile_validator.no_mnam &&
@@ -1247,11 +1469,9 @@ import { Utils } from '../../../utils/utils';
         this._services.service_general_post('Tenant/NewTenant', this.join_all_data)
             .subscribe( (response: any) => {
 
-                console.log('Response ===> ', response);
-
                 if( response.result == 'Success' ) {  
 
-                    //Aqui terminas el proceso
+                    this._router.navigateByUrl(`tenantList/${ this.build_selected }`);
 
                 }
 
@@ -1707,7 +1927,7 @@ class IncomeData {
     mainSource: string = '';
     monthlyIncome: number = null;
     billLastYear: number = null;
-    companyYearStart: number = null;
+    companyYearStart: string = '';
     branchoffice: number = null;
     streetHo: string = '';
     numberHo: string = '';

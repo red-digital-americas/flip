@@ -952,7 +952,7 @@
                                 id="profile_single"
                                 name="profile_type"
                                 value="1"
-                                checked="checked"
+                                [checked]="general_user_data.systemTypeId == 1"
                                 input-family="profile"
                                 (change)="changeProfileType( $event )"
                                 class="ap-form__input-radio display-none" />
@@ -968,6 +968,7 @@
                                 id="profile_buss" 
                                 name="profile_type"
                                 value="2"
+                                [checked]="general_user_data.systemTypeId == 2"
                                 input-family="profile"
                                 (change)="changeProfileType( $event )"
                                 class="ap-form__input-radio display-none" />
@@ -1680,6 +1681,7 @@
                                 id="income_ename" 
                                 name="income_ename"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_enam"
                                 [(ngModel)]="general_user_data.income.nameEmployer" />
                               <label 
                                 for="income_ename" 
@@ -1687,6 +1689,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.nameEmployer != ''">
                                 Employer name
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_enam">
+                                Employer name is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1700,6 +1705,7 @@
                                 id="income_industry" 
                                 name="income_industry"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_indu"
                                 [(ngModel)]="general_user_data.income.industry" />
                               <label 
                                 for="income_industry" 
@@ -1707,6 +1713,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.industry != ''">
                                 Industry
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_indu">
+                                Industry is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1721,6 +1730,7 @@
                                 id="income_phone" 
                                 name="income_phone"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_phon"
                                 [(ngModel)]="general_user_data.income.contactNumber" />
                               <label 
                                 for="income_phone" 
@@ -1728,6 +1738,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.contactNumber != ''">
                                 Phone
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_phon">
+                                Phone is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1742,6 +1755,7 @@
                                 id="income_tenure" 
                                 name="income_tenure"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_tenu"
                                 [(ngModel)]="general_user_data.income.tenureId" />
                               <label 
                                 for="income_tenure" 
@@ -1749,6 +1763,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.tenureId != null">
                                 Tenure
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_tenu">
+                                Tenure is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1761,6 +1778,7 @@
                                 id="income_credith" 
                                 name="income_credith"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_chis"
                                 [(ngModel)]="general_user_data.income.creditHistory">
                                 <option value="null" disabled>Credit History</option>
                                 <option value="true">Yes</option>
@@ -1772,6 +1790,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.creditHistory != null">
                                 Credit History
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_chis">
+                                Tenure is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1784,6 +1805,7 @@
                                 id="income_split" 
                                 name="income_split"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_spli"
                                 [(ngModel)]="general_user_data.income.splitRent">
                                 <option value="null" disabled>Will You split the fee with someone?</option>
                                 <option value="true">Yes</option>
@@ -1795,6 +1817,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.splitRent != null">
                                 Will You split the fee with someone?
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_spli">
+                                Will You split the fee with someone? is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1807,6 +1832,7 @@
                                 id="income_ckind" 
                                 name="income_ckind"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_kcom"
                                 [(ngModel)]="general_user_data.income.companyTypeId">
                                 <option value="null" disabled>Kind of Company</option>
                                 <option *ngFor="let list of companytype_list_gotten;" [value]="list.id">
@@ -1819,6 +1845,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.companyTypeId != null">
                                 Kind of Company
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_kcom">
+                                Kind of Company is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1833,6 +1862,7 @@
                                 id="income_hemploys" 
                                 name="income_hemploys"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_empl"
                                 [(ngModel)]="general_user_data.income.employeeId" />
                               <label 
                                 for="income_hemploys" 
@@ -1840,6 +1870,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.employeeId != null">
                                 How many employees?
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_empl">
+                                How many employees? is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1853,13 +1886,17 @@
                                 id="income_charge" 
                                 name="income_charge"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_char"
                                 [(ngModel)]="general_user_data.income.jobPosition" />
                               <label 
                                 for="income_charge" 
                                 class="ap-form__label ap-form__label-text"
-                                [class.ap-form__label-text--active]="general_user_data.income.jobPosition != null">
+                                [class.ap-form__label-text--active]="general_user_data.income.jobPosition != ''">
                                 What is your charge?
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_char">
+                                What is your charge? is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1873,6 +1910,7 @@
                                 id="income_isource" 
                                 name="income_isource"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_main"
                                 [(ngModel)]="general_user_data.income.mainSource" />
                               <label 
                                 for="income_isource" 
@@ -1880,6 +1918,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.mainSource != ''">
                                 What is your main income source?
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_main">
+                                What is your main income source? is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1894,6 +1935,7 @@
                                 id="income_iverificable" 
                                 name="income_iverificable"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_single.no_minc"
                                 [(ngModel)]="general_user_data.income.monthlyIncome" />
                               <label 
                                 for="income_iverificable" 
@@ -1901,6 +1943,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.monthlyIncome != null">
                                 Income monthly verificable
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_single.no_minc">
+                                Income monthly verificable is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1921,13 +1966,17 @@
                                 id="income_bscompany" 
                                 name="income_bscompany"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_buss.no_year"
                                 [(ngModel)]="general_user_data.income.companyYearStart" />
                               <label 
                                 for="income_bscompany" 
                                 class="ap-form__label ap-form__label-text"
-                                [class.ap-form__label-text--active]="general_user_data.income.companyYearStart != null">
+                                [class.ap-form__label-text--active]="general_user_data.income.companyYearStart != ''">
                                 What year start the company?
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_buss.no_year">
+                                What year start the company? is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1942,6 +1991,7 @@
                                 id="income_bcheckin" 
                                 name="income_bcheckin"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_buss.no_lche"
                                 [(ngModel)]="general_user_data.income.billLastYear" />
                               <label 
                                 for="income_bcheckin" 
@@ -1949,6 +1999,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.billLastYear != null">
                                 How much money check in the last year?
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_buss.no_lche">
+                                How much money check in the last year? is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1963,6 +2016,7 @@
                                 id="income_bhemployees" 
                                 name="income_bhemployees"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_buss.no_empl"
                                 [(ngModel)]="general_user_data.income.employeeId" />
                               <label 
                                 for="income_bhemployees" 
@@ -1970,6 +2024,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.employeeId != null">
                                 How many employees work in?
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_buss.no_empl">
+                                How much money check in the last year? is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -1984,6 +2041,7 @@
                                 id="income_bhstores" 
                                 name="income_bhstores"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_buss.no_stor"
                                 [(ngModel)]="general_user_data.income.branchoffice" />
                               <label 
                                 for="income_bhstores" 
@@ -1991,6 +2049,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.branchoffice != null">
                                 How many stores?
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_buss.no_stor">
+                                How many stores? is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -2009,6 +2070,7 @@
                                 id="income_bcity" 
                                 name="income_bcity"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_buss.no_city"
                                 [(ngModel)]="general_user_data.income.cityHo" />
                               <label 
                                 for="income_bcity" 
@@ -2016,6 +2078,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.cityHo != ''">
                                 City
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_buss.no_city">
+                                City is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -2029,13 +2094,17 @@
                                 id="income_bcommu" 
                                 name="income_bcommu"
                                 class="ap-form__input-text"
-                                [(ngModel)]="general_user_data.income.streetHo" />
+                                [class.form_error_found]="income_form_validator_buss.no_comm"
+                                [(ngModel)]="general_user_data.income.communityHo" />
                               <label 
                                 for="income_bcommu" 
                                 class="ap-form__label ap-form__label-text"
-                                [class.ap-form__label-text--active]="general_user_data.income.streetHo != ''">
+                                [class.ap-form__label-text--active]="general_user_data.income.communityHo != ''">
                                 Community
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_buss.no_comm">
+                                Community is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -2049,6 +2118,7 @@
                                 id="income_bstreet" 
                                 name="income_bstreet"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_buss.no_stre"
                                 [(ngModel)]="general_user_data.income.streetHo" />
                               <label 
                                 for="income_bstreet" 
@@ -2056,6 +2126,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.streetHo != ''">
                                 Street
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_buss.no_stre">
+                                Street is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -2069,13 +2142,17 @@
                                 id="income_bsnumber" 
                                 name="income_bsnumber"
                                 class="ap-form__input-text"
-                                [(ngModel)]="general_user_data.income.numberHo" />
+                                [class.form_error_found]="income_form_validator_buss.no_snum"
+                                [(ngModel)]="general_user_data.income.intNumberHo" />
                               <label 
                                 for="income_bsnumber" 
                                 class="ap-form__label ap-form__label-text"
-                                [class.ap-form__label-text--active]="general_user_data.income.numberHo != ''">
+                                [class.ap-form__label-text--active]="general_user_data.income.intNumberHo != ''">
                                 Street Number
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_buss.no_snum">
+                                Street Number is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -2090,6 +2167,7 @@
                                 id="income_bnumber" 
                                 name="income_bnumber"
                                 class="ap-form__input-text"
+                                [class.form_error_found]="income_form_validator_buss.no_nstr"
                                 [(ngModel)]="general_user_data.income.numberHo" />
                               <label 
                                 for="income_bnumber" 
@@ -2097,6 +2175,9 @@
                                 [class.ap-form__label-text--active]="general_user_data.income.numberHo != ''">
                                 Suite Number
                               </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="income_form_validator_buss.no_nstr">
+                                Suite Number is required*
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -2109,10 +2190,12 @@
                                 placeholder="Departament"
                                 id="income_bdepartament" 
                                 name="income_bdepartament"
-                                class="ap-form__input-text" />
+                                class="ap-form__input-text"
+                                [(ngModel)]="general_user_data.income.departamentHo"/>
                               <label 
                                 for="income_bdepartament" 
-                                class="ap-form__label ap-form__label-text">
+                                class="ap-form__label ap-form__label-text"
+                                [class.ap-form__label-text--active]="general_user_data.income.departamentHo != ''">
                                 Departament
                               </label>
                             </div>
@@ -2140,6 +2223,7 @@
                                   id="reference_name" 
                                   name="reference_name"
                                   class="ap-form__input-text"
+                                  [class.form_error_found]="reference_form_validator.no_name"
                                   [(ngModel)]="general_user_data.reference.name" />
                                 <label 
                                   for="reference_name" 
@@ -2147,6 +2231,9 @@
                                   [class.ap-form__label-text--active]="general_user_data.reference.name != ''">
                                   Name
                                 </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="reference_form_validator.no_name">
+                                  Name is required*
+                                </span>
                               </div>
                             </div>
                         </div>
@@ -2160,6 +2247,7 @@
                                   id="reference_lname" 
                                   name="reference_lname"
                                   class="ap-form__input-text"
+                                  [class.form_error_found]="reference_form_validator.no_fnam"
                                   [(ngModel)]="general_user_data.reference.firstName" />
                                 <label 
                                   for="reference_lname" 
@@ -2167,6 +2255,9 @@
                                   [class.ap-form__label-text--active]="general_user_data.reference.firstName != ''">
                                   Firstname
                                 </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="reference_form_validator.no_fnam">
+                                  Firstname is required*
+                                </span>
                               </div>
                             </div>
                         </div>
@@ -2180,6 +2271,7 @@
                                   id="reference_mname" 
                                   name="reference_mname"
                                   class="ap-form__input-text"
+                                  [class.form_error_found]="reference_form_validator.no_lnam"
                                   [(ngModel)]="general_user_data.reference.lastName" />
                                 <label 
                                   for="reference_mname" 
@@ -2187,6 +2279,9 @@
                                   [class.ap-form__label-text--active]="general_user_data.reference.lastName != ''">
                                   Lastname
                                 </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="reference_form_validator.no_lnam">
+                                  Lastname is required*
+                                </span>
                               </div>
                             </div>
                         </div>
@@ -2200,6 +2295,7 @@
                                   id="reference_relationship" 
                                   name="reference_relationship"
                                   class="ap-form__input-text"
+                                  [class.form_error_found]="reference_form_validator.no_rela"
                                   [(ngModel)]="general_user_data.reference.relationshipId">
                                   <option value="null" disabled>Relationship</option>
                                   <option *ngFor="let list of relationship_list_gotten;" [value]="list.id">
@@ -2212,6 +2308,9 @@
                                   [class.ap-form__label-text--active]="general_user_data.reference.relationshipId != null">
                                   Relationship
                                 </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="reference_form_validator.no_rela">
+                                  Relationship is required*
+                                </span>
                               </div>
                             </div>
                         </div>
@@ -2225,6 +2324,7 @@
                                   id="reference_email" 
                                   name="reference_email"
                                   class="ap-form__input-text"
+                                  [class.form_error_found]="reference_form_validator.no_mail"
                                   [(ngModel)]="general_user_data.reference.mail" />
                                 <label 
                                   for="reference_email" 
@@ -2232,6 +2332,9 @@
                                   [class.ap-form__label-text--active]="general_user_data.reference.mail != ''">
                                   Email
                                 </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="reference_form_validator.no_mail">
+                                  Email is required*
+                                </span>
                               </div>
                             </div>
                         </div>
@@ -2245,6 +2348,7 @@
                                   id="reference_phone" 
                                   name="reference_phone"
                                   class="ap-form__input-text"
+                                  [class.form_error_found]="reference_form_validator.no_phon"
                                   [(ngModel)]="general_user_data.reference.phone"/>
                                 <label 
                                   for="reference_phone" 
@@ -2252,6 +2356,9 @@
                                   [class.ap-form__label-text--active]="general_user_data.reference.phone != ''">
                                   Phone
                                 </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="reference_form_validator.no_phon">
+                                  Phone is required*
+                                </span>
                               </div>
                             </div>
                         </div>
@@ -2265,6 +2372,7 @@
                                   id="reference_firstr" 
                                   name="reference_firstr"
                                   class="ap-form__input-text"
+                                  [class.form_error_found]="reference_form_validator.no_rent"
                                   [(ngModel)]="general_user_data.reference.firstRent">
                                   <option value="null" disabled>First rent?</option>
                                   <option value="true">Yes</option>
@@ -2276,6 +2384,9 @@
                                   [class.ap-form__label-text--active]="general_user_data.reference.firstRent != null">
                                   First rent?
                                 </label>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="reference_form_validator.no_rent">
+                                  First rent? is required*
+                                </span>
                               </div>
                             </div>
                         </div>
@@ -2295,6 +2406,7 @@
                                     id="reference_oname" 
                                     name="reference_oname"
                                     class="ap-form__input-text"
+                                    [class.form_error_found]="reference_form_validator.no_lord"
                                     [(ngModel)]="general_user_data.reference.NameLandlord" />
                                   <label 
                                     for="reference_oname" 
@@ -2302,6 +2414,9 @@
                                     [class.ap-form__label-text--active]="general_user_data.reference.NameLandlord != ''">
                                     Name
                                   </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="reference_form_validator.no_lord">
+                                    Name is required*
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -2315,6 +2430,7 @@
                                     id="reference_omail" 
                                     name="reference_omail"
                                     class="ap-form__input-text"
+                                    [class.form_error_found]="reference_form_validator.no_lmai"
                                     [(ngModel)]="general_user_data.reference.EmailLandLord" />
                                   <label 
                                     for="reference_omail" 
@@ -2322,6 +2438,9 @@
                                     [class.ap-form__label-text--active]="general_user_data.reference.EmailLandLord != ''">
                                     Email
                                   </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="reference_form_validator.no_lmai">
+                                    Email is required*
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -2335,6 +2454,7 @@
                                     id="reference_ophone" 
                                     name="reference_ophone"
                                     class="ap-form__input-text"
+                                    [class.form_error_found]="reference_form_validator.no_lpho"
                                     [(ngModel)]="general_user_data.reference.PhoneLandLord" />
                                   <label 
                                     for="reference_ophone" 
@@ -2342,6 +2462,9 @@
                                     [class.ap-form__label-text--active]="general_user_data.reference.PhoneLandLord != ''">
                                     Phone Number
                                   </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="reference_form_validator.no_lpho">
+                                    Phone Number is required*
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -2548,12 +2671,13 @@
                         Continue
                     </button>
                   </div>
-                  <!--div class="ml-col-1 ap-form__buttons margin-top-x" *ngIf="terms_of_use == 'long_t'">
+                  <div class="ml-col-1 ap-form__buttons margin-top-x" *ngIf="terms_of_use == 'long_t'">
                     <button 
-                        class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
-                        Income
+                        class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
+                        (click)="profileTenantCompleted( false )">
+                        Continue
                     </button>
-                  </div -->
+                  </div>
             </form>
         <!-- div class="ml-col-1 margin-tb-min">
             <button 
