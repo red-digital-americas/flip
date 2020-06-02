@@ -24,7 +24,7 @@ export class TenantListComponent implements OnInit {
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-    displayedColumns: string[] = ['room', 'typeRoom', 'name', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'checkIn', 'checkOut', 'idUser'];
+    displayedColumns: string[] = ['room', 'typeRoom', 'name', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'checkIn', 'checkOut', 'active', 'idUser'];
     tenantList;
     buildingId;
     public section: string;

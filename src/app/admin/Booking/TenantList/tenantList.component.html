@@ -69,6 +69,10 @@
                     <th mat-header-cell *matHeaderCellDef class="table__header"> Check Out </th>
                     <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.checkOut">  </td>
                 </ng-container>
+                <ng-container matColumnDef="active">
+                    <th mat-header-cell *matHeaderCellDef class="table__header"> Active </th>
+                    <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.active">  </td>
+                </ng-container>
                 <ng-container matColumnDef="idUser">
                     <th mat-header-cell *matHeaderCellDef> </th>
                     <td mat-cell *matCellDef="let element">

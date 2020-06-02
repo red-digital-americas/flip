@@ -49,17 +49,27 @@ export class MenuService {
   ] 
 
   private booking = [
-    { name: 'Booking', url: '/booking', icon: 'icon-screen-tablet' },
-    { name: 'General TenanList', url: '/generalTenantlist', icon: 'icon-list' },
-    { name: 'Add Tenant', url: '/AddTenant', icon: 'icon-user-follow' },
-    { name: 'Users', url: '/Users', icon: 'icon-people' },
+    { id: 1, name: 'Booking', url: '/booking', icon: 'icon-screen-tablet' },
+    { id: 2, name: 'General TenanList', url: '/generalTenantlist', icon: 'icon-list' },
+    { id: 3, name: 'Add Tenant', url: '/AddTenant', icon: 'icon-user-follow' },
+    { id: 4, name: 'Users', url: '/Users', icon: 'icon-people' },
     // { name: 'Roles', url: '/Roles', icon: 'icon-settings' }
   ]
 
+  permissionBooking;
+
   public CreateMenu(sectionId:number) {
+    this.permissionBooking = JSON.parse(localStorage.getItem('user')).userPermissions;
+    console.log(this.permissionBooking);
+    var grantBooking = [];
+    this.permissionBooking.forEach(element => {
+      let i = this.booking.find(x => x.id === element.permissionId);
+      grantBooking.push(i);
+    });
+    console.log(grantBooking);
     if (sectionId == 1) { return this.flipWeb;}
     if (sectionId == 2) { return this.adminApp;}
-    if (sectionId == 3) { return this.booking;}
+    if (sectionId == 3) { return grantBooking;}
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

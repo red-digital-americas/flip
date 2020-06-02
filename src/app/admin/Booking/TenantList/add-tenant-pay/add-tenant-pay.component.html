@@ -4,24 +4,7 @@
         <div class="ml-col-1 padding-general-m margin-bottom-g">
           <div class="ml-col-1">
       
-            <div class="ml-col-1 step-bar">
-              <div class="step-bar__item">
-                  <span 
-                      class="step-bar__steper"
-                      [ngClass]="{'step-bar__steper--on': visible_step.step_1,
-                                  'step-bar__steper--off': !visible_step.step_1}">1
-                  </span>
-              </div>
-              <div class="step-bar__item">
-                  <span 
-                      class="step-bar__steper step-bar__steper--right"
-                      [ngClass]="{'step-bar__steper--on': visible_step.step_2,
-                                  'step-bar__steper--off': !visible_step.step_2}">2
-                  </span>
-              </div>
-          </div>
-      
-          <div class="ml-col-1" *ngIf="visible_step.step_1" step-form="one">
+          <div class="ml-col-1" >
             <div class="ml-col-1 margin-tb-min">
                 <h4 class="ap-form__titulo ap-form__titulo--auto-width">
                     Booking Configuration
