@@ -52,6 +52,8 @@ export class AddTenantPayComponent implements OnInit {
   public additional_services_table: any;
   public additional_services_selected: any[] = [];
   public booking_data: BookingDetailModel = new BookingDetailModel();
+  public table_services_resumen: any[] = ['icon','service','type','lapse','sdate','edate','ammount'];
+
 
   public bt_form_data: any = {
     no_sdat: false,
@@ -98,6 +100,7 @@ export class AddTenantPayComponent implements OnInit {
       id: this.ccObj.id
     };
     console.log(card_data);
+    this.loader.showLoader();
     this._service.service_general_post('Stripe', card_data).subscribe((value) => {
       console.log('Stripe', value);
       this.booking_post_data.idUser = this.userId;
@@ -119,11 +122,11 @@ export class AddTenantPayComponent implements OnInit {
           id: this.userId
         },
         token: value.item,
-        amount: this.total_services_ammount
+        amount: this.booking_detail_total_ammount
       };
       console.log('DATA Booking', obj);
-
       this._service.service_general_post('Tenant/NewTenantExist', obj).subscribe((value) => {
+        this.loader.hideLoader();
         this.systemMessage.showMessage({
           kind: 'ok',
           message: {
@@ -134,6 +137,7 @@ export class AddTenantPayComponent implements OnInit {
         });
         this.goToPage();
       }, (error) => {
+        this.loader.hideLoader();
         console.log('PostBooking', error);
         this.systemMessage.showMessage({
           kind: 'error',
@@ -145,6 +149,7 @@ export class AddTenantPayComponent implements OnInit {
         });
       });
     }, (error) => {
+      this.loader.hideLoader();
       console.log('Stripe', error);
       this.systemMessage.showMessage({
         kind: 'error',
@@ -417,6 +422,7 @@ export class AddTenantPayComponent implements OnInit {
 
   public all_services_selected: any[] = [];
   public total_services_ammount: number = 0;
+  public booking_detail_total_ammount: number = 0;
   public joinAllMyServices(): void {
     this.all_services_selected = [];
     this.current_build.services.forEach((service: any) => {
@@ -434,6 +440,7 @@ export class AddTenantPayComponent implements OnInit {
     this.all_services_selected.forEach((service) => {
       this.total_services_ammount += service.total_ammount;
     });
+    this.booking_detail_total_ammount = this.getTotalAmmount() + this.total_services_ammount;
   }
 
   public show_modal_content: string = '';

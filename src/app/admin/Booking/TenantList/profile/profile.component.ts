@@ -332,10 +332,10 @@ export class ProfileComponent implements OnInit {
   public initProfileApp(): void {
 
     const get_catalogos = new Promise( (resolve: any) =>  {
-
+      this.loader.showLoader();
       this.services.service_general_get('Tenant/getCatalogsUser')
           .subscribe( (response: any) => {
-
+          this.loader.hideLoader();
           if( response.result == 'Sucess' ) { 
 
             this.country_catalogo = response.country;
@@ -364,10 +364,10 @@ export class ProfileComponent implements OnInit {
         this.tenant_id = this.route.snapshot.paramMap.get('id');
 
         const user_data = { userId: this.tenant_id };
-
+        this.loader.showLoader();
         this.services.service_general_get_with_params('Profile/GetProfileById', user_data )
             .subscribe( (response: any) => {
-
+              this.loader.hideLoader();
               if( response.result == 'Sucess' ) {
 
                 const user_data = response.item[0];
@@ -397,7 +397,7 @@ export class ProfileComponent implements OnInit {
               }
 
             }, (error: any) => {
-
+              this.loader.hideLoader();
               console.log('Error en el servicio de getTenantById => ', error);
 
             });
@@ -405,7 +405,6 @@ export class ProfileComponent implements OnInit {
       } 
 
     });
-
   }
 
 

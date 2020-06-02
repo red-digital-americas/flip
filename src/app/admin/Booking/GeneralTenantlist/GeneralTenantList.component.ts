@@ -33,7 +33,7 @@ import { SystemMessage } from '../../../../ts/systemMessage';
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-    public table_colums: any[] = ['build','room','name','membership','dateInit','dateEnd','amountOutstanding', 'totalBeds', 'roomateFlip', 'checkIn', 'checkOut','more'];
+    public table_colums: any[] = ['build','room', 'typeRoom','name','membership','dateInit','dateEnd','amountOutstanding', 'totalBeds', 'roomateFlip', 'checkIn', 'checkOut','more'];
 
     public tenantList: any;
     public getTenantList():void {

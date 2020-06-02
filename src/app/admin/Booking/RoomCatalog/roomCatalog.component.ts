@@ -4,6 +4,8 @@ import { DatosService } from '../../../../datos.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { SystemMessage } from '../../../../ts/systemMessage';
+import { LoaderComponent } from '../../../../ts/loader';
 
 @Component({
     selector: 'room-catalog',
@@ -26,6 +28,9 @@ export class RoomCatalogComponent implements OnInit {
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+    loader = new LoaderComponent();
+    systemMessage = new SystemMessage();
+
     ngOnInit() {
         this.section = 'roomCatalog';
         this.buildingId = this.route.snapshot.paramMap.get('id');
@@ -33,8 +38,10 @@ export class RoomCatalogComponent implements OnInit {
     }
 
     getRoomList(id) {
+        this.loader.showLoader();
         const obj = { buildingId: id };
         this.services.service_general_get_with_params('Room/getRoom', obj).subscribe((value) => {
+            this.loader.hideLoader();
             console.log('Reponse Total ', value);
             this.roomList = new MatTableDataSource(value.item);
             console.log('Response', this.roomList);
