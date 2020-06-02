@@ -39,10 +39,10 @@
 <div class="row padding-bottom-m padding-general-m" style="padding-top: 0px;">
   <div class="ml-col-1 room-data__tabs text-center">
     <span class="room-data__tab room-data__tab--active" (click)="showSection( $event, 'room_a')">
-      Room Type 1
+      Room type 1
     </span>
     <span class="room-data__tab" (click)="showSection( $event ,'room_b')">
-      Room Type 2
+      Room type 2
     </span>
   </div>
   <div 
@@ -54,13 +54,13 @@
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
           <p class="room-data__card-titulo">
-            <span class="text-bold">Title: </span>
+            <span class="text-bold">Room type title: </span>
             {{ post.title }}
           </p>
         </div>
         <div class="ml-col-1">
           <p class="room-data__card-dato">
-            <span class="text-bold">Description: </span>
+            <span class="text-bold">Room Description: </span>
             {{ post.desc }}
           </p>
         </div>
@@ -123,23 +123,19 @@
         </div>
       </div>
     </div>
-    <div *ngIf="this.lengthpost < 4" style="padding-left: 555px;  float: right;">
-     
-      <button 
-              data-toggle="modal" 
-              (click)="primaryModal.show(); passdata(this.post_blanck);"
-              class="button button-x">
-              Add Silde in Room
-      </button>
-      <br> <br>
+    <div class="ml-col-1">
+      <p class="room-data__card-titulo">
+        <span class="text-bold">Slides of room: </span>
+        {{ post.title }}
+      </p>
     </div>
     <div class="ml-col-1 card-style margin-bottom-m" *ngFor="let photo of post.photos, index_b as index;">
-     {{index_b}}
+    
       <div class="ml-col-1 margin-top-x">
         <div class="room-data__card ml-col-1">
           <div class="ml-col-1">
             <p class="room-data__card-dato">
-              <span class="text-bold">Slide Title: </span>
+              <span class="text-bold">Slide title: </span>
               {{ photo.title }}
             </p>
           </div>
@@ -154,8 +150,12 @@
       <div class="ml-col-1 margin-top-x">
         <div class="icon-viewB">
           <div class="icon-viewB__container">
-            <p class="icon-viewB__title text-center">
+            <!-- <p class="icon-viewB__title text-center">
               Icon Title: {{ photo.titleIcon }}
+            </p> -->
+            <p class="room-data__card-dato text-center">
+              <span class="text-bold">Icon Title:  </span>
+              {{ photo.titleIcon }}
             </p>
             <div class="icon-viewB__icon">
               <span class="icon-viewB__icon-label text-center">Icon: </span> 
@@ -207,13 +207,13 @@
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
           <p class="room-data__card-titulo">
-            <span class="text-bold">Slide Title: </span>
+            <span class="text-bold">Room type title: </span>
             {{ post.title }}
           </p>
         </div>
         <div class="ml-col-1">
           <p class="room-data__card-dato">
-            <span class="text-bold">Slide Description: </span>
+            <span class="text-bold">Room Description: </span>
             {{ post.desc }}
           </p>
         </div>
@@ -276,7 +276,29 @@
         </div>
       </div>
     </div>
+    <div class="ml-col-1">
+      <p class="room-data__card-titulo">
+        <span class="text-bold">Slides of room: </span>
+        {{ post.title }}
+      </p>
+    </div>
     <div class="ml-col-1 card-style margin-bottom-m" *ngFor="let photo of post.photos, index_b as index;">
+      <div class="ml-col-1 margin-top-x">
+        <div class="room-data__card ml-col-1">
+          <div class="ml-col-1">
+            <p class="room-data__card-dato">
+              <span class="text-bold">Slide title: </span>
+              {{ photo.title }}
+            </p>
+          </div>
+          <div class="ml-col-1">
+            <p class="room-data__card-dato">
+              <span class="text-bold">Slide Description: </span>
+              {{ photo.description }}
+            </p>
+          </div>
+        </div>
+      </div>
       <div class="ml-col-1 margin-top-x">
         <div class="icon-viewB">
           <div class="icon-viewB__container">

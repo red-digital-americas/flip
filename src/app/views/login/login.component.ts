@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
 
   showSuccess() {
     //this.toasterService.pop('success', 'Success ', 'You will be redirected ');   
-    console.log('HERE!!!!!!!!!!!!', parseInt(localStorage.getItem("SystemTypeId")));
+    //console.log('HERE!!!!!!!!!!!!', parseInt(localStorage.getItem("SystemTypeId")));
     this._router.navigate([this.menuService.GetFirstURLSection(parseInt(localStorage.getItem("SystemTypeId")))]);
     // window.location.href = "/#"+this.menuService.GetFirstURLSection(parseInt(localStorage.getItem("SystemTypeId"))); // partial redirection
     // window.location.href = "/communities"; // full redirection (loading again page)

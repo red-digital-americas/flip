@@ -9,21 +9,21 @@ export class MenuService {
     { 
       name: 'Main', url: '/webadmin/webadmin', icon: 'icon-globe',
       children: [  
-        { name: 'Index', url: '/webadmin/webadmin', icon: 'icon-docs sangria'}, 
-        { name: 'Desgin Index', url: '/webadmin/designindex', icon: 'icon-tag sangria'}, 
+        { name: 'Main Index', url: '/webadmin/webadmin', icon: 'icon-docs sangria'}, 
+        { name: 'Design index', url: '/webadmin/designindex', icon: 'icon-tag sangria'}, 
         { name: 'More Index', url: '/webadmin/moreindex', icon: 'icon-book-open sangria' },
-        { name: 'Communities Index', url: '/webadmin/homeindex/1', icon: 'icon-globe-alt sangria'}
+        { name: 'Builds Index', url: '/webadmin/homeindex/1', icon: 'icon-globe-alt sangria'}
       ]
     },  
-    {
-      name: 'Communities', type: 1, url: '/webadmin/homemenu', icon: 'icon-home', 
-      children: [  
+    //{
+      //name: 'Communities', type: 1, url: '/webadmin/homemenu', icon: 'icon-home', 
+      //children: [  
         // { name: 'Home Services', url: '/webadmin/homeservices', icon: 'icon-drop' },
         // { name: 'Home Ammenities', url: '/webadmin/homeammenities', icon: 'icon-drop' },
         // { name: 'Home General', url: '/webadmin/homegeneral', icon: 'icon-drop' },
-        { name: 'Builds', url: '/webadmin/homemenu', icon: 'icon-docs sangria' },
-      ]
-    },
+    { name: 'Builds', type: 1, url: '/webadmin/homemenu', icon: 'icon-docs' },
+      //]
+    //},
     { name: 'Design', type: 1, url: '/webadmin/design', icon: 'icon-grid' },
     {
       name: 'More', type: 1, url: '/', icon: 'icon-plus reduce',
