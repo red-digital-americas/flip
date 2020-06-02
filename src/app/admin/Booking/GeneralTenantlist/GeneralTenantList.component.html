@@ -9,6 +9,29 @@
                     Add Tenant
                 </button>
             </h4>
+            <!-- <form class="date-block" [formGroup]="filterForm">
+                <div class="date-block__list">
+                <mat-form-field>
+                  <input matInput 
+                    [matDatepicker]="fromDate" 
+                    placeholder="From Date" 
+                    formControlName="fromDate">
+                  <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                  <mat-datepicker #fromDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+                  <div class="date-block__list">
+                <mat-form-field>
+                  <input matInput 
+                    [matDatepicker]="toDate" 
+                    placeholder="To Date" 
+                    formControlName="toDate">
+                  <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                  <mat-datepicker #toDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+               <button mat-button color="primary" class="primary" (click)="applyFilterPeriod()">Submit</button>
+            </form> -->
             <mat-form-field style="width: 100%;">
                 <mat-label>Filter</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
@@ -39,7 +62,12 @@
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.membership?.membershipType }}</td>
                 </ng-container>
                 <ng-container matColumnDef="dateInit">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Arraival<br />date</th>
+                    <th mat-header-cell *matHeaderCellDef class="table__header">
+                        Arraival<br />date
+                        <mat-form-field>
+                            <input matInput class="form-field" [formControl]="arrivalFilter" placeholder="Postion Filter">
+                        </mat-form-field>
+                    </th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.dateInit }}</td>
                 </ng-container>
                 <ng-container matColumnDef="dateEnd">
@@ -65,6 +93,10 @@
                 <ng-container matColumnDef="checkOut">
                     <th mat-header-cell *matHeaderCellDef class="table__header"> Check Out </th>
                     <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.checkOut">  </td>
+                </ng-container>
+                <ng-container matColumnDef="active">
+                    <th mat-header-cell *matHeaderCellDef class="table__header"> Active </th>
+                    <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.active"></td>
                 </ng-container>
                 <ng-container matColumnDef="more">
                     <th mat-header-cell *matHeaderCellDef></th>
