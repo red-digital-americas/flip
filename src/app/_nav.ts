@@ -52,7 +52,7 @@ export class MenuService {
     { id: 1, name: 'Booking', url: '/booking', icon: 'icon-screen-tablet' },
     { id: 2, name: 'General TenanList', url: '/generalTenantlist', icon: 'icon-list' },
     { id: 3, name: 'Add Tenant', url: '/AddTenant', icon: 'icon-user-follow' },
-    { id: 4, name: 'Users', url: '/Users', icon: 'icon-people' },
+    { id: 4, name: 'Users Admin', url: '/Users', icon: 'icon-people' },
     // { name: 'Roles', url: '/Roles', icon: 'icon-settings' }
   ]
 
