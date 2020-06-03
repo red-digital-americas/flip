@@ -808,46 +808,6 @@ import { Router } from '@angular/router';
         this.iHaveCompletedStep(0);
 
         this.sendToTopPage();
-
-        /*this.loader.showLoader();
-
-        this._services.service_general_post('Tenant/PostBooking', this.booking_post_data)
-            .subscribe( (response: any) => {
-
-                if( response.result == 'Sucess' ) {
-
-                    this.system_message.showMessage({
-                        kind: 'ok',
-                        time: 4777,
-                        message: {
-                            header: 'Booking detail created',
-                            text: 'Booking detail has been created successfully.'
-                        }
-                    });
-
-                    this.iHaveCompletedStep(0);
-
-                    setTimeout( () => this.loader.hideLoader(), 1777);
-
-                }
-
-            }, (error: any) => {
-
-                this.system_message.showMessage({
-                    kind: 'error',
-                    time: 4777,
-                    message: {
-                        header: 'Fatal Error',
-                        text: 'Error Fatal'
-                    }
-                });
-
-                setTimeout( () => this.loader.hideLoader(), 1777);
-
-            });*/
-
-
-        console.log('Service completed => ', this.booking_post_data );
         
     }
     
@@ -1330,8 +1290,8 @@ import { Router } from '@angular/router';
                         kind: 'error',
                         time: 4777,
                         message: {
-                            header: 'System error',
-                            text: 'We found an error please try later.'
+                            header: 'Card Error',
+                            text: error
                         }
                     });
     
