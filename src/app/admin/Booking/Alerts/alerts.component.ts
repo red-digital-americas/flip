@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DatosService } from '../../../../datos.service';
+import { LoaderComponent } from '../../../../ts/loader';
+import { SystemMessage } from '../../../../ts/systemMessage';
 
 @Component({
     selector: 'alerts',
@@ -8,12 +11,17 @@ import { Component, OnInit } from '@angular/core';
 export class AlertsComponent implements OnInit {
 
     public section: string;
+    public loader: LoaderComponent = new LoaderComponent();
+    public system_message: SystemMessage = new SystemMessage();
 
-    constructor() {}
+    constructor(
+        public _services: DatosService
+    ) {}
 
     ngOnInit() {
 
         this.section = 'alerts';
+        this.getAlertsData();
         this.getToday();
 
     }
@@ -23,6 +31,41 @@ export class AlertsComponent implements OnInit {
 
         !this.show_modal ? 
             this.show_modal = true : this.show_modal = false; 
+
+    }
+
+    public modules: any[] = [];
+    public getAlertsData():void {
+
+        const ws_data = {
+            userId: 0,
+            startDate: '01-01-1900',
+            endDate: '01-01-2050',
+            type: 1,
+            buildingId: 1
+        }
+
+        this._services.service_general_get_with_params('Alerts/GetAllAlertsByDateType', ws_data)
+            .subscribe( (response: any) => {
+
+                if( response.result == 'Sucess' ) {
+
+                    console.log('Response on success ========> ', response);
+                    
+                }
+
+            }, (error: any) => {
+
+                this.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                        header: 'System Error',
+                        text: 'A system error has ocurred, please try leater'
+                    }
+                });
+
+            });
 
     }
 

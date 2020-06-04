@@ -66,4 +66,6 @@ import { SystemMessage } from '../../../../ts/systemMessage';
     goToPage() {
         this.router.navigateByUrl( `MembershipNew/${ this.buildingId }`, { state: { id: this.buildingId, name: 'TenantList To Profile' } });
     }
+
+    backIndex(){this.router.navigateByUrl('booking');}
 }

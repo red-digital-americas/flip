@@ -306,6 +306,10 @@ select:active,
   font-weight: bold;
 }
 
+.text-underline {
+  text-decoration: underline;
+}
+
 .button {
 
   width: 100px;
@@ -2570,6 +2574,7 @@ select:active,
       float: left;
       height: 200px;
       overflow: hidden;
+      overflow: hidden;
       background-color: rgba(200,200,200,.07);
       box-shadow: inset 0 0 4px 2px rgba($color: #2e343a, $alpha: .17);
 
@@ -2586,6 +2591,17 @@ select:active,
         height: 350px;
       }
 
+    }
+
+    &-hider {
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      height: 50px;
+      background-color: rgba(0,0,0,.4);
+      position: absolute;
+      transition: transform .2s ease;
+      transform: translateY(100%);
     }
 
     &-titulo {
@@ -2642,6 +2658,10 @@ select:active,
 
     }
 
+  }
+
+  &__card:hover .index-cards__card-hider {
+    transform: translateY(0);
   }
 
 }

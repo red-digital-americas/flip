@@ -13,6 +13,10 @@
             New Ammenity
           </button>
         </div>
+        <div class="ml-col-1 margin-top-m font-big color-red text-center" *ngIf="amenitiesArray?.length == 0">
+          We don't have ammenitie yet,
+          <span class="text-underline cursor-pointer" (click)="toggleSectionForm( 'new' )">add one</span>.
+        </div>
         <div class="ap-cards__container" *ngFor="let amenity of amenitiesArray;">
           <div class="ap-cards__card ap-cards__card--bbuttons card-style">
             <h4 class="ap-cards__card-titulo text-bold">

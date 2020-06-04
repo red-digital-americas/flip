@@ -1,11 +1,16 @@
 <div class="ml-col-1">
-    <booking-navbar [section]="section"></booking-navbar>
+    <!-- booking-navbar [section]="section"></booking-navbar -->
     <div class="ml-col-1 padding-general-m margin-bottom-m">
         <div class="ml-col-1">
             <div class="ml-col-1 margin-bottom-x">
                 <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
                    Room Catalog
                  </h4>
+                 <button 
+                    class="ap-form__rButton button-red padding-lateral-m"
+                    (click)="backIndex()">
+                    Buildings
+                </button>
                  <button 
                     class="ap-form__rButton button-pink padding-lateral-m"
                     (click)="goToPage()">

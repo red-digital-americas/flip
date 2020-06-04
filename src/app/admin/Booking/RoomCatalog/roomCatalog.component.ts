@@ -67,4 +67,6 @@ export class RoomCatalogComponent implements OnInit {
         this.router.navigateByUrl( `roomNew/${ this.buildingId }`, { state: { id: this.buildingId, name: 'TenantList To Profile' } });
     }
 
+    backIndex(){this.router.navigateByUrl('booking');}
+
 }

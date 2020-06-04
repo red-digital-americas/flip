@@ -13,10 +13,11 @@ import { Router, ActivatedRoute } from '@angular/router';
     public navbar_options = [
         {name: 'Tenant List', id: 'tenantList', active: true},
         {name: 'Room Availability', id: 'roomAvailavility', active: false},
+        {name: 'Events Calendar', id: 'reservations', active: false},
         {name: 'Messages', id: 'messages', active: false},
         {name: 'Alerts', id: 'alerts', active: false},
-        {name: 'Room Catalog', id: 'roomCatalog', active: false},
-        {name: 'Merbership Catalog', id: 'MembershipCatalog', active: false}
+        //{name: 'Room Catalog', id: 'roomCatalog', active: false},
+        //{name: 'Merbership Catalog', id: 'MembershipCatalog', active: false}
     ];
 
     constructor(
@@ -26,9 +27,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
     public goToPage( to_where:string = 'default' ):void {
 
-        const id_path = sessionStorage.getItem('id_section_active'); console.log('PTM ===> ', id_path );
-
-        
+        const id_path = sessionStorage.getItem('id_section_active');
 
         if( to_where != 'default' ) {
 

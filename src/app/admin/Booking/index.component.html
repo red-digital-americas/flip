@@ -16,20 +16,34 @@
                     <img 
                         src="{{ card.photo == '' ? '../../../assets/14.jpg' : card.photo }}" 
                         class="index-cards__card-photo-img" />
+                    <div class="index-cards__card-hider">
+                      <div class="index-cards__card-buttons">
+                        <button 
+                              class="index-cards__card-buttons-button button-green"
+                              (click)="goToPage('roomCatalog', card)">
+                              Rooms
+                          </button>
+                          <button 
+                              class="index-cards__card-buttons-button button-yellow"
+                              (click)="goToPage('MembershipCatalog', card)">
+                              Memberships
+                          </button>
+                      </div>
+                    </div>
                 </figure>
                 <h4 class="index-cards__card-titulo">
                     {{ card.name }}
                 </h4>
                 <div class="index-cards__card-buttons">
-                    <button 
-                        (click)="toggleSectionForm( 'edit', card )"
+                  <button 
+                        (click)="goToBooking( card.id, card.name )"
                         class="index-cards__card-buttons-button button-blue">
-                        Edit
+                        Booking
                     </button>
                     <button 
-                        (click)="goToBooking( card.id, card.name )"
+                        (click)="toggleSectionForm( 'edit', card )"
                         class="index-cards__card-buttons-button button-black">
-                        Booking
+                        Edit
                     </button>
                 </div>
             </div>

@@ -93,6 +93,12 @@ export class BookingIndexComponent implements OnInit {
 
     }
 
+    public goToPage( page: string, extra_data: any = '' ):void {
+
+        this.router.navigateByUrl( `${ page }/${ extra_data.id }` );
+
+    }
+
 
    /*
     * Autor: Carlos Hernandez

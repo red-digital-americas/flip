@@ -20,7 +20,7 @@ export class NavComponent implements OnInit {
     {title: "Newsfeed", route: "/newsfeed", selector: 'newsfeed', active: false}, 
     // {title: "Activities", route: "/activities"}, 
     {title: "Amenities", route: "/amenities", selector: 'amenities', active: false}, 
-    {title: "Reservations", route: "/reservations", selector: 'reservations', active: false},
+    //{title: "Reservations", route: "/reservations", selector: 'reservations', active: false},
     {title: "Perks", route: "/perks", selector: 'perks', active: false},
     {title: "Services", route: "/services", selector: 'services', active: false},
     //{title: "Messages", route:"/chat", selector: 'chat', active: false}

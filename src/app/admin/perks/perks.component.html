@@ -17,6 +17,10 @@
             New Perk
           </button>
         </div>
+        <div class="ml-col-1 margin-top-m font-big color-red text-center" *ngIf="perksArray?.length == 0">
+          We don't have perks yet,
+          <span class="text-underline cursor-pointer" (click)="toggleSectionForm( 'new' )">add one</span>.
+        </div>
         <div class="ap-cards__container" *ngFor="let perk of perksArray;">
           <div class="ap-cards__card ap-cards__card--bbuttonsx card-style">
             <h4 class="ap-cards__card-titulo">
