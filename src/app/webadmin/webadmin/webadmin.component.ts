@@ -8,6 +8,7 @@ import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
 import { resolve } from 'dns';
 import { LoaderComponent } from '../../../ts/loader';
 import { SystemMessage } from '../../../ts/systemMessage';
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -17,7 +18,6 @@ import { SystemMessage } from '../../../ts/systemMessage';
 })
 export class WebadminComponent implements OnInit {
 
-  
   public myModal;
   public largeModal;
   public smallModal;
@@ -66,6 +66,33 @@ export class WebadminComponent implements OnInit {
 
   public newImages: any[] = [];
 
+  titlesForm = new FormGroup({
+    home: new FormControl(),
+    about: new FormControl(),
+    design: new FormControl(),
+    more: new FormControl(),
+    btnText: new FormControl()
+  });
+  titlesObj = [
+    { id: 0, name: 'sample' },
+    { id: 1, name: 'sample' },
+    { id: 2, name: 'sample' },
+    { id: 3, name: 'sample' },
+    { id: 4, name: 'sample' }
+  ];
+  get home() { return this.titlesForm.get('home').value; }
+  get about() { return this.titlesForm.get('about').value; }
+  get design() { return this.titlesForm.get('design').value; }
+  get more() { return this.titlesForm.get('more').value; }
+  get btnText() { return this.titlesForm.get('btnText').value; }
+
+  public form_required: any = {
+    no_home: false,
+    no_about: false,
+    no_design: false,
+    no_more: false,
+    no_btn: false
+  };
 
   ngOnInit() {
     if (localStorage.getItem("user") == undefined) {
@@ -80,10 +107,71 @@ export class WebadminComponent implements OnInit {
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
       this.IDBUILD = this.route.snapshot.params['id']; 
       this.get_photos();
-      
+      this.getTitles();
 
     }
   }
+
+  getTitles() {
+    this.heroService.service_general_get('IndexTitle').subscribe((value) => {
+      console.log(value);
+      this.titlesObj = value.item;
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  updateTitles() {
+    if (this.validateForm()) {
+      this.titlesObj[0].name = this.home;
+      this.titlesObj[1].name = this.about;
+      this.titlesObj[2].name = this.design;
+      this.titlesObj[3].name = this.more;
+      this.titlesObj[4].name = this.btnText;
+      console.log(this.titlesObj);
+      this.heroService.service_general_post('IndexTitle', this.titlesObj).subscribe((value) => {
+        this.system_message.showMessage({
+          kind: 'ok',
+          message: {
+              header: 'Ok',
+              text: 'Update success'
+          },
+          time: 2000
+      });
+      }, (error) => {
+        this.system_message.showMessage({
+          kind: 'error',
+          message: {
+              header: 'Error',
+              text: error
+          },
+          time: 2000
+      });
+      });
+    }
+  }
+
+  private validateForm (): boolean {
+    let result: boolean;
+    this.form_required.no_home = this.home === '' || this.home === null ? true : false;
+    this.form_required.no_about = this.about === '' || this.about === null ? true : false;
+    this.form_required.no_design = this.design === '' || this.design === null ? true : false;
+    this.form_required.no_more = this.more === '' || this.more === null ? true : false;
+    this.form_required.no_btn = this.btnText === '' || this.btnText === null ? true : false;
+    if (!this.form_required.no_fromData &&
+        !this.form_required.no_toDate &&
+        !this.form_required.no_design &&
+        !this.form_required.no_more &&
+        !this.form_required.no_btn
+        ) {
+          console.log('true', this.form_required);
+          result = true;
+        } else {
+          console.log('false', this.form_required);
+          result = false;
+        }
+    return result;
+}
 
   get_photos() {
     // debugger;
