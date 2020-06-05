@@ -24,17 +24,17 @@
 </div>
 <div class="row">
   <h3 Class="text-ultra" style="padding-left: 55px; padding-top: 15px; padding-bottom: -55px;"> {{ namebuilding}}</h3>
-  <!-- *ngIf="this.lengthpost < 4" 
-  <div *ngIf="this.lengthpost < 4" class="ml-col-1 position-relative margin-bottom-x">
+  <!-- *ngIf="this.lengthpost < 4"  -->
+  <div *ngIf="showAdd" class="ml-col-1 position-relative margin-bottom-x">
     <button style="position: absolute;
     right: 40px;
     top: -37px;"
             data-toggle="modal" 
-            (click)="primaryModal.show(); passdata(this.post_blanck);"
+            (click)="primaryModal.show(); passdata(post_blanck);"
             class="button button-x">
             Add Ammenitie
     </button>
-  </div> -->
+  </div>
 </div>
 <div class="row padding-bottom-m padding-general-m" style="padding-top: 15px;">
   <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x" *ngFor="let post of posts, index as index;">
@@ -316,6 +316,9 @@
                 id="close_modal" 
                 (click)="primaryModal.hide(); resetImagesData();">
                 Cerrar
+              </button>
+              <button type="submit" class="btn btn-warning" (click)="deleteSlide()">
+                Eliminar
               </button>
               <button type="submit" class="btn btn-primary" (click)="updatephoto()">
                 Guardar Cambios
