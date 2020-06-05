@@ -122,7 +122,7 @@ export class RoomAvailavilityComponent implements OnInit {
     public applyFilterPeriod() {
         console.log('Active', this.active);
         console.log('this.fromDate', this.fromDate);
-        console.log('this.toDate', this.toDate)
+        console.log('this.toDate', this.toDate);
         if (this.fromDate != null || this.toDate != null) {
             console.log('VALIDATE');
             if (this.validateForm()) {
@@ -170,7 +170,8 @@ export class RoomAvailavilityComponent implements OnInit {
                 buildongId: this.buildingId,
                 roomate: this.active === null ? '' : this.active.value,
                 startDate: this.fromDate === null ? '' : this.pipe.transform(this.fromDate, 'MM/dd/yyyy'),
-                endDate: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy')
+                endDate: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy'),
+                beds: this.noBeds === null ? '' : this.noBeds
             };
             console.log(params);
             this.loader.showLoader();
