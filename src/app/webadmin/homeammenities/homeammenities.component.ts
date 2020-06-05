@@ -53,6 +53,8 @@ export class HomeammenitiesComponent implements OnInit {
   namebuilding: string = "";
   post_blanck: any;
   lengthpost: number = 0;
+  showAdd = false;
+  canDelete = false;
 
   title: string = "";
 
@@ -256,6 +258,10 @@ export class HomeammenitiesComponent implements OnInit {
             // 
             this.posts = value.item;
             this.lengthpost = this.posts.length;
+            this.showAdd = this.posts.length <= 4 ? true : false;
+            this.canDelete = this.posts.length === 1 ? false : true;
+            console.log(this.lengthpost);
+            console.log(this.canDelete);
              this.namebuilding = value.detalle;
              setTimeout( () => { this.loader.hideLoader(); }, 1277);
           }
@@ -305,8 +311,16 @@ export class HomeammenitiesComponent implements OnInit {
           this.loader.showLoader();
 
           this.heroService.ServicioPostPost("UpdateHomeAmmenities", creadoobj)
-              .subscribe( (response: any) => { 
-
+              .subscribe( (response: any) => {
+                this.post.id = 0;
+                this.post.frontphoto = '';
+                this.post.photomobile = '';
+                this.post.desc = '';
+                this.post.test = '';
+                this.post.icon = '';
+                this.post.icon2 = '';
+                this.post.build = '';
+                this.post.buildmobile = '';
                 if( response.result == 'Success' ) {
 
                   this.system_message.showMessage({
@@ -327,7 +341,15 @@ export class HomeammenitiesComponent implements OnInit {
                 }
 
               }, (error: any) => {
-
+                this.post.id = 0;
+                this.post.frontphoto = '';
+                this.post.photomobile = '';
+                this.post.desc = '';
+                this.post.test = '';
+                this.post.icon = '';
+                this.post.icon2 = '';
+                this.post.build = '';
+                this.post.buildmobile = '';
                 this.system_message.showMessage({
                   kind: 'error',
                   time: 4700,
@@ -344,7 +366,15 @@ export class HomeammenitiesComponent implements OnInit {
               });
 
         } else {
-
+          this.post.id = 0;
+          this.post.frontphoto = '';
+          this.post.photomobile = '';
+          this.post.desc = '';
+          this.post.test = '';
+          this.post.icon = '';
+          this.post.icon2 = '';
+          this.post.build = '';
+          this.post.buildmobile = '';
           this.system_message.showMessage({
             kind: 'error',
             time: 4700,
@@ -364,6 +394,74 @@ export class HomeammenitiesComponent implements OnInit {
       //}
 
     //}
+  }
+
+  deleteSlide() {
+    let creadoobj = {
+      id: this.post.id,
+      Photo: this.post.frontphoto,
+      PhotoMobile: this.post.photomobile,
+      Description: this.post.desc,
+      Title: this.post.test,
+      Icon: this.post.icon,
+      Icon2: this.post.icon2,
+      PhotoBuild: this.post.build,
+      PhotoBuilMobile: this.post.buildmobile
+    };
+
+    if (this.formValidator(this.post)) {
+      if (this.posts.length > 1) {
+        const close_modal_button = document.getElementById('close_modal');
+        this.loader.showLoader();
+        this.heroService.ServicioPostPost('DeleteHomeAmmenities', creadoobj)
+        .subscribe( (response: any) => {
+          if ( response.result === 'Success' ) {
+            this.system_message.showMessage({
+              kind: 'ok',
+              time: 4700,
+              message: {
+                header: 'Content deleted',
+                text: 'Content hast been deleted successfully'
+              }
+            });
+            this.get_photos();
+            setTimeout( () => this.loader.hideLoader(), 777);
+            close_modal_button.click();
+          }
+        }, (error: any) => {
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 4700,
+            message: {
+              header: 'Fatal Error',
+              text: error
+            }
+          });
+          setTimeout( () => this.loader.hideLoader(), 777);
+          this.get_photos();
+        });
+      } else {
+        this.system_message.showMessage({
+          kind: 'error',
+          time: 4700,
+          message: {
+            header: 'Error',
+            text: 'Can not eleminate All the slides'
+          }
+        });
+        this.sendToPageTop();
+      }
+    } else {
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 4700,
+        message: {
+          header: 'Form must be completed',
+          text: 'All inputs must be filled to continue'
+        }
+      });
+      this.sendToPageTop();
+    }
   }
 
 

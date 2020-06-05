@@ -1,6 +1,6 @@
 <div class="ml-col-1">
     <booking-navbar [section]="section"></booking-navbar>
-    <div class="ml-col-1 padding-general-m margin-bottom-m">
+    <div class="ml-col-1 padding-general-m margin-bottom-m background-white">
         <div class="ml-col-1">
             <!-- h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
                 Room avaibility list
@@ -32,7 +32,10 @@
                                       <input matInput [matDatepicker]="fromDate" placeholder="From Date" formControlName="fromDate">
                                       <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
                                       <mat-datepicker #fromDate></mat-datepicker>
-                                    </mat-form-field>                       
+                                    </mat-form-field>   
+                                    <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_fromData">
+                                        From to Date is required*
+                                    </span>                    
                                 </div>
                             </div>
                         </div>
@@ -45,6 +48,9 @@
                                       <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
                                       <mat-datepicker #toDate></mat-datepicker>
                                     </mat-form-field>
+                                    <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_toDate">
+                                        To Date is required*
+                                    </span>
                                 </div>
                             </div>
                         </div>    
@@ -64,6 +70,17 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="ml-col-4">
+                          <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <mat-form-field >
+                                    <mat-label>Beds Avaibility</mat-label>
+                                    <input matInput formControlName="noBeds" placeholder="0" type="number" min="0">
+                                </mat-form-field> 
+                            </div>
+                          </div>
+                        </div>
                     </div>
                   
                   <div class="ml-col-1">
@@ -76,49 +93,37 @@
                   </div>
     
                 </form>
-            
-            <mat-form-field style="width: 100%;">
+            <mat-form-field class="ap-form__input">
                 <mat-label>Filter</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
             </mat-form-field>
-            <table mat-table mat-sort [dataSource]="roomList" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
-                <ng-container matColumnDef="active">
-                    <th mat-header-cell *matHeaderCellDef fxFlex="40" class="table__header table__header-center">Active</th>
-                    <td mat-cell *matCellDef="let element" fxFlex="40" class="table__data table__data-center">
-                        <div *ngIf="element.active">
-                            <label class="icon-check"></label>
-                        </div>
-                        <div *ngIf="!element.active">
-                            <label class="icon-ban"></label>
-                        </div>
-                    </td>
-                </ng-container>
+            <mat-table mat-table [dataSource]="roomList" matSort class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
                 <ng-container matColumnDef="room">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Room</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Room</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.room }}</td>
                 </ng-container>
                 <ng-container matColumnDef="beds">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Beds</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Beds</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.beds }}</td>
                 </ng-container>
                 <ng-container matColumnDef="disponibility">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Occupation</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Occupation</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.disponibility + '/' + element.beds }}</td>
                 </ng-container>
                 <ng-container matColumnDef="reservationsActive">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Reservations Active</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Reservations Active</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.reservationsActive + element.disponibility }}</td>
                 </ng-container>
                 <ng-container matColumnDef="dateUnemployment">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Date Unemployment</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Date Unemployment</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.dateUnemployment }}</td>
                 </ng-container>
                 <ng-container matColumnDef="amountStanding">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Amount Standing</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Amount Standing</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.amountStanding  | currency}}</td>
                 </ng-container>
                 <ng-container matColumnDef="roomateFlip">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Roomate Flip</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Roomate Flip</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         <div *ngIf="element.roomateFlip">
                             <label class="icon-check"></label>
@@ -129,7 +134,7 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Status</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Status</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         <div *ngIf="element.status">
                             <label class="icon-check"></label>
@@ -164,7 +169,7 @@
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
+            </mat-table>
             <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
         </div>
     </div>
