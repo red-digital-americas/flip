@@ -7,6 +7,7 @@ import { Utils } from '../../utils/utils';
 import { ImageCropperModule, ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 import { SystemMessage } from '../../../ts/systemMessage';
 import { LoaderComponent } from '../../../ts/loader';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-homegeneral',
@@ -58,6 +59,33 @@ export class HomegeneralComponent implements OnInit {
   imageInputLabel = "Choose file";
   imageInputLabeltwo = "Choose file";
 
+  titlesForm = new FormGroup({
+    servicios: new FormControl(),
+    amenidades: new FormControl(),
+    rooms: new FormControl(),
+    map: new FormControl(),
+    btnText: new FormControl()
+  });
+  titlesObj = [
+    { id: 0, name: 'sample' },
+    { id: 1, name: 'sample' },
+    { id: 2, name: 'sample' },
+    { id: 3, name: 'sample' },
+    { id: 4, name: 'sample' }
+  ];
+  get servicios() { return this.titlesForm.get('servicios').value; }
+  get amenidades() { return this.titlesForm.get('amenidades').value; }
+  get rooms() { return this.titlesForm.get('rooms').value; }
+  get map() { return this.titlesForm.get('map').value; }
+  get btnText() { return this.titlesForm.get('btnText').value; }
+
+  public form_required: any = {
+    no_servicios: false,
+    no_amenidades: false,
+    no_rooms: false,
+    no_map: false,
+    no_btn: false
+  };
 
   comment: string = "";
 
@@ -84,10 +112,72 @@ export class HomegeneralComponent implements OnInit {
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
       this.IDBUILD = parseInt(this.route.snapshot.params['id']); 
       this.get_photos();
-      
+      this.getTitles();
 
     }
   }
+
+  getTitles() {
+    this.heroService.service_general_get('Post/GetHomeGeneralTitles').subscribe((value) => {
+      console.log(value);
+      this.titlesObj = value.item;
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  updateTitles() {
+    if (this.validateForm()) {
+      this.titlesObj[0].name = this.servicios;
+      this.titlesObj[1].name = this.amenidades;
+      this.titlesObj[2].name = this.rooms;
+      this.titlesObj[3].name = this.map;
+      this.titlesObj[4].name = this.btnText;
+      console.log(this.titlesObj);
+      this.heroService.service_general_post('Post/UpdateHomeGeneralTitles', this.titlesObj).subscribe((value) => {
+        this.system_message.showMessage({
+          kind: 'ok',
+          message: {
+              header: 'Ok',
+              text: 'Update success'
+          },
+          time: 2000
+      });
+      }, (error) => {
+        this.system_message.showMessage({
+          kind: 'error',
+          message: {
+              header: 'Error',
+              text: error
+          },
+          time: 2000
+      });
+      });
+    }
+  }
+
+  private validateForm(): boolean {
+    let result: boolean;
+    this.form_required.no_servicios = this.servicios === '' || this.servicios === null ? true : false;
+    this.form_required.no_amenidades = this.amenidades === '' || this.amenidades === null ? true : false;
+    this.form_required.no_rooms = this.rooms === '' || this.rooms === null ? true : false;
+    this.form_required.no_map = this.map === '' || this.map === null ? true : false;
+    this.form_required.no_btn = this.btnText === '' || this.btnText === null ? true : false;
+    if (!this.form_required.no_servicios &&
+      !this.form_required.no_amenidades &&
+      !this.form_required.no_rooms &&
+      !this.form_required.no_map &&
+      !this.form_required.no_btn
+    ) {
+      console.log('true', this.form_required);
+      result = true;
+    } else {
+      console.log('false', this.form_required);
+      result = false;
+    }
+    return result;
+  }
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
   showCropper = false;

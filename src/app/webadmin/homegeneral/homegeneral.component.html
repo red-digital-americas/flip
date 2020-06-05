@@ -35,6 +35,87 @@
   </div>
 </div>
 <div class="row padding-bottom-m padding-general-m" style="padding-top: 15px;">
+  <div class="ml-col-1">
+    <form class="ap-form__titulo ap-form__titulo" [formGroup]="titlesForm">
+      
+      <div class="ml-col-4">
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+              <mat-form-field >
+                  <mat-label>Services</mat-label>
+                  <input matInput formControlName="servicios" placeholder="Example Service" type="text" [(ngModel)]="titlesObj[0].name">
+              </mat-form-field> 
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_servicios">
+                Service is required*
+              </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ml-col-4">
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+              <mat-form-field >
+                  <mat-label>Ammenities</mat-label>
+                  <input matInput formControlName="amenidades" placeholder="Example Ammenities" type="text" [(ngModel)]="titlesObj[1].name">
+              </mat-form-field> 
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_amenidades">
+                Ammenities is required*
+              </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ml-col-4">
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+              <mat-form-field >
+                  <mat-label>Rooms</mat-label>
+                  <input matInput formControlName="rooms" placeholder="Example Rooms" type="text" [(ngModel)]="titlesObj[2].name">
+              </mat-form-field> 
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_rooms">
+                Rooms is required*
+              </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ml-col-4">
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+              <mat-form-field >
+                  <mat-label>Map</mat-label>
+                  <input matInput formControlName="map" placeholder="Example Map" type="text" [(ngModel)]="titlesObj[3].name">
+              </mat-form-field> 
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_map">
+                Map is required*
+              </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ml-col-4">
+        <div class="ml-col-1">
+          <div class="ap-form__input">
+              <mat-form-field >
+                  <mat-label>Button Text</mat-label>
+                  <input matInput formControlName="btnText" placeholder="Example Text buttin" type="text" [(ngModel)]="titlesObj[4].name">
+              </mat-form-field> 
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_">
+                Button Text is required*
+              </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ml-col-4">
+        <div class="ml-col-1">
+          <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="updateTitles()">Update</button>
+        </div>         
+      </div>
+
+    </form>
+  </div>
   <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x" *ngFor="let post of posts, index as index;">
     <div class="ml-col-1">
       <div class="card__info margin-bottom-x" style="height: auto !important;">
