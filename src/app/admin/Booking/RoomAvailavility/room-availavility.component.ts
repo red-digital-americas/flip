@@ -56,12 +56,19 @@ export class RoomAvailavilityComponent implements OnInit {
     filterForm = new FormGroup({
         fromDate: new FormControl(),
         toDate: new FormControl(),
-        active: new FormControl()
+        active: new FormControl(),
+        noBeds: new FormControl()
     });
     pipe: DatePipe;
     get fromDate() { return this.filterForm.get('fromDate').value; }
     get toDate() { return this.filterForm.get('toDate').value; }
     get active() { return this.filterForm.get('active').value; }
+    get noBeds() { return this.filterForm.get('noBeds').value; }
+
+    public form_required: any = {
+        no_fromData: false,
+        no_toDate: false
+      };
 
     ngOnInit() {
         this.section = 'roomAvailavility';
@@ -114,40 +121,108 @@ export class RoomAvailavilityComponent implements OnInit {
 
     public applyFilterPeriod() {
         console.log('Active', this.active);
-        const params = {
-            buildongId: this.buildingId,
-            roomate: this.active === null ? '' : this.active.value,
-            startDate: this.fromDate === null ? '' : this.pipe.transform(this.fromDate, 'MM/dd/yyyy'),
-            endDate: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy')
-        };
-        console.log(params);
-        this.loader.showLoader();
-        this._services.service_general_get_with_params('Room/getAvailabilityRoom', params)
-            .subscribe((response: any) => {
-                this.loader.hideLoader();
-                if (response.result === 'Success') {
-                    this.roomList = new MatTableDataSource(response.item);
-                    this.roomList.paginator = this.paginator;
-                    this.roomList.sort = this.sort;
-                    console.log('List => ', response.item);
-                }
-            }, (error: any) => {
-                this.loader.hideLoader();
-                console.log('Error GetList => ', error);
-                this.systemMessage.showMessage({
-                    kind: 'error',
-                    message: {
-                        header: 'Error',
-                        text: error
-                    },
-                    time: 2000
+        console.log('this.fromDate', this.fromDate);
+        console.log('this.toDate', this.toDate)
+        if (this.fromDate != null || this.toDate != null) {
+            console.log('VALIDATE');
+            if (this.validateForm()) {
+                const params = {
+                    buildongId: this.buildingId,
+                    roomate: this.active === null ? '' : this.active.value,
+                    startDate: this.fromDate === null ? '' : this.pipe.transform(this.fromDate, 'MM/dd/yyyy'),
+                    endDate: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy'),
+                    beds: this.noBeds === null ? '' : this.noBeds
+                };
+                console.log(params);
+                this.loader.showLoader();
+                this._services.service_general_get_with_params('Room/getAvailabilityRoom', params)
+                    .subscribe((response: any) => {
+                        this.loader.hideLoader();
+                        this.filterForm.reset();
+                        this.form_required.no_fromData = false;
+                        this.form_required.no_toDate = false;
+                        if (response.result === 'Success') {
+                            this.roomList = new MatTableDataSource(response.item);
+                            this.roomList.paginator = this.paginator;
+                            this.roomList.sort = this.sort;
+                            console.log('List => ', response.item);
+                        }
+                    }, (error: any) => {
+                        this.loader.hideLoader();
+                        console.log('Error GetList => ', error);
+                        this.filterForm.reset();
+                        this.form_required.no_fromData = false;
+                        this.form_required.no_toDate = false;
+                        this.systemMessage.showMessage({
+                            kind: 'error',
+                            message: {
+                                header: 'Error',
+                                text: error
+                            },
+                            time: 2000
+                        });
+                    });
+            } else {
+                return;
+            }
+        } else {
+            const params = {
+                buildongId: this.buildingId,
+                roomate: this.active === null ? '' : this.active.value,
+                startDate: this.fromDate === null ? '' : this.pipe.transform(this.fromDate, 'MM/dd/yyyy'),
+                endDate: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy')
+            };
+            console.log(params);
+            this.loader.showLoader();
+            this._services.service_general_get_with_params('Room/getAvailabilityRoom', params)
+                .subscribe((response: any) => {
+                    this.loader.hideLoader();
+                    this.filterForm.reset();
+                    this.form_required.no_fromData = false;
+                    this.form_required.no_toDate = false;
+                    if (response.result === 'Success') {
+                        this.roomList = new MatTableDataSource(response.item);
+                        this.roomList.paginator = this.paginator;
+                        this.roomList.sort = this.sort;
+                        console.log('List => ', response.item);
+                    }
+                }, (error: any) => {
+                    this.loader.hideLoader();
+                    this.filterForm.reset();
+                    this.form_required.no_fromData = false;
+                    this.form_required.no_toDate = false;
+                    console.log('Error GetList => ', error);
+                    this.systemMessage.showMessage({
+                        kind: 'error',
+                        message: {
+                            header: 'Error',
+                            text: error
+                        },
+                        time: 2000
+                    });
                 });
-            });
+        }
     }
 
     public resetForm() {
         this.filterForm.reset();
         this.getRoomList(this.buildingId);
+    }
+
+    private validateForm (): boolean {
+        let result: boolean;
+        this.form_required.no_fromData = this.fromDate === '' || this.fromDate === null ? true : false;
+        this.form_required.no_toDate = this.toDate === '' || this.toDate === null ? true : false;
+        if (!this.form_required.no_fromData &&
+            !this.form_required.no_toDate
+            ) {
+              console.log('true', this.form_required);
+              result = true;
+            } else {
+              console.log('false', this.form_required);
+              result = false;
+            }
+        return result;
     }
 
 }
