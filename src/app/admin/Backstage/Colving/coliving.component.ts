@@ -119,8 +119,7 @@ import { DomSanitizer } from '@angular/platform-browser';
                 if( response.result == 'Success' ) {
 
                     this.back_stage_data_array = response.item;
-                    console.log("====== BACK")
-                    console.log(response);
+                    console.log('Slides => ', this.back_stage_data_array);
                 }
 
             }, (error: any) => {
@@ -141,7 +140,19 @@ import { DomSanitizer } from '@angular/platform-browser';
 
     passdata( post:any ){
 
-        this.resetImagesData();
+      this.resetImagesData();
+
+      if( post == 'new' ) {
+
+        this.back_stage_data.id = 0;
+        this.back_stage_data.description = '';
+        this.back_stage_data.icon2 = '';
+        this.back_stage_data.titleIcon = '';
+        this.back_stage_data.icon = '';
+        this.back_stage_data.photoMobileSlider = '';
+        this.back_stage_data.photoSlider = '';
+
+      } else {
 
         this.back_stage_data.id = post.id;
         this.back_stage_data.description= post.description;
@@ -150,6 +161,8 @@ import { DomSanitizer } from '@angular/platform-browser';
         this.back_stage_data.icon= post.icon;
         this.back_stage_data.photoMobileSlider= post.photoMobileSlider;
         this.back_stage_data.photoSlider= post.photoSlider;
+
+      }
     
     }
 
@@ -469,8 +482,6 @@ debugger;
 
 
 }
-
-
 
 class BackStageModel {
     id: number;

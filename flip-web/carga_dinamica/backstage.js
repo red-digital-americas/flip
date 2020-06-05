@@ -51,6 +51,7 @@ $(document).ready(function () {
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
     });
 
+    /*
     $.ajax({
         type: 'POST',
         url: urlbase_api +"Post/SeeBackstageWhatIs",
@@ -265,7 +266,7 @@ $(document).ready(function () {
             });
         }, 
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
-    });
+    });*/
 
     $.ajax({
         type: 'POST',
@@ -296,3 +297,38 @@ function change_image_movil(item) {
     //Imagen que cambia 
     $("#amenidadesrightimgm1").attr("src", respuesta.item[item].buildmobile);
 }
+
+
+function getBackstageData() {
+
+    const xhttp = new XMLHttpRequest(),
+        ws_data = {
+            id: 1
+        };
+
+        xhttp.onreadystatechange = function( response ) {
+
+            const result = response.target;
+
+            if( result.readyState == 4 && result.status == 200 ) {
+
+                const ws_data = JSON.response( result.response );
+                
+                createContentForWhatIsColiving( ws_data );
+
+            }
+
+        }
+        xhttp.open('POST','http://34.237.214.147/back/api_flip/api/Post/SeeBackstageWhatIs', true);
+        xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+        xhttp.send( JSON.stringify( ws_data ) );
+
+}
+
+function createContentForWhatIsColiving( data_content ) {
+
+    console.log(data_content);
+
+}
+
+getBackstageData();
