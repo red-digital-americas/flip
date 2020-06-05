@@ -936,9 +936,10 @@
                 .small_card:nth-last-child(4),
                 .small_card:nth-last-child(5),
                 .small_card:nth-last-child(6),
-                .small_card:nth-child(4) {
+                
+                /* .small_card:nth-child(4) {
                     display: none;
-                }
+                } */
 
                 .main {
                     display: flex;
@@ -1234,8 +1235,8 @@
 
                
 
-            ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeIndex'}).then( cards => { 
-
+            ajaxRequest({where_to_go: 'http://localhost:49314/api/Post/SeeIndex'}).then( cards => { 
+                console.log('DATA', cards);
                 function cardSettings( card_id ) {
 
                     let the_title = '',
@@ -1245,13 +1246,13 @@
                     switch( card_id ) {
 
                         case 3:
-                         the_title = 'Homes';
+                         the_title = cards.titles[0].name;
                          the_id = 'id="home_section"';
                          a_class = 'cursor-pointer'; 
                          break;
 
                         case 6:
-                         the_title = 'About';
+                         the_title = cards.titles[1].name;
                          the_id = 'id="about_section"';
                          a_class = 'cursor-pointer';
                          break;
@@ -1266,12 +1267,12 @@
                          break;
 
                         case 10:
-                         the_title = 'Desing';
+                         the_title = cards.titles[2].name;
                          the_id = 'id="desing_section"';
                          break;
 
                         case 13:
-                         the_title = 'More';
+                         the_title = cards.titles[3].name;
                          the_id = 'id="more_section"';
                          break;
 
@@ -1321,7 +1322,7 @@
                         class: 'label__button label__button--black',
                         id: 'find_my_home_button',
                         style: '',
-                        text: 'Find My Home' 
+                        text: cards.titles[4].name 
                     })
                 );
 
@@ -1873,9 +1874,9 @@
                         if( window.getComputedStyle(small_card[card], null).getPropertyValue("display") == 'block' ) {
 
                             small_card[card].style.order = card;    
-                            home_section.parentElement.style.order = '0';
+                            // home_section.parentElement.style.order = '0';
                             show_video_button.parentElement.style.order = '0'; 
-                            //desing_section.parentElement.style.order = '5';
+                            desing_section.parentElement.style.order = '5';
 
                         }
 

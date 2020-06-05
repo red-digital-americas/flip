@@ -16,7 +16,7 @@ $(document).ready(function () {
     $.ajax({
         type: 'POST',
         url: urlbase_api +"Post/SeeHomeGeneral",
-       // url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeGeneral",
+        url: "http://localhost:49314/api/Post/SeeHomeGeneral",
         data: JSON.stringify({ buildingid: buildingid, userid: 1 }),
         contentType: "application/json",
         dataType: "text",
@@ -40,6 +40,12 @@ $(document).ready(function () {
             $("#img-altata-03").attr("src", respuesta.item[3].frontphoto);
             $("#img-maltata-03").attr("src", respuesta.item[3].photomobile);
             $("#p-altata-03").text(respuesta.item[3].desc);
+
+            $('#textmenuamenidades').text(respuesta.titles[1].name);
+            $('#serviceTxt').text(respuesta.titles[0].name);
+            $('#roomsTxt').text(respuesta.titles[2].name);
+            $('#mapTXT').text(respuesta.titles[3].name)
+            $('#btnYellowTXT').text(espuesta.titles[3].name);
 
         },
         error: function (jqXHR, textStatus, errorThrown) { 
@@ -65,240 +71,310 @@ $(document).ready(function () {
             //$("#img-altata-00").attr("src", respuesta.item[0].build);
             //$("#img-maltata-00").attr("src", respuesta.item[0].buildmobile);
             //IMAGENES
-            $("#img-altata-amenities-00").attr("src", respuesta.item[0].frontphoto);
-            $("#img-altata-amenities-01").attr("src", respuesta.item[1].frontphoto);
-            $("#img-altata-amenities-02").attr("src", respuesta.item[2].frontphoto);
-            $("#img-altata-amenities-03").attr("src", respuesta.item[3].frontphoto);
-            $("#img-altata-amenities-04").attr("src", respuesta.item[4].frontphoto);
-
-            //ICONOS 1
-            $("#amenidadesrightimg1").attr("src", respuesta.item[0].build);
-            $("#amenidadesrightimgm1").attr("src", respuesta.item[0].buildmobile);
-            
-            $("#icon-altata-amenities-slide-00").attr("src", respuesta.item[0].icon);
-            $("#icon-altata-amenities-slide-00").mouseover(function () {
-                $("#icon-altata-amenities-slide-00").attr("src", respuesta.item[0].icon2);
-            });
-            $("#icon-altata-amenities-slide-00").mouseout(function () {
+            if (typeof respuesta.item[0] !== 'undefined') {
+                $("#img-altata-amenities-00").attr("src", respuesta.item[0].frontphoto);
+                
+                $("#amenidadesrightimg1").attr("src", respuesta.item[0].build);
+                $("#amenidadesrightimgm1").attr("src", respuesta.item[0].buildmobile);
+                
                 $("#icon-altata-amenities-slide-00").attr("src", respuesta.item[0].icon);
-            });
+                $("#icon-altata-amenities-slide-00").mouseover(function () {
+                    $("#icon-altata-amenities-slide-00").attr("src", respuesta.item[0].icon2);
+                });
+                $("#icon-altata-amenities-slide-00").mouseout(function () {
+                    $("#icon-altata-amenities-slide-00").attr("src", respuesta.item[0].icon);
+                });
 
-            $("#icon-altata-amenities-slide-01").attr("src", respuesta.item[1].icon);
-            $("#icon-altata-amenities-slide-01").mouseover(function () {
-                $("#icon-altata-amenities-slide-01").attr("src", respuesta.item[1].icon2);
-            });
-            $("#icon-altata-amenities-slide-01").mouseout(function () {
-                $("#icon-altata-amenities-slide-01").attr("src", respuesta.item[1].icon);
-            });
-
-            $("#icon-altata-amenities-slide-02").attr("src", respuesta.item[2].icon);
-            $("#icon-altata-amenities-slide-02").mouseover(function () {
-                $("#icon-altata-amenities-slide-02").attr("src", respuesta.item[2].icon2);
-            });
-            $("#icon-altata-amenities-slide-02").mouseout(function () {
-                $("#icon-altata-amenities-slide-02").attr("src", respuesta.item[2].icon);
-            });
-
-            $("#icon-altata-amenities-slide-03").attr("src", respuesta.item[3].icon);
-            $("#icon-altata-amenities-slide-03").mouseover(function () {
-                $("#icon-altata-amenities-slide-03").attr("src", respuesta.item[3].icon2);
-            });
-            $("#icon-altata-amenities-slide-03").mouseout(function () {
-                $("#icon-altata-amenities-slide-03").attr("src", respuesta.item[3].icon);
-            });
-
-            $("#icon-altata-amenities-slide-04").attr("src", respuesta.item[4].icon);
-            $("#icon-altata-amenities-slide-04").mouseover(function () {
-                $("#icon-altata-amenities-slide-04").attr("src", respuesta.item[4].icon2);
-            });
-            $("#icon-altata-amenities-slide-04").mouseout(function () {
-                $("#icon-altata-amenities-slide-04").attr("src", respuesta.item[4].icon);
-            });
-
-            $("#icon-altata-amenities-slide-05").attr("src", respuesta.item[0].icon);
-            $("#icon-altata-amenities-slide-05").mouseover(function () {
-                $("#icon-altata-amenities-slide-05").attr("src", respuesta.item[0].icon2);
-            });
-            $("#icon-altata-amenities-slide-05").mouseout(function () {
                 $("#icon-altata-amenities-slide-05").attr("src", respuesta.item[0].icon);
-            });
+                $("#icon-altata-amenities-slide-05").mouseover(function () {
+                    $("#icon-altata-amenities-slide-05").attr("src", respuesta.item[0].icon2);
+                });
+                $("#icon-altata-amenities-slide-05").mouseout(function () {
+                    $("#icon-altata-amenities-slide-05").attr("src", respuesta.item[0].icon);
+                });
 
-            $("#icon-altata-amenities-slide-06").attr("src", respuesta.item[1].icon);
-            $("#icon-altata-amenities-slide-06").mouseover(function () {
-                $("#icon-altata-amenities-slide-06").attr("src", respuesta.item[1].icon2);
-            });
-            $("#icon-altata-amenities-slide-06").mouseout(function () {
-                $("#icon-altata-amenities-slide-06").attr("src", respuesta.item[1].icon);
-            });
-
-            $("#icon-altata-amenities-slide-07").attr("src", respuesta.item[2].icon);
-            $("#icon-altata-amenities-slide-07").mouseover(function () {
-                $("#icon-altata-amenities-slide-07").attr("src", respuesta.item[2].icon2);
-            });
-            $("#icon-altata-amenities-slide-07").mouseout(function () {
-                $("#icon-altata-amenities-slide-07").attr("src", respuesta.item[2].icon);
-            });
-
-            $("#icon-altata-amenities-slide-08").attr("src", respuesta.item[3].icon);
-            $("#icon-altata-amenities-slide-08").mouseover(function () {
-                $("#icon-altata-amenities-slide-08").attr("src", respuesta.item[3].icon2);
-            });
-            $("#icon-altata-amenities-slide-08").mouseout(function () {
-                $("#icon-altata-amenities-slide-08").attr("src", respuesta.item[3].icon);
-            });
-
-            $("#icon-altata-amenities-slide-09").attr("src", respuesta.item[4].icon);
-            $("#icon-altata-amenities-slide-09").mouseover(function () {
-                $("#icon-altata-amenities-slide-09").attr("src", respuesta.item[4].icon2);
-            });
-            $("#icon-altata-amenities-slide-09").mouseout(function () {
-                $("#icon-altata-amenities-slide-09").attr("src", respuesta.item[4].icon);
-            });
-
-            $("#icon-altata-amenities-slide-10").attr("src", respuesta.item[0].icon);
-            $("#icon-altata-amenities-slide-10").mouseover(function () {
-                $("#icon-altata-amenities-slide-10").attr("src", respuesta.item[0].icon2);
-            });
-            $("#icon-altata-amenities-slide-10").mouseout(function () {
-                $("#icon-altata-amenities-slide-10").attr("src", respuesta.item[0].icon);
-            });
-
-            $("#icon-altata-amenities-slide-11").attr("src", respuesta.item[1].icon);
-            $("#icon-altata-amenities-slide-11").mouseover(function () {
-                $("#icon-altata-amenities-slide-11").attr("src", respuesta.item[1].icon2);
-            });
-            $("#icon-altata-amenities-slide-11").mouseout(function () {
-                $("#icon-altata-amenities-slide-11").attr("src", respuesta.item[1].icon);
-            });
-
-            $("#icon-altata-amenities-slide-12").attr("src", respuesta.item[2].icon);
-            $("#icon-altata-amenities-slide-012").mouseover(function () {
-                $("#icon-altata-amenities-slide-12").attr("src", respuesta.item[2].icon2);
-            });
-            $("#icon-altata-amenities-slide-12").mouseout(function () {
-                $("#icon-altata-amenities-slide-12").attr("src", respuesta.item[2].icon);
-            });
-
-            $("#icon-altata-amenities-slide-13").attr("src", respuesta.item[3].icon);
-            $("#icon-altata-amenities-slide-13").mouseover(function () {
-                $("#icon-altata-amenities-slide-13").attr("src", respuesta.item[3].icon2);
-            });
-            $("#icon-altata-amenities-slide-13").mouseout(function () {
-                $("#icon-altata-amenities-slide-13").attr("src", respuesta.item[3].icon);
-            });
-
-            $("#icon-altata-amenities-slide-14").attr("src", respuesta.item[4].icon);
-            $("#icon-altata-amenities-slide-14").mouseover(function () {
-                $("#icon-altata-amenities-slide-14").attr("src", respuesta.item[4].icon2);
-            });
-            $("#icon-altata-amenities-slide-14").mouseout(function () {
-                $("#icon-altata-amenities-slide-14").attr("src", respuesta.item[4].icon);
-            });
-
-            $("#icon-altata-amenities-slide-15").attr("src", respuesta.item[0].icon);
-            $("#icon-altata-amenities-slide-15").mouseover(function () {
-                $("#icon-altata-amenities-slide-15").attr("src", respuesta.item[0].icon2);
-            });
-            $("#icon-altata-amenities-slide-15").mouseout(function () {
                 $("#icon-altata-amenities-slide-15").attr("src", respuesta.item[0].icon);
-            });
+                $("#icon-altata-amenities-slide-15").mouseover(function () {
+                    $("#icon-altata-amenities-slide-15").attr("src", respuesta.item[0].icon2);
+                });
+                $("#icon-altata-amenities-slide-15").mouseout(function () {
+                    $("#icon-altata-amenities-slide-15").attr("src", respuesta.item[0].icon);
+                });
 
-            $("#icon-altata-amenities-slide-16").attr("src", respuesta.item[1].icon);
-            $("#icon-altata-amenities-slide-16").mouseover(function () {
-                $("#icon-altata-amenities-slide-16").attr("src", respuesta.item[1].icon2);
-            });
-            $("#icon-altata-amenities-slide-16").mouseout(function () {
-                $("#icon-altata-amenities-slide-16").attr("src", respuesta.item[1].icon);
-            });
+                $("#icon-altata-amenities-slide-10").attr("src", respuesta.item[0].icon);
+                $("#icon-altata-amenities-slide-10").mouseover(function () {
+                    $("#icon-altata-amenities-slide-10").attr("src", respuesta.item[0].icon2);
+                });
+                $("#icon-altata-amenities-slide-10").mouseout(function () {
+                    $("#icon-altata-amenities-slide-10").attr("src", respuesta.item[0].icon);
+                });
 
-            $("#icon-altata-amenities-slide-17").attr("src", respuesta.item[2].icon);
-            $("#icon-altata-amenities-slide-17").mouseover(function () {
-                $("#icon-altata-amenities-slide-17").attr("src", respuesta.item[2].icon2);
-            });
-            $("#icon-altata-amenities-slide-17").mouseout(function () {
-                $("#icon-altata-amenities-slide-17").attr("src", respuesta.item[2].icon);
-            });
-
-            $("#icon-altata-amenities-slide-18").attr("src", respuesta.item[3].icon);
-            $("#icon-altata-amenities-slide-18").mouseover(function () {
-                $("#icon-altata-amenities-slide-18").attr("src", respuesta.item[3].icon2);
-            });
-            $("#icon-altata-amenities-slide-18").mouseout(function () {
-                $("#icon-altata-amenities-slide-18").attr("src", respuesta.item[3].icon);
-            });
-
-            $("#icon-altata-amenities-slide-19").attr("src", respuesta.item[4].icon);
-            $("#icon-altata-amenities-slide-19").mouseover(function () {
-                $("#icon-altata-amenities-slide-19").attr("src", respuesta.item[4].icon2);
-            });
-            $("#icon-altata-amenities-slide-19").mouseout(function () {
-                $("#icon-altata-amenities-slide-19").attr("src", respuesta.item[4].icon);
-            });
-
-            $("#icon-altata-amenities-slide-20").attr("src", respuesta.item[0].icon);
-            $("#icon-altata-amenities-slide-20").mouseover(function () {
-                $("#icon-altata-amenities-slide-20").attr("src", respuesta.item[0].icon2);
-            });
-            $("#icon-altata-amenities-slide-20").mouseout(function () {
                 $("#icon-altata-amenities-slide-20").attr("src", respuesta.item[0].icon);
-            });
+                $("#icon-altata-amenities-slide-20").mouseover(function () {
+                    $("#icon-altata-amenities-slide-20").attr("src", respuesta.item[0].icon2);
+                });
+                $("#icon-altata-amenities-slide-20").mouseout(function () {
+                    $("#icon-altata-amenities-slide-20").attr("src", respuesta.item[0].icon);
+                });
 
-            $("#icon-altata-amenities-slide-21").attr("src", respuesta.item[1].icon);
-            $("#icon-altata-amenities-slide-21").mouseover(function () {
-                $("#icon-altata-amenities-slide-21").attr("src", respuesta.item[1].icon2);
-            });
-            $("#icon-altata-amenities-slide-21").mouseout(function () {
+                $("#p-altata-desc-00").text(respuesta.item[0].desc);
+                $("#p-altata-amenities-title-00").text(respuesta.item[0].title);
+                $("#img-maltata-amenities-slide-00").attr("src", respuesta.item[0].photomobile);
+             } else {
+                $('#img-altata-amenities-00').remove();
+                $("#amenidadesrightimg1").remove();
+                $("#amenidadesrightimgm1").remove();
+                $("#icon-altata-amenities-slide-00").remove();
+                $("#icon-altata-amenities-slide-05").remove();
+                $("#icon-altata-amenities-slide-15").remove();
+                $("#icon-altata-amenities-slide-10").remove();
+                $("#icon-altata-amenities-slide-20").remove();
+                $("#p-altata-desc-00").remove();
+                $("#p-altata-amenities-title-00").remove();
+                $("#img-maltata-amenities-slide-00").remove();
+                $('#slideAmenities0').remove()
+             }
+            
+            if (typeof respuesta.item[1] !== 'undefined') {
+                $("#img-altata-amenities-01").attr("src", respuesta.item[1].frontphoto);
+                
+                $("#icon-altata-amenities-slide-01").attr("src", respuesta.item[1].icon);
+                $("#icon-altata-amenities-slide-01").mouseover(function () {
+                    $("#icon-altata-amenities-slide-01").attr("src", respuesta.item[1].icon2);
+                });
+                $("#icon-altata-amenities-slide-01").mouseout(function () {
+                    $("#icon-altata-amenities-slide-01").attr("src", respuesta.item[1].icon);
+                });
+
+                $("#icon-altata-amenities-slide-06").attr("src", respuesta.item[1].icon);
+                $("#icon-altata-amenities-slide-06").mouseover(function () {
+                    $("#icon-altata-amenities-slide-06").attr("src", respuesta.item[1].icon2);
+                });
+                $("#icon-altata-amenities-slide-06").mouseout(function () {
+                    $("#icon-altata-amenities-slide-06").attr("src", respuesta.item[1].icon);
+                });
+
+                $("#icon-altata-amenities-slide-11").attr("src", respuesta.item[1].icon);
+                $("#icon-altata-amenities-slide-11").mouseover(function () {
+                    $("#icon-altata-amenities-slide-11").attr("src", respuesta.item[1].icon2);
+                });
+                $("#icon-altata-amenities-slide-11").mouseout(function () {
+                    $("#icon-altata-amenities-slide-11").attr("src", respuesta.item[1].icon);
+                });
+
+                $("#icon-altata-amenities-slide-16").attr("src", respuesta.item[1].icon);
+                $("#icon-altata-amenities-slide-16").mouseover(function () {
+                    $("#icon-altata-amenities-slide-16").attr("src", respuesta.item[1].icon2);
+                });
+                $("#icon-altata-amenities-slide-16").mouseout(function () {
+                    $("#icon-altata-amenities-slide-16").attr("src", respuesta.item[1].icon);
+                });
+
                 $("#icon-altata-amenities-slide-21").attr("src", respuesta.item[1].icon);
-            });
+                $("#icon-altata-amenities-slide-21").mouseover(function () {
+                    $("#icon-altata-amenities-slide-21").attr("src", respuesta.item[1].icon2);
+                });
+                $("#icon-altata-amenities-slide-21").mouseout(function () {
+                    $("#icon-altata-amenities-slide-21").attr("src", respuesta.item[1].icon);
+                });
 
-            $("#icon-altata-amenities-slide-22").attr("src", respuesta.item[2].icon);
-            $("#icon-altata-amenities-slide-22").mouseover(function () {
-                $("#icon-altata-amenities-slide-22").attr("src", respuesta.item[2].icon2);
-            });
-            $("#icon-altata-amenities-slide-22").mouseout(function () {
+                $("#p-altata-amenities-title-01").text(respuesta.item[1].title);
+                $("#p-altata-desc-01").text(respuesta.item[1].desc);
+                $("#img-maltata-amenities-slide-01").attr("src", respuesta.item[1].photomobile);
+            } else {
+                $("#img-altata-amenities-01").remove();
+                $("#icon-altata-amenities-slide-01").remove();
+                $("#icon-altata-amenities-slide-06").remove();
+                $("#icon-altata-amenities-slide-11").remove();
+                $("#icon-altata-amenities-slide-16").remove();
+                $("#icon-altata-amenities-slide-21").remove();
+                $("#p-altata-amenities-title-01").remove();
+                $("#p-altata-desc-01").remove();
+                $("#img-maltata-amenities-slide-01").remove();
+                $('#slideAmenities1').remove()
+            }
+            
+            if (typeof respuesta.item[2] !== 'undefined') {
+                $("#img-altata-amenities-02").attr("src", respuesta.item[2].frontphoto);
+
+                $("#icon-altata-amenities-slide-02").attr("src", respuesta.item[2].icon);
+                $("#icon-altata-amenities-slide-02").mouseover(function () {
+                    $("#icon-altata-amenities-slide-02").attr("src", respuesta.item[2].icon2);
+                });
+                $("#icon-altata-amenities-slide-02").mouseout(function () {
+                    $("#icon-altata-amenities-slide-02").attr("src", respuesta.item[2].icon);
+                });
+
+                $("#icon-altata-amenities-slide-07").attr("src", respuesta.item[2].icon);
+                $("#icon-altata-amenities-slide-07").mouseover(function () {
+                    $("#icon-altata-amenities-slide-07").attr("src", respuesta.item[2].icon2);
+                });
+                $("#icon-altata-amenities-slide-07").mouseout(function () {
+                    $("#icon-altata-amenities-slide-07").attr("src", respuesta.item[2].icon);
+                });
+
+                $("#icon-altata-amenities-slide-12").attr("src", respuesta.item[2].icon);
+                $("#icon-altata-amenities-slide-012").mouseover(function () {
+                    $("#icon-altata-amenities-slide-12").attr("src", respuesta.item[2].icon2);
+                });
+                $("#icon-altata-amenities-slide-12").mouseout(function () {
+                    $("#icon-altata-amenities-slide-12").attr("src", respuesta.item[2].icon);
+                });
+
+                $("#icon-altata-amenities-slide-17").attr("src", respuesta.item[2].icon);
+                $("#icon-altata-amenities-slide-17").mouseover(function () {
+                    $("#icon-altata-amenities-slide-17").attr("src", respuesta.item[2].icon2);
+                });
+                $("#icon-altata-amenities-slide-17").mouseout(function () {
+                    $("#icon-altata-amenities-slide-17").attr("src", respuesta.item[2].icon);
+                });
+
                 $("#icon-altata-amenities-slide-22").attr("src", respuesta.item[2].icon);
-            });
+                $("#icon-altata-amenities-slide-22").mouseover(function () {
+                    $("#icon-altata-amenities-slide-22").attr("src", respuesta.item[2].icon2);
+                });
+                $("#icon-altata-amenities-slide-22").mouseout(function () {
+                    $("#icon-altata-amenities-slide-22").attr("src", respuesta.item[2].icon);
+                });
 
-            $("#icon-altata-amenities-slide-23").attr("src", respuesta.item[3].icon);
-            $("#icon-altata-amenities-slide-23").mouseover(function () {
-                $("#icon-altata-amenities-slide-23").attr("src", respuesta.item[3].icon2);
-            });
-            $("#icon-altata-amenities-slide-23").mouseout(function () {
+                $("#p-altata-desc-02").text(respuesta.item[2].desc);
+                $("#p-altata-amenities-title-02").text(respuesta.item[2].title);
+                $("#img-maltata-amenities-slide-02").attr("src", respuesta.item[2].photomobile);
+            } else {
+                $("#img-altata-amenities-02").remove();
+                $("#icon-altata-amenities-slide-02").remove();
+                $("#icon-altata-amenities-slide-07").remove();
+                $("#icon-altata-amenities-slide-12").remove();
+                $("#icon-altata-amenities-slide-17").remove();
+                $("#icon-altata-amenities-slide-22").remove();
+                $("#p-altata-desc-02").remove();
+                $("#p-altata-amenities-title-02").remove();
+                $("#img-maltata-amenities-slide-02").remove();
+                $('#slideAmenities2').remove()
+            }
+
+            if (typeof respuesta.item[3] !== 'undefined') {
+                $("#img-altata-amenities-03").attr("src", respuesta.item[3].frontphoto);
+                //ICONOS 1
+                $("#icon-altata-amenities-slide-03").attr("src", respuesta.item[3].icon);
+                $("#icon-altata-amenities-slide-03").mouseover(function () {
+                    $("#icon-altata-amenities-slide-03").attr("src", respuesta.item[3].icon2);
+                });
+                $("#icon-altata-amenities-slide-03").mouseout(function () {
+                    $("#icon-altata-amenities-slide-03").attr("src", respuesta.item[3].icon);
+                });
+
+                $("#icon-altata-amenities-slide-08").attr("src", respuesta.item[3].icon);
+                $("#icon-altata-amenities-slide-08").mouseover(function () {
+                    $("#icon-altata-amenities-slide-08").attr("src", respuesta.item[3].icon2);
+                });
+                $("#icon-altata-amenities-slide-08").mouseout(function () {
+                    $("#icon-altata-amenities-slide-08").attr("src", respuesta.item[3].icon);
+                });
+
+                $("#icon-altata-amenities-slide-13").attr("src", respuesta.item[3].icon);
+                $("#icon-altata-amenities-slide-13").mouseover(function () {
+                    $("#icon-altata-amenities-slide-13").attr("src", respuesta.item[3].icon2);
+                });
+                $("#icon-altata-amenities-slide-13").mouseout(function () {
+                    $("#icon-altata-amenities-slide-13").attr("src", respuesta.item[3].icon);
+                });
+
+                $("#icon-altata-amenities-slide-18").attr("src", respuesta.item[3].icon);
+                $("#icon-altata-amenities-slide-18").mouseover(function () {
+                    $("#icon-altata-amenities-slide-18").attr("src", respuesta.item[3].icon2);
+                });
+                $("#icon-altata-amenities-slide-18").mouseout(function () {
+                    $("#icon-altata-amenities-slide-18").attr("src", respuesta.item[3].icon);
+                });
+
                 $("#icon-altata-amenities-slide-23").attr("src", respuesta.item[3].icon);
-            });
+                $("#icon-altata-amenities-slide-23").mouseover(function () {
+                    $("#icon-altata-amenities-slide-23").attr("src", respuesta.item[3].icon2);
+                });
+                $("#icon-altata-amenities-slide-23").mouseout(function () {
+                    $("#icon-altata-amenities-slide-23").attr("src", respuesta.item[3].icon);
+                });
+                //DESCRIPCION
+                $("#p-altata-desc-03").text(respuesta.item[3].desc);
+                //Titulo
+                $("#p-altata-amenities-title-03").text(respuesta.item[3].title);
+                ////////////////////////////Movil //////////////////////////////////////////////////////////
+                $("#img-maltata-amenities-slide-03").attr("src", respuesta.item[3].photomobile);
+            } else {
+                $("#img-altata-amenities-03").remove();
+                $("#icon-altata-amenities-slide-03").remove();
+                $("#icon-altata-amenities-slide-08").remove();
+                $("#icon-altata-amenities-slide-13").remove();
+                $("#icon-altata-amenities-slide-18").remove();
+                $("#icon-altata-amenities-slide-23").remove();
+                $("#p-altata-desc-03").remove();
+                $("#p-altata-amenities-title-03").remove();
+                $("#img-maltata-amenities-slide-03").remove();
+                $('#slideAmenities3').remove()
+            }
+            
+            if (typeof respuesta.item[4] !== 'undefined') {
+                $("#img-altata-amenities-04").attr("src", respuesta.item[4].frontphoto);
 
-            $("#icon-altata-amenities-slide-24").attr("src", respuesta.item[4].icon);
-            $("#icon-altata-amenities-slide-24").mouseover(function () {
-                $("#icon-altata-amenities-slide-24").attr("src", respuesta.item[4].icon2);
-            });
-            $("#icon-altata-amenities-slide-24").mouseout(function () {
+                $("#icon-altata-amenities-slide-04").attr("src", respuesta.item[4].icon);
+
+                $("#icon-altata-amenities-slide-04").mouseover(function () {
+                    $("#icon-altata-amenities-slide-04").attr("src", respuesta.item[4].icon2);
+                });
+                $("#icon-altata-amenities-slide-04").mouseout(function () {
+                    $("#icon-altata-amenities-slide-04").attr("src", respuesta.item[4].icon);
+                });
+
+                $("#icon-altata-amenities-slide-09").attr("src", respuesta.item[4].icon);
+                $("#icon-altata-amenities-slide-09").mouseover(function () {
+                    $("#icon-altata-amenities-slide-09").attr("src", respuesta.item[4].icon2);
+                });
+                $("#icon-altata-amenities-slide-09").mouseout(function () {
+                    $("#icon-altata-amenities-slide-09").attr("src", respuesta.item[4].icon);
+                });
+
+                $("#icon-altata-amenities-slide-14").attr("src", respuesta.item[4].icon);
+                $("#icon-altata-amenities-slide-14").mouseover(function () {
+                    $("#icon-altata-amenities-slide-14").attr("src", respuesta.item[4].icon2);
+                });
+                $("#icon-altata-amenities-slide-14").mouseout(function () {
+                    $("#icon-altata-amenities-slide-14").attr("src", respuesta.item[4].icon);
+                });
+
+                $("#icon-altata-amenities-slide-19").attr("src", respuesta.item[4].icon);
+                $("#icon-altata-amenities-slide-19").mouseover(function () {
+                    $("#icon-altata-amenities-slide-19").attr("src", respuesta.item[4].icon2);
+                });
+                $("#icon-altata-amenities-slide-19").mouseout(function () {
+                    $("#icon-altata-amenities-slide-19").attr("src", respuesta.item[4].icon);
+                });
+
                 $("#icon-altata-amenities-slide-24").attr("src", respuesta.item[4].icon);
-            });
+                $("#icon-altata-amenities-slide-24").mouseover(function () {
+                    $("#icon-altata-amenities-slide-24").attr("src", respuesta.item[4].icon2);
+                });
+                $("#icon-altata-amenities-slide-24").mouseout(function () {
+                    $("#icon-altata-amenities-slide-24").attr("src", respuesta.item[4].icon);
+                });
 
+                $("#p-altata-desc-04").text(respuesta.item[4].desc);
 
-            //DESCRIPCION
-            $("#p-altata-desc-00").text(respuesta.item[0].desc);
-            $("#p-altata-desc-01").text(respuesta.item[1].desc);
-            $("#p-altata-desc-02").text(respuesta.item[2].desc);
-            $("#p-altata-desc-03").text(respuesta.item[3].desc);
-            $("#p-altata-desc-04").text(respuesta.item[4].desc);
+                $("#p-altata-amenities-title-04").text(respuesta.item[4].title);
 
-            //Titulo
-            $("#p-altata-amenities-title-00").text(respuesta.item[0].title);
-            $("#p-altata-amenities-title-01").text(respuesta.item[1].title);
-            $("#p-altata-amenities-title-02").text(respuesta.item[2].title);
-            $("#p-altata-amenities-title-03").text(respuesta.item[3].title);
-            $("#p-altata-amenities-title-04").text(respuesta.item[4].title);
-
-
-    ////////////////////////////Movil //////////////////////////////////////////////////////////
-            $("#img-maltata-amenities-slide-00").attr("src", respuesta.item[0].photomobile);
-            $("#img-maltata-amenities-slide-01").attr("src", respuesta.item[1].photomobile);
-            $("#img-maltata-amenities-slide-02").attr("src", respuesta.item[2].photomobile);
-            $("#img-maltata-amenities-slide-03").attr("src", respuesta.item[3].photomobile);
-            $("#img-maltata-amenities-slide-04").attr("src", respuesta.item[4].photomobile);
-
-
+                $("#img-maltata-amenities-slide-04").attr("src", respuesta.item[4].photomobile);
+            } else {
+                $('#img-altata-amenities-04').remove();
+                $("#icon-altata-amenities-slide-04").remove();
+                $('#icon-altata-amenities-slide-09').remove();
+                $('#icon-altata-amenities-slide-14').remove();
+                $('#icon-altata-amenities-slide-19').remove();
+                $('#icon-altata-amenities-slide-24').remove();
+                $('#p-altata-desc-04').remove();
+                $('#p-altata-amenities-title-04').remove();
+                $('#img-maltata-amenities-slide-04').remove();
+                $('#slideAmenities4').remove();
+            }
         }, 
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
     });
