@@ -341,6 +341,17 @@ export class NewsfeedComponent implements OnInit {
 
           });
 
+    } else {
+
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 4777,
+        message: {
+          header: 'Form Data',
+          text: 'All inputs must be fill to continue'
+        }
+      });
+
     }
 
   }
@@ -362,17 +373,20 @@ export class NewsfeedComponent implements OnInit {
     switch( action_kind ) {
 
       case 'new':
+        this.resetNewPostFormValidator();
         this.show_post_form = true;
+        this.data_post.id = 0;
         this.data_post.title = '';
         this.data_post.PostText = '';
         this.data_post.photo = '../../../assets/14.jpg';
         this.data_post.userid = this.IDUSR;
         this.data_post.BuildingId = this.route.snapshot.params['id'];
-        this.post_form_action = 'Nuevo Post';
+        this.post_form_action = 'New Post';
         this.post_comments_section = false;
         break;
 
       case 'edit':
+        this.resetNewPostFormValidator();
         this.show_post_form = true;
         this.data_post.id = editable.idpost;
         this.data_post.title = editable.posttitle;
@@ -380,7 +394,7 @@ export class NewsfeedComponent implements OnInit {
         this.data_post.photo = editable.photo;
         this.data_post.userid = this.IDUSR;
         this.data_post.BuildingId = this.route.snapshot.params['id'];
-        this.post_form_action = 'Editar Post';
+        this.post_form_action = 'Edit Post';
         this.post_comments_section = true;
         this.getCommentsPost();
         break;
@@ -462,7 +476,14 @@ export class NewsfeedComponent implements OnInit {
 
     } else {
 
-      console.log('El comentario no puede ser vacio');
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 4777,
+        message: {
+          header: 'Form Data',
+          text: 'Comment must be fill to continue'
+        }
+      });
 
     }
 
@@ -657,7 +678,7 @@ export class NewsfeedComponent implements OnInit {
     no_post: false,
     no_photo: false
   };
-  public validatingFieldsFrom( kind_data: DataPost ): boolean { console.log( kind_data );
+  public validatingFieldsFrom( kind_data: DataPost ): boolean { 
 
     let result: boolean = false;
 
@@ -670,33 +691,6 @@ export class NewsfeedComponent implements OnInit {
     kind_data.photo == '../../../assets/14.jpg' || kind_data.photo == '' ? 
       this.forms_erros_found.no_photo = true : this.forms_erros_found.no_photo = false;
 
-    if( this.forms_erros_found.no_title ) this.system_message.showMessage({
-        kind: 'error',
-        time: 3800,
-        message: {
-          header: 'Field can not be empty',
-          text: 'Title is required.'
-        }
-    });
-
-    if( this.forms_erros_found.no_post ) this.system_message.showMessage({
-      kind: 'error',
-      time: 3800,
-      message: {
-        header: 'Field can not be empty',
-        text: 'Title is required.'
-      }
-    });
-
-    if( this.forms_erros_found.no_photo ) this.system_message.showMessage({
-      kind: 'error',
-      time: 3800,
-      message: {
-        header: 'Field can not be empty',
-        text: 'Title is required.'
-      }
-    });
-
     if(
       !this.forms_erros_found.no_title &&
       !this.forms_erros_found.no_post &&
@@ -705,6 +699,14 @@ export class NewsfeedComponent implements OnInit {
     else result = false;
 
     return result;
+
+  }
+
+  public resetNewPostFormValidator():void {
+
+    this.forms_erros_found.no_title = false;
+    this.forms_erros_found.no_post = false;
+    this.forms_erros_found.no_photo = false;
 
   }
 
@@ -775,12 +777,14 @@ export class NewsfeedComponent implements OnInit {
                         id_image_container.setAttribute('src', image_data.image );
                         name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
                         id_image_container.classList.remove('no-image');
+                        root_data.prepareImages( event_data );
 
                       } else {
 
-                        id_image_container.src = '../../../assets/14.jpg';
-                        root_data.data_post.photo = '../../../assets/14.jpg';
-                        name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
+                        //id_image_container.src = '../../../assets/14.jpg';
+                        //root_data.data_post.photo = '../../../assets/14.jpg';
+                        name_image_container.innerHTML = `
+                        <span class="color-red">Image size must be <br /><span class="text-bold">${ dimensions_image }px</span></span>`;
                         id_image_container.classList.add('no-image');
 
                       }

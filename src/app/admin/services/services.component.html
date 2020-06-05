@@ -27,11 +27,11 @@
               {{ service.description }}
             </p>
             <p class="ap-cards__card-desc">
-              <span class="text-bold">Month Price:</span>
+              <span class="text-bold">Recurrent Price:</span>
               {{ service.price | currency:'USD' }}
             </p>
             <p class="ap-cards__card-desc">
-              <span class="text-bold">Unit Price:</span>
+              <span class="text-bold">Once day Price:</span>
               {{ service.priceUnit | currency:'USD' }}
             </p>
             <figure class="ap-cards__card-image">
@@ -136,7 +136,7 @@
           <div class="ap-form__input">
             <input 
               type="number"
-              placeholder="Price"
+              placeholder="Recurrent day price"
               id="new_service_price" 
               name="new_service_price"
               [class.form_error_found]="form_service.no_pric"
@@ -146,10 +146,10 @@
               for="new_service_price" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_service.price != null">
-              Price
+              Recurrent day price
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_pric">
-              Price is required*
+              Recurrent day price is required*
             </span>
           </div>
         </div>
@@ -157,7 +157,7 @@
           <div class="ap-form__input">
             <input 
               type="number"
-              placeholder="Unit Price"
+              placeholder="Once day Price"
               id="new_service_unitp" 
               name="new_service_unitp"
               [(ngModel)]="data_service.priceUnit"
@@ -167,10 +167,10 @@
               for="new_service_unitp" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_service.priceUnit != null">
-              Unit Price
+              Once day Price
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_puni">
-              Unit Price is required*
+              Once day Price is required*
             </span>
           </div>
         </div>
@@ -183,7 +183,7 @@
               id="nuevo_servicio_img"
               name="nuevo_servicio_img"
               type="file"
-              (change)="validateImageUpload( $event, '350x350', 'nuevo_servicio_img_0', 'nuevo_servicio_name_0' ); prepareImages( $event );" />
+              (change)="validateImageUpload( $event, '350x350', 'nuevo_servicio_img_0', 'nuevo_servicio_name_0', 0);" />
             <label for="nuevo_servicio_img" class="ap-form__label-image">
               <figure class="ap-form__image">
                 <img class="ap-form__image-image no-image" 
@@ -208,14 +208,14 @@
               id="nuevo_servicio_icon"
               name="nuevo_servicio_icon"
               type="file"
-              (change)="validateImageUpload( $event, '150x150', 'nuevo_servicio_icon_0', 'nuevo_servicio_name_0' ); prepareIcon( $event );" />
+              (change)="validateImageUpload( $event, '150x150', 'nuevo_servicio_icon_0', 'nuevo_servicio_icon_name_0', 1);" />
             <label for="nuevo_servicio_icon" class="ap-form__label-image ap-form__label-image--icon">
               <figure class="ap-form__image">
                 <img class="ap-form__image-image ap-form__image-image--icon no-image bg-black" 
                      id="nuevo_servicio_icon_0"
                      [class.forms_errors_nimage]="form_service.no_icon"
                      src="{{ data_service.icon }}" />
-                <span class="ap-form__image-data text-center" id="nuevo_servicio_name_0">
+                <span class="ap-form__image-data text-center" id="nuevo_servicio_icon_name_0">
                   Image size must be<br />
                   <span class="text-bold">150x150</span> 
                 </span>

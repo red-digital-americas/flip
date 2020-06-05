@@ -112,7 +112,7 @@
               name="nueva_comunidad_img"
               type="file"
               accept="image/*"
-              (change)="validateImageUpload( $event, '350x350', 'new_post_image_0', 'new_post_name_0' ); prepareImages( $event );" />
+              (change)="validateImageUpload( $event, '350x350', 'new_post_image_0', 'new_post_name_0' );" />
             <label for="nueva_comunidad_img" class="ap-form__label-image">
               <figure class="ap-form__image">
                 <img class="ap-form__image-image no-image" 
@@ -124,7 +124,7 @@
                   <span class="text-bold">350x350</span> 
                 </span>
                 <span class="ml-col-1 form_error_found_label text-center" *ngIf="forms_erros_found.no_photo">
-                  Image is required**
+                  Image is required*
                 </span>
               </figure>
             </label>
@@ -251,12 +251,12 @@
       <button 
         (click)="toggleSectionForm('delete')"
         class="ml-modal__pop-buttons-button button-pink">
-        Cancelar
+        Cancel
       </button>
       <button 
         (click)="confirmDeleteElement()"
         class="ml-modal__pop-buttons-button button-black">
-        Eliminar
+        Delete
       </button>
     </div>
   </div>

@@ -227,6 +227,17 @@ export class PerksDetailComponent implements OnInit {
 
       }
 
+    } else {
+
+      this.system_message.showMessage({
+        kind: 'error',
+        message: {
+          header: 'Form Data',
+          text: 'All inputs must be filled to continue.'
+        },
+        time: 4777
+      });
+
     }
 
   }
@@ -252,9 +263,11 @@ export class PerksDetailComponent implements OnInit {
     switch( action_kind ) {
 
       case 'new':
+        this.resetPromotionValidator();
         this.show_dperk_form = true;
         this.new_promo_button = true;
         this.edit_promo_button = false;
+        this.data_promo.id = 0;
         this.data_promo.perkGuideId = this.perkId.toString();
         this.data_promo.name = '';
         this.data_promo.description = '';
@@ -265,6 +278,7 @@ export class PerksDetailComponent implements OnInit {
         break;
 
       case 'edit':
+        this.resetPromotionValidator();
         this.show_dperk_form = true;
         this.data_promo.id = editable.id;
         this.data_promo.perkGuideId = this.perkId;
@@ -409,6 +423,16 @@ export class PerksDetailComponent implements OnInit {
 
   }
 
+  public resetPromotionValidator():void {
+
+    this.form_data.no_name = false;
+    this.form_data.no_desc = false;
+    this.form_data.no_sdat = false;
+    this.form_data.no_edat = false;
+    this.form_data.no_phot = false;
+
+  }
+
   /*
    * Autor: Carlos Hernandez Hernandez
    * Contacto: carlos.hernandez@minimalist.com
@@ -475,14 +499,14 @@ export class PerksDetailComponent implements OnInit {
 
                         id_image_container.setAttribute('src', image_data.image );
                         name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
+                        root_data.prepareImages( event_data );
                         id_image_container.classList.remove('no-image');
 
                       } else {
 
-                        id_image_container.src = '../../../assets/14.jpg';
-                        name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
+                        name_image_container.innerHTML = `
+                          <span class="color-red">Image size must be <br /><span class="text-bold">${ dimensions_image }</span></span>`;
                         id_image_container.classList.add('no-image');
-                        root_data.data_promo.photo = '../../../assets/14.jpg';
 
                       }
                       

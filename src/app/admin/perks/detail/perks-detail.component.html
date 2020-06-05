@@ -1,4 +1,4 @@
-<div class="ml-col-1">
+<div class="ml-col-1 ap-form">
   <div class="ml-col-1 padding-general-m margin-bottom-g">
     <!-- div class="ml-col-1 ap-deeplink">
         <p class="ap-deeplink__level ap-deeplink__level--prev" (click)="changeLevel()">Lista Persk</p>
@@ -83,7 +83,7 @@
           </div>
           <div class="ml-col-1" *ngIf="show_dperk_form">
             <form 
-              class="ap-form ap-form__sdato--no-padding ml-col-1" 
+              class="ap-form ap-form--full-width ap-form__sdato--no-padding ml-col-1" 
               (submit)="sendDataPromotion()" 
               onsubmit="return false;">
               <div class="ml-col-1">
@@ -184,7 +184,7 @@
                     id="nueva_promo_img"
                     name="nueva_promo_img"
                     type="file"
-                    (change)="validateImageUpload( $event, '350x350', 'new_promo_image_0', 'new_promo_name_0' ); prepareImages( $event );" />
+                    (change)="validateImageUpload( $event, '350x350', 'new_promo_image_0', 'new_promo_name_0' );" />
                   <label for="nueva_promo_img" class="ap-form__label-image">
                     <figure class="ap-form__image">
                       <img class="ap-form__image-image no-image" 
@@ -230,7 +230,7 @@
               </div>
             </form>
           </div>
-          <div class="ap-cards__container"  *ngFor="let promo of promotionsArray;">
+          <div class="ap-cards__container ap-cards__container--comment"  *ngFor="let promo of promotionsArray;">
             <div class="ap-cards__card ap-cards__card--bbuttons card-style" *ngIf="!show_dperk_form">
               <h4 class="ap-cards__card-titulo">
                 {{ promo.name }}

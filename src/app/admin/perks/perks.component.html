@@ -288,7 +288,7 @@
             name="nuevo_servicio_img"
             perk_photo="perk_photo"
             type="file"
-            (change)="validateImageUpload( $event, '350x350', 'new_serv_image_0', 'new_serv_name_0' ); prepareImages( $event );" />
+            (change)="validateImageUpload( $event, '350x350', 'new_serv_image_0', 'new_serv_name_0' ,0);" />
           <label for="nuevo_servicio_img" class="ap-form__label-image">
             <figure class="ap-form__image">
               <img class="ap-form__image-image no-image" 
@@ -319,13 +319,13 @@
             name="gallery_input_{{ image.id }}"
             type="file"
             gallery="image"
-            (change)="prepareImagesG( $event ); validateImageUpload( $event, '1920x1080', 'gallery_img_' + image.id, 'gallery_img_name_' + image.id );" />
+            (change)="validateImageUpload( $event, '350x350', 'gallery_img_' + image.id, 'gallery_img_name_' + image.id );" />
           <label for="gallery_input_{{ image.id }}" class="ap-form__label-gallery">
             <figure class="ap-form__image">
               <img class="ap-form__image-image ap-form__image-image--gallery no-image" 
                    id="gallery_img_{{ image.id }}"
                    src="{{ image.src }}" />
-              <span class="ap-form__image-data text-center display-none" id="gallery_img_name_{{ image.id }}">
+              <span class="ap-form__image-data text-center" id="gallery_img_name_{{ image.id }}">
                 Image Size must be <br />
                 <span class="text-bold">350x350</span> 
               </span>

@@ -217,6 +217,7 @@ export class AmenitiesComponent implements OnInit {
 
       case 'new':
         this.show_ammenity_form = true;
+        this.id_amenity = 0;
         this.data_amenity.BuildingId = this.IDBUILD;
         this.data_amenity.name = '';
         this.data_amenity.description = '';
@@ -306,6 +307,17 @@ export class AmenitiesComponent implements OnInit {
               });
 
             });
+
+        } else {
+
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 4777,
+            message: {
+              header: 'Form Data',
+              text: 'All inputs must be fill to continue.'
+            }
+          });
 
         }
 
@@ -549,13 +561,15 @@ export class AmenitiesComponent implements OnInit {
                         id_image_container.setAttribute('src', image_data.image );
                         name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
                         id_image_container.classList.remove('no-image');
+                        root_data.prepareImages( event_data );
 
                       } else {
 
-                        id_image_container.src = '../../../assets/14.jpg';
-                        root_data.data_amenity.photo = '../../../assets/14.jpg';
+                        //id_image_container.src = '../../../assets/14.jpg';
+                        //root_data.data_amenity.photo = '../../../assets/14.jpg';
                         root_data.data_amenity_edit.photo = '../../../assets/14.jpg';
-                        name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
+                        name_image_container.innerHTML = `
+                          <span class="color-red">Image size must be <br /><span class="text-bold">${ dimensions_image }</span></span>`;
                         id_image_container.classList.add('no-image');
 
                       }

@@ -239,6 +239,7 @@ export class PerksComponent implements OnInit {
       case 'new':
         this.clearAndInitScopers();
         this.show_perk_form = true;
+        this.data_perk.id = 0;
         this.data_perk.buildingId = Number( this.IDBUILD );
         this.data_perk.name = '';
         this.data_perk.description = '';
@@ -383,7 +384,14 @@ export class PerksComponent implements OnInit {
 
     } else {
 
-      console.log('Formulario incompleto');
+      this.system_message.showMessage({
+        kind: 'error',
+        message: {
+          header: 'Form Data',
+          text: 'All inputs must be filled to continue.'
+        },
+        time: 4777
+      });
 
     }
 
@@ -633,7 +641,7 @@ export class PerksComponent implements OnInit {
    * Descripcion: Cuando se le da clic al input y se selecciona la imagen esta valida que el tamaño sea el adecuado y la despliega el el 
    *              visualizador
    */
-  public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
+  public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string, image_case: number ):void {
 
     const event = event_data.target,
           dimensions_image_data = {
@@ -689,12 +697,24 @@ export class PerksComponent implements OnInit {
                         id_image_container.setAttribute('src', image_data.image );
                         name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
                         id_image_container.classList.remove('no-image');
+
+                        if( image_case  == 0 ) {
+
+                            root_data.prepareImages( event_data );
+
+                        } else {
+
+                          root_data.prepareImagesG( event_data ); 
+
+                        }
+
                         if( event.hasAttribute('gallery') ) root_data.getGalleryImages(event.getAttribute('id'));
 
                       } else {
 
-                        id_image_container.src = '../../../assets/14.jpg';
-                        name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
+                        //id_image_container.src = '../../../assets/14.jpg';
+                        name_image_container.innerHTML = `
+                          <span class="color-red">Image size must be <br /><span class="text-bold">${ dimensions_image }</span></span>`;
                         id_image_container.classList.add('no-image');
                         if( !event.hasAttribute('gallery') ) root_data.data_perk.photo = '../../../assets/14.jpg';
 

@@ -8,6 +8,7 @@ import { Utils } from '../../utils/utils';
 import { Service, ServicesFormGroup, ServicesFormGroupInitialValues } from '../models/Services';
 import { LoaderComponent } from '../../../ts/loader';
 import { SystemMessage } from '../../../ts/systemMessage';
+import { root } from 'rxjs/internal/util/root';
 
 @Component({
   selector: 'app-services',
@@ -265,7 +266,18 @@ export class ServicesComponent implements OnInit {
 
       }
 
-    } 
+    } else {
+
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 4777,
+        message: {
+          header: 'Form Data',
+          text: 'All inputs must be fill to continue.'
+        }
+      });
+
+    }
 
   }
 
@@ -411,6 +423,18 @@ export class ServicesComponent implements OnInit {
 
   }
 
+  public resetFormValidator():void {
+
+    this.form_service.no_name = false;
+    this.form_service.no_desc = false;
+    this.form_service.no_prov = false;
+    this.form_service.no_pric = false;
+    this.form_service.no_puni = false;
+    this.form_service.no_icon = false;
+    this.form_service.no_phot = false;
+
+  }
+
   /*
    * Autor: Carlos Hernandez Hernandez
    * Contacto: carlos.hernandez@minimalist.com
@@ -429,8 +453,10 @@ export class ServicesComponent implements OnInit {
     switch( action_kind ) {
 
       case 'new':
+        this.resetFormValidator();
         this.show_service_form = true;
         this.data_service.buildingId = Number( this.IDBUILD );
+        this.data_service.id = 0;
         this.data_service.name = '';
         this.data_service.description = '';
         this.data_service.provider = '';
@@ -444,6 +470,7 @@ export class ServicesComponent implements OnInit {
         break;
 
       case 'edit':
+        this.resetFormValidator();
         this.show_service_form = true;
         this.data_service.buildingId = Number( this.IDBUILD );
         this.data_service.id = editable.id;
@@ -486,7 +513,7 @@ export class ServicesComponent implements OnInit {
    * Descripcion: Cuando se le da clic al input y se selecciona la imagen esta valida que el tamaño sea el adecuado y la despliega el el 
    *              visualizador
    */
-  public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
+  public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string, image_case: number ):void {
 
     const event = event_data.target,
           dimensions_image_data = {
@@ -539,17 +566,26 @@ export class ServicesComponent implements OnInit {
 
                       if( image_limit_width === image_data.width && image_limit_height === image_data.height ) {
 
+                        console.log('Here => ', image_case);
+                        if( image_case == 0 ) {
+
+                          root_data.prepareImages( event_data );
+
+                        } else {
+
+                          root_data.prepareIcon( event_data );
+
+                        }
+
                         id_image_container.setAttribute('src', image_data.image );
                         name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
                         id_image_container.classList.remove('no-image');
 
                       } else {
 
-                        id_image_container.src = '../../../assets/14.jpg';
-                        name_image_container.innerHTML = `La imagen debe medir <br /><span class="text-bold">${ dimensions_image }</span>`;
+                        name_image_container.innerHTML = `
+                        <span class="color-red">Image size must be <br /><span class="text-bold">${ dimensions_image }</span></span>`;
                         id_image_container.classList.add('no-image');
-                        if( event.id == 'nueva_comunidad_img' ) root_data.data_service.photo = '../../../assets/14.jpg'; 
-                        if( event.id == 'nueva_comunidadi_img' ) root_data.data_service.icon = '../../../assets/14.jpg'; 
 
                       }
                       
