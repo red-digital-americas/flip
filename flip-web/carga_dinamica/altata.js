@@ -16,7 +16,7 @@ $(document).ready(function () {
     $.ajax({
         type: 'POST',
         url: urlbase_api +"Post/SeeHomeGeneral",
-        url: "http://localhost:49314/api/Post/SeeHomeGeneral",
+        // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
         data: JSON.stringify({ buildingid: buildingid, userid: 1 }),
         contentType: "application/json",
         dataType: "text",
