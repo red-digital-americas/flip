@@ -25,17 +25,25 @@ import { DataSource } from '@angular/cdk/table';
         sessionStorage.removeItem('name_build');
     }
 
+    activeLs: ActiveModel[] = [
+        {id: 0, name: 'Yes', value: true},
+        {id: 1, name: 'No', value: false}
+      ];
+
     loader = new LoaderComponent();
     systemMessage = new SystemMessage();
 
     pipe: DatePipe;
     filterForm = new FormGroup({
-        fromDate: new FormControl()
+        fromDate: new FormControl(),
+        toDate: new FormControl(),
+        active: new FormControl()
     });
     arrivalFilter = new FormControl();
     globalFilter = '';
     get fromDate() { return this.filterForm.get('fromDate').value; }
     get toDate() { return this.filterForm.get('toDate').value; }
+    get active() { return this.filterForm.get('active').value; }
 
     public tenantList = new MatTableDataSource();
     public table_colums: any[] = [
@@ -76,9 +84,9 @@ import { DataSource } from '@angular/cdk/table';
     @ViewChild(MatSort, {static: true}) sort: MatSort;
 
     ngOnInit() {
-        this.tenantList.filterPredicate = (data: PeriodicElement, filter: string) => {
-            return data.dateInit === filter;
-        };
+        // this.tenantList.filterPredicate = (data: PeriodicElement, filter: string) => {
+        //     return data.dateInit === filter;
+        // };
     }
 
     public getTenantList():void {
@@ -120,6 +128,36 @@ import { DataSource } from '@angular/cdk/table';
         }
     }
 
+    public applyFilterPeriod() {
+        const params = {
+            activeBooking: this.active === null ? '' : this.active.value,
+            dateInit: this.fromDate === null ? '' : this.pipe.transform(this.fromDate, 'MM/dd/yyyy'),
+            dateEnd: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy')
+        };
+        console.log(params);
+        this.loader.showLoader();
+        this._services.service_general_get_with_params('Tenant/getGeneralTenantList', params)
+            .subscribe( (response: any) => {
+                this.loader.hideLoader();
+                if ( response.result === 'Sucess' ) {
+                    const data: PeriodicElement[] = response.item;
+                    this.tenantList = new MatTableDataSource(data);
+                    this.tenantList.paginator = this.paginator;
+                    this.tenantList.sort = this.sort;
+
+                    console.log('List => ', response.item );
+                }
+            }, (error: any) => {
+                this.loader.hideLoader();
+                console.log('Error GetList => ', error);
+            });
+    }
+
+    public resetForm() {
+        this.filterForm.reset();
+        this.getTenantList();
+    }
+
 }
 
 
@@ -141,4 +179,10 @@ export interface PeriodicElement {
     checkOut: string;
     active: string;
     more: string;
+}
+
+export interface ActiveModel {
+    id: number;
+    name: string;
+    value: boolean;
 }

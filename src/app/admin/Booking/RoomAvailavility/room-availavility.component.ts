@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LoaderComponent } from '../../../../ts/loader';
 import { SystemMessage } from '../../../../ts/systemMessage';
+import { FormGroup, FormControl } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'room-availavility',
@@ -20,7 +22,9 @@ export class RoomAvailavilityComponent implements OnInit {
         public _services: DatosService,
         public _router: Router,
         public route: ActivatedRoute
-    ) {}
+    ) {
+        this.pipe = new DatePipe('en');
+    }
 
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -44,6 +48,20 @@ export class RoomAvailavilityComponent implements OnInit {
     systemMessage = new SystemMessage();
 
     public section: string;
+
+    activeLs: ActiveModel[] = [
+        {id: 0, name: 'Yes', value: true},
+        {id: 1, name: 'No', value: false}
+      ];
+    filterForm = new FormGroup({
+        fromDate: new FormControl(),
+        toDate: new FormControl(),
+        active: new FormControl()
+    });
+    pipe: DatePipe;
+    get fromDate() { return this.filterForm.get('fromDate').value; }
+    get toDate() { return this.filterForm.get('toDate').value; }
+    get active() { return this.filterForm.get('active').value; }
 
     ngOnInit() {
         this.section = 'roomAvailavility';
@@ -70,7 +88,7 @@ export class RoomAvailavilityComponent implements OnInit {
                     kind: 'error',
                     message: {
                       header: 'Error',
-                      text: error.detalle
+                      text: error
                     },
                     time: 2000
                   });
@@ -91,9 +109,71 @@ export class RoomAvailavilityComponent implements OnInit {
     }
 
     public goToPage( to_where: string ):void {
-
         this._router.navigateByUrl( to_where );
-
     }
 
+    public applyFilterPeriod() {
+        console.log('Active', this.active);
+        const params = {
+            buildongId: this.buildingId,
+            roomate: this.active === null ? '' : this.active.value,
+            startDate: this.fromDate === null ? '' : this.pipe.transform(this.fromDate, 'MM/dd/yyyy'),
+            endDate: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy')
+        };
+        console.log(params);
+        this.loader.showLoader();
+        this._services.service_general_get_with_params('Room/getAvailabilityRoom', params)
+            .subscribe((response: any) => {
+                this.loader.hideLoader();
+                if (response.result === 'Success') {
+                    this.roomList = new MatTableDataSource(response.item);
+                    this.roomList.paginator = this.paginator;
+                    this.roomList.sort = this.sort;
+                    console.log('List => ', response.item);
+                }
+            }, (error: any) => {
+                this.loader.hideLoader();
+                console.log('Error GetList => ', error);
+                this.systemMessage.showMessage({
+                    kind: 'error',
+                    message: {
+                        header: 'Error',
+                        text: error
+                    },
+                    time: 2000
+                });
+            });
+    }
+
+    public resetForm() {
+        this.filterForm.reset();
+        this.getRoomList(this.buildingId);
+    }
+
+}
+
+export interface PeriodicElement {
+    name: string;
+    position: number;
+    weight: number;
+    symbol: string;
+    build: string;
+    room: string;
+    typeRoom: string;
+    membership: string;
+    dateInit: string;
+    dateEnd: string;
+    amountOutstanding: string;
+    totalBeds: string;
+    roomateFlip: string;
+    checkIn: string;
+    checkOut: string;
+    active: string;
+    more: string;
+}
+
+export interface ActiveModel {
+    id: number;
+    name: string;
+    value: boolean;
 }

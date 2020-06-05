@@ -77,6 +77,7 @@ import { UserDetailComponent } from './Booking/Users/user-detail/user-detail.com
 import { UserNewComponent } from './Booking/Users/user-new/user-new.component';
 import { RoomDetailComponent } from './Booking/RoomAvailavility/room-detail/room-detail.component';
 import { AddTenantPayComponent } from './Booking/TenantList/add-tenant-pay/add-tenant-pay.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -102,6 +103,7 @@ import { AddTenantPayComponent } from './Booking/TenantList/add-tenant-pay/add-t
     MatDialogModule,
     MatInputModule,
     MatTableModule,
+    MatSortModule,
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
