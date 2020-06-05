@@ -317,9 +317,11 @@
                 (click)="primaryModal.hide(); resetImagesData();">
                 Cerrar
               </button>
-              <button type="submit" class="btn btn-warning" (click)="deleteSlide()">
-                Eliminar
-              </button>
+              <div *ngIf="canDelete">
+                <button type="submit" class="btn btn-warning" (click)="deleteSlide()">
+                  Eliminar
+                </button>
+              </div>              
               <button type="submit" class="btn btn-primary" (click)="updatephoto()">
                 Guardar Cambios
               </button>

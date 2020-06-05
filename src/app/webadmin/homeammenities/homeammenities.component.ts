@@ -54,6 +54,7 @@ export class HomeammenitiesComponent implements OnInit {
   post_blanck: any;
   lengthpost: number = 0;
   showAdd = false;
+  canDelete = false;
 
   title: string = "";
 
@@ -258,7 +259,9 @@ export class HomeammenitiesComponent implements OnInit {
             this.posts = value.item;
             this.lengthpost = this.posts.length;
             this.showAdd = this.posts.length <= 4 ? true : false;
+            this.canDelete = this.posts.length === 1 ? false : true;
             console.log(this.lengthpost);
+            console.log(this.canDelete);
              this.namebuilding = value.detalle;
              setTimeout( () => { this.loader.hideLoader(); }, 1277);
           }
@@ -407,7 +410,7 @@ export class HomeammenitiesComponent implements OnInit {
     };
 
     if (this.formValidator(this.post)) {
-      if (this.posts.length > 1){
+      if (this.posts.length > 1) {
         const close_modal_button = document.getElementById('close_modal');
         this.loader.showLoader();
         this.heroService.ServicioPostPost('DeleteHomeAmmenities', creadoobj)
