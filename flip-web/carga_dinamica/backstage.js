@@ -312,9 +312,9 @@ function getBackstageData() {
 
             if( result.readyState == 4 && result.status == 200 ) {
 
-                const ws_data = JSON.response( result.response );
+                const ws_data = JSON.parse( result.response );
                 
-                createContentForWhatIsColiving( ws_data );
+                createContentForWhatIsColiving( ws_data.item );
 
             }
 
@@ -327,7 +327,69 @@ function getBackstageData() {
 
 function createContentForWhatIsColiving( data_content ) {
 
-    console.log(data_content);
+    const wi_backstage_container = document.getElementById('wi_backstage');
+
+    data_content.forEach( (slide, index) => {
+
+        const slide_html = `
+            <div class="item ${ index == 0 ? 'active' : '' }">
+            <img id= "img-what-01" src="${ slide.photoSlider }" alt="Los Angeles" />
+            <div class="header-text-room  ">
+                <div class="col-md-12 text-center"><br />
+                    <span>
+                        <div class="row"> 
+                            <div class="col-sm-6" style="margin-left: -2%;"><br> 
+                                <p id= "p-what-01" class="textamen">
+                                    ${ slide.description }
+                                </p>
+                            </div> 
+                            <div class="col-sm-6">
+                                <div class="text-center">
+                                    <h2>
+                                        <span id="comserv-activetext" class="beneficios-title" style="font-size: 0.75em;">¿WHAT IS INCLUDED?</span>
+                                    </h2> 
+                                </div><br> 
+                                ${ generateWicIconsSection() }
+                            </div>
+                        </span><br /> 
+                    </div>
+                </div>
+            </div>
+        `;
+
+        wi_backstage_container.innerHTML += slide_html;
+
+        });
+
+        function generateWicIconsSection() {
+
+            let result = '';
+
+            data_content.forEach( (icon, index) => {
+
+                console.log('Icon => ', icon);
+
+                const icons_html = `
+                    <div class ="col-sm-6 icondiv" >
+                        <label data-target="#myCarousel7" style="margin-bottom: 15px;" data-slide-to="${ index }">
+                            <a href="#">
+                                <img id="icon-01-01-01"  class="iconsback" src="${ icon.icon }" 
+                                    onmouseover="this.src='${ icon.icon2 }'"
+                                    onmouseout="this.src='${ icon.icon }'"
+                                    border="0" alt="" />
+                            </a>
+                            &nbsp;<span id="label-01-01-01">${ icon.titleIcon }</span> 
+                        </label>
+                    </div>
+                `;
+
+                result += icons_html;
+
+            });
+
+            return result;
+
+        }
 
 }
 

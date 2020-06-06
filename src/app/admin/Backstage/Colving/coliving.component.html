@@ -11,7 +11,7 @@
             New Slide
         </button>
       </div>
-      <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x" *ngFor="let post of back_stage_data_array, let i = index;">
+      <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x" *ngFor="let post of back_stage_data_array, index as index;">
         <h4 style="font-family: headerFont;
         font-size: large;">Slide: {{ index + 1  }}</h4> 
         <div class="ml-col-1">
@@ -66,7 +66,7 @@
         <div class="ml-col-1 text-center margin-top-m">
           <button 
             data-toggle="modal" 
-            (click)="primaryModal.show();passdata(post);"
+            (click)="primaryModal.show(); passdata(post);"
             class="button button-x">
             Edit
           </button>
@@ -89,7 +89,7 @@
         <h4 class="modal-title">
             What is coliving? Slide data
         </h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+        <button type="button" id="close_form_button" class="close" (click)="primaryModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -237,6 +237,13 @@
                 <div class="modal-footer">
                   <button 
                     type="button" 
+                    class="btn btn-secondary button-red"
+                    *ngIf="show_delete_button && back_stage_data_array?.length &gt; 1"
+                    (click)="deleteThisSlide( back_stage_data )">
+                    Delete
+                  </button>
+                  <button 
+                    type="button" 
                     class="btn btn-secondary" 
                     id="close_modal" 
                     (click)="primaryModal.hide(); resetImagesData(); getBackStageData();">
@@ -254,4 +261,27 @@
 </div>
 <div class="black-box">
     <img src="" id="image_data" />
+</div>
+<div class="ml-modal ml-modal--bg-black" *ngIf="show_modal">
+  <div class="ml-modal__pop">
+    <p class="ml-modal__pop-titulo margin-bottom-m">
+        Delete Slide
+    </p>
+    <p class="ml-modal__pop-text">
+        Are You sure to delete slide <br />
+        <span class="text-bold">{{ element_to_delete.description }}</span>?
+    </p>
+    <div class="ml-modal__pop-buttons">
+        <button 
+            class="ml-modal__pop-buttons-button button-blue"
+            (click)="showModal()">
+            Cancel
+        </button>
+        <button 
+            class="ml-modal__pop-buttons-button button-red"
+            (click)="confirmDeleteSlide()">
+            Delete
+        </button>
+    </div>
+  </div>
 </div>

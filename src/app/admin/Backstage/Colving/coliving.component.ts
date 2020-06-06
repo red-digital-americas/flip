@@ -138,6 +138,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     }
 
 
+    public show_delete_button: boolean = false;
     passdata( post:any ){
 
       this.resetImagesData();
@@ -151,6 +152,7 @@ import { DomSanitizer } from '@angular/platform-browser';
         this.back_stage_data.icon = '';
         this.back_stage_data.photoMobileSlider = '';
         this.back_stage_data.photoSlider = '';
+        this.show_delete_button = false;
 
       } else {
 
@@ -161,9 +163,76 @@ import { DomSanitizer } from '@angular/platform-browser';
         this.back_stage_data.icon= post.icon;
         this.back_stage_data.photoMobileSlider= post.photoMobileSlider;
         this.back_stage_data.photoSlider= post.photoSlider;
+        this.show_delete_button = true;
 
       }
     
+    }
+    
+    public show_modal: boolean = false;
+    public showModal():void {
+
+      !this.show_modal ?
+        this.show_modal = true :
+        this.show_modal = false;
+
+    }
+
+    public element_to_delete: BackStageModel;
+    public deleteThisSlide( post_slide: any ):void {
+
+      this.showModal();
+      this.element_to_delete = post_slide;
+
+    }
+
+    public confirmDeleteSlide():void {
+
+      console.log('To delete => ', this.element_to_delete);
+
+      const ws_data = {
+        id: this.element_to_delete.id,
+        userid: this.IDUSR
+      },
+      close_form_button = document.getElementById('close_form_button');
+
+      this.loader.showLoader();
+
+      this._services.service_general_post('Post/DeleteBackstageWhatIs', ws_data)
+          .subscribe( (response: any) => {
+
+            if( response.result == 'Success' ) {
+
+              this.showModal();
+              close_form_button.click();
+              this.getBackStageData();
+
+              this.system_message.showMessage({
+                kind: 'ok',
+                time: 4777,
+                message: {
+                  header: 'Slide Deleted',
+                  text: 'Slide has been deleted successfully'
+                }
+              });
+              
+              setTimeout( () => this.loader.hideLoader(), 1777);
+
+            }
+
+          }, (error: any) => {
+
+            this.system_message.showMessage({
+              kind: 'error',
+              time: 4777,
+              message: {
+                header: 'System Error',
+                text: 'A system error has ocurred, please try leater.'
+              }
+            });
+
+          });
+
     }
 
     public resetImagesData():void {
