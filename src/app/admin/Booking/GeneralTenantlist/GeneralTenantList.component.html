@@ -63,21 +63,21 @@
               </div>
 
             </form>
-            <mat-form-field style="width: 100%;">
+            <mat-form-field class="ap-form__input">
                 <mat-label>Filter</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
             </mat-form-field>
-            <mat-table mat-table [dataSource]="tenantList" matSort class="mat-elevation-z8" style="width: 100%;">
+            <mat-table mat-table [dataSource]="tenantList" matSort class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
                 <ng-container matColumnDef="build">
                     <th mat-header-cell mat-sort-header *matHeaderCellDef fxFlex="40" class="table__header"> Build</th>
                     <td mat-cell *matCellDef="let element" fxFlex="40" class="table__data">{{ element.build }}</td>
                 </ng-container>
                 <ng-container matColumnDef="room">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Room</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Room</th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.room }}</td>
                 </ng-container>
                 <ng-container matColumnDef="typeRoom">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Type Room</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Type Room</th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.typeRoom }}</td>
                 </ng-container>
                 <ng-container matColumnDef="name">
@@ -85,11 +85,11 @@
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.firstName }}</td>
                 </ng-container>
                 <ng-container matColumnDef="age">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Age</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Age</th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.age }}</td>
                 </ng-container>
                 <ng-container matColumnDef="membership">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Membership</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Membership</th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.membership?.membershipType }}</td>
                 </ng-container>
                 <ng-container matColumnDef="dateInit">
@@ -106,7 +106,7 @@
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.dateEnd }}</td>
                 </ng-container>
                 <ng-container matColumnDef="amountOutstanding">
-                    <th mat-header-cell *matHeaderCellDef class="table__header">Ammount<br />Outstanding</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Ammount<br />Outstanding</th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.amountOutstanding | currency }}</td>
                 </ng-container>
                 <ng-container matColumnDef="totalBeds">
@@ -114,23 +114,23 @@
                     <td mat-cell *matCellDef="let element" class="table__data"> {{element.totalBeds}} </td>
                 </ng-container>
                 <ng-container matColumnDef="roomateFlip">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Roomate Flip </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Roomate Flip </th>
                     <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
                 </ng-container>
                 <ng-container matColumnDef="checkIn">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Check In </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Check In </th>
                     <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.checkIn"></td>
                 </ng-container>
                 <ng-container matColumnDef="checkOut">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Check Out </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Check Out </th>
                     <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.checkOut">  </td>
                 </ng-container>
                 <ng-container matColumnDef="active">
-                    <th mat-header-cell *matHeaderCellDef class="table__header"> Active </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Active </th>
                     <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.active"></td>
                 </ng-container>
                 <ng-container matColumnDef="more">
-                    <th mat-header-cell *matHeaderCellDef></th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header ></th>
                     <td mat-cell *matCellDef="let element" class="table__data">
                         <button 
                             (click)="goToProfile( element )"
