@@ -1,0 +1,154 @@
+<div class="ml-col-1">
+    <div class="ml-col-1 padding-general-m">
+      <div class="ml-col-1 margin-bottom-m">
+        <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+            Flip Network
+        </h4>
+        <div class="ml-col-1" step-form="one">
+            <div class="ml-col-1 margin-tb-min">
+                <h4 class="ap-form__titulo ap-form__titulo--auto-width">
+                    Card Information
+                </h4>
+            </div>
+            <div class="ml-col-1">
+                <div class="ml-col-3">
+                    <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            type="text" 
+                            placeholder="Title"
+                            id="bd_sDate" 
+                            name="bd_sDate"
+                            class="ap-form__input-text"
+                            [(ngModel)]="main_card_data.titulo"/>
+                          <label 
+                            for="bd_sDate" 
+                            class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                            Title
+                          </label>
+                          <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                            Title is required*
+                          </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ml-col-7">
+                    <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <textarea 
+                            required
+                            type="text" 
+                            placeholder="Description"
+                            id="mc_desc" 
+                            name="mc_desc"
+                            class="ap-form__input-textarea"
+                            [(ngModel)]="main_card_data.descripcion"></textarea>
+                          <label 
+                            for="mc_desc" 
+                            class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                            Description
+                          </label>
+                          <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                            Description is required*
+                          </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ml-col-1 ap-form__buttons margin-top-x">
+                    <button 
+                        class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
+                        (click)="saveMainCardFlipNetData()">
+                        Save
+                    </button>
+                </div>
+            </div>
+            <div class="ml-col-1 top-separator margin-top-x">
+                <div class="ml-col-1 margin-bottom-m margin-top-x">
+                    <h4 class="ap-form__titulo ap-form__titulo--auto-width">
+                        Flip network slides
+                    </h4>
+                    <button 
+                        class="ap-form__rButton button-big button-yellow">
+                        Add new slide
+                    </button>
+                </div>
+                <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-m"
+                     *ngFor="let card of flipNetworkSlides, index as index">
+                    <h4 class="text-ultra">Slide: {{ index }}</h4> 
+                    <div class="ml-col-1">
+                        <div class="ml-col-1 margin-top-x">
+                            <div class="ml-col-1 images-view">
+                                <div class="ml-col-7 images-view__section">
+                                <figure class="images-view__image">
+                                    <span class="text-bold images-view__image--title">
+                                        Slide Photo:
+                                    </span>
+                                    <img src="../../../assets/webtmprb.png" class="images-view__image--mask" />
+                                    <img src="{{ card.photoSlider }}" class="images-view__image--image" />
+                                </figure>
+                                </div>
+                                <div class="ml-col-3o images-view__section">
+                                <figure class="images-view__image">
+                                    <span class="text-bold text-center images-view__image--title">
+                                        Slide Movile Photo:
+                                    </span>
+                                    <img src="../../../assets/phone.png" class="images-view__image--maskm" />
+                                    <img src="{{ card.photoMobileSlider }}" class="images-view__image--imagem" />
+                                </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-col-1 top-separator margin-top-x">
+                        <h4 class="ml-col-1 margin-tb-min text-ultra">Benefits</h4> 
+                        <div class="ml-col-1 margin-bottom-m" *ngFor="let beneficio of card.networkBenefits">
+                            <div class="ml-col-3">
+                                <div class="ml-col-1 margin-bottom-x">
+                                    <p class="card__info-dato">
+                                        <span class="text-bold">Benefit: <br /> </span> 
+                                        {{ beneficio.title }}
+                                    </p>
+                                </div>
+                                <div class="ml-col-1">
+                                    <p class="card__info-dato">
+                                        <span class="text-bold">Description: <br /> </span> 
+                                        {{ beneficio.description }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="ml-col-32">
+                                <div class="ml-col-1">
+                                    <div class="ml-col-1 images-view images-view--short">
+                                        <div class="ml-col-7 images-view__section">
+                                            <figure class="images-view__image">
+                                                <span class="text-bold text-center images-view__image--title">
+                                                    Slide Photo:
+                                                </span>
+                                                <img src="../../../assets/webtmprb.png" 
+                                                     class="images-view__image--mask images-view__image--mask-s" />
+                                                <img src="../../../../assets/img/Builds/resp_1.jpg" 
+                                                     class="images-view__image--image images-view__image--image-s" />
+                                            </figure>
+                                        </div>
+                                        <div class="ml-col-3o images-view__section">
+                                            <figure class="images-view__image">
+                                                <span class="text-bold text-center images-view__image--title">
+                                                    Slide Movile Photo:
+                                                </span>
+                                                <img src="../../../assets/phone.png" 
+                                                     class="images-view__image--maskm images-view__image--maskm-s" />
+                                                <img src="../../../../assets/img/Builds/resp_1.jpg" 
+                                                     class="images-view__image--imagem images-view__image--imagem-s" />
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>

@@ -28,6 +28,7 @@ import { ProfileComponent } from './Booking/TenantList/profile/profile.component
 import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/Reservations.component';
 import { BackstageIndexComponent } from './Backstage/index.component';
 import { ColivingComponent } from './Backstage/Colving/coliving.component';
+import { FlipNetworkComponent } from './Backstage/FlipNetwork/flipNetwork.component';
 import { MembershipComponent } from './Backstage/Memberships/memberships.component';
 import { DetailComponent } from './Booking/Membership/detail/detail.component';
 import { RoomComponent } from './Booking/RoomCatalog/room/room.component';
@@ -71,6 +72,7 @@ const routes: Routes = [
       { path: 'reservations', component: ProfileReservationsComponent, data: { title: 'Reservations' } }, 
       { path: 'backstage', component: BackstageIndexComponent, data: {title: 'Backstage Index'} },
       { path: 'coliving', component: ColivingComponent, data: {title: 'What is coliving'} },
+      { path: 'flipNetwork', component: FlipNetworkComponent, data: {title: 'Flip network'} },
       { path: 'memberships', component: MembershipComponent, data: {title: 'What is coliving'} },
       { path: 'Users-Detail/:id', component: UserDetailComponent, data: { title: 'Users Detail' } },
       { path: 'Users-New/', component: UserNewComponent, data: { title: 'Users New' } },

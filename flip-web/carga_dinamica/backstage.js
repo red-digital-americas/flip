@@ -367,8 +367,6 @@ function createContentForWhatIsColiving( data_content ) {
 
             data_content.forEach( (icon, index) => {
 
-                console.log('Icon => ', icon);
-
                 const icons_html = `
                     <div class ="col-sm-6 icondiv" >
                         <label data-target="#myCarousel7" style="margin-bottom: 15px;" data-slide-to="${ index }">
@@ -393,4 +391,47 @@ function createContentForWhatIsColiving( data_content ) {
 
 }
 
+function getFlipnetworkData() {
+
+    const xhttp = new XMLHttpRequest(),
+        ws_data = {
+            userid: 1, 
+            id: 1
+        };
+
+        xhttp.onreadystatechange = function( response ) {
+
+            const result = response.target;
+
+            if( result.readyState == 4 && result.status == 200 ) {
+
+                const ws_data = JSON.parse( result.response );
+                
+                console.log('Network ==> ', ws_data);
+
+                mainCardData( ws_data.backStageNetworkSection[0] );
+
+            }
+
+        }
+        xhttp.open('POST','http://34.237.214.147/back/api_flip/api/Post/SeeBacksNetworkSection', true);
+        xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+        xhttp.send( JSON.stringify( ws_data ) );
+
+}
+
+function mainCardData( card_data ) {
+
+    const fnc_title_container = document.getElementById('fnc_title'),
+        fnc_desc_container = document.querySelector('[fnc_desc]');
+
+    fnc_title_container.innerHTML = card_data.title;
+    fnc_desc_container.innerHTML = `
+        ${ card_data.description }
+        <span  id="butredflipmas"class="glyphicon glyphicon-plus pointer" style="font-size: 1.25em; left: 50%; color: white; position: absolute; top: 110%; transform: translate(-50%,-50%);"></span> 
+    `;
+
+}
+
 getBackstageData();
+getFlipnetworkData();

@@ -457,7 +457,8 @@ select:active,
 .ml-col-6,
 .ml-col-7,
 .ml-col-8,
-.ml-col-5e3 {
+.ml-col-5e3,
+.ml-col-75 {
   float: left;
 }
 
@@ -475,6 +476,10 @@ select:active,
 
 .ml-col-7 {
   width: 70%;
+}
+
+.ml-col-75 {
+  width: 75%;
 }
 
 .ml-col-6 {
@@ -836,6 +841,10 @@ select:active,
 
   height: 420px;
 
+  &--short {
+    height: 360px !important;
+  }
+
   @media screen and (max-width: 540px) {
     height: 680px;
   }
@@ -873,6 +882,10 @@ select:active,
       left: 5%;
       z-index: 1;
 
+      &-s {
+        height: 270px !important;
+      }
+
       @media screen and (max-width: 540px) {
         height: 220px;
       }
@@ -880,12 +893,20 @@ select:active,
     }
 
     &--maskm {
+
       width: 80%;
       height: 350px;
       position: absolute;
       top: 50px;
       left: 10%;
       z-index: 1;
+
+      &-s {
+        width: 90%;
+        left: 5%;
+        height: 260px;
+      }
+
     }
 
     &--image {
@@ -896,6 +917,11 @@ select:active,
       left: 5.15%;
       z-index: 2;
       height: 337px;  
+
+      &-s {
+        top: 55px;
+        height: 255px !important;
+      }
 
       @media screen and (max-width: 540px) {
         height: 200px;
@@ -913,12 +939,21 @@ select:active,
     }
 
     &--imagem {
+
       width: 47.95%;
       position: absolute;
       top: 92px;
       left: 26.15%;
       z-index: 2;
       height: 258px;
+
+      &-s {
+        top: 82px;
+        width: 55%;
+        left: 22%;
+        height: 190px;
+      }
+
     }
 
   }

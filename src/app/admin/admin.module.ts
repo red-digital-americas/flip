@@ -68,6 +68,7 @@ import { ProfileComponent } from './Booking/TenantList/profile/profile.component
 import { ProfileReservationsComponent } from './Booking/TenantList/Reservations/Reservations.component';
 import { BackstageIndexComponent } from './Backstage/index.component';
 import { ColivingComponent } from './Backstage/Colving/coliving.component';
+import { FlipNetworkComponent } from './Backstage/FlipNetwork/flipNetwork.component';
 import { MembershipComponent } from './Backstage/Memberships/memberships.component';
 import { DetailComponent } from './Booking/Membership/detail/detail.component';
 import { RoomComponent } from './Booking/RoomCatalog/room/room.component';
@@ -143,6 +144,7 @@ import { MatSortModule } from '@angular/material/sort';
     ProfileReservationsComponent,
     BackstageIndexComponent,
     ColivingComponent,
+    FlipNetworkComponent,
     MembershipComponent,
     DetailComponent,
     RoomComponent,

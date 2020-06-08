@@ -38,7 +38,8 @@ export class MenuService {
       children: [  
         { name: 'Index', url: '/backstage', icon: 'icon-globe sangria'},
         { name: 'What is Colving', url: '/coliving', icon: 'icon-book-open sangria'},
-        { name: 'Memberships', url: '/memberships', icon: 'icon-people sangria'}
+        { name: 'Memberships', url: '/memberships', icon: 'icon-people sangria'},
+        { name: 'Flip Network', url: '/flipNetwork', icon: 'icon-globe-alt sangria'}
       ]
     }
   ] 
