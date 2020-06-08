@@ -1,13 +1,13 @@
 <div class="row">
   <div class="ml-col-1 navbar__components">
     <div class="navbar__component ml-col-4">
-      <button class="navbar__component-button" (click)="amm(IDBUILD)">
-        Build: Ammenities
+      <button class="navbar__component-button" (click)="gene(IDBUILD)">
+        Build: General
       </button>
     </div>
     <div class="navbar__component ml-col-4">
-      <button class="navbar__component-button" (click)="gene(IDBUILD)">
-        Build: General
+      <button class="navbar__component-button" (click)="amm(IDBUILD)">
+        Build: Ammenities
       </button>
     </div>
     <div class="navbar__component ml-col-4">
@@ -24,8 +24,8 @@
 </div>
 <div class="row">
   <h3 Class="text-ultra" style="padding-left: 55px; padding-top: 15px; padding-bottom: -55px;"> {{ namebuilding}}</h3>
-  <!-- *ngIf="this.lengthpost < 4" 
-  <div *ngIf="this.lengthpost < 4" class="ml-col-1 position-relative margin-bottom-x">
+  <!-- *ngIf="this.lengthpost < 4" ---> 
+  <!-- <div *ngIf="this.lengthpost < 4" class="ml-col-1 position-relative margin-bottom-x">
     <button style="position: absolute;
     right: 40px;
     top: -37px;"
@@ -34,7 +34,7 @@
             class="button button-x">
             Add Room Type
     </button>
-  </div>-->
+  </div> -->
 </div>
 <div class="row padding-bottom-m padding-general-m" style="padding-top: 0px;">
   <div class="ml-col-1 room-data__tabs text-center">
@@ -50,6 +50,7 @@
     name="room-section"
     *ngFor="let post of posts, index as index;"
     class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x">
+    
     <div class="ml-col-1 room-data margin-bottom-m" style="padding-bottom: 0px;">
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
@@ -123,6 +124,22 @@
         </div>
       </div>
     </div>
+
+    <div class="ml-col-1">
+      <div class="row">
+        <div *ngIf="showAddA" class="ml-col-1 position-relative margin-bottom-x">
+          <button style="position: absolute;
+          right: 40px;
+          top: -37px;"
+                  data-toggle="modal" 
+                  (click)="primaryModal.show(); passPhotosDataA(this.post_blanck);"
+                  class="button button-x">
+                  Add Room Type
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="ml-col-1">
       <p class="room-data__card-titulo">
         <span class="text-bold">Slides of room: </span>
@@ -276,6 +293,22 @@
         </div>
       </div>
     </div>
+
+    <div class="ml-col-1">
+      <div class="row">
+        <div *ngIf="showAddB" class="ml-col-1 position-relative margin-bottom-x">
+          <button style="position: absolute;
+          right: 40px;
+          top: -37px;"
+                  data-toggle="modal" 
+                  (click)="primaryModal.show(); passPhotosDataB(this.post_blanck);"
+                  class="button button-x">
+                  Add Room Type
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="ml-col-1">
       <p class="room-data__card-titulo">
         <span class="text-bold">Slides of room: </span>
@@ -522,6 +555,11 @@
             (click)="primaryModal.hide(); resetImagesData();">
             Close
           </button>
+          <div *ngIf="canDeleteA">
+            <button type="submit" class="btn btn-warning" (click)="deleteSlide()">
+              Eliminar
+            </button>
+          </div> 
           <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios </button>
         </div>
       </form>

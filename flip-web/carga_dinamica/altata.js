@@ -45,11 +45,11 @@ $(document).ready(function () {
             $('#serviceTxt').text(respuesta.titles[0].name);
             $('#roomsTxt').text(respuesta.titles[2].name);
             $('#mapTXT').text(respuesta.titles[3].name)
-            $('#btnYellowTXT').text(espuesta.titles[3].name);
+            $('#btnYellowTXT').text(respuesta.titles[4].name);
 
         },
         error: function (jqXHR, textStatus, errorThrown) { 
-            debugger;
+            // debugger;
             console.log(jqXHR, textStatus, errorThrown); 
         },
     });
@@ -479,7 +479,7 @@ function getRoomsData( id_build ) {
 function appendContentToPage( data ) { 
     
     for( let index = 0; index < 4; index += 1 ) {
-        debugger;
+        // debugger;
         const title_section = document.querySelectorAll('[service="name"]')[index],
               description_section = document.querySelectorAll('[service="description"]')[index],
               image_section = document.querySelectorAll('[service="image"]')[index],
@@ -502,7 +502,7 @@ function appendContentToPage( data ) {
                                                 ${ icon.titleIcon }
                                             </span>
                                         </figure>`;
-debugger;
+// debugger;
                     icons_container.innerHTML += icon_content;
 
                 });
@@ -514,17 +514,46 @@ debugger;
 }
 
 function appendRoomContentToPage( rooms_data ) {
+    console.log('Rooms Data', rooms_data.length);
+    // rooms_data.forEach((element, index) => {
+    //     console.log('index', index);
+    //     const room = rooms_data[index],
+    //           room_card_name = document.querySelectorAll('[room="card_name"]')[index],
+    //           room_card_desc_o = document.querySelectorAll('[room="card_desc_one"]')[index],
+    //           room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
+    //         //  room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
+    //           room_card_prie_o = document.querySelectorAll('[room="card_price_one"]')[index],
+    //           room_card_prie_t = document.querySelectorAll('[room="card_price_two"]')[index];
+    //     if( room_card_name != undefined ) {
 
-    for( let index = 0; index < rooms_data.length; index += 1 ) {
+    //         room_card_name.innerHTML = room.title;
+    //         room_card_desc_o.innerHTML = `${room.descPrice}<br>
+    //                                     <p style="font-weight: 700; font-size: 1.5em;">
+    //                                         $ ${room.price}
+    //                                         <br>
+    //                                     </p>`;
+    //         room_card_desc_t.innerHTML = `${room.descPrice1}<br>
+    //                                     <p style="font-weight: 700; font-size: 1.5em;">
+    //                                         $ ${room.price1}
+    //                                         <br>
+    //                                     </p>`;
 
+    //         sliderRoomContent( room.photos, index );
+    //         sliderViewVideo( room.view360, index );
+
+    //     }
+    // });
+
+    for( var index = 0; index < rooms_data.length; index+= 1 ) {
+        console.log('index', index);
         const room = rooms_data[index],
               room_card_name = document.querySelectorAll('[room="card_name"]')[index],
               room_card_desc_o = document.querySelectorAll('[room="card_desc_one"]')[index],
-              room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index];
+              room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
             //  room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
               room_card_prie_o = document.querySelectorAll('[room="card_price_one"]')[index],
               room_card_prie_t = document.querySelectorAll('[room="card_price_two"]')[index];
-              
+        console.log('room_card_name', room_card_name);
         if( room_card_name != undefined ) {
 
             room_card_name.innerHTML = room.title;
@@ -593,7 +622,8 @@ function getUrlVideoToEmbed( video_url ) {
 }
 
 function sliderRoomContent( photos, index ) {
-
+    console.log('Photos', photos);
+    console.log('Photos Index', index);
     const slider_room_image = document.querySelectorAll(`[room="slide-image-${ index }"]`),
           slider_room_title = document.querySelectorAll(`[room="slide-title-${ index }"]`),
           slider_room_desc = document.querySelectorAll(`[room="slide-desc-${ index }"]`),
@@ -602,12 +632,12 @@ function sliderRoomContent( photos, index ) {
     for( let slide_index = 0; slide_index < 4; slide_index += 1 ) {
 
         if( photos[slide_index] != undefined ) {
-
+            console.log('Index', photos[slide_index]);
             slider_room_image[slide_index].src = photos[slide_index].photo;
             slider_room_title[slide_index].innerHTML = `${ photos[slide_index].titleIcon }<br />`;
             slider_room_desc[slide_index].innerHTML = photos[slide_index].titleIcon;
 
-            let icon = `<div class="col-sm-3 icondiv" style="margin-top: 50px;">
+            let icon0 = `<div class="col-sm-3 icondiv" style="margin-top: 50px;">
                             <label data-target="#myCarousel${ 7 + index }" data-slide-to="0" class="">
                                 <a href="#">
                                     <img class="iconscom" src="${ photos[0].icon }"
@@ -617,8 +647,8 @@ function sliderRoomContent( photos, index ) {
                                 </a>
                                 ${ photos[0].titleIcon }
                             </label>
-                            <br>
-                            <label data-target="#myCarousel${ 7 + index }" data-slide-to="1" class="">
+                            <br>`;
+            let icon1 = typeof photos[1] !== 'undefined' ? `<label data-target="#myCarousel${ 7 + index }" data-slide-to="1" class="">
                                 <a href="#">
                                     <img class="iconscom" src="${ photos[1].icon }"
                                         onmouseover="this.src='${ photos[1].icon2 }'"
@@ -626,10 +656,10 @@ function sliderRoomContent( photos, index ) {
                                         border="0" alt="" />
                                 </a> 
                                 ${ photos[1].titleIcon }
-                            </label>
-                        </div>
-                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                            <label data-target="#myCarousel${ 7 + index }" data-slide-to="2" class="">
+                            </label>` : '';
+            let iconEnd1 = `</div>`;
+            let iconStart1 = `<div class="col-sm-3 icondiv" style="margin-top: 50px;">`;
+            let icon2 = typeof photos[2] !== 'undefined' ? `<label data-target="#myCarousel${ 7 + index }" data-slide-to="2" class="">
                                 <a href="#">
                                     <img class="iconscom" src="${ photos[2].icon }"
                                         onmouseover="this.src='${ photos[2].icon2 }'"
@@ -638,8 +668,8 @@ function sliderRoomContent( photos, index ) {
                                 </a>
                                 ${ photos[2].titleIcon }
                             </label>
-                            <br>
-                            <label data-target="#myCarousel${ 7 + index }" data-slide-to="3" class="">
+                            <br>` : '';
+            let icon3 = typeof photos[3] !== 'undefined' ? `<label data-target="#myCarousel${ 7 + index }" data-slide-to="3" class="">
                                 <a href="#">
                                     <img class="iconscom" src="${ photos[3].icon }"
                                         onmouseover="this.src='a${ photos[3].icon2 }'"
@@ -647,13 +677,12 @@ function sliderRoomContent( photos, index ) {
                                         border="0" alt="" />
                                 </a> 
                                 ${ photos[3].titleIcon }
-                            </label>
-                        </div>`;
+                            </label>` : '';
+            let icoEnd2 = `</div>`;
 
-            slider_room_icons[slide_index].innerHTML = icon;
-
-        }
-
+            let iconAll = icon0 + icon1 + iconEnd1 + iconStart1 + icon2 + icon3 + icoEnd2
+            slider_room_icons[slide_index].innerHTML = iconAll;
+        }    
     }
 
 }
