@@ -55,6 +55,9 @@ export class HomeroomsComponent implements OnInit {
   post_blanck: any;
   lengthpost: number = 0;
   room_blanck: any;
+  showAddA = false;
+  showAddB = false;
+  canDeleteA = false;
 
   title: string = "";
   price: string = "";
@@ -223,7 +226,13 @@ export class HomeroomsComponent implements OnInit {
               this.posts = this.set_room_empty_obj();
               
             }
-
+            this.showAddA = value.item[0].photos.length <= 4 ? true : false;
+            this.showAddB = value.item[0].photos.length <= 4 ? true : false;
+            this.canDeleteA = value.item[0].photos.length === 1 ? false : true;
+            console.log(value);
+            console.log(this.canDeleteA);
+            console.log(this.posts);
+            console.log(this.posts_b);
             setTimeout( () => { this.loader.hideLoader(); }, 1277);
           }
       }
@@ -350,6 +359,30 @@ export class HomeroomsComponent implements OnInit {
     this.photos_data.description = album.description;
   }
 
+  public passPhotosDataA( album: any ): void {
+    this.photos_data.id = 0;
+    this.photos_data.titleIcon = '';
+    this.photos_data.icon = '';
+    this.photos_data.icon2 = '';
+    this.photos_data.Photo = '';
+    this.photos_data.PhotoMobile = '';
+    this.photos_data.IdCommunitiesRoomWeb = this.posts[0].id;
+    this.photos_data.title = '';
+    this.photos_data.description = '';
+  }
+
+  public passPhotosDataB( album: any ): void {
+    this.photos_data.id = 0;
+    this.photos_data.titleIcon = '';
+    this.photos_data.icon = '';
+    this.photos_data.icon2 = '';
+    this.photos_data.Photo = '';
+    this.photos_data.PhotoMobile = '';
+    this.photos_data.IdCommunitiesRoomWeb = this.posts_b[0].id;
+    this.photos_data.title = '';
+    this.photos_data.description = '';
+  }
+
   updatephoto() {
 
     if( this.formPhotosValidator( this.photos_data ) ) {
@@ -400,6 +433,40 @@ export class HomeroomsComponent implements OnInit {
 
     }
 
+  }
+
+  deleteSlide() {
+    if (this.formPhotosValidator(this.photos_data)) {
+      const close_album_button = document.getElementById('close_album');
+      this.loader.showLoader();
+      this.heroService.ServicioPostPost('DeleteHomeRoomphoto', this.photos_data)
+        .subscribe((response: any) => {
+          if (response.result === 'Success') {
+            this.system_message.showMessage({
+              kind: 'ok',
+              time: 4700,
+              message: {
+                header: 'Content deleted',
+                text: 'Content has been deleted successfully'
+              }
+            });
+            close_album_button.click();
+            this.get_photos();
+            setTimeout(() => this.loader.hideLoader(), 777);
+          }
+        }, (error: any) => {
+        });
+    } else {
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 4700,
+        message: {
+          header: 'Form must be completed',
+          text: 'All inputs must be filled to continue'
+        }
+      });
+      this.sendToPageTop();
+    }
   }
 
 
