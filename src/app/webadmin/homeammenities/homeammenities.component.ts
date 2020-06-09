@@ -253,8 +253,8 @@ export class HomeammenitiesComponent implements OnInit {
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
           break;
         default:
-          //  
-          if (value.result == "Success") {
+          //
+          if (value.result == 'Success') {
             // 
             this.posts = value.item;
             this.lengthpost = this.posts.length;
@@ -321,7 +321,7 @@ export class HomeammenitiesComponent implements OnInit {
                 this.post.icon2 = '';
                 this.post.build = '';
                 this.post.buildmobile = '';
-                if( response.result == 'Success' ) {
+                if ( response.result == 'Success' ) {
 
                   this.system_message.showMessage({
                     kind: 'ok',

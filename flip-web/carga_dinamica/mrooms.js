@@ -84,13 +84,13 @@ function getRoomsData( id_build ) {
 }
 
 function appendRoomContentToPage( rooms_data ) {
-
+    console.log('Rooms data', rooms_data);
     for( let index = 0; index < rooms_data.length; index += 1 ) {
 
         const room = rooms_data[index],
               room_card_name = document.querySelectorAll('[room="card_name"]')[index],
               room_card_desc_o = document.querySelectorAll('[room="card_desc_one"]')[index],
-              room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index];
+              room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
             //  room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
               room_card_prie_o = document.querySelectorAll('[room="card_price_one"]')[index],
               room_card_prie_t = document.querySelectorAll('[room="card_price_two"]')[index];
@@ -163,7 +163,8 @@ function getUrlVideoToEmbed( video_url ) {
 }
 
 function sliderRoomContent( photos, index ) {
-
+    console.log('Photos', photos);
+    console.log('Index', index);
     const slider_room_image = document.querySelectorAll(`[room="slide-image-${ index }"]`),
           slider_room_title = document.querySelectorAll(`[room="slide-title-${ index }"]`),
           slider_room_desc = document.querySelectorAll(`[room="slide-desc-${ index }"]`),
@@ -172,7 +173,7 @@ function sliderRoomContent( photos, index ) {
     for( let slide_index = 0; slide_index < 4; slide_index += 1 ) {
 
         if( photos[slide_index] != undefined ) {
-
+            console.log('Index', photos[slide_index]);
             slider_room_image[slide_index].src = photos[slide_index].photo;
             slider_room_title[slide_index].innerHTML = `${ photos[slide_index].titleIcon }<br />`;
             slider_room_desc[slide_index].innerHTML = photos[slide_index].titleIcon;
@@ -187,8 +188,8 @@ function sliderRoomContent( photos, index ) {
                                 </a>
                                 ${ photos[0].titleIcon }
                             </label>
-                            <br>
-                            <label data-target="#myCarousel${ 7 + index }" data-slide-to="1" class="">
+                            <br>`;
+            icon = typeof photos[1] !== 'undefined' ? icon + `<label data-target="#myCarousel${ 7 + index }" data-slide-to="1" class="">
                                 <a href="#">
                                     <img class="iconscom" src="${ photos[1].icon }"
                                         onmouseover="this.src='${ photos[1].icon2 }'"
@@ -196,10 +197,10 @@ function sliderRoomContent( photos, index ) {
                                         border="0" alt="" />
                                 </a> 
                                 ${ photos[1].titleIcon }
-                            </label>
-                        </div>
-                        <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                            <label data-target="#myCarousel${ 7 + index }" data-slide-to="2" class="">
+                            </label>` : icon;
+            icon = icon + `</div>`;
+            icon = icon + `<div class="col-sm-3 icondiv" style="margin-top: 50px;">`
+            icon = typeof photos[2] !== 'undefined' ? `<label data-target="#myCarousel${ 7 + index }" data-slide-to="2" class="">
                                 <a href="#">
                                     <img class="iconscom" src="${ photos[2].icon }"
                                         onmouseover="this.src='${ photos[2].icon2 }'"
@@ -208,8 +209,8 @@ function sliderRoomContent( photos, index ) {
                                 </a>
                                 ${ photos[2].titleIcon }
                             </label>
-                            <br>
-                            <label data-target="#myCarousel${ 7 + index }" data-slide-to="3" class="">
+                            <br>` : icon;
+            icon = typeof photos[3] !== 'undefined' ? `<label data-target="#myCarousel${ 7 + index }" data-slide-to="3" class="">
                                 <a href="#">
                                     <img class="iconscom" src="${ photos[3].icon }"
                                         onmouseover="this.src='a${ photos[3].icon2 }'"
@@ -217,8 +218,8 @@ function sliderRoomContent( photos, index ) {
                                         border="0" alt="" />
                                 </a> 
                                 ${ photos[3].titleIcon }
-                            </label>
-                        </div>`;
+                            </label>` : incon;
+            icon = icon + `</div>`;
 
             slider_room_icons[slide_index].innerHTML = icon;
 
