@@ -61,6 +61,8 @@ export class AlertsComponent implements OnInit {
 
         this.loader.showLoader();
 
+        console.log('Init => ', ws_data);
+
         this._services.service_general_get_with_params('Alerts/GetAllAlertsByDateType', ws_data)
             .subscribe( (response: any) => {
 
@@ -131,8 +133,6 @@ export class AlertsComponent implements OnInit {
     }
 
     public specificFieldWorker( array_to_work: any[], which_one: string ):void {
-
-        console.log('Worker ==> ', array_to_work);
 
         array_to_work.forEach( (element: any) => {
 
@@ -238,15 +238,47 @@ export class AlertsComponent implements OnInit {
         this.schedule_object = schedule_selected;
         console.log('Schedule selected ===> ', this.schedule_object );
 
+        if( this.schedule_object.alertDetails.length != 0 ) {
+
+            console.log('Schedule selected Avaible ===> ', this.schedule_object.alertDetails );
+
+            const root_data: any = this.schedule_object.alertDetails[0];
+
+            console.log('Data before => ', root_data);
+
+            this.alert_detail_form.id = root_data.id;
+            this.alert_detail_form.IdAlert = this.schedule_object.id;
+            this.alert_detail_form.Company = root_data.company;
+            this.alert_detail_form.Phone = root_data.phone;
+            this.alert_detail_form.EmailCompany = root_data.emailCompany;
+            this.alert_detail_form.AssignStaff = root_data.assignStaff;
+            this.alert_detail_form.MobilPhone = root_data.mobilPhone;
+            this.alert_detail_form.EmailStaff = root_data.emailStaff;
+            this.alert_detail_form.MaxBudget = root_data.maxBudget;
+            this.alert_detail_form.HoreSchedule = root_data.horeSchedule;
+            this.alert_detail_form.DateSchedule = root_data.dateSchedule;
+
+            console.log('Here Edit => ', this.alert_detail_form);
+
+        } else {
+
+            this.alert_detail_form.id = 0;
+            this.alert_detail_form.IdAlert = this.schedule_object.id;
+
+            console.log('Here New => ', this.alert_detail_form);
+
+        }
+
         this.schedule_avaible = JSON.parse( schedule_selected.availableSchedule );
         this.setDaysActives( this.schedule_avaible.daysOfWeek );
         this.color_alert_updated = this.schedule_object.color;
 
         if( action == 'edit' ) {
 
-            this.alert_detail_form.IdAlert = this.schedule_object.alertStatusId;
+            this.alert_detail_form.AlertStatusId = Number( this.schedule_object.alertStatusId );
 
         }
+
 
     }
 
@@ -297,20 +329,58 @@ export class AlertsComponent implements OnInit {
 
             this.loader.showLoader();
 
-            this.system_message.showMessage({
-                kind: 'ok',
-                time: 4777,
-                message: {
-                    header: 'Alert updated',
-                    text: 'Alert has been updated successfully.'
-                }
-            });
+            this.alert_detail_form.AlertStatusId = Number( this.alert_detail_form.AlertStatusId );
 
-            this.showModal();
+            console.log('Here we go ======> ', this.alert_detail_form);
 
-            setTimeout( () => this.loader.hideLoader(), 1777);
+            this._services.service_general_post('Alerts/UpdateAlertDetail', this.alert_detail_form)
+                .subscribe( (response: any) => {
 
-            console.log('Here we go => ', this.alert_detail_form);
+                    if( response.result == 'Success' ) {
+
+                        this.showModal();
+                        this.getAlertsData();
+
+                        this.system_message.showMessage({
+                            kind: 'ok',
+                            time: 4777,
+                            message: {
+                                header: 'Alert updated',
+                                text: 'Alert has been updated successfully.'
+                            }
+                        });
+
+                    } else {
+
+                        this.system_message.showMessage({
+                            kind: 'error',
+                            time: 4777,
+                            message: {
+                                header: 'System Error',
+                                text: 'Please contact your administrator'
+                            }
+                        });
+
+                    }
+
+                    console.log('Response => ', response);
+
+                    setTimeout( () => this.loader.hideLoader(), 1777);
+
+                }, (error: any) => {
+
+                    this.system_message.showMessage({
+                        kind: 'error',
+                        time: 4777,
+                        message: {
+                            header: 'System Error',
+                            text: 'A system error has ocurred, please try leater'
+                        }
+                    });
+    
+                    this.loader.hideLoader();
+
+                });
 
         } else {
 
@@ -340,8 +410,6 @@ export class AlertsComponent implements OnInit {
                     this.alerts_status_catalog = response.item; 
                     this.loader.hideLoader();
 
-                    console.log('Catalogo => ', this.alerts_status_catalog);
-
                 }
 
             }, (error: any) => {
@@ -369,7 +437,9 @@ export class AlertsComponent implements OnInit {
         no_snam: false,
         no_spho: false,
         no_smai: false,
-        no_mbud: false
+        no_mbud: false,
+        no_date: false,
+        no_hour: false
     }
     public alterDetailFieldsValidator():boolean {
 
@@ -407,6 +477,13 @@ export class AlertsComponent implements OnInit {
             this.alert_detail_validator.no_mbud = true :
             this.alert_detail_validator.no_mbud = false;
 
+        this.alert_detail_form.DateSchedule == '' ?
+            this.alert_detail_validator.no_date = true :
+            this.alert_detail_validator.no_date = false;  
+        
+        this.alert_detail_form.HoreSchedule == '' ?
+            this.alert_detail_validator.no_hour = true :
+            this.alert_detail_validator.no_hour = false;  
 
         for( let field in this.alert_detail_validator ) {
 
@@ -437,10 +514,32 @@ export class AlertsComponent implements OnInit {
         this.alert_detail_form.MobilPhone = '';
         this.alert_detail_form.EmailStaff = '';
         this.alert_detail_form.MaxBudget = '';
+        this.alert_detail_form.DateSchedule = '';
+        this.alert_detail_form.HoreSchedule = '';
 
     }
 
     /*Utilities Section*/
+    public dateWorker( the_date: string ) {
+
+        let result: string = '';
+
+        if( the_date != null || the_date != '' ) {
+
+            const split_the_date = the_date.split('-'),
+                  date_splited_day = split_the_date[0],
+                  date_splited_month = split_the_date[1],
+                  date_splited_year = split_the_date[2],
+                  new_date = `${ date_splited_year }-${ date_splited_month }-${ date_splited_day }`;
+
+            result = new_date;
+
+        }
+
+        return result;
+
+    }
+
     public today: string = '';
     public getToday():void {
 
@@ -487,6 +586,8 @@ class AlertDetail {
     MobilPhone: string = '';
     EmailCompany: string = '';
     EmailStaff: string = '';
-    ProgramSchedule: string = '';
+    DateSchedule: string = '';
+    HoreSchedule: string = '';
+    AlertStatusId: any = '';
     IdAlert: number = -1;
 }

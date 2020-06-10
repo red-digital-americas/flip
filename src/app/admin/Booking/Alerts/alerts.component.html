@@ -6,7 +6,8 @@
                Alerts
             </h4>
             <button 
-                class="ap-form__rButton button-big button-green">
+                class="ap-form__rButton button-big button-green"
+                (click)="showModal('new_alert')">
                 New Alert
             </button>
         </div>
@@ -609,16 +610,29 @@
             </button>
         </div> 
         <div class="ml-col-1 margin-bottom-x">
-            <div class="ml-col-4">
-                Order number: 
-                <span class="text-bold">
+            <div class="ml-col-3o">
+                <div class="ml-col-1">
+                    Order number: 
+                </div>
+                <div class="ml-col-1 text-bold">
                     {{ schedule_object.id }}
-                </span>
+                </div>
             </div>
-            <div class="ml-col-6">
-                Job Description: <span class="text-bold">
+            <div class="ml-col-4">
+                <div class="ml-col-1">
+                    Work type: 
+                </div>
+                <div class="ml-col-1 text-bold">
+                    {{ schedule_object.name }}
+                </div>
+            </div>
+            <div class="ml-col-4">
+                <div class="ml-col-1">
+                    Job description: 
+                </div>
+                <div class="ml-col-1 text-bold">
                     {{ schedule_object.information }}
-                </span>
+                </div>
             </div>
         </div>
         <div class="ml-col-1 margin-bottom-x">
@@ -653,7 +667,7 @@
                 </div>
             </div>
             <div class="ml-col-1 margin-top-x">
-                <div class="ml-col-2">
+                <div class="ml-col-1">
                     <div class="ml-col-1">
                         Description:
                     </div>
@@ -730,7 +744,7 @@
                         id="company_status" 
                         name="company_status"
                         class="ap-form__input-text"
-                        [(ngModel)]="alert_detail_form.IdAlert"
+                        [(ngModel)]="alert_detail_form.AlertStatusId"
                         (change)="changeColorStatus( alert_detail_form.IdAlert )"
                         [class.custom-input__text--error]="alert_detail_validator.no_aler">
                         <option value="-1" disabled>Status</option>
@@ -932,12 +946,17 @@
                         placeholder="When?"
                         id="staff_when" 
                         name="staff_when"
-                        class="ap-form__input-text" />
+                        class="ap-form__input-text"
+                        [class.custom-input__text--error]="alert_detail_validator.no_date"
+                        [(ngModel)]="alert_detail_form.DateSchedule"/>
                       <label 
                         for="staff_when" 
                         class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
                         When?
                       </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_date">
+                        When date is required*
+                      </span>
                     </div>
                 </div>
             </div>
@@ -950,12 +969,17 @@
                         placeholder="What time?"
                         id="staff_when" 
                         name="staff_when"
-                        class="ap-form__input-text" />
+                        class="ap-form__input-text"
+                        [(ngModel)]="alert_detail_form.HoreSchedule"
+                        [class.custom-input__text--error]="alert_detail_validator.no_hour"/>
                       <label 
                         for="staff_when" 
                         class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
                         What time?
                       </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_hour">
+                        What time is required*
+                      </span>
                     </div>
                 </div>
             </div>
@@ -966,6 +990,130 @@
                 (click)="saveAlertDetail()">
                 Save
             </button>
+        </div>
+    </div>
+    <div class="ml-modal__content card-style" *ngIf="section_to_show == 'new_alert'">
+        <div class="ml-col-1 margin-bottom-x">
+            <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
+                New Alert
+            </p>
+            <button 
+                class="ap-form__rButton button-red"
+                (click)="showModal();">
+                Close
+            </button>
+        </div> 
+        <div class="ml-col-1">
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="Name"
+                        id="new_alert_name" 
+                        name="company_status"
+                        class="ap-form__input-text" />
+                      <label 
+                        for="company_status" 
+                        class="ap-form__label ap-form__label-text">
+                        Name
+                      </label>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="Name"
+                        id="new_alert_name" 
+                        name="company_status"
+                        class="ap-form__input-text" />
+                      <label 
+                        for="company_status" 
+                        class="ap-form__label ap-form__label-text">
+                        Name
+                      </label>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="Name"
+                        id="new_alert_name" 
+                        name="company_status"
+                        class="ap-form__input-text" />
+                      <label 
+                        for="company_status" 
+                        class="ap-form__label ap-form__label-text">
+                        Name
+                      </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ml-col-1">
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="Name"
+                        id="new_alert_name" 
+                        name="company_status"
+                        class="ap-form__input-text" />
+                      <label 
+                        for="company_status" 
+                        class="ap-form__label ap-form__label-text">
+                        Name
+                      </label>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="Name"
+                        id="new_alert_name" 
+                        name="company_status"
+                        class="ap-form__input-text" />
+                      <label 
+                        for="company_status" 
+                        class="ap-form__label ap-form__label-text">
+                        Name
+                      </label>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="Name"
+                        id="new_alert_name" 
+                        name="company_status"
+                        class="ap-form__input-text" />
+                      <label 
+                        for="company_status" 
+                        class="ap-form__label ap-form__label-text">
+                        Name
+                      </label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="ml-modal__content card-style" *ngIf="section_to_show == 'chat'">
