@@ -106,10 +106,15 @@
                          *ngFor="let card of pending_schedule_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status">
-                                Order Number: {{ card.id }} 
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showModal('chat')">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
                             <span class="ml-col-1 word-break">
@@ -150,10 +155,15 @@
                          *ngFor="let card of confirming_completion_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status">
+                            <p class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showModal('chat')">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
                             <span class="ml-col-2 word-break">
@@ -194,10 +204,15 @@
                          *ngFor="let card of awaiting_invoice_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status">
+                            <p class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showModal('chat')">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
                             <span class="ml-col-2 word-break">
@@ -238,10 +253,15 @@
                          *ngFor="let card of confirming_paymnet_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status">
+                            <p class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showModal('chat')">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
                             <span class="ml-col-2 word-break">
@@ -282,10 +302,15 @@
                          *ngFor="let card of completed_and_paid_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status">
+                            <p class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showModal('chat')">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
                             <span class="ml-col-2 word-break">
@@ -328,10 +353,15 @@
                          *ngFor="let card of urgent_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status alerts__card-card--status-error">
+                            <p class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showModal('chat')">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
                             <span class="ml-col-2 word-break">
@@ -372,10 +402,15 @@
                          *ngFor="let card of schelude_today_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status alerts__card-card--status-error">
+                            <p class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showModal('chat')">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
                             <span class="ml-col-2 word-break">
@@ -416,10 +451,15 @@
                          *ngFor="let card of schelude_week_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status alerts__card-card--status-error">
+                            <p class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showModal('chat')">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
                             <span class="ml-col-2 word-break">
@@ -460,10 +500,15 @@
                          *ngFor="let card of schelude_week_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status alerts__card-card--status-error">
+                            <p class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showModal('chat')">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
                             <span class="ml-col-2 word-break">
@@ -504,10 +549,15 @@
                          *ngFor="let card of other_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status alerts__card-card--status-error">
+                            <p class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showModal('chat')">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
                             <span class="ml-col-2 word-break">
@@ -544,7 +594,7 @@
     </div>
 </div>
 <div class="ml-modal ml-modal--bg-black" *ngIf="show_modal">
-    <div class="ml-modal__content card-style">
+    <div class="ml-modal__content card-style" *ngIf="section_to_show == 'default'">
         <div class="ml-col-1 margin-bottom-x">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
                 Schedule
@@ -917,5 +967,18 @@
                 Save
             </button>
         </div>
+    </div>
+    <div class="ml-modal__content card-style" *ngIf="section_to_show == 'chat'">
+        <div class="ml-col-1 margin-bottom-x">
+            <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
+                Chat Messages
+            </p>
+            <button 
+                class="ap-form__rButton button-red"
+                (click)="showModal();">
+                Close
+            </button>
+        </div> 
+        Aqui va el chat!!
     </div>
 </div>

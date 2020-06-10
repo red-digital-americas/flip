@@ -27,10 +27,13 @@ export class AlertsComponent implements OnInit {
     }
 
     public show_modal: boolean = false;
-    public showModal():void {
+    public section_to_show: string = '';
+    public showModal( section_selected: string = 'default' ):void {
 
         !this.show_modal ? 
             this.show_modal = true : this.show_modal = false; 
+
+        this.section_to_show = section_selected;
 
     }
 
