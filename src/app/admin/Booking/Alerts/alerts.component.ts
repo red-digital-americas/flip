@@ -532,6 +532,8 @@ export class AlertsComponent implements OnInit {
         this.alert_detail_validator.no_spho = false;
         this.alert_detail_validator.no_smai = false;
         this.alert_detail_validator.no_mbud = false;
+        this.alert_detail_validator.no_date = false;
+        this.alert_detail_validator.no_hour = false;
 
         this.alert_detail_form.Company = '';
         this.alert_detail_form.Phone = '';
