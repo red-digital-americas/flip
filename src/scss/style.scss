@@ -3871,6 +3871,24 @@ select:active,
 
 }
 
+.schedule {
+
+    &__color {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin-left: 0;
+      margin-left: 5px;
+      border-radius: 50%;
+    }
+
+    &--mini {
+      width: 10px;
+      height: 10px;
+    }
+
+}
+
 .show-more-icon {
   position: absolute;
   top: 50%;

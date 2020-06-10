@@ -120,13 +120,13 @@
                             {{ card.name }}
                         </div>
                         <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022 ?</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am ?</div>
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card );">
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -164,13 +164,13 @@
                             {{ card.name }}
                         </div>
                         <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022 ?</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am ?</div>
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card );">
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -208,13 +208,13 @@
                             {{ card.name }}
                         </div>
                         <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022 ?</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am ?</div>
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card );">
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -252,13 +252,13 @@
                             {{ card.name }}
                         </div>
                         <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022 ?</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am ?</div>
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card );">
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -296,13 +296,13 @@
                             {{ card.name }}
                         </div>
                         <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022 ?</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am ?</div>
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card );">
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -342,13 +342,13 @@
                             {{ card.name }}
                         </div>
                         <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022 ?</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am ?</div>
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card );">
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -386,13 +386,13 @@
                             {{ card.name }}
                         </div>
                         <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022 ?</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am ?</div>
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card );">
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -430,13 +430,13 @@
                             {{ card.name }}
                         </div>
                         <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022 ?</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am ?</div>
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card );">
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -474,13 +474,13 @@
                             {{ card.name }}
                         </div>
                         <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022 ?</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am ?</div>
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card );">
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -518,13 +518,13 @@
                             {{ card.name }}
                         </div>
                         <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022 ?</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am ?</div>
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card );">
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -548,6 +548,9 @@
         <div class="ml-col-1 margin-bottom-x">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
                 Schedule
+                <span class="schedule__color" 
+                      [style.background-color]="schedule_object.color">
+                </span>
             </p>
             <button 
                 class="ap-form__rButton button-red"
@@ -557,10 +560,15 @@
         </div> 
         <div class="ml-col-1 margin-bottom-x">
             <div class="ml-col-4">
-                Order number: <span class="text-bold">777</span>
+                Order number: 
+                <span class="text-bold">
+                    {{ schedule_object.id }}
+                </span>
             </div>
             <div class="ml-col-6">
-                Job Description: <span class="text-bold">Make me bien wey all day amigo!</span>
+                Job Description: <span class="text-bold">
+                    {{ schedule_object.information }}
+                </span>
             </div>
         </div>
         <div class="ml-col-1 margin-bottom-x">
@@ -606,7 +614,7 @@
             </div>
         </div>
         <div class="ml-col-3">
-            <div class="ml-col-1 margin-bottom-x">
+            <div class="ml-col-1">
                 Avaibility Schedule: 
             </div>
             <div class="days-icons" id="days_container">
@@ -647,14 +655,14 @@
                 </div>
             </div>
             <div class="ml-col-1">
-                <div class="ml-col-2 text-center">
-                    Start Date:
+                <div class="ml-col-2">
+                    Open:
                     <span class="text-bold">
                         {{ schedule_avaible.startTime }}
                     </span>
                 </div>
-                <div class="ml-col-2 text-center">
-                    End Date:
+                <div class="ml-col-2">
+                    Close:
                     <span class="text-bold">
                         {{ schedule_avaible.endTime }}
                     </span>
@@ -673,14 +681,20 @@
                         name="company_status"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.IdAlert"
+                        (change)="changeColorStatus( alert_detail_form.IdAlert )"
                         [class.custom-input__text--error]="alert_detail_validator.no_aler">
                         <option value="-1" disabled>Status</option>
-                        <option value="1">Option holder</option>
+                        <option *ngFor="let status of alerts_status_catalog;" [value]="status.id">
+                            {{ status.status }}
+                        </option>
                       </select>
                       <label 
                         for="company_status" 
                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
                         Alert status
+                        <span class="schedule__color schedule--mini" 
+                              [style.background-color]="color_alert_updated">
+                        </span>
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_aler">
                         Alert status is required*
@@ -864,6 +878,7 @@
                       <input 
                         required
                         type="date" 
+                        [min]="today"
                         placeholder="When?"
                         id="staff_when" 
                         name="staff_when"
@@ -882,7 +897,7 @@
                       <input 
                         required
                         type="time" 
-                        placeholder="What time??"
+                        placeholder="What time?"
                         id="staff_when" 
                         name="staff_when"
                         class="ap-form__input-text" />
@@ -904,45 +919,3 @@
         </div>
     </div>
 </div>
-
-
-<!-- div class="alerts__card-card card-style">
-                        <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status alerts__card-card--status-error">
-                                Order Number: 777
-                            </span>
-                            <span class="alerts__card-card--bubble"></span>
-                        </div>
-                        <div class="ml-col-1">
-                            <span class="ml-col-2">Nombre Dow</span>
-                            <span class="ml-col-2 text-right">Alatata No. 7</span>
-                        </div>
-                        <div class="ml-col-1 text-bold">
-                            There no electricity in the apartament
-                        </div>
-                        <div class="ml-col-1 margin-top-x text-center">
-                            <button 
-                                class="alerts__card-button button-big button-green">
-                                Schedule
-                            </button>
-                        </div>
-                    </div -->
-                    <!-- div class="alerts__card-card card-style">
-                        <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status alerts__card-card--status-error">
-                                Order Number: 777
-                            </span>
-                            <span class="alerts__card-card--bubble"></span>
-                        </div>
-                        <div class="ml-col-1">
-                            <span class="ml-col-2">Nombre Dow</span>
-                            <span class="ml-col-2 text-right">Alatata No. 7</span>
-                        </div>
-                        <div class="ml-col-1 text-bold">
-                            There no electricity in the apartament
-                        </div>
-                        <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am</div>
-                        </div>
-                    </div -->

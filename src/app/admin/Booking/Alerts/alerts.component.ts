@@ -80,7 +80,13 @@ export class AlertsComponent implements OnInit {
                         this.confirming_completion_cards.forEach( (card: any) => card.visible_item = true );
                         this.awaiting_invoice_cards.forEach( (card: any) => card.visible_item = true ); 
                         this.confirming_paymnet_cards.forEach( (card: any) => card.visible_item = true );
-                        this.completed_and_paid_cards.forEach( (card: any) => card.visible_item = true ); 
+                        this.completed_and_paid_cards.forEach( (card: any) => card.visible_item = true );
+                        
+                        this.specificFieldWorker( this.pending_schedule_cards, 'creationDate' );
+                        this.specificFieldWorker( this.confirming_completion_cards, 'creationDate' );
+                        this.specificFieldWorker( this.awaiting_invoice_cards, 'creationDate' );
+                        this.specificFieldWorker( this.confirming_paymnet_cards, 'creationDate' );
+                        this.specificFieldWorker( this.completed_and_paid_cards, 'creationDate' );
 
                     } else {
 
@@ -89,6 +95,12 @@ export class AlertsComponent implements OnInit {
                         this.schelude_today_cards.forEach( (card: any) => card.visible_item = true ); 
                         this.schelude_week_cards.forEach( (card: any) => card.visible_item = true ); 
                         this.urgent_cards.forEach( (card: any) => card.visible_item = true ); 
+
+                        this.specificFieldWorker( this.other_cards, 'creationDate' );
+                        this.specificFieldWorker( this.schedule_month_cards, 'creationDate' );
+                        this.specificFieldWorker( this.schelude_today_cards, 'creationDate' );
+                        this.specificFieldWorker( this.schelude_week_cards, 'creationDate' );
+                        this.specificFieldWorker( this.urgent_cards, 'creationDate' );
 
                     }
 
@@ -112,6 +124,24 @@ export class AlertsComponent implements OnInit {
                 this.loader.hideLoader();
 
             });
+
+    }
+
+    public specificFieldWorker( array_to_work: any[], which_one: string ):void {
+
+        console.log('Worker ==> ', array_to_work);
+
+        array_to_work.forEach( (element: any) => {
+
+            const split_to_time_date = element[which_one].split('T'),
+                  date_gotted = split_to_time_date[0],
+                  time_gotted = split_to_time_date[1],
+                  time_gotted_hour = `${ time_gotted.split(':')[0] }:${ time_gotted.split(':')[1] }`;
+
+            element.date_worked = date_gotted;
+            element.hour_worked = time_gotted_hour;
+
+        });
 
     }
 
@@ -197,16 +227,38 @@ export class AlertsComponent implements OnInit {
 
     public schedule_object: any = null;
     public schedule_avaible: any = null;
-    public passScheduleData( schedule_selected: any ):void {
+    public passScheduleData( schedule_selected: any, action: string = 'new' ):void {
 
         this.resetAlertFormData();
+        this.getAlterStatusCatalog();
 
         this.schedule_object = schedule_selected;
+        console.log('Schedule selected ===> ', this.schedule_object );
 
         this.schedule_avaible = JSON.parse( schedule_selected.availableSchedule );
         this.setDaysActives( this.schedule_avaible.daysOfWeek );
+        this.color_alert_updated = this.schedule_object.color;
 
-        console.log('Schedule ===> ', this.schedule_object );
+        if( action == 'edit' ) {
+
+            this.alert_detail_form.IdAlert = this.schedule_object.alertStatusId;
+
+        }
+
+    }
+
+    public color_alert_updated: string = '';
+    public changeColorStatus( color_select: string ):void {
+
+        this.alerts_status_catalog.forEach( (alert: any) => {
+
+            if( alert.id == color_select ) {
+
+                this.color_alert_updated = alert.color;
+
+            }
+
+        });
 
     }
 
@@ -272,14 +324,22 @@ export class AlertsComponent implements OnInit {
 
     }
 
+    public alerts_status_catalog: any[] = [];
     public getAlterStatusCatalog():void {
 
         this.loader.showLoader();
 
-        this._services.service_general_get('getstatusalerts')
+        this._services.service_general_get('Alerts/getstatusalerts')
             .subscribe( (response: any) => {
 
-                console.log('===> ', response);
+                if( response.result == 'Success' ) {
+
+                    this.alerts_status_catalog = response.item; 
+                    this.loader.hideLoader();
+
+                    console.log('Catalogo => ', this.alerts_status_catalog);
+
+                }
 
             }, (error: any) => {
 
@@ -291,6 +351,8 @@ export class AlertsComponent implements OnInit {
                         text: 'A system error has ocurred, please try leater'
                     }
                 });
+
+                this.loader.hideLoader();
 
             });
 
