@@ -17,9 +17,35 @@ export class AlertsComponent implements OnInit {
     constructor(
         public _services: DatosService
     ) {}
+    /////////////////////////////////////////////// CHAT ////////////////////////////////////////////////
+    IDUSR = '';
+    messageInput = '';
+    userSendMessage: {} = {
+        id: 0,
+        info: {
+            name: 'Name',
+            lastname: 'Last Name',
+            photo: 'https://radio.spainrp.es/assets/images/logo-122x122.png'
+        }
+    };
 
+    messages: [
+        {
+            message: {
+                userId: 0,
+                message1: 'Cadena 0'
+            }
+        },
+        {
+            message: {
+                userId: 1,
+                message1: 'Cadena 1'
+            }
+        }
+    ];
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     ngOnInit() {
-
+        this.IDUSR = JSON.parse(localStorage.getItem('user')).id;
         this.section = 'alerts';
         this.getAlertsData();
         this.getToday();
@@ -571,6 +597,93 @@ export class AlertsComponent implements OnInit {
 
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////// CHAT ///////////////////////////////////////////////
+    showChat(card: any) {
+        !this.show_modal ?
+            this.show_modal = true : this.show_modal = false;
+
+        this.section_to_show = 'chat';
+        console.log(card);
+        this.userSendMessage = {
+            id: card.id,
+            userId: card.userId,
+            info: {
+                name: card.user.name + ' ',
+                lastname: card.user.lastName + ' ' + card.user.motherName,
+                photo: card.user.avatar
+            }
+        };
+        const creadoobj = { alertId: card.id, userId: card.userId };
+        console.log('My User', this.IDUSR);
+        this._services.service_general_get_with_params('Alerts/GetAlertsMessages', creadoobj).subscribe((value) => {
+            switch (value.result) {
+                case 'Error':
+                    console.log('Ocurrio un error ' + value.detalle);
+                    break;
+                default:
+                    console.log(value.item);
+                    if (value.result === 'Success') {
+                        this.messages = value.item;
+                        setTimeout(() => { this.scrollToBottom(); }, 200);
+                    }
+            }
+        });
+    }
+
+    GetMessages(data) {
+        console.log('GetMessage', data);
+        const creadoobj = { alertId: data.id, userId: data.userId };
+        this._services.service_general_get_with_params('Alerts/GetAlertsMessages', creadoobj).subscribe((value) => {
+            switch (value.result) {
+                case 'Error':
+                    console.log('Ocurrio un error ' + value.detalle);
+                    break;
+                default:
+                    console.log(value.item);
+                    if (value.result === 'Success') {
+                        this.messages = value.item;
+                        setTimeout(() => { this.scrollToBottom(); }, 200);
+                    }
+            }
+        });
+    }
+
+    // SentMessageBTN() {
+    //     console.log('Sent Message');
+    // }
+
+    SentMessageBTN (message: string, alertId: number, alertStatusId: number = 0) {
+        if (this.messageInput.length <= 0) { return; }
+        if (this.messageInput.trim().replace('/\r?\n|\r/', '').length <= 0) { return; }
+        console.log('DATA', message, alertId);
+        // return;
+        const alertMesage: AlertMessage = new AlertMessage();
+        alertMesage.message = message;
+        alertMesage.userId = parseInt(this.IDUSR);
+        alertMesage.alertStatusId = alertStatusId;
+        alertMesage.alertId = alertId;
+
+        this._services.service_general_post('Alerts/SentMessage', alertMesage).subscribe((value) => {
+          switch (value.result) {
+            case 'Error':
+              console.log('Ocurrio un error ' + value.detalle);
+            //   this.presentToast(value.detalle);
+              break;
+            default:
+              console.log(value.item);
+              if (value.result === 'Success') {
+                this.messageInput = '';
+                this.GetMessages(this.userSendMessage);
+              }
+            }
+        });
+      }
+
+      private scrollToBottom(): void {
+        document.getElementById('last').scrollIntoView(false);
+      }
+
 }
 
 class TextFinder {
@@ -590,4 +703,14 @@ class AlertDetail {
     HoreSchedule: string = '';
     AlertStatusId: any = '';
     IdAlert: number = -1;
+}
+
+export class AlertMessage {
+    public id:number;
+    public message:string;
+    public date:Date;
+    public seen:boolean;
+    public userId:number;
+    public alertStatusId:number;
+    public alertId:number;
 }

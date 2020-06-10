@@ -114,7 +114,7 @@
                                 </span>
                             </p>
                             <span class="alerts__card-card--bubble"
-                                  (click)="showModal('chat')">
+                                  (click)="showChat(card)">
                             </span>
                         </div>
                         <div class="ml-col-1">
@@ -163,7 +163,7 @@
                                 </span>
                             </p>
                             <span class="alerts__card-card--bubble"
-                                  (click)="showModal('chat')">
+                                  (click)="showChat(card)">
                             </span>
                         </div>
                         <div class="ml-col-1">
@@ -212,7 +212,7 @@
                                 </span>
                             </p>
                             <span class="alerts__card-card--bubble"
-                                  (click)="showModal('chat')">
+                                  (click)="showChat(card)">
                             </span>
                         </div>
                         <div class="ml-col-1">
@@ -261,7 +261,7 @@
                                 </span>
                             </p>
                             <span class="alerts__card-card--bubble"
-                                  (click)="showModal('chat')">
+                                  (click)="showChat(card)">
                             </span>
                         </div>
                         <div class="ml-col-1">
@@ -310,7 +310,7 @@
                                 </span>
                             </p>
                             <span class="alerts__card-card--bubble"
-                                  (click)="showModal('chat')">
+                                  (click)="showChat(card)">
                             </span>
                         </div>
                         <div class="ml-col-1">
@@ -361,7 +361,7 @@
                                 </span>
                             </p>
                             <span class="alerts__card-card--bubble"
-                                  (click)="showModal('chat')">
+                                  (click)="showChat(card)">
                             </span>
                         </div>
                         <div class="ml-col-1">
@@ -410,7 +410,7 @@
                                 </span>
                             </p>
                             <span class="alerts__card-card--bubble"
-                                  (click)="showModal('chat')">
+                                  (click)="showChat(card)">
                             </span>
                         </div>
                         <div class="ml-col-1">
@@ -459,7 +459,7 @@
                                 </span>
                             </p>
                             <span class="alerts__card-card--bubble"
-                                  (click)="showModal('chat')">
+                                  (click)="showChat(card)">
                             </span>
                         </div>
                         <div class="ml-col-1">
@@ -508,7 +508,7 @@
                                 </span>
                             </p>
                             <span class="alerts__card-card--bubble"
-                                  (click)="showModal('chat')">
+                                  (click)="showChat(card)">
                             </span>
                         </div>
                         <div class="ml-col-1">
@@ -557,7 +557,7 @@
                                 </span>
                             </p>
                             <span class="alerts__card-card--bubble"
-                                  (click)="showModal('chat')">
+                                  (click)="showChat(card)">
                             </span>
                         </div>
                         <div class="ml-col-1">
@@ -992,7 +992,7 @@
             </button>
         </div>
     </div>
-    <div class="ml-modal__content card-style" *ngIf="section_to_show == 'new_alert'">
+    <div class="ml-modal__content card-style " *ngIf="section_to_show == 'new_alert'">
         <div class="ml-col-1 margin-bottom-x">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
                 New Alert
@@ -1003,120 +1003,8 @@
                 Close
             </button>
         </div> 
-        <div class="ml-col-1">
-            <div class="ml-col-3">
-                <div class="ml-col-1">
-                    <div class="ap-form__input">
-                      <input 
-                        required
-                        type="text" 
-                        placeholder="Name"
-                        id="new_alert_name" 
-                        name="company_status"
-                        class="ap-form__input-text" />
-                      <label 
-                        for="company_status" 
-                        class="ap-form__label ap-form__label-text">
-                        Name
-                      </label>
-                    </div>
-                </div>
-            </div>
-            <div class="ml-col-3">
-                <div class="ml-col-1">
-                    <div class="ap-form__input">
-                      <input 
-                        required
-                        type="text" 
-                        placeholder="Name"
-                        id="new_alert_name" 
-                        name="company_status"
-                        class="ap-form__input-text" />
-                      <label 
-                        for="company_status" 
-                        class="ap-form__label ap-form__label-text">
-                        Name
-                      </label>
-                    </div>
-                </div>
-            </div>
-            <div class="ml-col-3">
-                <div class="ml-col-1">
-                    <div class="ap-form__input">
-                      <input 
-                        required
-                        type="text" 
-                        placeholder="Name"
-                        id="new_alert_name" 
-                        name="company_status"
-                        class="ap-form__input-text" />
-                      <label 
-                        for="company_status" 
-                        class="ap-form__label ap-form__label-text">
-                        Name
-                      </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ml-col-1">
-            <div class="ml-col-3">
-                <div class="ml-col-1">
-                    <div class="ap-form__input">
-                      <input 
-                        required
-                        type="text" 
-                        placeholder="Name"
-                        id="new_alert_name" 
-                        name="company_status"
-                        class="ap-form__input-text" />
-                      <label 
-                        for="company_status" 
-                        class="ap-form__label ap-form__label-text">
-                        Name
-                      </label>
-                    </div>
-                </div>
-            </div>
-            <div class="ml-col-3">
-                <div class="ml-col-1">
-                    <div class="ap-form__input">
-                      <input 
-                        required
-                        type="text" 
-                        placeholder="Name"
-                        id="new_alert_name" 
-                        name="company_status"
-                        class="ap-form__input-text" />
-                      <label 
-                        for="company_status" 
-                        class="ap-form__label ap-form__label-text">
-                        Name
-                      </label>
-                    </div>
-                </div>
-            </div>
-            <div class="ml-col-3">
-                <div class="ml-col-1">
-                    <div class="ap-form__input">
-                      <input 
-                        required
-                        type="text" 
-                        placeholder="Name"
-                        id="new_alert_name" 
-                        name="company_status"
-                        class="ap-form__input-text" />
-                      <label 
-                        for="company_status" 
-                        class="ap-form__label ap-form__label-text">
-                        Name
-                      </label>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="ml-modal__content card-style" *ngIf="section_to_show == 'chat'">
+    <div class="ml-modal__content card-style " *ngIf="section_to_show == 'chat'">
         <div class="ml-col-1 margin-bottom-x">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
                 Chat Messages
@@ -1126,7 +1014,37 @@
                 (click)="showModal();">
                 Close
             </button>
-        </div> 
-        Aqui va el chat!!
+        </div>
+        <div class="ml-col-1 margin-top-x">
+            <div class="ml-col-1">
+                <div class="">
+                    <h4 class="chatm__datos">
+                        {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
+                        <img class="chatm__datos-photo" 
+                             src="{{ userSendMessage.info.photo }}" />
+                    </h4>
+                    <div class="chatm__chat" id="chat_messages">
+                        <div *ngFor="let message of messages"
+                             class="chatm__chat-message">
+                            <span class="chatm__chat-message-msg"
+                                  [ngClass]="{'chatm__chat-message-msg-from': IDUSR == message.userId, 
+                                            'chatm__chat-message-msg-own': IDUSR != message.userId}">
+                                {{ message.message }}
+                            </span>
+                        </div>
+                        <div id="last"></div>
+                    </div>
+                    
+                    <div class="chatm__message">
+                        <textarea class="chatm__message-message card-style" [(ngModel)]="messageInput"></textarea>
+                        <button 
+                            (click)="SentMessageBTN(messageInput, userSendMessage.id )"
+                            class="chatm__message-send">
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>               
+            </div>
+        </div>
     </div>
 </div>
