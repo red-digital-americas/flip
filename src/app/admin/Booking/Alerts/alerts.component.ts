@@ -254,6 +254,18 @@ export class AlertsComponent implements OnInit {
 
     }
 
+    public initNewAlertModule():void {
+
+        this.getAlterStatusCatalog();
+
+    }
+
+    public saveNewAlertData():void {
+
+        console.log(' ===========> El pendejo!');
+
+    }
+
     public schedule_object: any = null;
     public schedule_avaible: any = null;
     public passScheduleData( schedule_selected: any, action: string = 'new' ):void {
@@ -357,8 +369,6 @@ export class AlertsComponent implements OnInit {
 
             this.alert_detail_form.AlertStatusId = Number( this.alert_detail_form.AlertStatusId );
 
-            console.log('Here we go ======> ', this.alert_detail_form);
-
             this._services.service_general_post('Alerts/UpdateAlertDetail', this.alert_detail_form)
                 .subscribe( (response: any) => {
 
@@ -388,8 +398,6 @@ export class AlertsComponent implements OnInit {
                         });
 
                     }
-
-                    console.log('Response => ', response);
 
                     setTimeout( () => this.loader.hideLoader(), 1777);
 
@@ -566,6 +574,83 @@ export class AlertsComponent implements OnInit {
 
         return result;
 
+    }
+
+    public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
+
+        const event = event_data.target,
+              dimensions_image_data = {
+                get_dimensions: ( function() {
+    
+                  const dimensions_split = dimensions_image.split('x'),
+                        width = Number( dimensions_split[0] ),
+                        height = Number( dimensions_split[1] );
+    
+                  return {
+                    width: width,
+                    height: height
+                  }
+    
+                }())
+              },
+              image_limit_width = dimensions_image_data.get_dimensions.width,
+              image_limit_height = dimensions_image_data.get_dimensions.height,
+              id_image_container:any = document.getElementById( target_image ),
+              name_image_container = document.getElementById( name_image ),
+              native_image_uploaded = document.getElementById('image_real_dimension'),
+              root_data = this;
+    
+        if( event.files && event.files[0] ) {
+    
+          const reader = new FileReader();
+    
+                reader.onload = function(e:any) {
+    
+                  const image_convert:any = e.target.result,
+                        validating_image = new Promise( (resolve) => {
+    
+                          native_image_uploaded.setAttribute('src', image_convert);
+                          
+                          setTimeout( () => {
+    
+                            const native_image_dimension = {
+                              image: image_convert,
+                              width: native_image_uploaded.offsetWidth,
+                              height: native_image_uploaded.offsetHeight
+                            };
+    
+                            resolve( native_image_dimension );
+    
+                          }, 277);
+                  
+                        });
+    
+                        validating_image.then( ( image_data:any ) => {
+    
+                          if( image_limit_width === image_data.width && image_limit_height === image_data.height ) {
+                            
+                            id_image_container.setAttribute('src', image_data.image );
+                            name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
+                            id_image_container.classList.remove('no-image');
+                            //root_data.prepareImages( event_data );
+    
+                          } else {
+    
+                            id_image_container.src = '../../../assets/14.jpg';
+                            //root_data.general_user_data.avatar = '';
+                            name_image_container.innerHTML = `Image must be <br /><span class="text-bold">${ dimensions_image }px</span>`;
+                            id_image_container.classList.add('no-image');
+    
+                          }
+                          
+                        });
+    
+                }
+    
+                reader.readAsDataURL( event.files[0] );
+    
+        }
+        
     }
 
     public today: string = '';
