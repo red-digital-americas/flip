@@ -107,12 +107,12 @@
                          *ngFor="let card of pending_schedule_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -156,12 +156,12 @@
                          *ngFor="let card of confirming_completion_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -205,12 +205,12 @@
                          *ngFor="let card of awaiting_invoice_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -254,12 +254,12 @@
                          *ngFor="let card of confirming_paymnet_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -303,12 +303,12 @@
                          *ngFor="let card of completed_and_paid_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -354,12 +354,12 @@
                          *ngFor="let card of urgent_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -403,12 +403,12 @@
                          *ngFor="let card of schelude_today_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -452,12 +452,12 @@
                          *ngFor="let card of schelude_week_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -501,12 +501,12 @@
                          *ngFor="let card of schelude_week_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -550,12 +550,12 @@
                          *ngFor="let card of other_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -1005,7 +1005,7 @@
         </div>
         <div class="ml-col-1 margin-bottom-x margin-top-x">
             <div class="ml-col-1 at-bcard__stitle">Information</div>
-            <div class="ml-col-3">
+            <!-- div class="ml-col-3">
                 <div class="ml-col-1">
                     <div class="ap-form__input">
                       <input 
@@ -1025,8 +1025,8 @@
                       </span>
                     </div>
                 </div>
-            </div>
-            <div class="ml-col-3">
+            </div -->
+            <!-- div class="ml-col-3">
                 <div class="ml-col-1">
                     <div class="ap-form__input">
                       <input 
@@ -1035,7 +1035,8 @@
                         placeholder="Email"
                         id="new_alert_email" 
                         name="new_alert_email"
-                        class="ap-form__input-text"/>
+                        class="ap-form__input-text"
+                        [(ngModel)]="new_alert_data."/>
                       <label 
                         for="new_alert_email" 
                         class="ap-form__label ap-form__label-text">
@@ -1046,8 +1047,8 @@
                       </span>
                     </div>
                 </div>
-            </div>
-            <div class="ml-col-3">
+            </div -->
+            <!-- div class="ml-col-3">
                 <div class="ml-col-1">
                     <div class="ap-form__input">
                       <input 
@@ -1056,7 +1057,8 @@
                         placeholder="Phone"
                         id="new_alert_phone" 
                         name="new_alert_phone"
-                        class="ap-form__input-text"/>
+                        class="ap-form__input-text"
+                        [(ngModel)]="new_alert_data."/>
                       <label 
                         for="new_alert_phone" 
                         class="ap-form__label ap-form__label-text">
@@ -1064,6 +1066,33 @@
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
                         Phone is required*
+                      </span>
+                    </div>
+                </div>
+            </div -->
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <select 
+                        required
+                        type="text" 
+                        placeholder="Alert status"
+                        id="new_alert_status" 
+                        name="new_alert_status"
+                        [(ngModel)]="new_alert_data.UserId"
+                        class="ap-form__input-text">
+                        <option value="" disabled>Users</option>
+                        <option *ngFor="let user of build_users_list;" [value]="user.id">
+                            {{ user.name }}
+                        </option>
+                      </select>
+                      <label 
+                        for="new_alert_status" 
+                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                        Users
+                      </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                        Users is required*
                       </span>
                     </div>
                 </div>
@@ -1098,7 +1127,8 @@
                         placeholder="Job Description"
                         id="new_alert_jdesc" 
                         name="new_alert_jdesc"
-                        class="ap-form__input-text"/>
+                        class="ap-form__input-text"
+                        [(ngModel)]="new_alert_data.Information"/>
                       <label 
                         for="new_alert_jdesc" 
                         class="ap-form__label ap-form__label-text">
@@ -1120,7 +1150,8 @@
                             placeholder="Description"
                             id="mc_desc" 
                             name="mc_desc"
-                            class="ap-form__input-textarea"></textarea>
+                            class="ap-form__input-textarea"
+                            [(ngModel)]="new_alert_data.Description"></textarea>
                           <label 
                             for="mc_desc" 
                             class="ap-form__label ap-form__label-text ap-form__label-text--active">
@@ -1135,40 +1166,54 @@
                         <div class="ml-col-1">
                             Avaibility Schedule: 
                         </div>
-                        <div class="days-icons">
+                        <div class="days-icons" day-selecter="container">
                             <div class="days-icons__container">
-                                <div class="days-icons__day">
-                                    <span day="day-letter" class="days-icons__day-letter cursor-pointer">S</span>
+                                <div class="days-icons__day" day-index="0">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        S
+                                    </span>
                                 </div>
                             </div>
                             <div class="days-icons__container">
-                                <div class="days-icons__day">
-                                    <span day="day-letter" class="days-icons__day-letter cursor-pointer">M</span>
+                                <div class="days-icons__day" day-index="1">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        M
+                                    </span>
                                 </div>
                             </div>
                             <div class="days-icons__container">
-                                <div class="days-icons__day">
-                                    <span day="day-letter" class="days-icons__day-letter cursor-pointer">T</span>
+                                <div class="days-icons__day" day-index="2">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        T
+                                    </span>
                                 </div>
                             </div>
                             <div class="days-icons__container">
-                                <div class="days-icons__day">
-                                    <span day="day-letter" class="days-icons__day-letter cursor-pointer">W</span>
+                                <div class="days-icons__day" day-index="3">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        W
+                                    </span>
                                 </div>
                             </div>
                             <div class="days-icons__container">
-                                <div class="days-icons__day">
-                                    <span day="day-letter" class="days-icons__day-letter cursor-pointer">R</span>
+                                <div class="days-icons__day" day-index="4">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        R
+                                    </span>
                                 </div>
                             </div>
                             <div class="days-icons__container">
-                                <div class="days-icons__day">
-                                    <span day="day-letter" class="days-icons__day-letter cursor-pointer">F</span>
+                                <div class="days-icons__day" day-index="5">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        F
+                                    </span>
                                 </div>
                             </div>
                             <div class="days-icons__container">
-                                <div class="days-icons__day">
-                                    <span day="day-letter" class="days-icons__day-letter cursor-pointer">S</span>
+                                <div class="days-icons__day" day-index="6">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        S
+                                    </span>
                                 </div>
                             </div>
                         </div>

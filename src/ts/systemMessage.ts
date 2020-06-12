@@ -25,7 +25,7 @@ export class SystemMessage {
 
     public showMessage( settings: MessageSettings ):void {
         
-        if( settings.where == undefined ) settings.where = 'root_html'; console.log( settings );
+        if( settings.where == undefined ) settings.where = 'root_html'; 
 
         const get_root = document.getElementById( settings.where );
               get_root.appendChild( this.createMessageContainer( settings ));

@@ -258,11 +258,80 @@ export class AlertsComponent implements OnInit {
 
         this.getAlterStatusCatalog();
 
+        this.getUsersBookingList();
+
+        function initDaySelecterApp():void {
+
+            const selecter: any = document.querySelector('[day-selecter="container"]').children;
+
+            selecter.forEach( (day: any) => {
+
+                const day_button = day.querySelector('[day-selecter="day"]');
+
+                console.log('Button => ', day_button);
+
+                day_button.onclick = function( event_data ) {
+
+                    const root_data = event_data.target;
+
+                    if( root_data.classList.contains('days-icons__day-letter--active') ) {
+
+                        root_data.classList.remove('days-icons__day-letter--active');
+
+                    } else {
+
+                        root_data.classList.add('days-icons__day-letter--active');
+
+                    }
+
+                }
+
+            });
+
+        }
+
+        setTimeout( () => initDaySelecterApp(), 177);
+
     }
 
+    public build_users_list: any[] = [];
+    public getUsersBookingList():void {
+
+        const ws_data: any = {
+            buildingId: 1
+        }
+
+        this._services.service_general_get_with_params("Users", ws_data)
+            .subscribe( (response: any) => {
+
+                if( response.result == 'Success' ) {
+
+                    this.build_users_list = response.item;
+
+                }
+
+                console.log('Here => ', this.build_users_list);
+
+            }, (error: any) => {
+
+                this.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                        header: 'System Error',
+                        text: 'Please contact your administrator'
+                    }
+                });
+
+            });
+
+    }
+
+    public new_alert_data: NewAlertDTO = new NewAlertDTO();
     public saveNewAlertData():void {
 
-        console.log(' ===========> El pendejo!');
+        console.log(' ===========> New alert save!');
+        console.log(this.new_alert_data);
 
     }
 
@@ -800,4 +869,16 @@ export class AlertMessage {
     public userId:number;
     public alertStatusId:number;
     public alertId:number;
+}
+
+class NewAlertDTO {
+    Information: string = '';
+    Photo: string = '';
+    Description: string = '';
+    AvailableSchedule: string = '';
+    UserId: number = null;
+    BuildingId: number = null;
+    AlertCategoryId: number = null;
+    AlertStatusId: number = null;
+    alertDetails: AlertDetail = new AlertDetail();
 }
