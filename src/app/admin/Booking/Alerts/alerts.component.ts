@@ -3,6 +3,7 @@ import { DatosService } from '../../../../datos.service';
 import { LoaderComponent } from '../../../../ts/loader';
 import { SystemMessage } from '../../../../ts/systemMessage';
 import { Utils } from '../../../utils/utils';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'alerts',
@@ -14,9 +15,12 @@ export class AlertsComponent implements OnInit {
     public section: string;
     public loader: LoaderComponent = new LoaderComponent();
     public system_message: SystemMessage = new SystemMessage();
+    public root_id_build: string = this._activeRouter.snapshot.paramMap.get('id');
 
     constructor(
-        public _services: DatosService
+        public _services: DatosService,
+        public _router: Router,
+        public _activeRouter: ActivatedRoute
     ) {}
     /////////////////////////////////////////////// CHAT ////////////////////////////////////////////////
     IDUSR = '';
@@ -50,7 +54,6 @@ export class AlertsComponent implements OnInit {
         this.section = 'alerts';
         this.getAlertsData();
         this.getToday();
-
     }
 
     public show_modal: boolean = false;
@@ -82,7 +85,7 @@ export class AlertsComponent implements OnInit {
             startDate: '01-01-1900',
             endDate: '01-01-2050',
             type: id_type,
-            buildingId: localStorage.getItem('buildingid')
+            buildingId: this.root_id_build
         },
         filter_by_container: any = document.getElementById('filter_by');
 
@@ -258,8 +261,10 @@ export class AlertsComponent implements OnInit {
     public initNewAlertModule():void {
 
         this.getAlterStatusCatalog();
-
         this.getUsersBookingList();
+        this.getWorktypesCatalog();
+        this.resetFormValidator();
+        this.new_alert_data.AlertStatusId = 1;
 
         function initDaySelecterApp():void {
 
@@ -297,7 +302,7 @@ export class AlertsComponent implements OnInit {
     public getUsersBookingList():void {
 
         const ws_data: any = {
-            buildingId: 1
+            buildingId: this.root_id_build
         }
 
         this._services.service_general_get_with_params("Users", ws_data)
@@ -326,6 +331,39 @@ export class AlertsComponent implements OnInit {
 
     }
 
+    public work_type_catalog: any[] = [];
+    public getWorktypesCatalog():void {
+
+        const ws_data: any = {
+            buildingId: this.root_id_build
+        }
+
+        this._services.service_general_get_with_params('Alerts/Categories', ws_data)
+            .subscribe( (response: any) => {
+
+                if( response.result == 'Success' ) {
+
+                    this.work_type_catalog = response.item;
+
+                }
+
+                console.log('Catalogo => ', this.work_type_catalog);
+
+            }, (error: any) => {
+
+                this.system_message.showMessage({
+                    kind: 'error',
+                    time: 2777,
+                    message: {
+                        header: 'System Error',
+                        text: 'A System Error has ocurred, please try leater.'
+                    }
+                });
+
+            });
+
+    }
+
     public new_alert_data: NewAlertDTO = new NewAlertDTO();
     public saveNewAlertData():void {
 
@@ -337,19 +375,47 @@ export class AlertsComponent implements OnInit {
 
         if( new_alert_forms_validator.main_fields ) {
 
-            this.new_alert_data.BuildingId = 1;
-
-            this.new_alert_data.alertDetails.id = 0;
-            this.new_alert_data.alertDetails.IdAlert = 0;
+            this.new_alert_data.id = 0;
+            this.new_alert_data.BuildingId = this.root_id_build;
+            this.new_alert_data.AlertStatusId = 1;
+            this.new_alert_data.CreationDate = this.today;
+            
+            this.new_alert_data.alertDetails[0].id = 0;
+            this.new_alert_data.alertDetails[0].IdAlert = 0;
+            this.new_alert_data.alertDetails[0].AlertStatusId = 1;
 
             this.loader.showLoader();
 
-            this._services.service_general_post('Servicio', this.new_alert_data)
+            this._services.service_general_post('Alerts/NewAlert_detail', this.new_alert_data)
                 .subscribe( (response: any) => {
 
-                    console.log('========> ', response);
+                    if( response.result == 'Success' ) {
 
-                    this.showModal();
+                        this.showModal();
+                        this.getAlertsData();
+
+                        this.system_message.showMessage({
+                            kind: 'ok',
+                            time: 4777,
+                            message: {
+                                header: 'Alert Created',
+                                text: 'New alerts has been created successfully.'
+                            }
+                        });
+
+                    } else {
+
+                        this.system_message.showMessage({
+                            kind: 'error',
+                            time: 4777,
+                            message: {
+                                header: 'System Error',
+                                text: 'Please contact support.'
+                            }
+                        });
+
+                    }
+
                     setTimeout( () => this.loader.hideLoader(), 1777);
 
                 }, (error: any) => {
@@ -386,6 +452,7 @@ export class AlertsComponent implements OnInit {
 
     public new_alert_form: any = {
         no_user: false,
+        no_cate: false,
         no_info: false,
         no_desc: false,
         no_sche: false
@@ -397,6 +464,10 @@ export class AlertsComponent implements OnInit {
         this.new_alert_data.UserId == -1 ?
             this.new_alert_form.no_user = true :
             this.new_alert_form.no_user = false;
+
+        this.new_alert_data.AlertCategoryId == -1 ?
+            this.new_alert_form.no_cate = true :
+            this.new_alert_form.no_cate = false;
 
         this.new_alert_data.Information == '' ?
             this.new_alert_form.no_info = true :
@@ -421,9 +492,21 @@ export class AlertsComponent implements OnInit {
 
     }
 
+    public resetFormValidator():void {
+
+        this.new_alert_form.no_user = false;
+        this.new_alert_form.no_cate = false;
+        this.new_alert_form.no_info = false;
+        this.new_alert_form.no_desc = false;
+        this.new_alert_form.no_sche = false;
+
+        this.new_alert_data = new NewAlertDTO();
+
+    }
+
     public avaible_schedule: any = {
-        startTime: '',
-        endTime: '',
+        startTime: "",
+        endTime: "",
         daysOfWeek: null
     }
     public getScheduleData():void {
@@ -491,6 +574,7 @@ export class AlertsComponent implements OnInit {
         } else {
 
             this.new_alert_data.AvailableSchedule = JSON.stringify( this.avaible_schedule );
+            //"{\"daysOfWeek\":[1,3,4],\"startTime\":\"9:00\",\"endTime\":\"18:00\"}"
 
         }
 
@@ -675,6 +759,8 @@ export class AlertsComponent implements OnInit {
                     this.loader.hideLoader();
 
                 }
+
+                console.log('Catalogo Alertas => ', this.alerts_status_catalog);
 
             }, (error: any) => {
 
@@ -1072,13 +1158,15 @@ export class AlertMessage {
 }
 
 class NewAlertDTO {
+    id: number = 0;
     Information: string = '';
     Photo: string = '';
     Description: string = '';
     AvailableSchedule: string = '';
     UserId: number = -1;
-    BuildingId: number = null;
-    AlertCategoryId: number = null;
+    BuildingId: string = '';
+    AlertCategoryId: number = -1;
     AlertStatusId: number = null;
-    alertDetails: AlertDetail = new AlertDetail();
+    CreationDate: string = '';
+    alertDetails: AlertDetail[] = [ new AlertDetail() ];
 }

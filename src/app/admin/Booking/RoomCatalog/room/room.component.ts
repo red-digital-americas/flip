@@ -301,4 +301,6 @@ export class RoomComponent implements OnInit {
     // console.log(this.images_in_gallery);
   }
 
+  backButton(){ window.history.back(); }
+
 }

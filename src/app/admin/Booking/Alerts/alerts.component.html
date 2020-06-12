@@ -1101,20 +1101,27 @@
             <div class="ml-col-3">
                 <div class="ml-col-1">
                     <div class="ap-form__input">
-                      <input 
+                      <select 
                         required
                         type="text" 
-                        placeholder="Work Type"
-                        id="new_alert_wtype" 
-                        name="new_alert_wtype"
-                        class="ap-form__input-text"/>
+                        placeholder="Alert status"
+                        id="new_alert_status" 
+                        name="new_alert_status"
+                        [(ngModel)]="new_alert_data.AlertCategoryId"
+                        [class.custom-input__text--error]="new_alert_form.no_cate"
+                        class="ap-form__input-text">
+                        <option value="-1" disabled>Alert Category</option>
+                        <option *ngFor="let work of work_type_catalog;" [value]="work.id">
+                            {{ work.name }}
+                        </option>
+                      </select>
                       <label 
-                        for="new_alert_wtype" 
-                        class="ap-form__label ap-form__label-text">
-                        Work Type
+                        for="new_alert_status" 
+                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                        Alert Category
                       </label>
-                      <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                        Work Type is required*
+                      <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_cate">
+                        Alert Category required*
                       </span>
                     </div>
                 </div>
@@ -1144,7 +1151,7 @@
                 </div>
             </div>
             <div class="ml-col-1">
-                <div class="ml-col-2">
+                <div class="ml-col-6">
                     <div class="ml-col-1">
                         <div class="ap-form__input">
                           <textarea 
@@ -1270,7 +1277,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ml-col-2">
+                <div class="ml-col-4o">
                     <div class="ml-col-1 ml-col-r">
                         <div class="ap-form__input ap-form__input--full-width">
                           <input
@@ -1298,6 +1305,7 @@
                 </div>
             </div>
             <div class="ml-col-1">
+                <div class="ml-col-1 at-bcard__stitle margin-tb-x">Alert Information</div>
                 <div class="ml-col-1 margin-top-x">
                     <div class="ml-col-3">
                         <div class="ml-col-1">
@@ -1305,14 +1313,15 @@
                               <select 
                                 required
                                 type="text" 
+                                disabled
                                 placeholder="Alert status"
                                 id="new_alert_status" 
                                 name="new_alert_status"
                                 class="ap-form__input-text"
                                 (change)="changeColorStatus( $event.target.value )"
+                                [value]="1"
                                 [(ngModel)]="new_alert_data.alertDetails.AlertStatusId"
                                 [class.custom-input__text--error]="1 == 2">
-                                <option value="-1" disabled>Status</option>
                                 <option *ngFor="let status of alerts_status_catalog;" [value]="status.id">
                                     {{ status.status }}
                                 </option>

@@ -3081,6 +3081,18 @@ select:active,
   position: relative;
 }
 
+.button-icon {
+
+  background-size: auto 70%;
+  background-position: 12.5% 50%;
+  background-repeat: no-repeat;
+
+  &--test {
+    background-image: url('../assets/flipF.png');
+  }
+
+}
+
 .button-big {
   padding: 5px 40px;
 }
@@ -3185,6 +3197,14 @@ select:active,
 
 .padding-right-min {
   padding-right: 10px;
+}
+
+.padding-left-min {
+  padding-left: 10px;
+}
+
+.padding-left-m {
+  padding-left: 20px;
 }
 
 .padding-right-m {
@@ -3314,6 +3334,32 @@ select:active,
   font-size: 11px;
   font-style: italic;
   left: 0px;
+}
+
+.title_back_button {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.title_back_button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+  width: 75%;
+  height: 75%;
+  border-width: 2px 0 0 2px;
+  border-color: #a61919;
+  border-style: solid;
+  transition: transform .2s ease;
+}
+
+.title_back_button:hover:after {
+  transform: translate(-50%, -50%) rotate(-45deg) scale(1.07);
 }
 
 .cursor-pointer {
