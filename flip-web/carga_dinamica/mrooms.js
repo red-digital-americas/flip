@@ -87,30 +87,35 @@ function appendRoomContentToPage( rooms_data ) {
     console.log('Rooms data', rooms_data);
     for( let index = 0; index < rooms_data.length; index += 1 ) {
 
-        const room = rooms_data[index],
-              room_card_name = document.querySelectorAll('[room="card_name"]')[index],
-              room_card_desc_o = document.querySelectorAll('[room="card_desc_one"]')[index],
-              room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
-            //  room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
-              room_card_prie_o = document.querySelectorAll('[room="card_price_one"]')[index],
-              room_card_prie_t = document.querySelectorAll('[room="card_price_two"]')[index];
-              
-        if( room_card_name != undefined ) {
-
-            room_card_name.innerHTML = room.title;
-            room_card_desc_o.innerHTML = `${room.descPrice}<br>
+    
+        let room = rooms_data[index];
+        let tittle = document.querySelectorAll("#comserv-activetext")[index];
+        let descripcion = document.querySelectorAll(".textamen")[index];
+              console.log("=>>>",tittle);
+        if( tittle != undefined)  {
+            
+            tittle.append(room.title);
+            
+            descripcion.append(room.desc);
+            
+            
+            descripcion.innerHTML = `<p>${room.desc}</p> <br>
+                                        ${room.descPrice}<br>
+                                        <div>
                                         <p style="font-weight: 700; font-size: 1.5em;">
                                             $ ${room.price}
-                                            <br>
-                                        </p>`;
-            room_card_desc_t.innerHTML = `${room.descPrice1}<br>
+                                        </p>
+                                        <br>
+                                        <spam style="flex: 1 1 auto;"></spam>
+                                        ${room.descPrice1}<br>
                                         <p style="font-weight: 700; font-size: 1.5em;">
                                             $ ${room.price1}
                                             <br>
-                                        </p>`;
+                                        </p>
+                                        </div>`;
 
-            sliderRoomContent( room.photos, index );
-            sliderViewVideo( room.view360, index );
+           sliderRoomContent( room.photos, index );
+           sliderViewVideo( room.view360, index );
 
         }
 
@@ -170,6 +175,7 @@ function sliderRoomContent( photos, index ) {
           slider_room_desc = document.querySelectorAll(`[room="slide-desc-${ index }"]`),
           slider_room_icons = document.querySelectorAll(`[room="icons-sections-${ index }"]`);
 
+    console.log(slider_room_image);
     for( let slide_index = 0; slide_index < 4; slide_index += 1 ) {
 
         if( photos[slide_index] != undefined ) {

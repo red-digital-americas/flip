@@ -568,7 +568,7 @@ function appendRoomContentToPage( rooms_data ) {
                                             <br>
                                         </p>`;
 
-            sliderRoomContent( room.photos, index );
+            sliderRoomContent( room, index );
             sliderViewVideo( room.view360, index );
 
         }
@@ -621,69 +621,115 @@ function getUrlVideoToEmbed( video_url ) {
 
 }
 
-function sliderRoomContent( photos, index ) {
-    console.log('Photos', photos);
+function sliderRoomContent( room, index ) {
+    console.log('Photos', room);
     console.log('Photos Index', index);
-    const slider_room_image = document.querySelectorAll(`[room="slide-image-${ index }"]`),
-          slider_room_title = document.querySelectorAll(`[room="slide-title-${ index }"]`),
-          slider_room_desc = document.querySelectorAll(`[room="slide-desc-${ index }"]`),
-          slider_room_icons = document.querySelectorAll(`[room="icons-sections-${ index }"]`);
+    var photos = room.photos;
+    
 
+let palntilla = `<div class="carousel-inner">`;
     for( let slide_index = 0; slide_index < 4; slide_index += 1 ) {
 
         if( photos[slide_index] != undefined ) {
-            console.log('Index', photos[slide_index]);
-            slider_room_image[slide_index].src = photos[slide_index].photo;
-            slider_room_title[slide_index].innerHTML = `${ photos[slide_index].titleIcon }<br />`;
-            slider_room_desc[slide_index].innerHTML = photos[slide_index].titleIcon;
+            
+            if(slide_index == 1){
+                 palntilla +=`<div class="item active">`;
+            }else{
+                palntilla +=`<div class="item">`;
+            }
+            
+            palntilla +=`
+                                                        <img src="${photos[slide_index].photo}" alt="Los Angeles" room="slide-image-0">
+                                                        <div class="header-text-room">
+                                                            <div class="col-md-12  text-center">
+                                                                <span class="btn_rooms_span">
+                                                                    <button id="booknowbtn" type="button" class="button_menu_rooms btn-form btn" style="margin-right: 20px;">BOOK A TOUR  </button>
+                                                                    <button type="button" class="button_menu_rooms  btn-form btn view_video_0">VIEW 360° <hr style="margin-left: 15px;"> </button>
+                                                                    <button type="button" id="getguidebtn" class="button_menu_rooms btn-form btn">GET GUIDE  <hr style="margin-left: 15px;"></button>
+                                                                </span>
+                                                                <br>
+                                                                <span>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6" style="margin-left: -2%;">
+                                                                            <br>
+                                                                            <h2 class="aux-back-amen" style="">
+                                                                                <span id="comserv-activetext beneficios-title ">
+                                                                                    <p style="font-weight: 500; margin-top: 7%;" room="slide-title-0">
+                                                                                        ${room.title}
+                                                                                    </p>
+                                                                                </span>
+                                                                            </h2>
+                                                                            <p class="textamen" style="margin-top: 5%;" room="slide-desc-0">
+                                                                                ${room.desc}
+                                                                            </p>
+                                                                        </div>
+                                                                        <br>
 
-            let icon0 = `<div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                            <label data-target="#myCarousel${ 7 + index }" data-slide-to="0" class="">
-                                <a href="#">
-                                    <img class="iconscom" src="${ photos[0].icon }"
-                                        onmouseover="this.src='${ photos[0].icon2 }'"
-                                        onmouseout="this.src='${ photos[0].icon }'"
-                                        border="0" alt="" />
-                                </a>
-                                ${ photos[0].titleIcon }
-                            </label>
-                            <br>`;
-            let icon1 = typeof photos[1] !== 'undefined' ? `<label data-target="#myCarousel${ 7 + index }" data-slide-to="1" class="">
-                                <a href="#">
-                                    <img class="iconscom" src="${ photos[1].icon }"
-                                        onmouseover="this.src='${ photos[1].icon2 }'"
-                                        onmouseout="this.src='${ photos[1].icon }'"
-                                        border="0" alt="" />
-                                </a> 
-                                ${ photos[1].titleIcon }
-                            </label>` : '';
-            let iconEnd1 = `</div>`;
-            let iconStart1 = `<div class="col-sm-3 icondiv" style="margin-top: 50px;">`;
-            let icon2 = typeof photos[2] !== 'undefined' ? `<label data-target="#myCarousel${ 7 + index }" data-slide-to="2" class="">
-                                <a href="#">
-                                    <img class="iconscom" src="${ photos[2].icon }"
-                                        onmouseover="this.src='${ photos[2].icon2 }'"
-                                        onmouseout="this.src='${ photos[2].icon }'"
-                                        border="0" alt="" />
-                                </a>
-                                ${ photos[2].titleIcon }
-                            </label>
-                            <br>` : '';
-            let icon3 = typeof photos[3] !== 'undefined' ? `<label data-target="#myCarousel${ 7 + index }" data-slide-to="3" class="">
-                                <a href="#">
-                                    <img class="iconscom" src="${ photos[3].icon }"
-                                        onmouseover="this.src='a${ photos[3].icon2 }'"
-                                        onmouseout="this.src='${ photos[3].icon }'"
-                                        border="0" alt="" />
-                                </a> 
-                                ${ photos[3].titleIcon }
-                            </label>` : '';
-            let icoEnd2 = `</div>`;
+                                                                        <div room="icons-sections-0">
+                                                                            <div class="col-sm-3 icondiv" style="margin-top: 50px;">
+                                                                                <label data-target="#myCarousel7" data-slide-to="0" class="">
+                                                                                    <a href="#">
+                                                                                        <img class="iconscom" src="${photos[slide_index].icon}" onmouseover="this.src='${photos[slide_index].icon2}'" onmouseout="this.src='${photos[slide_index].icon}'" border="0" alt="">
+                                                                                    </a>
+                                                                                    Lorem
+                                                                                </label>
+                                                                                <br>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                    </div>
+                                                                </span>
+                                                                <br>
+                                                            </div>
+                                                        </div><!-- /header-text -->
+                                                    </div>
 
-            let iconAll = icon0 + icon1 + iconEnd1 + iconStart1 + icon2 + icon3 + icoEnd2
-            slider_room_icons[slide_index].innerHTML = iconAll;
+                                                   
+                                               
+
+                                               `;
+            
+
+           
         }    
     }
+    
+   
+    let contenedor;
+    let ape;
+    if(index == 0){
+        contenedor = document.getElementById("myCarousel7");
+        ape = document.getElementById("comroomgallery");
+         palntilla += `  </div><!-- Left and right controls -->
+                                                <a class="left carousel-control" href="#myCarousel7" data-slide="prev">
+
+                                                    <img src="assets/images/arrow-izqu.png">
+                                                </a>
+                                                <a class="right carousel-control" href="#myCarousel7" data-slide="next">
+
+
+                                                    <img src="assets/images/arrow-derecha.png">
+                                                </a>`;
+        $('#myCarousel7').html(`${palntilla}`);
+        
+    }else if(index == 1){
+        contenedor = document.getElementById("myCarousel8");
+       ape = document.getElementById("comroomBgallery");
+         palntilla += `  </div><!-- Left and right controls -->
+                                                <a class="left carousel-control" href="#myCarousel8" data-slide="prev">
+
+                                                    <img src="assets/images/arrow-izqu.png">
+                                                </a>
+                                                <a class="right carousel-control" href="#myCarousel8" data-slide="next">
+
+
+                                                    <img src="assets/images/arrow-derecha.png">
+                                                </a>`;
+        $('#myCarousel8').html(`${palntilla}`);
+    }
+    
+    
+    
 
 }
 
