@@ -7,126 +7,601 @@
             </h4>
             <button 
                 class="ap-form__rButton button-big button-green"
-                (click)="showModal()">
+                (click)="showModal('new_alert')">
                 New Alert
             </button>
         </div>
         <div class="ml-col-1">
-            <div class="ml-col-4">
-                <div class="ml-col-1">
-                    <div class="ap-form__input">
-                      <select
-                        placeholder="Alert By"
-                        id="staff_when" 
-                        name="staff_when"
-                        class="ap-form__input-text">
-                        <option value="">Alert By</option>
-                        <option value="1">By Status</option>
-                        <option value="2">By Actions</option>
-                      </select>
-                      <label 
-                        for="staff_when" 
-                        class="ap-form__label ap-form__label-text">
-                        Alerts By
-                      </label>
+            <div class="ml-col-1">
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <select
+                            placeholder="Alert By"
+                            id="filter_by" 
+                            name="filter_by"
+                            (change)="getAlertsData( $event.target.value )"
+                            class="ap-form__input-text">
+                            <option value="1" selected>Status</option>
+                            <option value="2">Urgency</option>
+                          </select>
+                          <label 
+                            for="filter_by" 
+                            class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                            Alerts By
+                          </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ml-col-2">
+                    <div class="ml-col-1">
+                        <form (ngSubmit)="filteringByText()" class="ap-form__input">
+                            <input 
+                                required
+                                type="text" 
+                                placeholder="Find by id or name..."
+                                id="filter_text" 
+                                name="filter_text"
+                                [(ngModel)]="find_text.text"
+                                (change)="filteringByText()"
+                                class="ap-form__input-text" />
+                          <label 
+                            for="filter_text" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="find_text.text != ''">
+                            Find by id or name...
+                          </label>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="ml-col-4">
-                <div class="ml-col-1">
-                    <div class="ap-form__input">
-                      <input 
-                        required
-                        type="date" 
-                        [min]="today"
-                        [value]="today"
-                        placeholder="Start Date"
-                        id="filter_start" 
-                        name="filter_start"
-                        class="ap-form__input-text" />
-                      <label 
-                        for="filter_start" 
-                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                        Start Date
-                      </label>
+            <div class="ml-col-1 display-none">
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            type="date" 
+                            [min]="today"
+                            [value]="today"
+                            placeholder="Start Date"
+                            id="filter_start" 
+                            name="filter_start"
+                            class="ap-form__input-text" />
+                          <label 
+                            for="filter_start" 
+                            class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                            Start Date
+                          </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="ml-col-4">
-                <div class="ml-col-1">
-                    <div class="ap-form__input">
-                      <input 
-                        required
-                        type="date" 
-                        placeholder="End Date"
-                        id="filter_end" 
-                        name="filter_end"
-                        class="ap-form__input-text" />
-                      <label 
-                        for="filter_end" 
-                        class="ap-form__label ap-form__label-text">
-                        End Date
-                      </label>
+                <div class="ml-col-4">
+                    <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <input 
+                            required
+                            type="date" 
+                            placeholder="End Date"
+                            id="filter_end" 
+                            name="filter_end"
+                            class="ap-form__input-text" />
+                          <label 
+                            for="filter_end" 
+                            class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                            End Date
+                          </label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="alerts">
-            <div class="alerts__section">
+            <!-- Card section: By Status starts -->
+            <div class="alerts__section" *ngIf="pending_schedule_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
                         Pending Schedule
                     </h4>
-                    <div class="alerts__card-card card-style">
+                    <div class="alerts__card-card card-style"
+                         *ngFor="let card of pending_schedule_cards"
+                         [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status alerts__card-card--status-error">
-                                Order Number: 777
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showChat(card)">
                             </span>
-                            <span class="alerts__card-card--bubble"></span>
                         </div>
                         <div class="ml-col-1">
-                            <span class="ml-col-2">Nombre Dow</span>
-                            <span class="ml-col-2 text-right">Alatata No. 7</span>
+                            <span class="ml-col-1 word-break">
+                                {{ card.information }}
+                            </span>
                         </div>
-                        <div class="ml-col-1 text-bold">
-                            There no electricity in the apartament
+                        <div class="ml-col-1 text-bold word-break">
+                            {{ card.name }}
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green">
-                                Schedule
+                                class="alerts__card-button button-big button-green"
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                Edit
                             </button>
                         </div>
                     </div>
-                    <div class="alerts__card-card card-style">
-                        <div class="ml-col-1 text-bold position-relative">
-                            <span class="alerts__card-card--status alerts__card-card--status-error">
-                                Order Number: 777
-                            </span>
-                            <span class="alerts__card-card--bubble"></span>
-                        </div>
-                        <div class="ml-col-1">
-                            <span class="ml-col-2">Nombre Dow</span>
-                            <span class="ml-col-2 text-right">Alatata No. 7</span>
-                        </div>
-                        <div class="ml-col-1 text-bold">
-                            There no electricity in the apartament
-                        </div>
-                        <div class="ml-col-1">
-                            <div class="ml-col-1">29/10/2022</div>
-                            <div class="ml-col-1">07:00 am - 10:00 am</div>
-                        </div>
-                    </div>
+                    <span class="text-center color-red text-big text-bold margin-tb-m"
+                          *ngIf="pending_schedule_cards?.length == 0">
+                        There's no cards
+                    </span> 
+                    <span id="pending_schedule_cards_nr" 
+                          class="display-none text-center color-black text-big text-bold margin-tb-m">
+                        Any result has been found.
+                    </span>
                 </div>
             </div>
+            <div class="alerts__section" *ngIf="confirming_completion_cards != undefined">
+                <div class="alerts__card-container card-style">
+                    <h4 class="alerts__card-titulo">
+                        Confirming Completion
+                    </h4>
+                    <div class="alerts__card-card card-style"
+                         *ngFor="let card of confirming_completion_cards"
+                         [class.display-none]="!card?.visible_item">
+                        <div class="ml-col-1 text-bold position-relative">
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showChat(card)">
+                            </span>
+                        </div>
+                        <div class="ml-col-1">
+                            <span class="ml-col-2 word-break">
+                                {{ card.information }}
+                            </span>
+                        </div>
+                        <div class="ml-col-1 text-bold word-break">
+                            {{ card.name }}
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1 margin-top-x text-center">
+                            <button 
+                                class="alerts__card-button button-big button-green"
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-center color-red text-big text-bold margin-tb-m"
+                          *ngIf="confirming_completion_cards?.length == 0">
+                        There's no cards
+                    </span> 
+                    <span id="confirming_completion_cards_nr" 
+                          class="display-none text-center color-black text-big text-bold margin-tb-m">
+                        Any result has been found.
+                    </span>
+                </div>
+            </div>
+            <div class="alerts__section" *ngIf="awaiting_invoice_cards != undefined">
+                <div class="alerts__card-container card-style">
+                    <h4 class="alerts__card-titulo">
+                        Awaiting Invoice
+                    </h4>
+                    <div class="alerts__card-card card-style"
+                         *ngFor="let card of awaiting_invoice_cards"
+                         [class.display-none]="!card?.visible_item">
+                        <div class="ml-col-1 text-bold position-relative">
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showChat(card)">
+                            </span>
+                        </div>
+                        <div class="ml-col-1">
+                            <span class="ml-col-2 word-break">
+                                {{ card.information }}
+                            </span>
+                        </div>
+                        <div class="ml-col-1 text-bold word-break">
+                            {{ card.name }}
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1 margin-top-x text-center">
+                            <button 
+                                class="alerts__card-button button-big button-green"
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-center color-red text-big text-bold margin-tb-m"
+                          *ngIf="awaiting_invoice_cards?.length == 0">
+                        There's no cards
+                    </span> 
+                    <span id="awaiting_invoice_cards_nr" 
+                          class="display-none text-center color-black text-big text-bold margin-tb-m">
+                        Any result has been found.
+                    </span>
+                </div>
+            </div>
+            <div class="alerts__section" *ngIf="confirming_paymnet_cards != undefined">
+                <div class="alerts__card-container card-style">
+                    <h4 class="alerts__card-titulo">
+                        Confirming payment
+                    </h4>
+                    <div class="alerts__card-card card-style"
+                         *ngFor="let card of confirming_paymnet_cards"
+                         [class.display-none]="!card?.visible_item">
+                        <div class="ml-col-1 text-bold position-relative">
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showChat(card)">
+                            </span>
+                        </div>
+                        <div class="ml-col-1">
+                            <span class="ml-col-2 word-break">
+                                {{ card.information }}
+                            </span>
+                        </div>
+                        <div class="ml-col-1 text-bold word-break">
+                            {{ card.name }}
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1 margin-top-x text-center">
+                            <button 
+                                class="alerts__card-button button-big button-green"
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-center color-red text-big text-bold margin-tb-m"
+                          *ngIf="confirming_paymnet_cards?.length == 0">
+                        There's no cards
+                    </span> 
+                    <span id="confirming_paymnet_cards_nr" 
+                          class="display-none text-center color-black text-big text-bold margin-tb-m">
+                        Any result has been found.
+                    </span>
+                </div>
+            </div>
+            <div class="alerts__section" *ngIf="completed_and_paid_cards != undefined">
+                <div class="alerts__card-container card-style">
+                    <h4 class="alerts__card-titulo">
+                        Completed and Paid
+                    </h4>
+                    <div class="alerts__card-card card-style"
+                         *ngFor="let card of completed_and_paid_cards"
+                         [class.display-none]="!card?.visible_item">
+                        <div class="ml-col-1 text-bold position-relative">
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showChat(card)">
+                            </span>
+                        </div>
+                        <div class="ml-col-1">
+                            <span class="ml-col-2 word-break">
+                                {{ card.information }}
+                            </span>
+                        </div>
+                        <div class="ml-col-1 text-bold word-break">
+                            {{ card.name }}
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1 margin-top-x text-center">
+                            <button 
+                                class="alerts__card-button button-big button-green"
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-center color-red text-big text-bold margin-tb-m"
+                          *ngIf="completed_and_paid_cards?.length == 0">
+                        There's no cards
+                    </span> 
+                    <span id="completed_and_paid_cards_nr" 
+                          class="display-none text-center color-black text-big text-bold margin-tb-m">
+                        Any result has been found.
+                    </span>
+                </div>
+            </div>
+            <!-- Card section: By Status ends -->
+            <!-- Card section: By Actions starts -->
+            <div class="alerts__section" *ngIf="urgent_cards != undefined">
+                <div class="alerts__card-container card-style">
+                    <h4 class="alerts__card-titulo">
+                        Urgent
+                    </h4>
+                    <div class="alerts__card-card card-style"
+                         *ngFor="let card of urgent_cards"
+                         [class.display-none]="!card?.visible_item">
+                        <div class="ml-col-1 text-bold position-relative">
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showChat(card)">
+                            </span>
+                        </div>
+                        <div class="ml-col-1">
+                            <span class="ml-col-2 word-break">
+                                {{ card.information }}
+                            </span>
+                        </div>
+                        <div class="ml-col-1 text-bold word-break">
+                            {{ card.name }}
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1 margin-top-x text-center">
+                            <button 
+                                class="alerts__card-button button-big button-green"
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-center color-red text-big text-bold margin-tb-m"
+                          *ngIf="urgent_cards?.length == 0">
+                        There's no cards
+                    </span> 
+                    <span id="urgent_cards_nr" 
+                          class="display-none text-center color-black text-big text-bold margin-tb-m">
+                        Any result has been found.
+                    </span>
+                </div>
+            </div>
+            <div class="alerts__section" *ngIf="schelude_today_cards != undefined">
+                <div class="alerts__card-container card-style">
+                    <h4 class="alerts__card-titulo">
+                        Schedule Today
+                    </h4>
+                    <div class="alerts__card-card card-style"
+                         *ngFor="let card of schelude_today_cards"
+                         [class.display-none]="!card?.visible_item">
+                        <div class="ml-col-1 text-bold position-relative">
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showChat(card)">
+                            </span>
+                        </div>
+                        <div class="ml-col-1">
+                            <span class="ml-col-2 word-break">
+                                {{ card.information }}
+                            </span>
+                        </div>
+                        <div class="ml-col-1 text-bold word-break">
+                            {{ card.name }}
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1 margin-top-x text-center">
+                            <button 
+                                class="alerts__card-button button-big button-green"
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-center color-red text-big text-bold margin-tb-m"
+                          *ngIf="schelude_today_cards?.length == 0">
+                        There's no cards
+                    </span> 
+                    <span id="schelude_today_cards_nr" 
+                          class="display-none text-center color-black text-big text-bold margin-tb-m">
+                        Any result has been found.
+                    </span>
+                </div>
+            </div>
+            <div class="alerts__section" *ngIf="schelude_week_cards != undefined">
+                <div class="alerts__card-container card-style">
+                    <h4 class="alerts__card-titulo">
+                        Schedule Week
+                    </h4>
+                    <div class="alerts__card-card card-style"
+                         *ngFor="let card of schelude_week_cards"
+                         [class.display-none]="!card?.visible_item">
+                        <div class="ml-col-1 text-bold position-relative">
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showChat(card)">
+                            </span>
+                        </div>
+                        <div class="ml-col-1">
+                            <span class="ml-col-2 word-break">
+                                {{ card.information }}
+                            </span>
+                        </div>
+                        <div class="ml-col-1 text-bold word-break">
+                            {{ card.name }}
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1 margin-top-x text-center">
+                            <button 
+                                class="alerts__card-button button-big button-green"
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-center color-red text-big text-bold margin-tb-m"
+                          *ngIf="schelude_week_cards?.length == 0">
+                        There's no cards
+                    </span> 
+                    <span id="schelude_week_cards_nr" 
+                          class="display-none text-center color-black text-big text-bold margin-tb-m">
+                        Any result has been found.
+                    </span>
+                </div>
+            </div>
+            <div class="alerts__section" *ngIf="schelude_week_cards != undefined">
+                <div class="alerts__card-container card-style">
+                    <h4 class="alerts__card-titulo">
+                        Schedule Month
+                    </h4>
+                    <div class="alerts__card-card card-style"
+                         *ngFor="let card of schelude_week_cards"
+                         [class.display-none]="!card?.visible_item">
+                        <div class="ml-col-1 text-bold position-relative">
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showChat(card)">
+                            </span>
+                        </div>
+                        <div class="ml-col-1">
+                            <span class="ml-col-2 word-break">
+                                {{ card.information }}
+                            </span>
+                        </div>
+                        <div class="ml-col-1 text-bold word-break">
+                            {{ card.name }}
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1 margin-top-x text-center">
+                            <button 
+                                class="alerts__card-button button-big button-green"
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-center color-red text-big text-bold margin-tb-m"
+                          *ngIf="schelude_week_cards?.length == 0">
+                        There's no cards
+                    </span> 
+                    <span id="schelude_week_cards_nr" 
+                          class="display-none text-center color-black text-big text-bold margin-tb-m">
+                        Any result has been found.
+                    </span>
+                </div>
+            </div>
+            <div class="alerts__section" *ngIf="other_cards != undefined">
+                <div class="alerts__card-container card-style">
+                    <h4 class="alerts__card-titulo">
+                        Other
+                    </h4>
+                    <div class="alerts__card-card card-style"
+                         *ngFor="let card of other_cards"
+                         [class.display-none]="!card?.visible_item">
+                        <div class="ml-col-1 text-bold position-relative">
+                            <p class="alerts__card-card--status">
+                                Order Number: {{ card.id }}
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="card.color">
+                                </span>
+                            </p>
+                            <span class="alerts__card-card--bubble"
+                                  (click)="showChat(card)">
+                            </span>
+                        </div>
+                        <div class="ml-col-1">
+                            <span class="ml-col-2 word-break">
+                                {{ card.information }}
+                            </span>
+                        </div>
+                        <div class="ml-col-1 text-bold word-break">
+                            {{ card.name }}
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-1">{{ card.date_worked | date }}</div>
+                            <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1 margin-top-x text-center">
+                            <button 
+                                class="alerts__card-button button-big button-green"
+                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-center color-red text-big text-bold margin-tb-m"
+                          *ngIf="other_cards?.length == 0">
+                        There's no cards
+                    </span> 
+                    <span id="other_cards_nr" 
+                          class="display-none text-center color-black text-big text-bold margin-tb-m">
+                        Any result has been found.
+                    </span>
+                </div>
+            </div>
+            <!-- Card section: By Actions end -->
         </div>
     </div>
 </div>
 <div class="ml-modal ml-modal--bg-black" *ngIf="show_modal">
-    <div class="ml-modal__content card-style">
+    <div class="ml-modal__content card-style" *ngIf="section_to_show == 'default'">
         <div class="ml-col-1 margin-bottom-x">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
                 Schedule
+                <span class="schedule__color" 
+                      [style.background-color]="schedule_object.color">
+                </span>
             </p>
             <button 
                 class="ap-form__rButton button-red"
@@ -135,21 +610,39 @@
             </button>
         </div> 
         <div class="ml-col-1 margin-bottom-x">
-            <div class="ml-col-4">
-                Order number: <span class="text-bold">777</span>
+            <div class="ml-col-3o">
+                <div class="ml-col-1">
+                    Order number: 
+                </div>
+                <div class="ml-col-1 text-bold">
+                    {{ schedule_object.id }}
+                </div>
             </div>
-            <div class="ml-col-6">
-                Job Description: <span class="text-bold">Make me bien wey all day amigo!</span>
+            <div class="ml-col-4">
+                <div class="ml-col-1">
+                    Work type: 
+                </div>
+                <div class="ml-col-1 text-bold">
+                    {{ schedule_object.name }}
+                </div>
+            </div>
+            <div class="ml-col-4">
+                <div class="ml-col-1">
+                    Job description: 
+                </div>
+                <div class="ml-col-1 text-bold">
+                    {{ schedule_object.information }}
+                </div>
             </div>
         </div>
         <div class="ml-col-1 margin-bottom-x">
-            <div class="ml-col-4">
+            <div class="ml-col-3o">
                 <div class="ml-col-2">
                     <div class="ml-col-1">
                         Tenant:
                     </div>
                     <div class="ml-col-1 text-bold">
-                        Jonh Peek
+                        {{ schedule_object.user.name }} {{ schedule_object.user.lastName }}
                     </div>
                 </div>
             </div>
@@ -159,7 +652,7 @@
                         Phone:
                     </div>
                     <div class="ml-col-1 text-bold">
-                        55 66778899
+                        {{ schedule_object.user.phone }}
                     </div>
                 </div>
             </div>
@@ -169,22 +662,112 @@
                         Email:
                     </div>
                     <div class="ml-col-1 text-bold">
-                        carlos@lolol
+                        {{ schedule_object.user.email }}
                     </div>
                 </div>
             </div>
-            <div class="ml-col-4">
-                <div class="ml-col-2">
+            <div class="ml-col-1 margin-top-x">
+                <div class="ml-col-1">
                     <div class="ml-col-1">
-                        Job Site:
+                        Description:
                     </div>
                     <div class="ml-col-1 text-bold">
-                        Alatat No. 7
+                        {{ schedule_object.description }}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ml-col-1 margin-bottom-x">
+        <div class="ml-col-3">
+            <div class="ml-col-1">
+                Avaibility Schedule: 
+            </div>
+            <div class="days-icons" id="days_container">
+                <div class="days-icons__container">
+                    <div class="days-icons__day">
+                        <span day="day-letter" class="days-icons__day-letter">S</span>
+                    </div>
+                </div>
+                <div class="days-icons__container">
+                    <div class="days-icons__day">
+                        <span day="day-letter" class="days-icons__day-letter">M</span>
+                    </div>
+                </div>
+                <div class="days-icons__container">
+                    <div class="days-icons__day">
+                        <span day="day-letter" class="days-icons__day-letter">T</span>
+                    </div>
+                </div>
+                <div class="days-icons__container">
+                    <div class="days-icons__day">
+                        <span day="day-letter" class="days-icons__day-letter">W</span>
+                    </div>
+                </div>
+                <div class="days-icons__container">
+                    <div class="days-icons__day">
+                        <span day="day-letter" class="days-icons__day-letter">R</span>
+                    </div>
+                </div>
+                <div class="days-icons__container">
+                    <div class="days-icons__day">
+                        <span day="day-letter" class="days-icons__day-letter">F</span>
+                    </div>
+                </div>
+                <div class="days-icons__container">
+                    <div class="days-icons__day">
+                        <span day="day-letter" class="days-icons__day-letter">S</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-1">
+                <div class="ml-col-2">
+                    Open:
+                    <span class="text-bold">
+                        {{ schedule_avaible.startTime }}
+                    </span>
+                </div>
+                <div class="ml-col-2">
+                    Close:
+                    <span class="text-bold">
+                        {{ schedule_avaible.endTime }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="ml-col-1 margin-top-x">
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <select 
+                        required
+                        type="text" 
+                        placeholder="Alert status"
+                        id="company_status" 
+                        name="company_status"
+                        class="ap-form__input-text"
+                        [(ngModel)]="alert_detail_form.AlertStatusId"
+                        (change)="changeColorStatus( alert_detail_form.IdAlert )"
+                        [class.custom-input__text--error]="alert_detail_validator.no_aler">
+                        <option value="-1" disabled>Status</option>
+                        <option *ngFor="let status of alerts_status_catalog;" [value]="status.id">
+                            {{ status.status }}
+                        </option>
+                      </select>
+                      <label 
+                        for="company_status" 
+                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                        Alert status
+                        <span class="schedule__color schedule--mini" 
+                              [style.background-color]="color_alert_updated">
+                        </span>
+                      </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_aler">
+                        Alert status is required*
+                      </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ml-col-1 margin-bottom-x margin-top-x">
             <div class="ml-col-1 at-bcard__stitle">Company</div>
             <div class="ml-col-3">
                 <div class="ml-col-1">
@@ -195,12 +778,17 @@
                         placeholder="Name"
                         id="company_name" 
                         name="company_name"
-                        class="ap-form__input-text" />
+                        class="ap-form__input-text"
+                        [(ngModel)]="alert_detail_form.Company"
+                        [class.custom-input__text--error]="alert_detail_validator.no_cnam"/>
                       <label 
                         for="company_name" 
                         class="ap-form__label ap-form__label-text">
                         Name
                       </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_cnam">
+                        Name is required*
+                      </span>
                     </div>
                 </div>
             </div>
@@ -213,12 +801,17 @@
                         placeholder="Phone"
                         id="company_phone" 
                         name="company_phone"
-                        class="ap-form__input-text" />
+                        class="ap-form__input-text"
+                        [(ngModel)]="alert_detail_form.Phone"
+                        [class.custom-input__text--error]="alert_detail_validator.no_cpho"/>
                       <label 
                         for="company_phone" 
                         class="ap-form__label ap-form__label-text">
                         Phone
                       </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_cpho">
+                        Phone is required*
+                      </span>
                     </div>
                 </div>
             </div>
@@ -231,12 +824,17 @@
                         placeholder="Email"
                         id="company_mail" 
                         name="company_mail"
-                        class="ap-form__input-text" />
+                        class="ap-form__input-text"
+                        [(ngModel)]="alert_detail_form.EmailCompany"
+                        [class.custom-input__text--error]="alert_detail_validator.no_cmai"/>
                       <label 
                         for="company_mail" 
                         class="ap-form__label ap-form__label-text">
                         Email
                       </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_cmai">
+                        Email is required*
+                      </span>
                     </div>
                 </div>
             </div>
@@ -252,12 +850,17 @@
                         placeholder="Staff Name"
                         id="staff_name" 
                         name="staff_name"
-                        class="ap-form__input-text" />
+                        class="ap-form__input-text"
+                        [(ngModel)]="alert_detail_form.AssignStaff"
+                        [class.custom-input__text--error]="alert_detail_validator.no_snam"/>
                       <label 
                         for="staff_name" 
                         class="ap-form__label ap-form__label-text">
                         Staff Name
                       </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_snam">
+                        Staff Name is required*
+                      </span>
                     </div>
                 </div>
             </div>
@@ -270,12 +873,17 @@
                         placeholder="Phone"
                         id="staff_phone" 
                         name="staff_phone"
-                        class="ap-form__input-text" />
+                        class="ap-form__input-text"
+                        [(ngModel)]="alert_detail_form.MobilPhone"
+                        [class.custom-input__text--error]="alert_detail_validator.no_spho"/>
                       <label 
                         for="staff_phone" 
                         class="ap-form__label ap-form__label-text">
                         Phone
                       </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_spho">
+                        Phone is required*
+                      </span>
                     </div>
                 </div>
             </div>
@@ -288,33 +896,43 @@
                         placeholder="Mail"
                         id="staff_mail" 
                         name="staff_mail"
-                        class="ap-form__input-text" />
+                        class="ap-form__input-text"
+                        [(ngModel)]="alert_detail_form.EmailStaff"
+                        [class.custom-input__text--error]="alert_detail_validator.no_smai"/>
                       <label 
                         for="staff_mail" 
                         class="ap-form__label ap-form__label-text">
                         Mail
                       </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_smai">
+                        Mail is required*
+                      </span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="ml-col-1 margin-bottom-x">
             <div class="ml-col-1 at-bcard__stitle">Staff Asign</div>
-            <div class="ml-col-3">
+            <div class="ml-col-3 clear-left">
                 <div class="ml-col-1">
                     <div class="ap-form__input">
                       <input 
                         required
-                        type="number" 
+                        type="text" 
                         placeholder="Max Budget"
                         id="staff_mbadget" 
                         name="staff_mbadget"
-                        class="ap-form__input-text" />
+                        class="ap-form__input-text"
+                        [(ngModel)]="alert_detail_form.MaxBudget"
+                        [class.custom-input__text--error]="alert_detail_validator.no_mbud"/>
                       <label 
                         for="staff_mbadget" 
                         class="ap-form__label ap-form__label-text">
                         Max Budget
                       </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_mbud">
+                        Max Budget is required*
+                      </span>
                     </div>
                 </div>
             </div>
@@ -324,24 +942,109 @@
                       <input 
                         required
                         type="date" 
+                        [min]="today"
                         placeholder="When?"
                         id="staff_when" 
                         name="staff_when"
-                        class="ap-form__input-text" />
+                        class="ap-form__input-text"
+                        [class.custom-input__text--error]="alert_detail_validator.no_date"
+                        [(ngModel)]="alert_detail_form.DateSchedule"/>
                       <label 
                         for="staff_when" 
-                        class="ap-form__label ap-form__label-text">
+                        class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
                         When?
                       </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_date">
+                        When date is required*
+                      </span>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="time" 
+                        placeholder="What time?"
+                        id="staff_when" 
+                        name="staff_when"
+                        class="ap-form__input-text"
+                        [(ngModel)]="alert_detail_form.HoreSchedule"
+                        [class.custom-input__text--error]="alert_detail_validator.no_hour"/>
+                      <label 
+                        for="staff_when" 
+                        class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
+                        What time?
+                      </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_hour">
+                        What time is required*
+                      </span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="ml-col-1 ap-form__buttons margin-top-m">
             <button 
-                class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green">
+                class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green"
+                (click)="saveAlertDetail()">
                 Save
             </button>
+        </div>
+    </div>
+    <div class="ml-modal__content card-style " *ngIf="section_to_show == 'new_alert'">
+        <div class="ml-col-1 margin-bottom-x">
+            <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
+                New Alert
+            </p>
+            <button 
+                class="ap-form__rButton button-red"
+                (click)="showModal();">
+                Close
+            </button>
+        </div> 
+    </div>
+    <div class="ml-modal__content card-style " *ngIf="section_to_show == 'chat'">
+        <div class="ml-col-1 margin-bottom-x">
+            <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
+                Chat Messages
+            </p>
+            <button 
+                class="ap-form__rButton button-red"
+                (click)="showModal();">
+                Close
+            </button>
+        </div>
+        <div class="ml-col-1 margin-top-x">
+            <div class="ml-col-1">
+                <div class="">
+                    <h4 class="chatm__datos">
+                        {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
+                        <img class="chatm__datos-photo" 
+                             src="{{ userSendMessage.info.photo }}" />
+                    </h4>
+                    <div class="chatm__chat" id="chat_messages">
+                        <div *ngFor="let message of messages"
+                             class="chatm__chat-message">
+                            <span class="chatm__chat-message-msg"
+                                  [ngClass]="{'chatm__chat-message-msg-from': IDUSR == message.userId, 
+                                            'chatm__chat-message-msg-own': IDUSR != message.userId}">
+                                {{ message.message }}
+                            </span>
+                        </div>
+                        <div id="last"></div>
+                    </div>
+                    
+                    <div class="chatm__message">
+                        <textarea class="chatm__message-message card-style" [(ngModel)]="messageInput"></textarea>
+                        <button 
+                            (click)="SentMessageBTN(messageInput, userSendMessage.id )"
+                            class="chatm__message-send">
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>               
+            </div>
         </div>
     </div>
 </div>
