@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatosService } from '../../../../datos.service';
 import { LoaderComponent } from '../../../../ts/loader';
 import { SystemMessage } from '../../../../ts/systemMessage';
+import { Utils } from '../../../utils/utils';
 
 @Component({
     selector: 'alerts',
@@ -268,8 +269,6 @@ export class AlertsComponent implements OnInit {
 
                 const day_button = day.querySelector('[day-selecter="day"]');
 
-                console.log('Button => ', day_button);
-
                 day_button.onclick = function( event_data ) {
 
                     const root_data = event_data.target;
@@ -330,8 +329,170 @@ export class AlertsComponent implements OnInit {
     public new_alert_data: NewAlertDTO = new NewAlertDTO();
     public saveNewAlertData():void {
 
-        console.log(' ===========> New alert save!');
-        console.log(this.new_alert_data);
+        this.getScheduleData();
+
+        const new_alert_forms_validator: any = {
+            main_fields: this.newAlertForm(),
+        }
+
+        if( new_alert_forms_validator.main_fields ) {
+
+            this.new_alert_data.BuildingId = 1;
+
+            this.new_alert_data.alertDetails.id = 0;
+            this.new_alert_data.alertDetails.IdAlert = 0;
+
+            this.loader.showLoader();
+
+            this._services.service_general_post('Servicio', this.new_alert_data)
+                .subscribe( (response: any) => {
+
+                    console.log('========> ', response);
+
+                    this.showModal();
+                    setTimeout( () => this.loader.hideLoader(), 1777);
+
+                }, (error: any) => {
+
+                    this.system_message.showMessage({
+                        kind: 'error',
+                        time: 4777,
+                        message: {
+                            header: 'System Error',
+                            text: 'A System Error has ocurred, please try leater.'
+                        }
+                    });
+
+                    setTimeout( () => this.loader.hideLoader(), 1777);
+
+                });
+
+        } else {
+
+            this.system_message.showMessage({
+                kind: 'error',
+                time: 4777,
+                message: {
+                    header: 'Form Data',
+                    text: 'All fields must be field to continue.'
+                }
+            });
+
+            this.sendToTopPage();
+
+        }
+
+    }
+
+    public new_alert_form: any = {
+        no_user: false,
+        no_info: false,
+        no_desc: false,
+        no_sche: false
+    }
+    public newAlertForm():boolean {
+
+        let result: boolean = false;
+
+        this.new_alert_data.UserId == -1 ?
+            this.new_alert_form.no_user = true :
+            this.new_alert_form.no_user = false;
+
+        this.new_alert_data.Information == '' ?
+            this.new_alert_form.no_info = true :
+            this.new_alert_form.no_info = false;
+
+        this.new_alert_data.Description == '' ?
+            this.new_alert_form.no_desc = true :
+            this.new_alert_form.no_desc = false;
+
+        this.new_alert_data.AvailableSchedule == '' ?
+            this.new_alert_form.no_sche = true :
+            this.new_alert_form.no_sche = false;
+
+        for( let field in this.new_alert_form ) {
+
+            if( this.new_alert_form[field] ) return false;
+            else result = true; 
+
+        }
+
+        return result;
+
+    }
+
+    public avaible_schedule: any = {
+        startTime: '',
+        endTime: '',
+        daysOfWeek: null
+    }
+    public getScheduleData():void {
+
+        let days_selected: any[] = [];
+
+        const selecter: any = document.querySelector('[day-selecter="container"]').children,
+              new_alert_open: any = document.getElementById('new_alert_open'),
+              new_alert_close: any = document.getElementById('new_alert_close'),
+              schedule_validator = {
+                  no_days: false,
+                  no_ohou: false,
+                  no_chou: false
+              };
+        
+        selecter.forEach( (day: any) => {
+
+            const day_button = day.querySelector('[day-selecter="day"]');
+
+            if( day_button.classList.contains('days-icons__day-letter--active') ) {
+
+                days_selected.push( day_button.parentElement.getAttribute('day-index') );
+
+            }
+
+        });
+
+        this.avaible_schedule.daysOfWeek = days_selected;
+
+        if( new_alert_open.value != '' ) {
+
+            this.avaible_schedule.startTime = new_alert_open.value;
+            schedule_validator.no_ohou = false;
+            new_alert_open.classList.remove('custom-input__text--error');
+
+        } else {
+            
+            this.avaible_schedule.startTime = '';
+            schedule_validator.no_ohou = true;
+            new_alert_open.classList.add('custom-input__text--error');
+
+        }
+
+        if( new_alert_close.value != '' ) {
+
+            this.avaible_schedule.endTime = new_alert_close.value;
+            schedule_validator.no_chou = false;
+            new_alert_close.classList.remove('custom-input__text--error');
+
+        } else {
+            
+            this.avaible_schedule.endTime = '';
+            schedule_validator.no_chou = true;
+            new_alert_close.classList.add('custom-input__text--error');
+
+        }
+
+        if(
+            schedule_validator.no_ohou || 
+            schedule_validator.no_chou
+        ) {
+
+            this.new_alert_data.AvailableSchedule = '';
+
+        } else {
+
+            this.new_alert_data.AvailableSchedule = JSON.stringify( this.avaible_schedule );
+
+        }
 
     }
 
@@ -625,6 +786,14 @@ export class AlertsComponent implements OnInit {
     }
 
     /*Utilities Section*/
+    public sendToTopPage():void {
+
+        const modal_app_container: any = document.getElementById('modal-app');
+
+        modal_app_container.scrollTo(0,0);
+
+    }
+
     public dateWorker( the_date: string ) {
 
         let result: string = '';
@@ -701,12 +870,12 @@ export class AlertsComponent implements OnInit {
                             id_image_container.setAttribute('src', image_data.image );
                             name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
                             id_image_container.classList.remove('no-image');
-                            //root_data.prepareImages( event_data );
+                            root_data.prepareImages( event_data );
     
                           } else {
     
                             id_image_container.src = '../../../assets/14.jpg';
-                            //root_data.general_user_data.avatar = '';
+                            root_data.new_alert_data.Photo = '';
                             name_image_container.innerHTML = `Image must be <br /><span class="text-bold">${ dimensions_image }px</span>`;
                             id_image_container.classList.add('no-image');
     
@@ -720,6 +889,37 @@ export class AlertsComponent implements OnInit {
     
         }
         
+    }
+
+    public newImages: any[] = [];
+    public prepareImages(e) {
+        
+        if (Utils.isDefined(e.srcElement.files)) {
+        for (let f of e.srcElement.files) {
+            
+            this.newImages.push(f);
+        }
+        }
+        this.addImages();
+
+    }
+
+    public addImages() {
+        let url: string = '';
+        if (!Utils.isEmpty(this.newImages)) {
+        for (let f of this.newImages) {
+            this._services.UploadImgSuc(f).subscribe((r) => {
+            if (Utils.isDefined(r)) {
+                url = <string>r.message;
+                
+                url = url.replace('/Imagenes', this._services.getURL() + 'Flip');
+                this.new_alert_data.Photo = url;
+                
+                this.newImages = [];
+            }
+            })
+        }
+        }
     }
 
     public today: string = '';
@@ -876,7 +1076,7 @@ class NewAlertDTO {
     Photo: string = '';
     Description: string = '';
     AvailableSchedule: string = '';
-    UserId: number = null;
+    UserId: number = -1;
     BuildingId: number = null;
     AlertCategoryId: number = null;
     AlertStatusId: number = null;
