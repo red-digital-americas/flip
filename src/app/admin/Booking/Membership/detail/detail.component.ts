@@ -172,4 +172,6 @@ export class DetailComponent implements OnInit {
     });
   }
 
+  backButton(){ window.history.back(); }
+
 }

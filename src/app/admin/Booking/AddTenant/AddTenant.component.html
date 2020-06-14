@@ -765,10 +765,10 @@
                                 <div class="ml-col-5e3">
                                     <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
                                         <div class="ml-col-1 padding-bottom-x">
-                                            Total Beds:
+                                            Cost per night:
                                         </div>
                                         <div class="ml-col-1 text-bold">
-                                            {{ getTotalBeds( booking_data.totalBeds ) }}
+                                            {{ membership_selected.price | currency }}
                                         </div>
                                     </div>
                                 </div>
@@ -1171,6 +1171,7 @@
                           name="profile_nationality"
                           input-family="profile"
                           class="ap-form__input-text"
+                          [class.form_error_found]="form_profile_validator.no_nati"
                           [(ngModel)]="general_user_data.userData.countryId">
                           <option value="" disabled>Nationality</option>
                           <option *ngFor="let list of country_list_gotten;" [value]="list.id">
@@ -1183,6 +1184,9 @@
                           [class.ap-form__label-text--active]="general_user_data.userData.countryId != ''">
                           Nationality
                         </label>
+                        <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_validator.no_nati">
+                          Nationality is required*
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -1221,6 +1225,7 @@
                           id="profile_bday" 
                           input-family="profile"
                           [(ngModel)]="general_user_data.bith"
+                          [class.form_error_found]="form_profile_validator.no_bdat"
                           name="profile_bday"
                           class="ap-form__input-text" />
                         <label 
@@ -1228,6 +1233,9 @@
                           class="ap-form__label ap-form__label-text ap-form__label-text--active">
                           Birthday
                         </label>
+                        <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_validator.no_bdat">
+                          Birthday is required*
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -1490,7 +1498,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="ml-col-1" *ngIf="!single_profile"> <!-- *ngIf="profile_data.clientKind" -->
+                  <div class="ml-col-1" *ngIf="!single_profile"> 
                     <div class="ml-col-1">
                         <div class="ap-form__input">
                             <p class="ap-form__titulo ap-form__titulo--auto-width">
@@ -1650,15 +1658,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- div class="ml-col-1 ap-form__buttons" *ngIf="profile_section_card">
-                    <button 
-                        class="ap-form__buttons-button ap-form__buttons-button--big button-green"
-                        (click)="changeSectionNavigation( 'edit_profile' )">
-                        Edit Profile
-                    </button>
-                  </div -->
-
-
                   <div class="ml-col-1 margin-top-x">
                     <div class="ml-col-1">
                         <h4 class="ap-form__titulo text-left">
@@ -2203,10 +2202,6 @@
                         </div>
                       </div>
                     </div>
-
-
-
-
                     <div class="ml-col-1 margin-top-x">
                         <div class="ml-col-1">
                             <h4 class="ap-form__titulo text-left">
@@ -2646,24 +2641,10 @@
                             <div class="ml-col-1 text-center margin-top-x">
                               Required fields <span class="color-red text-bold">*</span>
                             </div>
-                            <!-- div class="ml-col-1 ap-form__buttons">
-                              <button 
-                                type="submit"
-                                class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
-                                Save
-                              </button>
-                            </div -->
                           </form>
                         </div>
                       </div>
                   </div>
-
-
-
-
-
-
-
                   <div class="ml-col-1 ap-form__buttons margin-top-m" *ngIf="terms_of_use == 'short_t'">
                     <button 
                         class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
@@ -2679,44 +2660,7 @@
                     </button>
                   </div>
             </form>
-        <!-- div class="ml-col-1 margin-tb-min">
-            <button 
-                class="ap-form__rButton button-black button-big"
-                (click)="iHaveCompletedStep(1)">
-                Confirm
-            </button>
-        </div -->
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="ml-col-1" *ngIf="visible_step.step_3" step-form="three">
         <div class="ml-col-1 top-separator margin-bottom-m">
             <div class="ml-col-1 margin-tb-min">
@@ -2814,10 +2758,10 @@
                 <div class="ml-col-5e3">
                     <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
                         <div class="ml-col-1 padding-bottom-x">
-                            Total Beds:
+                            Cost per night:
                         </div>
                         <div class="ml-col-1 text-bold">
-                            {{ getTotalBeds( booking_data.totalBeds ) }}
+                            {{ membership_selected.price | currency }}
                         </div>
                     </div>
                 </div>

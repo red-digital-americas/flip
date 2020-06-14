@@ -7,7 +7,7 @@
             </h4>
             <button 
                 class="ap-form__rButton button-big button-green"
-                (click)="showModal('new_alert')">
+                (click)="showModal('new_alert'); initNewAlertModule()">
                 New Alert
             </button>
         </div>
@@ -107,12 +107,12 @@
                          *ngFor="let card of pending_schedule_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -156,12 +156,12 @@
                          *ngFor="let card of confirming_completion_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -205,12 +205,12 @@
                          *ngFor="let card of awaiting_invoice_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -254,12 +254,12 @@
                          *ngFor="let card of confirming_paymnet_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -303,12 +303,12 @@
                          *ngFor="let card of completed_and_paid_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -354,12 +354,12 @@
                          *ngFor="let card of urgent_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -403,12 +403,12 @@
                          *ngFor="let card of schelude_today_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -452,12 +452,12 @@
                          *ngFor="let card of schelude_week_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -501,12 +501,12 @@
                          *ngFor="let card of schelude_week_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -550,12 +550,12 @@
                          *ngFor="let card of other_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
-                            <p class="alerts__card-card--status">
+                            <div class="alerts__card-card--status">
                                 Order Number: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
-                            </p>
+                            </div>
                             <span class="alerts__card-card--bubble"
                                   (click)="showChat(card)">
                             </span>
@@ -594,7 +594,7 @@
         </div>
     </div>
 </div>
-<div class="ml-modal ml-modal--bg-black" *ngIf="show_modal">
+<div class="ml-modal ml-modal--bg-black" id="modal-app" *ngIf="show_modal">
     <div class="ml-modal__content card-style" *ngIf="section_to_show == 'default'">
         <div class="ml-col-1 margin-bottom-x">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
@@ -609,32 +609,6 @@
                 Close
             </button>
         </div> 
-        <div class="ml-col-1 margin-bottom-x">
-            <div class="ml-col-3o">
-                <div class="ml-col-1">
-                    Order number: 
-                </div>
-                <div class="ml-col-1 text-bold">
-                    {{ schedule_object.id }}
-                </div>
-            </div>
-            <div class="ml-col-4">
-                <div class="ml-col-1">
-                    Work type: 
-                </div>
-                <div class="ml-col-1 text-bold">
-                    {{ schedule_object.name }}
-                </div>
-            </div>
-            <div class="ml-col-4">
-                <div class="ml-col-1">
-                    Job description: 
-                </div>
-                <div class="ml-col-1 text-bold">
-                    {{ schedule_object.information }}
-                </div>
-            </div>
-        </div>
         <div class="ml-col-1 margin-bottom-x">
             <div class="ml-col-3o">
                 <div class="ml-col-2">
@@ -664,6 +638,32 @@
                     <div class="ml-col-1 text-bold">
                         {{ schedule_object.user.email }}
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="ml-col-1 margin-bottom-x">
+            <div class="ml-col-3o">
+                <div class="ml-col-1">
+                    Order number: 
+                </div>
+                <div class="ml-col-1 text-bold">
+                    {{ schedule_object.id }}
+                </div>
+            </div>
+            <div class="ml-col-4">
+                <div class="ml-col-1">
+                    Work type: 
+                </div>
+                <div class="ml-col-1 text-bold">
+                    {{ schedule_object.name }}
+                </div>
+            </div>
+            <div class="ml-col-4">
+                <div class="ml-col-1">
+                    Job description: 
+                </div>
+                <div class="ml-col-1 text-bold">
+                    {{ schedule_object.information }}
                 </div>
             </div>
             <div class="ml-col-1 margin-top-x">
@@ -745,7 +745,7 @@
                         name="company_status"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.AlertStatusId"
-                        (change)="changeColorStatus( alert_detail_form.IdAlert )"
+                        (change)="changeColorStatus( alert_detail_form.AlertStatusId )"
                         [class.custom-input__text--error]="alert_detail_validator.no_aler">
                         <option value="-1" disabled>Status</option>
                         <option *ngFor="let status of alerts_status_catalog;" [value]="status.id">
@@ -912,7 +912,7 @@
             </div>
         </div>
         <div class="ml-col-1 margin-bottom-x">
-            <div class="ml-col-1 at-bcard__stitle">Staff Asign</div>
+            <div class="ml-col-1 at-bcard__stitle">Schedule</div>
             <div class="ml-col-3 clear-left">
                 <div class="ml-col-1">
                     <div class="ap-form__input">
@@ -993,7 +993,7 @@
         </div>
     </div>
     <div class="ml-modal__content card-style " *ngIf="section_to_show == 'new_alert'">
-        <div class="ml-col-1 margin-bottom-x">
+        <div class="ml-col-1">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
                 New Alert
             </p>
@@ -1002,7 +1002,571 @@
                 (click)="showModal();">
                 Close
             </button>
-        </div> 
+        </div>
+        <div class="ml-col-1 margin-bottom-x margin-top-x">
+            <div class="ml-col-1 at-bcard__stitle">Information</div>
+            <!-- div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="Name"
+                        id="new_alert_name" 
+                        name="new_alert_name"
+                        class="ap-form__input-text"/>
+                      <label 
+                        for="new_alert_name" 
+                        class="ap-form__label ap-form__label-text">
+                        Name
+                      </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                        Name is required*
+                      </span>
+                    </div>
+                </div>
+            </div -->
+            <!-- div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="Email"
+                        id="new_alert_email" 
+                        name="new_alert_email"
+                        class="ap-form__input-text"
+                        [(ngModel)]="new_alert_data."/>
+                      <label 
+                        for="new_alert_email" 
+                        class="ap-form__label ap-form__label-text">
+                        Email
+                      </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                        Email is required*
+                      </span>
+                    </div>
+                </div>
+            </div -->
+            <!-- div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="Phone"
+                        id="new_alert_phone" 
+                        name="new_alert_phone"
+                        class="ap-form__input-text"
+                        [(ngModel)]="new_alert_data."/>
+                      <label 
+                        for="new_alert_phone" 
+                        class="ap-form__label ap-form__label-text">
+                        Phone
+                      </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                        Phone is required*
+                      </span>
+                    </div>
+                </div>
+            </div -->
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <select 
+                        required
+                        type="text" 
+                        placeholder="Alert status"
+                        id="new_alert_status" 
+                        name="new_alert_status"
+                        [(ngModel)]="new_alert_data.UserId"
+                        [class.custom-input__text--error]="new_alert_form.no_user"
+                        class="ap-form__input-text">
+                        <option value="-1" disabled>Users</option>
+                        <option *ngFor="let user of build_users_list;" [value]="user.id">
+                            {{ user.name }}
+                        </option>
+                      </select>
+                      <label 
+                        for="new_alert_status" 
+                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                        Users
+                      </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_user">
+                        Users is required*
+                      </span>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <select 
+                        required
+                        type="text" 
+                        placeholder="Alert status"
+                        id="new_alert_status" 
+                        name="new_alert_status"
+                        [(ngModel)]="new_alert_data.AlertCategoryId"
+                        [class.custom-input__text--error]="new_alert_form.no_cate"
+                        class="ap-form__input-text">
+                        <option value="-1" disabled>Alert Category</option>
+                        <option *ngFor="let work of work_type_catalog;" [value]="work.id">
+                            {{ work.name }}
+                        </option>
+                      </select>
+                      <label 
+                        for="new_alert_status" 
+                        class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                        Alert Category
+                      </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_cate">
+                        Alert Category required*
+                      </span>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-3">
+                <div class="ml-col-1">
+                    <div class="ap-form__input">
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="Job Description"
+                        id="new_alert_jdesc" 
+                        name="new_alert_jdesc"
+                        class="ap-form__input-text"
+                        [(ngModel)]="new_alert_data.Information"
+                        [class.custom-input__text--error]="new_alert_form.no_info"/>
+                      <label 
+                        for="new_alert_jdesc" 
+                        class="ap-form__label ap-form__label-text"
+                        [class.ap-form__label-text--active]="new_alert_data.Information != ''">
+                        Job Description
+                      </label>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_info">
+                        Job Description is required*
+                      </span>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-1">
+                <div class="ml-col-6">
+                    <div class="ml-col-1">
+                        <div class="ap-form__input">
+                          <textarea 
+                            required
+                            type="text" 
+                            placeholder="Description"
+                            id="mc_desc" 
+                            name="mc_desc"
+                            class="ap-form__input-textarea"
+                            [(ngModel)]="new_alert_data.Description"
+                            [class.custom-input__text--error]="new_alert_form.no_desc"></textarea>
+                          <label 
+                            for="mc_desc" 
+                            class="ap-form__label ap-form__label-text"
+                            [class.ap-form__label-text--active]="new_alert_data.Description != ''">
+                            Description
+                          </label>
+                          <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_desc">
+                            Description is required*
+                          </span>
+                        </div>
+                    </div>
+                    <div class="ml-col-6">
+                        <div class="ml-col-1">
+                            Avaibility Schedule: 
+                        </div>
+                        <div class="days-icons margin-bottom-x" day-selecter="container">
+                            <div class="days-icons__container">
+                                <div class="days-icons__day" day-index="0">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        S
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="days-icons__container">
+                                <div class="days-icons__day" day-index="1">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        M
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="days-icons__container">
+                                <div class="days-icons__day" day-index="2">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        T
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="days-icons__container">
+                                <div class="days-icons__day" day-index="3">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        W
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="days-icons__container">
+                                <div class="days-icons__day" day-index="4">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        R
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="days-icons__container">
+                                <div class="days-icons__day" day-index="5">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        F
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="days-icons__container">
+                                <div class="days-icons__day" day-index="6">
+                                    <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
+                                        S
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-2">
+                                <div class="ml-col-1">
+                                    <div class="ap-form__input">
+                                      <input 
+                                        required
+                                        type="time" 
+                                        placeholder="Open at: "
+                                        id="new_alert_open" 
+                                        name="new_alert_open"
+                                        class="ap-form__input-text"
+                                        [class.custom-input__text--error]="1 == 2"/>
+                                      <label 
+                                        for="new_alert_open" 
+                                        class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
+                                        Open at: 
+                                      </label>
+                                      <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                        Open at is required*
+                                      </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ml-col-2">
+                                <div class="ml-col-1">
+                                    <div class="ap-form__input">
+                                      <input 
+                                        required
+                                        type="time" 
+                                        placeholder="Close at:"
+                                        id="new_alert_close" 
+                                        name="new_alert_close"
+                                        class="ap-form__input-text"
+                                        [class.custom-input__text--error]="1 == 2"/>
+                                      <label 
+                                        for="new_alert_close" 
+                                        class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
+                                        Close at:
+                                      </label>
+                                      <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                        Close at is required*
+                                      </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ml-col-4o">
+                    <div class="ml-col-1 ml-col-r">
+                        <div class="ap-form__input ap-form__input--full-width">
+                          <input
+                            required
+                            class="ap-form__input-image display-none" 
+                            id="new_alert_image"
+                            name="new_alert_image"
+                            (change)="validateImageUpload( $event, '350x350', 'profile_avatar_img', 'profile_avatar_name' )"
+                            input-family="profile"
+                            type="file"
+                            accept="image/*" />
+                          <label for="new_alert_image" class="ap-form__label-image">
+                            <figure class="ap-form__image">
+                              <img class="ap-form__image-image no-image" 
+                                  id="profile_avatar_img"
+                                  src="../../../../assets/14.jpg" />
+                              <span class="ap-form__image-data text-center" id="profile_avatar_name">
+                                Image size must be <br />
+                                <span class="text-bold">350x350px</span> 
+                              </span>
+                            </figure>
+                          </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-col-1">
+                <div class="ml-col-1 at-bcard__stitle margin-tb-x">Alert Information</div>
+                <div class="ml-col-1 margin-top-x">
+                    <div class="ml-col-3">
+                        <div class="ml-col-1">
+                            <div class="ap-form__input">
+                              <select 
+                                required
+                                type="text" 
+                                disabled
+                                placeholder="Alert status"
+                                id="new_alert_status" 
+                                name="new_alert_status"
+                                class="ap-form__input-text"
+                                (change)="changeColorStatus( $event.target.value )"
+                                [value]="1"
+                                [(ngModel)]="new_alert_data.alertDetails.AlertStatusId"
+                                [class.custom-input__text--error]="1 == 2">
+                                <option *ngFor="let status of alerts_status_catalog;" [value]="status.id">
+                                    {{ status.status }}
+                                </option>
+                              </select>
+                              <label 
+                                for="new_alert_status" 
+                                class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                Alert status
+                                <span class="schedule__color schedule--mini" 
+                                      [style.background-color]="color_alert_updated">
+                                </span>
+                              </label>
+                              <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                Alert status is required*
+                              </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-col-1 margin-bottom-x margin-top-x">
+                        <div class="ml-col-1 at-bcard__stitle">Company</div>
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="text" 
+                                    placeholder="Name"
+                                    id="new_alert_cname" 
+                                    name="new_alert_cname"
+                                    class="ap-form__input-text"
+                                    [(ngModel)]="new_alert_data.alertDetails.Name"
+                                    [class.custom-input__text--error]="1 == 2"/>
+                                  <label 
+                                    for="new_alert_cname" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Name
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                    Name is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="text" 
+                                    placeholder="Phone"
+                                    id="new_alert_cphone" 
+                                    name="new_alert_cphone"
+                                    class="ap-form__input-text"
+                                    [(ngModel)]="new_alert_data.alertDetails.Phone"
+                                    [class.custom-input__text--error]="1 == 2"/>
+                                  <label 
+                                    for="new_alert_cphone" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Phone
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                    Phone is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="text" 
+                                    placeholder="Email"
+                                    id="new_alert_cmail" 
+                                    name="new_alert_cmail"
+                                    class="ap-form__input-text"
+                                    [(ngModel)]="new_alert_data.alertDetails.EmailCompany"
+                                    [class.custom-input__text--error]="1 == 2"/>
+                                  <label 
+                                    for="new_alert_cmail" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Email
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                    Email is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-col-1 margin-bottom-x">
+                        <div class="ml-col-1 at-bcard__stitle">Staff Asign</div>
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="text" 
+                                    placeholder="Staff Name"
+                                    id="new_alert_nstaff" 
+                                    name="new_alert_nstaff"
+                                    class="ap-form__input-text"
+                                    [(ngModel)]="new_alert_data.alertDetails.AssignStaff"
+                                    [class.custom-input__text--error]="1 == 2"/>
+                                  <label 
+                                    for="new_alert_nstaff" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Staff Name
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                    Staff Name is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="text" 
+                                    placeholder="Phone"
+                                    id="new_alert_pstaff" 
+                                    name="new_alert_pstaff"
+                                    class="ap-form__input-text"
+                                    [(ngModel)]="new_alert_data.alertDetails.MobilPhone"
+                                    [class.custom-input__text--error]="1 == 2"/>
+                                  <label 
+                                    for="new_alert_pstaff" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Phone
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                    Phone is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="text" 
+                                    placeholder="Mail"
+                                    id="new_alert_estaff" 
+                                    name="new_alert_estaff"
+                                    class="ap-form__input-text"
+                                    [(ngModel)]="new_alert_data.alertDetails.EmailStaff"
+                                    [class.custom-input__text--error]="1 == 2"/>
+                                  <label 
+                                    for="new_alert_estaff" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Mail
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                    Mail is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-col-1 margin-bottom-x">
+                        <div class="ml-col-1 at-bcard__stitle">Schedule</div>
+                        <div class="ml-col-3 clear-left">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="text" 
+                                    placeholder="Max Budget"
+                                    id="new_alert_mbud" 
+                                    name="new_alert_mbud"
+                                    class="ap-form__input-text"
+                                    [(ngModel)]="new_alert_data.alertDetails.MaxBudget"
+                                    [class.custom-input__text--error]="1 == 2"/>
+                                  <label 
+                                    for="new_alert_mbud" 
+                                    class="ap-form__label ap-form__label-text">
+                                    Max Budget
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                    Max Budget is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="date" 
+                                    [min]="today"
+                                    placeholder="When?"
+                                    id="new_alert_date" 
+                                    name="new_alert_date"
+                                    class="ap-form__input-text"
+                                    [(ngModel)]="new_alert_data.alertDetails.DateSchedule"
+                                    [class.custom-input__text--error]="1 == 2"/>
+                                  <label 
+                                    for="new_alert_date" 
+                                    class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
+                                    When?
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                    When date is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-col-3">
+                            <div class="ml-col-1">
+                                <div class="ap-form__input">
+                                  <input 
+                                    required
+                                    type="time" 
+                                    placeholder="What time?"
+                                    id="new_alert_time" 
+                                    name="new_alert_time"
+                                    class="ap-form__input-text"
+                                    [(ngModel)]="new_alert_data.alertDetails.HoreSchedule"
+                                    [class.custom-input__text--error]="1 == 2"/>
+                                  <label 
+                                    for="new_alert_time" 
+                                    class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
+                                    What time?
+                                  </label>
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                                    What time is required*
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ml-col-1 ap-form__buttons margin-top-m">
+            <button 
+                class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green"
+                (click)="saveNewAlertData()">
+                Save
+            </button>
+        </div>
     </div>
     <div class="ml-modal__content card-style " *ngIf="section_to_show == 'chat'">
         <div class="ml-col-1 margin-bottom-x">
@@ -1034,7 +1598,6 @@
                         </div>
                         <div id="last"></div>
                     </div>
-                    
                     <div class="chatm__message">
                         <textarea class="chatm__message-message card-style" [(ngModel)]="messageInput"></textarea>
                         <button 
@@ -1047,4 +1610,7 @@
             </div>
         </div>
     </div>
+</div>
+<div class="black-box">
+    <img src="" id="image_real_dimension" />
 </div>

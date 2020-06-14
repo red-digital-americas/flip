@@ -710,7 +710,7 @@ import { Router } from '@angular/router';
 
         this.all_services_selected = [];
 
-        this.current_build.services.forEach( (service: any) => {
+        this.membership_selected.services.forEach( (service: any) => {
 
             service.type_service = 'Included';
             service.lapse = '1';
@@ -766,7 +766,7 @@ import { Router } from '@angular/router';
             diff_time = Math.abs( start_date - end_date ),
             diff_days = Math.ceil(diff_time / (1000 * 60 * 60 * 24));
 
-            this.terms_of_use = diff_days < 8 ? 'short_t' : 'long_t';
+            this.terms_of_use = diff_days < 31 ? 'short_t' : 'long_t';
 
         return diff_days;
 
@@ -912,17 +912,19 @@ import { Router } from '@angular/router';
     }
 
     public profile_section_card: boolean = false;
-    public profileTenantCompleted( is_short_term: boolean = true ):void {
+    public async profileTenantCompleted( is_short_term: boolean = true ):Promise<void> {
 
         const form_validation_result = {
             information: this.profileFormValidator(),
-            pay_method: this.creditCardValidator() 
+            pay_method: await this.creditCardValidator() 
         }
 
-        console.log('Form Information => ', form_validation_result.information );
-        console.log('Payment Information => ', form_validation_result.pay_method );
+        console.log('=> ', form_validation_result.information);
+        console.log('=> ', form_validation_result.pay_method);
 
         if( is_short_term ) {
+
+            console.log('Entre aqui');
 
             if( form_validation_result.information && form_validation_result.pay_method ) {
 
@@ -931,10 +933,8 @@ import { Router } from '@angular/router';
                 this.join_all_data.user = this.general_user_data;
                 this.join_all_data.creditCard = this.credit_card_data;
                 this.iHaveCompletedStep(1);
-                
-                console.log('Modelo en profile => ', this.join_all_data);
     
-            } else {
+            } else if( form_validation_result.pay_method != null ) {
     
                 this.system_message.showMessage({
                     kind: 'error',
@@ -945,9 +945,9 @@ import { Router } from '@angular/router';
                     }
                 });
     
-                this.sendToTopPage();
+                this.sendToTopPage();   
     
-            } 
+            }
 
         }
 
@@ -957,9 +957,6 @@ import { Router } from '@angular/router';
                 income_form: this.incomeFormValidator(),
                 reference_form: this.referenceFormValidator()
             }
-
-            console.log('Income Form validation => ', additional_forms.income_form);
-            console.log('Reference Form validation => ', additional_forms.reference_form);
 
             if( 
                 form_validation_result.information && 
@@ -972,8 +969,6 @@ import { Router } from '@angular/router';
                 this.join_all_data.user = this.general_user_data;
                 this.join_all_data.creditCard = this.credit_card_data;
                 this.iHaveCompletedStep(1);
-                
-                console.log('Modelo en profile => ', this.join_all_data);
     
             } else {
     
@@ -1227,79 +1222,107 @@ import { Router } from '@angular/router';
         no_year: false,
         no_ccv: false
     }
-    public creditCardValidator():boolean {
+    public async creditCardValidator():Promise<any> {
 
-        let result: boolean = false;
+        let hold_result: boolean = false,
+            result: boolean = null;
 
-        this.credit_card_data.name == '' ? 
+        const processing_card: Promise<any>  = new Promise( (resolve: any) => {
+
+            this.credit_card_data.name == '' ? 
             this.credit_card_form.no_name = true :
             this.credit_card_form.no_name = false;
 
-        this.credit_card_data.number == '' ? 
-            this.credit_card_form.no_numb = true :
-            this.credit_card_form.no_numb = false;
+            this.credit_card_data.number == '' ? 
+                this.credit_card_form.no_numb = true :
+                this.credit_card_form.no_numb = false;
 
-        this.credit_card_data.month == null ? 
-            this.credit_card_form.no_mont = true :
-            this.credit_card_form.no_mont = false;
+            this.credit_card_data.month == null ? 
+                this.credit_card_form.no_mont = true :
+                this.credit_card_form.no_mont = false;
 
-        this.credit_card_data.year == null ? 
-            this.credit_card_form.no_year = true :
-            this.credit_card_form.no_year = false;
+            this.credit_card_data.year == null ? 
+                this.credit_card_form.no_year = true :
+                this.credit_card_form.no_year = false;
 
-        this.credit_card_data.ccv == '' ? 
-            this.credit_card_form.no_ccv = true :
-            this.credit_card_form.no_ccv = false;
+            this.credit_card_data.ccv == '' ? 
+                this.credit_card_form.no_ccv = true :
+                this.credit_card_form.no_ccv = false;
 
-        for( let field in this.credit_card_form ) {
+            for( let field in this.credit_card_form ) {
 
-            if( this.credit_card_form[field] ) return false;
-            else result = true;
+                if( this.credit_card_form[field] ) hold_result = false;
+                else hold_result = true;
 
-        }
-
-        if( result ) {
-
-            const card_data = {
-                number: this.credit_card_data.number,
-                expYear: Number( this.credit_card_data.year ),
-                expMonth: Number( this.credit_card_data.month ),
-                cvc:  this.credit_card_data.ccv,
             }
-    
-            this._services.service_general_post('Stripe', card_data)
-                .subscribe( ( response: any ) => {
-    
-                    if( response.result == 'Success' ) {
-                        
-                        result = true;
-                        this.join_all_data.token = response.item;
 
-                    } else {
+            if( hold_result ) {
 
-                        result = false;
-                        this.join_all_data.token = response.item;
-
-                    }
+                const card_data = {
+                    number: this.credit_card_data.number,
+                    expYear: Number( this.credit_card_data.year ),
+                    expMonth: Number( this.credit_card_data.month ),
+                    cvc:  this.credit_card_data.ccv,
+                }
+        
+                this._services.service_general_post('Stripe', card_data)
+                    .subscribe( ( response: any ) => {
+        
+                        if( response.result == 'Success' ) {
+                            
+                            this.join_all_data.token = response.item;
+                            result = true;
     
-                }, ( error: any ) => {
-
-                    result = false;
+                        } else {
     
-                    this.system_message.showMessage({
-                        kind: 'error',
-                        time: 4777,
-                        message: {
-                            header: 'Card Error',
-                            text: error
+                            this.join_all_data.token = response.item;
+                            result = false;
+    
                         }
+
+                        resolve( result );
+        
+                    }, ( error: any ) => {
+        
+                        this.system_message.showMessage({
+                            kind: 'error',
+                            time: 4777,
+                            message: {
+                                header: 'Card Error',
+                                text: error
+                            }
+                        });
+
+                        resolve( false );
+        
                     });
-    
-                });
 
-        }
+            } else {
 
-        return result;
+                this.system_message.showMessage({
+                    kind: 'error',
+                    time: 4777,
+                    message: {
+                        header: 'Inputs required',
+                        text: 'Some inputs must be fill to continue.'
+                    }
+                }); 
+
+                this.sendToTopPage();
+
+            }
+
+        });
+
+        return processing_card.then( (result: boolean) => {
+
+            if( result ) {
+
+                return result;
+
+            } else return null;
+
+        });
 
     }
 
@@ -1310,7 +1333,9 @@ import { Router } from '@angular/router';
         no_mail: false,
         no_mail_valid: false,
         no_phon: false,
-        no_gend: false
+        no_gend: false,
+        no_nati: false,
+        no_bdat: false
     }
     public form_profile_buss = {
         no_name: false,
@@ -1354,6 +1379,14 @@ import { Router } from '@angular/router';
             this.form_profile_validator.no_gend = true :
             this.form_profile_validator.no_gend = false;
 
+        this.general_user_data.userData.countryId == '' ?
+            this.form_profile_validator.no_nati = true :
+            this.form_profile_validator.no_nati = false;
+
+        this.general_user_data.bith == '' ?
+            this.form_profile_validator.no_bdat = true :
+            this.form_profile_validator.no_bdat = false;
+
         this.general_user_data.userTaxData.name == '' ?
             this.form_profile_buss.no_name = true :
             this.form_profile_buss.no_name = false;
@@ -1385,7 +1418,9 @@ import { Router } from '@angular/router';
             !this.form_profile_validator.no_phon &&
             !this.form_profile_validator.no_mail &&
             !this.form_profile_validator.no_mail_valid &&
-            !this.form_profile_validator.no_gend
+            !this.form_profile_validator.no_gend &&
+            !this.form_profile_validator.no_nati &&
+            !this.form_profile_validator.no_bdat
         ) {
 
             if( !this.single_profile ) {
@@ -1418,7 +1453,7 @@ import { Router } from '@angular/router';
     /** Final step ==============================================> */
     public completeAddTenantProcess():void {
 
-        this.credit_card_data.name = this.encryptData( this.credit_card_data.name );
+        this.credit_card_data.number = this.encryptData( this.credit_card_data.number );
         this.credit_card_data.ccv = this.encryptData( this.credit_card_data.ccv );
         this.join_all_data.amount = this.booking_detail_total_ammount.toString();
 
@@ -1910,140 +1945,3 @@ class ReferenceData {
     EmailLandLord: string = '';
     PhoneLandLord: string = '';
 }
-
-/* 
-{
-	"booking": {
-		"idMembership": 11,
-		"Booking": {
-			"dateInitProgram": "2020-07-01",
-			"dateEndProgram": "2020-07-30",
-			"idRommateType": 1,
-			"reservedBeds": 2,
-			"idRoom": 10
-		},
-		"amount": 110000,
-		"serviceBooking": [
-			{
-				"idService": 33,
-				"dateStart": "2020-07-01",
-				"dateEnd": "2020-07-30",
-				"recurrent": 1,
-				"fromMembership": 11,
-				"amount": 100,
-				"idUserPaymentService": 0,
-				"idUserPaymentServiceNavigation": {
-					"id": 0,
-					"idCreditCard": null,
-					"idServiceBooking": 0,
-					"payment": 0,
-					"paymentDate": ""
-				}
-			},
-			{
-				"idService": 31,
-				"dateStart": "2020-07-01",
-				"dateEnd": "2020-07-30",
-				"recurrent": 1,
-				"fromMembership": 11,
-				"idUserPaymentService": 0,
-				"amount": 100,
-				"idUserPaymentServiceNavigation": {
-					"id": 0,
-					"idCreditCard": null,
-					"idServiceBooking": 0,
-					"payment": 0,
-					"paymentDate": ""
-				}
-			}
-		],
-		"aditionalBeds": []
-	},
-	"creditCard": {
-		"id": 0,
-		"active": true,
-		"ccv": "U2FsdGVkX1980/LKUDWS7ZekZJAow5gbvmBCWdVi69w=",
-		"month": 7,
-		"name": "Card XXX",
-		"number": "U2FsdGVkX1/h+yZ0TmBGOC8AwwV6cizaP0VRKz6ZdAvqY6Az7m2HihlopkGMeRfY",
-		"year": 2026,
-		"main": 0
-	},
-	"user": {
-		"name": "Admin",
-		"password": "admin123",
-		"email": "admin@minimalist.mx",
-		"lastName": "To",
-		"motherName": "Altata",
-		"avatar": "",
-		"systemTypeId": 1,
-		"phone": "0987654321",
-		"cellphone": "1234567890",
-		"workplace": "FLIP!",
-		"aboutMe": "Admin from web admin",
-		"active": true,
-		"birth": "2000-01-01",
-		"rfc": "XAXX010101000",
-		"income": {
-			"nameEmployer": "Minimalist 7",
-			"industry": "tecnology7",
-			"contactNumber": "123456",
-			"tenureId": 578,
-			"creditHistory": false,
-			"splitRent": true,
-			"companyTypeId": 2,
-			"employeeId": 60,
-			"jobPosition": "EL Jefesito",
-			"mainSource": "Proyectos",
-			"monthlyIncome": 420000000,
-			"billLastYear": 123456789,
-			"companyYearStart": 2010,
-			"branchoffice": 22,
-			"streetHo": "Alta tension",
-			"numberHo": "Entrada 4 Dep 14",
-			"intNumberHo": "100",
-			"cityHo": "Mexico",
-			"communityHo": "Hidalgo",
-			"departamentHo": "23"
-		},
-		"reference": {
-			"name": "Lorem",
-			"firstName": "Ipsum",
-			"lastName": "Ipsum",
-			"relationshipId": 1,
-			"mail": "random@mail.com",
-			"phone": 1234567890,
-			"firstRent": true,
-			"NameLandlord": "",
-			"EmailLandLord": "",
-			"PhoneLandLord": ""
-		},
-		"userData": {
-			"pet": true,
-			"civilStatusId": 2,
-			"scholarshipId": 4,
-			"countryId": 1,
-			"stateId": null,
-			"genderId": 2,
-			"rent": null,
-			"car": null,
-			"howMuchMax": null,
-			"howMuchMin": null,
-			"country": null,
-			"gender": null,
-			"scholarship": null,
-			"state": null
-		},
-		"userTaxData": {
-			"name": "",
-			"activity": "",
-			"tradeName": "",
-			"legalRepresentative": "",
-			"phone": null,
-			"rfc": ""
-		}
-	},
-	"token": "tok_1GnXNMAttdY9MyOvwsCGDCQ0",
-	"amount": "10000"
-}
-*/

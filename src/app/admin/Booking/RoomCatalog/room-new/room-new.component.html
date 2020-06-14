@@ -1,18 +1,24 @@
 <div class="ml-col-1">
-    <booking-navbar [section]="section"></booking-navbar>
+    <!-- booking-navbar [section]="section"></booking-navbar -->
     <div class="ml-col-1">
         <div class="ml-col-1 padding-general-m margin-bottom-g">
-            <div class="ml-col-1 margin-top-m folder">
-                <div class="ml-col-1 margin-top-x" >
+          <div class="ml-col-1">
+            <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+                <span class="title_back_button" (click)="backButton()"></span><br />
+                <span class="padding-left-m">New Room</span>
+             </h4>
+          </div>
+            <div class="ml-col-1">
+                <div class="ml-col-1">
                 <form 
-                class="ap-form ap-form--no-tl-br ml-col-1 card-style"
+                class="ap-form ap-form--no-tl-br ml-col-1"
                 action="submit"
                 (submit)="update()">
-                <div class="ml-col-1">
+                <!-- div class="ml-col-1">
                     <h4 class="ap-form__titulo text-left">
                         New Room
                     </h4>
-                </div>
+                </div -->
                         <div class="ml-col-3">
                             <div class="ml-col-1">
                             <div class="ap-form__input">
@@ -202,7 +208,7 @@
                         <div class="ml-col-1 ap-form__buttons">
                             <button 
                             type="submit"
-                            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+                            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
                             Save
                             </button>
                         </div>
