@@ -26,6 +26,7 @@ export class RoomComponent implements OnInit {
   roomId;
   roomObj = {
     active: true,
+    smoke: true,
     buildingId: 0,
     description: '',
     id: 0,
