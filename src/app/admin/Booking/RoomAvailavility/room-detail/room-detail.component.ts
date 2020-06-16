@@ -42,13 +42,43 @@ export class RoomDetailComponent implements OnInit {
   activeTotal = 0;
   activeLenght;
   activeObj;
-  activeDisplayedColumns: string[] = ['name', 'age', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'idUser'];
+  activeDisplayedColumns: string[] = [
+    'name',
+    'room',
+    'membership',
+    'dateInit',
+    'dateEnd',
+    'amountOutstanding',
+    'pendingBilled',
+    'totalBeds',
+    'roomateFlip',
+    'checkIn',
+    'checkOut',
+    'active',
+    'idUser',
+    'showBooking'
+];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   ////////////////////////// INACTIVE ///////////////////////////////
   inactiveObj;
   inactiveTotal = 0;
-  inactiveDisplayedColumns: string[] = ['name', 'age', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'idUser'];
+  inactiveDisplayedColumns: string[] = [
+    'name',
+    'room',
+    'membership',
+    'dateInit',
+    'dateEnd',
+    'amountOutstanding',
+    'pendingBilled',
+    'totalBeds',
+    'roomateFlip',
+    'checkIn',
+    'checkOut',
+    'active',
+    'idUser',
+    'showBooking'
+    ];
   @ViewChild(MatPaginator, { static: true }) paginatorInactive: MatPaginator;
   @ViewChild(MatSort, { static: true }) sortInactive: MatSort;
 
@@ -79,6 +109,8 @@ export class RoomDetailComponent implements OnInit {
       this.activeLenght = value.item.active.length;
       value.item.active.forEach(element => {
         this.activeTotal = this.activeTotal + element.amountOutstanding;
+        this.activeTotal = this.activeTotal +
+                          (element.membership !== null ? element.membership.priceMembership : 0);
       });
       this.activeObj = new MatTableDataSource(value.item.active);
       this.activeObj.paginator = this.paginator;
@@ -86,6 +118,8 @@ export class RoomDetailComponent implements OnInit {
 
       value.item.inactive.forEach(element => {
         this.inactiveTotal = this.inactiveTotal + element.amountOutstanding;
+        this.inactiveTotal = this.inactiveTotal +
+                          (element.membership !== null ? element.membership.priceMembership : 0);
       });
       this.inactiveObj = new MatTableDataSource(value.item.inactive);
       this.inactiveObj.paginator = this.paginatorInactive;
