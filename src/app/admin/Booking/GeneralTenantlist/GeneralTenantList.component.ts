@@ -47,14 +47,15 @@ import { DataSource } from '@angular/cdk/table';
 
     public tenantList = new MatTableDataSource();
     public table_colums: any[] = [
+        'name',
         'build',
         'room',
         'typeRoom',
-        'name',
         'membership',
         'dateInit',
         'dateEnd',
         'amountOutstanding',
+        'pendingBilled',
         'totalBeds',
         'roomateFlip',
         'checkIn',
