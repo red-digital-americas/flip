@@ -159,6 +159,22 @@
                               </label>
                             </div>
                         </div>   
+
+                        <div class="ml-col-3">
+                          <div class="ap-form__input">
+                            <input 
+                              type="checkbox"
+                              id="profile_smoke" 
+                              name="profile_smoke"
+                              [checked]="roomObj.smoke"
+                              [(ngModel)]="roomObj.smoke"
+                              [ngModelOptions]="{standalone: true}"
+                              class="ap-form__input-checkbox display-none" />
+                            <label for="profile_smoke" class="ap-form__label ap-form__label-checkbox">
+                              Smoke
+                            </label>
+                          </div>
+                        </div>  
                           
                         <div class="ml-col-1 ap-form__gallery padding-general-m" id="images_on_gallery">
                             <div class="ml-col-1">
