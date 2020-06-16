@@ -1007,18 +1007,18 @@
     <div class="ml-modal__content card-style " *ngIf="section_to_show == 'chat'">
         <div class="ml-col-1 margin-bottom-x">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
-                Chat Messages
+                Chat Alerts
             </p>
             <button 
                 class="ap-form__rButton button-red"
-                (click)="showModal();">
+                (click)="closeChatAlerts();">
                 Close
             </button>
         </div>
         <div class="ml-col-1 margin-top-x">
             <div class="ml-col-1">
                 <div class="">
-                    <h4 class="chatm__datos">
+                    <h4 (click)="viewDetail(userSendMessage.userId, userSendMessage.booking, userSendMessage.building)" class="chatm__datos">
                         {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
                         <img class="chatm__datos-photo" 
                              src="{{ userSendMessage.info.photo }}" />
