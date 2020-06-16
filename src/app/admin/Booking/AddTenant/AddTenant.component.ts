@@ -1421,6 +1421,7 @@ import { Router } from '@angular/router';
         this.credit_card_data.name = this.encryptData( this.credit_card_data.name );
         this.credit_card_data.ccv = this.encryptData( this.credit_card_data.ccv );
         this.join_all_data.amount = this.booking_detail_total_ammount.toString();
+        this.join_all_data.amountMembership = this.getTotalAmmount().toString();
 
         console.log('Sending this => ', this.join_all_data);
 
@@ -1815,6 +1816,7 @@ class BookingCompleted {
     creditCard: CreditCardModel;
     token: string;
     amount: string;
+    amountMembership: string;
 }
 
 class GeneralUserData {
