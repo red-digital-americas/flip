@@ -38,6 +38,7 @@ export class RoomAvailavilityComponent implements OnInit {
         'amountStanding',
         'roomateFlip',
         'status',
+        'smoke',
         'viewMore',
         'addBooking'
     ];
