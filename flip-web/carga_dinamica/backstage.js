@@ -279,8 +279,109 @@ $(document).ready(function () {
             respuesta = JSON.parse(data);
             console.log("========MEMBERSHIP====>");
             console.log(respuesta);
+            
+            //A
             $("#span_title_mem1").text(respuesta.item[0].title);
             $("#p_title_mem1").text(respuesta.item[0].title);
+            $("#aimage").attr("src",respuesta.item[0].photoSlider);
+            let plantilla = "";
+            for(let i = 0 ; i < 8; i++){
+                let icon = respuesta.item[0].backstageMembershipItems[i];
+                plantilla += `<div class ="col-sm-3 icondiv" >
+                                   <label   data-target="#myCarousel6" data-slide-to="0"   class="yogaam marginlabel">   
+                                         <a href="#">
+                                            <img  class="iconsback" src="${icon.icon}" 
+                                                  onmouseover="this.src=${icon.icon2}'"
+                                                  onmouseout="this.src='${icon.icon}'"
+                                                  border="0" alt=""/>
+                                         </a>
+                                         ${icon.titleIcon}
+                                   </label>
+                              </div>
+                `;
+            }
+            plantilla += `<div class ="col-sm-6" >
+                          <label class="marginprice">
+                                <p style="margin-bottom: 8%; font-size: 20px;"> Price 1 <br> </p> 
+                                <p> <strong style="font-size: 20px;">$${respuesta.item[0].price}</strong></p>
+                          </label>
+                         </div>
+                         <div class ="col-sm-6" >
+                         <label class="marginprice">
+                                <p style="margin-bottom: 8%; font-size: 20px;"> Price 2 <br> </p> 
+                                <p> <strong style="font-size: 20px;">$${respuesta.item[0].price1}</strong></p>
+                          </label>
+                          </div>`;
+            $('#aicons').html(`${plantilla}`);
+            
+            
+            //B
+            $("#span_title_mem2").text(respuesta.item[1].title);
+            $("#p_title_mem2").text(respuesta.item[1].title);
+            $("#aimage").attr("src",respuesta.item[1].photoSlider);
+            plantilla = "";
+            for(let i = 0 ; i < 8; i++){
+                let icon = respuesta.item[1].backstageMembershipItems[i];
+                plantilla += `<div class ="col-sm-3 icondiv" >
+                                   <label   data-target="#myCarousel6" data-slide-to="0"   class="yogaam marginlabel">   
+                                         <a href="#">
+                                            <img  class="iconsback" src="${icon.icon}" 
+                                                  onmouseover="this.src=${icon.icon2}'"
+                                                  onmouseout="this.src='${icon.icon}'"
+                                                  border="0" alt=""/>
+                                         </a>
+                                         ${icon.titleIcon}
+                                   </label>
+                              </div>
+                `;
+            }
+            plantilla += `<div class ="col-sm-6" >
+                          <label class="marginprice">
+                                <p style="margin-bottom: 8%; font-size: 20px;"> Price 1 <br> </p> 
+                                <p> <strong style="font-size: 20px;">$${respuesta.item[1].price}</strong></p>
+                          </label>
+                         </div>
+                         <div class ="col-sm-6" >
+                         <label class="marginprice">
+                                <p style="margin-bottom: 8%; font-size: 20px;"> Price 2 <br> </p> 
+                                <p> <strong style="font-size: 20px;">$${respuesta.item[1].price1}</strong></p>
+                          </label>
+                          </div>`;
+            $('#bicons').html(`${plantilla}`);
+            
+            //c
+            $("#span_title_mem3").text(respuesta.item[2].title);
+            $("#textservadicionales").text(respuesta.item[2].title);
+            $("#cimage").attr("src",respuesta.item[2].photoSlider);
+            plantilla = "";
+            for(let i = 0 ; i < 8; i++){
+                let icon = respuesta.item[2].backstageMembershipItems[i];
+                plantilla += `<div class ="col-sm-3 icondiv" >
+                                   <label   data-target="#myCarousel6" data-slide-to="0"   class="yogaam marginlabel">   
+                                         <a href="#">
+                                            <img  class="iconsback" src="${icon.icon}" 
+                                                  onmouseover="this.src=${icon.icon2}'"
+                                                  onmouseout="this.src='${icon.icon}'"
+                                                  border="0" alt=""/>
+                                         </a>
+                                         ${icon.titleIcon}
+                                   </label>
+                              </div>
+                `;
+            }
+            plantilla += `<div class ="col-sm-6" >
+                          <label class="marginprice">
+                                <p style="margin-bottom: 8%; font-size: 20px;"> Price 1 <br> </p> 
+                                <p> <strong style="font-size: 20px;">$${respuesta.item[2].price}</strong></p>
+                          </label>
+                         </div>
+                         <div class ="col-sm-6" >
+                         <label class="marginprice">
+                                <p style="margin-bottom: 8%; font-size: 20px;"> Price 2 <br> </p> 
+                                <p> <strong style="font-size: 20px;">$${respuesta.item[2].price1}</strong></p>
+                          </label>
+                          </div>`;
+            $('#cicons').html(`${plantilla}`);
            // alert(respuesta.item[0].title);
         }, 
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },

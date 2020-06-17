@@ -1,154 +1,290 @@
 <div class="ml-col-1">
-    <div class="ml-col-1 padding-general-m">
-      <div class="ml-col-1 margin-bottom-m">
-        <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-            Flip Network
-        </h4>
-        <div class="ml-col-1" step-form="one">
-            <div class="ml-col-1 margin-tb-min">
-                <h4 class="ap-form__titulo ap-form__titulo--auto-width">
-                    Card Information
-                </h4>
-            </div>
+  <div class="ml-col-1 padding-general-m">
+    <div class="ml-col-1 margin-bottom-m">
+      <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+        Flip Network
+      </h4>
+      <div class="ml-col-1" step-form="one">
+        <div class="ml-col-1 margin-tb-min">
+          <h4 class="ap-form__titulo ap-form__titulo--auto-width">
+            Card Information
+          </h4>
+        </div>
+        <div class="ml-col-1">
+          <div class="ml-col-3">
             <div class="ml-col-1">
-                <div class="ml-col-3">
-                    <div class="ml-col-1">
-                        <div class="ap-form__input">
-                          <input 
-                            required
-                            type="text" 
-                            placeholder="Title"
-                            id="bd_sDate" 
-                            name="bd_sDate"
-                            class="ap-form__input-text"
-                            [(ngModel)]="main_card_data.titulo"/>
-                          <label 
-                            for="bd_sDate" 
-                            class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                            Title
-                          </label>
-                          <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                            Title is required*
-                          </span>
-                        </div>
-                    </div>
+              <div class="ap-form__input">
+                <input required type="text" placeholder="Title" id="bd_sDate" name="bd_sDate"
+                  class="ap-form__input-text" [(ngModel)]="main_card_data.titulo" />
+                <label for="bd_sDate" class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                  Title
+                </label>
+                <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                  Title is required*
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="ml-col-7">
+            <div class="ml-col-1">
+              <div class="ap-form__input">
+                <textarea required type="text" placeholder="Description" id="mc_desc" name="mc_desc"
+                  class="ap-form__input-textarea" [(ngModel)]="main_card_data.descripcion"></textarea>
+                <label for="mc_desc" class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                  Description
+                </label>
+                <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
+                  Description is required*
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="ml-col-1 ap-form__buttons margin-top-x">
+            <button
+              class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
+              (click)="saveMainCardFlipNetData()">
+              Save
+            </button>
+          </div>
+        </div>
+        <div class="ml-col-1 top-separator margin-top-x">
+          <div class="ml-col-1 margin-bottom-m margin-top-x">
+            <h4 class="ap-form__titulo ap-form__titulo--auto-width">
+              Flip network slides
+            </h4>
+            <button data-toggle="modal" (click)="primaryModal.show(); new(1,null);"
+              class="ap-form__rButton button-big button-yellow">
+              Add new slide
+            </button>
+          </div>
+          <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-m"
+            *ngFor="let card of flipNetworkSlides, index as index">
+            <h4 class="text-ultra">Slide: {{ index }}</h4>
+            <div class="ml-col-1">
+              <div class="ml-col-1 margin-top-x">
+                <div class="ml-col-1 images-view">
+                  <div class="ml-col-7 images-view__section">
+                    <figure class="images-view__image">
+                      <span class="text-bold images-view__image--title">
+                        Slide Photo:
+                      </span>
+                      <img src="../../../assets/webtmprb.png" class="images-view__image--mask" />
+                      <img src="{{ card.photoSlider }}" class="images-view__image--image" />
+                    </figure>
+                  </div>
+                  <div class="ml-col-3o images-view__section">
+                    <figure class="images-view__image">
+                      <span class="text-bold text-center images-view__image--title">
+                        Slide Movile Photo:
+                      </span>
+                      <img src="../../../assets/phone.png" class="images-view__image--maskm" />
+                      <img src="{{ card.photoMobileSlider }}" class="images-view__image--imagem" />
+                    </figure>
+                  </div>
                 </div>
-                <div class="ml-col-7">
-                    <div class="ml-col-1">
-                        <div class="ap-form__input">
-                          <textarea 
-                            required
-                            type="text" 
-                            placeholder="Description"
-                            id="mc_desc" 
-                            name="mc_desc"
-                            class="ap-form__input-textarea"
-                            [(ngModel)]="main_card_data.descripcion"></textarea>
-                          <label 
-                            for="mc_desc" 
-                            class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                            Description
-                          </label>
-                          <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                            Description is required*
-                          </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="ml-col-1 ap-form__buttons margin-top-x">
-                    <button 
-                        class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
-                        (click)="saveMainCardFlipNetData()">
-                        Save
-                    </button>
-                </div>
+              </div>
             </div>
             <div class="ml-col-1 top-separator margin-top-x">
-                <div class="ml-col-1 margin-bottom-m margin-top-x">
-                    <h4 class="ap-form__titulo ap-form__titulo--auto-width">
-                        Flip network slides
-                    </h4>
-                    <button 
-                        class="ap-form__rButton button-big button-yellow">
-                        Add new slide
-                    </button>
+              <h4 class="ml-col-1 margin-tb-min text-ultra">Benefits</h4>
+              <div class="ml-col-1 margin-bottom-m" *ngFor="let beneficio of card.networkBenefits">
+                <div class="ml-col-3">
+                  <div class="ml-col-1 margin-bottom-x">
+                    <p class="card__info-dato">
+                      <span class="text-bold">Benefit: <br /> </span>
+                      {{ beneficio.title }}
+                    </p>
+                  </div>
+                  <div class="ml-col-1">
+                    <p class="card__info-dato">
+                      <span class="text-bold">Description: <br /> </span>
+                      {{ beneficio.description }}
+                    </p>
+                  </div>
                 </div>
-                <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-m"
-                     *ngFor="let card of flipNetworkSlides, index as index">
-                    <h4 class="text-ultra">Slide: {{ index }}</h4> 
-                    <div class="ml-col-1">
-                        <div class="ml-col-1 margin-top-x">
-                            <div class="ml-col-1 images-view">
-                                <div class="ml-col-7 images-view__section">
-                                <figure class="images-view__image">
-                                    <span class="text-bold images-view__image--title">
-                                        Slide Photo:
-                                    </span>
-                                    <img src="../../../assets/webtmprb.png" class="images-view__image--mask" />
-                                    <img src="{{ card.photoSlider }}" class="images-view__image--image" />
-                                </figure>
-                                </div>
-                                <div class="ml-col-3o images-view__section">
-                                <figure class="images-view__image">
-                                    <span class="text-bold text-center images-view__image--title">
-                                        Slide Movile Photo:
-                                    </span>
-                                    <img src="../../../assets/phone.png" class="images-view__image--maskm" />
-                                    <img src="{{ card.photoMobileSlider }}" class="images-view__image--imagem" />
-                                </figure>
-                                </div>
-                            </div>
-                        </div>
+                <div class="ml-col-32">
+                  <div class="ml-col-1">
+                    <div class="ml-col-1 images-view images-view--short">
+                      <div class="ml-col-7 images-view__section">
+                        <figure class="images-view__image">
+                          <span class="text-bold text-center images-view__image--title">
+                            Slide Photo:
+                          </span>
+                          <img src="../../../assets/webtmprb.png"
+                            class="images-view__image--mask images-view__image--mask-s" />
+                          <img src="../../../../assets/img/Builds/resp_1.jpg"
+                            class="images-view__image--image images-view__image--image-s" />
+                        </figure>
+                      </div>
+                      <div class="ml-col-3o images-view__section">
+                        <figure class="images-view__image">
+                          <span class="text-bold text-center images-view__image--title">
+                            Slide Movile Photo:
+                          </span>
+                          <img src="../../../assets/phone.png"
+                            class="images-view__image--maskm images-view__image--maskm-s" />
+                          <img src="../../../../assets/img/Builds/resp_1.jpg"
+                            class="images-view__image--imagem images-view__image--imagem-s" />
+                        </figure>
+                      </div>
                     </div>
-                    <div class="ml-col-1 top-separator margin-top-x">
-                        <h4 class="ml-col-1 margin-tb-min text-ultra">Benefits</h4> 
-                        <div class="ml-col-1 margin-bottom-m" *ngFor="let beneficio of card.networkBenefits">
-                            <div class="ml-col-3">
-                                <div class="ml-col-1 margin-bottom-x">
-                                    <p class="card__info-dato">
-                                        <span class="text-bold">Benefit: <br /> </span> 
-                                        {{ beneficio.title }}
-                                    </p>
-                                </div>
-                                <div class="ml-col-1">
-                                    <p class="card__info-dato">
-                                        <span class="text-bold">Description: <br /> </span> 
-                                        {{ beneficio.description }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="ml-col-32">
-                                <div class="ml-col-1">
-                                    <div class="ml-col-1 images-view images-view--short">
-                                        <div class="ml-col-7 images-view__section">
-                                            <figure class="images-view__image">
-                                                <span class="text-bold text-center images-view__image--title">
-                                                    Slide Photo:
-                                                </span>
-                                                <img src="../../../assets/webtmprb.png" 
-                                                     class="images-view__image--mask images-view__image--mask-s" />
-                                                <img src="../../../../assets/img/Builds/resp_1.jpg" 
-                                                     class="images-view__image--image images-view__image--image-s" />
-                                            </figure>
-                                        </div>
-                                        <div class="ml-col-3o images-view__section">
-                                            <figure class="images-view__image">
-                                                <span class="text-bold text-center images-view__image--title">
-                                                    Slide Movile Photo:
-                                                </span>
-                                                <img src="../../../assets/phone.png" 
-                                                     class="images-view__image--maskm images-view__image--maskm-s" />
-                                                <img src="../../../../assets/img/Builds/resp_1.jpg" 
-                                                     class="images-view__image--imagem images-view__image--imagem-s" />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+            <button data-toggle="modal" (click)="primaryModal.show(); new(2,card);"
+              class="ap-form__rButton button-big button-yellow">
+              Edit slide
+            </button>
+
+            <button (click)="deleteslide(card)" class="ap-form__rButton button-big button-red">
+              Delete slide
+            </button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+
+  <!--modal-->
+  <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" id="modal-fw">
+    <div class="modal-dialog modal-primary" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" *ngIf="modal === 1 && flipNetworkSlides.length < 5">
+            Add Slide
+          </h4>
+          <h4 class="modal-title" *ngIf="modal === 1 && flipNetworkSlides.length >= 5">
+            Ya se tienen los slide maximos permitidos
+          </h4>
+          <h4 class="modal-title" *ngIf="modal === 2">
+            Edit information in section:
+          </h4>
+          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="form" *ngIf="(modal === 1 && flipNetworkSlides.length < 5) || modal === 2">
+          <form #loginForm="ngForm" autocomplete="off">
+
+            <div class="form__image">
+              <input class="display-none image_form" type="file" name="image_one_selected" accept="image/*"
+                (change)="readImageData($event, '1920x1080', 0);" id="validatedCustomFile2" required>
+              <label class="form__image-img" for="validatedCustomFile2">
+                <figure class="image_to_preview_container">
+                  <img src="{{ back_stage_data.photoSlider }}"
+                    class="image_to_preview placeholder_image custom-input__image" style="max-width: 90%;"
+                    [class.custom-input__image--error]="form_watcher.no_img0" />
+                </figure>
+                <span class="image_to_preview_name name_image_uploaded"></span>
+                <span class="padding-tb-min">
+                  <strong>Desktop photo:</strong> <br />
+                  <span class="color-red" *ngIf="form_watcher.no_img0">
+                    Desktop photo is required <br />
+                  </span>
+                  *Image resolution 1920x1080px.
+                </span>
+              </label>
+            </div>
+
+            <div class="form__image">
+              <input class="display-none image_form" type="file" name="image_one_selected" accept="image/*"
+                (change)="readImageData($event, '441x660', 1);" id="validatedCustomFile3" required>
+              <label class="form__image-img" for="validatedCustomFile3">
+                <figure class="image_to_preview_container">
+                  <img style="max-width: 90%;" src="{{ back_stage_data.photoMobileSlider }}"
+                    class="image_to_preview placeholder_image custom-input__image"
+                    [class.custom-input__image--error]="form_watcher.no_img0" />
+                </figure>
+                <span class="image_to_preview_name name_image_uploaded"></span>
+                <span class="padding-tb-min">
+                  <strong>Desktop mobile:</strong> <br />
+                  <span class="color-red" *ngIf="form_watcher.no_img0">
+                    Desktop mobile is required <br />
+                  </span>
+                  *Image resolution 441x660px.
+                </span>
+              </label>
+            </div>
+            <div class="ml-col-1 custom-input margin-top-m">
+              <button class="ap-form__rButton button-big button-yellow" *ngIf="beneficios.length < 4"
+                (click)="addbeneficio()">
+                Add Benefits
+              </button>
+              <h4 class="modal-title">
+                Benefit
+              </h4>
+            </div>
+
+            <div *ngFor="let beneficio of beneficios, index as index">
+              <div class="ml-col-1 custom-input margin-top-m">
+                <input type="text" class="custom-input__text" name="title" id="title" placeholder="Title"
+                  [(ngModel)]="beneficio.title" maxlength="20" required />
+                <label class="custom-input__label custom-input__label--active" for="title">
+                  Title
+                </label>
+              </div>
+
+              <div class="ml-col-1 custom-input margin-top-m">
+                <textarea class="custom-input__textarea" name="descripcion_home" id="descripcion_home"
+                  placeholder="Description" [(ngModel)]="beneficio.description" required></textarea>
+                <label class="custom-input__label custom-input__label--active" for="descripcion_home">
+                  Description
+                </label>
+              </div>
+
+              <div class="form__image">
+                <input class="display-none image_form" type="file" name="image_one_selected" accept="image/*"
+                  (change)="readImageData($event, '1920x1080', 0);" id="validatedCustomFile2" required>
+                <label class="form__image-img" for="validatedCustomFile2">
+                  <figure class="image_to_preview_container">
+                    <img src="{{ beneficio.photoSlider }}"
+                      class="image_to_preview placeholder_image custom-input__image" style="max-width: 90%;" />
+                  </figure>
+                  <span class="image_to_preview_name name_image_uploaded"></span>
+                  <span class="padding-tb-min">
+                    <strong>Desktop photo:</strong> <br />
+                    *Image resolution 1920x1080px.
+                  </span>
+                </label>
+              </div>
+
+              <div class="form__image">
+                <input class="display-none image_form" type="file" name="image_one_selected" accept="image/*"
+                  (change)="readImageData($event, '441x660', 1);" id="validatedCustomFile3" required>
+                <label class="form__image-img" for="validatedCustomFile3">
+                  <figure class="image_to_preview_container">
+                    <img style="max-width: 90%;" src="{{ beneficio.photoMobileSlider }}"
+                      class="image_to_preview placeholder_image custom-input__image" />
+                  </figure>
+                  <span class="image_to_preview_name name_image_uploaded"></span>
+                  <span class="padding-tb-min">
+                    <strong>Desktop mobile:</strong> <br />
+                    *Image resolution 441x660px.
+                  </span>
+                </label>
+              </div>
+              <div class="ml-col-1 custom-input margin-top-m">
+                <button class="ap-form__rButton button-big button-red" (click)="deletebeneficio(index, beneficio)">
+                  Remove Benefit
+                </button>
+                <br><br>
+                <div style="width: 100%; border: solid .5px;"></div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" style="z-index: 9999;" id="close_modal"
+            class="ap-form__buttons-button ap-form__buttons-button button-red"
+            (click)="primaryModal.hide();">
+            Close
+          </button>
+          <button type="button" style="z-index: 9999;"
+            class="ap-form__buttons-button ap-form__buttons-button button-black" (click)="update(); primaryModal.hide();">Save
+            changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

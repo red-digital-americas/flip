@@ -160,7 +160,27 @@ export class DatosService {
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.http.post(this.heroesUrl + 'Building/SaveRooms', parametros);
   }
+  
+  updateSladerNetwork(parametros): Observable<any> {
+    let headers = new HttpHeaders();
+    console.log(parametros);
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post(this.heroesUrl + 'Post/UpdateNetworkSlides', parametros);
+  }
 
+  deleteNetworkBenefits(parametros): Observable<any> {
+    let headers = new HttpHeaders();
+    console.log(parametros);
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post(this.heroesUrl + 'Post/DeleteNetworkBenefits', parametros);
+  }
+
+  deleteNetworkSlides(parametros): Observable<any> {
+    let headers = new HttpHeaders();
+    console.log(parametros);
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post(this.heroesUrl + 'Post/DeleteNetworkSlides', parametros);
+  }
   ////////////////////////////////////////////////////////////////////////////////////
   // ErrorHandler
   ////////////////////////////////////////////////////////////////////////////////////

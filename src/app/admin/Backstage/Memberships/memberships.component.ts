@@ -104,8 +104,8 @@ import { LoaderComponent } from '../../../../ts/loader';
                 if( response.result == 'Success' ) {
 
                     this.back_stage_data_array = response.item;
-                   // console.log("====== BACKNEW")
-                    //console.log(response);
+                    console.log("====== BACKNEW")
+                    console.log(response);
                 }
 
             }, (error: any) => {
@@ -237,19 +237,6 @@ import { LoaderComponent } from '../../../../ts/loader';
         let url: string = '';
         if (!Utils.isEmpty(this.newImages)) {
           for (let f of this.newImages) {
-            /**
-             * if(indice==0){
-              this.imageInputLabel = f.name;
-            }
-            if(indice==1)
-            {
-            this.imageInputLabeltwo = f.name;
-            }
-            if(indice==2)
-            {
-            this.imageInputLabelthree = f.name;
-            }
-             */
             this._services.UploadImgSuc(f).subscribe((r) => {
               if (Utils.isDefined(r)) {
                 url = <string>r.message;
@@ -288,6 +275,8 @@ import { LoaderComponent } from '../../../../ts/loader';
      this.back_stage_data.price = post.price;
      this.back_stage_data.price1 = post.price1;
      this.back_stage_data.type = post.type;
+     this.back_stage_data.descPrice = post.descPrice;
+     this.back_stage_data.descPrice1 = post.descPrice1;
      this.back_stage_data.photoSlider = post.photoSlider;
      this.back_stage_data.photoMobileSlider = post.photoMobileSlider;
      this.back_stage_data.backstageMembershipItems = post.backstageMembershipItems;
@@ -488,6 +477,13 @@ import { LoaderComponent } from '../../../../ts/loader';
     
       }
 
+      public deleteIconsServices(i){
+        console.log(this.back_stage_data.backstageMembershipItems);
+        this.back_stage_data.backstageMembershipItems.splice(i,1);
+        
+        console.log(this.back_stage_data.backstageMembershipItems);
+      }
+
 
       public formValidator( form_data: BackstageMembershipSection ):boolean {
 
@@ -538,6 +534,8 @@ class BackstageMembershipSection
       photoMobileSlider: string;
       price1: string;
       price: string;
+      descPrice: string;
+      descPrice1: string;
       type: string;
       backstageMembershipItems: any[];
 }

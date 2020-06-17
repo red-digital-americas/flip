@@ -32,15 +32,29 @@
             <span class="text-bold">Title Slide: </span> 
             {{ post.title }}
           </p>
+          <br><br> 
+          <p class="card__info-dato">
+            <span class="text-bold">Description: </span> 
+            {{ post.description }}
+          </p>
         </div>
         <div class="card__info margin-bottom-x" style="height: auto !important;"  *ngIf="post.id != '4'">
-            <p class="card__info-dato">
-              <span class="text-bold">Price1: </span> 
-              {{ post.price | currency }} 
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <span class="text-bold">Price2: </span> 
-              {{ post.price1 | currency}}
-            </p>
+          
+                <p class="card__info-dato ml-col-4o">
+                  <span class="text-bold">Price1: </span> 
+                  {{ post.price | currency }} <br><br>
+                  <span class="text-bold">Description: </span> 
+                  {{post.descPrice}}
+                </p>
+
+                <p class="card__info-dato ml-col-4o">
+                  <span class="text-bold">Price2: </span> 
+                  {{ post.price1 | currency}} <br><br>
+                  <span class="text-bold">Description: </span> 
+                  {{post.descPrice1}}
+                </p>
+
+            
             
           </div>
         <!--   <div class="card__info margin-bottom-x" style="height: auto !important;">
@@ -141,6 +155,26 @@
                 Title is required
               </span>
             </div>
+
+            <div class="ml-col-1 custom-input margin-top-m">
+              <input 
+                type="text"
+                class="custom-input__text" 
+                name="titulo_home" 
+                id="titulo_home" 
+                placeholder="Title" 
+                [(ngModel)]="back_stage_data.description"
+                maxlength="20"
+                [class.custom-input__text--error]="form_watcher.no_titl"
+                required />
+              <label class="custom-input__label custom-input__label--active" for="titulo_home">
+                Description
+              </label>
+              <span class="custom-input__text--errorm" *ngIf="form_watcher.no_desc">
+                Description is required
+              </span>
+            </div>
+
             <div class="ml-col-1 custom-input margin-top-m"  *ngIf="back_stage_data.id != '4'">
                 <input 
                   type="text"
@@ -159,6 +193,26 @@
                   Price is required
                 </span>
               </div>
+
+              <div class="ml-col-1 custom-input margin-top-m"  *ngIf="back_stage_data.id != '4'">
+                <input 
+                  type="text"
+                  class="custom-input__text" 
+                  name="desprecio" 
+                  id="desprecio" 
+                  placeholder="Title" 
+                  [(ngModel)]="back_stage_data.descPrice"
+                  maxlength="20"
+                  [class.custom-input__text--error]="form_watcher.no_p"
+                  required />
+                <label class="custom-input__label custom-input__label--active" for="desprecio">
+                  Price description
+                </label>
+                <span class="custom-input__text--errorm" *ngIf="form_watcher.no_p">
+                  Price description is required
+                </span>
+              </div>
+
               <div class="ml-col-1 custom-input margin-top-m"  *ngIf="back_stage_data.id != '4'">
                 <input 
                   type="text"
@@ -175,6 +229,25 @@
                 </label>
                 <span class="custom-input__text--errorm" *ngIf="form_watcher.no_p1">
                   Proce 1 is required
+                </span>
+              </div>
+
+              <div class="ml-col-1 custom-input margin-top-m"  *ngIf="back_stage_data.id != '4'">
+                <input 
+                  type="text"
+                  class="custom-input__text" 
+                  name="desprecio1" 
+                  id="desprecio1" 
+                  placeholder="Title" 
+                  [(ngModel)]="back_stage_data.descPrice1"
+                  maxlength="20"
+                  [class.custom-input__text--error]="form_watcher.no_p"
+                  required />
+                <label class="custom-input__label custom-input__label--active" for="desprecio1">
+                  Price 1 description
+                </label>
+                <span class="custom-input__text--errorm" *ngIf="form_watcher.no_p">
+                  Price 1 description is required
                 </span>
               </div>
           <!--   <div class="ml-col-1 custom-input margin-top-m" *ngIf="back_stage_data.id == '4'">
