@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">IdProps {{idProps}}</h4> -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="ml-col-1 padding-general-m card-style">
+        <full-calendar
+            #calendar
+            defaultView="dayGridMonth"
+            [header]="{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            }"
+            [plugins]="calendarPlugins"
+            [weekends]="calendarWeekends"        
+            eventLimit= "false"
+            locale="es"
+            nowIndicator="true"     
+            slotDuration='01:00'   
+            [events]="calendarEvents"
+            selectable="true" 
+            (select)="handleSelect($event)"
+            (eventClick)="handleEventClick($event)"
+            (dateClick)="handleDateClick($event)"   
+            (eventDrop)="handleEventDrop($event)"
+            (eventResize)="handleEventResize($event)" 
+            (datesRender)="handleDatesRender($event)">
+        </full-calendar>
+    </div>
+</div>
