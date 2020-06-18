@@ -41,8 +41,8 @@ export class TenantListComponent implements OnInit {
         'checkIn',
         'checkOut',
         'active',
-        'doCheckOut',
-        'idUser',
+        // 'doCheckOut',
+        // 'idUser',
         'showBooking'
     ];
     tenantList;

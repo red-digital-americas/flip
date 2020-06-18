@@ -576,7 +576,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ml-col-1 top-separator margin-top-x">
+                    <div class="ml-col-1 top-separator margin-top-x" *ngIf="room_selected !== null">
                         <div class="ap-form__titulo margin-tb-min">
                             Avaible Memberships
                         </div>
@@ -755,7 +755,7 @@
                                 <div class="ml-col-5e3">
                                     <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
                                         <div class="ml-col-1 padding-bottom-x">
-                                            Nights reserved:
+                                            Number of nights:
                                         </div>
                                         <div class="ml-col-1 text-bold">
                                             {{ getDaysReserved() }}
@@ -765,7 +765,7 @@
                                 <div class="ml-col-5e3">
                                     <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
                                         <div class="ml-col-1 padding-bottom-x">
-                                            Cost per night:
+                                            Cost per bed:
                                         </div>
                                         <div class="ml-col-1 text-bold">
                                             {{ membership_selected.price | currency }}
@@ -2748,7 +2748,7 @@
                 <div class="ml-col-5e3">
                     <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
                         <div class="ml-col-1 padding-bottom-x">
-                            Nights reserved:
+                            Number of nights:
                         </div>
                         <div class="ml-col-1 text-bold">
                             {{ getDaysReserved() }}

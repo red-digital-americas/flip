@@ -104,7 +104,7 @@
                               name="typeRoom"
                               class="ap-form__input-text"
                               [(ngModel)]="membershipObj.typeRoomId">
-                              <option value="null" disabled>Kind Room*</option>
+                              <option value="null" disabled>Type Room*</option>
                               <option *ngFor="let room of typeRoomList;" [value]="room.id">
                                 {{ room.type }}
                               </option>
@@ -113,7 +113,7 @@
                               for="profile_typeRoom" 
                               class="ap-form__label ap-form__label-text"
                               [class.ap-form__label-text--active]="membershipObj.typeRoomId != null">
-                              Kind Room <span class="color-red text-bold">*</span> 
+                              Type Room <span class="color-red text-bold">*</span> 
                             </label>
                           </div>
                         </div>
@@ -191,7 +191,7 @@
                       <div class="ml-col-1 ap-form__buttons">
                         <button 
                           type="submit"
-                          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+                          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--add-white">
                           Save
                         </button>
                       </div>

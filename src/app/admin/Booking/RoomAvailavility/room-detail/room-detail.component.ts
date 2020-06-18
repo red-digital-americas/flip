@@ -55,7 +55,7 @@ export class RoomDetailComponent implements OnInit {
     'checkIn',
     'checkOut',
     'active',
-    'idUser',
+    // 'idUser',
     'showBooking'
 ];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -76,7 +76,7 @@ export class RoomDetailComponent implements OnInit {
     'checkIn',
     'checkOut',
     'active',
-    'idUser',
+    // 'idUser',
     'showBooking'
     ];
   @ViewChild(MatPaginator, { static: true }) paginatorInactive: MatPaginator;
@@ -84,6 +84,10 @@ export class RoomDetailComponent implements OnInit {
 
   loader = new LoaderComponent();
   systemMessage = new SystemMessage();
+
+  show_page_modal = false;
+  modal_to_show: string;
+  userIdSelected;
 
   constructor(
     public _services: DatosService,
@@ -156,5 +160,41 @@ export class RoomDetailComponent implements OnInit {
     sessionStorage.setItem('booking_id', element.idBooking);
     this._router.navigateByUrl('reservations');
   }
+
+  public viewBookingDetail( page: string, idUser, idBooking ):void {
+    sessionStorage.setItem('user_id', idUser.toString() );
+    sessionStorage.setItem('booking_id', idBooking);
+    this._router.navigateByUrl( page );
+  }
+
+  public showModal( to_show: string = 'default', userId ): void {
+    !this.show_page_modal ? this.show_page_modal = true : this.show_page_modal = false;
+    this.modal_to_show = to_show;
+    this.userIdSelected = userId;
+}
+
+confirmCheckInOut() {
+    const ws_data = {
+        username: this.userIdSelected
+    };
+    this.loader.showLoader();
+    this._services.service_general_post(`Profile/checkOut`, ws_data)
+        .subscribe((response: any) => {
+            if (response.result === 'Success') {
+                this.systemMessage.showMessage({
+                    kind: 'ok',
+                    time: 4200,
+                    message: {
+                        header: `Check out successfully.`,
+                        text: `You have been Check out successfully`
+                    }
+                });
+                this.showModal('', 0);
+                setTimeout(() => this.loader.hideLoader(), 1777);
+            }
+        }, (error: any) => {
+            console.error('Error WS CIO => ', error);
+        });
+}
 
 }

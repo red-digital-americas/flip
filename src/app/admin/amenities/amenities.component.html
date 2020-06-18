@@ -8,9 +8,9 @@
             Ammenities
           </h4>
           <button 
-            class="ap-form__rButton button-black padding-lateral-m"
+            class="ap-form__rButton button-black padding-lateral-m button-icon button-icon--add-white"
             (click)="toggleSectionForm( 'new' )">
-            New Ammenity
+            Add Ammenity
           </button>
         </div>
         <div class="ml-col-1 margin-top-m font-big color-red text-center" *ngIf="amenitiesArray?.length == 0">
@@ -31,12 +31,12 @@
             <div class="ap-cards__card-buttons">
               <button 
                 (click)="toggleSectionForm( 'edit', amenity )"
-                class="ap-cards__card-button button-green">
-                Edit Ammenity
+                class="ap-cards__card-button ap-cards__card-button--aceptar button-green button-icon button-icon--edit-white">
+                Edit
               </button>
               <button 
                 (click)="deleteThisAmenity( amenity )"
-                class="ap-cards__card-button button-black">
+                class="ap-cards__card-button button-black button-icon button-icon--delete-white">
                 Delete
               </button>
             </div>
@@ -52,7 +52,7 @@
          <button 
              class="ap-form__rButton button-red padding-lateral-m"
              (click)="toggleSectionForm()">
-             Cancel
+             Close
          </button>
        </div>
       <div class="ml-col-7 margin-top-x">
@@ -172,15 +172,15 @@
         </button>
       </div -->
       <div class="ml-col-1 ap-form__buttons margin-top-x">
-        <button 
+        <!-- <button 
           type="button"
           (click)="toggleSectionForm()"
           class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
           Cancel
-        </button>
+        </button> -->
         <button 
           type="submit"
-          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--edit-white">
           Save
         </button>
       </div>

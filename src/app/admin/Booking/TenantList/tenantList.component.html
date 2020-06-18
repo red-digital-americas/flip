@@ -1,14 +1,14 @@
 <booking-navbar [section]="section"></booking-navbar>
 <div class="ml-col-1">
     <div class="ml-col-1 padding-general-m margin-bottom-g background-white">
-        <div class="ml-col-1 margin-bottom-x">
+        <div class="ml-col-1 margin-bottom-x text-center">
             <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
                Reservations
              </h4>
              <button 
-                    class="ap-form__rButton button-black padding-lateral-m"
+                    class="ap-form__rButton button-black button-big button-icon button-icon--add-white"
                     (click)="goToPage( 'AddTenant' )">
-                    Add reservations
+                    Add Reservations
             </button>
         </div>
         <div class="ml-col-1">
@@ -73,7 +73,7 @@
             <mat-table mat-table matSort [dataSource]="tenantList" class="mat-elevation-z8 table--no-shadow">
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Name </th>
-                    <td mat-cell *matCellDef="let element" class="table__data table__data-center"> {{element.firstName}} </td>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center" (click)="viewDetail(element.idUser, element.idBooking)" > {{element.firstName}} </td>
                 </ng-container>
                 <ng-container matColumnDef="room">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Room</th>
@@ -127,13 +127,27 @@
                 </ng-container>
                 <ng-container matColumnDef="checkOut">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Check Out </th>
-                    <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.checkOut">  </td>
+                    <td mat-cell *matCellDef="let element" class="table__data"> 
+                        <div *ngIf="element.checkOut.includes('Check Out') || element.checkOut.length <= 3 ; then elseOut else thenOut"></div>
+                        <ng-template #thenOut >
+                            <span>{{element.checkOut}}</span>
+                        </ng-template>
+                        <ng-template #elseOut>
+                          <button [disabled]="element.pending !== 0 || element.checkOut.includes('N/A')"
+                            (click)="showModal('check_out',element.idUser)" mat-raised-button
+                            class="text-center" style="white-space: normal;"
+                             [class.table__data-button-yellow]="element.checkOut === 'Check Out'"
+                             [class.table__data-button-red]="element.checkOut  !== 'Check Out'">
+                             {{element.checkOut}}
+                          </button>
+                        </ng-template>
+                    </td>
                 </ng-container>
                 <ng-container matColumnDef="active">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Active </th>
                     <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.active">  </td>
                 </ng-container>
-                <ng-container matColumnDef="doCheckOut">
+                <!-- <ng-container matColumnDef="doCheckOut">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Check Out </th>
                     <td mat-cell *matCellDef="let element">
                         <button 
@@ -144,8 +158,8 @@
                             Check Out
                         </button>
                     </td>
-                </ng-container>
-                <ng-container matColumnDef="idUser">
+                </ng-container> -->
+                <!-- <ng-container matColumnDef="idUser">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Profile </th>
                     <td mat-cell *matCellDef="let element">
                         <button 
@@ -155,15 +169,15 @@
                             Profile
                         </button>
                     </td>
-                </ng-container>
+                </ng-container> -->
                 <ng-container matColumnDef="showBooking">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Booking </th>
                     <td mat-cell *matCellDef="let element">
                         <button 
                             (click)="viewBookingDetail('reservations', element.idUser, element.idBooking)" 
                             mat-raised-button color="accent"
-                            class="table__data-button button-pink">
-                            Booking
+                            class="table__data-button-yellow button-yellow">
+                            Detail
                         </button>
                     </td>
                 </ng-container>
