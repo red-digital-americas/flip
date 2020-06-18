@@ -28,13 +28,33 @@ export class TenantListComponent implements OnInit {
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-    displayedColumns: string[] = ['room', 'typeRoom', 'name', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'checkIn', 'checkOut', 'active', 'idUser'];
+    displayedColumns: string[] = [
+        'name',
+        'room',
+        'membership',
+        'dateInit',
+        'dateEnd',
+        'amountOutstanding',
+        'pendingBilled',
+        'totalBeds',
+        'roomateFlip',
+        'checkIn',
+        'checkOut',
+        'active',
+        // 'doCheckOut',
+        // 'idUser',
+        'showBooking'
+    ];
     tenantList;
     buildingId;
     public section: string;
 
     loader = new LoaderComponent();
     systemMessage = new SystemMessage();
+
+    show_page_modal = false;
+    modal_to_show: string;
+    userIdSelected;
 
     activeLs: ActiveModel[] = [
         {id: 0, name: 'Yes', value: true},
@@ -55,7 +75,10 @@ export class TenantListComponent implements OnInit {
         this.section = 'tenantList';
         this.buildingId = this.route.snapshot.paramMap.get('id');
         this.getTenantList(this.buildingId);
-        
+    }
+
+    public goToPage( to_where: string ):void {
+        this.router.navigateByUrl( to_where );
     }
 
     getTenantList(id) {
@@ -112,6 +135,43 @@ export class TenantListComponent implements OnInit {
         this.filterForm.reset();
         this.getTenantList(this.buildingId);
     }
+
+    public showModal( to_show: string = 'default', userId ):void {
+        !this.show_page_modal ? this.show_page_modal = true : this.show_page_modal = false;
+        this.modal_to_show = to_show;
+        this.userIdSelected = userId;
+    }
+
+    confirmCheckInOut() {
+        const ws_data = {
+            username: this.userIdSelected
+        };
+        this.loader.showLoader();
+        this.services.service_general_post(`Profile/checkOut`, ws_data)
+            .subscribe((response: any) => {
+                if (response.result === 'Success') {
+                    this.systemMessage.showMessage({
+                        kind: 'ok',
+                        time: 4200,
+                        message: {
+                            header: `Check out successfully.`,
+                            text: `You have been Check out successfully`
+                        }
+                    });
+                    this.showModal('', 0);
+                    this.resetForm();
+                    setTimeout(() => this.loader.hideLoader(), 1777);
+                }
+            }, (error: any) => {
+                console.error('Error WS CIO => ', error);
+            });
+    }
+
+    public viewBookingDetail( page: string, idUser, idBooking ):void {
+        sessionStorage.setItem('user_id', idUser.toString() );
+        sessionStorage.setItem('booking_id', idBooking);
+        this.router.navigateByUrl( page );
+      }
 
 }
 

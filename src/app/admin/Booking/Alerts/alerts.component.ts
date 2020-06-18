@@ -4,6 +4,9 @@ import { LoaderComponent } from '../../../../ts/loader';
 import { SystemMessage } from '../../../../ts/systemMessage';
 import { Utils } from '../../../utils/utils';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import * as signalR from '@aspnet/signalr';
+import { Gvars } from '../../../models/gvars';
 
 @Component({
     selector: 'alerts',
@@ -48,6 +51,8 @@ export class AlertsComponent implements OnInit {
             }
         }
     ];
+    private hubConnection: HubConnection;
+    alertId: number;
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     ngOnInit() {
         this.IDUSR = JSON.parse(localStorage.getItem('user')).id;
@@ -1050,6 +1055,8 @@ export class AlertsComponent implements OnInit {
         this.userSendMessage = {
             id: card.id,
             userId: card.userId,
+            building: card.buildingId,
+            booking: card.booking.id,
             info: {
                 name: card.user.name + ' ',
                 lastname: card.user.lastName + ' ' + card.user.motherName,
@@ -1069,8 +1076,18 @@ export class AlertsComponent implements OnInit {
                         this.messages = value.item;
                         setTimeout(() => { this.scrollToBottom(); }, 200);
                     }
+                    this.openHubConnection();
             }
         });
+    }
+
+    closeChatAlerts() {
+        this.hubConnection.off('Send');
+        this.hubConnection.stop();
+        !this.show_modal ?
+            this.show_modal = true : this.show_modal = false;
+
+        this.section_to_show = '';
     }
 
     GetMessages(data) {
@@ -1099,6 +1116,7 @@ export class AlertsComponent implements OnInit {
         if (this.messageInput.length <= 0) { return; }
         if (this.messageInput.trim().replace('/\r?\n|\r/', '').length <= 0) { return; }
         console.log('DATA', message, alertId);
+        this.alertId = alertId;
         // return;
         const alertMesage: AlertMessage = new AlertMessage();
         alertMesage.message = message;
@@ -1125,6 +1143,47 @@ export class AlertsComponent implements OnInit {
       private scrollToBottom(): void {
         document.getElementById('last').scrollIntoView(false);
       }
+
+    openHubConnection() {
+        //////////////////////////////////// SIGNAL R //////////////////////////////////////      
+        // var options = {
+        //     transport: signalR.HttpTransportType.ServerSentEvents,
+        //     logging: signalR.LogLevel.Trace,
+        //     accessTokenFactory: () => accessToken
+        // };
+        this.hubConnection = new HubConnectionBuilder()
+            .configureLogging(signalR.LogLevel.Debug)
+            .withUrl(`${Gvars.URL}/chatAlertHub`, {
+                skipNegotiation: true,
+                transport: signalR.HttpTransportType.WebSockets,
+            })
+            .build();
+        this.hubConnection.serverTimeoutInMilliseconds = 9999999999999;
+        // Send is the name that we use inside and endpoint with the function  _chatHubContext.Clients.all.SendAsync("Send", params);
+        this.hubConnection.on('Send', (rtMessageResponse) => {
+            console.log('Signal R', rtMessageResponse);
+            console.log('AlertId', this.alertId);
+            if (this.alertId === rtMessageResponse.alertId) {
+                this.GetMessages(this.userSendMessage);
+            }
+        });
+
+        this.hubConnection.onclose((error) => {
+            console.log(error);
+            if (error === undefined) { return; }
+              // WebSocket closed with status code: 1006 ().
+            // console.log(error?.name);      // Error
+        });
+
+        this.hubConnection.start()
+            .then(() => console.log('Connection started!'))
+            .catch(function(err) { console.log('Error while establishing connection :(', err)} );
+    }
+
+    viewDetail(id: number, idBooking: number, buildingId) {
+        console.log('Id user', id);
+        this._router.navigateByUrl( `app-profile/${ id }/${ idBooking }`, { state: { id: buildingId, name: 'TenantList To Profile' } });
+    }
 
 }
 

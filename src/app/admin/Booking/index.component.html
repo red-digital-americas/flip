@@ -4,9 +4,9 @@
         Buildings
       </h4>
       <button 
-          class="ap-form__rButton button-black padding-lateral-m"
+          class="ap-form__rButton button-pink padding-lateral-m button-big button-icon button-icon--add-white"
           (click)="toggleSectionForm( 'new' )">
-          New Build
+          Add Building
       </button>
     </div>
     <div class="ml-col-1 index-cards" *ngIf="!show_booking_form">
@@ -19,7 +19,7 @@
                     <div class="index-cards__card-hider">
                       <div class="index-cards__card-buttons">
                         <button 
-                              class="index-cards__card-buttons-button button-green"
+                              class="index-cards__card-buttons-button button-pink"
                               (click)="goToPage('roomCatalog', card)">
                               Rooms
                           </button>
@@ -38,11 +38,11 @@
                   <button 
                         (click)="goToBooking( card.id, card.name )"
                         class="index-cards__card-buttons-button button-blue">
-                        Booking
+                        Operation
                     </button>
                     <button 
                         (click)="toggleSectionForm( 'edit', card )"
-                        class="index-cards__card-buttons-button button-black">
+                        class="index-cards__card-buttons-button button-black button-icon button-icon--edit-white">
                         Edit
                     </button>
                 </div>
@@ -61,7 +61,7 @@
            <button 
                class="ap-form__rButton button-red padding-lateral-m"
                (click)="toggleSectionForm()">
-               Cancel
+               Close
            </button>
          </div>
         <div class="ml-col-7 margin-top-x">
@@ -280,15 +280,15 @@
             </div>
         </div>
         <div class="ml-col-1 ap-form__buttons margin-top-x">
-          <button 
+          <!-- <button 
             type="button"
             (click)="toggleSectionForm()"
             class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
             Cancel
-          </button>
+          </button> -->
           <button 
             type="submit"
-            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--add-white">
             Save
           </button>
         </div>

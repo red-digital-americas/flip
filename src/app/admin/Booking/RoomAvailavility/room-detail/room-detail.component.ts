@@ -42,18 +42,52 @@ export class RoomDetailComponent implements OnInit {
   activeTotal = 0;
   activeLenght;
   activeObj;
-  activeDisplayedColumns: string[] = ['name', 'age', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'idUser'];
+  activeDisplayedColumns: string[] = [
+    'name',
+    'room',
+    'membership',
+    'dateInit',
+    'dateEnd',
+    'amountOutstanding',
+    'pendingBilled',
+    'totalBeds',
+    'roomateFlip',
+    'checkIn',
+    'checkOut',
+    'active',
+    // 'idUser',
+    'showBooking'
+];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   ////////////////////////// INACTIVE ///////////////////////////////
   inactiveObj;
   inactiveTotal = 0;
-  inactiveDisplayedColumns: string[] = ['name', 'age', 'membership', 'dateInit', 'dateEnd', 'amountOutstanding', 'totalBeds', 'roomateFlip', 'idUser'];
+  inactiveDisplayedColumns: string[] = [
+    'name',
+    'room',
+    'membership',
+    'dateInit',
+    'dateEnd',
+    'amountOutstanding',
+    'pendingBilled',
+    'totalBeds',
+    'roomateFlip',
+    'checkIn',
+    'checkOut',
+    'active',
+    // 'idUser',
+    'showBooking'
+    ];
   @ViewChild(MatPaginator, { static: true }) paginatorInactive: MatPaginator;
   @ViewChild(MatSort, { static: true }) sortInactive: MatSort;
 
   loader = new LoaderComponent();
   systemMessage = new SystemMessage();
+
+  show_page_modal = false;
+  modal_to_show: string;
+  userIdSelected;
 
   constructor(
     public _services: DatosService,
@@ -79,6 +113,8 @@ export class RoomDetailComponent implements OnInit {
       this.activeLenght = value.item.active.length;
       value.item.active.forEach(element => {
         this.activeTotal = this.activeTotal + element.amountOutstanding;
+        this.activeTotal = this.activeTotal +
+                          (element.membership !== null ? element.membership.priceMembership : 0);
       });
       this.activeObj = new MatTableDataSource(value.item.active);
       this.activeObj.paginator = this.paginator;
@@ -86,6 +122,8 @@ export class RoomDetailComponent implements OnInit {
 
       value.item.inactive.forEach(element => {
         this.inactiveTotal = this.inactiveTotal + element.amountOutstanding;
+        this.inactiveTotal = this.inactiveTotal +
+                          (element.membership !== null ? element.membership.priceMembership : 0);
       });
       this.inactiveObj = new MatTableDataSource(value.item.inactive);
       this.inactiveObj.paginator = this.paginatorInactive;
@@ -122,5 +160,41 @@ export class RoomDetailComponent implements OnInit {
     sessionStorage.setItem('booking_id', element.idBooking);
     this._router.navigateByUrl('reservations');
   }
+
+  public viewBookingDetail( page: string, idUser, idBooking ):void {
+    sessionStorage.setItem('user_id', idUser.toString() );
+    sessionStorage.setItem('booking_id', idBooking);
+    this._router.navigateByUrl( page );
+  }
+
+  public showModal( to_show: string = 'default', userId ): void {
+    !this.show_page_modal ? this.show_page_modal = true : this.show_page_modal = false;
+    this.modal_to_show = to_show;
+    this.userIdSelected = userId;
+}
+
+confirmCheckInOut() {
+    const ws_data = {
+        username: this.userIdSelected
+    };
+    this.loader.showLoader();
+    this._services.service_general_post(`Profile/checkOut`, ws_data)
+        .subscribe((response: any) => {
+            if (response.result === 'Success') {
+                this.systemMessage.showMessage({
+                    kind: 'ok',
+                    time: 4200,
+                    message: {
+                        header: `Check out successfully.`,
+                        text: `You have been Check out successfully`
+                    }
+                });
+                this.showModal('', 0);
+                setTimeout(() => this.loader.hideLoader(), 1777);
+            }
+        }, (error: any) => {
+            console.error('Error WS CIO => ', error);
+        });
+}
 
 }

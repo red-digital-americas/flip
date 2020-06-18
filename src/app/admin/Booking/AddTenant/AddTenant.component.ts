@@ -23,6 +23,8 @@ import { Router } from '@angular/router';
         public _router: Router
     ) {}
 
+    dispalyMemberships = false;
+
     /*Welcome back Mr.Anderson we missed you.*/
     ngOnInit() {
 
@@ -1357,9 +1359,9 @@ import { Router } from '@angular/router';
             this.form_profile_validator.no_lnam = true :
             this.form_profile_validator.no_lnam = false;
 
-        this.general_user_data.motherName == '' ? 
-            this.form_profile_validator.no_mnam = true :
-            this.form_profile_validator.no_mnam = false;
+        // this.general_user_data.motherName == '' ? 
+        //     this.form_profile_validator.no_mnam = true :
+        //     this.form_profile_validator.no_mnam = false;
 
         this.general_user_data.phone == '' ? 
             this.form_profile_validator.no_phon = true :
@@ -1414,7 +1416,7 @@ import { Router } from '@angular/router';
         if(
             !this.form_profile_validator.no_name &&
             !this.form_profile_validator.no_lnam &&
-            !this.form_profile_validator.no_mnam &&
+            // !this.form_profile_validator.no_mnam &&
             !this.form_profile_validator.no_phon &&
             !this.form_profile_validator.no_mail &&
             !this.form_profile_validator.no_mail_valid &&
@@ -1456,6 +1458,7 @@ import { Router } from '@angular/router';
         this.credit_card_data.number = this.encryptData( this.credit_card_data.number );
         this.credit_card_data.ccv = this.encryptData( this.credit_card_data.ccv );
         this.join_all_data.amount = this.booking_detail_total_ammount.toString();
+        this.join_all_data.amountMembership = this.getTotalAmmount().toString();
 
         console.log('Sending this => ', this.join_all_data);
 
@@ -1850,6 +1853,7 @@ class BookingCompleted {
     creditCard: CreditCardModel;
     token: string;
     amount: string;
+    amountMembership: string;
 }
 
 class GeneralUserData {

@@ -26,7 +26,19 @@ import { resolve } from 'dns';
     public table_colums: any[] = ['service','type','sdate','edate','xcost'];
     public table_colums_pending: any[] = ['icon','service','type','lapse','sdate','edate','xcost'];
     public table_colums_paid_services: any[] = ['icon','service','type','lapse','sdate','edate','cclue','xcost'];
-    public table_history_colums: any[] = ['build','room','beds','membership','adate','ddate','aout','button'];
+    public table_history_colums: any[] = [
+        'build',
+        'room',
+        'beds',
+        'membership',
+        'adate',
+        'ddate',
+        'aout',
+        'pendingBilled',
+        'roomateFlip',
+        'active',
+        'button'
+    ];
     public table_payHistory_colums: any[] = ['membership', 'payday','dateStart','dateEnd','card','ammount'];
     public table_serHistory_colums: any[] = ['name','payday','dateStart','dateEnd','card','price'];
     public table_adding_services: any[] = ['icon','service','description','recurrent','once','select'];
@@ -34,6 +46,10 @@ import { resolve } from 'dns';
     public user_id: number;
     public booking_id: number;
     public section: string;
+    public formCancel: any = {
+        no_detail: false
+    };
+    detailCancel = '';
 
     constructor(
         public _services: DatosService,
@@ -184,7 +200,8 @@ import { resolve } from 'dns';
         let ws_action: string = null;
 
         const ws_data = {
-            username: this.current_card.userId
+            username: this.current_card.userId,
+            booking: this.current_membership.idBooking
         }
 
         switch( action ) {
@@ -201,7 +218,7 @@ import { resolve } from 'dns';
 
         this.loader.showLoader();
 
-        this._services.service_general_post(`Profile/${ ws_action }`, ws_data)
+        this._services.service_general_post(`Profile/${ ws_action }Admin`, ws_data)
             .subscribe( (response: any) => {
 
                 if( response.result == 'Success' ) {
@@ -228,6 +245,50 @@ import { resolve } from 'dns';
 
             });
 
+    }
+
+    validateCancelForm ():boolean {
+        let result = false;
+        this.formCancel.no_detail = this.detailCancel === '' || this.detailCancel === null ? true : false;
+        if (!this.formCancel.no_detail) {
+            console.log('Valid', true);
+            result = true;
+        } else {
+            console.log('No Valid', false);
+            result = false;
+        }
+        return result;
+    }
+
+    confirmCancelBooking() {
+        const ws_data = {
+            username: this.current_card.userId,
+            booking: this.current_membership.idBooking,
+            detail: this.detailCancel
+        };
+        console.log('Cancel', ws_data);
+        if (this.validateCancelForm()) {
+            return;
+            this.loader.showLoader();
+            this._services.service_general_post(`Profile/Cancel`, ws_data)
+                .subscribe( (response: any) => {
+                    if ( response.result === 'Success' ) {
+                        this.system_message.showMessage({
+                            kind: 'ok',
+                            time: 4200,
+                            message: {
+                                header: `Cancel successfully.`,
+                                text: `You have been cancel successfully`
+                            }
+                        });
+                        this.getReservationData();
+                        this.showModal();
+                        setTimeout( () => this.loader.hideLoader(),1777);
+                    }
+                }, (error: any) => {
+                    console.error('Error WS CIO => ', error);
+                });
+        }
     }
 
     public payPendingItems():void {
