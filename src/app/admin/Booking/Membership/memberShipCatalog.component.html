@@ -8,14 +8,14 @@
                     <span class="padding-left-m">Membership list</span>
                  </h4>
                  <button 
-                    class="ap-form__rButton button-pink padding-lateral-m"
+                    class="ap-form__rButton button-pink padding-lateral-m button-icon button-icon--add-white"
                     (click)="goToPage()">
                     Add Membership
                 </button>
             </div>
             <div class="ml-col-1">
                 <mat-form-field>
-                    <mat-label>Filter</mat-label>
+                    <mat-label>Search</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Platinum">
                 </mat-form-field>
                 <table mat-table mat-sort [dataSource]="membershipList" class="mat-elevation-z8 table--no-shadow">
