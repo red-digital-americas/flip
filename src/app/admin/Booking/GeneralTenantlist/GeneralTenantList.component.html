@@ -64,7 +64,7 @@
 
             </form>
             <mat-form-field class="ap-form__input">
-                <mat-label>Filter</mat-label>
+                <mat-label>Search</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
             </mat-form-field>
             <mat-table mat-table [dataSource]="tenantList" matSort class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
@@ -82,7 +82,7 @@
                 </ng-container>
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Name</th>
-                    <td mat-cell *matCellDef="let element" class="table__data">{{ element.firstName }}</td>
+                    <td mat-cell *matCellDef="let element" class="table__data" (click)="goToProfile( element )">{{ element.firstName }}</td>
                 </ng-container>
                 <ng-container matColumnDef="age">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Age</th>
@@ -131,7 +131,21 @@
                 </ng-container>
                 <ng-container matColumnDef="checkOut">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Check Out </th>
-                    <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.checkOut">  </td>
+                    <td mat-cell *matCellDef="let element" class="table__data"> 
+                        <div *ngIf="element.checkOut.includes('Check Out') || element.checkOut.length <= 3 ; then elseOut else thenOut"></div>
+                        <ng-template #thenOut >
+                            <span>{{element.checkOut}}</span>
+                        </ng-template>
+                        <ng-template #elseOut>
+                          <button [disabled]="element.pending !== 0 || element.checkOut.includes('N/A')"
+                            (click)="showModal('check_out',element.idUser)" mat-raised-button
+                            class="text-center" style="white-space: normal;"
+                             [class.table__data-button-yellow]="element.checkOut === 'Check Out'"
+                             [class.table__data-button-red]="element.checkOut  !== 'Check Out'">
+                             {{element.checkOut}}
+                          </button>
+                        </ng-template>
+                    </td>
                 </ng-container>
                 <ng-container matColumnDef="active">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Active </th>
@@ -152,6 +166,29 @@
                 <tr mat-row *matRowDef="let row; columns: table_colums;"></tr>
             </mat-table>
             <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
+        </div>
+    </div>
+</div>
+
+<div class="ml-modal" *ngIf="show_page_modal">
+    <div class="ml-modal__pop" *ngIf="modal_to_show == 'check_out'">
+        <p class="ml-modal__pop-titulo margin-bottom-m">
+            Check Out
+        </p>
+        <p class="ml-modal__pop-text">
+            Are you sure to Check Out?
+        </p>
+        <div class="ml-modal__pop-buttons">
+            <button 
+                (click)="showModal()"
+                class="ml-modal__pop-buttons-button button-pink">
+                Cancel
+            </button>
+            <button 
+                (click)="confirmCheckInOut('out')"
+                class="ml-modal__pop-buttons-button button-black">
+                Check Out
+            </button>
         </div>
     </div>
 </div>
