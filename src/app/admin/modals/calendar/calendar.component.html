@@ -1,11 +1,17 @@
 <div class="modal-header">
     <!-- <h4 class="modal-title pull-left">IdProps {{idProps}}</h4> -->
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
+    <h4 class="modal-title pull-left">Schedule</h4>
+    <button 
+            class="ap-form__rButton button-red"
+            (click)="modalRef.hide()">
+            Close
     </button>
+    <!-- <button type="button" class="close pull-right" aria-label="Close" >
+      <span aria-hidden="true">&times;</span>
+    </button> -->
 </div>
 <div class="modal-body">
-    <div class="ml-col-1 padding-general-m card-style">
+    <div class="ml-col-1 padding-general-m  margin-bottom-m ">
         <full-calendar
             #calendar
             defaultView="dayGridMonth"
@@ -29,5 +35,54 @@
             (eventResize)="handleEventResize($event)" 
             (datesRender)="handleDatesRender($event)">
         </full-calendar>
+    </div>
+</div>
+
+<div class="ml-modal ml-modal--bg-black" *ngIf="show_page_modal">
+    <div class="ml-modal__pop card_style" *ngIf="modal_to_show == 'detail'">
+        <div class="ml-col-1 margin-bottom-x">
+            <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
+                Booking's Detail
+            </p>
+            <button 
+                class="ap-form__rButton button-red"
+                (click)="showModal();">
+                Close
+            </button>
+        </div>   
+        <div class="ml-col-1">
+            <div class="ml-col-1">
+              <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding">
+                <div class="ml-col-1">
+                      Name: <span class="text-bold">{{ userInfo.name }}</span>
+                </div>
+              </div>
+              <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding">
+                <div class="ml-col-1">
+                      Date Init: <span class="text-bold">{{ userInfo.timeStart }}</span>
+                </div>                
+              </div>
+              <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding">
+                <div class="ml-col-1">
+                      Date End: <span class="text-bold">{{ userInfo.timeEnd }}</span>
+                </div>
+              </div>
+              <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding">
+                <div class="ml-col-1">
+                      Roomate: <span class="text-bold">{{ userInfo.roomate }}</span>
+                </div>
+              </div>
+              <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding">
+                <div class="ml-col-1">
+                      Membership: <span class="text-bold">{{ userInfo.membership }}</span>
+                </div>
+              </div>
+              <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding">
+                <div class="ml-col-1">
+                      Number of Beds: <span class="text-bold">{{ userInfo.beds }}</span>
+                </div>
+              </div>
+            </div>
+        </div> 
     </div>
 </div>
