@@ -80,6 +80,7 @@ import { RoomDetailComponent } from './Booking/RoomAvailavility/room-detail/room
 import { AddTenantPayComponent } from './Booking/TenantList/add-tenant-pay/add-tenant-pay.component';
 import { MatSortModule } from '@angular/material/sort';
 import { CalendarComponent } from './modals/calendar/calendar.component';
+import { CalendarDetailComponent } from './modals/calendar-detail/calendar-detail.component';
 
 
 @NgModule({
@@ -155,7 +156,8 @@ import { CalendarComponent } from './modals/calendar/calendar.component';
     UserNewComponent,
     RoomDetailComponent,
     AddTenantPayComponent,
-    CalendarComponent
+    CalendarComponent,
+    CalendarDetailComponent
   ],
   entryComponents: [
     DetalleComponent,
@@ -163,7 +165,8 @@ import { CalendarComponent } from './modals/calendar/calendar.component';
     InviteComponent,
     MessageUsersComponent,
     RoomModalComponent,
-    CalendarComponent
+    CalendarComponent,
+    CalendarDetailComponent
   ],
   exports:[Autoresize]
 })
