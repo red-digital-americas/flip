@@ -516,7 +516,7 @@ function getFlipnetworkData() {
             const ws_data = JSON.parse(result.response);
 
             console.log('Network ==> ', ws_data);
-            let plantilla;
+            let plantilla = "";
             for (let i = 0; i < ws_data.backStageNetworkSlides.length; i++) {
                 let slide = ws_data.backStageNetworkSlides[i];
                 if (i == 0) {

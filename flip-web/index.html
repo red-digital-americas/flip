@@ -1209,8 +1209,13 @@
             windowHeight = window.innerHeight,
             windowWidth = window.innerWidth,
             isItMobil = windowWidth <= 1024 ? true : false;
+            
+            
 
             function createCustomElement( element_data ) {
+                if(isItMobil){
+                    window.location.href = './flip_movil.html';
+                }
 
                 let the_element = document.createElement( element_data.label );
                     the_element.setAttribute('class', element_data.class );
@@ -1237,6 +1242,7 @@
 
             ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeIndex'}).then( cards => { 
                 console.log('DATA', cards);
+                
                 function cardSettings( card_id ) {
 
                     let the_title = '',
