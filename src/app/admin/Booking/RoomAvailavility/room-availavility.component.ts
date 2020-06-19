@@ -9,6 +9,28 @@ import { SystemMessage } from '../../../../ts/systemMessage';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
+import dayGridPlugin from '@fullcalendar/daygrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+
+import {DayBgRow, DayGrid, DayGridSeg, DayGridSlicer, DayGridView } from '@fullcalendar/daygrid';
+import { EventInput } from '@fullcalendar/core';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import * as moment from 'moment';
+
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { CalendarComponent } from '../../modals/calendar/calendar.component';
+
+class ScheduleModel {
+    public id: number;
+    public Date;
+    public TimeStart;
+    public TimeEnd;
+    public ActivityId: number;
+    constructor() {}
+  }
+
 @Component({
     selector: 'room-availavility',
     styleUrls: ['./room-availavility.component.scss'],
@@ -21,7 +43,8 @@ export class RoomAvailavilityComponent implements OnInit {
     constructor(
         public _services: DatosService,
         public _router: Router,
-        public route: ActivatedRoute
+        public route: ActivatedRoute,
+        private modalService: BsModalService
     ) {
         this.pipe = new DatePipe('en');
     }
@@ -38,6 +61,7 @@ export class RoomAvailavilityComponent implements OnInit {
         'amountStanding',
         'roomateFlip',
         'status',
+        'smoke',
         'viewMore',
         'addBooking'
     ];
@@ -69,6 +93,13 @@ export class RoomAvailavilityComponent implements OnInit {
         no_fromData: false,
         no_toDate: false
       };
+
+
+    show_page_modal = false;
+    modal_to_show: string;
+    userIdSelected;
+
+    modalRef: BsModalRef;
 
     ngOnInit() {
         this.section = 'roomAvailavility';
@@ -224,6 +255,17 @@ export class RoomAvailavilityComponent implements OnInit {
               result = false;
             }
         return result;
+    }
+
+    public showModal( to_show: string = 'default', userId ): void {
+        this.modalRef = this.modalService.show(CalendarComponent, {
+            initialState: { responseData: {} },
+            class: 'modal-lg'
+          });
+          this.modalRef.content.closeBtnName = 'Close';
+        // !this.show_page_modal ? this.show_page_modal = true : this.show_page_modal = false;
+        // this.modal_to_show = to_show;
+        // this.userIdSelected = userId;
     }
 
 }

@@ -6,9 +6,9 @@
                Alerts
             </h4>
             <button 
-                class="ap-form__rButton button-big button-green"
+                class="ap-form__rButton button-big button-green button-icon button-icon--add-white"
                 (click)="showModal('new_alert'); initNewAlertModule()">
-                New Alert
+                Add Alert
             </button>
         </div>
         <div class="ml-col-1">
@@ -131,7 +131,7 @@
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green"
+                                class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
@@ -180,7 +180,7 @@
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green"
+                                class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
@@ -229,7 +229,7 @@
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green"
+                                class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
@@ -278,7 +278,7 @@
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green"
+                                class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
@@ -327,7 +327,7 @@
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green"
+                                class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
@@ -378,7 +378,7 @@
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green"
+                                class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
@@ -427,7 +427,7 @@
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green"
+                                class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
@@ -476,7 +476,7 @@
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green"
+                                class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
@@ -525,8 +525,8 @@
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green"
-                                (click)="showModal(); passScheduleData( card, 'edit' );">
+                                class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
+                                (click)="showModal(); passScheduuleData( card, 'edit' );">
                                 Edit
                             </button>
                         </div>
@@ -574,7 +574,7 @@
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
-                                class="alerts__card-button button-big button-green"
+                                class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
                                 Edit
                             </button>
@@ -995,7 +995,7 @@
     <div class="ml-modal__content card-style " *ngIf="section_to_show == 'new_alert'">
         <div class="ml-col-1">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
-                New Alert
+                Add Alert
             </p>
             <button 
                 class="ap-form__rButton button-red"
@@ -1571,18 +1571,18 @@
     <div class="ml-modal__content card-style " *ngIf="section_to_show == 'chat'">
         <div class="ml-col-1 margin-bottom-x">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
-                Chat Messages
+                Chat Alerts
             </p>
             <button 
                 class="ap-form__rButton button-red"
-                (click)="showModal();">
+                (click)="closeChatAlerts();">
                 Close
             </button>
         </div>
         <div class="ml-col-1 margin-top-x">
             <div class="ml-col-1">
                 <div class="">
-                    <h4 class="chatm__datos">
+                    <h4 (click)="viewDetail(userSendMessage.userId, userSendMessage.booking, userSendMessage.building)" class="chatm__datos">
                         {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
                         <img class="chatm__datos-photo" 
                              src="{{ userSendMessage.info.photo }}" />

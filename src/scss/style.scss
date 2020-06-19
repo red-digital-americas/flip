@@ -3049,7 +3049,7 @@ select:active,
 }
 
 .button-blue {
-  background-color: #4298b5;
+  background-color: #4ac1ba;
   color: white;
 }
 
@@ -3064,12 +3064,12 @@ select:active,
 }
 
 .button-yellow {
-  background-color: #ffc72c;
+  background-color: #fccd0a;
   color: #2e343a;
 }
 
 .button-pink {
-  background-color: #f57eb6;
+  background-color: #f499bb;
   color: white;
 }
 
@@ -3089,6 +3089,30 @@ select:active,
 
   &--test {
     background-image: url('../assets/flipF.png');
+  }
+
+  &--delete {
+    background-image: url("../assets/icon/minus.png");
+  }
+
+  &--delete-white {
+    background-image: url("../assets/icon/minus-white.png");
+  }
+
+  &--add {
+    background-image: url('../assets/icon/plus.png');
+  }
+
+  &--add-white {
+    background-image: url('../assets/icon/plus-white.png');
+  }
+
+  &--edit {
+    background-image: url('../assets/icon/edit.png');
+  }
+
+  &--edit-white {
+    background-image: url('../assets/icon/edit-white.png');
   }
 
 }
@@ -3807,13 +3831,45 @@ select:active,
       width: 80px;
       border-radius: 16px !important;
       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-      background-color: #309b8a !important;
+      background-color: #4ac1ba !important;
       padding: 0;
       font-size: 10px;
       line-height: 20px !important;
     }
 
+    &-button-yellow {
+      width: 80px;
+      border-radius: 16px !important;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+      background-color: #fccd0a !important;
+      padding: 0;
+      font-size: 10px;
+      line-height: 20px !important;
+      color: #2e343a !important;
+      white-space: normal;
+    }
+
+    &-button-red {
+      width: 80px;
+      border-radius: 16px !important;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+      background-color: #a61919 !important;
+      padding: 0;
+      font-size: 10px;
+      line-height: 20px !important;
+      color: white !important;
+      white-space: normal;
+    }
+
     &-button:focus {
+      outline: none;
+    }
+
+    &-button-yellow:focus {
+      outline: none;
+    }
+
+    &-button-red {
       outline: none;
     }
 
