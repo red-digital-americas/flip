@@ -8,16 +8,17 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-
+import bootstrapPlugin from '@fullcalendar/bootstrap'
 import {DayBgRow, DayGrid, DayGridSeg, DayGridSlicer, DayGridView }  from '@fullcalendar/daygrid';
 import { EventInput } from '@fullcalendar/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-
 import { BsComponentRef } from 'ngx-bootstrap/component-loader/bs-component-ref.class';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { DetalleComponent } from '../modals/detalle/detalle.component';
 import { CrearComponent } from '../modals/crear/crear.component';
 import * as moment from 'moment';
+
+
 
 class ScheduleModel {
   public id:number;
@@ -85,7 +86,7 @@ export class ReservationsComponent implements OnInit {
  
   @ViewChild('calendar', {read: FullCalendarComponent, static: true}) calendarComponent: FullCalendarComponent; 
 
-  calendarPlugins = [dayGridPlugin, listPlugin, interactionPlugin, timeGridPlugin];      
+  calendarPlugins = [dayGridPlugin, listPlugin, interactionPlugin, timeGridPlugin, bootstrapPlugin ];      
   calendarWeekends = true;  
   activeStart;
   activeEnd;
