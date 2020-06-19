@@ -168,6 +168,11 @@ import { Utils } from '../../../utils/utils';
                 this.getBackstageFlipNetworkData();
             }));
         }else if(this.modal == 2){
+          this.beneficios.forEach(d =>{
+            d.idBackStageNetworkSlide = this.back_stage_data.id;
+          })
+          this.back_stage_data.networkBenefits = this.beneficios;
+       console.log(this.back_stage_data);
             this._services.updateSladerNetwork(this.back_stage_data).subscribe((data =>{
                 console.log(data);
                 this.getBackstageFlipNetworkData();
@@ -179,9 +184,10 @@ import { Utils } from '../../../utils/utils';
         console.log(data);
         this._services.deleteNetworkSlides({id: data.id, userid: 1}).subscribe((res =>{
             console.log(res);
+            this.getBackstageFlipNetworkData();
         }))
     }
-
+//funciones de imagen para slider
     public readImageData( event_data, dimension, image_index: number ):void {
 
         const file = event_data.target.files,
@@ -265,6 +271,79 @@ import { Utils } from '../../../utils/utils';
           }
         }
       }
+
+//funciones de imagen para benefit
+readImageDataBenefit( event_data, dimension, img: number, index: number ):void {
+
+    const file = event_data.target.files,
+          root_event = event_data.target,
+          //img_target = event_data.target.parentElement.getElementsByClassName('image_to_preview')[0],
+          //image_container_name = event_data.target.parentElement.getElementsByClassName('image_to_preview_name')[0],
+          //placeh_image_data = document.getElementById('image_data'),
+          limits = {
+            width: 0,
+            height: 0
+          },
+          dimension_limits = {
+            get_dimension_limits: function() {
+
+              const dimension_calc = dimension.split('x'),
+                    width = dimension_calc[0],
+                    height = dimension_calc[1];
+
+              return {
+                width: Number( width ),
+                height: Number( height )
+              };
+
+            }
+          },
+          last_image = this.postphoto;
+
+    if( file && file[0] ) {
+
+      const root = this;
+
+      this.prepareImagesBenefit( event_data, img, index );
+
+    }
+
+  }
+
+  prepareImagesBenefit(e, img,indice) {
+    if (Utils.isDefined(e.srcElement.files)) {
+      for (let f of e.srcElement.files) {
+        this.newImages[indice]=(f);
+      }
+    } 
+    this.addImagesBenefit(indice,e, img);
+  }
+
+  addImagesBenefit(indice,e, img) { 
+    let url: string = '';
+    if (!Utils.isEmpty(this.newImages)) {
+      for (let f of this.newImages) {
+        this._services.UploadImgSuc(f).subscribe((r) => {
+          if (Utils.isDefined(r)) {
+            url = <string>r.message;
+            url = url.replace('/Imagenes', this._services.getURL() + 'Flip');
+            this.postphoto[indice]=(url);
+            if(img==0){
+              this.beneficios[indice].photoSlider = url;
+              this.form_watcher.no_img0 = false;
+              debugger;
+            }
+
+            if(img==1){
+                this.beneficios[indice].photoMobileSlider = url;
+                debugger;
+            }
+
+          }
+        })
+      }
+    }
+  }
 }
 
 class NetworkMaindata {

@@ -235,8 +235,8 @@
 
               <div class="form__image">
                 <input class="display-none image_form" type="file" name="image_one_selected" accept="image/*"
-                  (change)="readImageData($event, '1920x1080', 0);" id="validatedCustomFile2" required>
-                <label class="form__image-img" for="validatedCustomFile2">
+                  (change)="readImageDataBenefit($event, '1920x1080', 0, index);" id="validatedCustomFile1{{index}}" required>
+                <label class="form__image-img" for="validatedCustomFile1{{index}}">
                   <figure class="image_to_preview_container">
                     <img src="{{ beneficio.photoSlider }}"
                       class="image_to_preview placeholder_image custom-input__image" style="max-width: 90%;" />
@@ -251,8 +251,8 @@
 
               <div class="form__image">
                 <input class="display-none image_form" type="file" name="image_one_selected" accept="image/*"
-                  (change)="readImageData($event, '441x660', 1);" id="validatedCustomFile3" required>
-                <label class="form__image-img" for="validatedCustomFile3">
+                  (change)="readImageDataBenefit($event, '441x660', 1, index);" id="validatedCustomFile2{{index}}" required>
+                <label class="form__image-img" for="validatedCustomFile2{{index}}">
                   <figure class="image_to_preview_container">
                     <img style="max-width: 90%;" src="{{ beneficio.photoMobileSlider }}"
                       class="image_to_preview placeholder_image custom-input__image" />

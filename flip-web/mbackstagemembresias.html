@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" class="js no-touch csstransitions uk-notouch"><head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" /> <meta name="apple-mobile-web-app-capable" content="yes" /> <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
+<html lang="en" class="js no-touch csstransitions uk-notouch">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.jquery-ripples { position: relative; z-index: 0; }</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        .jquery-ripples {
+            position: relative;
+            z-index: 0;
+        }
+
+    </style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -12,12 +23,13 @@
 
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <link rel="stylesheet" href="/assets/css/animation.css">
 
     <!--font-awesome.min.css-->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-
+    <script src="carga_dinamica/config.js"></script>
+    <script src="carga_dinamica/mbackstagemembersias.js"></script>
 
     <!--flaticon.css-->
     <link rel="stylesheet" href="assets/css/flaticon.css">
@@ -43,610 +55,394 @@
     <link rel="stylesheet" href="assets/css/styleflip.css">
     <link rel="stylesheet" href="assets/css/media.css">
     <!--Menu_responsive.css-->
-    <link rel="stylesheet" href="assets/css/Menu_responsive.css"> 
+    <link rel="stylesheet" href="assets/css/Menu_responsive.css">
     <!--responsive.css-->
     <link rel="stylesheet" href="assets/css/responsive.css">
-    
+
     <link rel="stylesheet" href="assets/css/animatebutton.css">
 
 
-    </head>
-    <body>
-  <div id="wrapper">
+</head>
 
-        </div>
+<body>
+    <div id="wrapper">
 
- 
-        <!--FIN LOAD -->
-        <div  id="allpage" class="wrapper" style="overflow-y: scroll;">
+    </div>
 
 
-            <div id="pportfolio2">
-                <div class="pportfolio2 text-center">
-                    <div class="container-fluid">
-                        <!--INICIO VIDEO -->
+    <!--FIN LOAD -->
+    <div id="allpage" class="wrapper" style="overflow-y: scroll;">
 
-                        <!--FIN VIDEO --->
-                        <!--INICIO GRIDS -->
-                          <div id="myModal" class="modal">
 
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p id="getguidetext">Get the Guide</p>
-                <p id="getguidetextbody">If you want to take the visit, please give us this info: </p>
-                <form>
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" placeholder="name" required>
+        <div id="pportfolio2">
+            <div class="pportfolio2 text-center">
+                <div class="container-fluid">
+                    <!--INICIO VIDEO -->
+
+                    <!--FIN VIDEO --->
+                    <!--INICIO GRIDS -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p id="getguidetext">Get the Guide</p>
+                            <p id="getguidetextbody">If you want to take the visit, please give us this info: </p>
+                            <form>
+                                <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <input type="text" class="form-control" id="name" placeholder="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email address:</label>
+                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="telephone">Telephone:</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Put your # phone here " maxlength="15" minlength="10" required>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
+                        </div>
+
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email address:</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="telephone">Telephone:</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Put your # phone here "
-                               maxlength="15"
-                               minlength="10"
-                               required>
-                    </div>
 
 
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </div>
+                    <div id="generalgrid">
+                        <!--Inicio Communities -->
+                        <div class="  wow fadeInUp" data-wow-delay="500ms" style="visibility: visible; animation-delay: 500ms; animation-name: fadeInUp;">
 
-        </div>
-
-      
-                        <div id="generalgrid">
-                            <!--Inicio Communities -->
-                            <div class="  wow fadeInUp" data-wow-delay="500ms" style="visibility: visible; animation-delay: 500ms; animation-name: fadeInUp;">
-
-                                <div class="work-showcase" id="MixItUp674482">
-                                    <div class="row">
-                                        <div class="col-12 col-md-9 No_PaDdInG">
-
-                                                <div id="comamenitiesgallery" class="container portfolio3x1-galery"> 
+                            <div class="work-showcase" id="MixItUp674482">
+                                <div class="row">
+                                    <div class="col-12 col-md-9 No_PaDdInG">
+                                        <!--Carrucel de membrecias y servicios adicionales -->
+                                        <div id="comamenitiesgallery" class="container portfolio3x1-galery">
 
 
-                                                <div id="myCarousel6" class="carousel slide" data-ride="carousel" data-interval="false">
+                                            <div id="myCarousel6" class="carousel slide" data-ride="carousel" data-interval="false">
 
-                                                    <!-- Indicators -->
-                                                    <ol style="visibility: hidden;" id="carouselmap" class="carousel-indicators carouse-communities-index">
-                                                        <li id="unoselect" data-target="#myCarousel6" data-slide-to="0" class="active"></li>
-                                                        <li id="dosselect" data-target="#myCarousel6" data-slide-to="1"></li>
-                                                        <li  id="treselect" data-target="#myCarousel6" data-slide-to="2"></li>
-                                                    </ol>
+                                                <!-- Indicators -->
+                                                <ol style="visibility: hidden;" id="carouselmap" class="carousel-indicators carouse-communities-index">
+                                                    <li id="unoselect" data-target="#myCarousel6" data-slide-to="0" class="active"></li>
+                                                    <li id="dosselect" data-target="#myCarousel6" data-slide-to="1"></li>
+                                                    <li id="treselect" data-target="#myCarousel6" data-slide-to="2"></li>
+                                                </ol>
 
-                                                    <!-- Wrapper for slides -->
-                                                    <div class="carousel-inner">
-                                                        <div class="item active ">
-                                                            <img src="assets/images/backstage/background2.jpg" alt="Los Angeles">
-                                                            <div class="header-text" style="top: 65%;">
-                                                                <div class="col-md-12 paddmem " style="text-align:center; padding-left:0px;">
-                                                                    <h2 class="aux-back-amen paddmem" style="width: 50%; margin-left: -5%;">
-                                                                        <span id="comserv-activetext" class="beneficios-title "  >  MEMBRESIA 1 </span>
-                                                                    </h2>
-                                                                    <span>
-                                                                        <div class="row"> 
-                                                                            <div style="margin-left: 6%;" class ="col-sm-3 icondiv paddmem" >
-                                                                                <label  style="margin-left: -112px;"   data-target="#myCarousel6" data-slide-to="0"   class="yogaam paddingmovil ">   <a href="#">
-                                                                                    <img  class="iconsback" src="assets/images/icon_test1.svg" 
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt=""/></a>
-                                                                                 <br>Impsum</label>
-
-                                                                                <label  style="margin-left:0px;"   data-target="#myCarousel6" data-slide-to="1"  class="gymamm paddingmovil"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum  </label> 
-                                                                                 <label  style="margin-left:0px;"  data-target="#myCarousel6" data-slide-to="1"  class="gymamm paddingmovil"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum  </label> 
-                                                                                 <label  style="margin-left:0px;"  data-target="#myCarousel6" data-slide-to="1"  class="gymamm paddingmovil"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum  </label> 
-                                                                                <br> 
-
-                                                                                <label class="margintopmovilmem">
-                                                                                    <p style="margin-bottom: 8%" > Price 2  <br> </p> <p> <strong>
-                                                                                        $000.00</strong> 
-                                                                                    </p>
-                                                                                </label>
-                                                                                <label class="margintopmovilmem">
-                                                                                    <p style="margin-bottom: 8%" > Price 1  <br> </p> <p> <strong>
-                                                                                        $000.00</strong> 
-                                                                                    </p>
-                                                                                </label>
-
-                                                                            </div>
-                                                                            
-
-
+                                                <!-- Wrapper for slides -->
+                                                <div class="carousel-inner">
+                                                    <!--membresia 1-->
+                                                    <div class="item active ">
+                                                        <img id="m1imagen" src="assets/images/backstage/background2.jpg" alt="Los Angeles">
+                                                        <div class="header-text" style="top: 50%;">
+                                                            <div class="col-md-12 paddmem " style="text-align:center; padding-left:0px;">
+                                                                <h2 class="aux-back-amen paddmem" style="width: 50%; margin-left: -5%;">
+                                                                    <span id="comserv-activetext" class="beneficios-title m1title"> MEMBRESIA 1 </span>
+                                                                </h2>
+                                                                <span>
+                                                                    <div class="row">
+                                                                        <div id="icon1" class="col-sm-3 icondiv paddmem">
 
                                                                         </div>
 
 
-                                                                    </span>
-
-                                                                    <br> 
-                                                                </div>
-                                                            </div><!-- /header-text -->
-                                                        </div>
-
-                                                        <div class="item">
-                                                            <img src="assets/images/backstage/background2.jpg" alt="Chicago">
-                                                              <div class="header-text" style="top: 65%;">
-                                                                <div class="col-md-12 " style="text-align:center; padding-left:0px;">
-                                                                    <h2 class="aux-back-amen" style="    width: 50%; margin-left: -5%;">
-                                                                        <span id="comserv-activetext" class="beneficios-title "  >  MEMBRESIA 2 </span>
-                                                                    </h2>
-                                                                    <span>
-                                                                        <div class="row"> 
-                                                                            <br> 
-                                                                            <div style="margin-left: 5%;"  class ="col-sm-3 icondiv" >
-                                                                                <label  style="margin-left:-112px;"   data-target="#myCarousel6" data-slide-to="0"   class="yogaam paddingmovil ">   <a href="#">
-                                                                                    <img  class="iconsback" src="assets/images/icon_test1.svg" 
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt=""/></a>
-                                                                                 <br>Impsum</label>
-
-                                                                                <label  style="margin-left:0px;"   data-target="#myCarousel6" data-slide-to="1"  class="gymamm paddingmovil"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum  </label> 
-                                                                                 <label  style="margin-left:0px;"  data-target="#myCarousel6" data-slide-to="1"  class="gymamm paddingmovil"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum  </label> 
-                                                                                 <label  style="margin-left:0px;"  data-target="#myCarousel6" data-slide-to="1"  class="gymamm paddingmovil"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum  </label> 
-                                                                                <br> 
-
-                                                                                <label class="margintopmovilmem">
-                                                                                    <p style="margin-bottom: 8%" > Price 2  <br> </p> <p> <strong>
-                                                                                        $000.00</strong> 
-                                                                                    </p>
-                                                                                </label>
-                                                                                <label class="margintopmovilmem">
-                                                                                    <p style="margin-bottom: 8%" > Price 1  <br> </p> <p> <strong>
-                                                                                        $000.00</strong> 
-                                                                                    </p>
-                                                                                </label>
-
-                                                                            </div>
-                                                                            
 
 
-
-                                                                        </div>
-
-
-                                                                    </span>
-
-                                                                    <br> 
-                                                                </div>
-                                                            </div><!-- /header-text -->
-                                                      
-                                                        </div>
-
-                                                        <div class="item">
-                                                            <img src="assets/images/backstage/background2.jpg" alt="Chicago">
-                                                            <div class="header-text " style="top: 59%">
-                                                                   <div class="col-md-12 " style="text-align:center; padding-left:0px;">
-                                                                    <h2 class="aux-back-amen" style="margin-left: -6%;">
-                                                                        <span id="comserv-activetext" class="beneficios-title "  >  SERVICIOS</span>
-                                                                    </h2>
-                                                                    <span>
-                                                                        <div class="row" style="margin-left: -20%;"> 
-                                                                            <br> 
-                                                                            <div  style="  "  class ="col-sm-3 icondiv" >
-                                                                                <label  style="margin-left:0px;"   data-target="#myCarousel6" data-slide-to=""   class="yogaam paddingmovil labelwithoutmarginleft ">   <a href="#">
-                                                                                    <img  class="iconsback" src="assets/images/icon_test1.svg" 
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt=""/></a>
-                                                                                 <br>Impsum<strong>
-                                                                                        <br> $000.00</strong></label>
-
-                                                                                <label  style="margin-left:0px;"   data-target="#myCarousel6" data-slide-to=""  class="gymamm paddingmovil labelwithoutmarginleft"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum <strong>
-                                                                                        <br> $000.00</strong> </label> 
-                                                                                 <label  style="margin-left:0px;"  data-target="#myCarousel6" data-slide-to=""  class="gymamm paddingmovil labelwithoutmarginleft"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum 
-                                                                                <strong>
-                                                                                        <br> $000.00</strong></label> 
-                                                                                 <label  style="margin-left:0px;"  data-target="#myCarousel6" data-slide-to=""  class="gymamm paddingmovil labelwithoutmarginleft"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum <strong>
-                                                                                        <br> $000.00</strong>  </label> 
-                                                                                <br> 
-
-                                                                            </div>
-                                                                            
-<div class ="col-sm-3 icondiv" >
-                                                                                <label  style="margin-left:0px;"   data-target="#myCarousel6" data-slide-to=""   class="yogaam paddingmovil labelwithoutmarginleft ">   <a href="#">
-                                                                                    <img  class="iconsback" src="assets/images/icon_test1.svg" 
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt=""/></a>
-                                                                                 <br>Impsum<strong>
-                                                                                        <br> $000.00</strong></label>
-
-                                                                                <label  style="margin-left:0px;"   data-target="#myCarousel6" data-slide-to=""  class="gymamm paddingmovil labelwithoutmarginleft"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum <strong>
-                                                                                        <br> $000.00</strong> </label> 
-                                                                                 <label  style="margin-left:0px;"  data-target="#myCarousel6" data-slide-to=""  class="gymamm paddingmovil labelwithoutmarginleft"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum 
-                                                                                <strong>
-                                                                                        <br> $000.00</strong></label> 
-                                                                                 <label  style="margin-left:0px;"  data-target="#myCarousel6" data-slide-to=""  class="gymamm paddingmovil labelwithoutmarginleft"><img  class="iconsback" src="assets/images/icon_test4.svg" 
-                                                                                          onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                          onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                          border="0" alt=""/> <br> Impsum <strong>
-                                                                                        <br> $000.00</strong>  </label> 
-                                                                                <br> 
-
-                                                                            </div>
-                                                                            
+                                                                    </div>
 
 
-                                                                        </div>
+                                                                </span>
 
-
-                                                                    </span>
-
-                                                                    <br> 
-                                                                </div>
-                                                           
-                                                            </div><!-- /header-text -->
-                                                        </div>
+                                                                <br>
+                                                            </div>
+                                                        </div><!-- /header-text -->
                                                     </div>
+                                                    <!--membresia 2-->
+                                                    <div class="item">
+                                                        <img id="m2imagen" src="assets/images/backstage/background2.jpg" alt="Chicago">
+                                                        <div class="header-text" style="top: 50%;">
+                                                            <div class="col-md-12 " style="text-align:center; padding-left:0px;">
+                                                                <h2 class="aux-back-amen" style="    width: 50%; margin-left: -5%;">
+                                                                    <span id="comserv-activetext" class="beneficios-title m2title"> MEMBRESIA 2 </span>
+                                                                </h2>
+                                                                <span>
+                                                                    <div class="row">
+                                                                        <br>
+                                                                        <div id="icon2" class="col-sm-3 icondiv">
 
-                                                    <!-- Left and right controls -->
+                                                                        </div>
 
-                                                    
-                                                    
-                                                    <a class="fback" style="top:3%; left: 3%;" href="index.html" >
-                                                        <span>
-                                                            <img src="assets/images/F.png" alt="Los Angeles">
-                                                        </span>
-                                                    </a>
-                                                     <a class="fbackclosemobil" style="top:3%; right: 0px; width: 12%; " href="mbackstage.html" >
-                                                        <!-- span>
+                                                                    </div>
+
+
+                                                                </span>
+
+                                                                <br>
+                                                            </div>
+                                                        </div><!-- /header-text -->
+
+                                                    </div>
+                                                    <!--servisios adisionales-->
+                                                    <div class="item">
+                                                        <img id="m3imagen" src="assets/images/backstage/background2.jpg" alt="Chicago">
+                                                        <div class="header-text " style="top: 50%">
+                                                            <div class="col-md-12 " style="text-align:center; padding-left:0px;">
+                                                                <h2 class="aux-back-amen" style="margin-left: -6%;">
+                                                                    <span id="comserv-activetext" class="beneficios-title m3title"> SERVICIOS</span>
+                                                                </h2>
+                                                                <span>
+                                                                    <div class="row">
+
+                                                                        <div id="icon3" class="col-sm-3 icondiv">
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </span>
+
+                                                                <br>
+                                                            </div>
+
+                                                        </div><!-- /header-text -->
+                                                    </div>
+                                                </div>
+
+                                                <!-- Left and right controls -->
+
+
+
+                                                <a class="fback" style="top:3%; left: 3%;" href="index.html">
+                                                    <span>
+                                                        <img src="assets/images/F.png" alt="Los Angeles">
+                                                    </span>
+                                                </a>
+                                                <a class="fbackclosemobil" style="top:3%; right: 0px; width: 12%; " href="mbackstage.html">
+                                                    <!-- span>
                                                             <img style="width: 40%; height: 40%;" src="assets/images/closebut.svg" alt="Los Angeles">
                                                         </span -->
-                                                    </a>
-                                                    
-                                                    
-                                                     
-                                                    <span style="    margin-left: 9%;" class="titlepagesection" >
-                                                    <p id="titlepage">   </p>
-                                                    </span>
+                                                </a>
 
-                                                </div>
+
+
+                                                <span style="    margin-left: 9%;" class="titlepagesection">
+                                                    <p id="titlepage"> </p>
+                                                </span>
 
                                             </div>
 
-
-                                            <div id="redflip" class="container portfolio3x1-galery  hiddens "> 
-
-
-                                                <div id="redflipcarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-
-                                                    <!-- Indicators -->
-                                                    <ol style="visibility: hidden;" id="carouselmap" class="carousel-indicators carouse-communities-index">
-                                                        <li id="unoselect" data-target="#redflipcarousel" data-slide-to="0" class="active"></li>
-                                                        <li id="dosselect" data-target="#redflipcarousel" data-slide-to="1"></li>
-                                                        <li  id="treselect" data-target="#redflipcarousel" data-slide-to="2"></li>
-                                                    </ol>
-
-                                                    <!-- Wrapper for slides -->
-                                                    <div class="carousel-inner">
-                                                        <div class="item active ">
-
-                                                            <button id="butben1" class="centerMe" style="    top: 17%;
-    left: 75%;
-">
-                                                                <div  id="buttonicon" class="icon" >
-                                                                    <i class="fa fa fa-plus"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <span>BENEFICIO 1 </span>
-                                                                </div>
-                                                            </button>
-                                                            <button id="butben2" class="leftme" style="top: 54%;
-    left: 23%;">
-                                                                <div  id="buttonicon" class="icon" >
-                                                                    <i class="fa fa fa-plus"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <span>BENEFICIO 2 </span>
-                                                                </div>
-                                                            </button>
-                                                            <button id="butben3" class="rightme" style="top: 37%;
-    right: 48%;">
-                                                                <div  id="buttonicon" class="icon" >
-                                                                    <i class="fa fa fa-plus"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <span>BENEFICIO 3</span>
-                                                                </div>
-                                                            </button>
-                                                            <!-- <button class="btn">Beneficio</button>--> 
-                                                            <img src="assets/images/Communities/Coahuila/coahuila7.jpg" alt="Los Angeles">
-                                                            <div class="header-text  No_PaDdInG " style="top: 74%;">
-                                                                <div class="col-md-12  No_PaDdInG ">
-                                                                    <div class="col-xs-5">
-                                                                       
-                                                                        <span id="comserv-activetext" class="left-content" > <h4 style="width: 100%;
-    margin-top: 6%;
-    margin-bottom: 16%;" class="aux-back" id="beneficiosredflip"><strong>BENEFICIO 1 </strong>    </h4></span>
-
-                                                                        <p class="textamen" id="textoredflip" >
-                                                                            Lorem ipsum dolor sit amet, consectetur 
-                                                                        </p>
-                                                                    </div>
-
-                                                                    <div  style="margin-top: -20%; "class="col-xs-7 No_PaDdInG ">
-                                                                        <img  class="redflipcontent redmarginmovil "  id="imgredflip" src="assets/images/Communities/Coahuila/coahuila1.jpg" alt="build" />
-                                                                    </div> 
-
-                                                                    <br>
-
-
-                                                                    <br> 
-                                                                </div>
-                                                            </div><!-- /header-text -->
-                                                        </div>
-                                                        <div class="item">
-                                                            <!-- <button class="btn">Beneficio</button>--> 
-                                                             <button id="butben4" class="centerMe" style="top: 24%;
-    left: 58%;">
-                                                                <div  id="buttonicon" class="icon" >
-                                                                    <i class="fa fa fa-plus"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <span>BENEFICIO 1 </span>
-                                                                </div>
-                                                            </button>
-                                                            
-                                                            <button id="butben6" class="rightme">
-                                                                <div  id="buttonicon" class="icon" >
-                                                                    <i class="fa fa fa-plus"></i>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <span>BENEFICIO 3</span>
-                                                                </div>
-                                                            </button>
-                                                            <img src="assets/images/Communities/Altata/altata3.jpg" alt="Los Angeles">
-                                                            <div class="header-text No_PaDdInG " style="top: 74%;">
-                                                                <div class="col-md-12  No_PaDdInG ">
-                                                                    <div class="col-xs-5">
-
-                                                                        <span id="comserv-activetext" class="left-content" > <h4 style="width: 100%;
-    margin-top: 6%;
-    margin-bottom: 16%;"class="aux-back" id="beneficiosredflip2"><strong>BENEFICIO 1 </strong>    </h4></span>
-
-                                                                        <p class="textamen" id="textoredflip" >
-                                                                            Lorem ipsum dolor sit amet, consectetur 
-                                                                        </p>
-                                                                    </div>
-
-                                                                    <div  style="margin-top: -20%; " class="col-xs-7 No_PaDdInG ">
-                                                                        <img class="redflipcontent redmarginmovil "  id="imgredflip2" src="assets/images/Communities/Altata/altata11.jpg" alt="build"/>
-                                                                    </div> 
-
-                                                                    <br>
-
-
-                                                                    <br> 
-                                                                </div>
-                                                            
-                                                            </div><!-- /header-text -->
-                                                        </div>
-                                                    </div>
-                                                         <a  style="margin-top: 50%;margin-left:4%;" class="left carousel-control" href="#redflipcarousel" data-slide="prev">
-                                                     
-                                                        <img   src="assets/images/arrow-izqu.png" />
-                                                    </a>
-                                                    
-                                                      <a style="margin-top: 50%;margin-right: -10%;" class="right carousel-control" href="#redflipcarousel" data-slide="next">
-                                                    <img   src="assets/images/arrow-derecha.png" />      
-                                                    </a>
-                                                    
-                                                    <!-- Left and right controls -->
-
-                                                   
-                                                    <a class="fback" style="top:3%; left: 3%;" href="index.html" >
-                                                        <span>
-                                                            <img src="assets/images/F.png" alt="Los Angeles">
-                                                        </span>
-                                                    </a>
-                                                     <a class="fbackclosemobil" style="top:3%; right: 0px; width: 12%; " href="mbackstage.html" >
-                                                        <!-- span>
-                                                            <img style="width: 40%; height: 40%;" src="assets/images/closebut.svg" alt="Los Angeles">
-                                                        </span -->
-                                                    </a>
-                                                     
-                                                    <span style="    margin-left: 9%;" class="titlepagesection" >
-                                                    <p id="titlepage">   </p>
-                                                    </span>
-
-                                                </div>
-
-                                            </div>
-                                            
                                         </div>
-                                      
-                             
-                                    </div> 
-                                    
-                                         <a id="closemaps" class="fclose hiddens">
-                                            <span>
-                                                <img src="assets/images/closebut.svg" alt="Los Angeles">
-                                            </span>
-                                        </a>
-                                        
+
+
+                                        <div id="redflip" class="container portfolio3x1-galery  hiddens ">
+
+
+                                            <div id="redflipcarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+
+                                                <!-- Indicators -->
+                                                <ol style="visibility: hidden;" id="carouselmap" class="carousel-indicators carouse-communities-index">
+                                                    <li id="unoselect" data-target="#redflipcarousel" data-slide-to="0" class="active"></li>
+                                                    <li id="dosselect" data-target="#redflipcarousel" data-slide-to="1"></li>
+                                                    <li id="treselect" data-target="#redflipcarousel" data-slide-to="2"></li>
+                                                </ol>
+
+                                                <!-- Wrapper for slides -->
+                                                <div id="network-carrucel" class="carousel-inner">
+                                                    
+                                                </div>
+                                                <a style="margin-top: 50%;margin-left:4%;" class="left carousel-control" href="#redflipcarousel" data-slide="prev">
+
+                                                    <img src="assets/images/arrow-izqu.png" />
+                                                </a>
+
+                                                <a style="margin-top: 50%;margin-right: -10%;" class="right carousel-control" href="#redflipcarousel" data-slide="next">
+                                                    <img src="assets/images/arrow-derecha.png" />
+                                                </a>
+
+                                                <!-- Left and right controls -->
+
+
+                                                <a class="fback" style="top:3%; left: 3%;" href="index.html">
+                                                    <span>
+                                                        <img src="assets/images/F.png" alt="Los Angeles">
+                                                    </span>
+                                                </a>
+                                                <a class="fbackclosemobil" style="top:3%; right: 0px; width: 12%; " href="mbackstage.html">
+                                                    <!-- span>
+                                                            <img style="width: 40%; height: 40%;" src="assets/images/closebut.svg" alt="Los Angeles">
+                                                        </span -->
+                                                </a>
+
+                                                <span style="    margin-left: 9%;" class="titlepagesection">
+                                                    <p id="titlepage"> </p>
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
                                     </div>
-                                    
+
+
                                 </div>
-                            <div id="buttonmenucom" >
-                                        
-                                            
-                                        <div  class=" col-xs-12  col-md-3 col-sm-4 No_PaDdInG  ">
-                                            <div id="quitportfolio1" class="pportfolio-communities-item single-portfolio_corporate  " >
 
-                                                <div class="card"> 
-                                                    <div id="servicios"  class="frontchange "> 
-                                                        <div class="portfolio-preview-3 lateral-menu1 lateral-menubackstage">
-                                                            <div class="textmenucommunities">MEMBRESÍA 2</div>
-                                                        </div>
-                                                    </div> 
-                                                    <div  id="servgral" class="backchange">
-                                                       
-                                                    </div> 
-                                                </div>
-                                            </div>
-                                              <div id="quitportfolio2" class="pportfolio-communities-item single-portfolio_corporate  " >
-
-                                                <div class="card"> 
-                                                    <div id="servicios"  class="frontchange "> 
-                                                        <div class="portfolio-preview-3 lateral-menu1 lateral-menubackstae5">
-                                                            <div class="textmenucommunities">MEMBRESÍA 1</div>
-                                                        </div>
-                                                    </div> 
-                                                    <div  id="servgral" class="backchange">
-                                                       
-                                                    </div> 
-                                                </div>
-                                            </div>
-                                            </div>
-                                        
-                                        <div   id="amenidades" class=" col-xs-12  col-md-3 col-sm-4  No_PaDdInG ">
-                                            <div class="pportfolio-communities-item single-portfolio_corporate  " >
-                                                <div  class="card"> 
-                                                    <div   id="amenidadesmenu" class="frontchange "> 
-
-                                                        <div class="portfolio-preview-3 lateral-menu2  lateral-menubackstage2">
-                                                            <div class="textmenucommunities"> <p id="textmenuamenidades">RED FLIP </p>
-                                                            </div>
-                                                        </div> 
-
-                                                    </div>
-                                                    <div class="backchange">
-                                                        
-                                                    </div> 
-                                                </div>
-
-
-                                            </div>
-                                            </div>   
-                                 <div id="room" class=" col-xs-12  col-md-3 col-sm-4 No_PaDdInG">
-                                            <div class="pportfolio-communities-item single-portfolio_corporate  "   style="position: relative;">
-
-                                                <div class="card"> 
-                                                    <div class="frontchange "> 
-
-                                                        <div class="portfolio-preview-3 lateral-menu3 lateral-menubackstage3">
-                                                            <div id="serviciosadicionales" class="textmenucommunities"> SERVICIOS ADICIONALES
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="backchange">
-                                                        
-                                                    </div> 
-                                                </div>
-
-
-
-                                            </div>
-                                            </div>   
-                                        
-                                        <div id="booknow" class=" col-xs-12  col-md-3 col-sm-4 No_PaDdInG ">
-
-                                        <div  id="books" class="pportfolio-communities-item single-portfolio_corporate  movilhidden  lateral-menu5" style="position: absolute;         right: : 0px;  position: relative "  >
-                                            <img id="imgbook"src="assets/images/book-now.png" alt="book_now" class=" super growmax-communities"  style=" width: 65%;     height: auto ;">
-                                        </div> 
-                                    </div>
-                                </div>
+                                <a id="closemaps" class="fclose hiddens">
+                                    <span>
+                                        <img src="assets/images/closebut.svg" alt="Los Angeles">
+                                    </span>
+                                </a>
 
                             </div>
+
                         </div>
+                        <div id="buttonmenucom">
+
+
+                            <div class=" col-xs-12  col-md-3 col-sm-4 No_PaDdInG  ">
+                                <div id="quitportfolio1" class="pportfolio-communities-item single-portfolio_corporate  ">
+
+                                    <div class="card">
+                                        <div id="servicios" class="frontchange ">
+                                            <div class="portfolio-preview-3 lateral-menu1 lateral-menubackstage">
+                                                <div class="textmenucommunities" id="m2title">MEMBRESÍA 2</div>
+                                            </div>
+                                        </div>
+                                        <div id="servgral" class="backchange">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="quitportfolio2" class="pportfolio-communities-item single-portfolio_corporate  ">
+
+                                    <div class="card">
+                                        <div id="servicios" class="frontchange ">
+                                            <div class="portfolio-preview-3 lateral-menu1 lateral-menubackstae5">
+                                                <div class="textmenucommunities" id="m1title">MEMBRESÍA 1</div>
+                                            </div>
+                                        </div>
+                                        <div id="servgral" class="backchange">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="amenidades" class=" col-xs-12  col-md-3 col-sm-4  No_PaDdInG ">
+                                <div class="pportfolio-communities-item single-portfolio_corporate  ">
+                                    <div class="card">
+                                        <div id="amenidadesmenu" class="frontchange ">
+
+                                            <div class="portfolio-preview-3 lateral-menu2  lateral-menubackstage2">
+                                                <div class="textmenucommunities">
+                                                    <p id="textmenuamenidades" class="net">RED FLIP </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="backchange">
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div id="room" class=" col-xs-12  col-md-3 col-sm-4 No_PaDdInG">
+                                <div class="pportfolio-communities-item single-portfolio_corporate  " style="position: relative;">
+
+                                    <div class="card">
+                                        <div class="frontchange ">
+
+                                            <div class="portfolio-preview-3 lateral-menu3 lateral-menubackstage3">
+                                                <div id="serviciosadicionales" class="textmenucommunities">
+                                                    <div id="m3title">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="backchange">
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                            <div id="booknow" class=" col-xs-12  col-md-3 col-sm-4 No_PaDdInG ">
+
+                                <div id="books" class="pportfolio-communities-item single-portfolio_corporate  movilhidden  lateral-menu5" style="position: absolute;         right: : 0px;  position: relative ">
+                                    <img id="imgbook" src="assets/images/book-now.png" alt="book_now" class=" super growmax-communities" style=" width: 65%;     height: auto ;">
+                                </div>
+                            </div>
                         </div>
 
-                   
-                <!--FIN GRIDS--->
-               
+                    </div>
+                </div>
             </div>
-            
-            
+
+
+            <!--FIN GRIDS--->
+
+        </div>
+
+
         <div class="icon-bar">
-                <a  class="talktous"><img src="assets/images/talktous-movil.png" alt="book_now" ></a> 
-                <a class="signin"> <!-- span id="signinmov"> <img   src="assets/images/icono%20mobil.png" style="width: 8%;
+            <a class="talktous"><img src="assets/images/talktous-movil.png" alt="book_now"></a>
+            <a class="signin">
+                <!-- span id="signinmov"> <img   src="assets/images/icono%20mobil.png" style="width: 8%;
     height: 8%;
-    margin-top: 3%;" alt="book_now" > </span --></a> 
-                <a href="https://landing.minimalist.mx/flip/"  class="book" target="_blank"><img src="assets/images/book-now-movil.png" alt="book_now" > </a> 
+    margin-top: 3%;" alt="book_now" > </span --></a>
+            <a href="https://landing.minimalist.mx/flip/" class="book" target="_blank"><img src="assets/images/book-now-movil.png" alt="book_now"> </a>
 
-            </div>
-            
+        </div>
+
         <div id="loginmodal" class="modal" style="z-index: 99999">
 
             <!-- Modal content -->
             <div class="modal-content">
-                <span  id="closelogin"class="close"><img style="width: 20%;  height: 20%;
+                <span id="closelogin" class="close"><img style="width: 20%;  height: 20%;
     margin-left: 75%;" src="assets/images/error.svg"> </span>
-                                <p id="">LOGIN</p>
+                <p id="">LOGIN</p>
 
-                <form name="login" method="post" action=""
-      enctype="multipart/form-data">
-                                <div class="form-group" style="text-align: left;">
-                        <label style="margin-left: 0px; text-align: left;" for="email"><h4>Email address:
-                            </h4></label>
+                <form name="login" method="post" action="" enctype="multipart/form-data">
+                    <div class="form-group" style="text-align: left;">
+                        <label style="margin-left: 0px; text-align: left;" for="email">
+                            <h4>Email address:
+                            </h4>
+                        </label>
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="" required>
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
-                    <div class="form-group" style="text-align: left;" >
-                        <label style="margin-left: 0px; text-align: left; " for="name"><h4>Password
-                            </h4></label>
+                    <div class="form-group" style="text-align: left;">
+                        <label style="margin-left: 0px; text-align: left; " for="name">
+                            <h4>Password
+                            </h4>
+                        </label>
                         <input type="password" class="form-control" id="name" placeholder="" required>
                     </div>
-                    
-                     <button type="submit" class="btn btn-default">Login</button>
-                                
+
+                    <button type="submit" class="btn btn-default">Login</button>
+
                 </form>
-                             
+
             </div>
 
         </div>
-            
-            <script>
-               var modal2 = document.getElementById('loginmodal');
+
+        <script>
+            var modal2 = document.getElementById('loginmodal');
 
             // Get the button that opens the modal
             var btn2 = document.getElementById("signinmov");
-            
-          
+
+
 
             // Get the <span> element that closes the modal
             var span2 = document.getElementById("closelogin");
@@ -660,526 +456,541 @@
             span2.onclick = function() {
                 modal2.style.display = "none";
             }
-            
-             window.onclick = function(event) {
+
+            window.onclick = function(event) {
                 if (event.target == modal2) {
                     modal2.style.display = "none";
                 }
             }
-        
-        </script> 
+
+        </script>
 
 
-            
-            <footer >
-                <div class="footer">
-                    <ul class="footer_menu"> 
-                        <br class ="brhide hiddens">
 
-                        <li class="movilhidden "><img src="assets/images/14.jpg" alt="FLIP_LOGO"></li>    
+        <footer>
+            <div class="footer">
+                <ul class="footer_menu">
+                    <br class="brhide hiddens">
 
-                        <li id="partnercommunities" ><a href="mcommunities.html">Communities</a></li>
-                        <li><a href="mbackstage.html">About</a></li>
-                        <li><a href="mdesign.html">Design</a></li>
-                        <li><a href="mmore.html">More</a></li>
-                        <li class="movilhidden"><hr></li>
+                    <li class="movilhidden "><img src="assets/images/14.jpg" alt="FLIP_LOGO"></li>
 
-                        <li id="partnerfooter" class="">
+                    <li id="partnercommunities"><a href="mcommunities.html">Communities</a></li>
+                    <li><a href="mbackstage.html">About</a></li>
+                    <li><a href="mdesign.html">Design</a></li>
+                    <li><a href="mmore.html">More</a></li>
+                    <li class="movilhidden">
+                        <hr>
+                    </li>
 
-                            <a  id=""  style="font-weight: 600;                 font-family: GothamProLight;" href="#">Partner</a></li>
-                        <li class="">
-                            <a style="font-weight: 600;                 font-family: GothamProLight; "  href="mjobs.html">Carrers</a></li>
-                        <li class="" ><a  style="font-weight: 600;                 font-family: GothamProLight; " href="mteam.html">Team</a></li>
-                       
-                        <br class="brhide hiddens">
-                        <br class="brhide hiddens">
+                    <li id="partnerfooter" class="">
 
-
-                        <li > <a id="facefooter" href="#" class="facebook"><i class="fa fa-facebook fa-2x"></i></a> 
-                        </li>
-                        <li ><a id="facefooter" href="#" class="twitter"><i class="fa fa-twitter fa-2x"></i></a> 
-                        </li>
-                        <li ><a id="facefooter" href="#" class="youtube"><i class="fa fa-youtube fa-2x"></i></a> 
-                        </li>
-                        <li ><a id="facefooter" href="#" class="instagram"><i class="fa fa-instagram fa-2x"></i></a> 
-
-                        </li>
-                    </ul>
+                        <a id="" style="font-weight: 600;                 font-family: GothamProLight;" href="#">Partner</a></li>
+                    <li class="">
+                        <a style="font-weight: 600;                 font-family: GothamProLight; " href="mjobs.html">Carrers</a></li>
+                    <li class=""><a style="font-weight: 600;                 font-family: GothamProLight; " href="mteam.html">Team</a></li>
 
                     <br class="brhide hiddens">
-                    <br class ="brhide hiddens">
-                    <br class ="brhide hiddens">
-
-                </div><!--#footer-->
-            </footer>
-
-        </div>
-
-
-
-
-    
-
-      
-
-        <!--jquery.min.js-->
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <!--modernizr and waypoints -->
-        <script type="text/javascript" src="assets/js/modernizr.js"></script>
-        <script type="text/javascript" src="assets/js/waypoints.min.js"></script>
-        <!--bootstrap and bootsnav-->
-        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="assets/js/bootsnav.js"></script>
-        <!-- uikit.min.js and sticky.min.js -->
-        <script type="text/javascript" src="assets/js/uikit.min.js"></script>
-        <script type="text/javascript" src="assets/js/sticky.min.js"></script>
-        <!-- MasterSlider -->
-        <script type='text/javascript' src='assets/js/masterslider.min.js'></script>
-        <!--meanmenu.min.js-->
-        <script type="text/javascript" src="assets/js/jquery.meanmenu.min.js"></script>
-        <!--lightbox.min.js-->
-        <script type="text/javascript" src="assets/js/lightbox.min.js"></script>
-        <!--isotope.pkgd.min.js-->
-        <script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
-        <!--ripples-min.js-->
-        <script type="text/javascript" src="assets/js/ripples-min.js"></script>
-        <!--owl.carousel.min.js-->
-        <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
-        <!--jquery-ui.min.js-->
-        <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
-        <!--bxslider.js-->
-        <script type="text/javascript" src="assets/js/jquery.bxslider.js"></script>
-        <!--change-text.js-->
-        <script type="text/javascript" src="assets/js/change-text.js"></script>
-        <!--gmaps-->
-        <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4RM7zOgOKq6n2fv407hX28xiL-M6vLdY"></script>--> 
-        <script type="text/javascript" src="assets/js/gmaps.js" ></script>
-        <!--parallax.js-->
-        <script type="text/javascript" src="assets/js/parallax.js"></script>
-        <!--fancybox.min.js-->
-        <script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
-        <!--wow.min.js-->
-        <script type="text/javascript" src="assets/js/wow.min.js"></script>
-        <!--counterup.min.js-->
-        <script type="text/javascript" src="assets/js/jquery.counterup.min.js"></script>
-        <!--circliful.js-->
-        <script type="text/javascript" src="assets/js/jquery.circliful.min.js"></script>
-        <!--mixitup.js-->
-        <script type="text/javascript" src="assets/js/jquery.mixitup.js"></script>
-        <!--showcase-slider.js-->
-        <script type="text/javascript" src="assets/js/showcase-slider.js"></script>
-        <!--bootstrap-progressbar.js-->
-        <script type="text/javascript" src="assets/js/bootstrap-progressbar.js"></script>
-        <!--SLIDER REVOLUTION SCRIPTS -->
-        <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-        <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-        <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  -->
-        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
-        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
-        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
-        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
-        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
-        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
-        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
-        <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
-        
-        <script  type="text/javascript"src="assets/js/jquery.flip.js"></script>
-
-<script type = "text/javascript" 
-                src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
-        </script>
-        <!--custom.js-->
-        <script type="text/javascript" src="assets/js/custom.js"></script>
-        <script type="text/javascript" src="assets/js/custommenu.js"></script>
-        <script>
-           
-
-
-
-       
-            var z = window.matchMedia("(max-width: 700px)")
-            if (z.matches){
-                div1 = $('#cardmore2x15');
-                div2 = $('#backquitmore');
-
-                tdiv1 = div1.clone();
-                tdiv2 = div2.clone();
-
-                div1.replaceWith(tdiv2);
-                div2.replaceWith(tdiv1);
-                
-
-
-
-            }
-           
-                $(".brhide").removeClass("hiddens");
-
-            
-            
-            $('#play').click(function(){
-                $('#repvid').slideDown(500);
-                $('#generalgrid').stop()().slideUp(500);
-                $("#myBtn").trigger("click");
-
-            });
-
-            $('#myBtn2').click(function(){
-                $('#generalgrid').slideDown(500);
-                $('#repvid').stop()().slideUp(500);
-
-
-            });
-
-
-            window.wh = $(window).height(); 
-            window.ww = $(window).width();
-            function mores() {
-                var x = window.matchMedia("(max-width: 700px)")
-                if (x.matches){
-                    console.log("MENOS DE 700");      
-                    $('#indexgrid').stop()().toggle("up");
-                    window.resizeTo(window.ww,window.wh);
-
-                    $('#MoreSection').toggle("down");
-
-
-                }
-                else {
-                    console.log("MÁS DE 700");
-                    $(".card").flip(true);
-                    $("#cardmore2x11").removeClass("pportfolio2-item");
-                    $("#cardmore2x12").removeClass("pportfolio2-item");
-                    $("#cardmore2x13").removeClass("pportfolio2-item");
-                    $("#cardmore2x14").removeClass("pportfolio2-item");
-                    $("#cardmore2x15").removeClass("pportfolio2-item");
-                    $("#cardmore2x13").removeClass("bordermore");
-                    $("#flip").removeClass("bordermore");
-
-                    $("#cardmore2x12").addClass("pportfolioCom-item");
-                    $("#cardmore2x13").addClass("pportfolioCom-item");
-                    $("#cardmore2x14").addClass("pportfolioCom-item");
-                    $("#cardmore2x15").addClass("pportfolioCom-item");
-                    $("#cardmore2x11").addClass("pportfolioCom-item");
-
-
-
-                    $( "#backquitmore" ).addClass( "hiddens" );
-                    $( "#fliplogo" ).addClass( "hiddens" );
-                    $( "#dudequitmore" ).addClass( "hiddens" );
-                    $( "#girlquitmore" ).addClass( "hiddens" );
-                    $( "#comGridIndex" ).addClass( "hiddens" );
-                }
-
-            }
-            window.heightmenu =  $("#lateral-menuserv").height(); 
-            window.topamenidades =$('#amenidades');
-
-          
-            
-            $("#room").click(function(){
-                $('#treselect').trigger('click');
-                $("#contentMore1").removeClass("lateral-menurooms"); 
-                $("#servadic").addClass("lateral-menurooms"); 
-                $("#sevadicdiv").removeClass("lateral-menurooms"); 
-                $("#contentMore2").removeClass("lateral-menurooms"); 
-                $("#quitportfolio1").removeClass("backselectmovil"); 
-                
-                $("#amenidades").removeClass("backselectmovil"); 
-                $("#room").addClass("backselectmovil"); 
-                $("#quitportfolio2").removeClass("backselectmovil");  
-                
-                $("#comamenitiesgallery").show( "slide", { direction: "right"  }, 500 );             
-
-                //$('#comamenitiesgallery').slid  (500);
-                $("#redflip").addClass("hiddens");
-                  $("#redflipcarousel").hide( "slide", { direction: "left"  }, 500 );
-               // $("#redflipcarousel").slideUp(100);
-                $("#servadic").addClass("lateral-menurooms"); 
-                $("#contentMore1").addClass("lateral-menurooms"); 
-                $("#sevadicdiv").addClass("lateral-menurooms"); 
-                $("#contentMore2").removeClass("lateral-menurooms"); 
-    $('body,html').animate({ scrollTop : 0}, 500);
-
-                
-                $('#redflip').slideUp(100,function() {
-                    $('#comamenitiesgallery').removeClass("hiddens");  
-                });
-/* $('#redflip').hide( "slide", { direction: "left"  }, 500 ,function() {
-                    $('#comamenitiesgallery').removeClass("hiddens");  
-                });*/
-            });
-           $("#quitportfolio2").click(function(){
-                $('#unoselect').trigger('click');
-                $("#contentMore1").addClass("lateral-menurooms"); 
-                $("#sevadicdiv").removeClass("lateral-menurooms"); 
-                $("#servadic").removeClass("lateral-menurooms");  
-                $("#contentMore2").removeClass("lateral-menurooms"); 
-               $("#quitportfolio1").removeClass("backselectmovil"); 
-                $("#amenidades").removeClass("backselectmovil"); 
-                $("#room").removeClass("backselectmovil"); 
-                $("#quitportfolio2").addClass("backselectmovil");  
-               
-               
-               
-                
-                  $("#comamenitiesgallery").show( "slide", { direction: "right"  }, 500 );  
-               
-               
-               
-//$('#comamenitiesgallery').slideDown(500);
-                $("#redflip").addClass("hiddens");
-                $("#redflipcarousel").hide( "slide", { direction: "left"  }, 500 );
-                
-                
-                //$("#redflipcarousel").slideUp(100);
-                $("#servadic").addClass("lateral-menurooms"); 
-                $("#contentMore1").addClass("lateral-menurooms"); 
-                $("#sevadicdiv").addClass("lateral-menurooms"); 
-                $("#contentMore2").removeClass("lateral-menurooms"); 
-
-                    $('body,html').animate({ scrollTop : 0}, 500);
-
-                
-                $('#redflip').slideUp(100,function() {
-                    $('#comamenitiesgallery').removeClass("hiddens");  
-                });
-               
-            });
-            $("#quitportfolio1").click(function(){
-                $('#dosselect').trigger('click');
-                 $("#sevadicdiv").addClass("lateral-menurooms"); 
-                $("#servadic").removeClass("lateral-menurooms"); 
-                
-                $("#quitportfolio1").addClass("backselectmovil"); 
-                $("#amenidades").removeClass("backselectmovil"); 
-                $("#room").removeClass("backselectmovil"); 
-                $("#quitportfolio2").removeClass("backselectmovil"); 
-                
-                
-                $("#contentMore1").removeClass("lateral-menurooms"); 
-                $("#contentMore2").removeClass("lateral-menurooms"); 
-                $("#quitportfolio2").removeClass("hiddens");
-                
-                
-                 $("#comamenitiesgallery").show( "slide", { direction: "right"  }, 500 );             
-
-                //$('#comamenitiesgallery').slid  (500);
-                $("#redflip").addClass("hiddens");
-                  $("#redflipcarousel").hide( "slide", { direction: "left"  }, 500 );
-                
-
-                //$('#comamenitiesgallery').slideDown(500);
-                //$("#redflip").addClass("hiddens");
-                //$("#redflipcarousel").slideUp(100);
-                $("#servadic").addClass("lateral-menurooms"); 
-                $("#contentMore1").addClass("lateral-menurooms"); 
-                $("#sevadicdiv").addClass("lateral-menurooms"); 
-                $("#contentMore2").removeClass("lateral-menurooms"); 
-
-                
-                
-                
-                $('#redflip').slideUp(100,function() {
-                    $('#comamenitiesgallery').removeClass("hiddens");  
-                });
-    $('body,html').animate({ scrollTop : 0}, 500);
-
-                
-            });
-
-
-            $("#amenidades").click(function(){
-                $("#quitportfolio1").removeClass("backselectmovil"); 
-                $("#amenidades").addClass("backselectmovil"); 
-                $("#room").removeClass("backselectmovil"); 
-                $("#quitportfolio2").removeClass("backselectmovil"); 
-                
-                
-                          
-
-                //$('#comamenitiesgallery').slid  (500);
-               
-                  
-                $("#comamenitiesgallery").hide( "slide", { direction: "left"  }, 500 );
-                
-                
-                
-                //$('#comamenitiesgallery').slideUp(500);
-                $("#redflip").removeClass("hiddens");
-                  $("#redflipcarousel").show( "slide", { direction: "right"  }, 600 );  
-               // $("#redflipcarousel").slideDown(100);
-                $("#servadic").removeClass("lateral-menurooms"); 
-                $("#contentMore1").removeClass("lateral-menurooms"); 
-                $("#sevadicdiv").removeClass("lateral-menurooms"); 
-                $("#contentMore2").addClass("lateral-menurooms"); 
-
-                
-                
-                    $('body,html').animate({ scrollTop : 0}, 50);
-
-                
-                $('#redflip').slideDown(100,function() {
-                    $('#comamenitiesgallery').addClass("hiddens");  
-                });
-    $('body,html').animate({ scrollTop : 0}, 500);
-
-            });
-
-             $("#butben1").click(function(){ 
-               document.getElementById("beneficiosredflip").textContent="BENEFICIO 1"; 
-               $("#beneficiosredflip").addClass("beneficios-title");
-                document.getElementById("imgredflip").src="assets/images/Communities/Coahuila/gym.jpg";
-            });
-            $("#butben2").click(function(){
-                document.getElementById("beneficiosredflip").textContent="BENEFICIO 2"; 
-               $("#beneficiosredflip").addClass("beneficios-title"); document.getElementById("imgredflip").src="assets/images/Communities/Coahuila/gamecenter.jpg";
-            });
-            $("#butben3").click(function(){
-                document.getElementById("beneficiosredflip").textContent="BENEFICIO 3"; 
-               $("#beneficiosredflip").addClass("beneficios-title"); document.getElementById("imgredflip").src="assets/images/Communities/Coahuila/spaces.jpg";
-            });
-            
-            
-            $("#butben4").click(function(){ 
-               document.getElementById("beneficiosredflip2").textContent="BENEFICIO 1"; 
-               $("#beneficiosredflip2").addClass("beneficios-title");
-                document.getElementById("imgredflip2").src="assets/images/Communities/Coahuila/gym.jpg";
-            });
-         
-            $("#butben6").click(function(){
-                document.getElementById("beneficiosredflip2").textContent="BENEFICIO 3"; 
-               $("#beneficiosredflip2").addClass("beneficios-title"); document.getElementById("imgredflip2").src="assets/images/Communities/Coahuila/spaces.jpg";
-            });
-            
-             $("#butben7").click(function(){
-                document.getElementById("beneficiosredflip3").textContent="BENEFICIO 1"; 
-               $("#beneficiosredflip3").addClass("beneficios-title"); document.getElementById("imgredflip3").src="assets/images/Communities/Coahuila/gym.jpg";
-            });
-
-             $("#butben8").click(function(){
-                document.getElementById("beneficiosredflip3").textContent="BENEFICIO 2"; 
-               $("#beneficiosredflip3").addClass("beneficios-title"); document.getElementById("imgredflip3").src="assets/images/Communities/Coahuila/spaces.jpg";
-            });
-
-            
-             $("#butben9").click(function(){
-                document.getElementById("beneficiosredflip3").textContent="BENEFICIO 3"; 
-               $("#beneficiosredflip3").addClass("beneficios-title"); document.getElementById("imgredflip3").src="assets/images/Communities/Coahuila/pool.png";
-            });
-
-
-          
-           
-            var getStyle = function (e, styleName) {
-                var styleValue = "";
-                if(document.defaultView && document.defaultView.getComputedStyle) {
-                    styleValue = document.defaultView.getComputedStyle(e, "").getPropertyValue(styleName);
-                }
-                else if(e.currentStyle) {
-                    styleName = styleName.replace(/\-(\w)/g, function (strMatch, p1) {
-                        return p1.toUpperCase();
-                    });
-                    styleValue = e.currentStyle[styleName];
-                }
-                return styleValue;
-            }
-
-
-
-            function communties() {
-
-
-
-                $('#indexgrid').toggle( "right" );
-
-                $('#ComBuild').toggle( "left" );
-
-
-
-
-            }
-            function comback() {
-                $('#indexgrid').toggle( "left" );
-
-                $('#ComBuild').toggle( "right" );
-
-
-
-            }
-            /*function mores() {
+                    <br class="brhide hiddens">
+
+
+                    <li> <a id="facefooter" href="#" class="facebook"><i class="fa fa-facebook fa-2x"></i></a>
+                    </li>
+                    <li><a id="facefooter" href="#" class="twitter"><i class="fa fa-twitter fa-2x"></i></a>
+                    </li>
+                    <li><a id="facefooter" href="#" class="youtube"><i class="fa fa-youtube fa-2x"></i></a>
+                    </li>
+                    <li><a id="facefooter" href="#" class="instagram"><i class="fa fa-instagram fa-2x"></i></a>
+
+                    </li>
+                </ul>
+
+                <br class="brhide hiddens">
+                <br class="brhide hiddens">
+                <br class="brhide hiddens">
+
+            </div>
+            <!--#footer-->
+        </footer>
+
+    </div>
+
+
+
+
+
+
+
+
+    <!--jquery.min.js-->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!--modernizr and waypoints -->
+    <script type="text/javascript" src="assets/js/modernizr.js"></script>
+    <script type="text/javascript" src="assets/js/waypoints.min.js"></script>
+    <!--bootstrap and bootsnav-->
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootsnav.js"></script>
+    <!-- uikit.min.js and sticky.min.js -->
+    <script type="text/javascript" src="assets/js/uikit.min.js"></script>
+    <script type="text/javascript" src="assets/js/sticky.min.js"></script>
+    <!-- MasterSlider -->
+    <script type='text/javascript' src='assets/js/masterslider.min.js'></script>
+    <!--meanmenu.min.js-->
+    <script type="text/javascript" src="assets/js/jquery.meanmenu.min.js"></script>
+    <!--lightbox.min.js-->
+    <script type="text/javascript" src="assets/js/lightbox.min.js"></script>
+    <!--isotope.pkgd.min.js-->
+    <script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
+    <!--ripples-min.js-->
+    <script type="text/javascript" src="assets/js/ripples-min.js"></script>
+    <!--owl.carousel.min.js-->
+    <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+    <!--jquery-ui.min.js-->
+    <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+    <!--bxslider.js-->
+    <script type="text/javascript" src="assets/js/jquery.bxslider.js"></script>
+    <!--change-text.js-->
+    <script type="text/javascript" src="assets/js/change-text.js"></script>
+    <!--gmaps-->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4RM7zOgOKq6n2fv407hX28xiL-M6vLdY"></script>-->
+    <script type="text/javascript" src="assets/js/gmaps.js"></script>
+    <!--parallax.js-->
+    <script type="text/javascript" src="assets/js/parallax.js"></script>
+    <!--fancybox.min.js-->
+    <script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
+    <!--wow.min.js-->
+    <script type="text/javascript" src="assets/js/wow.min.js"></script>
+    <!--counterup.min.js-->
+    <script type="text/javascript" src="assets/js/jquery.counterup.min.js"></script>
+    <!--circliful.js-->
+    <script type="text/javascript" src="assets/js/jquery.circliful.min.js"></script>
+    <!--mixitup.js-->
+    <script type="text/javascript" src="assets/js/jquery.mixitup.js"></script>
+    <!--showcase-slider.js-->
+    <script type="text/javascript" src="assets/js/showcase-slider.js"></script>
+    <!--bootstrap-progressbar.js-->
+    <script type="text/javascript" src="assets/js/bootstrap-progressbar.js"></script>
+    <!--SLIDER REVOLUTION SCRIPTS -->
+    <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  -->
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
+    <script type="text/javascript" src="rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/jquery.flip.js"></script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
+    </script>
+    <!--custom.js-->
+    <script type="text/javascript" src="assets/js/custom.js"></script>
+    <script type="text/javascript" src="assets/js/custommenu.js"></script>
+    <script>
+        var z = window.matchMedia("(max-width: 700px)")
+        if (z.matches) {
+            div1 = $('#cardmore2x15');
+            div2 = $('#backquitmore');
 
+            tdiv1 = div1.clone();
+            tdiv2 = div2.clone();
+
+            div1.replaceWith(tdiv2);
+            div2.replaceWith(tdiv1);
+
+
+
+
+        }
+
+        $(".brhide").removeClass("hiddens");
+
+
+
+        $('#play').click(function() {
+            $('#repvid').slideDown(500);
+            $('#generalgrid').stop()().slideUp(500);
+            $("#myBtn").trigger("click");
+
+        });
+
+        $('#myBtn2').click(function() {
+            $('#generalgrid').slideDown(500);
+            $('#repvid').stop()().slideUp(500);
+
+
+        });
+
+
+        window.wh = $(window).height();
+        window.ww = $(window).width();
+
+        function mores() {
+            var x = window.matchMedia("(max-width: 700px)")
+            if (x.matches) {
+                console.log("MENOS DE 700");
                 $('#indexgrid').stop()().toggle("up");
+                window.resizeTo(window.ww, window.wh);
+
                 $('#MoreSection').toggle("down");
 
-            }*/
 
-            function moreback() {
-                $('#indexgrid').toggle("down");   
-                $('#MoreSection').stop()().toggle("up");
+            } else {
+                console.log("MÁS DE 700");
+                $(".card").flip(true);
+                $("#cardmore2x11").removeClass("pportfolio2-item");
+                $("#cardmore2x12").removeClass("pportfolio2-item");
+                $("#cardmore2x13").removeClass("pportfolio2-item");
+                $("#cardmore2x14").removeClass("pportfolio2-item");
+                $("#cardmore2x15").removeClass("pportfolio2-item");
+                $("#cardmore2x13").removeClass("bordermore");
+                $("#flip").removeClass("bordermore");
+
+                $("#cardmore2x12").addClass("pportfolioCom-item");
+                $("#cardmore2x13").addClass("pportfolioCom-item");
+                $("#cardmore2x14").addClass("pportfolioCom-item");
+                $("#cardmore2x15").addClass("pportfolioCom-item");
+                $("#cardmore2x11").addClass("pportfolioCom-item");
 
 
-            } 
-            function design() {
-                $('#indexgrid').stop()().slideUp(500);
-                $('#DesignSection').slideDown(500);
 
-
-
+                $("#backquitmore").addClass("hiddens");
+                $("#fliplogo").addClass("hiddens");
+                $("#dudequitmore").addClass("hiddens");
+                $("#girlquitmore").addClass("hiddens");
+                $("#comGridIndex").addClass("hiddens");
             }
 
-            function designback() {           
-                $('#indexgrid').slideDown(500);   
-                $('#DesignSection').stop()().slideUp(500);
+        }
+        window.heightmenu = $("#lateral-menuserv").height();
+        window.topamenidades = $('#amenidades');
 
 
-            }
 
-            function hover(element) {
-                $("#cbottom").hide();
-                $("#ctop").show(); 
-                // document.getElementById('cbottom').style.display='none';
-            }
-            function hover2(element) {
-                $("#cbottom2").hide();
-                $("#ctop2").show(); 
-                // document.getElementById('cbottom').style.display='none';
-            }
-            function hover3(element) {
-                $("#cbottom3").hide();
-                $("#ctop3").show(); 
-                // document.getElementById('cbottom').style.display='none';
-            }
-            function hover4(element) {
-                $("#cbottom4").hide();
-                $("#ctop4").show(); 
-                // document.getElementById('cbottom').style.display='none';
-            }
-            function unhover(element) {
-                $("#cbottom").show();
-                //document.getElementById('ctop').style.display='none';
-            }
-            function unhover2(element) {
-                $("#cbottom2").show();
-                //document.getElementById('ctop').style.display='none';
-            }
-            function unhover3(element) {
-                $("#cbottom3").show();
-                //document.getElementById('ctop').style.display='none';
-            }
-            function unhover4(element) {
-                $("#cbottom4").show();
-                //document.getElementById('ctop').style.display='none';
-            }
+        $("#room").click(function() {
+            $('#treselect').trigger('click');
+            $("#contentMore1").removeClass("lateral-menurooms");
+            $("#servadic").addClass("lateral-menurooms");
+            $("#sevadicdiv").removeClass("lateral-menurooms");
+            $("#contentMore2").removeClass("lateral-menurooms");
+            $("#quitportfolio1").removeClass("backselectmovil");
 
-            setTimeout(() => {
-                document.getElementsByClassName('textmenucommunities')[0].click();
-            }, 100);
+            $("#amenidades").removeClass("backselectmovil");
+            $("#room").addClass("backselectmovil");
+            $("#quitportfolio2").removeClass("backselectmovil");
 
-            $('.textmenucommunities').on('click', function sendMeToTop() {
-                document.getElementById('allpage').scrollTo(0,0);
+            $("#comamenitiesgallery").show("slide", {
+                direction: "right"
+            }, 500);
+
+            //$('#comamenitiesgallery').slid  (500);
+            $("#redflip").addClass("hiddens");
+            $("#redflipcarousel").hide("slide", {
+                direction: "left"
+            }, 500);
+            // $("#redflipcarousel").slideUp(100);
+            $("#servadic").addClass("lateral-menurooms");
+            $("#contentMore1").addClass("lateral-menurooms");
+            $("#sevadicdiv").addClass("lateral-menurooms");
+            $("#contentMore2").removeClass("lateral-menurooms");
+            $('body,html').animate({
+                scrollTop: 0
+            }, 500);
+
+
+            $('#redflip').slideUp(100, function() {
+                $('#comamenitiesgallery').removeClass("hiddens");
+            });
+            /* $('#redflip').hide( "slide", { direction: "left"  }, 500 ,function() {
+                                $('#comamenitiesgallery').removeClass("hiddens");  
+                            });*/
+        });
+        $("#quitportfolio2").click(function() {
+            $('#unoselect').trigger('click');
+            $("#contentMore1").addClass("lateral-menurooms");
+            $("#sevadicdiv").removeClass("lateral-menurooms");
+            $("#servadic").removeClass("lateral-menurooms");
+            $("#contentMore2").removeClass("lateral-menurooms");
+            $("#quitportfolio1").removeClass("backselectmovil");
+            $("#amenidades").removeClass("backselectmovil");
+            $("#room").removeClass("backselectmovil");
+            $("#quitportfolio2").addClass("backselectmovil");
+
+
+
+
+            $("#comamenitiesgallery").show("slide", {
+                direction: "right"
+            }, 500);
+
+
+
+            //$('#comamenitiesgallery').slideDown(500);
+            $("#redflip").addClass("hiddens");
+            $("#redflipcarousel").hide("slide", {
+                direction: "left"
+            }, 500);
+
+
+            //$("#redflipcarousel").slideUp(100);
+            $("#servadic").addClass("lateral-menurooms");
+            $("#contentMore1").addClass("lateral-menurooms");
+            $("#sevadicdiv").addClass("lateral-menurooms");
+            $("#contentMore2").removeClass("lateral-menurooms");
+
+            $('body,html').animate({
+                scrollTop: 0
+            }, 500);
+
+
+            $('#redflip').slideUp(100, function() {
+                $('#comamenitiesgallery').removeClass("hiddens");
             });
 
-        </script> 
-    </body>
+        });
+        $("#quitportfolio1").click(function() {
+            $('#dosselect').trigger('click');
+            $("#sevadicdiv").addClass("lateral-menurooms");
+            $("#servadic").removeClass("lateral-menurooms");
+
+            $("#quitportfolio1").addClass("backselectmovil");
+            $("#amenidades").removeClass("backselectmovil");
+            $("#room").removeClass("backselectmovil");
+            $("#quitportfolio2").removeClass("backselectmovil");
+
+
+            $("#contentMore1").removeClass("lateral-menurooms");
+            $("#contentMore2").removeClass("lateral-menurooms");
+            $("#quitportfolio2").removeClass("hiddens");
+
+
+            $("#comamenitiesgallery").show("slide", {
+                direction: "right"
+            }, 500);
+
+            //$('#comamenitiesgallery').slid  (500);
+            $("#redflip").addClass("hiddens");
+            $("#redflipcarousel").hide("slide", {
+                direction: "left"
+            }, 500);
+
+
+            //$('#comamenitiesgallery').slideDown(500);
+            //$("#redflip").addClass("hiddens");
+            //$("#redflipcarousel").slideUp(100);
+            $("#servadic").addClass("lateral-menurooms");
+            $("#contentMore1").addClass("lateral-menurooms");
+            $("#sevadicdiv").addClass("lateral-menurooms");
+            $("#contentMore2").removeClass("lateral-menurooms");
+
+
+
+
+            $('#redflip').slideUp(100, function() {
+                $('#comamenitiesgallery').removeClass("hiddens");
+            });
+            $('body,html').animate({
+                scrollTop: 0
+            }, 500);
+
+
+        });
+
+
+        $("#amenidades").click(function() {
+            $("#quitportfolio1").removeClass("backselectmovil");
+            $("#amenidades").addClass("backselectmovil");
+            $("#room").removeClass("backselectmovil");
+            $("#quitportfolio2").removeClass("backselectmovil");
+
+
+
+
+            //$('#comamenitiesgallery').slid  (500);
+
+
+            $("#comamenitiesgallery").hide("slide", {
+                direction: "left"
+            }, 500);
+
+
+
+            //$('#comamenitiesgallery').slideUp(500);
+            $("#redflip").removeClass("hiddens");
+            $("#redflipcarousel").show("slide", {
+                direction: "right"
+            }, 600);
+            // $("#redflipcarousel").slideDown(100);
+            $("#servadic").removeClass("lateral-menurooms");
+            $("#contentMore1").removeClass("lateral-menurooms");
+            $("#sevadicdiv").removeClass("lateral-menurooms");
+            $("#contentMore2").addClass("lateral-menurooms");
+
+
+
+            $('body,html').animate({
+                scrollTop: 0
+            }, 50);
+
+
+            $('#redflip').slideDown(100, function() {
+                $('#comamenitiesgallery').addClass("hiddens");
+            });
+            $('body,html').animate({
+                scrollTop: 0
+            }, 500);
+
+        });
+
+        $("#butben1").click(function() {
+            document.getElementById("beneficiosredflip").textContent = "BENEFICIO 1";
+            $("#beneficiosredflip").addClass("beneficios-title");
+            document.getElementById("imgredflip").src = "assets/images/Communities/Coahuila/gym.jpg";
+        });
+        $("#butben2").click(function() {
+            document.getElementById("beneficiosredflip").textContent = "BENEFICIO 2";
+            $("#beneficiosredflip").addClass("beneficios-title");
+            document.getElementById("imgredflip").src = "assets/images/Communities/Coahuila/gamecenter.jpg";
+        });
+        $("#butben3").click(function() {
+            document.getElementById("beneficiosredflip").textContent = "BENEFICIO 3";
+            $("#beneficiosredflip").addClass("beneficios-title");
+            document.getElementById("imgredflip").src = "assets/images/Communities/Coahuila/spaces.jpg";
+        });
+
+
+        var datos = function(data){
+            $(".beneficiosredflip").html("<strong>"+data.title+"</strong>");
+            $(".textoredflip").html("<strong>"+data.description+"</strong>");
+            $(".imgredflip").attr("src",data.photoMobileSlider);
+        }
+
+       
+
+
+
+
+        var getStyle = function(e, styleName) {
+            var styleValue = "";
+            if (document.defaultView && document.defaultView.getComputedStyle) {
+                styleValue = document.defaultView.getComputedStyle(e, "").getPropertyValue(styleName);
+            } else if (e.currentStyle) {
+                styleName = styleName.replace(/\-(\w)/g, function(strMatch, p1) {
+                    return p1.toUpperCase();
+                });
+                styleValue = e.currentStyle[styleName];
+            }
+            return styleValue;
+        }
+
+
+
+        function communties() {
+
+
+
+            $('#indexgrid').toggle("right");
+
+            $('#ComBuild').toggle("left");
+
+
+
+
+        }
+
+        function comback() {
+            $('#indexgrid').toggle("left");
+
+            $('#ComBuild').toggle("right");
+
+
+
+        }
+        /*function mores() {
+
+            $('#indexgrid').stop()().toggle("up");
+            $('#MoreSection').toggle("down");
+
+        }*/
+
+        function moreback() {
+            $('#indexgrid').toggle("down");
+            $('#MoreSection').stop()().toggle("up");
+
+
+        }
+
+        function design() {
+            $('#indexgrid').stop()().slideUp(500);
+            $('#DesignSection').slideDown(500);
+
+
+
+        }
+
+        function designback() {
+            $('#indexgrid').slideDown(500);
+            $('#DesignSection').stop()().slideUp(500);
+
+
+        }
+
+        function hover(element) {
+            $("#cbottom").hide();
+            $("#ctop").show();
+            // document.getElementById('cbottom').style.display='none';
+        }
+
+        function hover2(element) {
+            $("#cbottom2").hide();
+            $("#ctop2").show();
+            // document.getElementById('cbottom').style.display='none';
+        }
+
+        function hover3(element) {
+            $("#cbottom3").hide();
+            $("#ctop3").show();
+            // document.getElementById('cbottom').style.display='none';
+        }
+
+        function hover4(element) {
+            $("#cbottom4").hide();
+            $("#ctop4").show();
+            // document.getElementById('cbottom').style.display='none';
+        }
+
+        function unhover(element) {
+            $("#cbottom").show();
+            //document.getElementById('ctop').style.display='none';
+        }
+
+        function unhover2(element) {
+            $("#cbottom2").show();
+            //document.getElementById('ctop').style.display='none';
+        }
+
+        function unhover3(element) {
+            $("#cbottom3").show();
+            //document.getElementById('ctop').style.display='none';
+        }
+
+        function unhover4(element) {
+            $("#cbottom4").show();
+            //document.getElementById('ctop').style.display='none';
+        }
+
+        setTimeout(() => {
+            document.getElementsByClassName('textmenucommunities')[0].click();
+        }, 100);
+
+        $('.textmenucommunities').on('click', function sendMeToTop() {
+            document.getElementById('allpage').scrollTo(0, 0);
+        });
+
+    </script>
+</body>
+
 </html>
