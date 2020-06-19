@@ -259,10 +259,14 @@ export class RoomAvailavilityComponent implements OnInit {
 
     public showModal( to_show: string = 'default', userId ): void {
         this.modalRef = this.modalService.show(CalendarComponent, {
-            initialState: { responseData: {} },
+            initialState: { roomId: userId, responseData: {} },
             class: 'modal-lg'
           });
           this.modalRef.content.closeBtnName = 'Close';
+
+          let newSubscriber = this.modalService.onHide.subscribe(r => {
+            newSubscriber.unsubscribe();
+          });
         // !this.show_page_modal ? this.show_page_modal = true : this.show_page_modal = false;
         // this.modal_to_show = to_show;
         // this.userIdSelected = userId;

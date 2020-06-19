@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Detail</h4>
+  <!-- <h4 class="modal-title pull-left">IdProps {{idProps}}</h4> -->
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <!-- DETAIL -->
+  <div class="container clearfix">
+    <div class="row">
+      <div class="col-8">
+        <div class="row">
+          <div class="col-12">
+            <h5>Name</h5>
+            <div>Lorem ipsum</div>
+          </div>
+          <hr style="width:100%;">
+
+          <div class="col-12">
+            <h5>Date Init</h5>
+            <div>Lorem ipsum</div>
+          </div>
+          <div class="col-12">
+            <h5>Date End</h5>
+            <div>Lorem ipsum</div>
+          </div>
+          <div class="col-12">
+            <h5>Roomate</h5>
+            <div>Lorem ipsum</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <button (click)="isEditVisible=!isEditVisible" type="button"
+        class="btn btn-outline-danger margin-gral">Close</button>
+    </div>
+  </div>
+</div>

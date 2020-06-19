@@ -11,6 +11,8 @@ import * as moment from 'moment';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../../datos.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { CalendarDetailComponent } from '../calendar-detail/calendar-detail.component';
 
 class ScheduleModel {
     public id: number;
@@ -32,7 +34,9 @@ export class CalendarComponent implements OnInit {
   constructor(
     public _services: DatosService,
     public _router: Router,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    public modalRef: BsModalRef,
+    private modalService: BsModalService
   ) { }
 
   @ViewChild('calendar', { read: FullCalendarComponent, static: true }) calendarCustom: FullCalendarComponent;
@@ -41,27 +45,85 @@ export class CalendarComponent implements OnInit {
   calendarWeekends = true;
   activeStart;
   activeEnd;
+  endDate = new Date();
 
   calendarEvents: EventInput[] = [
-    // { id: 10, title: 'Event Now', start: new Date() },
+    // { id: 10, title: 'Event Now', start: '2020-06-20', end: '2020-06-28' },
+    // { id: 10, title: 'Event Now', start: '2020-06-10', end: '2020-06-22', color: '#00ff00' },
     // { id: 3, title: 'Evento A', start: new Date(), startEditable:true, durationEditable:true, overlap: false },    
+    // { id: 5, title: 'Evento B', start: new Date(), startEditable:true, durationEditable:true, overlap: false },    
 
-    // areas where "Meeting" must be dropped
-    // { groupId: 'availableForMeeting', start: '2019-06-11T10:00:00', end: '2019-06-11T16:00:00', rendering: 'background', color: '#00ff00'},
+    // // areas where "Meeting" must be dropped
+    // { groupId: 'availableForMeeting', start: new Date(), end: this.endDate.getDate() + 10, rendering: 'background', color: '#00ff00'},
     // { groupId: 'availableForMeeting', start: '2019-06-13T10:00:00', end: '2019-06-13T16:00:00', rendering: 'background', color: '#00ff00'},
-    // red areas where no events can be dropped
+    // // red areas where no events can be dropped
     // { start: '2019-06-24', end: '2019-06-28', overlap: false, rendering: 'background', color: '#ff9f89' },
     // { start: '2019-06-06', end: '2019-06-08', overlap: false, rendering: 'background', color: '#ff9f89' },
     // { start: '2019-06-01', end: '2019-06-04', overlap: false, rendering: 'background', color: '#0000ff' }
   ];
 
   schedulesArray = [];
-  scheduleModel: ScheduleModel;    // For Modifications through Calendar handles Events  
+  scheduleModel: ScheduleModel;    // For Modifications through Calendar handles Events
+
+  show_page_modal = false;
+  modal_to_show: string;
+  userIdSelected;
+
+  amenitiesArray = [];
+  amenitySelect;
+
+  userInfo = {
+    name: '',
+    timeStart: '',
+    timeEnd: '',
+    roomate: '',
+    membership: '',
+    beds: ''
+  };
+  roomId;
 
   ngOnInit() {
     console.log('Enter');
+    this.GetAmenities();
     this.InitCalendarSetup();
   }
+
+  private GetAmenities() {    
+    this._services.service_general_get_with_params("Amenity", {idBuilding: 1}).subscribe(      
+      (res)=> {
+        if(res.result === "Success"){                    
+          this.amenitiesArray = res.item;
+          if (this.amenitiesArray.length <= 0) { return; }
+
+          this.amenitySelect = this.amenitiesArray[0].id;
+          this.GetEvents();              
+        } else if(res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
+        else { console.log("Error"); }
+      },
+      (err)=> {console.log(err);}
+    );  
+  }
+
+  public showModal( to_show: string = 'default', userId ): void {
+    // this.modalRef = this.modalService.show(CalendarDetailComponent, {
+    //     initialState: { responseData: {} },
+    //     class: 'modal-lg'
+    //   });
+    //   this.modalRef.content.closeBtnName = 'Close';
+    if (userId !== undefined) {
+      const params ={
+        tenant: userId
+      }
+      this._services.service_general_get_with_params('Room/GetTenantByRoom', params).subscribe(
+        (res) => {
+          console.log('Tenant', res);
+          this.userInfo = res.item;
+         });
+    }
+    !this.show_page_modal ? this.show_page_modal = true : this.show_page_modal = false;
+    this.modal_to_show = to_show;
+    this.userIdSelected = userId;
+}
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  CALENDAR
@@ -70,17 +132,17 @@ export class CalendarComponent implements OnInit {
 
   GetEvents() {
     // let params = {buildingId: this.IDBUILD, amenityId: this.amenitySelect};        
-    let params = { buildingId: 0, amenityId: 0, startDate: this.activeStart, endDate: this.activeEnd };
-    this._services.service_general_get_with_params("Schedules", params).subscribe(
+    const params = { room: this.roomId };
+    this._services.service_general_get_with_params('Room/GetScheduleByRoom', params).subscribe(
       (res) => {
-        if (res.result === "Success") {
+        if (res.result === 'Success') {
           console.log(res.item);
           this.schedulesArray = res.item;
           this.LoadEventsToCalendar(this.schedulesArray);
-        } else if (res.result === "Error") {
-          console.log("Ocurrio un error" + res.detalle);
+        } else if (res.result === 'Error') {
+          console.log('Ocurrio un error' + res.detalle);
         } else {
-          console.log("Error");
+          console.log('Error');
         }
       },
       (err) => { console.log(err); }
@@ -90,11 +152,13 @@ export class CalendarComponent implements OnInit {
   /////////////////////////////////// FULL CALENDAR INPUTS /////////////////////////////////////////////////////////////////
   // https://github.com/fullcalendar/fullcalendar-angular/blob/master/projects/fullcalendar/src/lib/fullcalendar-options.ts
   private InitCalendarSetup() {
+    // console.log('Init Calendar');
     this.calendarCustom.eventAllow = this.handleEventAllow;
+    // console.log(this.calendarCustom);
   }
 
   handleEventAllow(dropLocation, draggedEvent) {
-    // console.log(draggedEvent.title , draggedEvent.id ,draggedEvent.start, draggedEvent.end);
+    console.log(draggedEvent.title , draggedEvent.id ,draggedEvent.start, draggedEvent.end);
 
     //////// No permite mover eventos pasados ///////////////////////////////////////////////
     // if (moment(draggedEvent.start).isBefore(moment(), 'day')) { return false; }
@@ -107,8 +171,8 @@ export class CalendarComponent implements OnInit {
       }
     }
     //////// Fecha destino a mover debe ser hoy o posterior /////////////////////////////////                   
-    // return moment(dropLocation.start).isSameOrAfter(moment(), 'day');    
-    return moment(dropLocation.start).isAfter(moment(), 'hour');
+    return moment(dropLocation.start).isSameOrAfter(moment(), 'day');    
+    // return moment(dropLocation.start).isAfter(moment(), 'hour');
   }
 
   /////////////////////////////////// FULL CALENDAR OUTPUS/HANDLERS /////////////////////////////////////////////////////////
@@ -118,7 +182,8 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEventClick(arg) {
-    // console.log(arg.event.title, arg.event.id, arg.event.start, arg.event.end);    
+    // console.log('detail', arg.event);
+    this.showModal('detail', arg.event.id);
     // this.VerDetalle(arg.event.id);
   }
 
@@ -140,24 +205,24 @@ export class CalendarComponent implements OnInit {
   }
 
   handleDatesRender(info) {
-    // console.log(info.view.type);
-    // console.log(info.view.activeEnd, info.view.activeStart, info.view.currentEnd, info.view.currentStart); 
+    // console.log(info.view);
+    // console.log('handleDatesRender', info.view.activeEnd, info.view.activeStart, info.view.currentEnd, info.view.currentStart); 
     this.activeStart = moment(info.view.activeStart).startOf('day').subtract(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
     this.activeEnd = moment(info.view.activeEnd).endOf('day').format('YYYY-MM-DDTHH:mm:ss');
 
     let fcNextBtn = document.getElementsByClassName('fc-next-button')[0];
     let fcPrevBtn = document.getElementsByClassName('fc-prev-button')[0];
-
-    if (moment(info.view.activeStart).isBefore(moment(), 'month')) {
-      fcPrevBtn != undefined ? fcPrevBtn.setAttribute('disabled', 'true') : null;
+    console.log('Moment', moment().add(-12, 'month'));
+    if (moment(info.view.activeStart).isBefore(moment().add(-6, 'month'), 'month')) {
+      fcPrevBtn !== undefined ? fcPrevBtn.setAttribute('disabled', 'true') : null;
     } else {
-      fcPrevBtn != undefined ? fcPrevBtn.removeAttribute('disabled') : null;
+      fcPrevBtn !== undefined ? fcPrevBtn.removeAttribute('disabled') : null;
     }
 
-    if (moment(info.view.activeEnd).isAfter(moment().add(1, 'month'), 'month')) {
-      fcNextBtn != undefined ? fcNextBtn.setAttribute('disabled', 'true') : null;
+    if (moment(info.view.activeEnd).isAfter(moment().add(6, 'month'), 'month')) {
+      fcNextBtn !== undefined ? fcNextBtn.setAttribute('disabled', 'true') : null;
     } else {
-      fcNextBtn != undefined ? fcNextBtn.removeAttribute('disabled') : null;
+      fcNextBtn !== undefined ? fcNextBtn.removeAttribute('disabled') : null;
     }
 
     // if (this.amenitySelect != undefined) {this.GetEvents();}    // Avoid error first time
@@ -172,24 +237,25 @@ export class CalendarComponent implements OnInit {
 
   private LoadEventsToCalendar(events: any) {
     this.calendarCustom.getApi().removeAllEvents();
-
+    console.log('LoadEventsToCalendar', events);
     events.forEach(ev => {
       this.calendarCustom.getApi().addEvent(this.ParseEvent(ev));
     });
 
-    // this.calendarComponent.getApi().refetchEvents();
+    // this.calendarCustom.getApi().refetchEvents();
   }
 
   private ParseEvent(event: any) {
     let newEvent = {
       id: event.id,
-      title: event.activity.name,
+      title: event.name,
       start: event.timeStart,
       end: event.timeEnd,
+      beds: event.beds,
       startEditable: true,
       durationEditable: true,
       overlap: false,
-      backgroundColor: event.activity.private ? '#d8209e' : '#3788d8' 
+      backgroundColor: event.roomate === 'Romate FLIP' ? '#4ac1ba' : '#fccd0a'
     };
     return newEvent;
   }
@@ -225,10 +291,10 @@ export class CalendarComponent implements OnInit {
           this.scheduleModel.TimeStart = moment(arg.event.start).format('YYYY-MM-DDTHH:mm:ss');
           this.scheduleModel.TimeEnd = moment(arg.event.end).format('YYYY-MM-DDTHH:mm:ss');
           this.scheduleModel.ActivityId = res.item[0].activity.id;
-          // console.log(this.scheduleModel);
+          console.log(this.scheduleModel);
           this.UpdateSchedule(this.scheduleModel);
         } else if (res.result === "Error") {
-          // console.log(res.detalle);
+          console.log(res.detalle);
           //   this.toasterService.pop('danger', 'Error', res.detalle);
         } else {
           console.log("Error");
