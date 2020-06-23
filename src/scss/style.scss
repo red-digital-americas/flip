@@ -3084,7 +3084,7 @@ select:active,
 .button-icon {
 
   background-size: auto 70%;
-  background-position: 12.5% 50%;
+  background-position: 10% 50%;
   background-repeat: no-repeat;
 
   &--test {
@@ -3846,7 +3846,6 @@ select:active,
       font-size: 10px;
       line-height: 20px !important;
       color: #2e343a !important;
-      white-space: normal;
     }
 
     &-button-red {
@@ -3858,7 +3857,6 @@ select:active,
       font-size: 10px;
       line-height: 20px !important;
       color: white !important;
-      white-space: normal;
     }
 
     &-button:focus {

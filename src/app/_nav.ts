@@ -45,8 +45,7 @@ export class MenuService {
   ] 
 
   private adminApp = [
-    { name: 'Communities', url: '/communities', icon: 'icon-drop' }, 
-    // { name: 'Users', url: '/users', icon: 'icon-drop'}
+    { name: 'Communities', url: '/communities', icon: 'cui-dashboard' }
   ] 
 
   private booking = [
