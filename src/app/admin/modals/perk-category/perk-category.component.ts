@@ -21,8 +21,9 @@ export class PerkCategoryComponent implements OnInit {
 
   displayedColumns: string[] = [
     'name',
+    'asociate',
     'edit',
-    'eliminate'
+    'eliminate',
   ];
   categoriesList: any;
 

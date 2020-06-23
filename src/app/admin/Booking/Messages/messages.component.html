@@ -43,7 +43,7 @@
                 </div>
                 <div class="ap-chat__chat">
                     <div class="chatm card-style" *ngIf="showChat">
-                        <h4 style="cursor:pointer; color:inherit" class="chatm__datos" (click)="viewDetail(userConversation.id, userConversation.idBooking)">
+                        <h4 style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" class="chatm__datos" (click)="viewDetail(userConversation.id, userConversation.idBooking)">
                             {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
                             <img class="chatm__datos-photo" 
                                  src="{{ userSendMessage.info.photo }}" />
@@ -63,7 +63,7 @@
                             <button 
                                 (click)="SentMessage(1)"
                                 class="chatm__message-send">
-                                Enviar
+                                <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
