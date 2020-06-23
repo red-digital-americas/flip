@@ -8,6 +8,8 @@ import { DatosService } from '../../../datos.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Building } from '../models/building';
 import { ModalMLComponent } from '../../../ts/modal_ml';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { PerkCategoryComponent } from '../modals/perk-category/perk-category.component';
 
 @Component({
   templateUrl: 'communities.component.html',
@@ -42,11 +44,12 @@ export class CommunitiesComponent implements OnInit {
 
   constructor(private router: Router,
     private heroService: DatosService,
-    private _formBuilder: FormBuilder){ 
+    private _formBuilder: FormBuilder,
+    private modalService: BsModalService){ 
   
     }
 
-
+  modalRef: BsModalRef;
 
   ngOnInit() {
     if (localStorage.getItem("user") == undefined) {
@@ -77,6 +80,17 @@ export class CommunitiesComponent implements OnInit {
     }
   }
 
+  public showModal(to_show: string = 'default', userId): void {
+    this.modalRef = this.modalService.show(PerkCategoryComponent, {
+      initialState: { roomId: userId, responseData: {} },
+      class: 'modal-lg'
+    });
+    this.modalRef.content.closeBtnName = 'Close';
+
+    const newSubscriber = this.modalService.onHide.subscribe(r => {
+      newSubscriber.unsubscribe();
+    });
+  }
 
   get_builds() {
     // 

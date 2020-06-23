@@ -89,6 +89,11 @@
        <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
           Communities
         </h4>
+        <button 
+          class="ap-form__rButton button-black button-big"
+          (click)="showModal( 'AddTenant' )">
+          Perk Categories
+        </button>
       </div>
       <div class="ml-col-1 index-cards">
           <div class="index-cards__container" *ngFor="let card of posts;">
