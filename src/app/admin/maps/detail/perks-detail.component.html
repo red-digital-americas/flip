@@ -1,0 +1,388 @@
+<div class="ml-col-1 ap-form">
+  <div class="ml-col-1 padding-general-m margin-bottom-g">
+    <!-- div class="ml-col-1 ap-deeplink">
+        <p class="ap-deeplink__level ap-deeplink__level--prev" (click)="changeLevel()">Lista Persk</p>
+        <p class="ap-deeplink__level ap-deeplink__level--current">Detalle Perk</p>
+    </div -->
+    <div class="ml-col-1" *ngIf="!show_perk_detail_form">
+      <div class="ml-col-1 ap-info">
+        <div class="ml-col-1 margin-bottom-m">
+          <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+            Perks
+          </h4>
+          <button 
+            class="ap-form__rButton button-black padding-lateral-m"
+            (click)="changeLevel()">
+            Perks List
+          </button>
+        </div>
+        <div class="ml-col-6">
+          <p class="ap-info__dato">
+            <span class="text-bold">Title: </span> 
+            {{ perkDetail?.name }}
+          </p>
+          <p class="ap-info__dato">
+            <span class="text-bold">Description: </span> 
+            {{ perkDetail?.description }}
+          </p>
+          <p class="ap-info__dato">
+            <span class="text-bold">Address: </span> 
+            {{ perkDetail?.streetAddress }}, 
+            {{ perkDetail?.city }}, 
+            {{ perkDetail?.stateProvincy }}, 
+            {{ perkDetail?.zip }}, 
+            {{ perkDetail?.country }}.
+          </p>
+          <p class="ap-info__dato">
+            <span class="text-bold">Latitude: </span> 
+            {{ perkDetail?.latitude }}
+          </p>
+          <p class="ap-info__dato">
+            <span class="text-bold">Longitude: </span> 
+            {{ perkDetail?.longitude }}
+          </p>
+        </div>
+        <div class="ml-col-4o">
+          <figure class="ap-info__image">
+            <img class="ap-info__image-img" src="{{ perkDetail?.photo }}" />
+          </figure>
+        </div> 
+      </div>
+      <div class="ml-col-1 margin-bottom-m margin-top-m">
+        <div class="ap-cards">
+          <!-- h4 class="ap-cards__titulo">
+            Promociones
+          </h4>
+          <div class="ml-col-1 ap-form__buttons">
+            <button 
+              *ngIf="!show_dperk_form"
+              (click)="toggleSectionForm( 'new' )"
+              class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+              Añadir Promoción
+            </button>
+          </div -->
+          <!-- div class="ml-col-1 margin-bottom-x">
+            <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+              Promotions
+            </h4>
+            <button 
+              class="ap-form__rButton button-black padding-lateral-m"
+              (click)="toggleSectionForm( 'new' )">
+              Add Promotion
+            </button>
+          </div -->
+          <div class="ml-col-1" *ngIf="!show_dperk_form">
+            <button 
+              class="ap-form__rButton button-black"
+              (click)="toggleSectionForm( 'new' )">
+              Add Promotion
+            </button>
+            <h4 class="ap-form__titulo ap-form__titulo--auto-width">
+              Promotions
+            </h4>
+          </div>
+          <div class="ml-col-1" *ngIf="show_dperk_form">
+            <form 
+              class="ap-form ap-form--full-width ap-form__sdato--no-padding ml-col-1" 
+              (submit)="sendDataPromotion()" 
+              onsubmit="return false;">
+              <div class="ml-col-1">
+                <h4 class="ap-form__titulo text-left">
+                  {{ show_dperk_form_action }}
+                </h4>
+              </div>
+              <div class="ml-col-7 margin-top-x">
+                <div class="ml-col-1">
+                  <div class="ap-form__input">
+                    <input 
+                      type="text"
+                      placeholder="Title"
+                      id="new_promo_title" 
+                      [(ngModel)]="data_promo.name"
+                      [class.form_error_found]="form_data.no_name"
+                      name="new_promo_title"
+                      class="ap-form__input-text" />
+                    <label 
+                      for="new_promo_title" 
+                      class="ap-form__label ap-form__label-text"
+                      [class.ap-form__label-text--active]="data_promo.name != ''">
+                      Title
+                    </label>
+                    <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
+                      Title is required*
+                    </span>
+                  </div>
+                </div>
+                <div class="ml-col-1">
+                  <div class="ap-form__input">
+                    <textarea 
+                      id="new_perk_desc"
+                      name="new_promo_desc"
+                      placeholder="Description"
+                      [(ngModel)]="data_promo.description"
+                      [class.form_error_found]="form_data.no_desc"
+                      class="ap-form__label ap-form__input-textarea"></textarea>
+                    <label 
+                      for="new_promo_desc" 
+                      class="ap-form__label ap-form__label-text"
+                      [class.ap-form__label-text--active]="data_promo.description != ''">
+                      Description
+                    </label>
+                    <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
+                      Description is required*
+                    </span>
+                  </div>
+                </div>
+                <div class="ml-col-4o">
+                  <div class="ap-form__input">
+                    <input 
+                      type="date"
+                      placeholder="Start Date "
+                      id="new_promo_start" 
+                      name="new_promo_start"
+                      [(ngModel)]="data_promo.startDate"
+                      [class.form_error_found]="form_data.no_sdat"
+                      (change)="validatingDateRange()"
+                      class="ap-form__input-text" />
+                    <label 
+                      for="new_promo_start" 
+                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                      Start Date 
+                    </label>
+                    <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_sdat">
+                      Start Date is required*
+                    </span>
+                  </div>
+                </div>
+                <div class="ml-col-4o">
+                  <div class="ap-form__input">
+                    <input 
+                      disabled
+                      type="date"
+                      placeholder="End Date"
+                      id="new_promo_end" 
+                      name="new_promo_end"
+                      (change)="validatingDateRange()"
+                      [(ngModel)]="data_promo.endDate"
+                      [class.form_error_found]="form_data.no_edat"
+                      class="ap-form__input-text" />
+                    <label 
+                      for="new_promo_end" 
+                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                      End Date
+                    </label>
+                    <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_edat">
+                      End Date is requited*
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="ml-col-3o">
+                <div class="ap-form__input">
+                  <input
+                    class="ap-form__input-image display-none" 
+                    id="nueva_promo_img"
+                    name="nueva_promo_img"
+                    type="file"
+                    (change)="validateImageUpload( $event, '350x350', 'new_promo_image_0', 'new_promo_name_0' );" />
+                  <label for="nueva_promo_img" class="ap-form__label-image">
+                    <figure class="ap-form__image">
+                      <img class="ap-form__image-image no-image" 
+                            id="new_promo_image_0"
+                            [class.forms_errors_nimage]="form_data.no_phot"
+                            src="{{ data_promo.photo }}" />
+                      <span class="ap-form__image-data text-center" id="new_promo_name_0">
+                        Image size must be <br />
+                        <span class="text-bold">350x350</span> 
+                      </span>
+                      <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
+                        Image is required*
+                      </span>
+                    </figure>
+                  </label>
+                </div>
+              </div>
+              <!-- div class="ml-col-1 ap-form__buttons">
+                <button 
+                  type="button"
+                  (click)="toggleSectionForm( 'hide' )"
+                  class="ap-form__buttons-button ap-form__buttons-button--cancelar">
+                  Cancelar
+                </button>
+                <button 
+                  type="submit"
+                  class="ap-form__buttons-button ap-form__buttons-button--aceptar">
+                  Guardar
+                </button>
+              </div -->
+              <div class="ml-col-1 ap-form__buttons margin-top-x">
+                <button 
+                  type="button"
+                  (click)="toggleSectionForm('hide')"
+                  class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="ap-cards__container ap-cards__container--comment"  *ngFor="let promo of promotionsArray;">
+            <div class="ap-cards__card ap-cards__card--bbuttons card-style" *ngIf="!show_dperk_form">
+              <h4 class="ap-cards__card-titulo">
+                {{ promo.name }}
+              </h4>
+              <p class="ap-cards__card-desc">
+                {{ promo.description }}
+              </p>
+              <figure class="ap-cards__card-image">
+                <img src="{{ promo.photo }}" />
+              </figure>
+              <div class="ap-cards__card-buttons">
+                <button 
+                  (click)="toggleSectionForm( 'edit', promo )"
+                  class="ap-cards__card-button button-green">
+                  Edit Promotion
+                </button>
+                <button 
+                  (click)="deleteThisPromo( promo )"
+                  class="ap-cards__card-button button-black">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+          <span class="ml-col-1 ap-info__noitems" *ngIf="how_many_promos == 0">
+            No hay promociones existentes
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
+  <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
+    <p class="ml-modal__pop-titulo margin-bottom-m">
+      Delete Promotion
+    </p>
+    <p class="ml-modal__pop-text">
+      Are you sure to delete promotion <br />
+      <span class="text-bold">"{{ promo_to_delete.name }}"</span>?
+    </p>
+    <div class="ml-modal__pop-buttons">
+      <button 
+        (click)="showModal()"
+        class="ml-modal__pop-buttons-button button-pink">
+        Cancelar
+      </button>
+      <button 
+        (click)="confirmDeleteElement()"
+        class="ml-modal__pop-buttons-button button-black">
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!--div class="bottom-container">
+  <button 
+    class="button button-black button-see-x right-element-absolute"
+    *ngIf="!show_dperk_form"
+    (click)="toggleSectionForm( 'new' )">
+    Agregar Nueva Promoción
+  </button>
+  <button 
+    class="button button-blue button-x right-element-absolute"
+    *ngIf="show_dperk_form"
+    (click)="toggleSectionForm()">
+    Detalle Perk
+  </button>
+</div -->
+
+<div class="black-box">
+  <img src="" id="image_real_dimension" />
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Codigo anterior -->
+<div class="animated fadeIn display-none">
+  <div class="card">    
+    <div class="card-body">
+      <h5 class="card-title">Perk</h5>
+              
+        <div class="row">                      
+          <div class="col-12 col-lg-8 col-xl-8">
+            <div class="row">                                      
+              <div class="col-12 mb-2">                  
+                {{perkDetail?.name}}
+              </div>                                                                      
+              <div class="col-12 mb-2">                  
+                {{perkDetail?.description}}                                        
+              </div>                
+              <div class="col-12 mb-2">                
+                {{perkDetail?.streetAddress}}, {{perkDetail?.city}}, {{perkDetail?.stateProvincy}}, {{perkDetail?.zip}}, {{perkDetail?.country}}
+              </div>                               
+              <div class="col-6 mb-2">                
+                {{perkDetail?.latitude}}, {{perkDetail?.longitude}}
+              </div>                                             
+              
+            </div>  
+          </div>    
+
+          <div class="col-12 col-lg-4 col-xl-4">
+            <img style="width: 100%; max-height: 15rem;" [src]="perkDetail?.photo" alt="">            
+          </div>
+
+            <div class="col-12 mb-2">
+                <button (click)="EditPerk()" type="button" class="btn btn-outline-dark margin-gral">Edit Perk</button>
+                <button (click)="DeletePerk()" type="button" class="btn btn-outline-danger margin-gral">Delete Perk</button>
+            </div>  
+        </div>                      
+            
+
+      <div style="margin-bottom: 1rem;"></div>
+      <h5 class="card-title">Promotions</h5>
+      <div class="row">
+        <div class="col-12 mb-2">
+            <button (click)="AddPromotion()" type="button" class="btn btn-outline-dark margin-gral">Add Promotion</button>            
+        </div>           
+        <div class="col-sm-6 col-md-4" *ngFor="let post of promotionsArray">
+          <div class="card">
+            <div class="card-header">
+              {{post.name}}
+            </div>
+
+            <div class="card-body">
+              <label> {{post.description | slice:0:100}}</label>
+              <div class="col-sm-6 col-md-4">
+                <img class="img-size" src="{{post.photo}}">
+              </div>
+            </div>
+            <button (click)="DetailPromotion(post.id)" type="button" class="btn btn-outline-primary">View Promotion</button>
+            <button (click)="DeletePromotion(post.id)" type="button" class="btn  btn-outline-danger">Delete Promotion</button>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<toaster-container></toaster-container>
+<!-- <toaster-container [toasterconfig]="toasterconfig"></toaster-container> -->

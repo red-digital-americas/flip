@@ -24,6 +24,7 @@ export class NavComponent implements OnInit {
     {title: "Perks", route: "/perks", selector: 'perks', active: false},
     {title: "Services", route: "/services", selector: 'services', active: false},
     //{title: "Messages", route:"/chat", selector: 'chat', active: false}
+    {title: "Maps", route: "/maps", selector: 'maps', active: false},
   ]
   
   constructor(  public router: Router, public route: ActivatedRoute,                           
