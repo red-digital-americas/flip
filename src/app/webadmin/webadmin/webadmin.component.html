@@ -78,7 +78,7 @@
 
       <div class="ml-col-4">
         <div class="ml-col-1">
-          <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="updateTitles()">Update</button>
+          <button style="width: 100px;" class="ap-form__buttons-button padding-lateral-m button-black button-icon button-icon--add-white" (click)="updateTitles()">Update</button>
         </div>         
       </div>
 
@@ -99,8 +99,9 @@
           <button 
             class="button" 
             data-toggle="modal" 
-            (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index )">
-            Editar
+            (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index )"
+            class="index-cards__card-buttons-button button-green button-icon button-icon--edit-white">
+           &nbsp; Editar
           </button>
         </div>
       </div>
@@ -189,8 +190,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-        <button type="button" class="close" id="close_button" (click)="primaryModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="ap-form__rButton button-red padding-lateral-m" id="close_button" (click)="primaryModal.hide()" aria-label="Close">
+          Close
         </button>
       </div>
       <div class="form">
@@ -237,9 +238,9 @@
           </div>
           <div class="card__row">
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-              <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">
-                Guardar Cambios
+              
+              <button type="submit" [disabled]="!loginForm.form.valid" (click)="updatephoto()"class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--add-white">
+                Save
               </button>
             </div>
           </div>
