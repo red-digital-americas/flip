@@ -81,6 +81,7 @@ import { AddTenantPayComponent } from './Booking/TenantList/add-tenant-pay/add-t
 import { MatSortModule } from '@angular/material/sort';
 import { CalendarComponent } from './modals/calendar/calendar.component';
 import { CalendarDetailComponent } from './modals/calendar-detail/calendar-detail.component';
+import { PerkCategoryComponent } from './modals/perk-category/perk-category.component';
 
 
 @NgModule({
@@ -157,7 +158,8 @@ import { CalendarDetailComponent } from './modals/calendar-detail/calendar-detai
     RoomDetailComponent,
     AddTenantPayComponent,
     CalendarComponent,
-    CalendarDetailComponent
+    CalendarDetailComponent,
+    PerkCategoryComponent
   ],
   entryComponents: [
     DetalleComponent,
@@ -166,7 +168,8 @@ import { CalendarDetailComponent } from './modals/calendar-detail/calendar-detai
     MessageUsersComponent,
     RoomModalComponent,
     CalendarComponent,
-    CalendarDetailComponent
+    CalendarDetailComponent,
+    PerkCategoryComponent
   ],
   exports:[Autoresize]
 })

@@ -1,0 +1,208 @@
+<div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">IdProps {{idProps}}</h4> -->
+    <h4 class="modal-title pull-left">Perk Categories</h4>
+    <button 
+            class="ap-form__rButton button-big button-pink button-icon button-icon--add-white"
+            (click)="showModal('add',userIdSelected)">
+            Add
+    </button>
+    <button 
+            class="ap-form__rButton button-big button-red"
+            (click)="modalRef.hide()">
+            Close
+    </button>
+</div>
+<div class="modal-body">
+    <mat-table mat-table [dataSource]="categoriesList" matSort class="mat-elevation-z8 table--no-shadow">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Category Name</th>
+            <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.name }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Edit</th>
+            <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                <button 
+                    (click)="showModal('edit',element)"
+                    mat-raised-button color="accent"
+                    class="table__data-button">
+                    Edit
+                </button>   
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="eliminate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Delete</th>
+            <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                <button 
+                    mat-raised-button color="accent"
+                    (click)="showModal('delete', element)"
+                    class="table__data-button display-none table__data-button-yellow">
+                    Delete
+                </button>   
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </mat-table>
+</div>
+
+<div class="ml-modal ml-modal--bg-black" *ngIf="show_page_modal">
+    <form class="ml-modal__content ml-modal__content--min card-style" *ngIf="modal_to_show == 'add'"> 
+        <div class="ml-col-1 margin-bottom-m">
+            <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
+                Add Category
+            </p>
+            <button 
+                class="ap-form__rButton button-red"
+                (click)="showModal('edit', userVoidSelected);">
+                Close
+            </button>
+        </div>
+        <div class="ml-col-1 margin-top-x">
+            <div class="ml-col-2">
+                <div class="ml-col-1">
+                  <div class="ap-form__input">
+                    <input 
+                      required
+                      type="text" 
+                      placeholder="Name*"
+                      id="nameCategory" 
+                      name="nameCategory"
+                      class="ap-form__input-text"
+                      [value]="userIdSelected.name"
+                      [(ngModel)]="userIdSelected.name"
+                      [class.form_error_found]="name_form.no_name"/>
+                    <label 
+                      for="nameCategory" 
+                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                      Name
+                    </label>
+                    <span class="ml-col-1 form_error_found_label" *ngIf="name_form.no_name">
+                        Name is required*
+                    </span>
+                  </div>
+                </div>
+            </div>
+            <div class="ml-col-3 ml-col-r">
+                <div class="ap-form__input">
+                  <input
+                    required
+                    class="ap-form__input-image display-none" 
+                    id="category_icon"
+                    name="category_icon"
+                    type="file"
+                    accept="image/*"
+                    (change)="prepareImages( $event );" />
+                  <label for="category_icon" class="ap-form__label-image">
+                    <figure class="ap-form__image">
+                      <img class="ap-form__image-image no-image" 
+                          id="category_icon_img"
+                          src="{{ userIdSelected.icon }}" />
+                      <span class="ap-form__image-data text-center" id="category_icon_name">
+                        La imagen debe medir <br />
+                        <span class="text-bold">350x350</span> 
+                      </span>
+                    </figure>
+                  </label>
+                </div>
+              </div>
+        </div>
+        <div class="ml-modal__pop-buttons">
+            <button 
+                (click)="add()"
+                type="button"
+                class="ml-modal__pop-buttons-button button-black  button-big button-icon button-icon--add-white">
+                Save
+            </button>
+        </div>
+    </form>
+    <form class="ml-modal__content ml-modal__content--min card-style" *ngIf="modal_to_show == 'edit'"> 
+        <div class="ml-col-1 margin-bottom-m">
+            <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
+                Edit Category
+            </p>
+            <button 
+                class="ap-form__rButton button-red"
+                (click)="showModal('edit', userVoidSelected);">
+                Close
+            </button>
+        </div>
+        <div class="ml-col-1 margin-top-x">
+            <div class="ml-col-2">
+                <div class="ml-col-1">
+                  <div class="ap-form__input">
+                    <input 
+                      required
+                      type="text" 
+                      placeholder="Name*"
+                      id="nameCategory" 
+                      name="nameCategory"
+                      class="ap-form__input-text"
+                      [value]="userIdSelected.name"
+                      [(ngModel)]="userIdSelected.name"
+                      [class.form_error_found]="name_form.no_name"/>
+                    <label 
+                      for="nameCategory" 
+                      class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                      Name
+                    </label>
+                    <span class="ml-col-1 form_error_found_label" *ngIf="name_form.no_name">
+                        Name is required*
+                    </span>
+                  </div>
+                </div>
+            </div>
+            <div class="ml-col-3 ml-col-r">
+                <div class="ap-form__input">
+                  <input
+                    required
+                    class="ap-form__input-image display-none" 
+                    id="category_icon"
+                    name="category_icon"
+                    type="file"
+                    accept="image/*"
+                    (change)="prepareImages( $event );" />
+                  <label for="category_icon" class="ap-form__label-image">
+                    <figure class="ap-form__image">
+                      <img class="ap-form__image-image no-image" 
+                          id="category_icon_img"
+                          src="{{ userIdSelected.icon }}" />
+                      <span class="ap-form__image-data text-center" id="category_icon_name">
+                        La imagen debe medir <br />
+                        <span class="text-bold">350x350</span> 
+                      </span>
+                    </figure>
+                  </label>
+                </div>
+              </div>
+        </div>
+        <div class="ml-modal__pop-buttons">
+            <button 
+                (click)="update()"
+                type="button"
+                class="ml-modal__pop-buttons-button button-black  button-big button-icon button-icon--edit-white">
+                Update
+            </button>
+        </div>
+    </form>
+    <div class="ml-modal__pop" *ngIf="modal_to_show == 'delete'">
+        <p class="ml-modal__pop-titulo margin-bottom-m">
+            Delete Category
+        </p>
+        <p class="ml-modal__pop-text">
+            Are you sure to delete?
+        </p>
+        <div class="ml-modal__pop-buttons">
+            <button 
+                (click)="showModal('', userVoidSelected)"
+                class="ml-modal__pop-buttons-button button-pink">
+                Cancel
+            </button>
+            <button 
+                (click)="delete()"
+                class="ml-modal__pop-buttons-button button-black">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
