@@ -264,7 +264,7 @@ export class MapsComponent implements OnInit {
         this.data_perk.id = editable.id;
         this.data_perk.name = editable.name;
         this.data_perk.description = editable.description;
-        this.data_perk.packCategoryId = editable.packCategoryId;
+        this.data_perk.mapCategoryId = editable.mapCategoryId;
         this.data_perk.streetAddress = editable.streetAddress;
         this.data_perk.city = editable.city;
         this.data_perk.stateProvincy = editable.stateProvincy;
@@ -295,9 +295,9 @@ export class MapsComponent implements OnInit {
   public sendPerkData():void {
 
     if( this.validatingFieldsFrom( this.data_perk ) ) {
-
-      this.data_perk.galleryPerks = this.createImagesArray();
-      
+   
+      this.data_perk.mapGalleries = this.createImagesArray();
+      debugger;
       if( this.new_perk_button && !this.edit_perk_button ) {
 
         this.loader.showLoader(); 
@@ -400,12 +400,12 @@ export class MapsComponent implements OnInit {
 
   public getPerkGallery( id_perk: number ):void {
 
-    this.heroService.service_general_get_with_params("PerkGuide/GetPerksWithGallery", { id: id_perk })
+    this.heroService.service_general_get_with_params("Map/GetMapsWithGallery", { id: id_perk })
         .subscribe( (response: any) => { 
+console.log(response);
+          if( response.item[0].mapGalleries.length != 0 ) this.images_in_gallery.shift();
 
-          if( response.item[0].galleryPerks.length != 0 ) this.images_in_gallery.shift();
-
-          response.item[0].galleryPerks.forEach( (image_gallery: any) => {
+          response.item[0].mapGalleries.forEach( (image_gallery: any) => {
 
             let new_image = {
               id: image_gallery.id,
@@ -527,7 +527,7 @@ export class MapsComponent implements OnInit {
     no_long: false,
     no_phot: false
   }
-  public validatingFieldsFrom( form_data: DataPerk ): boolean { 
+  public validatingFieldsFrom( form_data: any ): boolean { 
 
     let result = false;
 
@@ -537,7 +537,7 @@ export class MapsComponent implements OnInit {
     form_data.description == null || form_data.description == '' ?
       this.form_data.no_desc = true : this.form_data.no_desc = false;
 
-    form_data.packCategoryId == null || form_data.packCategoryId < 0 ?
+    form_data.mapCategoryId == null || form_data.mapCategoryId < 0 ?
       this.form_data.no_cate = true : this.form_data.no_cate = false;
 
     form_data.streetAddress == null || form_data.streetAddress == '' ?
@@ -859,4 +859,6 @@ class DataPerk {
   buildingId: number;
   photo: string;
   galleryPerks: any;
+  mapGalleries: any;
+  mapCategoryId: number;
 }

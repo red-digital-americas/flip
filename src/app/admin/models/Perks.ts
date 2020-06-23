@@ -18,7 +18,10 @@ export class PerksGuide {
 
     public building?:any
     public packCategory?:PerksCategory;
+    public mapCategory?:PerksCategory;
     public galleryPerks?:GalleryPerk[];
+    public mapGalleries?:GalleryPerk[];
+    
     public perkPromotions?:PerkPromotion[];
 
     constructor() { }
@@ -39,6 +42,7 @@ export class PerksGuide {
         this.photo = serviceObject.photo;
 
         this.galleryPerks = serviceObject.galleryPerks;
+        this.mapGalleries = serviceObject.galleryPerks;
     }
 
     public ParseFromForm(form) {
@@ -60,7 +64,14 @@ export class PerksGuide {
             let galleryPerk = new GalleryPerk()
             galleryPerk.photo = photo.serverUrlCtrl;
             this.galleryPerks.push(galleryPerk);
-        });        
+        });
+        
+        this.mapGalleries = [];
+        form.perkGalleryCtrl.forEach(photo => {
+            let galleryPerk = new GalleryPerk()
+            galleryPerk.photo = photo.serverUrlCtrl;
+            this.mapGalleries.push(galleryPerk);
+        });
     }
 
     public ParseToForm(form) {
@@ -85,7 +96,17 @@ export class PerksGuide {
                     serverUrlCtrl: new FormControl(photo.photo)
                 })
             );                                    
-        });         
+        }); 
+        
+        this.mapGalleries.forEach( photo => {       
+            form.controls['perkGalleryCtrl'].push(
+                new FormGroup ({
+                    labelCtrl: new FormControl('Choose file'),
+                    photoCtrl: new FormControl(),  
+                    serverUrlCtrl: new FormControl(photo.photo)
+                })
+            );                                    
+        }); 
     }
 }
 

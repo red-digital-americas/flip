@@ -257,11 +257,8 @@
                                                     </p>
                                                     <br>
                                                     <!-- Trigger the Modal -->
-                                                    <div id="imagesmapp" class="hiddens" style="margin-left: 6%;">
-                                                        <a href="#lightbox">
-                                                            <img id="myImgimggal" src="assets/images/Communities/Coahuila/amenities.jpg" style="width:100%;max-width:50px;    margin: .5em;">
-                                                        </a>
-                                                        
+                                                    <div id="imagesmapp" style="margin-left: 6%;">
+                                                                                                                
                                                     </div>
                                                     <div id="imagenesgalheight" class="container imagesgalheight hiddens">
 
@@ -1048,11 +1045,10 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: urlbase_api + "Map/GetMaps",
+                    url: urlbase_api + "Map/GetMapsWithGallery",
                     // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
                     data: JSON.stringify({
-                        buildingid: buildingid,
-                        userid: 1
+                        id: 1
                     }),
                     contentType: "application/json",
                     dataType: "text",
@@ -1064,13 +1060,23 @@
                         markers = respuesta.item;
              
                         $('#TitleMap').html(`<p style="font-weight: 300;">${markers[0].name}</p>`);
-                        let plantilla = `${markers[0].description}<div id="imagesmapp" class="">
-                                                        <a href="#lightbox">
-                                                            <img id="myImgimggal" src="${markers[0].photo}" style="width:100%;max-width:100px;    margin: .5em;">
-                                                        </a>
-                                                    </div>`;
-                        $('#textdescmap').html(`${plantilla}`)
+                        let plantilla = `${markers[0].description}`;
+                        $('#textdescmap').html(`${plantilla}`);
                   
+                       
+                         let gal = `<a href="#lightbox">
+                                        <img id="myImgimggal" src="${markers[0].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                                    </a>`;
+                        
+                     for(let l = 0; l < markers[0].mapGalleries.length; l++){
+                         gal +=`                               
+                                    <a href="#lightbox">
+                                        <img id="myImgimggal" src="${markers[0].mapGalleries[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                                    </a>`;
+                     }
+                    
+                    $("#imagesmapp").html(`${gal}`);
+                     console.log(gal);
                   console.log("Marcadores",markers);
                     
 
@@ -1083,7 +1089,8 @@
                     var address = markers[i].streetAddress+", "+markers[i].city+", "+markers[i].stateProvincy+" "+markers[i].zip+" "+markers[i].country;
                     var type = "";
                     var desc = markers[i].description;
-                    var img1 = markers[i].photo;
+                    var img = markers[i].mapGalleries;
+                    var portada = markers[i].photo;
                     //debugger;
                     var point = new google.maps.LatLng(
                         parseFloat(markers[i].latitude),
@@ -1091,8 +1098,8 @@
                     var html = "<b>" + name + "</b> <br/>" + address;
                     // var icon = customIcons[type] || {};
                     // debugger;
-                    var marker = createMarker(point, name, address, type, map, desc, img1);
-                    bindInfoWindow(marker, map, infoWindow, html, name, desc, img1);
+                    var marker = createMarker(point, name, address, type, map, desc, img, portada);
+                    bindInfoWindow(marker, map, infoWindow, html, name, desc, img, portada);
                     //debugger;
                 }
                 // });
@@ -1103,7 +1110,7 @@
                 })
             }
 
-            function createMarker(point, name, address, type, map, desc, img1) {
+            function createMarker(point, name, address, type, map, desc, img, portada) {
                 var icon = customIcons[type] || {};
                 var marker = new google.maps.Marker({
                     map: map,
@@ -1115,7 +1122,7 @@
                 if (!markerGroups[type]) markerGroups[type] = [];
                 markerGroups[type].push(marker);
                 var html = "<b>" + name + "</b> <br/>" + address;
-                bindInfoWindow(marker, map, infoWindow, html, name, desc, img1);
+                bindInfoWindow(marker, map, infoWindow, html, name, desc, img, portada);
                 return marker;
             }
 
@@ -1204,16 +1211,27 @@
             });
 
 
-            function bindInfoWindow(marker, map, infoWindow, html, name, desc, img1) {
+            function bindInfoWindow(marker, map, infoWindow, html, name, desc, img, portada) {
                 google.maps.event.addListener(marker, 'click', function () {
                     infoWindow.setContent(html);
                     infoWindow.open(map, marker);
                     $("#imagesmapp").removeClass("hiddens");
                     document.getElementById("TitleMap").textContent = name;
                     document.getElementById("textdescmap").textContent = desc;
-
-                    document.getElementById("myImgimggal").src = img1;
-                    document.getElementById("lightgal1").src = img1;
+                    console.log(img);
+                    
+                    let gal = `<a href="#lightbox">
+                                        <img id="myImgimggal" src="${portada}" style="width:100%;max-width:50px; margin: .5em;">
+                                    </a>`;
+                     for(let l = 0; l < img.length; l++){
+                         gal +=`                               
+                                    <a href="#lightbox">
+                                        <img id="myImgimggal" src="${img[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                                    </a>`;
+                     }
+                    
+                    $("#imagesmapp").html(`${gal}`);
+                    
 
                 });
             }

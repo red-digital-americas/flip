@@ -107,7 +107,7 @@
               id="new_perk_desc"
               name="new_perk_category"
               placeholder="Category"
-              [(ngModel)]="data_perk.packCategoryId"
+              [(ngModel)]="data_perk.mapCategoryId"
               [class.form_error_found]="form_data.no_cate"
               class="ap-form__label ap-form__input-text">
               <option disabled="disabled" value="-1">Category</option>
@@ -118,7 +118,7 @@
             <label 
               for="new_perk_category" 
               class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.packCategoryId != '-1'">
+              [class.ap-form__label-text--active]="data_perk.mapCategoryId != '-1'">
               Category
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_cate">
