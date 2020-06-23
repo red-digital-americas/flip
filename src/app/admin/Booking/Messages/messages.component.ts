@@ -395,4 +395,9 @@ export class MessagesComponent implements OnInit {
         }
       }
 
+      viewDetail(id: number, idBooking: number) {
+        // console.log('Id user', id);
+        this.router.navigateByUrl( `app-profile/${ id }/${ idBooking }`, { state: { id: this.IDBUILD, name: 'TenantList To Profile' } });
+    }
+
 }
