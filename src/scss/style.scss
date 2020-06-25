@@ -4049,3 +4049,8 @@ select {
   0% { right: 0; }
   100% { right: -100%; }
 }
+
+// MODALS
+.myCustomModalClass .modal-dialog {
+  max-width: 1000px;
+}

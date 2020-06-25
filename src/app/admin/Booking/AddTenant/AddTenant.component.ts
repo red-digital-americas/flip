@@ -861,10 +861,10 @@ import { Router } from '@angular/router';
         const type_profile = event_data.target;
 
         type_profile.value == '1' ? 
-            this.general_user_data.systemTypeId = 1 :
-            this.general_user_data.systemTypeId = 2;
+            this.general_user_data.clientKind = false :
+            this.general_user_data.clientKind = true;
 
-        this.single_profile =  this.general_user_data.systemTypeId == 1 ? true : false;   
+        this.single_profile =  this.general_user_data.clientKind === false ? true : false;
 
     }
 
@@ -1385,7 +1385,7 @@ import { Router } from '@angular/router';
             this.form_profile_validator.no_nati = true :
             this.form_profile_validator.no_nati = false;
 
-        this.general_user_data.bith == '' ?
+        this.general_user_data.birth == '' ?
             this.form_profile_validator.no_bdat = true :
             this.form_profile_validator.no_bdat = false;
 
@@ -1864,12 +1864,13 @@ class GeneralUserData {
     motherName: string = '';
     avatar: string = '';
     systemTypeId: number = 1;
+    clientKind: boolean = false;
     phone: string = '';
     cellphone: string = '';
     workplace: string = '';
     aboutMe: string = '';
     active: boolean = true;
-    bith: string = '';
+    birth: string = '';
     rfc: string = '';
     userData: PersonaUserInfo = new PersonaUserInfo();
     userTaxData: UserBussinessData = new UserBussinessData();
