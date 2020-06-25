@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
     this._router.navigate([this.menuService.GetFirstURLSection(parseInt(localStorage.getItem("SystemTypeId")))]);
     // window.location.href = "/#"+this.menuService.GetFirstURLSection(parseInt(localStorage.getItem("SystemTypeId"))); // partial redirection
     // window.location.href = "/communities"; // full redirection (loading again page)
+    this.loader.hideLoader()
   }
 
   showError() {
@@ -103,6 +104,8 @@ export class LoginComponent implements OnInit {
 
     if( this.passwordValidator( this.pass_data ) ) {
 
+      this.loader.showLoader();
+
       this.heroService.ServicioPostRecoverPass("RecoverPassword", this.pass_data)
           .subscribe( (response: any) => { console.log( response );
 
@@ -116,7 +119,7 @@ export class LoginComponent implements OnInit {
                 },
                 time: 4000
               });  
-              this.showSuccess(); 
+              //this.showSuccess(); 
 
             } else {
 
@@ -130,6 +133,8 @@ export class LoginComponent implements OnInit {
               });  
 
             }
+
+            setTimeout( () => this.loader.hideLoader(), 1777)
 
           }, (error: any) => {
 
@@ -209,8 +214,7 @@ export class LoginComponent implements OnInit {
                 },
                 time: 2000
               });  ;
-              this.showSuccess(); 
-              setTimeout( () => this.loader.hideLoader(), 2200);      
+              this.showSuccess();      
             }
         }
       
@@ -233,7 +237,6 @@ export class LoginComponent implements OnInit {
     }
 
   }
-
 
 
   public form_data: any = {

@@ -81,7 +81,7 @@
         Recover Password
       </h4>
       <div class="ml-col-1">
-        <div class="ap-form__input">
+        <div class="ap-form__input ap-form__input--full-width">
           <input 
             type="text" 
             placeholder="Email"
@@ -100,21 +100,23 @@
           <span class="ml-col-1 form_error_found_label" *ngIf="form_pass.no_emai">
             Email is required*
           </span>
-          <span class="ml-col-1 form_error_found_label" *ngIf="form_pass.no_val_mail">
-            Email no valid, It can not contain special characters*
+          <span 
+            class="ml-col-1 form_error_found_label" 
+            *ngIf="form_pass.no_val_mail && !form_pass.no_emai">
+            Email format is not valid*
           </span>
         </div>
         <div class="ml-col-1 ap-form__buttons">
           <button 
             type="button"
             (click)="recoverPassword()"
-            class="ap-form__buttons-button ap-form__buttons-button--cancelar">
-            Cancelar
+            class="ap-form__buttons-button button-black">
+            Cancel
           </button>
           <button 
             type="submit"
-            class="ap-form__buttons-button ap-form__buttons-button--aceptar">
-            Aceptar
+            class="ap-form__buttons-button button-pink">
+            Recover
           </button>
         </div>
       </div>
