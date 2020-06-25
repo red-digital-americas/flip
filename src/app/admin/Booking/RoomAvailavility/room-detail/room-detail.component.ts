@@ -40,6 +40,7 @@ export class RoomDetailComponent implements OnInit {
 
   ////////////////////////// ACTIVE //////////////////////////////////
   activeTotal = 0;
+  activeTotalPending = 0;
   activeLenght;
   activeObj;
   activeDisplayedColumns: string[] = [
@@ -63,6 +64,7 @@ export class RoomDetailComponent implements OnInit {
   ////////////////////////// INACTIVE ///////////////////////////////
   inactiveObj;
   inactiveTotal = 0;
+  inactiveTotalPending = 0;
   inactiveDisplayedColumns: string[] = [
     'name',
     'room',
@@ -115,6 +117,7 @@ export class RoomDetailComponent implements OnInit {
         this.activeTotal = this.activeTotal + element.amountOutstanding;
         this.activeTotal = this.activeTotal +
                           (element.membership !== null ? element.membership.priceMembership : 0);
+        this.activeTotalPending = this.activeTotalPending + element.pending;
       });
       this.activeObj = new MatTableDataSource(value.item.active);
       this.activeObj.paginator = this.paginator;
@@ -124,6 +127,8 @@ export class RoomDetailComponent implements OnInit {
         this.inactiveTotal = this.inactiveTotal + element.amountOutstanding;
         this.inactiveTotal = this.inactiveTotal +
                           (element.membership !== null ? element.membership.priceMembership : 0);
+        this.inactiveTotalPending = this.inactiveTotalPending + element.pending;
+
       });
       this.inactiveObj = new MatTableDataSource(value.item.inactive);
       this.inactiveObj.paginator = this.paginatorInactive;
