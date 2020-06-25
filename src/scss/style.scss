@@ -3081,6 +3081,10 @@ select:active,
   position: relative;
 }
 
+.button-unable {
+  background-color: rgba(140,140,140,.2) !important;
+}
+
 .button-icon {
 
   background-size: auto 70%;
