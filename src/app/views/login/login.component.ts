@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     //Reset session
     sessionStorage.removeItem('lastSectionId');
+    this.no_buttons_abaible = false;
   }
 
   error = null;
@@ -45,6 +46,8 @@ export class LoginComponent implements OnInit {
   validar: boolean = false;
 
   private toasterService: ToasterService;
+
+  public no_buttons_abaible: boolean = false;
 
   public toasterconfig: ToasterConfig =
     new ToasterConfig({
@@ -216,6 +219,7 @@ export class LoginComponent implements OnInit {
               });  ;
               this.showSuccess();      
             }
+            this.no_buttons_abaible = true;
         }
       
 
