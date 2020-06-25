@@ -1,0 +1,23 @@
+.example-container {
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 300px !important;
+    align-items: center;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+
+  mat-cell{
+    display:flex !important;
+    justify-content:center!important;
+    
+  }
+  
+  mat-header-cell {
+    display:flex;
+    justify-content:center;
+  }
+  
