@@ -17,7 +17,7 @@ class MessageCustom {
     public invitationId?: number;
     constructor() { }
 }
-  
+
 enum typeSend {
     SEND = 1,
     SENDALL = 2
@@ -86,8 +86,6 @@ export class MessagesComponent implements OnInit {
             transport: signalR.HttpTransportType.WebSockets
           })
           .build();
-    
-    
         this.hubConnection.on('Send', (rtMessageResponse) => {
           // console.log(rtMessageResponse);
           //debugger;
