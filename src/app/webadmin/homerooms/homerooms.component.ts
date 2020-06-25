@@ -345,6 +345,10 @@ export class HomeroomsComponent implements OnInit {
     this.router.navigate(['webadmin/homeservices/' + id])
   }
 
+  map(id?: number) {
+    this.router.navigate(['webadmin/maps/' + id])
+  }
+
   public photos_data: PhotosModelData = new PhotosModelData();
   public passPhotosData( album: any ):void {
 

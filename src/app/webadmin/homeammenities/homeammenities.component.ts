@@ -115,6 +115,10 @@ export class HomeammenitiesComponent implements OnInit {
     this.router.navigate(['webadmin/homeservices/' + id])
   }
 
+  map(id?: number) {
+    this.router.navigate(['webadmin/maps/' + id])
+  }
+
 
   imageChangedEvent: any = '';
   croppedImage: any = '';

@@ -533,7 +533,11 @@
         <script type="text/javascript" src="assets/js/custommenu.js"></script>
         <script>
 
-
+            var
+            windowHeight = window.innerHeight,
+            windowWidth = window.innerWidth,
+            isItMobil = windowWidth <= 1024 ? true : false;
+            
             function  compareTime (dateString, now) {
                 console.log("variable:"+ dateString);
                 console.log("ahora:"+ now);
@@ -573,6 +577,12 @@
                 console.log(window.globaltime);
             }
             window.onload = function() {
+                
+                
+                if(!isItMobil){
+                    console.log(window.location.href);
+                    window.location.href = './index.html';
+                }
                 if(localStorage.noFirstVisit=="1") {
                     console.log('Primera vez ');
                     localStorage.setItem("flags", "true");

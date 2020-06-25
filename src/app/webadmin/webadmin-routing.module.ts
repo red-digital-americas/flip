@@ -18,6 +18,7 @@ import { HomeroomsComponent } from './homerooms/homerooms.component';
 import { HomeservicesComponent } from './homeservices/homeservices.component';
 import { HomemenuComponent } from './homemenu/homemenu.component';
 import { MoreindexComponent } from './moreindex/moreindex.component';
+import { MapsComponent } from './maps/perks.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'homeindex/:id', component: HomeindexComponent, data: {title:'Home  Index'} },
       { path: 'homeroom/:id', component: HomeroomsComponent, data: {title:'  Home Room'} },
       { path: 'homeservices/:id', component: HomeservicesComponent, data: {title:'  Home Services'} },
+      { path: 'maps/:id', component: MapsComponent, data: {title:'  Maps'} },
       { path: 'moreindex', component: MoreindexComponent, data: {title:'  More Index '} },
       { path: 'team', component: TeamComponent, data: {title:'  Team'} },
       { path: 'jobs', component: JobsComponent, data: {title:'  Jobs'} },

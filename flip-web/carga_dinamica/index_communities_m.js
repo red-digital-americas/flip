@@ -49,7 +49,7 @@ function fill_grid_home_images(respuesta) {
         if(respuesta.item[0].direction.length > 0)
         {
             $("#communitiesflip2x12").click(function () {
-                var url = "./maltata.html?buildingid="+respuesta.item[0].id;
+                var url = "./maltata.html?buildingid="+respuesta.item[0].id+'&title='+respuesta.item[0].title;
                 $(location).attr('href', url);
             });
         }
@@ -76,7 +76,7 @@ function fill_grid_home_images(respuesta) {
         if(respuesta.item[1].direction.length > 0)
         {
             $("#commflip2x11").click(function () {
-                var url = "./maltata.html?buildingid="+respuesta.item[1].id;
+                var url = "./maltata.html?buildingid="+respuesta.item[1].id+'&title='+respuesta.item[1].title;
                 $(location).attr('href', url);
             });
         }
@@ -100,7 +100,7 @@ function fill_grid_home_images(respuesta) {
         if(respuesta.item[2].direction.length > 0)
         {
             $("#communitiesflip2x13").click(function () {
-                var url = "./maltata.html?buildingid="+respuesta.item[2].id;
+                var url = "./maltata.html?buildingid="+respuesta.item[2].id+'&title='+respuesta.item[2].title;
                 $(location).attr('href', url);
             });
         }
@@ -124,7 +124,7 @@ function fill_grid_home_images(respuesta) {
         if(respuesta.item[3].direction.length > 0)
         {
             $("#communitiesflip2x14").click(function () {
-                var url = "./maltata.html?buildingid="+respuesta.item[3].id;
+                var url = "./maltata.html?buildingid="+respuesta.item[3].id+'&title='+respuesta.item[3].title;
                 $(location).attr('href', url);
             });
         }

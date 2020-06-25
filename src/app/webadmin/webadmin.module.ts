@@ -31,7 +31,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';;
+import { MatInputModule } from '@angular/material/input';
+import { MapsComponent } from './maps/perks.component';
+
+import { NgSelectModule } from '@ng-select/ng-select';
+import { BsDatepickerModule } from 'ngx-bootstrap';
+
 
 @NgModule({
   imports: [
@@ -53,7 +58,9 @@ import { MatInputModule } from '@angular/material/input';;
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
+    NgSelectModule,
+    BsDatepickerModule
   ],
-  declarations: [WebadminComponent, TeamComponent, JobsComponent, PressComponent, DesignComponent, DesignindexComponent, MoreindexComponent, HomeindexComponent, HomeservicesComponent, HomeammenitiesComponent, HomeroomsComponent, HomegeneralComponent, HomemenuComponent]
+  declarations: [WebadminComponent, TeamComponent, JobsComponent, PressComponent, DesignComponent, DesignindexComponent, MoreindexComponent, HomeindexComponent, HomeservicesComponent, HomeammenitiesComponent, HomeroomsComponent, HomegeneralComponent, HomemenuComponent, MapsComponent]
 })
 export class WebadminModule { }

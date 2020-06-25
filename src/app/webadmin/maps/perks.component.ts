@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { PerksGuide, PerksCategory } from '../models/Perks';
+import { PerksGuide, PerksCategory } from '../../admin/models/Perks';
 import { Utils } from '../../utils/utils';
 import { LoaderComponent } from '../../../ts/loader';
 import { SystemMessage } from '../../../ts/systemMessage';
@@ -78,6 +78,26 @@ export class MapsComponent implements OnInit {
       }, (err)=> {console.log(err);}
     );
   }  
+
+  gotonewsfeed(id?: number) {
+    this.router.navigate(['webadmin/homeindex/' + id])
+  }
+  amm(id?: number) {
+    this.router.navigate(['webadmin/homeammenities/' + id])
+  }
+  gene(id?: number) {
+    this.router.navigate(['webadmin/homegeneral/' + id])
+  }
+  room(id?: number) {
+    this.router.navigate(['webadmin/homeroom/' + id])
+  }
+  serv(id?: number) {
+    this.router.navigate(['webadmin/homeservices/' + id])
+  }
+
+  map(id?: number) {
+    this.router.navigate(['webadmin/maps/' + id])
+  }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // FORM

@@ -10,8 +10,10 @@ var respuesta;
 var _html;
 let params = new URLSearchParams(location.search);
 var buildingid = params.get('buildingid');
+var title = params.get('title');
 
 $(document).ready(function () {
+    $('#titlepage').html(`${title}`)
    // debugger;
     $.ajax({
         type: 'POST',

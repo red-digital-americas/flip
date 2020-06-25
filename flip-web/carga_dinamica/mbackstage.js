@@ -90,7 +90,7 @@ $(document).ready(function () {
                 }
            plantilla += `
                                                             <img id="img-mwhat-01" src="${itemactual.photoMobileSlider}" style="object-fit: cover; height: 100%;" alt="Los Angeles">
-                                                            <div class="header-text" style="    top: 71%;">
+                                                            <div class="header-text" style="    top: 40%; height: 100%">
                                                                 <div class="col-md-12  paddtop ">
                                                                     <span>
                                                                         <div class="row"> 

@@ -82,7 +82,6 @@ const routes: Routes = [
       { path: 'AddTenantPay/:id', component: AddTenantPayComponent, data: { title: 'Add Tenant Pay' } },
       // { path: 'perks/:id', loadChildren: './perks/perks.module#PerksComponentModule' },
       { path: '', loadChildren: './perks/perks.module#PerksComponentModule', data: { title: 'Perks'} },
-      { path: '', loadChildren: './maps/perks.module#MapsComponentModule', data: { title: 'Maps'} },
       { path: '', loadChildren: './services/services.module#ServicesComponentModule', data: { title: 'Services'}  }
     ]
   }

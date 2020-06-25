@@ -299,6 +299,10 @@ this.router.navigate(['webadmin/homeroom/' + id])
 serv(id?: number) {
 this.router.navigate(['webadmin/homeservices/' + id])
 }
+
+maps(id?: number) {
+  this.router.navigate(['webadmin/maps/' + id])
+}
    
    public system_message: SystemMessage = new SystemMessage();
    public loader: LoaderComponent = new LoaderComponent();

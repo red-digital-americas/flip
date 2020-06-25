@@ -168,6 +168,10 @@ room(id?: number) {
 serv(id?: number) {
   this.router.navigate(['webadmin/homeservices/' + id])
 }
+
+map(id?: number) {
+  this.router.navigate(['webadmin/maps/' + id])
+}
   
     prepareImagesblob(e) {
   

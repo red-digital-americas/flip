@@ -1041,15 +1041,11 @@
                     zoom: 15,
                 });
                 var infoWindow = new google.maps.InfoWindow();
-
-
+                var id = params.get('buildingid');
+                console.log("id ===>", id);
                 $.ajax({
-                    type: 'POST',
-                    url: urlbase_api + "Map/GetMapsWithGallery",
-                    // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
-                    data: JSON.stringify({
-                        id: 1
-                    }),
+                    type: 'GET',
+                    url: urlbase_api + "Map/GetMapsWithGallery?buildingId="+id,
                     contentType: "application/json",
                     dataType: "text",
 
