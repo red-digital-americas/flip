@@ -251,7 +251,7 @@ export class HomeammenitiesComponent implements OnInit {
       this.loader.showLoader();
     this.heroService.ServicioPostPost("SeeHomeAmmenities", creadoobj).subscribe((value) => {
       //debugger;
-
+ console.log(value);
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
@@ -305,7 +305,9 @@ export class HomeammenitiesComponent implements OnInit {
           Icon: this.post.icon, 
           Icon2: this.post.icon2, 
           PhotoBuild: this.post.build, 
-          PhotoBuilMobile: this.post.buildmobile
+          PhotoBuilMobile: this.post.buildmobile,
+          buildingid: this.IDBUILD, 
+          userid: this.IDUSR
         };
 
         if( this.formValidator( this.post ) ) {

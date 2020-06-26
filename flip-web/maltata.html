@@ -27,6 +27,14 @@
                 margin-top: 0px !important;
             }
         }
+        .minigalimg{
+            height: 200px !important;
+        }
+        
+        .photo{
+            width: 70px !important;
+            max-width: 70px !important;
+        }
     </style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -269,19 +277,8 @@
                                                                     <img src="assets/images/closebut.svg" alt="Los Angeles">
                                                                 </span -->
                                                             </a>
-                                                            <div class="carousel-inner ">
-                                                                <div class="item active">
-                                                                    <img class="minigalimg" style="height: 200px;" id="lightgal1" src="assets/images/Communities/Coahuila/amenities.jpg" alt="First slide">
-                                                                </div>
-                                                                <div class="item">
-                                                                    <img class="minigalimg" style="height: 200px;" id="lightgal2" src="assets/images/Communities/Coahuila/business.jpg" alt="Second slide">
-                                                                </div>
-                                                                <div class="item">
-                                                                    <img class="minigalimg" style="height: 200px;" id="lightgal3" src="assets/images/Communities/Coahuila/coliving.jpg" alt="Third slide">
-                                                                </div>
-                                                                <div class="item">
-                                                                    <img lass="minigalimg" style="height: 200px;" id="lightgal4" src="assets/images/Communities/Coahuila/community.jpg" alt="Fourth slide">
-                                                                </div>
+                                                            <div id="gla" class="carousel-inner ">
+                                                                
                                                             </div><!-- /.carousel-inner -->
                                                             <a style="    top: 15%;" class="left carousel-control" href="#minigallery" data-slide="prev">
 
@@ -1060,18 +1057,26 @@
                         $('#textdescmap').html(`${plantilla}`);
                   
                        
-                         let gal = `<a href="#lightbox">
-                                        <img id="myImgimggal" src="${markers[0].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                       let gal = `<a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${markers[0].photo}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
-                        
+                        let minig = `<div class="item active">
+                                         <img class="minigalimg" id="lightgal1" src="${markers[0].photo}" alt="First slide">
+                                     </div>
+                                     `;
                      for(let l = 0; l < markers[0].mapGalleries.length; l++){
                          gal +=`                               
-                                    <a href="#lightbox">
-                                        <img id="myImgimggal" src="${markers[0].mapGalleries[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                                    <a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${markers[0].mapGalleries[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
+                         
+                         minig += ` <div class="item">
+                                         <img class="minigalimg" src="${markers[0].mapGalleries[l].photo}" alt="Fourth slide">
+                                     </div>`;
                      }
                     
                     $("#imagesmapp").html(`${gal}`);
+                    $('#gla').html(`${minig}`);
                      console.log(gal);
                   console.log("Marcadores",markers);
                     
@@ -1216,16 +1221,23 @@
                     document.getElementById("textdescmap").textContent = desc;
                     console.log(img);
                     
-                    let gal = `<a href="#lightbox">
-                                        <img id="myImgimggal" src="${portada}" style="width:100%;max-width:50px; margin: .5em;">
+                    let gal = `<a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${portada}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
+                    let minig = `<div class="item active">
+                                         <img class="minigalimg" id="lightgal1" src="${portada}" alt="First slide">
+                                     </div>
+                                     `;
                      for(let l = 0; l < img.length; l++){
                          gal +=`                               
-                                    <a href="#lightbox">
-                                        <img id="myImgimggal" src="${img[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                                    <a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${img[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
+                         minig += ` <div class="item">
+                                         <img class="minigalimg" src="${img[l].photo}" alt="Fourth slide">
+                                     </div>`;
                      }
-                    
+                    $('#gla').html(`${minig}`)
                     $("#imagesmapp").html(`${gal}`);
                     
 
@@ -1278,15 +1290,20 @@
 
         });
         $("#myImgimggal").click(function () {
-            $("#minigallery").removeClass("hiddens"); $("#imagenesgalheight").removeClass("hiddens");
+           
 
+        });
+
+        var minigaler = function() {
+            console.log("entra");
+             $("#minigallery").removeClass("hiddens"); 
+            $("#imagenesgalheight").removeClass("hiddens");
             $("#closeminigal").removeClass("hiddens");
             $("#TitleMap").addClass("hiddens");
             $("#textdescmap").addClass("hiddens");
             $("#imagesmapp").addClass("hiddens");
 
-        });
-
+        }
         $("#closeminigal").click(function () {
             $("#imagenesgalheight").addClass("hiddens");
 

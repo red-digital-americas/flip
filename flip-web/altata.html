@@ -123,6 +123,11 @@
             display: none;
         }
 
+        .photo{
+                max-width: 70px !important;
+                width: 70px !important;
+                height: 70px !important;
+        }
     </style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -2102,24 +2107,11 @@
                                                             <a id="closeminigal" class="fclose hiddens pointer" style="top: 10%;
                                                                                                                            bottom: 0;
                                                                                                                            right: -18%;">
-                                                                <!-- span>
-                                                                    <img src="assets/images/closebut.svg" alt="Los Angeles">
-                                                                </span -->
+                                                                
                                                             </a>
 
-                                                            <div class="carousel-inner" style="height: 70%;">
-                                                                <div class="item active">
-                                                                    <img class="minigalimg" id="lightgal1" src="assets/images/Communities/Coahuila/amenities.jpg" alt="First slide">
-                                                                </div>
-                                                                <div class="item">
-                                                                    <img class="minigalimg" id="lightgal2" src="assets/images/Communities/Coahuila/business.jpg" alt="Second slide">
-                                                                </div>
-                                                                <div class="item">
-                                                                    <img class="minigalimg" id="lightgal3" src="assets/images/Communities/Coahuila/coliving.jpg" alt="Third slide">
-                                                                </div>
-                                                                <div class="item">
-                                                                    <img class="minigalimg" id="lightgal4" src="assets/images/Communities/Coahuila/community.jpg" alt="Fourth slide">
-                                                                </div>
+                                                            <div id="gla" class="carousel-inner" style="height: 70%;">
+                                                                
                                                             </div><!-- /.carousel-inner -->
                                                             <a class="left carousel-control" href="#minigallery" data-slide="prev">
 
@@ -2698,20 +2690,27 @@
                         $('#TitleMap').html(`<p style="font-weight: 300;">${markers[0].name}</p>`);
                         let plantilla = `${markers[0].description}`;
                         $('#textdescmap').html(`${plantilla}`);
-                  
                        
-                         let gal = `<a href="#lightbox">
-                                        <img id="myImgimggal" src="${markers[0].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                         let gal = `<a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${markers[0].photo}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
-                        
+                        let minig = `<div class="item active">
+                                         <img class="minigalimg" id="lightgal1" src="${markers[0].photo}" alt="First slide">
+                                     </div>
+                                     `;
                      for(let l = 0; l < markers[0].mapGalleries.length; l++){
                          gal +=`                               
-                                    <a href="#lightbox">
-                                        <img id="myImgimggal" src="${markers[0].mapGalleries[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                                    <a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${markers[0].mapGalleries[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
+                         
+                         minig += ` <div class="item">
+                                         <img class="minigalimg" src="${markers[0].mapGalleries[l].photo}" alt="Fourth slide">
+                                     </div>`;
                      }
                     
                     $("#imagesmapp").html(`${gal}`);
+                    $('#gla').html(`${minig}`);
                      console.log(gal);
                   console.log("Marcadores",markers);
 
@@ -2868,16 +2867,23 @@ for (var i = 0; i < markerGroups[type].length; i++) {
                     document.getElementById("TitleMap").textContent = name;
                     document.getElementById("textdescmap").textContent = desc;
 
-                    let gal = `<a href="#lightbox">
-                                        <img id="myImgimggal" src="${portada}" style="width:100%;max-width:50px; margin: .5em;">
+                    let gal = `<a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${portada}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
+                    let minig = `<div class="item active">
+                                         <img class="minigalimg" id="lightgal1" src="${portada}" alt="First slide">
+                                     </div>
+                                     `;
                      for(let l = 0; l < img.length; l++){
                          gal +=`                               
-                                    <a href="#lightbox">
-                                        <img id="myImgimggal" src="${img[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                                    <a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${img[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
+                         minig += ` <div class="item">
+                                         <img class="minigalimg" src="${img[l].photo}" alt="Fourth slide">
+                                     </div>`;
                      }
-                    
+                    $('#gla').html(`${minig}`)
                     $("#imagesmapp").html(`${gal}`);
                 });
             }
@@ -2962,14 +2968,15 @@ for (var i = 0; i < markerGroups[type].length; i++) {
             $("#imagesmapp").addClass("hiddens");
 
         });
-        $("#myImgimggal").click(function() {
+        var minigaler = function() {
+            console.log("entra");
             $("#minigallery").removeClass("hiddens");
             $("#closeminigal").removeClass("hiddens");
             $("#TitleMap").addClass("hiddens");
             $("#textdescmap").addClass("hiddens");
             $("#imagesmapp").addClass("hiddens");
 
-        });
+        }
 
         $("#closeminigal").click(function() {
             $("#minigallery").addClass("hiddens");
