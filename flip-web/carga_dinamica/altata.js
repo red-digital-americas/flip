@@ -13,8 +13,8 @@ var buildingid = params.get('buildingid');
 var title = params.get('title');
 
 $(document).ready(function () {
-    $('#titlepage').html(`${title}`)
    // debugger;
+     $('#titlepage').html(`${title}`);
     $.ajax({
         type: 'POST',
         url: urlbase_api +"Post/SeeHomeGeneral",
@@ -380,8 +380,6 @@ $(document).ready(function () {
         }, 
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
     });
-    
-
 });
 
 function change_image(item) {
@@ -750,8 +748,8 @@ function getBuildId() {
 
     const build_id = getBuildId(); 
 
-    getServiceData( build_id );
-    getRoomsData( build_id );
+    getServiceData( buildingid );
+    getRoomsData( buildingid );
     //getAmmenitiesData( build_id );
 
 }());

@@ -140,7 +140,7 @@
                             class="text-center"
                              [class.table__data-button-yellow]="element.checkOut === 'Check Out'"
                              [class.table__data-button-red]="element.checkOut  !== 'Check Out'">
-                             {{element.checkOut}}
+                             {{element.checkOut === 'Check Out' ? element.checkOut : 'CheckOut' }}
                           </button>
                         </ng-template>
                     </td>

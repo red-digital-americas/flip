@@ -118,6 +118,10 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Total Billed</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.amountStanding  | currency}}</td>
                 </ng-container>
+                <ng-container matColumnDef="pending">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Pending</th>
+                    <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.pending  | currency}}</td>
+                </ng-container>
                 <ng-container matColumnDef="roomateFlip">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Roomate type</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">

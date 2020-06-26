@@ -59,6 +59,7 @@ export class RoomAvailavilityComponent implements OnInit {
         'reservationsActive',
         'dateUnemployment',
         'amountStanding',
+        'pending',
         'roomateFlip',
         'status',
         'smoke',
