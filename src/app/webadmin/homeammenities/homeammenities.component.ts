@@ -307,7 +307,8 @@ export class HomeammenitiesComponent implements OnInit {
           PhotoBuild: this.post.build, 
           PhotoBuilMobile: this.post.buildmobile,
           buildingid: this.IDBUILD, 
-          userid: this.IDUSR
+          userid: this.IDUSR,
+          CommunitiesIndexId: this.IDBUILD
         };
 
         if( this.formValidator( this.post ) ) {
