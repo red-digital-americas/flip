@@ -27,6 +27,9 @@ export class HomegeneralComponent implements OnInit {
   public warningModal;
   public dangerModal;
   public infoModal;
+  slide_to_delete: any;
+  modal_to_show:any;
+  page_modal:boolean = false;
 
   constructor(private router: Router,
     private heroService: DatosService,
@@ -101,6 +104,14 @@ export class HomegeneralComponent implements OnInit {
     });
 
   ngOnInit() {
+    this.post_blanck = {
+      id: 0,
+      title: "",
+      desc: "",
+      frontphoto: "",
+      photomobile: ""
+    }
+   
     if (localStorage.getItem("user") == undefined) {
       this.router.navigate(['/login']);
     }
@@ -274,7 +285,7 @@ export class HomegeneralComponent implements OnInit {
    passdata( post:any ){
 
     this.resetImagesData();
-
+    
     this.general_data.id = post.id;
     this.general_data.title = post.title;
     this.general_data.Description = post.desc;
@@ -303,6 +314,68 @@ this.router.navigate(['webadmin/homeservices/' + id])
 maps(id?: number) {
   this.router.navigate(['webadmin/maps/' + id])
 }
+
+public delete( element_data: any ):void {
+
+  this.slide_to_delete = element_data;
+  this.showModal();
+
+}
+
+public showModal( section: string = 'default' ):void {
+
+  this.modal_to_show = section;
+  !this.page_modal ? this.page_modal = true : this.page_modal = false; 
+
+}
+
+public confirmDeleteElement():void {
+
+  this.loader.showLoader(); 
+
+  this.heroService.service_general_post(`Post/DeleteHomeGeneral`,this.slide_to_delete)
+      .subscribe( (response: any) => {
+
+        if( response.result == 'Success' ) {
+
+          this.get_photos();
+          this.showModal();
+          this.loader.hideLoader(); 
+          this.system_message.showMessage({
+            kind: 'ok',
+            message: {
+              header: 'Slide Deleted',
+              text: 'Slide has been deleted successfully.'
+            },
+            time: 2000
+          });
+
+        }else{
+          this.loader.hideLoader(); 
+          this.system_message.showMessage({
+            kind: 'error',
+            message: {
+              header: 'System Error',
+              text: 'Error WS => Deleted Slide'
+            },
+            time: 2000
+          });
+        }
+
+      }, (error: any) => {
+
+        this.system_message.showMessage({
+          kind: 'error',
+          message: {
+            header: 'System Error',
+            text: 'Error WS => Deleted Slide'
+          },
+          time: 2000
+        });
+
+      });
+
+}
    
    public system_message: SystemMessage = new SystemMessage();
    public loader: LoaderComponent = new LoaderComponent();
@@ -316,7 +389,8 @@ maps(id?: number) {
       title: this.general_data.title,
       Photo: this.general_data.Photo, 
       PhotoMobile: this.general_data.PhotoMobile, 
-      Description: this.general_data.Description
+      Description: this.general_data.Description,
+      CommunitiesIndexId: this.IDBUILD
     };
 
     if( this.formValidator( this.general_data ) ) {
