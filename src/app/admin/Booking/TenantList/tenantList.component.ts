@@ -38,6 +38,7 @@ export class TenantListComponent implements OnInit {
         'pendingBilled',
         'totalBeds',
         'roomateFlip',
+        'status',
         'checkIn',
         'checkOut',
         'active',
@@ -61,15 +62,29 @@ export class TenantListComponent implements OnInit {
         {id: 1, name: 'No', value: false}
     ];
 
+    pendingLs: ActiveModel[] = [
+        {id: 0, name: 'Yes', value: true},
+        {id: 1, name: 'No', value: false}
+    ];
+
+    ifCheckOutLs: ActiveModel[] = [
+        {id: 0, name: 'Yes', value: true},
+        {id: 1, name: 'No', value: false}
+    ];
+
     filterForm = new FormGroup({
         fromDate: new FormControl(),
         toDate: new FormControl(),
-        active: new FormControl()
+        active: new FormControl(),
+        pending: new FormControl(),
+        ifCheckOut: new FormControl()
     });
     pipe: DatePipe;
     get fromDate() { return this.filterForm.get('fromDate').value; }
     get toDate() { return this.filterForm.get('toDate').value; }
     get active() { return this.filterForm.get('active').value; }
+    get pending() { return this.filterForm.get('pending').value; }
+    get ifCheckOut() { return this.filterForm.get('ifCheckOut').value; }
 
     ngOnInit() {
         this.section = 'tenantList';
@@ -110,7 +125,9 @@ export class TenantListComponent implements OnInit {
         const params = {
             activeBooking: this.active === null ? '' : this.active.value,
             dateInit: this.fromDate === null ? '' : this.pipe.transform(this.fromDate, 'MM/dd/yyyy'),
-            dateEnd: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy')
+            dateEnd: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy'),
+            pending: this.pending === null ? '' : this.pending.value,
+            ifCheckOut: this.ifCheckOut === null ? '' : this.ifCheckOut.value
         };
         console.log(params);
         this.loader.showLoader();
