@@ -466,14 +466,14 @@ select:active,
       bottom: 0;
       right: 0;
       margin: auto;
-      width: 50%;
-      height: 50%;
+      width: 60%;
+      height: 60%;
       border-radius: 50%;
       box-shadow: 0.5px 0.5px 0.25px rgba($color: #2e343a, $alpha: .2);
     }
 
     &-able {
-      background-color: #309b8a;
+      background-color: #20a8d8;
     }
 
     &-unable {
