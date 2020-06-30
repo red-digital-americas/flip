@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
     public navbar_options = [
         {name: 'Reservations', id: 'tenantList', active: true},
         {name: 'Room Availability', id: 'roomAvailavility', active: false},
-        {name: 'Events Calendar', id: 'reservations', active: false},
+        {name: 'Events', id: 'reservations', active: false},
         {name: 'Messages', id: 'messages', active: false},
         {name: 'Alerts', id: 'alerts', active: false},
         //{name: 'Room Catalog', id: 'roomCatalog', active: false},

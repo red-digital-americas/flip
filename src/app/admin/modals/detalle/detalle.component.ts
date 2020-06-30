@@ -90,7 +90,6 @@ export class DetalleComponent implements OnInit {
 
   ngOnInit() {    
     this.responseData = {action:'None'};
-
     var params = { "id": this.idProps };
     //debugger;
     this.heroService.service_general_get_with_params("Schedules", params).subscribe((res) => {
@@ -101,6 +100,7 @@ export class DetalleComponent implements OnInit {
           return;
         }
         this.eventDetail = res.item[0];
+        console.log("info evento => ", this.eventDetail);
         this.isPastEvent();
         // this.isAllDayEvent();
       }
@@ -283,10 +283,9 @@ export class DetalleComponent implements OnInit {
         console.log('Here ===> ', res);
         if(res.result === "Success"){                    
           this.usersBuildingArray = res.item;                       
-          
           this.usersBuildingArray = this.usersBuildingArray.filter(user => {                        
             return !this.booksArray.map(book => book.user.id).includes(user.id); 
-          });          
+          });         
         } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
         else { console.log("Error");}
       },

@@ -17,6 +17,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { DetalleComponent } from '../modals/detalle/detalle.component';
 import { CrearComponent } from '../modals/crear/crear.component';
 import * as moment from 'moment';
+import { SystemMessage } from '../../../ts/systemMessage';
+import { LoaderComponent } from '../../../ts/loader';
 
 
 
@@ -57,7 +59,8 @@ export class ReservationsComponent implements OnInit {
     }
     else {      
       this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
-      this.IDBUILD = this.route.snapshot.params['id'];       
+      this.IDBUILD = this.route.snapshot.params['id']; 
+      this.getToday();      
       this.GetAmenities();         
       this.InitCalendarSetup();
       this.section = 'reservations';
@@ -186,13 +189,13 @@ export class ReservationsComponent implements OnInit {
     let fcNextBtn = document.getElementsByClassName('fc-next-button')[0];
     let fcPrevBtn = document.getElementsByClassName('fc-prev-button')[0];
     
-    if (moment(info.view.activeStart).isBefore(moment(), 'month')) { 
+    if (moment(info.view.activeEnd).isBefore(moment().add(-4, 'month'), 'month')) { 
       fcPrevBtn != undefined ? fcPrevBtn.setAttribute('disabled', 'true') : null;
     } else {
       fcPrevBtn != undefined ? fcPrevBtn.removeAttribute('disabled') : null;
     }
 
-    if (moment(info.view.activeEnd).isAfter(moment().add(1, 'month'), 'month')) { 
+    if (moment(info.view.activeEnd).isAfter(moment().add(6, 'month'), 'month')) { 
       fcNextBtn != undefined ? fcNextBtn.setAttribute('disabled', 'true') : null;
     } else {
       fcNextBtn != undefined ? fcNextBtn.removeAttribute('disabled') : null;
@@ -239,7 +242,7 @@ export class ReservationsComponent implements OnInit {
     ); 
   }
 
-  private GetScheudleById(arg) {            
+  private GetScheudleById(arg) {           
     this.heroService.service_general_get_with_params("Schedules", { id: arg.event.id }).subscribe(
       (res)=> {                
         if(res.result === "Success"){          
@@ -288,7 +291,8 @@ export class ReservationsComponent implements OnInit {
     });      
   }  
 
-  Crear (arg) {    
+  Crear (arg) { 
+    console.log('Arg => ', arg);   
     //"dayGridMonth" "timeGridWeek" "timeGridDay"
     if(moment(arg.date).isBefore(moment(new Date()), 'day') && this.calendarComponent.getApi().view.type === 'dayGridMonth') { 
       this.calendarComponent.getApi().unselect(); return; 
@@ -313,7 +317,372 @@ export class ReservationsComponent implements OnInit {
         this.GetEvents();
       }
     });      
-  }  
+  }
   
+  ///////////////////////////////////////////////
+  /////////// Holis ////////////////////////
+  ////////////////////////////// Crayolis /////////
+  ///////////////////////////////////////////////
+  public system_message:SystemMessage = new SystemMessage();
+  public host_list: any[] = [];
+  public getHostCatalog():void {
+
+    let params = {buildingId: this.IDBUILD};
+  
+    this.heroService.service_general_get_with_params("Users", params)
+        .subscribe( (response: any) => {
+
+          if( response.result == "Success" ) {
+
+            this.host_list = response.item;
+
+          }
+
+        }, (error: any) => {
+
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 4777,
+            message: {
+              header: 'System Error',
+              text: 'Users Catalog has not been loaded.'
+            }
+          });
+
+        });
+
+  }
+
+  public show_modal:boolean = false;
+  public showModal():void {
+
+    this.reservation_data = new NewReservationModel();
+
+    !this.show_modal ? 
+      this.show_modal = true :
+      this.show_modal = false;
+
+    this.getHostCatalog();
+
+  }
+
+  public updateKindReservation( status:boolean = true ):void {
+
+    this.reservation_data.Private = status;
+
+  }
+
+  public reservation_data: NewReservationModel = new NewReservationModel();
+  public loader: LoaderComponent = new LoaderComponent();
+  public newEventTrigger():void {
+
+    this.reservation_data.Schedules[0].TimeStart = `${ this.reservation_data.Schedules[0].Date } ${ this.time_start }`;
+    this.reservation_data.Schedules[0].TimeEnd = `${ this.reservation_data.Schedules[0].Date } ${ this.time_end }`;
+
+    if( this.newEventFormValidator() ) {
+
+      this.reservation_data.AmenityId = this.amenitySelect;
+      this.newReserversationWS();
+
+    } else {
+
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 4777,
+        message: {
+          header: 'Form Data',
+          text: 'All inputs must be filled to continue'
+        }
+      });
+
+    }    
+
+  }
+
+  public time_start:string = '';
+  public time_end:string = '';
+  public hourWorker( event_data: any, status:boolean = true ):void {
+ 
+    const event = event_data.target;
+
+    if( status ) {
+
+      this.time_start = event.value;
+
+    } else {
+
+      this.time_end = event.value;
+
+    }
+
+  }
+
+  public newReserversationWS():void {
+
+    console.log('Aqui ===> ', this.reservation_data);
+
+    this.heroService.service_general_post("Activity", this.reservation_data)
+        .subscribe( (response: any) => {
+
+          console.log('Response del activity => ', response);
+
+          if( response.result == "Success" ) {
+
+            this.loader.showLoader();
+
+            this.system_message.showMessage({
+              kind: 'ok',
+              time: 4777,
+              message: {
+                header: 'Event created',
+                text: 'Event has been created successfully'
+              }
+            });
+
+            this.showModal();
+            
+            setTimeout( () => this.loader.hideLoader(), 1777);
+
+          } else {
+
+            this.system_message.showMessage({
+              kind: 'error',
+              time: 4777,
+              message: {
+                header: 'Event not created',
+                text: response.detalle
+              }
+            });
+
+          }
+
+        }, (error: any) => {
+
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 4777,
+            message: {
+              header: 'System Error',
+              text: 'Event can not be created, please contact support or try later.'
+            }
+          });
+
+        });
+
+  }
+
+  public event_form_validator: any = {
+    no_name: false,
+    no_desc: false,
+    no_host: false,
+    no_date: false,
+    no_shou: false,
+    no_ehou: false,
+    no_phot: false
+  }
+  public newEventFormValidator():boolean {
+
+    let result:boolean = false;
+
+    this.reservation_data.Name == '' ? 
+      this.event_form_validator.no_name = true : 
+      this.event_form_validator.no_name = false;
+      
+    this.reservation_data.Description == '' ? 
+      this.event_form_validator.no_desc = true : 
+      this.event_form_validator.no_desc = false; 
+
+    this.reservation_data.UserId == 0 ? 
+      this.event_form_validator.no_host = true : 
+      this.event_form_validator.no_host = false; 
+
+    this.reservation_data.Photo == '' ? 
+      this.event_form_validator.no_phot = true : 
+      this.event_form_validator.no_phot = false; 
+
+    this.reservation_data.Schedules[0].Date == '' ? 
+      this.event_form_validator.no_date = true : 
+      this.event_form_validator.no_date = false;
+      
+    this.reservation_data.Schedules[0].TimeStart == '' ? 
+      this.event_form_validator.no_shou = true : 
+      this.event_form_validator.no_shou = false; 
+
+    this.reservation_data.Schedules[0].TimeEnd == '' ? 
+      this.event_form_validator.no_ehou = true : 
+      this.event_form_validator.no_ehou = false; 
+
+    for( let item in this.event_form_validator ) {
+
+      if( this.event_form_validator[item] ) {
+
+        return false;
+
+      } else result = true;
+
+    }
+
+    return result;
+
+  }
+
+  public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
+
+    const event = event_data.target,
+          dimensions_image_data = {
+            get_dimensions: ( function() {
+
+              const dimensions_split = dimensions_image.split('x'),
+                    width = Number( dimensions_split[0] ),
+                    height = Number( dimensions_split[1] );
+
+              return {
+                width: width,
+                height: height
+              }
+
+            }())
+          },
+          image_limit_width = dimensions_image_data.get_dimensions.width,
+          image_limit_height = dimensions_image_data.get_dimensions.height,
+          id_image_container:any = document.getElementById( target_image ),
+          name_image_container = document.getElementById( name_image ),
+          native_image_uploaded = document.getElementById('image_real_dimension'),
+          root_data = this;
+
+    if( event.files && event.files[0] ) {
+
+      const reader = new FileReader();
+
+            reader.onload = function(e:any) {
+
+              const image_convert:any = e.target.result,
+                    validating_image = new Promise( (resolve) => {
+
+                      native_image_uploaded.setAttribute('src', image_convert);
+                      
+                      setTimeout( () => {
+
+                        const native_image_dimension = {
+                          image: image_convert,
+                          width: native_image_uploaded.offsetWidth,
+                          height: native_image_uploaded.offsetHeight
+                        };
+
+                        resolve( native_image_dimension );
+
+                      }, 277);
+              
+                    });
+
+                    validating_image.then( ( image_data:any ) => {
+
+                      if( image_limit_width === image_data.width && image_limit_height === image_data.height ) {
+                        
+                        id_image_container.setAttribute('src', image_data.image );
+                        name_image_container.innerHTML = `<span class="image-name">${ event.files[0].name }</span>`;
+                        id_image_container.classList.remove('no-image');
+                        root_data.prepareImages( event_data );
+
+                      } else {
+
+                        id_image_container.src = '../../../assets/14.jpg';
+                        root_data.reservation_data.Photo = '';
+                        name_image_container.innerHTML = `Image must be <br /><span class="text-bold">${ dimensions_image }px</span>`;
+                        id_image_container.classList.add('no-image');
+
+                      }
+                      
+                    });
+
+            }
+
+            reader.readAsDataURL( event.files[0] );
+
+    }
+    
+}
+
+public today: string = '';
+  public getToday():void {
+
+      const date = new Date(),
+            today = {
+                day: date.getDate(),
+                month: date.getMonth() + 1,
+                year: date.getFullYear()
+            },
+            format_date = {
+                day: function() {
+
+                  let day = today.day < 10 ? `0${today.day}` : today.day;
+
+                  return day;
+
+                },
+                month: function() {
+
+                  let month = today.month < 10 ? `0${today.month}` : today.month;
+
+                  return month;
+
+                }
+            },
+            new_date = `${ today.year }-${ format_date.month() }-${ format_date.day() }`;
+            
+      this.today = new_date;
+
+  }
+
+public newImages: any[] = [];
+prepareImages(e) {
+    
+    if (Utils.isDefined(e.srcElement.files)) {
+    for (let f of e.srcElement.files) {
+        
+        this.newImages.push(f);
+    }
+    }
+    this.addImages();
+
+}
+
+addImages() {
+    let url: string = '';
+    if (!Utils.isEmpty(this.newImages)) {
+    for (let f of this.newImages) {
+        this.heroService.UploadImgSuc(f).subscribe((r) => {
+        if (Utils.isDefined(r)) {
+            url = <string>r.message;
+            
+            url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
+            this.reservation_data.Photo = url;
+            
+            this.newImages = [];
+        }
+        })
+    }
+    }
+}
+  
+}
+
+class NewReservationModel {
+  Name: string = '';
+  Description: string = '';
+  Photo: string = '';
+  QuoteMax: number = 30;
+  Private: boolean = false;
+  Status: number = 0;
+  Schedules: any = [new ReservationSchedule];
+  UserId: number = 0;
+  AmenityId: number = 0;
+}
+
+class ReservationSchedule {
+  Date: string = '';
+  Status: number = 0;
+  TimeEnd: String = '';
+  TimeStart: String = '';
 }
 

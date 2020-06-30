@@ -4,7 +4,12 @@
         <div class="ml-col-1 margin-bottom-x">
             <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
                Messages
-             </h4>
+            </h4>
+            <button 
+                class="ap-form__rButton button-yellow button-icon button-icon--add padding-lateral-m button-big"
+                (click)="openModal()">
+                New Conversation
+            </button>
         </div>
         <div class="ml-col-1 position-relative">
             <div class="ml-col-1 ap-chat">
@@ -16,15 +21,15 @@
                         {{userInfo.name}} {{userInfo.lastName}}
                     </p>
                 </div>
-                <div class="ap-chat__people-person ap-chat__people-person--contacts block-tets" (click)="openModal()">
-                    <p class="ap-chat__people-person-name ap-chat__people-person--contacts-subtitle">
+                <div class="ap-chat__people-person ap-chat__people-person--contacts block-tets" style="height: 40px;">
+                    <p class="ap-chat__people-person-name ap-chat__people-person--contacts-subtitle padding-left-min">
                         Conversations
                     </p>
-                    <button class="ap-chat__people-person--contacts-button button-yellow button-icon button-icon--edit">
+                    <!-- button class="ap-chat__people-person--contacts-button button-yellow button-icon button-icon--edit">
                         New Message
-                    </button>
+                    </button -->
                 </div>
-                <div class="ap-chat__people margin-top-m">
+                <div class="ap-chat__people">
                     <div class="ml-col-1">
                         <div 
                             *ngFor="let friend of posts;"
@@ -32,7 +37,7 @@
                             class="ap-chat__people-person ap-chat__people-person--friend">
                             <span class="ap-chat__people-person--mask"></span>
                             <figure class="ap-chat__people-person-photo ap-chat__people-person-photo--friend">
-                                <img [src]="userInfo.avatar?userInfo.avatar:'src\assets\avatar-def.png'" />
+                                <img [src]="friend.photo != null ? friend.photo:'src\assets\avatar-def.png'" />
                             </figure>
                             <p class="ap-chat__people-person-name ap-chat__people-person-name--friend">
                                 {{ friend.name }} {{ friend.lastname }}
@@ -42,6 +47,11 @@
                     </div>
                 </div>
                 <div class="ap-chat__chat">
+                    <div class="ml-col-1" *ngIf="showChat">
+                        <button class="ap-form__rButton button-red margin-bottom-x" (click)="hideChat()">
+                            Close
+                        </button>
+                    </div>
                     <div class="chatm card-style" *ngIf="showChat">
                         <h4 style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" class="chatm__datos" (click)="viewDetail(userConversation.id, userConversation.idBooking)">
                             {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}

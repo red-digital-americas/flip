@@ -122,7 +122,7 @@ export class MessagesComponent implements OnInit {
               console.log("Post==>", value.item);
               if (value.result == "Success") {
                 this.posts = value.item;
-                console.log(this.posts);
+                console.log('Los chats ===> ', this.posts);
               }
           }
         });
@@ -192,6 +192,20 @@ export class MessagesComponent implements OnInit {
         this.GetConversationUser(contact.conversationId);
         this.GetMessages();
         this.illChatWith( event_data );
+      }
+
+      public hideChat():void {
+
+        this.showChat = false;
+
+        const friend_item = document.getElementsByClassName('ap-chat__people-person--friend');
+    
+        for( let friend = friend_item.length; friend--; ) {
+    
+          friend_item[friend].classList.remove('ap-chat__people-person--active');
+    
+        }
+
       }
     
       public illChatWith( event_data:any ):void {

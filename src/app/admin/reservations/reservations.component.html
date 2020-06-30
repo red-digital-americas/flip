@@ -1,15 +1,19 @@
-<!-- app-nav [section]="section"></app-nav -->
 <div class="ml-col-1 ap-calendar">
   <booking-navbar [section]="section"></booking-navbar>
   <div class="ml-col-1 padding-general-m margin-bottom-g">
     <div class="ml-col-1">
       <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-        Events Calendar
+        Events
       </h4>
+      <button 
+        class="ap-form__rButton button-blue padding-lateral-m button-big"
+        (click)="showModal()">
+        New Event
+      </button>
       <button 
         class="ap-form__rButton button-black padding-lateral-m button-big"
         (click)="Refresh()">
-        Update Calendar
+        Refresh Calendar
       </button>
     </div>
     <form class="ap-form ap-form__sdato--no-padding ml-col-2 margin-bottom-x">
@@ -57,10 +61,234 @@
       ></full-calendar>
     </div>
   </div>
-  <!-- button 
-    (click)="Refresh()"
-    class="ap-calendar__refresh card-style">
-  </button -->
+</div>
+<div class="ml-modal ml-modal--bg-black" *ngIf="show_modal">
+  <div class="ml-modal__content card-style">
+    <div class="ml-col-1 margin-bottom-x">
+        <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
+            New Event
+        </p>
+        <button 
+            class="ap-form__rButton button-red" (click)="showModal()">
+            Close
+        </button>
+    </div> 
+    <div class="ml-col-1">
+      <div class="ml-col-6">
+        <div class="ml-col-1">
+          <div class="ml-col-1">
+              <div class="ap-form__input">
+                  <p class="ml-col-1">
+                      Kind of reservation:
+                  </p>
+              </div>
+          </div>
+          <div class="ml-col-15">
+              <div class="ap-form__input-radio-opc">
+                  <input 
+                      type="radio" 
+                      id="profile_single"
+                      name="profile_type"
+                      checked
+                      class="ap-form__input-radio display-none"
+                      (change)="updateKindReservation( false )" />
+                  <label for="profile_single" class="ap-form__label-radio">
+                    Activity
+                  </label>
+              </div>
+          </div>
+          <div class="ml-col-15">
+              <div class="ap-form__input-radio-opc">
+                  <input 
+                      type="radio" 
+                      id="profile_buss" 
+                      name="profile_type"
+                      class="ap-form__input-radio display-none"
+                      (change)="updateKindReservation()" />
+                  <label for="profile_buss" class="ap-form__label-radio">
+                    Space
+                  </label>
+              </div>
+          </div>
+        </div>
+        <div class="ml-col-1">
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <input 
+                required
+                type="text" 
+                placeholder="Name*"
+                id="profile_name" 
+                name="profile_name"
+                class="ap-form__input-text"
+                [(ngModel)]="reservation_data.Name"
+                [class.form_error_found]="event_form_validator.no_name" />
+              <label 
+                for="profile_name" 
+                class="ap-form__label ap-form__label-text">
+                Name
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_name">
+                Name is required*
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ml-col-1">
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <textarea 
+                required 
+                placeholder="Description*"
+                id="profile_desc" 
+                name="profile_desc"
+                [(ngModel)]="reservation_data.Description"
+                [class.form_error_found]="event_form_validator.no_desc"
+                class="ap-form__input-textarea"></textarea>
+              <label 
+                for="profile_name" 
+                class="ap-form__label ap-form__label-text">
+                Description
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_desc">
+                Description is required*
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ml-col-2">
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <select
+                  required
+                  type="text" 
+                  placeholder="Lapse Time"
+                  [(ngModel)]="reservation_data.UserId"
+                  [class.form_error_found]="event_form_validator.no_host"
+                  class="ap-form__input-text">
+                  <option value="0" disabled>Select Host</option>
+                  <option *ngFor="let host of host_list, index as index;" [value]="host.id">
+                    {{ host.name }} {{ host.lastName }} {{ host.motherName }}
+                  </option>
+              </select>
+              <label 
+                class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="1 == 2">
+                Host
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_host">
+                Host is required*
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ml-col-2">
+          <div class="ml-col-1">
+              <div class="ap-form__input">
+                <input 
+                  required
+                  type="date" 
+                  placeholder="When?"
+                  id="staff_when" 
+                  name="staff_when"
+                  class="ap-form__input-text"
+                  [min]="today"
+                  [class.form_error_found]="event_form_validator.no_date"
+                  [(ngModel)]="reservation_data.Schedules[0].Date"/>
+                <label 
+                  for="staff_when" 
+                  class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
+                  Date
+                </label>
+                <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_date">
+                  Date is required*
+                </span>
+              </div>
+          </div>
+        </div>
+        <div class="ml-col-3">
+          <div class="ml-col-1">
+              <div class="ap-form__input">
+                <input 
+                  required
+                  type="time" 
+                  placeholder="What time?"
+                  id="staff_when" 
+                  name="staff_when"
+                  class="ap-form__input-text"
+                  (change)="hourWorker( $event )"
+                  [class.form_error_found]="event_form_validator.no_shou"
+                  [value]="time_start" />
+                <label 
+                  for="staff_when" 
+                  class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
+                  Open at:
+                </label>
+                <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_shou">
+                  Open at is required*
+                </span>
+              </div>
+          </div>
+        </div>
+        <div class="ml-col-3">
+          <div class="ml-col-1">
+              <div class="ap-form__input">
+                <input 
+                  required
+                  type="time" 
+                  placeholder="What time?"
+                  id="staff_when" 
+                  name="staff_when"
+                  class="ap-form__input-text"
+                  (change)="hourWorker( $event, false )"
+                  [class.form_error_found]="event_form_validator.no_ehou"
+                  [value]="time_end" />
+                <label 
+                  for="staff_when" 
+                  class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
+                  Close at:
+                </label>
+                <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_ehou">
+                  Close at: is required*
+                </span>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="ml-col-4o">
+        <div class="ap-form__input ap-form__input--full-width">
+          <input
+            class="ap-form__input-image display-none" 
+            id="nueva_comunidad_img"
+            name="nueva_comunidad_img"
+            type="file"
+            (change)="validateImageUpload( $event, '350x350', 'new_amm_image_0', 'new_amm_name_0' );" />
+          <label for="nueva_comunidad_img" class="ap-form__label-image">
+            <figure class="ap-form__image">
+              <img class="ap-form__image-image no-image" 
+                   id="new_amm_image_0"
+                   [class.forms_errors_nimage]="event_form_validator.no_phot"
+                   src="../../../assets/14.jpg" />
+              <span class="ap-form__image-data text-center" id="new_amm_name_0">
+                Image resolution must be <br />
+                <span class="text-bold">350x350</span> 
+              </span>
+            </figure>
+          </label>
+        </div>
+      </div>
+      <div class="ml-col-1 ap-form__buttons margin-top-m">
+        <button 
+            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
+            (click)="newEventTrigger()">
+            Create event
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black-box">
+  <img src="" id="image_real_dimension" />
 </div>
 
   <!--div class="card display-none">    

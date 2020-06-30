@@ -445,6 +445,45 @@ select:active,
 
 }
 
+.spaces {
+
+  width: 80px;
+  float: left;
+  display: flex;
+  justify-content: center;
+
+  &__space {
+
+    width: 10px;
+    height: 10px;
+    position: relative;
+
+    &-able,
+    &-unable {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      width: 50%;
+      height: 50%;
+      border-radius: 50%;
+      box-shadow: 0.5px 0.5px 0.25px rgba($color: #2e343a, $alpha: .2);
+    }
+
+    &-able {
+      background-color: #309b8a;
+    }
+
+    &-unable {
+      background-color: rgba(140,140,140,.7);
+    }
+
+  } 
+
+}
+
 .form_large_image {
   height: 340px !important;
 }
@@ -2239,7 +2278,7 @@ select:active,
     height: 100%;
     float: left;
     position: relative;
-    padding-top: 140px;
+    padding-top: 100px;
     padding-bottom: 120px;
     background-color: white;
     overflow-y: scroll;
@@ -3087,7 +3126,7 @@ select:active,
 
 .button-icon {
 
-  background-size: auto 70%;
+  background-size: auto 55%;
   background-position: 10% 50%;
   background-repeat: no-repeat;
 
@@ -3639,6 +3678,41 @@ select:active,
 
 }
 
+.loader-section {
+
+  height: 180px;
+  position: relative;
+
+  &__loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 120px;
+    height: 120px;
+  }
+
+  &__loader::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 4px 4px .5px .5px;
+    border-style: solid solid dashed dashed;
+    transform: rotate(0deg);
+    border-color: rgba($color: #2e343a, $alpha: .7); 
+    animation-name: rotateLoader;
+    animation-iteration-count: infinite;
+    animation-duration: 4s;
+    animation-timing-function: linear; 
+  }
+
+}
+
 .system-message {
 
   width: 340px;
@@ -4052,6 +4126,10 @@ select {
 @keyframes systemMessageOut {
   0% { right: 0; }
   100% { right: -100%; }
+}
+
+@keyframes rotateLoader {
+  100% { transform: rotate(360deg); }
 }
 
 // MODALS

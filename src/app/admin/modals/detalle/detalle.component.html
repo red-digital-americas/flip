@@ -31,16 +31,27 @@
                     </div>
                     <div class="col-12">
                         {{eventDetail?.date | date:'yyyy/MM/dd'}} {{eventDetail?.timeStart | date:'HH:mm'}} - {{eventDetail?.timeEnd | date:'HH:mm'}}
+                    </div>
+                    <hr style="width:100%;">
+                     
+                    <div class="col-12 margin-bottom-x">
+                        <h5>Host</h5>
+                        <div class="book"> 
+                            <img class="book__avatar"
+                                 [src]="eventDetail?.user.avatar != '' ? eventDetail?.user.avatar : '../../../../assets/avatar-def.png'" />       
+                            <div class="book__username">
+                                {{ eventDetail?.user.name }} {{ eventDetail?.user.lastName }}
+                            </div>                                                            
+                        </div>   
                     </div>                    
                 </div>
             </div>            
-
             <div class="col-4">
                 <img class="event__photo" [src]="eventDetail?.activity.photo" alt="Event Photo">
             </div>
         </div>
 
-        <div class="row" *ngIf="!eventDetail?.activity.private">
+        <div class="row margin-bottom-x" *ngIf="!eventDetail?.activity.private">
             <div class="col-6">
                 <h5>Books</h5>                   
                 <div *ngIf="!booksArray.length">No books for this event</div>            
