@@ -1,6 +1,6 @@
 <div class="ml-col-1">
-    <div class="ml-col-1 padding-general-m margin-bottom-m">
-        <div class="ml-col-1 padding-general-m card-style">
+    <div class="ml-col-1 padding-general-m background-white">
+        <div class="ml-col-1 margin-bottom-x text-cente">
             <h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
                 Tenant list
                 <button 
@@ -9,9 +9,11 @@
                     Add Tenant
                 </button>
             </h4>
-            <form class="ap-form__titulo ap-form__titulo--no-border date-block" [formGroup]="filterForm">
-                
+        </div>
+        <div class="ml-col-1">
+            <form class="ap-form__titulo ap-form__titulo--no-border date-block" [formGroup]="filterForm">              
                 <div class="ml-col-1">
+                    
                     <div class="ml-col-4">
                         <div class="ml-col-1">
                             <div class="ap-form__input">
@@ -35,6 +37,38 @@
                             </div>
                         </div>
                     </div>    
+
+                    <div class="ml-col-4">
+                        <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <mat-form-field>
+                                    <mat-label>Pending</mat-label>
+                                    <mat-select [formControl]="animalControl" formControlName="pending">
+                                      <mat-option>--</mat-option>
+                                      <mat-option *ngFor="let pending of pendingLs" [value]="pending">
+                                        {{pending.name}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ml-col-4">
+                        <div class="ml-col-1">
+                            <div class="ap-form__input">
+                                <mat-form-field>
+                                    <mat-label>Check Out</mat-label>
+                                    <mat-select [formControl]="animalControl" formControlName="ifCheckOut">
+                                      <mat-option>--</mat-option>
+                                      <mat-option *ngFor="let ifCheckOut of ifCheckOutLs" [value]="ifCheckOut">
+                                        {{ifCheckOut.name}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="ml-col-4">
                         <div class="ml-col-1">
@@ -154,6 +188,10 @@
                 <ng-container matColumnDef="active">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Active </th>
                     <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.active"></td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Status </th>
+                    <td mat-cell *matCellDef="let element" class="table__data" > {{ element.status[element.status.length - 1].detalle }} </td>
                 </ng-container>
                 <ng-container matColumnDef="more">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header ></th>
