@@ -50,6 +50,8 @@ import { resolve } from 'dns';
         no_detail: false
     };
     detailCancel = '';
+    statusBooking: boolean;
+    ifCheckIn: boolean;
 
     constructor(
         public _services: DatosService,
@@ -122,8 +124,13 @@ import { resolve } from 'dns';
             .subscribe( (response: any) => {
                 this.loader.hideLoader();
                 if( response.result == 'Success' ) {
-
+                    console.log(response);
                     this.current_membership = response.infoMembership;
+                    this.statusBooking =
+                        response.infoMembership.status[response.infoMembership.status.length - 1].idStatusBooking === 4
+                        ? false : true;
+                    this.ifCheckIn = response.infoMembership.dateStartReal !== null ? false : true;
+                    console.log('IfCheckIn', this.ifCheckIn, this.statusBooking, response.infoMembership.dateStartReal);
                     this.current_beds = this.current_membership.additionalBeds;
                     this.current_membership.customDateS = this.dateWorker('format' ,this.current_membership.dateStart );
                     this.current_membership.customDateE = this.dateWorker('format' ,this.current_membership.dateEnd );
@@ -268,7 +275,6 @@ import { resolve } from 'dns';
         };
         console.log('Cancel', ws_data);
         if (this.validateCancelForm()) {
-            return;
             this.loader.showLoader();
             this._services.service_general_post(`Profile/Cancel`, ws_data)
                 .subscribe( (response: any) => {
@@ -325,10 +331,10 @@ import { resolve } from 'dns';
                                 this._services.service_general_post('Booking/PayFromAdmin', ws_data)
                                     .subscribe( (response: any) => {
 
-                                        this.showModal();
-                                        this.getReservationData();
                                         this.loader.hideLoader();
+                                        this.getReservationData();
                                         this.clearServicesSelected();
+                                        this.showModal();
 
                                     }, (error: any) => {
 
@@ -1082,11 +1088,15 @@ import { resolve } from 'dns';
     }
 
     public goToPage( the_page: string = '' ):void {
-
         the_page != '' ? 
             this._router.navigateByUrl( the_page ) :
             window.history.back();
+    }
 
+    viewDetail() {
+        this._router.navigateByUrl(`app-profile/${ this.user_id }/${ this.booking_id }`, 
+            { state: { id: 0, name: 'TenantList To Profile' } 
+        });
     }
 
 }

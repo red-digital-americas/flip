@@ -3113,8 +3113,9 @@ select:active,
 }
 
 .button-toggle {
-  background-color: white;
-  color: #2e343a;
+  background-color: #f499bb;
+  color: white;
+  // color: #2e343a;
   padding-left: 40px;
   padding-right: 40px;
   position: relative;
@@ -4133,6 +4134,9 @@ select {
 }
 
 // MODALS
-.myCustomModalClass .modal-dialog {
-  max-width: 1000px;
+.myCustomModalClass .modal-dialog{
+  max-width: 100% !important;
+  // width: fit-content !important;
+  // height: fit-content !important;
+  // max-height: max-content !important;
 }
