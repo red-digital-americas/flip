@@ -573,7 +573,7 @@ function getFlipnetworkData() {
                     }
                 }
             
-            plantilla += `<img src="${slide.photoMobileSlider}" alt="Los Angeles">
+            plantilla += `<img src="${slide.photoSlider}" alt="Los Angeles">
                             <div class="header-backstage  No_PaDdInG ">
                                 <div class="col-md-12 text-center No_PaDdInG ">
                                     <div class="col-md-7" style="margin-left: -2%;">

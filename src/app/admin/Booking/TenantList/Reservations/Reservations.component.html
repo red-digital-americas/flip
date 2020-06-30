@@ -8,32 +8,23 @@
     <div class="ml-col-1 margin-bottom-m">
         <button 
             class="ap-form__rButton button-red"
-            (click)="goToPage()">
+            (click)="viewDetail()">
             My Profile
         </button>
         <button 
-            *ngIf="check_out_active"
-            class="ap-form__rButton button-pink"
-            (click)="showModal('check_out')">
-            Check Out
-        </button>
-        <button 
-            *ngIf="check_in_active"
-            class="ap-form__rButton button-blue"
-            (click)="showModal('check_in')">
-            Check In
-        </button>
-        <button 
+            *ngIf="statusBooking"
             class="ap-form__rButton button-green"
             (click)="showModal('add_service'); getServicesData();">
             Add Service
         </button>
         <button 
+            *ngIf="statusBooking"
             class="ap-form__rButton button-yellow"
             (click)="showModal('edit_end_date'); editEndDateInit();">
             Edit End Date
         </button>
         <button 
+            *ngIf="statusBooking"
             class="ap-form__rButton button-red"
             (click)="showModal('cancel_booking')">
             Cancel
@@ -41,6 +32,16 @@
         <h4 class="ap-form__titulo ap-form__titulo--auto-width">
             {{ name_build }}
         </h4>
+    </div>
+    <div class="ml-col-1 margin-bottom-x">
+        <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
+            <div class="ml-col-1">
+                Status:
+            </div>
+            <div class="ml-col-1 text-bold">
+                {{ current_membership?.status[current_membership?.status.length - 1].detalle }} 
+            </div>
+        </div>     
     </div>
     <div class="ml-col-1 margin-bottom-x">
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
@@ -63,17 +64,40 @@
             <div class="ml-col-1">
                 Check In:
             </div>
-            <div class="ml-col-1 text-bold">
-                {{ current_membership?.dateStartReal != null ? current_membership?.dateStartReal : 'No Date' }}  
-            </div>
+            <div *ngIf="current_membership?.dateStartReal != null ; then elseIn else thenIn"></div>
+            <ng-template #elseIn >
+                <div class="ml-col-1 text-bold">
+                    {{ current_membership?.dateStartReal != null ? current_membership?.dateStartReal : 'No Date' }}  
+                </div>
+            </ng-template>
+            <ng-template #thenIn>
+                <button 
+                    *ngIf="check_in_active || statusBooking"
+                    class="ap-form__rButton button-blue ml-col-1 padding-lateral-m"
+                    (click)="showModal('check_in')">
+                    Check In
+                </button>
+            </ng-template>
         </div>
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
             <div class="ml-col-1">
                 Check Out:
             </div>
-            <div class="ml-col-1 text-bold">
-                {{ current_membership?.dateEndReal != null ? current_membership?.dateEndReal : 'No Date' }} 
-            </div>
+            <div *ngIf="current_membership?.dateEndReal != null; then elseOut else thenOut"></div>
+            <ng-template #elseOut >
+                <div class="ml-col-1 text-bold">
+                    {{ current_membership?.dateEndReal != null ? current_membership?.dateStartReal : 'No Date' }}  
+                </div>
+            </ng-template>
+            <ng-template #thenOut>
+                <button
+                    [disabled]="ifCheckIn"
+                    *ngIf="statusBooking"
+                    class="ap-form__rButton button-pink ml-col-1 padding-lateral-m"
+                    (click)="showModal('check_out')">
+                    Check Out
+                </button>
+            </ng-template>
         </div>
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
             <div class="ml-col-1">
@@ -463,6 +487,7 @@
     </div>
     <div class="ml-col-1 bottom-separator margin-bottom-x">
         <button 
+            *ngIf="statusBooking"
             class="ap-form__rButton button-black text-bold padding-lateral-m"
             (click)="showModal('confirm_payment')">
             Pay
@@ -645,7 +670,7 @@
                         mat-raised-button color="accent"
                         class="table__data-button"
                         (click)="showModal('history'); moreHistoryData( element )">
-                        view more
+                        Detail
                     </button>
                 </td>
             </ng-container>

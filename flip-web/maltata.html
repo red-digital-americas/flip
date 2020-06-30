@@ -27,6 +27,14 @@
                 margin-top: 0px !important;
             }
         }
+        .minigalimg{
+            height: 200px !important;
+        }
+        
+        .photo{
+            width: 70px !important;
+            max-width: 70px !important;
+        }
     </style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +43,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/css/animation.css">
     <script src="carga_dinamica/config.js"></script>
-    <script src="carga_dinamica/altata.js"></script>
+    <script src="carga_dinamica/maltata.js"></script>
     <!--font-awesome.min.css-->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <!--flaticon.css-->
@@ -145,72 +153,8 @@
                                                     <li data-target="#myCarousel" data-slide-to="4"></li>
                                                 </ol>
                                                 <!-- Wrapper for slides -->
-                                                <div class="carousel-inner">
-                                                    <div class="item active ">
-                                                        <img id="img-maltata-00" alt="Los Angeles">
-                                                        <div id="hidegallmap" class="header-text  ">
-                                                            <div class="col-md-12 text-center text-design-leftphi">
-                                                                <span>
-                                                                    <!-- p id="p-altata-00" class="padding-right" style="margin-right: 8%;"></p -->
-                                                                    <p  id ="p-altata-00"; class="padding-right" style="margin-right: 8%; margin-top: 9%;">
-                                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, est error repudiandae magnam illum quos voluptatibus ad aliquid totam odio minima quod.
-                                                                    </p>
-                                                                </span>
-                                                                <br>
-                                                                <br>
-                                                            </div>
-                                                        </div><!-- /header-text -->
-                                                    </div>
-                                                    <div class="item">
-                                                        <img id="img-maltata-01" alt="Chicago">
-                                                        <div id="hidegallmap1" class="header-text  ">
-                                                            <div class="col-md-12 text-center text-design-leftphi">
-                                                                <br>
-                                                                <br>
-                                                                <span>
-                                                                    <!-- p class="padding-right" style="margin-right: 8%;"></p -->
-                                                                    <p id ="p-altata-01"; class="padding-right" style="margin-right: 8%; margin-top: -2.5%;">
-                                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, est error repudiandae magnam illum quos voluptatibus ad aliquid totam odio minima quod.
-                                                                    </p>
-                                                                </span>
-                                                                <br>
-                                                                <br>
-                                                            </div>
-                                                        </div><!-- /header-text -->
-                                                    </div>
-                                                    <div class="item">
-                                                        <img id="img-maltata-02" alt="New York">
-                                                        <div id="hidegallmap2" class="header-text  ">
-                                                            <div class="col-md-12 text-center text-deign-leftphi">
-                                                                <br> <br>
-                                                                <span>
-                                                                    <!--p id="p-altata-02" class="padding-right" style="margin-right: 8%;"></p -->
-                                                                    <p id ="p-altata-02"; class="padding-right" style="margin-right: 8%; margin-top: -2.5%;">
-                                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, est error repudiandae magnam illum quos voluptatibus ad aliquid totam odio minima quod.
-                                                                    </p>
-                                                                </span>
-                                                                <br>
-                                                                <br>
-
-                                                            </div>
-                                                        </div><!-- /header-text -->
-                                                    </div>
-                                                    <div class="item">
-                                                        <img id="img-maltata-03" alt="New York">
-                                                        <div id="hidegallmap2" class="header-text  ">
-                                                            <div class="col-md-12 text-center text-design-leftphi">
-                                                                <br> <br>
-                                                                <span>
-                                                                    <!-- p id="p-altata-03" class="padding-right" style="margin-right: 8%;"></p -->
-                                                                    <p id ="p-altata-03"; class="padding-right" style="margin-right: 8%; margin-top: -2.5%;">
-                                                                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repudiandae, earum accusamus deleniti molestiae laudantium explicabo impedit mollitia error.
-                                                                    </p>
-                                                                </span>
-                                                                <br>
-                                                                <br>
-                                                            </div>
-                                                        </div><!-- /header-text -->
-                                                    </div>
+                                                <div id="generalslides" class="carousel-inner">
+                                                
                                                 </div>
                                                 <!-- Left and right controls -->
                                                 <a style="margin-top: 50%; margin-left: 5%;" class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -269,19 +213,8 @@
                                                                     <img src="assets/images/closebut.svg" alt="Los Angeles">
                                                                 </span -->
                                                             </a>
-                                                            <div class="carousel-inner ">
-                                                                <div class="item active">
-                                                                    <img class="minigalimg" style="height: 200px;" id="lightgal1" src="assets/images/Communities/Coahuila/amenities.jpg" alt="First slide">
-                                                                </div>
-                                                                <div class="item">
-                                                                    <img class="minigalimg" style="height: 200px;" id="lightgal2" src="assets/images/Communities/Coahuila/business.jpg" alt="Second slide">
-                                                                </div>
-                                                                <div class="item">
-                                                                    <img class="minigalimg" style="height: 200px;" id="lightgal3" src="assets/images/Communities/Coahuila/coliving.jpg" alt="Third slide">
-                                                                </div>
-                                                                <div class="item">
-                                                                    <img lass="minigalimg" style="height: 200px;" id="lightgal4" src="assets/images/Communities/Coahuila/community.jpg" alt="Fourth slide">
-                                                                </div>
+                                                            <div id="gla" class="carousel-inner ">
+                                                                
                                                             </div><!-- /.carousel-inner -->
                                                             <a style="    top: 15%;" class="left carousel-control" href="#minigallery" data-slide="prev">
 
@@ -1060,18 +993,26 @@
                         $('#textdescmap').html(`${plantilla}`);
                   
                        
-                         let gal = `<a href="#lightbox">
-                                        <img id="myImgimggal" src="${markers[0].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                       let gal = `<a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${markers[0].photo}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
-                        
+                        let minig = `<div class="item active">
+                                         <img class="minigalimg" id="lightgal1" src="${markers[0].photo}" alt="First slide">
+                                     </div>
+                                     `;
                      for(let l = 0; l < markers[0].mapGalleries.length; l++){
                          gal +=`                               
-                                    <a href="#lightbox">
-                                        <img id="myImgimggal" src="${markers[0].mapGalleries[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                                    <a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${markers[0].mapGalleries[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
+                         
+                         minig += ` <div class="item">
+                                         <img class="minigalimg" src="${markers[0].mapGalleries[l].photo}" alt="Fourth slide">
+                                     </div>`;
                      }
                     
                     $("#imagesmapp").html(`${gal}`);
+                    $('#gla').html(`${minig}`);
                      console.log(gal);
                   console.log("Marcadores",markers);
                     
@@ -1216,16 +1157,23 @@
                     document.getElementById("textdescmap").textContent = desc;
                     console.log(img);
                     
-                    let gal = `<a href="#lightbox">
-                                        <img id="myImgimggal" src="${portada}" style="width:100%;max-width:50px; margin: .5em;">
+                    let gal = `<a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${portada}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
+                    let minig = `<div class="item active">
+                                         <img class="minigalimg" id="lightgal1" src="${portada}" alt="First slide">
+                                     </div>
+                                     `;
                      for(let l = 0; l < img.length; l++){
                          gal +=`                               
-                                    <a href="#lightbox">
-                                        <img id="myImgimggal" src="${img[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
+                                    <a href="#lightbox" class="photo" onclick="minigaler()">
+                                        <img class="photo" src="${img[l].photo}" style="width:100%;max-width:50px; margin: .5em;">
                                     </a>`;
+                         minig += ` <div class="item">
+                                         <img class="minigalimg" src="${img[l].photo}" alt="Fourth slide">
+                                     </div>`;
                      }
-                    
+                    $('#gla').html(`${minig}`)
                     $("#imagesmapp").html(`${gal}`);
                     
 
@@ -1278,15 +1226,20 @@
 
         });
         $("#myImgimggal").click(function () {
-            $("#minigallery").removeClass("hiddens"); $("#imagenesgalheight").removeClass("hiddens");
+           
 
+        });
+
+        var minigaler = function() {
+            console.log("entra");
+             $("#minigallery").removeClass("hiddens"); 
+            $("#imagenesgalheight").removeClass("hiddens");
             $("#closeminigal").removeClass("hiddens");
             $("#TitleMap").addClass("hiddens");
             $("#textdescmap").addClass("hiddens");
             $("#imagesmapp").addClass("hiddens");
 
-        });
-
+        }
         $("#closeminigal").click(function () {
             $("#imagenesgalheight").addClass("hiddens");
 

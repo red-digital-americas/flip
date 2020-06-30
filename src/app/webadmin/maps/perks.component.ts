@@ -116,7 +116,7 @@ export class MapsComponent implements OnInit {
 
   public AddPerk () {
     this.perkModel.ParseFromForm(this.formGroup.value);   
-    // console.log(this.perkModel);return;
+    console.log(this.perkModel);return;
 
     this.heroService.service_general_post("PerkGuide/AddPerk", this.perkModel).subscribe(
       (res)=> { console.log('Hay que mandar este => ', this.perkModel );

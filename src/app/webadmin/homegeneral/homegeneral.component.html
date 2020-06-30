@@ -31,14 +31,7 @@
 <div class="row">
   <h3 Class="text-ultra" style="padding-left: 55px; padding-top: 15px; padding-bottom: -55px;"> {{ namebuilding}}</h3>
   <!-- *ngIf="this.lengthpost < 4" -->
-  <div *ngIf="this.lengthpost < 4" style="padding-left: 555px; padding-top: 15px; float: right; ">
-    <button 
-            data-toggle="modal" 
-            (click)="primaryModal.show(); passdata(this.post_blanck);"
-            class="button button-x">
-            Add Slide
-    </button>
-  </div>
+
 </div>
 <div class="row padding-bottom-m padding-general-m" style="padding-top: 15px;">
   <div class="ml-col-1">
@@ -121,6 +114,14 @@
       </div>
 
     </form>
+    <div style="padding-top: 0px; float: right; margin: 0 0 15px 0;">
+      <button 
+              data-toggle="modal" 
+              (click)="primaryModal.show(); passdata(this.post_blanck);"
+              class="button button-x">
+              Add Slide
+      </button>
+    </div>
   </div>
   <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x" *ngFor="let post of posts, index as index;">
     <div class="ml-col-1">
@@ -162,10 +163,41 @@
           class="button button-x">
           Edit
         </button>
+
+        <button 
+                (click)="delete(post)"
+                class="button button-x button-black button-icon button-icon--delete-white">
+                Delete
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+<div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
+  <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
+    <p class="ml-modal__pop-titulo margin-bottom-m">
+      Delete Slide
+    </p>
+    <p class="ml-modal__pop-text">
+      Are you sure to delete slide<br />
+      <span class="text-bold">"{{ slide_to_delete.title }}"</span>?
+    </p>
+    <div class="ml-modal__pop-buttons">
+      <button 
+        (click)="showModal()"
+        class="ml-modal__pop-buttons-button button-pink">
+        Cancel
+      </button>
+      <button 
+        (click)="confirmDeleteElement()"
+        class="ml-modal__pop-buttons-button button-black">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="black-box">
   <img src="" id="image_data" />
 </div>

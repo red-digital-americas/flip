@@ -28,7 +28,17 @@ import { DataSource } from '@angular/cdk/table';
     activeLs: ActiveModel[] = [
         {id: 0, name: 'Yes', value: true},
         {id: 1, name: 'No', value: false}
-      ];
+    ];
+
+    pendingLs: ActiveModel[] = [
+        {id: 0, name: 'Yes', value: true},
+        {id: 1, name: 'No', value: false}
+    ];
+
+    ifCheckOutLs: ActiveModel[] = [
+        {id: 0, name: 'Yes', value: true},
+        {id: 1, name: 'No', value: false}
+    ];
 
     loader = new LoaderComponent();
     systemMessage = new SystemMessage();
@@ -37,13 +47,17 @@ import { DataSource } from '@angular/cdk/table';
     filterForm = new FormGroup({
         fromDate: new FormControl(),
         toDate: new FormControl(),
-        active: new FormControl()
+        active: new FormControl(),
+        pending: new FormControl(),
+        ifCheckOut: new FormControl()
     });
     arrivalFilter = new FormControl();
     globalFilter = '';
     get fromDate() { return this.filterForm.get('fromDate').value; }
     get toDate() { return this.filterForm.get('toDate').value; }
     get active() { return this.filterForm.get('active').value; }
+    get pending() { return this.filterForm.get('pending').value; }
+    get ifCheckOut() { return this.filterForm.get('ifCheckOut').value; }
 
     show_page_modal = false;
     modal_to_show: string;
@@ -62,6 +76,7 @@ import { DataSource } from '@angular/cdk/table';
         'pendingBilled',
         'totalBeds',
         'roomateFlip',
+        'status',
         'checkIn',
         'checkOut',
         'active',
@@ -137,7 +152,9 @@ import { DataSource } from '@angular/cdk/table';
         const params = {
             activeBooking: this.active === null ? '' : this.active.value,
             dateInit: this.fromDate === null ? '' : this.pipe.transform(this.fromDate, 'MM/dd/yyyy'),
-            dateEnd: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy')
+            dateEnd: this.toDate === null ? '' : this.pipe.transform(this.toDate, 'MM/dd/yyyy'),
+            pending: this.pending === null ? '' : this.pending.value,
+            ifCheckOut: this.ifCheckOut === null ? '' : this.ifCheckOut.value
         };
         console.log(params);
         this.loader.showLoader();

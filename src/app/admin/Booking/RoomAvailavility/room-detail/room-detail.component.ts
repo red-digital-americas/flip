@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DatosService } from '../../../../../datos.service';
 import { LoaderComponent } from '../../../../../ts/loader';
 import { SystemMessage } from '../../../../../ts/systemMessage';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-room-detail',
@@ -16,6 +17,20 @@ export class RoomDetailComponent implements OnInit {
 
   section;
   roomId;
+  roomData = {
+    amountStanding: 0,
+    beds: 0,
+    dateUnemployment: '01/01/0001',
+    disponibility: 0,
+    floor: '',
+    id: 0,
+    pending: 0,
+    reservationsActive: 0,
+    room: '',
+    roomateFlip: true,
+    smoke: true,
+    status: true
+  };
   roomObj = {
     id: 0,
     name: '',
@@ -40,6 +55,7 @@ export class RoomDetailComponent implements OnInit {
 
   ////////////////////////// ACTIVE //////////////////////////////////
   activeTotal = 0;
+  activeTotalPending = 0;
   activeLenght;
   activeObj;
   activeDisplayedColumns: string[] = [
@@ -52,6 +68,7 @@ export class RoomDetailComponent implements OnInit {
     'pendingBilled',
     'totalBeds',
     'roomateFlip',
+    'status',
     'checkIn',
     'checkOut',
     'active',
@@ -63,6 +80,7 @@ export class RoomDetailComponent implements OnInit {
   ////////////////////////// INACTIVE ///////////////////////////////
   inactiveObj;
   inactiveTotal = 0;
+  inactiveTotalPending = 0;
   inactiveDisplayedColumns: string[] = [
     'name',
     'room',
@@ -73,6 +91,7 @@ export class RoomDetailComponent implements OnInit {
     'pendingBilled',
     'totalBeds',
     'roomateFlip',
+    'status',
     'checkIn',
     'checkOut',
     'active',
@@ -89,6 +108,46 @@ export class RoomDetailComponent implements OnInit {
   modal_to_show: string;
   userIdSelected;
 
+  /////////////////////////
+  // ACTIVE
+  ////////////////////////
+  ifCheckOutLs: ActiveModel[] = [
+      {id: 0, name: 'Yes', value: true},
+      {id: 1, name: 'No', value: false}
+  ];
+  pendingLs: ActiveModel[] = [
+      {id: 0, name: 'Yes', value: true},
+      {id: 1, name: 'No', value: false}
+  ];
+  filterActiveForm = new FormGroup({
+      pending: new FormControl(),
+      ifCheckOut: new FormControl()
+  });
+  get pending() { return this.filterActiveForm.get('pending').value; }
+  get ifCheckOut() { return this.filterActiveForm.get('ifCheckOut').value; }
+  /////////////////////////
+  // END ACTIVE
+  ////////////////////////
+  // INACTIVE
+  ///////////////////////
+  ifCheckOutILs: ActiveModel[] = [
+    {id: 0, name: 'Yes', value: true},
+    {id: 1, name: 'No', value: false}
+  ];
+  pendingILs: ActiveModel[] = [
+      {id: 0, name: 'Yes', value: true},
+      {id: 1, name: 'No', value: false}
+  ];
+  filterInactiveForm = new FormGroup({
+      pending: new FormControl(),
+      ifCheckOut: new FormControl()
+  });
+  get pendingI() { return this.filterInactiveForm.get('pendingI').value; }
+  get ifCheckOutI() { return this.filterInactiveForm.get('ifCheckOutI').value; }
+  /////////////////////////
+  // END INACTIVE
+  ////////////////////////
+
   constructor(
     public _services: DatosService,
     public _router: Router,
@@ -97,6 +156,8 @@ export class RoomDetailComponent implements OnInit {
 
   ngOnInit() {
     this.section = 'roomAvailavility';
+    this.roomData = JSON.parse(sessionStorage.getItem('roomData'));
+    console.log('ROOM DATA', this.roomData);
     this.roomId = this.route.snapshot.paramMap.get('id');
     this.getRoomDetail(this.roomId);
   }
@@ -115,6 +176,7 @@ export class RoomDetailComponent implements OnInit {
         this.activeTotal = this.activeTotal + element.amountOutstanding;
         this.activeTotal = this.activeTotal +
                           (element.membership !== null ? element.membership.priceMembership : 0);
+        this.activeTotalPending = this.activeTotalPending + element.pending;
       });
       this.activeObj = new MatTableDataSource(value.item.active);
       this.activeObj.paginator = this.paginator;
@@ -124,6 +186,8 @@ export class RoomDetailComponent implements OnInit {
         this.inactiveTotal = this.inactiveTotal + element.amountOutstanding;
         this.inactiveTotal = this.inactiveTotal +
                           (element.membership !== null ? element.membership.priceMembership : 0);
+        this.inactiveTotalPending = this.inactiveTotalPending + element.pending;
+
       });
       this.inactiveObj = new MatTableDataSource(value.item.inactive);
       this.inactiveObj.paginator = this.paginatorInactive;
@@ -171,30 +235,67 @@ export class RoomDetailComponent implements OnInit {
     !this.show_page_modal ? this.show_page_modal = true : this.show_page_modal = false;
     this.modal_to_show = to_show;
     this.userIdSelected = userId;
-}
+  }
 
-confirmCheckInOut() {
+  confirmCheckInOut() {
     const ws_data = {
-        username: this.userIdSelected
+      username: this.userIdSelected
     };
     this.loader.showLoader();
     this._services.service_general_post(`Profile/checkOut`, ws_data)
-        .subscribe((response: any) => {
-            if (response.result === 'Success') {
-                this.systemMessage.showMessage({
-                    kind: 'ok',
-                    time: 4200,
-                    message: {
-                        header: `Check out successfully.`,
-                        text: `You have been Check out successfully`
-                    }
-                });
-                this.showModal('', 0);
-                setTimeout(() => this.loader.hideLoader(), 1777);
+      .subscribe((response: any) => {
+        if (response.result === 'Success') {
+          this.systemMessage.showMessage({
+            kind: 'ok',
+            time: 4200,
+            message: {
+              header: `Check out successfully.`,
+              text: `You have been Check out successfully`
             }
-        }, (error: any) => {
-            console.error('Error WS CIO => ', error);
-        });
+          });
+          this.showModal('', 0);
+          setTimeout(() => this.loader.hideLoader(), 1777);
+        }
+      }, (error: any) => {
+        console.error('Error WS CIO => ', error);
+      });
+  }
+
+  filterTable(ifActive: any) {
+    const data = {
+      roomId: this.roomId,
+      pending: this.pending === null ? '' : this.pending.value,
+      ifCheckOut: this.ifCheckOut === null ? '' : this.ifCheckOut.value,
+      active: ifActive
+    };
+    console.log(data);
+    this.loader.showLoader();
+    this._services.service_general_get_with_params(`Room/GetFilterRoom`, data)
+      .subscribe((response: any) => {
+        this.loader.hideLoader();
+        this.filterActiveForm.reset();
+        if (response.result === 'Success') {
+          if (ifActive === true) {
+            this.activeObj = new MatTableDataSource(response.item);
+            this.activeObj.paginator = this.paginator;
+            this.activeObj.sort = this.sort;
+            // this.displayActive = response.item.length === 0 ? false : true;
+          } else {
+            this.inactiveObj = new MatTableDataSource(response.item);
+            this.inactiveObj.paginator = this.paginatorInactive;
+            this.inactiveObj.sort = this.sortInactive;
+          }
+        }
+      }, (error: any) => {
+        this.loader.hideLoader();
+        console.error('Error WS CIO => ', error);
+      });
+  }
+
 }
 
+export interface ActiveModel {
+  id: number;
+  name: string;
+  value: boolean;
 }

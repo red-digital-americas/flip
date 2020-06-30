@@ -13,8 +13,8 @@ var buildingid = params.get('buildingid');
 var title = params.get('title');
 
 $(document).ready(function () {
-    $('#titlepage').html(`${title}`)
    // debugger;
+     $('#titlepage').html(`${title}`);
     $.ajax({
         type: 'POST',
         url: urlbase_api +"Post/SeeHomeGeneral",
@@ -27,22 +27,29 @@ $(document).ready(function () {
          //   debugger;
             respuesta = JSON.parse(data);
             console.log(' General ========> ',respuesta);
-            $("#img-altata-00").attr("src", respuesta.item[0].frontphoto);
-            $("#img-maltata-00").attr("src", respuesta.item[0].photomobile);
-            $("#p-altata-00").text(respuesta.item[0].desc);
-
-            $("#img-altata-01").attr("src", respuesta.item[1].frontphoto);
-            $("#img-maltata-01").attr("src", respuesta.item[1].photomobile);
-            $("#p-altata-01").text(respuesta.item[1].desc);
-
-            $("#img-altata-02").attr("src", respuesta.item[2].frontphoto);
-            $("#img-maltata-02").attr("src", respuesta.item[2].photomobile);
-            $("#p-altata-02").text(respuesta.item[2].desc);
-
-            $("#img-altata-03").attr("src", respuesta.item[3].frontphoto);
-            $("#img-maltata-03").attr("src", respuesta.item[3].photomobile);
-            $("#p-altata-03").text(respuesta.item[3].desc);
-
+            let plantilla = "";
+            for(let i = 0; i < respuesta.item.length; i++){
+                let slide = respuesta.item[i];
+                if(i == 0){
+                    plantilla += `<div class="item active ">`;
+                }else{
+                    plantilla += `<div class="item">`;
+                }
+                plantilla += `   <img src="${slide.frontphoto}" alt="${slide.title}">
+                                    <div id="hidegallmap" class="header-text hidden-xs">
+                                        <div class="col-md-12  text-center text-design-leftphi">
+                                           <br>
+                                           <br>
+                                           <span>
+                                              <p id="p-altata-00" class="paddingright">${slide.desc}</p>
+                                           </span>
+                                           <br>
+                                           <br>
+                                         </div>
+                                    </div>
+                                </div>`;
+            }
+            $("#generalslides").html(`${plantilla}`);
             $('#textmenuamenidades').text(respuesta.titles[1].name);
             $('#serviceTxt').text(respuesta.titles[0].name);
             $('#roomsTxt').text(respuesta.titles[2].name);
@@ -380,8 +387,6 @@ $(document).ready(function () {
         }, 
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
     });
-    
-
 });
 
 function change_image(item) {
@@ -750,8 +755,8 @@ function getBuildId() {
 
     const build_id = getBuildId(); 
 
-    getServiceData( build_id );
-    getRoomsData( build_id );
+    getServiceData( buildingid );
+    getRoomsData( buildingid );
     //getAmmenitiesData( build_id );
 
 }());
