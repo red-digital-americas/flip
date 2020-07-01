@@ -127,7 +127,7 @@ import { resolve } from 'dns';
                     console.log(response);
                     this.current_membership = response.infoMembership;
                     this.statusBooking =
-                        response.infoMembership.status[response.infoMembership.status.length - 1].idStatusBooking === 4
+                        response.infoMembership.status.idStatusBooking === 4 || response.infoMembership.status.idStatusBooking === 3
                         ? false : true;
                     this.ifCheckIn = response.infoMembership.dateStartReal !== null ? false : true;
                     console.log('IfCheckIn', this.ifCheckIn, this.statusBooking, response.infoMembership.dateStartReal);
