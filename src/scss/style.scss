@@ -3104,8 +3104,16 @@ select:active,
     background-image: url('../assets/icon/plus.png');
   }
 
+  &--cancel {
+    background-image: url('../assets/icon/cancel.png');
+  }
+
   &--add-white {
     background-image: url('../assets/icon/plus-white.png');
+  }
+
+  &--cancel-white {
+    background-image: url('../assets/icon/cancel-white.png');
   }
 
   &--edit {
