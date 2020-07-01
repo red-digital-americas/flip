@@ -80,7 +80,7 @@ import { DataSource } from '@angular/cdk/table';
         'checkIn',
         'checkOut',
         'active',
-        // 'more'
+        'more'
     ];
 
     filteredValues = {
