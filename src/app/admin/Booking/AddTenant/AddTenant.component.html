@@ -220,6 +220,7 @@
                                 id="bd_roomate" 
                                 name="bd_roomate"
                                 [disabled]="able_section_two"
+                                (change)="unableField( $event, 'bd_gender_container')"
                                 [class.form_error_found]="bt_form_data.no_rtyp"
                                 [(ngModel)]="booking_data.roomateFlip"
                                 class="ap-form__input-text">
@@ -239,7 +240,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ml-col-4">
+                    <div class="ml-col-4" id="bd_gender_container">
                         <div class="ml-col-1">
                             <div class="ap-form__input">
                               <select

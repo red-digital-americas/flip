@@ -8,7 +8,7 @@
 
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-3" *ngFor="let item of navSections">
-      <a  class="nav-link"         
+      <a  class="nav-link cursor-pointer"         
         [ngClass]="{'navSection--active': item.id == selectedSection}"
         (click)="GoSection(item)">
         {{item.name}}

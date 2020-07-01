@@ -921,8 +921,8 @@ import { Router } from '@angular/router';
             pay_method: await this.creditCardValidator() 
         }
 
-        console.log('=> ', form_validation_result.information);
-        console.log('=> ', form_validation_result.pay_method);
+        console.log('Validacion de la info => ', form_validation_result.information);
+        console.log('Validacion de metodo de pago => ', form_validation_result.pay_method);
 
         const cc_encrypt: CreditCardModel = {
             active: true,
@@ -1261,12 +1261,13 @@ import { Router } from '@angular/router';
                 this.credit_card_form.no_ccv = true :
                 this.credit_card_form.no_ccv = false;
 
-            for( let field in this.credit_card_form ) {
-
-                if( this.credit_card_form[field] ) hold_result = false;
-                else hold_result = true;
-
-            }
+            if(
+                !this.credit_card_form.no_name &&
+                !this.credit_card_form.no_numb &&
+                !this.credit_card_form.no_mont &&
+                !this.credit_card_form.no_year &&
+                !this.credit_card_form.no_ccv 
+            ) hold_result = true;
 
             if( hold_result ) {
 
@@ -1715,6 +1716,25 @@ import { Router } from '@angular/router';
         } catch (e) { console.log(e); }
     }
 
+    public unableField( event_data:any, field_selected:string ):void {
+
+        const event = event_data.target,
+              field_to_hide = document.getElementById( field_selected );
+
+        if( event.value == '2' ) {
+
+            field_to_hide.classList.add('display-none');
+            this.booking_data.roomatePreferences = '1';
+            
+        } else {
+
+            field_to_hide.classList.remove('display-none');
+            this.booking_data.roomatePreferences = null;
+
+        }
+
+    }
+
     public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
 
         const event = event_data.target,
@@ -1833,7 +1853,7 @@ class BookingDetailModel {
     pets: boolean = null;
     roomType: number = null;
     smoke: boolean = null;
-    roomatePreferences: boolean = null;
+    roomatePreferences: any = null;
     totalBeds: number = null;
 }
 
