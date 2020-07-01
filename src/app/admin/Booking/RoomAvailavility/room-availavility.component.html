@@ -84,6 +84,7 @@
                   </div>
     
                 </form>
+            <div class="ml-col-1">
                 <mat-form-field class="ap-form__input">
                     <mat-label>Search</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
@@ -99,14 +100,24 @@
                     </ng-container>
                     <ng-container matColumnDef="disponibility">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Occupation</th>
-                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.reservationsActive + '/' + element.beds }}</td>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                            <span class="ml-col-1">
+                                {{ element.disponibility + '/' + element.beds }}
+                            </span>
+                            <div class="spaces">
+                                <div *ngFor="let bed of element.bed_disponibility" class="spaces__space">
+                                    <div *ngIf="bed.unable" class="spaces__space-unable"></div>
+                                    <div *ngIf="!bed.unable" class="spaces__space-able"></div>
+                                </div>
+                            </div>
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="reservationsActive">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Reservations Active</th>
-                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.disponibility }}</td>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.reservationsActive + element.disponibility }}</td>
                     </ng-container>
                     <ng-container matColumnDef="dateUnemployment">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Next full avaibility date</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Date Unemployment</th>
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.dateUnemployment }}</td>
                     </ng-container>
                     <ng-container matColumnDef="amountStanding">

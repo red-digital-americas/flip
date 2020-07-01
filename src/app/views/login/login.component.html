@@ -60,16 +60,21 @@
           </span>
         </div>
       </div>
-      <div class="ml-col-1 ap-form__buttons margin-top-m"
-          [class.visibility-hidden]="no_buttons_abaible">
+      <div class="ml-col-1 ap-form__buttons margin-top-m" *ngIf="!no_buttons_abaible">
         <button 
           type="submit"
+          [class.button-unable]="no_buttons_abaible"
           class="ap-form__buttons-button ap-form__buttons-button--big button-black">
           Login
         </button>
         <span class="ml-col-1 padding-general-min image-name cursor-pointer" (click)="recoverPassword()">
           Forgot password?
         </span>
+      </div>
+      <div class="ml-col-1" *ngIf="no_buttons_abaible">
+        <div class="loader-section">
+          <span class="loader-section__loader"></span>
+        </div>
       </div>
     </form>
     <form 

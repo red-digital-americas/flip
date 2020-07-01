@@ -6,6 +6,7 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { DatosService } from '../../../../datos.service';
 import * as moment from 'moment';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
+import { param } from 'jquery';
 
 class ScheduleModel {
   public Date;
@@ -102,6 +103,7 @@ export class CrearComponent implements OnInit {
 
   GetUsers() {   
     var params = { buildingId: this.buildingIdProps};       
+    console.log("Aqui =====> ", params);
     this.heroService.service_general_get_with_params("Users", params).subscribe(
       (res)=> {
         if(res.result === "Success"){                    

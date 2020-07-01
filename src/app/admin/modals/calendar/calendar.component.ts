@@ -237,10 +237,16 @@ export class CalendarComponent implements OnInit {
 
   private LoadEventsToCalendar(events: any) {
     this.calendarCustom.getApi().removeAllEvents();
-    console.log('LoadEventsToCalendar', events);
+    //console.log('LoadEventsToCalendar', events);
     events.forEach(ev => {
       this.calendarCustom.getApi().addEvent(this.ParseEvent(ev));
     });
+
+    document.getElementsByClassName('modal-dialog')[0].classList.remove('modal-lg');
+    const element:any = document.getElementsByClassName('modal-dialog')[0];
+          element.style.minWidth = "920px";
+          window.dispatchEvent(new Event('resize'));
+
 
     // this.calendarCustom.getApi().refetchEvents();
   }

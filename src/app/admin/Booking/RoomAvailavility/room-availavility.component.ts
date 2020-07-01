@@ -123,6 +123,7 @@ export class RoomAvailavilityComponent implements OnInit {
             .subscribe( (response: any) => {
                 this.loader.hideLoader();
                 if ( response.result === 'Success' ) {
+                    this.disponibilityMarkers( response.item );
                     this.roomList = new MatTableDataSource(response.item);
                     this.roomList.paginator = this.paginator;
                     this.roomList.sort = this.sort;
@@ -140,6 +141,40 @@ export class RoomAvailavilityComponent implements OnInit {
                     time: 2000
                   });
             });
+    }
+
+    public disponibilityMarkers( objects: any ):void {
+
+        objects.forEach( (row: any) => {
+
+            let total_spaces:number = row.disponibility,
+                total_beds:number = row.beds,
+                beds_markers = [];
+                
+            for( let space = 0; space < total_beds; space += 1 ) {
+
+                let bed_marker = {
+                    unable: true
+                }
+
+                beds_markers.push( bed_marker );
+
+                for( let unable_space = 0; unable_space < total_spaces; unable_space += 1 ) {
+
+                    if( beds_markers[unable_space] != undefined ) {
+
+                        beds_markers[unable_space].unable = false;
+
+                    }
+
+                }
+
+            }
+
+            row.bed_disponibility = beds_markers;
+
+        });
+
     }
 
     public applyFilter(event: Event) {

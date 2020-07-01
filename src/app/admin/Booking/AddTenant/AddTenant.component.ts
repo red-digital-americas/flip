@@ -924,6 +924,17 @@ import { Router } from '@angular/router';
         console.log('=> ', form_validation_result.information);
         console.log('=> ', form_validation_result.pay_method);
 
+        const cc_encrypt: CreditCardModel = {
+            active: true,
+            ccv: this.encryptData(this.credit_card_data.ccv),
+            id: 0,
+            main: 1,
+            month: this.credit_card_data.month,
+            name: this.credit_card_data.name,
+            year: this.credit_card_data.year,
+            number: this.encryptData(this.credit_card_data.number)
+        };
+
         if( is_short_term ) {
 
             console.log('Entre aqui');
@@ -933,7 +944,7 @@ import { Router } from '@angular/router';
                 this.profile_section_card = true;
                 this.join_all_data.booking = this.booking_post_data;
                 this.join_all_data.user = this.general_user_data;
-                this.join_all_data.creditCard = this.credit_card_data;
+                this.join_all_data.creditCard = cc_encrypt;
                 this.iHaveCompletedStep(1);
     
             } else if( form_validation_result.pay_method != null ) {
@@ -965,11 +976,10 @@ import { Router } from '@angular/router';
                 form_validation_result.pay_method &&
                 additional_forms.income_form &&
                 additional_forms.reference_form ) {
-
                 this.profile_section_card = true;
                 this.join_all_data.booking = this.booking_post_data;
                 this.join_all_data.user = this.general_user_data;
-                this.join_all_data.creditCard = this.credit_card_data;
+                this.join_all_data.creditCard = cc_encrypt;
                 this.iHaveCompletedStep(1);
     
             } else {
@@ -1455,8 +1465,8 @@ import { Router } from '@angular/router';
     /** Final step ==============================================> */
     public completeAddTenantProcess():void {
 
-        this.credit_card_data.number = this.encryptData( this.credit_card_data.number );
-        this.credit_card_data.ccv = this.encryptData( this.credit_card_data.ccv );
+        // this.credit_card_data.number = this.encryptData( this.credit_card_data.number );
+        // this.credit_card_data.ccv = this.encryptData( this.credit_card_data.ccv );
         this.join_all_data.amount = this.booking_detail_total_ammount.toString();
         this.join_all_data.amountMembership = this.getTotalAmmount().toString();
 
@@ -1869,6 +1879,10 @@ class GeneralUserData {
     cellphone: string = '';
     workplace: string = '';
     aboutMe: string = '';
+    twitterUrl: string = '';
+    facebookUrl: string = '';
+    instagramUrl: string = '';
+    linkedInUrl: string = '';
     active: boolean = true;
     birth: string = '';
     rfc: string = '';
