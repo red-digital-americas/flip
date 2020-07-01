@@ -167,13 +167,18 @@
                             <span>{{element.checkOut}}</span>
                         </ng-template>
                         <ng-template #elseOut>
-                          <button [disabled]="element.pending !== 0 || element.checkOut.includes('N/A')"
-                            (click)="showModal('check_out',element.idUser)" mat-raised-button
-                            class="text-center"
-                             [class.table__data-button-yellow]="element.checkOut === 'Check Out'"
-                             [class.table__data-button-red]="element.checkOut  !== 'Check Out'">
-                             {{element.checkOut === 'Check Out' ? element.checkOut : 'CheckOut' }}
-                          </button>
+                            <div *ngIf="element.checkIn.includes('<span'); then elseCheckIn else thencheckOut"></div>
+                            <ng-template #elseCheckIn>
+                                N/A
+                            </ng-template>
+                            <ng-template #thencheckOut>
+                                <button [disabled]="element.pending !== 0 || element.checkOut.includes('N/A')"
+                                  (click)="showModal('check_out',element.idUser)" mat-raised-button class="text-center"
+                                  [class.table__data-button-yellow]="element.checkOut === 'Check Out'"
+                                  [class.table__data-button-red]="element.checkOut  !== 'Check Out'">
+                                  {{element.checkOut === 'Check Out' ? element.checkOut : 'CheckOut' }}
+                                </button>
+                            </ng-template>
                         </ng-template>
                     </td>
                 </ng-container>
@@ -183,7 +188,12 @@
                 </ng-container>
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Status </th>
-                    <td mat-cell *matCellDef="let element" class="table__data" > {{ element.status[element.status.length - 1].detalle }} </td>
+                    <td mat-cell *matCellDef="let element" class="table__data" >
+                        <div *ngIf="element.status.idStatusBooking === 1">Pending</div>
+                        <div *ngIf="element.status.idStatusBooking === 2">Check In</div>
+                        <div *ngIf="element.status.idStatusBooking === 3">Check Out</div>
+                        <div *ngIf="element.status.idStatusBooking === 4">Cancel</div>
+                    </td>
                 </ng-container>
                 <!-- <ng-container matColumnDef="doCheckOut">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Check Out </th>
