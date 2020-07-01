@@ -5,6 +5,7 @@ import { Utils } from '../../../utils/utils';
 import { DatosService } from '../../../../datos.service';
 import { InviteComponent } from '../invite/invite.component';
 import * as moment from 'moment';
+import { SystemMessage } from '../../../../ts/systemMessage';
 
 class ScheduleModel {
   public Id:number;
@@ -76,6 +77,7 @@ export class DetalleComponent implements OnInit {
     scheduleModel:ScheduleModel = new ScheduleModel();    // For this moment only supports 1 schedule
     acitivyModel:ActivityModel = new ActivityModel();
     public newImages: any[] = [];
+    public system_message: SystemMessage = new SystemMessage();
 
 
   public toasterconfig: ToasterConfig = new ToasterConfig({
@@ -182,8 +184,27 @@ export class DetalleComponent implements OnInit {
           this.modalRef.hide();
         } else if(res.result === "Error") {
           console.log(res.detalle, res.item);
-          this.toasterService.pop('danger', 'Error', res.detalle);
-        } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
+          //this.toasterService.pop('danger', 'Error', res.detalle);
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 4777,
+            message: {
+              header: 'Error',
+              text: res.detalle
+            }
+          });
+        } else { 
+
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 4777,
+            message: {
+              header: 'Error',
+              text: 'An Error has ocurred'
+            }
+          });
+
+         }
 
       },
       (err)=> { console.log(err);}       
@@ -268,7 +289,20 @@ export class DetalleComponent implements OnInit {
   unselectAll() { this.selectedUsers = []; }
 
   Invite () {    
-    if (this.selectedUsers.length <= 0) { return; }
+    if (this.selectedUsers.length <= 0) {
+
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 3777,
+        message: {
+          header: 'Select users',
+          text: 'Please select some users to send invitations.'
+        }
+      });
+
+      return;
+
+    }
 
     this.inviteModel.idActivity = this.eventDetail.activity.id;
     this.inviteModel.inviteidList = this.selectedUsers;
@@ -299,14 +333,48 @@ export class DetalleComponent implements OnInit {
         console.log(res);
         if(res.result === "Success"){                    
           this.selectedUsers = [];
-          this.toasterService.pop('success', 'Success', 'Invitations sent.');
+          //this.toasterService.pop('success', 'Success', 'Invitations sent.');
+          this.system_message.showMessage({
+            kind: 'ok',
+            time: 4777,
+            message: {
+              header: 'Invitations sent',
+              text: 'Invitations has been sent successfully'
+            }
+          });
         } else if (res.result === "Error") { 
           console.log("Ocurrio un error" + res.detalle); 
-          this.toasterService.pop('danger', 'Error', 'Error Sending invites.');
+          //this.toasterService.pop('danger', 'Error', 'Error Sending invites.');
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 4777,
+            message: {
+              header: 'Invitations Error',
+              text: 'Invitations can not been send correctly'
+            }
+          });
         } 
-        else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'Error Sending invites.');}
+        else {
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 4777,
+            message: {
+              header: 'Invitations Error',
+              text: 'Invitations can not been send correctly'
+            }
+          });
+        }
       },
-      (err)=> {console.log(err); this.toasterService.pop('danger', 'Error', 'Error Sending invites.');}
+      (err)=> {
+        this.system_message.showMessage({
+          kind: 'error',
+          time: 4777,
+          message: {
+            header: 'Invitations Error',
+            text: 'Invitations can not been send correctly'
+          }
+        });
+      }
     );
   }
 }
