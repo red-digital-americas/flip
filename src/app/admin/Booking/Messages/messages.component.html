@@ -37,7 +37,8 @@
                             class="ap-chat__people-person ap-chat__people-person--friend">
                             <span class="ap-chat__people-person--mask"></span>
                             <figure class="ap-chat__people-person-photo ap-chat__people-person-photo--friend">
-                                <img [src]="friend.photo != null ? friend.photo:'src\assets\avatar-def.png'" />
+                                <img *ngIf="friend.photo != ''" src="{{ friend.photo }}" />
+                                <img *ngIf="friend.photo == ''" src="../../../../assets/avatar-def.png" />
                             </figure>
                             <p class="ap-chat__people-person-name ap-chat__people-person-name--friend">
                                 {{ friend.name }} {{ friend.lastname }}
@@ -55,8 +56,10 @@
                     <div class="chatm card-style" *ngIf="showChat">
                         <h4 style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" class="chatm__datos" (click)="viewDetail(userConversation.id, userConversation.idBooking)">
                             {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
-                            <img class="chatm__datos-photo" 
-                                 src="{{ userSendMessage.info.photo }}" />
+                            <!-- img class="chatm__datos-photo" 
+                                 src="{{ userSendMessage.info.photo }}" / -->
+                            <img *ngIf="userSendMessage.info.photo != ''" class="chatm__datos-photo" src="{{ userSendMessage.info.photo }}" />
+                            <img *ngIf="userSendMessage.info.photo == ''" class="chatm__datos-photo" src="../../../../assets/avatar-def.png" />
                         </h4>
                         <div class="chatm__chat" id="chat_messages">
                             <div *ngFor="let message of messages"

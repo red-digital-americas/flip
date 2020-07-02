@@ -3159,6 +3159,10 @@ select:active,
     background-image: url('../assets/icon/edit-white.png');
   }
 
+  &--refresh-white {
+    background-image: url('../assets/icon/refresh-white.png');
+  }
+
 }
 
 .button-big {
@@ -3273,6 +3277,10 @@ select:active,
 
 .padding-left-m {
   padding-left: 20px;
+}
+
+.padding-left-g {
+  padding-left: 40px;
 }
 
 .padding-right-m {
@@ -4069,6 +4077,47 @@ select:active,
       width: 10px;
       height: 10px;
     }
+
+}
+
+.table-color {
+
+  &__row {
+    width: 100%;
+    padding: 2px 0;
+    padding-left: 22.5px;
+    font-size: 14px;
+    position: relative;
+  }
+
+  &__mark {
+
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    width: 12.5px;
+    height: 12.5px;
+
+    & > div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%;
+      height: 65%;
+      border-radius: 50%;
+    }
+
+    &--ocean {
+      background-color: #4AC1BA;
+    }
+
+    &--yellow {
+      background-color: #FCCD0A;
+    }
+
+  }
 
 }
 

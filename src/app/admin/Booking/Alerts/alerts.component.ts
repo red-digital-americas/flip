@@ -391,6 +391,8 @@ export class AlertsComponent implements OnInit {
 
             this.loader.showLoader();
 
+            console.log('Nueva alerta WS => ', this.new_alert_data);
+
             this._services.service_general_post('Alerts/NewAlert_detail', this.new_alert_data)
                 .subscribe( (response: any) => {
 
@@ -651,6 +653,8 @@ export class AlertsComponent implements OnInit {
             }
 
         });
+
+        console.log('Catalogo alert status => ', this.alerts_status_catalog);
 
     }
 
