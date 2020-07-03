@@ -3,6 +3,44 @@
     <h2 Class="text-ultra">  Team</h2>
   </div>
   <div class="row padding-bottom-m">
+    <div *ngFor="let post of posts, index as index;" class="pCard_card" [ngClass]="{'pCard_on': post.id === select}">
+      <div class="pCard_up">
+        <img class="photo" [src]="post.frontphoto" alt="">
+         <div class="pCard_text">
+            <h2>{{post.name}} {{post.lastname}}</h2>
+            <p>{{post.position}}</p>
+         </div>
+         <div class="pCard_add" (click)="openmore(post)"><i class="fa fa-plus" [ngClass]="{'fa-minus':post.id === select}"></i></div>
+      </div>
+      <div class="pCard_down">
+        <div class="card__row text-center">
+          <button 
+          class="button padding-lateral button-green button-icon button-icon--edit-white"
+            data-toggle="modal" 
+            (click)="primaryModal.show(); passdata( post );">
+            Edit
+          </button>
+        </div>
+      </div>
+      <div class="pCard_back">
+         <p>Description: {{post.desc}}</p>
+         <div class="ml-col-1 social" *ngIf="post.link && post.link != null && post.link != undefined">
+          <a href="post.link">
+            <img src="../../../assets/iconfinder_linkedin_circle_color_107178.svg" alt="" srcset="">
+            
+            {{post.link}}
+          </a>
+         </div>
+         <div class="ml-col-1 social" *ngIf="post.twitter && post.twitter != null && post.twitter != undefined">
+           <a href="{{post.twitter}}">
+            <img src="../../../assets/iconfinder_twitter_834708.svg" alt="" srcset="">
+            
+            {{post.twitter}}
+          </a>
+         </div>
+      </div>
+  </div>
+    <!--
     <div class="big-card" *ngFor="let post of posts, index as index;">
       <div class="card">
         <div class="card__row">
@@ -48,6 +86,7 @@
         </div>
       </div>
     </div>
+  -->
   </div>
 </div>
 
@@ -153,16 +192,20 @@
 
 
 <div bsModal #primaryModal="bs-modal" class="modal fade modal-fw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content card">
+      <div>
+        <button 
+            type="button" 
+            class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" 
+            (click)="primaryModal.hide()" 
+            aria-label="Close">
+          Close
         </button>
+        <br><br>
+        <h4 class="modal-title">Select the images to change at position: {{PostId}}</h4>
       </div>
-
-
+      <hr>
       <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
           <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
@@ -293,15 +336,12 @@
             </label>
           </div>
         </div>
-        <div class="modal-footer ml-col-1">
-          <button 
-            type="button" 
-            class="btn btn-secondary" 
-            id="close_modal" 
-            (click)="primaryModal.hide(); resetImagesData();">
-            Cerrar
+        <div class="card__row margin-top-x" style="text-align: end;">
+          <button type="button" 
+          class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
+                  (click)="updatephoto()">
+                  Save
           </button>
-          <button type="button" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
         </div>
       </form>
     </div>

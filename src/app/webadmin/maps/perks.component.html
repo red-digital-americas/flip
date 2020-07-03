@@ -28,7 +28,7 @@
   </div>
 </div>
 <div class="ml-col-1">
-  <div class="ml-col-1 padding-general-m margin-bottom-g">
+  <div class="ml-col-1 padding-general-m margin-bottom-g ">
     <div class="ml-col-1" *ngIf="!show_perk_form">
       <div class="ap-cards">
         <!-- h4 class="ap-cards__titulo">
@@ -38,11 +38,12 @@
           <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
             Maps
           </h4>
-          <button 
-            class="ap-form__rButton button-black padding-lateral-m button-icon button-icon--add-white"
-            (click)="toggleSectionForm( 'new' )">
-            Add Map
-          </button>
+          <div style="padding-top: 0px; float: right; margin: 0 0 15px 0;">
+            <button class="button button-x button-pink button-icon button-icon--add-white"
+              (click)="toggleSectionForm( 'new' )">
+              Add Map
+            </button>
+          </div>
         </div>
         <div class="ml-col-1 margin-top-m font-big color-red text-center" *ngIf="perksArray?.length == 0">
           We don't have maps yet,
@@ -60,334 +61,240 @@
               <img src="{{ perk.photo }}" />
             </figure>
             <div class="ap-cards__card-buttons ap-cards__card-buttons--levels">
-              <button 
-                (click)="toggleSectionForm( 'edit', perk)"
+              <button (click)="deleteThisPerk( perk )" *ngIf="this.perksArray.length > 1"
+                class="ap-cards__card-button button-red button-icon button-icon--delete-white">
+                Delete
+              </button>
+
+              <button (click)="toggleSectionForm( 'edit', perk)"
                 class="ap-cards__card-button button-green button-icon button-icon--edit-white">
                 Edit
               </button>
-              <button 
-                (click)="deleteThisPerk( perk )" *ngIf="this.perksArray.length > 1"
-                class="ap-cards__card-button button-black button-icon button-icon--delete-white">
-                Delete
-              </button>
+              
             </div>
           </div>
         </div>
       </div>
     </div>
-    <form class="ap-form ml-col-1 card-style" (submit)="sendPerkData()" onsubmit="return false;" *ngIf="show_perk_form"> <!-- El formulario -->
-      <div class="ml-col-1">
-        <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-          {{ perk_form_action }}
-         </h4>
-         <button 
-             class="ap-form__rButton button-red padding-lateral-m"
-             (click)="toggleSectionForm()">
-             Close
-         </button>
-       </div>
-      <div class="ml-col-7 margin-top-x">
+    <div class="ml-modal ml-modal--bg-black" *ngIf="show_perk_form">
+      <form class="ap-form ml-modal__data ml-col-1 card-style" style="margin-bottom: 50px;" (submit)="sendPerkData()"
+        onsubmit="return false;">
+        <!-- El formulario -->
         <div class="ml-col-1">
-          <div class="ap-form__input">
-            <input 
-              type="text"
-              placeholder="Title"
-              id="new_perk_title" 
-              name="new_perk_title"
-              [(ngModel)]="data_perk.name"
-              [class.form_error_found]="form_data.no_name"
-              class="ap-form__input-text" />
-            <label 
-              for="new_perk_title" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.name != ''">
-              Title
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
-              Title is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-1">
-          <div class="ap-form__input">
-            <textarea 
-              id="new_perk_desc"
-              name="new_perk_desc"
-              placeholder="Description"
-              [class.form_error_found]="form_data.no_desc"
-              [(ngModel)]="data_perk.description"
-              class="ap-form__label ap-form__input-textarea"></textarea>
-            <label 
-              for="new_perk_desc" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.description != ''">
-              Description
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
-              Description is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-1">
-          <div class="ap-form__input">
-            <select 
-              id="new_perk_desc"
-              name="new_perk_category"
-              placeholder="Category"
-              [(ngModel)]="data_perk.mapCategoryId"
-              [class.form_error_found]="form_data.no_cate"
-              class="ap-form__label ap-form__input-text">
-              <option disabled="disabled" value="-1">Category</option>
-              <option *ngFor="let category of perkCategories;" value="{{ category.id }}">
-                {{ category.name }}
-              </option>
-            </select>
-            <label 
-              for="new_perk_category" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.mapCategoryId != '-1'">
-              Category
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_cate">
-              Category is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ap-form__input">
-            <input 
-              type="text"
-              placeholder="Street"
-              id="new_perk_street" 
-              name="new_perk_street"
-              [(ngModel)]="data_perk.streetAddress"
-              [class.form_error_found]="form_data.no_stre"
-              class="ap-form__input-text" />
-            <label 
-              for="new_perk_street" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.streetAddress != ''">
-              Street
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_stre">
-              Street is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ap-form__input">
-            <input 
-              type="text"
-              placeholder="City"
-              id="new_perk_city" 
-              name="new_perk_city"
-              [class.form_error_found]="form_data.no_city"
-              [(ngModel)]="data_perk.city"
-              class="ap-form__input-text" />
-            <label 
-              for="new_perk_city" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.city != ''">
-              City
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_city">
-              City is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ap-form__input">
-            <input 
-              type="text"
-              placeholder="State Provincy"
-              id="new_perk_sp" 
-              name="new_perk_sp"
-              [class.form_error_found]="form_data.no_stat"
-              [(ngModel)]="data_perk.stateProvincy"
-              class="ap-form__input-text" />
-            <label 
-              for="new_perk_sp" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.stateProvincy != ''">
-              State Provincy
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_stat">
-              State Provincy is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-4">
-          <div class="ap-form__input">
-            <input 
-              type="number"
-              min="0"
-              placeholder="Zip"
-              id="new_perk_zip" 
-              name="new_perk_zip"
-              [(ngModel)]="data_perk.zip"
-              [class.form_error_found]="form_data.no_zip"
-              class="ap-form__input-text" />
-            <label 
-              for="new_perk_zip" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.zip != null">
-              Zip
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_zip">
-              Zip is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-4">
-          <div class="ap-form__input">
-            <input 
-              type="text"
-              placeholder="Country"
-              id="new_perk_country" 
-              name="new_perk_country"
-              [(ngModel)]="data_perk.country"
-              [class.form_error_found]="form_data.no_coun"
-              class="ap-form__input-text" />
-            <label 
-              for="new_perk_country" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.country != ''">
-              Country
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_coun">
-              Country is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-4">
-          <div class="ap-form__input">
-            <input 
-              type="number"
-              placeholder="Latitude"
-              id="new_perk_latitud" 
-              name="new_perk_latitud"
-              [(ngModel)]="data_perk.latitude"
-              [class.form_error_found]="form_data.no_lati"
-              class="ap-form__input-text" />
-            <label 
-              for="new_perk_latitud" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.latitude != null">
-              Latitude
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
-              Latitude is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-4">
-          <div class="ap-form__input">
-            <input 
-              type="number"
-              placeholder="Longitude"
-              id="new_perk_longitud" 
-              name="new_perk_longitud"
-              [class.form_error_found]="form_data.no_long"
-              [(ngModel)]="data_perk.longitude"
-              class="ap-form__input-text" />
-            <label 
-              for="new_perk_longitud" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_perk.longitude != null">
-              Longitude
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">
-              Longitude is required*
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="ml-col-3o">
-        <div class="ap-form__input">
-          <input
-            class="ap-form__input-image display-none" 
-            id="nuevo_servicio_img"
-            name="nuevo_servicio_img"
-            perk_photo="perk_photo"
-            type="file"
-            (change)="validateImageUpload( $event, '350x350', 'new_serv_image_0', 'new_serv_name_0' ,0);" />
-          <label for="nuevo_servicio_img" class="ap-form__label-image">
-            <figure class="ap-form__image">
-              <img class="ap-form__image-image no-image" 
-                   id="new_serv_image_0"
-                   [class.forms_errors_nimage]="form_data.no_phot"
-                   src="{{ data_perk.photo }}" />
-              <span class="ap-form__image-data text-center" id="new_serv_name_0">
-                Image size must be <br />
-                <span class="text-bold">350x350</span> 
-              </span>
-              <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
-                Image is required*
-              </span>
-            </figure>
-          </label>
-        </div>
-      </div>
-      <div class="ml-col-1 ap-form__gallery margin-top-x" id="images_on_gallery">
-        <div class="ml-col-1">
-          <h4 class="ap-form__titulo text-left">
-            Gallery
+          <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+            {{ perk_form_action }}
           </h4>
-        </div>
-        <div class="ap-form__gallery-image" *ngFor="let image of images_in_gallery, index as index;">
-          <input
-            class="ap-form__input-image display-none" 
-            id="gallery_input_{{ image.id }}"
-            name="gallery_input_{{ image.id }}"
-            type="file"
-            gallery="image"
-            (change)="validateImageUpload( $event, '350x350', 'gallery_img_' + image.id, 'gallery_img_name_' + image.id );" />
-          <label for="gallery_input_{{ image.id }}" class="ap-form__label-gallery">
-            <figure class="ap-form__image">
-              <img class="ap-form__image-image ap-form__image-image--gallery no-image" 
-                   id="gallery_img_{{ image.id }}"
-                   src="{{ image.src }}" />
-              <span class="ap-form__image-data text-center" id="gallery_img_name_{{ image.id }}">
-                Image Size must be <br />
-                <span class="text-bold">350x350</span> 
-              </span>
-              <button 
-                *ngIf="image.can_delete"
-                type="button"
-                (click)="deleteImageFromGallery( image.id )"
-                class="ap-form__gallery-delete">x
-              </button>
-            </figure>
-          </label>
-          <button 
-            *ngIf="image.last_one"
-            type="button"
-            (click)="addOneImageToGallery()"
-            class="ap-form__gallery-adder-button">+
+          <button class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
+            (click)="toggleSectionForm()">
+            Close
           </button>
         </div>
-      </div>
-      <!-- div class="ml-col-1 ap-form__buttons">
-        <button 
-          type="submit"
-          class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-          Guardar
-        </button>
-      </div -->
-      <div class="ml-col-1 ap-form__buttons margin-top-x">
-        <!-- <button 
-          type="button"
-          (click)="toggleSectionForm()"
-          class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
-          Cancel
-        </button> -->
-        <button 
-          type="submit"
-          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--add-white">
-          Save
-        </button>
-      </div>
-    </form>
+        <div class="ml-col-1 margin-top-x">
+          <hr>
+        </div>
+        <div class="ml-col-7 margin-top-x">
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <input type="text" placeholder="Title" id="new_perk_title" name="new_perk_title"
+                [(ngModel)]="data_perk.name" [class.form_error_found]="form_data.no_name" class="ap-form__input-text" />
+              <label for="new_perk_title" class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_perk.name != ''">
+                Title
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
+                Title is required*
+              </span>
+            </div>
+          </div>
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <textarea id="new_perk_desc" name="new_perk_desc" placeholder="Description"
+                [class.form_error_found]="form_data.no_desc" [(ngModel)]="data_perk.description"
+                class="ap-form__label ap-form__input-textarea"></textarea>
+              <label for="new_perk_desc" class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_perk.description != ''">
+                Description
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
+                Description is required*
+              </span>
+            </div>
+          </div>
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <select id="new_perk_desc" name="new_perk_category" placeholder="Category"
+                [(ngModel)]="data_perk.mapCategoryId" [class.form_error_found]="form_data.no_cate"
+                class="ap-form__label ap-form__input-text">
+                <option disabled="disabled" value="-1">Category</option>
+                <option *ngFor="let category of perkCategories;" value="{{ category.id }}">
+                  {{ category.name }}
+                </option>
+              </select>
+              <label for="new_perk_category" class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_perk.mapCategoryId != '-1'">
+                Category
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_cate">
+                Category is required*
+              </span>
+            </div>
+          </div>
+          <div class="ml-col-3">
+            <div class="ap-form__input">
+              <input type="text" placeholder="Street" id="new_perk_street" name="new_perk_street"
+                [(ngModel)]="data_perk.streetAddress" [class.form_error_found]="form_data.no_stre"
+                class="ap-form__input-text" />
+              <label for="new_perk_street" class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_perk.streetAddress != ''">
+                Street
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_stre">
+                Street is required*
+              </span>
+            </div>
+          </div>
+          <div class="ml-col-3">
+            <div class="ap-form__input">
+              <input type="text" placeholder="City" id="new_perk_city" name="new_perk_city"
+                [class.form_error_found]="form_data.no_city" [(ngModel)]="data_perk.city" class="ap-form__input-text" />
+              <label for="new_perk_city" class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_perk.city != ''">
+                City
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_city">
+                City is required*
+              </span>
+            </div>
+          </div>
+          <div class="ml-col-3">
+            <div class="ap-form__input">
+              <input type="text" placeholder="State Provincy" id="new_perk_sp" name="new_perk_sp"
+                [class.form_error_found]="form_data.no_stat" [(ngModel)]="data_perk.stateProvincy"
+                class="ap-form__input-text" />
+              <label for="new_perk_sp" class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_perk.stateProvincy != ''">
+                State Provincy
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_stat">
+                State Provincy is required*
+              </span>
+            </div>
+          </div>
+          <div class="ml-col-4">
+            <div class="ap-form__input">
+              <input type="number" min="0" placeholder="Zip" id="new_perk_zip" name="new_perk_zip"
+                [(ngModel)]="data_perk.zip" [class.form_error_found]="form_data.no_zip" class="ap-form__input-text" />
+              <label for="new_perk_zip" class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_perk.zip != null">
+                Zip
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_zip">
+                Zip is required*
+              </span>
+            </div>
+          </div>
+          <div class="ml-col-4">
+            <div class="ap-form__input">
+              <input type="text" placeholder="Country" id="new_perk_country" name="new_perk_country"
+                [(ngModel)]="data_perk.country" [class.form_error_found]="form_data.no_coun"
+                class="ap-form__input-text" />
+              <label for="new_perk_country" class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_perk.country != ''">
+                Country
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_coun">
+                Country is required*
+              </span>
+            </div>
+          </div>
+          <div class="ml-col-4">
+            <div class="ap-form__input">
+              <input type="number" placeholder="Latitude" id="new_perk_latitud" name="new_perk_latitud"
+                [(ngModel)]="data_perk.latitude" [class.form_error_found]="form_data.no_lati"
+                class="ap-form__input-text" />
+              <label for="new_perk_latitud" class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_perk.latitude != null">
+                Latitude
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
+                Latitude is required*
+              </span>
+            </div>
+          </div>
+          <div class="ml-col-4">
+            <div class="ap-form__input">
+              <input type="number" placeholder="Longitude" id="new_perk_longitud" name="new_perk_longitud"
+                [class.form_error_found]="form_data.no_long" [(ngModel)]="data_perk.longitude"
+                class="ap-form__input-text" />
+              <label for="new_perk_longitud" class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="data_perk.longitude != null">
+                Longitude
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">
+                Longitude is required*
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ml-col-3o">
+          <div class="ap-form__input">
+            <input class="ap-form__input-image display-none" id="nuevo_servicio_img" name="nuevo_servicio_img"
+              perk_photo="perk_photo" type="file"
+              (change)="validateImageUpload( $event, '350x350', 'new_serv_image_0', 'new_serv_name_0' ,0);" />
+            <label for="nuevo_servicio_img" class="ap-form__label-image">
+              <figure class="ap-form__image">
+                <img class="ap-form__image-image no-image" id="new_serv_image_0"
+                  [class.forms_errors_nimage]="form_data.no_phot" src="{{ data_perk.photo }}" />
+                <span class="ap-form__image-data text-center" id="new_serv_name_0">
+                  Image size must be <br />
+                  <span class="text-bold">350x350</span>
+                </span>
+                <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
+                  Image is required*
+                </span>
+              </figure>
+            </label>
+          </div>
+        </div>
+        <div class="ml-col-1 ap-form__gallery margin-top-x" id="images_on_gallery">
+          <div class="ml-col-1">
+            <h4 class="ap-form__titulo text-left">
+              Gallery
+            </h4>
+          </div>
+          <div class="ap-form__gallery-image" *ngFor="let image of images_in_gallery, index as index;">
+            <input class="ap-form__input-image display-none" id="gallery_input_{{ image.id }}"
+              name="gallery_input_{{ image.id }}" type="file" gallery="image"
+              (change)="validateImageUpload( $event, '350x350', 'gallery_img_' + image.id, 'gallery_img_name_' + image.id );" />
+            <label for="gallery_input_{{ image.id }}" class="ap-form__label-gallery">
+              <figure class="ap-form__image">
+                <img class="ap-form__image-image ap-form__image-image--gallery no-image" id="gallery_img_{{ image.id }}"
+                  src="{{ image.src }}" />
+                <span class="ap-form__image-data text-center" id="gallery_img_name_{{ image.id }}">
+                  Image Size must be <br />
+                  <span class="text-bold">350x350</span>
+                </span>
+                <button *ngIf="image.can_delete" type="button" (click)="deleteImageFromGallery( image.id )"
+                  class="ap-form__gallery-delete">x
+                </button>
+              </figure>
+            </label>
+
+
+            <button *ngIf="image.last_one" type="button" (click)="addOneImageToGallery()"
+              class="ap-form__gallery-adder-button button-pink">+
+            </button>
+          </div>
+        </div>
+        <div class="ml-col-1 ap-form__buttons margin-top-x" style="text-align: end;">
+          <hr>
+          <button type="submit"
+            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
@@ -417,14 +324,12 @@
       <span class="text-bold">"{{ perk_to_delete.name }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
-      <button 
-        (click)="showModal()"
-        class="ml-modal__pop-buttons-button button-pink">
+      <button (click)="showModal()"
+        class="ml-modal__pop-buttons-button button-black button-icon button-icon--cancel-white">
         Cancel
       </button>
-      <button 
-        (click)="confirmDeleteElement()"
-        class="ml-modal__pop-buttons-button button-black">
+      <button (click)="confirmDeleteElement()"
+        class="ml-modal__pop-buttons-button button-red button-icon button-icon--cancel-white">
         Delete
       </button>
     </div>
@@ -449,118 +354,118 @@
 
 <!-- Aqui esta el codigo anterior -->
 <div class="animated fadeIn display-none">
-  <div class="card">    
+  <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Add Perks</h5>   
+      <h5 class="card-title">Add Perks</h5>
       <form [formGroup]="formGroup" autocomplete="off">
-        <div class="row">                      
+        <div class="row">
           <div class="col-12 col-lg-8 col-xl-8">
-            <div class="row">                                      
+            <div class="row">
               <div class="col-12 mb-2">
-                  <input type="text" formControlName="perkNameCtrl" class="form-control" placeholder="Title">
-              </div>          
-                                                            
+                <input type="text" formControlName="perkNameCtrl" class="form-control" placeholder="Title">
+              </div>
+
               <div class="col-12 mb-2">
-                  <div class="input-group">
-                      <div class="input-group-prepend">
-                          <span class="input-group-text">Description</span>
-                      </div>
-                      <textarea formControlName="perkDescriptionCtrl" class="form-control" aria-label="With textarea"></textarea>
-                  </div>                        
-              </div>  
-              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Description</span>
+                  </div>
+                  <textarea formControlName="perkDescriptionCtrl" class="form-control"
+                    aria-label="With textarea"></textarea>
+                </div>
+              </div>
+
               <div class="col-4 mb-2">
-                <input type="text" formControlName="perkStreetAddressCtrl" class="form-control" placeholder="StreetAddress">
-              </div>   
+                <input type="text" formControlName="perkStreetAddressCtrl" class="form-control"
+                  placeholder="StreetAddress">
+              </div>
               <div class="col-4 mb-2">
                 <input type="text" formControlName="perkCityCtrl" class="form-control" placeholder="City">
-              </div>   
+              </div>
               <div class="col-4 mb-2">
-                <input type="text" formControlName="perkStateProvincyCtrl" class="form-control" placeholder="StateProvincy">
-              </div>   
+                <input type="text" formControlName="perkStateProvincyCtrl" class="form-control"
+                  placeholder="StateProvincy">
+              </div>
               <div class="col-3 mb-2">
                 <input type="text" formControlName="perkZipCtrl" class="form-control" placeholder="Zip">
-              </div>   
+              </div>
               <div class="col-3 mb-2">
                 <input type="text" formControlName="perkCountryCtrl" class="form-control" placeholder="Country">
-              </div>   
+              </div>
               <div class="col-3 mb-2">
                 <input type="text" formControlName="perkLatitudeCtrl" class="form-control" placeholder="Latitude">
-              </div>   
+              </div>
               <div class="col-3 mb-2">
                 <input type="text" formControlName="perkLongitudeCtrl" class="form-control" placeholder="Longitude">
-              </div>                 
-              
-              <div class="col-6 mb-2">                        
+              </div>
+
+              <div class="col-6 mb-2">
                 <div class="input-group">
                   <div class="input-group-prepend" style="position: relative; z-index:1;">
                     <span class="input-group-text">Host</span>
-                  </div>                                  
-                        
-                  <ng-select    
-                    style="flex: 1"
-                    formControlName="perkCategoryIdCtrl"                 
-                    [clearable]="false"
-                    [items]="perkCategories"                                                                                              
-                    bindLabel="name" 
-                    bindValue="id">                   
-                  </ng-select>                                
+                  </div>
+
+                  <ng-select style="flex: 1" formControlName="perkCategoryIdCtrl" [clearable]="false"
+                    [items]="perkCategories" bindLabel="name" bindValue="id">
+                  </ng-select>
                 </div>
-              </div> 
+              </div>
 
               <div class="col-6 mb-2">
-                <div formGroupName="perkPhotoCtrl">                               
+                <div formGroupName="perkPhotoCtrl">
                   <div class="custom-file">
-                    <input type="file" accept="image/*"
-                      formControlName="photoCtrl"
-                      (change)="prepareImages($event, formGroup.get('perkPhotoCtrl')['controls'])" class="custom-file-input" id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="customFile">    
-                        {{formGroup.get('perkPhotoCtrl').get('labelCtrl').value}}                  
-                    </label>        
-                  </div>                                                                                            
-                </div> 
-              </div>                          
-            </div>  
-          </div>    
+                    <input type="file" accept="image/*" formControlName="photoCtrl"
+                      (change)="prepareImages($event, formGroup.get('perkPhotoCtrl')['controls'])"
+                      class="custom-file-input" id="validatedCustomFile" required>
+                    <label class="custom-file-label" for="customFile">
+                      {{formGroup.get('perkPhotoCtrl').get('labelCtrl').value}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div class="col-12 col-lg-4 col-xl-4">
-            <img style="width: 14rem; max-height: 8rem;" [src]="formGroup.get('perkPhotoCtrl').get('serverUrlCtrl').value" alt="">
+            <img style="width: 14rem; max-height: 8rem;"
+              [src]="formGroup.get('perkPhotoCtrl').get('serverUrlCtrl').value" alt="">
           </div>
-        </div>   
+        </div>
         <div style="margin-bottom: 1rem;"></div>
         <h5 class="card-title">Imagenes</h5>
-        <div class="row">          
-          
-          <div formArrayName="perkGalleryCtrl"
-            class="col-4 mb-2"
+        <div class="row">
+
+          <div formArrayName="perkGalleryCtrl" class="col-4 mb-2"
             *ngFor="let arrayItem of perkGalleryCrtlArray.controls; let i=index">
 
-            <div [formGroupName]="i" class="input-file__container">                               
+            <div [formGroupName]="i" class="input-file__container">
               <div class="custom-file input-file">
-                <input type="file" accept="image/*"
-                  formControlName="photoCtrl"
-                  (change)="prepareImages($event, formGroup.get('perkGalleryCtrl').at(i).controls)" class="custom-file-input" id="validatedCustomFile" required>
+                <input type="file" accept="image/*" formControlName="photoCtrl"
+                  (change)="prepareImages($event, formGroup.get('perkGalleryCtrl').at(i).controls)"
+                  class="custom-file-input" id="validatedCustomFile" required>
                 <label class="custom-file-label" for="customFile">
                   {{formGroup.get('perkGalleryCtrl').at(i).get('labelCtrl').value}}
-                </label>        
+                </label>
               </div>
 
               <div *ngIf="i!=0" (click)="RemoveGalleryCtrl();" class="input-file__remove">
                 <i class="fa fa-trash" aria-hidden="true"></i>
-              </div>                                                                             
-            </div> 
-            
-            <img class="input-file__img" [src]="formGroup.get('perkGalleryCtrl').at(i).get('serverUrlCtrl').value" alt="">
+              </div>
+            </div>
+
+            <img class="input-file__img" [src]="formGroup.get('perkGalleryCtrl').at(i).get('serverUrlCtrl').value"
+              alt="">
           </div>
-          
+
           <div (click)="AddGalleryCtrl()" class="add-btn">+ Add Image</div>
-        </div>  
+        </div>
 
         <div style="margin-bottom: 1rem;"></div>
         <div class="col-12">
-          <button (click)="AddPerk()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Perk</button>
-        </div>   
-      </form>           
+          <button (click)="AddPerk()" type="button" class="btn btn-outline-dark margin-gral"
+            [disabled]="formGroup.invalid">Add Perk</button>
+        </div>
+      </form>
       <div style="margin-bottom: 1rem;"></div>
       <div class="row">
         <div class="col-sm-6 col-md-4" *ngFor="let post of perksArray">

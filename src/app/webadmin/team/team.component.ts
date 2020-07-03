@@ -25,6 +25,8 @@ export class TeamComponent implements OnInit {
   public dangerModal;
   public infoModal;
 
+  public select: any;
+
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
@@ -127,7 +129,18 @@ export class TeamComponent implements OnInit {
 
    }
 
-   
+   openmore(post){
+      console.log(post);
+      
+      if(this.select == post.id){
+        this.select = null;
+      }else if( this.select == null){
+        this.select = post.id;
+      }else{
+        this.select = post.id;
+      }
+  }
+
    updatephoto() {
 
     let creadoobj = { 

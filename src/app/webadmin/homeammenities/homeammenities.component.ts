@@ -612,6 +612,8 @@ export class HomeammenitiesComponent implements OnInit {
 
           }
 
+          this.post_blanck = {}
+
   }
 
   /*

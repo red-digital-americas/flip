@@ -120,17 +120,17 @@ import { Utils } from '../../../utils/utils';
             console.log(data);
             this.back_stage_data = data;
             this.beneficios = this.back_stage_data.networkBenefits;
-        }else{
+        }else if (data == null){
             console.log("sin data");
             this.back_stage_data = {};
-            this.beneficios.push(
+            this.beneficios = [
                 {
                     photoSlider: "",
                     photoMobileSlider: "",
                     title: "", 
                     description: ""
                 }
-            );
+              ];
         }
     }
 
