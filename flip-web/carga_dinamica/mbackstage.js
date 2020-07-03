@@ -90,7 +90,7 @@ $(document).ready(function () {
                 }
            plantilla += `
                                                             <img id="img-mwhat-01" src="${itemactual.photoMobileSlider}" style="object-fit: cover; height: 100%;" alt="Los Angeles">
-                                                            <div class="header-text" style="    top: 40%; height: 100%">
+                                                            <div class="header-text" style="    top: 30%!important; height: 100%">
                                                                 <div class="col-md-12  paddtop ">
                                                                     <span>
                                                                         <div class="row"> 
@@ -132,7 +132,7 @@ $(document).ready(function () {
                            </div>`;
         //document.getElementsById("myCarousel7").remove();
        //$('#myCarousel7').html(`${plantilla}`);
-        $('#myCarousel7').html(`${plantilla}`);
+        $('#myCarousel6').html(`${plantilla}`);
          
         }, 
         error: function (jqXHR, textStatus, errorThrown) { console.log(jqXHR, textStatus, errorThrown); },
@@ -181,66 +181,45 @@ function createContentForWhatIsColiving( data_content ) {
 
     const wi_backstage_container = document.getElementById('wi_backstage');
 
+    console.log("Data sladie coving ====>", data_content);
+    
+    let slide_html = "";
     data_content.forEach( (slide, index) => {
 
-        const slide_html = `
-            <div class="item ${ index == 0 ? 'active' : '' }">
-            <img id= "img-what-01" src="${ slide.photoSlider }" alt="Los Angeles" />
-            <div class="header-text-room  ">
-                <div class="col-md-12 text-center"><br />
-                    <span>
-                        <div class="row"> 
-                            <div class="col-sm-6" style="margin-left: -2%;"><br> 
-                                <p id= "p-what-01" class="textamen">
-                                    ${ slide.description }
-                                </p>
-                            </div> 
-                            <div class="col-sm-6">
-                                <div class="text-center">
-                                    <h2>
-                                        <span id="comserv-activetext" class="beneficios-title" style="font-size: 0.75em;">¿WHAT IS INCLUDED?</span>
-                                    </h2> 
-                                </div><br> 
-                                ${ generateWicIconsSection() }
-                            </div>
-                        </span><br /> 
-                    </div>
-                </div>
-            </div>
+        slide_html += `<div class="item ${ index == 0 ? 'active' : '' }">
+                               <img id ="img-mwhat-01" src="${ slide.photoMobileSlider }"  style="object-fit: cover; height: 100%;" alt="Los Angeles">
+                                        <div class="header-text" style="    top: 50%;">
+                                              <div class="col-md-12  paddtop ">
+                                                    <span>
+                                                         <div class="row"> 
+                                                              <div style="padding:0px; " class="col-sm-6">
+                                                                   <p id="p-mwhat-01" class="textamen" style="margin-top: 4%; margin-left: 4%;">
+                                                                    ${ slide.description }
+                                                                    </p>
+                                                         </div> 
+                                                         <br><br>
+                                                         <div class="col-xs-6 icondiv" style="text-align: left">
+                                                           <label data-target="#myCarousel6" data-slide-to="1" class="">
+                                                             <a href="#">
+                                                                 <img id="micon-01-03-01" class="iconsback" src="${slide.icon}" onmouseover="this.src='${slide.icon2}'" onmouseout="this.src='${slide.icon}'" border="0" alt="">
+                                                             </a>&nbsp;
+                                                             <span id="mlabel-01-03-01">${slide.titleIcon}</span>
+                                                          </label> 
+                                                    </div>
+                                            </div>
+                                        </span>
+                                    <br> 
+                                    </div>
+                            </div><!-- /header-text -->
+                      </div>
         `;
 
         //wi_backstage_container.innerHTML += slide_html;
 
-        });
+        })
 
-        function generateWicIconsSection() {
-
-            let result = '';
-
-            data_content.forEach( (icon, index) => {
-
-                const icons_html = `
-                    <div class ="col-sm-6 icondiv" >
-                        <label data-target="#myCarousel7" style="margin-bottom: 15px;" data-slide-to="${ index }">
-                            <a href="#">
-                                <img id="icon-01-01-01"  class="iconsback" src="${ icon.icon }" 
-                                    onmouseover="this.src='${ icon.icon2 }'"
-                                    onmouseout="this.src='${ icon.icon }'"
-                                    border="0" alt="" />
-                            </a>
-                            &nbsp;<span id="label-01-01-01">${ icon.titleIcon }</span> 
-                        </label>
-                    </div>
-                `;
-
-                result += icons_html;
-
-            });
-
-            return result;
-
-        }
-
+    console.log("slide_",slide_html);
+    $("#coving").html(`${slide_html}`);
 }
 
 function getFlipnetworkData() {
