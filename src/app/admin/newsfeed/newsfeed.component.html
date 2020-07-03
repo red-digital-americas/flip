@@ -1,14 +1,14 @@
 <app-nav [section]="section"></app-nav>
 <div class="ml-col-1">
   <div class="ml-col-1 padding-general-m margin-bottom-g">
-    <div class="ml-col-1" *ngIf="!show_post_form">
+    <div class="ml-col-1">
       <div class="ap-cards">
         <div class="ml-col-1 margin-bottom-x">
           <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
             Post
           </h4>
           <button style="float: right;"
-            class="button button-x button-green padding-lateral-m button-icon button-icon--add-white"
+            class="button button-x button-pink padding-lateral-m button-icon button-icon--add-white"
             (click)="toggleSectionForm( 'new' )">
             Add Post
           </button>
@@ -208,7 +208,7 @@
               <button 
                 type="button"
                 (click)="deleteThisComment( comment )"
-                class="ap-cards__card-button button-black">
+                class="ap-cards__card-button button-red button-icon button-icon--delete-white">
                 Delete
               </button>
             </div>
@@ -220,7 +220,7 @@
       </div>
     </div>
   </form>
-</div>
+</div>*9-+*/9
 
 <!-- div class="bottom-container">
   <button 

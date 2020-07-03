@@ -29,7 +29,7 @@
 </div>
 <div class="ml-col-1">
   <div class="ml-col-1 padding-general-m margin-bottom-g ">
-    <div class="ml-col-1" *ngIf="!show_perk_form">
+    <div class="ml-col-1">
       <div class="ap-cards">
         <!-- h4 class="ap-cards__titulo">
           Perks
@@ -317,10 +317,10 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
     <p class="ml-modal__pop-titulo margin-bottom-m">
-      Delete Perk
+      Delete Map
     </p>
     <p class="ml-modal__pop-text">
-      Are you sure to delete perk<br />
+      Are you sure to delete map<br />
       <span class="text-bold">"{{ perk_to_delete.name }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
@@ -329,7 +329,7 @@
         Cancel
       </button>
       <button (click)="confirmDeleteElement()"
-        class="ml-modal__pop-buttons-button button-red button-icon button-icon--cancel-white">
+        class="ml-modal__pop-buttons-button button-red button-icon button-icon--delete-white">
         Delete
       </button>
     </div>

@@ -2,14 +2,14 @@
 
 <div class="ml-col-1">
   <div class="ml-col-1 padding-general-m margin-bottom-g">
-    <div class="ml-col-1" *ngIf="!show_service_form">
+    <div class="ml-col-1">
       <div class="ap-cards">
         <div class="ml-col-1 margin-bottom-x">
           <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
             Services
           </h4>
           <button 
-            class="ap-form__rButton button-black padding-lateral-m button-icon button-icon--add-white"
+            class="ap-form__rButton button-pink padding-lateral-m button-icon button-icon--add-white"
             (click)="toggleSectionForm( 'new' )">
             Add Service
           </button>
@@ -39,15 +39,15 @@
             </figure>
             <div class="ap-cards__card-buttons">
               <button 
-                (click)="toggleSectionForm( 'edit', service )"
-                class="ap-cards__card-button button-green button-icon button-icon--edit-white">
-                Edit
-              </button>
-              <button 
-                (click)="deleteThisService( service )"
-                class="ap-cards__card-button button-black button-icon button-icon--delete-white">
-                Delete
-              </button>
+              (click)="deleteThisService( service )"
+              class="ap-cards__card-button button-red button-icon button-icon--delete-white">
+              Delete
+            </button>
+            <button 
+              (click)="toggleSectionForm( 'edit', service )"
+              class="ap-cards__card-button button-green button-icon button-icon--edit-white">
+              Edit
+            </button>
             </div>
             <figure class="ap-cards__card-icon">
               <img class="ap-cards__card-icon-img" src="{{ service.icon }}" />
@@ -58,199 +58,202 @@
     </div>
 
 
-    <form (submit)="sendServiceData()" onsubmit="return false;" class="ap-form ml-col-1 card-style" *ngIf="show_service_form">
-      <div class="ml-col-1">
-        <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-          {{ service_form_action }}
-         </h4>
-         <button 
-             class="ap-form__rButton button-red padding-lateral-m"
-             (click)="toggleSectionForm()">
-             Close
-         </button>
-       </div>
-      <div class="ml-col-6 margin-top-x">
-        <div class="ml-col-1">
-          <div class="ap-form__input">
-            <input 
-              type="text"
-              placeholder="Title"
-              id="new_service_title" 
-              name="new_service_title"
-              [class.form_error_found]="form_service.no_name"
-              [(ngModel)]="data_service.name"
-              class="ap-form__input-text" />
-            <label 
-              for="new_service_title" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_service.name != ''">
-              Title
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_name">
-              Title is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-1">
-          <div class="ap-form__input">
-            <textarea 
-              id="new_service_desc"
-              name="new_service_desc"
-              placeholder="Description"
-              [class.form_error_found]="form_service.no_desc"
-              [(ngModel)]="data_service.description"
-              class="ap-form__label ap-form__input-textarea"></textarea>
-            <label 
-              for="new_service_desc" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_service.description != ''">
-              Description
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_desc">
-              Description is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ap-form__input">
-            <input 
-              type="text"
-              placeholder="Provider"
-              id="new_service_prov" 
-              name="new_service_prov"
-              [class.form_error_found]="form_service.no_prov"
-              [(ngModel)]="data_service.provider"
-              class="ap-form__input-text" />
-            <label 
-              for="new_service_prov" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_service.provider != ''">
-              Provider
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_prov">
-              Provider is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ap-form__input">
-            <input 
-              type="number"
-              placeholder="Recurrent day price"
-              id="new_service_price" 
-              name="new_service_price"
-              [class.form_error_found]="form_service.no_pric"
-              [(ngModel)]="data_service.price"
-              class="ap-form__input-text" />
-            <label 
-              for="new_service_price" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_service.price != null">
-              Recurrent day price
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_pric">
-              Recurrent day price is required*
-            </span>
-          </div>
-        </div>
-        <div class="ml-col-3">
-          <div class="ap-form__input">
-            <input 
-              type="number"
-              placeholder="Once day Price"
-              id="new_service_unitp" 
-              name="new_service_unitp"
-              [(ngModel)]="data_service.priceUnit"
-              [class.form_error_found]="form_service.no_puni"
-              class="ap-form__input-text" />
-            <label 
-              for="new_service_unitp" 
-              class="ap-form__label ap-form__label-text"
-              [class.ap-form__label-text--active]="data_service.priceUnit != null">
-              Once day Price
-            </label>
-            <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_puni">
-              Once day Price is required*
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="ml-col-4o">
-        <div class="ml-col-6">
-          <div class="ap-form__input">
-            <input
-              class="ap-form__input-image display-none" 
-              id="nuevo_servicio_img"
-              name="nuevo_servicio_img"
-              type="file"
-              (change)="validateImageUpload( $event, '350x350', 'nuevo_servicio_img_0', 'nuevo_servicio_name_0', 0);" />
-            <label for="nuevo_servicio_img" class="ap-form__label-image">
-              <figure class="ap-form__image">
-                <img class="ap-form__image-image no-image" 
-                     id="nuevo_servicio_img_0"
-                     [class.forms_errors_nimage]="form_service.no_phot"
-                     src="{{ data_service.photo }}" />
-                <span class="ap-form__image-data text-center" id="nuevo_servicio_name_0">
-                  Image size must be <br />
-                  <span class="text-bold">350x350</span> 
-                </span>
-                <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_phot">
-                  Image is required*
-                </span>
-              </figure>
-            </label>
-          </div>
-        </div>
-        <div class="ml-col-4o">
-          <div class="ap-form__input">
-            <input
-              class="ap-form__input-image display-none" 
-              id="nuevo_servicio_icon"
-              name="nuevo_servicio_icon"
-              type="file"
-              (change)="validateImageUpload( $event, '150x150', 'nuevo_servicio_icon_0', 'nuevo_servicio_icon_name_0', 1);" />
-            <label for="nuevo_servicio_icon" class="ap-form__label-image ap-form__label-image--icon">
-              <figure class="ap-form__image">
-                <img class="ap-form__image-image ap-form__image-image--icon no-image bg-black" 
-                     id="nuevo_servicio_icon_0"
-                     [class.forms_errors_nimage]="form_service.no_icon"
-                     src="{{ data_service.icon }}" />
-                <span class="ap-form__image-data text-center" id="nuevo_servicio_icon_name_0">
-                  Image size must be<br />
-                  <span class="text-bold">150x150</span> 
-                </span>
-                <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_icon">
-                  Image is required*
-                </span>
-              </figure>
-            </label>
-          </div>
-        </div>
-      </div>
-      <!-- div class="ml-col-1 ap-form__buttons">
-        <button 
-          type="submit"
-          class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
-          Guardar
-        </button>
-      </div -->
-      <div class="ml-col-1 ap-form__buttons margin-top-x">
-        <!-- <button 
-          type="button"
-          (click)="toggleSectionForm()"
-          class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
-          Cancel
-        </button> -->
-        <button 
-          type="submit"
-          class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--add-white">
-          Save
-        </button>
-      </div>
-    </form>
+
   </div>
 </div>
 
+<div class="ml-col-1  padding-general-m margin-bottom-g new-modal" *ngIf="show_service_form">
+<form (submit)="sendServiceData()" onsubmit="return false;" class="ap-form ml-col-1 card-style">
+  <div class="ml-col-1">
+    <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+      {{ service_form_action }}
+     </h4>
+     <button 
+         class="ap-form__rButton button-red padding-lateral-m button-icon button-icon--cancel-white"
+         (click)="toggleSectionForm()">
+         Close
+     </button>
+   </div>
+  <div class="ml-col-6 margin-top-x">
+    <div class="ml-col-1">
+      <div class="ap-form__input">
+        <input 
+          type="text"
+          placeholder="Title"
+          id="new_service_title" 
+          name="new_service_title"
+          [class.form_error_found]="form_service.no_name"
+          [(ngModel)]="data_service.name"
+          class="ap-form__input-text" />
+        <label 
+          for="new_service_title" 
+          class="ap-form__label ap-form__label-text"
+          [class.ap-form__label-text--active]="data_service.name != ''">
+          Title
+        </label>
+        <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_name">
+          Title is required*
+        </span>
+      </div>
+    </div>
+    <div class="ml-col-1">
+      <div class="ap-form__input">
+        <textarea 
+          id="new_service_desc"
+          name="new_service_desc"
+          placeholder="Description"
+          [class.form_error_found]="form_service.no_desc"
+          [(ngModel)]="data_service.description"
+          class="ap-form__label ap-form__input-textarea"></textarea>
+        <label 
+          for="new_service_desc" 
+          class="ap-form__label ap-form__label-text"
+          [class.ap-form__label-text--active]="data_service.description != ''">
+          Description
+        </label>
+        <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_desc">
+          Description is required*
+        </span>
+      </div>
+    </div>
+    <div class="ml-col-3">
+      <div class="ap-form__input">
+        <input 
+          type="text"
+          placeholder="Provider"
+          id="new_service_prov" 
+          name="new_service_prov"
+          [class.form_error_found]="form_service.no_prov"
+          [(ngModel)]="data_service.provider"
+          class="ap-form__input-text" />
+        <label 
+          for="new_service_prov" 
+          class="ap-form__label ap-form__label-text"
+          [class.ap-form__label-text--active]="data_service.provider != ''">
+          Provider
+        </label>
+        <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_prov">
+          Provider is required*
+        </span>
+      </div>
+    </div>
+    <div class="ml-col-3">
+      <div class="ap-form__input">
+        <input 
+          type="number"
+          placeholder="Recurrent day price"
+          id="new_service_price" 
+          name="new_service_price"
+          [class.form_error_found]="form_service.no_pric"
+          [(ngModel)]="data_service.price"
+          class="ap-form__input-text" />
+        <label 
+          for="new_service_price" 
+          class="ap-form__label ap-form__label-text"
+          [class.ap-form__label-text--active]="data_service.price != null">
+          Recurrent day price
+        </label>
+        <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_pric">
+          Recurrent day price is required*
+        </span>
+      </div>
+    </div>
+    <div class="ml-col-3">
+      <div class="ap-form__input">
+        <input 
+          type="number"
+          placeholder="Once day Price"
+          id="new_service_unitp" 
+          name="new_service_unitp"
+          [(ngModel)]="data_service.priceUnit"
+          [class.form_error_found]="form_service.no_puni"
+          class="ap-form__input-text" />
+        <label 
+          for="new_service_unitp" 
+          class="ap-form__label ap-form__label-text"
+          [class.ap-form__label-text--active]="data_service.priceUnit != null">
+          Once day Price
+        </label>
+        <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_puni">
+          Once day Price is required*
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="ml-col-4o">
+    <div class="ml-col-6">
+      <div class="ap-form__input">
+        <input
+          class="ap-form__input-image display-none" 
+          id="nuevo_servicio_img"
+          name="nuevo_servicio_img"
+          type="file"
+          (change)="validateImageUpload( $event, '350x350', 'nuevo_servicio_img_0', 'nuevo_servicio_name_0', 0);" />
+        <label for="nuevo_servicio_img" class="ap-form__label-image">
+          <figure class="ap-form__image">
+            <img class="ap-form__image-image no-image" 
+                 id="nuevo_servicio_img_0"
+                 [class.forms_errors_nimage]="form_service.no_phot"
+                 src="{{ data_service.photo }}" />
+            <span class="ap-form__image-data text-center" id="nuevo_servicio_name_0">
+              Image size must be <br />
+              <span class="text-bold">350x350</span> 
+            </span>
+            <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_phot">
+              Image is required*
+            </span>
+          </figure>
+        </label>
+      </div>
+    </div>
+    <div class="ml-col-4o">
+      <div class="ap-form__input">
+        <input
+          class="ap-form__input-image display-none" 
+          id="nuevo_servicio_icon"
+          name="nuevo_servicio_icon"
+          type="file"
+          (change)="validateImageUpload( $event, '150x150', 'nuevo_servicio_icon_0', 'nuevo_servicio_icon_name_0', 1);" />
+        <label for="nuevo_servicio_icon" class="ap-form__label-image ap-form__label-image--icon">
+          <figure class="ap-form__image">
+            <img class="ap-form__image-image ap-form__image-image--icon no-image bg-black" 
+                 id="nuevo_servicio_icon_0"
+                 [class.forms_errors_nimage]="form_service.no_icon"
+                 src="{{ data_service.icon }}" />
+            <span class="ap-form__image-data text-center" id="nuevo_servicio_icon_name_0">
+              Image size must be<br />
+              <span class="text-bold">150x150</span> 
+            </span>
+            <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_icon">
+              Image is required*
+            </span>
+          </figure>
+        </label>
+      </div>
+    </div>
+  </div>
+  <!-- div class="ml-col-1 ap-form__buttons">
+    <button 
+      type="submit"
+      class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+      Guardar
+    </button>
+  </div -->
+  <div class="ml-col-1 ap-form__buttons margin-top-x">
+    <!-- <button 
+      type="button"
+      (click)="toggleSectionForm()"
+      class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
+      Cancel
+    </button> -->
+    <button 
+      type="submit"
+      class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white">
+      Save
+    </button>
+  </div>
+</form>
+</div>
 
 <!-- div class="bottom-container">
   <button 

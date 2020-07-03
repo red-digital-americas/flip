@@ -37,281 +37,285 @@
                 <div class="index-cards__card-buttons">
                   <button 
                         (click)="goToBooking( card.id, card.name )"
-                        class="index-cards__card-buttons-button button-blue">
+                        class="index-cards__card-buttons-button button-black">
                         Operation
                     </button>
                     <button 
                         (click)="toggleSectionForm( 'edit', card )"
-                        class="index-cards__card-buttons-button button-black button-icon button-icon--edit-white">
+                        class="index-cards__card-buttons-button button-green button-icon button-icon--edit-white">
                         Edit
                     </button>
                 </div>
             </div>
         </div>
     </div>
-    <form 
-      (submit)="sendBookingData()" 
-      onsubmit="return false;" 
-      class="ap-form ml-col-1 padding-general-m card-style" 
-      *ngIf="show_booking_form">
-        <div class="ml-col-1" *ngIf="show_booking_form">
-          <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-            {{ booking_form_action }}
-           </h4>
-           <button 
-               class="ap-form__rButton button-red padding-lateral-m"
-               (click)="toggleSectionForm()">
-               Close
-           </button>
-         </div>
-        <div class="ml-col-7 margin-top-x">
-            <div class="ml-col-1">
-                <div class="ap-form__input">
-                  <input 
-                    type="text"
-                    placeholder="Nombre"
-                    id="booking_title" 
-                    name="booking_title"
-                    class="ap-form__input-text"
-                    [class.form_error_found]="form_data.no_name"
-                    [(ngModel)]="booking_data.name" />
-                  <label 
-                    for="booking_title" 
-                    class="ap-form__label ap-form__label-text"
-                    [class.ap-form__label-text--active]="booking_data.name != ''">
-                    Nombre
-                  </label>
-                  <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
-                    El campo es obligatorio*
-                  </span>
-                </div>
-            </div>
-            <div class="ml-col-1">
-                <div class="ap-form__input">
-                  <textarea 
-                    id="booking_desc"
-                    name="booking_desc"
-                    placeholder="Descripción"
-                    [class.form_error_found]="form_data.no_desc"
-                    [(ngModel)]="booking_data.description"
-                    class="ap-form__label ap-form__input-textarea"></textarea>
-                  <label 
-                    for="booking_desc" 
-                    class="ap-form__label ap-form__label-text"
-                    [class.ap-form__label-text--active]="booking_data.description != ''">
-                    Descripción
-                  </label>
-                  <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
-                    El campo es obligatorio*
-                  </span>
-                </div>
-            </div>
-            <div class="ml-col-1">
-                <div class="ap-form__input">
-                  <textarea 
-                    id="booking_direccion"
-                    name="booking_direccion"
-                    placeholder="Dirección"
-                    [class.form_error_found]="form_data.no_dire"
-                    [(ngModel)]="booking_data.direction"
-                    class="ap-form__label ap-form__input-textarea"></textarea>
-                  <label 
-                    for="booking_direccion" 
-                    class="ap-form__label ap-form__label-text"
-                    [class.ap-form__label-text--active]="booking_data.direction != ''">
-                    Dirección
-                  </label>
-                  <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_dire">
-                    El campo es obligatorio*
-                  </span>
-                </div>
-            </div>
-            <div class="ml-col-2">
-              <div class="ap-form__input">
-                <input 
-                  type="number"
-                  placeholder="Latitud"
-                  id="booking_latitud" 
-                  name="booking_latitud"
-                  class="ap-form__input-text"
-                  [class.form_error_found]="form_data.no_lati"
-                  [(ngModel)]="booking_data.latitude" />
-                <label 
-                  for="booking_latitud" 
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="booking_data.latitude != null">
-                  Latitud
-                </label>
-                <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
-                  El campo es obligatorio*
-                </span>
-              </div>
-            </div>
-            <div class="ml-col-2">
-              <div class="ap-form__input">
-                <input 
-                  type="number"
-                  placeholder="Longitud"
-                  id="booking_longitud" 
-                  name="booking_longitud"
-                  class="ap-form__input-text"
-                  [class.form_error_found]="form_data.no_long"
-                  [(ngModel)]="booking_data.longitude" />
-                <label 
-                  for="booking_longitud"
-                  class="ap-form__label ap-form__label-text"
-                  [class.ap-form__label-text--active]="booking_data.longitude != null">
-                  Longitud
-                </label>
-                <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">
-                  El campo es obligatorio*
-                </span>
-              </div>
-            </div>
-            <div class="ml-col-2">
-              <div class="ap-form__input">
-                <input 
-                  type="checkbox"
-                  id="booking_active" 
-                  name="booking_active"
-                  [checked]="booking_data.status"
-                  [(ngModel)]="booking_data.status"
-                  class="ap-form__input-checkbox display-none" />
-                <label for="booking_active" class="ap-form__label ap-form__label-checkbox">
-                  Build Active
-                </label>
-              </div>
-            </div>
+
+</div>
+
+<div class="ml-col-1  padding-general-m margin-bottom-g new-modal" *ngIf="show_booking_form">
+<form 
+(submit)="sendBookingData()" 
+onsubmit="return false;" 
+class="ap-form ml-col-1 padding-general-m card-style">
+  <div class="ml-col-1" *ngIf="show_booking_form">
+    <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+      {{ booking_form_action }}
+     </h4>
+     <button 
+         class="ap-form__rButton button-red padding-lateral-m button-icon button-icon--cancel-white"
+         (click)="toggleSectionForm()">
+         Close
+     </button>
+   </div>
+  <div class="ml-col-7 margin-top-x">
+      <div class="ml-col-1">
+          <div class="ap-form__input">
+            <input 
+              type="text"
+              placeholder="Name"
+              id="booking_title" 
+              name="booking_title"
+              class="ap-form__input-text"
+              [class.form_error_found]="form_data.no_name"
+              [(ngModel)]="booking_data.name" />
+            <label 
+              for="booking_title" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="booking_data.name != ''">
+              Name
+            </label>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
+              The field is required*
+            </span>
+          </div>
+      </div>
+      <div class="ml-col-1">
+          <div class="ap-form__input">
+            <textarea 
+              id="booking_desc"
+              name="booking_desc"
+              placeholder="Descriptio"
+              [class.form_error_found]="form_data.no_desc"
+              [(ngModel)]="booking_data.description"
+              class="ap-form__label ap-form__input-textarea"></textarea>
+            <label 
+              for="booking_desc" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="booking_data.description != ''">
+              Description
+            </label>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
+              The field is required*
+            </span>
+          </div>
+      </div>
+      <div class="ml-col-1">
+          <div class="ap-form__input">
+            <textarea 
+              id="booking_direccion"
+              name="booking_direccion"
+              placeholder="Address"
+              [class.form_error_found]="form_data.no_dire"
+              [(ngModel)]="booking_data.direction"
+              class="ap-form__label ap-form__input-textarea"></textarea>
+            <label 
+              for="booking_direccion" 
+              class="ap-form__label ap-form__label-text"
+              [class.ap-form__label-text--active]="booking_data.direction != ''">
+              Address
+            </label>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_dire">
+              The field is required*
+            </span>
+          </div>
+      </div>
+      <div class="ml-col-2">
+        <div class="ap-form__input">
+          <input 
+            type="number"
+            placeholder="Latitude"
+            id="booking_latitud" 
+            name="booking_latitud"
+            class="ap-form__input-text"
+            [class.form_error_found]="form_data.no_lati"
+            [(ngModel)]="booking_data.latitude" />
+          <label 
+            for="booking_latitud" 
+            class="ap-form__label ap-form__label-text"
+            [class.ap-form__label-text--active]="booking_data.latitude != null">
+            Latitude
+          </label>
+          <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
+            The field is required*
+          </span>
         </div>
-        <div class="ml-col-3o">
-            <div class="ap-form__input">
-                <input
-                  class="ap-form__input-image display-none" 
-                  id="booking_img"
-                  name="booking_img"
-                  type="file" 
-                  accept="image/*"
-                  (change)="prepareImages( $event ); validateImageUpload( $event, '350x350', 'booking_img_0', 'booking_img_name_0' );" />
-                <label for="booking_img" class="ap-form__label-image">
-                  <figure class="ap-form__image">
-                    <img class="ap-form__image-image no-image" 
-                         id="booking_img_0"
-                         [class.forms_errors_nimage]="form_data.no_phot"
-                         src="{{ booking_data.photo}}" />
-                    <span class="ap-form__image-data text-center" id="booking_img_name_0">
-                      La imagen debe medir <br />
-                      <span class="text-bold">350x350</span> 
-                    </span>
-                    <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
-                      El campo es obligatorio*
-                    </span>
-                  </figure>
-                </label>
-            </div>
+      </div>
+      <div class="ml-col-2">
+        <div class="ap-form__input">
+          <input 
+            type="number"
+            placeholder="Longitude"
+            id="booking_longitud" 
+            name="booking_longitud"
+            class="ap-form__input-text"
+            [class.form_error_found]="form_data.no_long"
+            [(ngModel)]="booking_data.longitude" />
+          <label 
+            for="booking_longitud"
+            class="ap-form__label ap-form__label-text"
+            [class.ap-form__label-text--active]="booking_data.longitude != null">
+            Longitude
+          </label>
+          <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">
+            The field is required*
+          </span>
         </div>
-        <div class="ml-col-1 ap-form__rooms" id="rooms_added">
-            <div class="ml-col-1">
-              <h4 class="ap-form__titulo text-left">
-                Rooms Category
-              </h4>
-            </div>
-            <div class="ap-form__rooms-room room" *ngFor="let room of rooms;" room="added">
-              <div class="ml-col-1 padding-general-x card-style">
-                <div class="ml-col-1">
-                  <div class="ap-form__input ap-form__input--full-width">
-                    <input 
-                      type="text"
-                      placeholder="Room Type"
-                      id="booking_room_title_{{ room.id }}" 
-                      name="booking_room_title_{{ room.id }}"
-                      value="{{ room.input }}"
-                      class="ap-form__input-text" />
-                    <label 
-                      for="booking_room_title_{{ room.id }}" 
-                      class="ap-form__label ap-form__label-text"
-                      [class.ap-form__label-text--active]="room.input != ''">
-                      Room Type
-                    </label>
-                  </div>
-                </div>
-                <div class="ml-col-1">
-                  <div class="ap-form__input ap-form__input--full-width">
-                    <textarea 
-                      type="text"
-                      placeholder="Description"
-                      id="booking_room_num_{{ room.id }}"
-                      value="{{ room.select }}" 
-                      name="booking_num_title_{{ room.id }}"
-                      class="ap-form__input-textarea"></textarea>
-                    <label 
-                      for="booking_num_title_{{ room.id }}" 
-                      class="ap-form__label ap-form__label-text"
-                      [class.ap-form__label-text--active]="room.select != ''">
-                      Description
-                    </label>
-                  </div>
-                </div>
-                <div class="ml-col-1" *ngIf="edit_build_button">
-                  <div class="ap-form__input ap-form__input-no-padding-tb">
-                    <input 
-                      type="checkbox"
-                      id="booking_room_active_{{ room.id }}" 
-                      name="booking_room_active_{{ room.id }}"
-                      [checked]="room.active"
-                      class="ap-form__input-checkbox display-none" />
-                    <label for="booking_room_active_{{ room.id }}" class="ap-form__label ap-form__label-checkbox">
-                      Activo
-                    </label>
-                  </div>
-                </div>
-                <button 
-                  *ngIf="room.can_delete"
-                  type="button"
-                  (click)="deleteThisRoom( room.id, $event )"
-                  class="ap-form__rooms-room-delete button-orange">x
-                </button>
-                <button 
-                  type="button"
-                  *ngIf="room.last_one"
-                  (click)="addNewRoom()"
-                  class="ap-form__rooms-room-add button-blue">+
-                </button>
-              </div>
-            </div>
+      </div>
+      <div class="ml-col-2">
+        <div class="ap-form__input">
+          <input 
+            type="checkbox"
+            id="booking_active" 
+            name="booking_active"
+            [checked]="booking_data.status"
+            [(ngModel)]="booking_data.status"
+            class="ap-form__input-checkbox display-none" />
+          <label for="booking_active" class="ap-form__label ap-form__label-checkbox">
+            Build Active
+          </label>
         </div>
-        <div class="ml-col-1 ap-form__buttons margin-top-x">
-          <!-- <button 
-            type="button"
-            (click)="toggleSectionForm()"
-            class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
-            Cancel
-          </button> -->
+      </div>
+  </div>
+  <div class="ml-col-3o">
+      <div class="ap-form__input">
+          <input
+            class="ap-form__input-image display-none" 
+            id="booking_img"
+            name="booking_img"
+            type="file" 
+            accept="image/*"
+            (change)="prepareImages( $event ); validateImageUpload( $event, '350x350', 'booking_img_0', 'booking_img_name_0' );" />
+          <label for="booking_img" class="ap-form__label-image">
+            <figure class="ap-form__image">
+              <img class="ap-form__image-image no-image" 
+                   id="booking_img_0"
+                   [class.forms_errors_nimage]="form_data.no_phot"
+                   src="{{ booking_data.photo}}" />
+              <span class="ap-form__image-data text-center" id="booking_img_name_0">
+                Image resolution<br />
+                <span class="text-bold">350x350</span> 
+              </span>
+              <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
+                The field is required*
+              </span>
+            </figure>
+          </label>
+      </div>
+  </div>
+  <div class="ml-col-1 ap-form__rooms" id="rooms_added">
+      <div class="ml-col-1">
+        <h4 class="ap-form__titulo text-left">
+          Rooms Category
+        </h4>
+      </div>
+      <div class="ap-form__rooms-room room" *ngFor="let room of rooms;" room="added">
+        <div class="ml-col-1 padding-general-x card-style">
+          <div class="ml-col-1">
+            <div class="ap-form__input ap-form__input--full-width">
+              <input 
+                type="text"
+                placeholder="Room Type"
+                id="booking_room_title_{{ room.id }}" 
+                name="booking_room_title_{{ room.id }}"
+                value="{{ room.input }}"
+                class="ap-form__input-text" />
+              <label 
+                for="booking_room_title_{{ room.id }}" 
+                class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="room.input != ''">
+                Room Type
+              </label>
+            </div>
+          </div>
+          <div class="ml-col-1">
+            <div class="ap-form__input ap-form__input--full-width">
+              <textarea 
+                type="text"
+                placeholder="Description"
+                id="booking_room_num_{{ room.id }}"
+                value="{{ room.select }}" 
+                name="booking_num_title_{{ room.id }}"
+                class="ap-form__input-textarea"></textarea>
+              <label 
+                for="booking_num_title_{{ room.id }}" 
+                class="ap-form__label ap-form__label-text"
+                [class.ap-form__label-text--active]="room.select != ''">
+                Description
+              </label>
+            </div>
+          </div>
+          <div class="ml-col-1" *ngIf="edit_build_button">
+            <div class="ap-form__input ap-form__input-no-padding-tb">
+              <input 
+                type="checkbox"
+                id="booking_room_active_{{ room.id }}" 
+                name="booking_room_active_{{ room.id }}"
+                [checked]="room.active"
+                class="ap-form__input-checkbox display-none" />
+              <label for="booking_room_active_{{ room.id }}" class="ap-form__label ap-form__label-checkbox">
+                Active
+              </label>
+            </div>
+          </div>
           <button 
-            type="submit"
-            class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--add-white">
-            Save
+            *ngIf="room.can_delete"
+            type="button"
+            (click)="deleteThisRoom( room.id, $event )"
+            class="ap-form__rooms-room-delete button-red">x
+          </button>
+          <button 
+            type="button"
+            *ngIf="room.last_one"
+            (click)="addNewRoom()"
+            class="ap-form__rooms-room-add button-green">+
           </button>
         </div>
-    </form>
+      </div>
+  </div>
+  <div class="ml-col-1 ap-form__buttons margin-top-x">
+    <!-- <button 
+      type="button"
+      (click)="toggleSectionForm()"
+      class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
+      Cancel
+    </button> -->
+    <button 
+      type="submit"
+      class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white">
+      Save
+    </button>
+  </div>
+</form>
 </div>
+
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop">
     <p class="ml-modal__pop-titulo">
       Delete Element
     </p>
     <p class="ml-modal__pop-text">
-      Estas seguro que deseas eliminar el elemento <br />
+      Are you sure you want to delete the item? <br />
       <span class="text-bold">"{{ room_to_delete.type }}"</span>
     </p>
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="confirmDeleteRoomModal()"
-        class="ml-modal__pop-buttons-button button-blue">
+        class="ml-modal__pop-buttons-button button-black button-icon button-icon--cancel-white">
         Cancel
       </button>
       <button 
         (click)="confirmDeleteRoom()"
-        class="ml-modal__pop-buttons-button button-orange">
+        class="ml-modal__pop-buttons-button button-red button-icon button-icon--delete-white">
         Delete
       </button>
     </div>

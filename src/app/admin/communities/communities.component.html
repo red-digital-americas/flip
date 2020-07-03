@@ -90,7 +90,7 @@
           Communities
         </h4>
         <button 
-          class="ap-form__rButton button-black button-big"
+          class="ap-form__rButton button-yellow button-big button-icon button-icon--edit"
           (click)="showModal( 'AddTenant' )">
           Perk Categories
         </button>
@@ -138,7 +138,7 @@
     <div class="ap-form ap-form__center card-style">
       <div class="ml-col-1">
         <h4 class="ap-form__titulo text-left">
-          Nueva Comunidad
+          New Community
         </h4>
       </div>
       <div class="ml-col-6">
@@ -146,11 +146,11 @@
           <div class="ap-form__input">
             <input 
               type="text" 
-              placeholder="Nombre"
+              placeholder="Name"
               id="community_name" 
               class="ap-form__input-text" />
             <label for="community_name" class="ap-form__label ap-form__label-text">
-              Nombre
+              Name
             </label>
           </div>
         </div>
@@ -158,10 +158,10 @@
           <div class="ap-form__input">
             <textarea 
             id="community_direccion"
-            placeholder="Dirección"
+            placeholder="Address"
             class="ap-form__label ap-form__input-textarea"></textarea>
             <label for="community_direccion" class="ap-form__label ap-form__label-text">
-              Dirección
+              Address
             </label>
           </div>
         </div>
@@ -169,10 +169,10 @@
           <div class="ap-form__input">
             <textarea 
             id="community_desc"
-            placeholder="Descripción"
+            placeholder="Description"
             class="ap-form__label ap-form__input-textarea"></textarea>
             <label for="community_desc" class="ap-form__label ap-form__label-text">
-              Descripción
+              Description
             </label>
           </div>
         </div>
@@ -190,7 +190,7 @@
                    id="form_newcommunity_image_0"
                    src="../../../assets/14.jpg" />
               <span class="ap-form__image-data" id="form_newcommunity_name_0">
-                La imagen debe medir <br />
+                Image resolution <br />
                 <span class="text-bold">350x350</span> 
               </span>
             </figure>
@@ -206,21 +206,21 @@
               <div class="ap-form__input">
                 <input 
                   type="text" 
-                  placeholder="Descripción"
+                  placeholder="Description"
                   id="add_room_desc_{{ room.room }}" 
                   class="ap-form__input-text" />
                 <label for="add_room_desc_{{ room.room }}" class="ap-form__label ap-form__label-text">
-                  Descripción
+                  Descrition
                 </label>
               </div>
               <div class="ap-form__input">
                 <input 
                   type="number" 
-                  placeholder="Número de cuartos"
+                  placeholder="Number of rooms"
                   id="add_room_cantidad_{{ room.room }}" 
                   class="ap-form__input-text" />
                 <label for="add_room_cantidad_{{ room.room }}" class="ap-form__label ap-form__label-text">
-                  Número de cuartos
+                Number of rooms
                 </label>
               </div>
               <button 
@@ -246,7 +246,7 @@
         <button 
           class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar"
           section-to-show="add-new-rooms">
-          Agregar Room
+          Add Room
         </button>
       </div>
       <div class="ml-col-1 ap-form__buttons">

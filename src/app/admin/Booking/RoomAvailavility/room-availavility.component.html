@@ -74,11 +74,11 @@
                     </div>
                   
                   <div class="ml-col-1">
-                    <div class="ml-col-4">
+                    <div class="ml-col-2">
                       <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="applyFilterPeriod()">Filter</button>
                     </div>
-                    <div class="ml-col-4">
-                        <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="resetForm()">Reset</button>
+                    <div class="ml-col-2">
+                        <button class="ap-form__buttons-button button-x button-black button-icon button-icon--refresh-white" (click)="resetForm()">Reset</button>
                     </div>
                   </div>
     
@@ -166,7 +166,7 @@
                             <button 
                                 (click)="roomDetail( element )"
                                 mat-raised-button color="accent"
-                                class="table__data-button">
+                                class="table__data-button button-yellow button-icon button-icon--edit-white">
                                 Detail
                             </button>   
                         </td>
@@ -177,8 +177,8 @@
                             <button 
                                 mat-raised-button color="accent"
                                 (click)="showModal('calendar', element.id)"
-                                class="table__data-button-yellow display-none ">
-                                Calendar
+                                class="table__data-button-yellow button-black display-none ">
+                                Calendar 
                             </button>   
                         </td>
                     </ng-container>
