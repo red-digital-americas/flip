@@ -78,7 +78,8 @@ export class CalendarComponent implements OnInit {
     timeEnd: '',
     roomate: '',
     membership: '',
-    beds: ''
+    beds: '',
+    idUser: ''
   };
   roomId;
 
@@ -309,6 +310,14 @@ export class CalendarComponent implements OnInit {
       },
       (err) => { console.log(err); }
     );
+  }
+
+  public viewDetail(page: string, idUser, idBooking) {
+    sessionStorage.setItem('user_id', idUser.toString() );
+    sessionStorage.setItem('booking_id', idBooking);
+    this._router.navigateByUrl( page );
+    this.showModal('', undefined);
+    this.modalRef.hide();
   }
 
 }
