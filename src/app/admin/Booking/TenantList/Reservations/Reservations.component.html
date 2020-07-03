@@ -39,7 +39,10 @@
                 Status:
             </div>
             <div class="ml-col-1 text-bold">
-                {{ current_membership?.status[current_membership?.status.length - 1].detalle }} 
+                <div *ngIf="current_membership.status.idStatusBooking === 1">Pending</div>
+                <div *ngIf="current_membership.status.idStatusBooking === 2">Check In</div>
+                <div *ngIf="current_membership.status.idStatusBooking === 3">Check Out</div>
+                <div *ngIf="current_membership.status.idStatusBooking === 4">Cancel</div>
             </div>
         </div>     
     </div>
@@ -73,7 +76,8 @@
             <ng-template #thenIn>
                 <button 
                     *ngIf="check_in_active || statusBooking"
-                    class="ap-form__rButton button-blue ml-col-1 padding-lateral-m"
+                    style="float: left;"
+                    class="ap-form__rButton button-blue"
                     (click)="showModal('check_in')">
                     Check In
                 </button>
@@ -90,13 +94,16 @@
                 </div>
             </ng-template>
             <ng-template #thenOut>
-                <button
-                    [disabled]="ifCheckIn"
-                    *ngIf="statusBooking"
-                    class="ap-form__rButton button-pink ml-col-1 padding-lateral-m"
-                    (click)="showModal('check_out')">
-                    Check Out
-                </button>
+                <div *ngIf="!ifCheckIn">
+                    <button
+                        [disabled]="ifCheckIn"
+                        *ngIf="statusBooking"
+                        style="float: left;"
+                        class="ap-form__rButton button-pink"
+                        (click)="showModal('check_out')">
+                        Check Out
+                    </button>
+                </div>
             </ng-template>
         </div>
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">

@@ -182,8 +182,12 @@
 <!-- ----------------------------------------------------------- -->
 <div class="modal-header">
     <h4 class="modal-title pull-left">Nueva Reservación</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <!-- button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
+    </button -->
+    <button 
+        class="ap-form__rButton button-red" (click)="modalRef.hide()">
+        Close
     </button>
 </div>
 <div class="modal-body">
@@ -286,8 +290,17 @@
             <div class="col-4">
                 <img style="width:100%" class="img-size" [src]="acitivyModel.Photo" />
             </div>    
-            <div class="col-12">
+            <!--div class="col-12">
                 <button (click)="AddActivity()" type="submit" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Activity</button>
+            </div-->
+            <div class="ml-col-1 ap-form__buttons margin-top-x">
+                <button 
+                    class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--add-white"
+                    (click)="AddActivity()"
+                    type="submit"
+                    [disabled]="formGroup.invalid">
+                    Add Activity
+                </button>
             </div>                    
         </div>  
       </form>

@@ -1,8 +1,12 @@
 <div class="modal-header">
     <h4 class="modal-title pull-left">{{ !isEditVisible ? eventDetail?.activity.name : 'Editar'}}</h4>               
     <!-- <h4 class="modal-title pull-left">IdProps {{idProps}}</h4> -->
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <!-- button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
+    </button -->
+    <button 
+        class="ap-form__rButton button-red" (click)="modalRef.hide()">
+        Close
     </button>
 </div>
 
@@ -96,15 +100,34 @@
                         </ng-template> -->
                     </ng-select>
                 </fieldset>
-                <button *ngIf="!eventDetail?.activity.private" type="button" class="btn btn-outline-dark" (click)="Invite()" >Invite</button>                                         
+                <!--button *ngIf="!eventDetail?.activity.private" type="button" class="btn btn-outline-dark" (click)="Invite()" >Invite</button -->
+                <div class="ml-col-1 ap-form__buttons" *ngIf="showEditBtn">
+                    <button 
+                        class="ap-form__buttons-button ap-form__buttons-button--big button-pink button-icon button-icon--add-white"
+                        (click)="Invite()">
+                        Invite
+                    </button>
+                </div>                                         
             </div>
         </div>  
         
-        <div class="row" *ngIf="showEditBtn">
+        <!-- div class="row" *ngIf="showEditBtn">
             <div class="col mt-2">                
                 <button type="button" class="btn btn-outline-dark" (click)="Edit()">Editar</button>
                 <button type="button" class="btn btn-outline-danger" (click)="Delete()">Eliminar</button>
             </div>            
+        </div -->
+        <div class="ml-col-1 ap-form__buttons margin-top-m" *ngIf="showEditBtn">
+            <button 
+                class="ap-form__buttons-button ap-form__buttons-button--big button-yellow button-icon button-icon--add-white"
+                (click)="Edit()">
+                Edit
+            </button>
+            <button 
+                class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-red button-icon button-icon--delete-white"
+                (click)="Delete()">
+                Delete
+            </button>
         </div>
     </div>
 

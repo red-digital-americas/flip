@@ -660,7 +660,7 @@
             </div>
             <div class="ml-col-4">
                 <div class="ml-col-1">
-                    Job description: 
+                    Alerts name: 
                 </div>
                 <div class="ml-col-1 text-bold">
                     {{ schedule_object.information }}
@@ -1132,7 +1132,7 @@
                       <input 
                         required
                         type="text" 
-                        placeholder="Job Description"
+                        placeholder="Alerts name"
                         id="new_alert_jdesc" 
                         name="new_alert_jdesc"
                         class="ap-form__input-text"
@@ -1142,10 +1142,10 @@
                         for="new_alert_jdesc" 
                         class="ap-form__label ap-form__label-text"
                         [class.ap-form__label-text--active]="new_alert_data.Information != ''">
-                        Job Description
+                        Alerts name
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_info">
-                        Job Description is required*
+                        Alerts name is required*
                       </span>
                     </div>
                 </div>
@@ -1320,8 +1320,7 @@
                                 class="ap-form__input-text"
                                 (change)="changeColorStatus( $event.target.value )"
                                 [value]="1"
-                                [(ngModel)]="new_alert_data.alertDetails.AlertStatusId"
-                                [class.custom-input__text--error]="1 == 2">
+                                [(ngModel)]="new_alert_data.AlertStatusId">
                                 <option *ngFor="let status of alerts_status_catalog;" [value]="status.id">
                                     {{ status.status }}
                                 </option>
@@ -1352,7 +1351,7 @@
                                     id="new_alert_cname" 
                                     name="new_alert_cname"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="new_alert_data.alertDetails.Name"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].Company"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_cname" 
@@ -1375,7 +1374,7 @@
                                     id="new_alert_cphone" 
                                     name="new_alert_cphone"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="new_alert_data.alertDetails.Phone"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].Phone"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_cphone" 
@@ -1398,7 +1397,7 @@
                                     id="new_alert_cmail" 
                                     name="new_alert_cmail"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="new_alert_data.alertDetails.EmailCompany"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].EmailCompany"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_cmail" 
@@ -1424,7 +1423,7 @@
                                     id="new_alert_nstaff" 
                                     name="new_alert_nstaff"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="new_alert_data.alertDetails.AssignStaff"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].AssignStaff"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_nstaff" 
@@ -1447,7 +1446,7 @@
                                     id="new_alert_pstaff" 
                                     name="new_alert_pstaff"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="new_alert_data.alertDetails.MobilPhone"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].MobilPhone"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_pstaff" 
@@ -1470,7 +1469,7 @@
                                     id="new_alert_estaff" 
                                     name="new_alert_estaff"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="new_alert_data.alertDetails.EmailStaff"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].EmailStaff"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_estaff" 
@@ -1496,7 +1495,7 @@
                                     id="new_alert_mbud" 
                                     name="new_alert_mbud"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="new_alert_data.alertDetails.MaxBudget"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].MaxBudget"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_mbud" 
@@ -1520,7 +1519,7 @@
                                     id="new_alert_date" 
                                     name="new_alert_date"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="new_alert_data.alertDetails.DateSchedule"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].DateSchedule"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_date" 
@@ -1543,7 +1542,7 @@
                                     id="new_alert_time" 
                                     name="new_alert_time"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="new_alert_data.alertDetails.HoreSchedule"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].HoreSchedule"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_time" 
