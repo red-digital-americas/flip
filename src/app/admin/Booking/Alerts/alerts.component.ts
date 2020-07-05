@@ -144,6 +144,8 @@ export class AlertsComponent implements OnInit {
 
                     }
 
+                    this.filteringByText( false );
+
                     console.log('General => ', response);
                     
                 }
