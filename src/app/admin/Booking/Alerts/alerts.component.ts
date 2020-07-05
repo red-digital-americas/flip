@@ -144,7 +144,9 @@ export class AlertsComponent implements OnInit {
 
                     }
 
-                    this.filteringByText( false );
+                    this.filteringByText( this.find_text.archive );
+
+                    console.log('Bug ===> ', this.find_text.archive);
 
                     console.log('General => ', response);
                     
@@ -248,9 +250,6 @@ export class AlertsComponent implements OnInit {
                 card.visible_item = false;
 
             }
-
-            console.log('Pues aqui seria => ', card.archive);
-            console.log('Condition => ', extra_data.archive);
 
         });
 
