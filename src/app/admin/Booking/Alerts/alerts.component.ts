@@ -638,6 +638,8 @@ export class AlertsComponent implements OnInit {
         this.schedule_object = schedule_selected;
         console.log('Schedule selected ===> ', this.schedule_object );
 
+        this.alert_detail_form.archive = this.schedule_object.archive;
+
         if( this.schedule_object.alertDetails.length != 0 ) {
 
             console.log('Schedule selected Avaible ===> ', this.schedule_object.alertDetails );
