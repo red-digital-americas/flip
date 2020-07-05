@@ -72,10 +72,10 @@
         </div>
         <div class="card__row text-center">
           <button 
-            class="button" 
+            class="index-cards__card-buttons-button button-green button-icon button-icon--edit-white" 
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index );">
-            Editar
+            Edit
           </button>
         </div>
       </div>
@@ -83,8 +83,8 @@
   </div>
   
   <div class="bottom-container">
-    <button type="button" class="button button-x center-element-absolute" (click)="updatesn()">
-        Guardar Cambios
+    <button type="button" class="button button-x center-element-absolute button-green button-icon button-icon--add-white" (click)="updatesn()">
+        Save
     </button>
   </div>
 </div>
@@ -134,16 +134,16 @@
   </div -->
 
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content card">
+      <div>
+        <button type="button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" (click)="primaryModal.hide()" aria-label="Close">
+          Close
         </button>
+        <br><br>
+        <h4 class="modal-title">Select the Image to change at position: {{PostId}}</h4>
       </div>
-
-
+      <hr>
       <div class="form">
         <form #loginForm="ngForm" autocomplete="off">
           <div class="form__image form__image--full">
@@ -161,18 +161,17 @@
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span>
-                <strong>Imagen:</strong> <br /> 
-                *La imagen deberá de ser de 288px * 866px;
+                <strong>Image:</strong> <br /> 
+                *The image must be* 866px;
               </span>
             </label>
           </div>
-          <div class="card__row">
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" id="close_button" (click)="primaryModal.hide()">Cerrar</button>
-              <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">
-                Guardar Cambios
+          <div class="card__row" style="text-align: end; margin-top: 20px;">
+            <hr>
+              <button type="submit" [disabled]="!loginForm.form.valid" (click)="updatephoto()"
+              class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white">
+                Save
               </button>
-            </div>
           </div>
         </form>
       </div>

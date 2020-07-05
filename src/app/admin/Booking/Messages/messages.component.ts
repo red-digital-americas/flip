@@ -36,16 +36,15 @@ export class MessagesComponent implements OnInit {
         // public modalController: ModalController,
         // public toastController: ToastController
         private route: ActivatedRoute,
-      ) {
-    
-      }
+      ) { }
       private hubConnection: HubConnection;
       IDUSR: string = "0";
+      CONSIERGE: string = '0';
       IDBUILD: string = "0";
       public user: string[];
       userInfo: any;
       posts: any;
-    
+
       userConversation;
       messages: MessageCustom[] = [];
       selectedContacts: Contact[] = [];
@@ -56,9 +55,9 @@ export class MessagesComponent implements OnInit {
       tmpContacts: Contact[] = [];
       userSendMessage = new ContactSend();
       conversationId: number;
-    
+
       public section:string;
-    
+
       public toasterconfig: ToasterConfig = new ToasterConfig({
         tapToDismiss: true,
         timeout: 3000,
@@ -76,6 +75,7 @@ export class MessagesComponent implements OnInit {
         this.get_chats();
         this.get_users();
         this.getInfoUser();
+        this.getConsierge(this.IDBUILD);
         this.section = 'messages';
         this.hubConnection = new HubConnectionBuilder()
           .configureLogging(signalR.LogLevel.Debug)
@@ -107,6 +107,20 @@ export class MessagesComponent implements OnInit {
         if (conversationId !== undefined || conversationId !== null) {
           this.showConversation(conversationId, conversationId.iduser, event.target);
         }
+      }
+
+      getConsierge(building: any) {
+        const params = {
+          buildingId: building
+        }
+        this.heroService.service_general_get_with_params('Message/GetUserBulding', params).subscribe((value) => {
+          if (value.result === 'Success') {
+            console.log('GetUserBulding', value);
+            this.CONSIERGE = value.item.id;
+          }
+        }, (error) => {
+          console.log('Error', error);
+        });
       }
     
       get_chats() {
@@ -303,30 +317,30 @@ export class MessagesComponent implements OnInit {
           await selectedUser.users.forEach(async users => {
             let noRepeat = 0;
             await this.posts.forEach(messageFor => {
-              if (users == messageFor.iduser && users != parseInt(this.IDUSR)) {
+              if (users == messageFor.iduser && users != parseInt(this.CONSIERGE)) {
                 let messageAdd = new MessageData();
                 messageAdd.conversationId = messageFor.conversationId;
                 messageAdd.message1 = selectedUser.message;
-                messageAdd.userId = parseInt(this.IDUSR);
+                messageAdd.userId = parseInt(this.CONSIERGE);
                 messageList.push(messageAdd);
                 console.log("Se agrego1");
               } else
                 noRepeat++;
-              if (noRepeat == this.posts.length && users != parseInt(this.IDUSR)) {
+              if (noRepeat == this.posts.length && users != parseInt(this.CONSIERGE)) {
                 let messageAdd = new MessageData();
                 messageAdd.conversation = new Conversation();
                 messageAdd.conversationId = 0;
                 messageAdd.message1 = selectedUser.message;
-                messageAdd.userId = parseInt(this.IDUSR);
-                messageAdd.conversation.userId = parseInt(this.IDUSR);
+                messageAdd.userId = parseInt(this.CONSIERGE);
+                messageAdd.conversation.userId = parseInt(this.CONSIERGE);
                 messageAdd.conversation.status = false;
                 messageAdd.conversation.userIdReciver = users;
                 messageList.push(messageAdd);
-                
-                console.log("Se agrego2");
+
+                console.log('Se agrego2', );
               }
             });
-    
+
           });
           console.log("MessageList=>", messageList);
           this.heroService.ServicioPostMessageList(messageList).subscribe(response => {

@@ -109,7 +109,11 @@
 
       <div class="ml-col-4">
         <div class="ml-col-1">
-          <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="updateTitles()">Update</button>
+          <button style="width: 100px;"
+                  class="ap-form__buttons-button padding-lateral-m button-pink button-icon button-icon--add-white" 
+                  (click)="updateTitles()">
+                  Update
+          </button>
         </div>         
       </div>
 
@@ -118,7 +122,7 @@
       <button 
               data-toggle="modal" 
               (click)="primaryModal.show(); passdata(this.post_blanck);"
-              class="button button-x">
+              class="button button-x button-pink button-icon button-icon--add-white">
               Add Slide
       </button>
     </div>
@@ -158,16 +162,16 @@
       </div>
       <div class="ml-col-1 text-center margin-top-m">
         <button 
+                (click)="delete(post)"
+                class="button button-x padding-lateral button-red button-icon button-icon--delete-white">
+                Delete
+        </button>
+        &nbsp;&nbsp;
+        <button 
           data-toggle="modal" 
           (click)="primaryModal.show();passdata(post);"
-          class="button button-x">
+          class="button button-x padding-lateral button-green button-icon button-icon--edit-white">
           Edit
-        </button>
-
-        <button 
-                (click)="delete(post)"
-                class="button button-x button-black button-icon button-icon--delete-white">
-                Delete
         </button>
       </div>
     </div>
@@ -210,14 +214,18 @@
   aria-labelledby="myModalLabel" 
   aria-hidden="true"
   id="modal-fw">
-  <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content card">
+      <div>
+        <button type="button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
+                (click)="primaryModal.hide()" aria-label="Close">
+          Close
         </button>
+        <br><br>
+        <h4 class="modal-title">Select the images to change at position: {{PostId}}</h4>
+        
       </div>
+      <hr>
       <div class="form">
         <form #loginForm="ngForm" autocomplete="off">
           <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
@@ -307,16 +315,13 @@
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button 
-          type="button" 
-          style="z-index: 9999;" 
-          id="close_modal" 
-          class="btn btn-secondary" 
-          (click)="primaryModal.hide(); resetImagesData()">
-          Cerrar
+      <div class="card__row margin-top-x" style="text-align: end;">
+        <hr>
+        <button type="button"
+                class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
+                (click)="updatephoto()">
+            Save
         </button>
-        <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
       </div>
     </div>
   </div>

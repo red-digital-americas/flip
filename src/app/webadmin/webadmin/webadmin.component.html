@@ -5,17 +5,18 @@
   </div>
   <div class="ml-col-1">
     <form class="ap-form__titulo ap-form__titulo" [formGroup]="titlesForm">
-      
+
       <div class="ml-col-4">
         <div class="ml-col-1">
           <div class="ap-form__input">
-              <mat-form-field >
-                  <mat-label>Home</mat-label>
-                  <input matInput formControlName="home" placeholder="Example Home" type="text" [(ngModel)]="titlesObj[0].name">
-              </mat-form-field> 
-              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_home">
-                Home is required*
-              </span>
+            <mat-form-field>
+              <mat-label>Home</mat-label>
+              <input matInput formControlName="home" placeholder="Example Home" type="text"
+                [(ngModel)]="titlesObj[0].name">
+            </mat-form-field>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_home">
+              Home is required*
+            </span>
           </div>
         </div>
       </div>
@@ -23,13 +24,14 @@
       <div class="ml-col-4">
         <div class="ml-col-1">
           <div class="ap-form__input">
-              <mat-form-field >
-                  <mat-label>About</mat-label>
-                  <input matInput formControlName="about" placeholder="Example About" type="text" [(ngModel)]="titlesObj[1].name">
-              </mat-form-field> 
-              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_about">
-                About is required*
-              </span>
+            <mat-form-field>
+              <mat-label>About</mat-label>
+              <input matInput formControlName="about" placeholder="Example About" type="text"
+                [(ngModel)]="titlesObj[1].name">
+            </mat-form-field>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_about">
+              About is required*
+            </span>
           </div>
         </div>
       </div>
@@ -37,13 +39,14 @@
       <div class="ml-col-4">
         <div class="ml-col-1">
           <div class="ap-form__input">
-              <mat-form-field >
-                  <mat-label>Design</mat-label>
-                  <input matInput formControlName="design" placeholder="Example Design" type="text" [(ngModel)]="titlesObj[2].name">
-              </mat-form-field> 
-              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_design">
-                Design is required*
-              </span>
+            <mat-form-field>
+              <mat-label>Design</mat-label>
+              <input matInput formControlName="design" placeholder="Example Design" type="text"
+                [(ngModel)]="titlesObj[2].name">
+            </mat-form-field>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_design">
+              Design is required*
+            </span>
           </div>
         </div>
       </div>
@@ -51,13 +54,14 @@
       <div class="ml-col-4">
         <div class="ml-col-1">
           <div class="ap-form__input">
-              <mat-form-field >
-                  <mat-label>More</mat-label>
-                  <input matInput formControlName="more" placeholder="Example More" type="text" [(ngModel)]="titlesObj[3].name">
-              </mat-form-field> 
-              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_more">
-                More is required*
-              </span>
+            <mat-form-field>
+              <mat-label>More</mat-label>
+              <input matInput formControlName="more" placeholder="Example More" type="text"
+                [(ngModel)]="titlesObj[3].name">
+            </mat-form-field>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_more">
+              More is required*
+            </span>
           </div>
         </div>
       </div>
@@ -65,21 +69,24 @@
       <div class="ml-col-4">
         <div class="ml-col-1">
           <div class="ap-form__input">
-              <mat-form-field >
-                  <mat-label>Button Text</mat-label>
-                  <input matInput formControlName="btnText" placeholder="Example Text buttin" type="text" [(ngModel)]="titlesObj[4].name">
-              </mat-form-field> 
-              <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_">
-                Button Text is required*
-              </span>
+            <mat-form-field>
+              <mat-label>Button Text</mat-label>
+              <input matInput formControlName="btnText" placeholder="Example Text buttin" type="text"
+                [(ngModel)]="titlesObj[4].name">
+            </mat-form-field>
+            <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_">
+              Button Text is required*
+            </span>
           </div>
         </div>
       </div>
 
       <div class="ml-col-4">
         <div class="ml-col-1">
-          <button style="width: 100px;" class="ap-form__buttons-button padding-lateral-m button-black button-icon button-icon--add-white" (click)="updateTitles()">Update</button>
-        </div>         
+          <button style="width: 100px;"
+            class="ap-form__buttons-button padding-lateral-m button-pink button-icon button-icon--add-white"
+            (click)="updateTitles()">Update</button>
+        </div>
       </div>
 
     </form>
@@ -92,16 +99,14 @@
             <img src="{{post.frontphoto}}" class="card__image-img" />
           </figure>
           <figure class="card__image">
-            <img src="{{post.backphoto}}" class="card__image-img"  />
+            <img src="{{post.backphoto}}" class="card__image-img" />
           </figure>
         </div>
         <div class="card__row padding-tb-x text-center">
-          <button 
-            class="button" 
-            data-toggle="modal" 
+          <button class="button" data-toggle="modal"
             (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index )"
             class="index-cards__card-buttons-button button-green button-icon button-icon--edit-white">
-           &nbsp; Editar
+            &nbsp; Edit
           </button>
         </div>
       </div>
@@ -109,7 +114,7 @@
   </div>
 </div>
 
-  <!-- Aqui empieza las tarjeta: el for es quien las crea >
+<!-- Aqui empieza las tarjeta: el for es quien las crea >
   <div class="col" *ngFor="let post of posts; let i = index" style="border: solid 1px green;">
     <mat-card *ngIf="i==7" style="margin-bottom:15px; text-align:center">
       <div class="btn-group float-right" dropdown>
@@ -185,116 +190,60 @@
 <div class="black-box">
   <img src="" id="image_data" />
 </div>
-<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-        <button type="button" class="ap-form__rButton button-red padding-lateral-m" id="close_button" (click)="primaryModal.hide()" aria-label="Close">
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content card">
+      <div>
+        <button type="button"
+          class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
+          id="close_button" (click)="primaryModal.hide()" aria-label="Close">
           Close
         </button>
+        <br><br>
+        <h4 class="card-title">
+          Select the Images to change at position: {{PostId}}</h4>
       </div>
-      <div class="form">
+      <hr>
+      <div class="form" style="margin-top: 20px;">
         <form #loginForm="ngForm" autocomplete="off">
           <div class="form__image">
-            <input 
-              class="display-none"
-              type="file" 
-              name="image_one_selected"
-              accept="image/*"
-              (change)="readImageData($event, '350x350', 0);"
-              id="validatedCustomFile" 
-              required>
+            <input class="display-none" type="file" name="image_one_selected" accept="image/*"
+              (change)="readImageData($event, '350x350', 0);" id="validatedCustomFile" required>
             <label class="form__image-img" for="validatedCustomFile">
               <figure class="image_to_preview_container">
                 <img src="#" class="image_to_preview placeholder_image" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
-                <strong>Imagen Default:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <strong>Image Default:</strong> <br />
+                *The image must be 350px * 350px.
               </span>
             </label>
           </div>
           <div class="form__image">
-            <input 
-              class="display-none"
-              type="file" 
-              name="image_one_selected"
-              accept="image/*"
-              (change)="readImageData($event, '350x350', 1);"
-              id="validatedCustomFile1" 
-              required>
+            <input class="display-none" type="file" name="image_one_selected" accept="image/*"
+              (change)="readImageData($event, '350x350', 1);" id="validatedCustomFile1" required>
             <label class="form__image-img" for="validatedCustomFile1">
               <figure class="image_to_preview_container">
                 <img src="#" class="image_to_preview placeholder_image" />
               </figure>
               <span class="image_to_preview_name name_image_uploaded"></span>
               <span class="padding-tb-min">
-                <strong>Imagen Hover:</strong> <br /> 
-                *La imagen deberá de ser de 350px * 350px.
+                <strong>Imagen Hover:</strong> <br />
+                *The image must be 350px * 350px.
               </span>
             </label>
           </div>
-          <div class="card__row">
-            <div class="modal-footer">
-              
-              <button type="submit" [disabled]="!loginForm.form.valid" (click)="updatephoto()"class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--add-white">
-                Save
-              </button>
-            </div>
+          <div class="card__row margin-top-x" style="text-align: end;">
+            <hr>
+            <button type="submit" [disabled]="!loginForm.form.valid" (click)="updatephoto()"
+              class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white">
+              Save
+            </button>
           </div>
         </form>
       </div>
-
-      <!-- form #loginForm="ngForm" autocomplete="off" class="display-none">
-
-        <div *ngIf="8==PostId ||  15==PostId " class="modal-body">
-
-          Imagen Default : *La imagen deberá de ser de 350px * 350px;
-          <div class="custom-file margin-gral ">
-
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile" required />
-            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-
-          </div>
-          Imagen  Hover : *La imagen deberá de ser de 350px * 350px;
-          <div class="custom-file margin-gral ">
-
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile" required>
-            <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
-
-          </div>
-        </div>
-
-        <div *ngIf="8!=PostId && 15!=PostId" class="modal-body">
-          Imagen Default : *La imagen deberá de ser de 350px * 350px;
-          <div class="custom-file margin-gral" style="margin-bottom: 20px;">
-
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event,0)" class="custom-file-input" id="validatedCustomFile" required>
-            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>
-
-          </div>
-          Imagen  Hover : *La imagen deberá de ser de 350px * 350px;
-          <div class="custom-file margin-gral ">
-
-            <input type="file" accept="image/*"
-                   (change)="prepareImages($event,1)" class="custom-file-input" id="validatedCustomFile" required>
-            <label class="custom-file-label" for="customFile">{{imageInputLabeltwo}}</label>
-
-          </div>
-        </div>
-
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Cerrar</button>
-          <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="updatephoto()">Guardar Cambios </button>
-        </div>
-
-      </form -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

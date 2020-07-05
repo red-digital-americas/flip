@@ -23,10 +23,10 @@
         </div>
         <div class="card__row text-center">
           <button 
-            class="button" 
+          class="button button-x padding-lateral button-green button-icon button-icon--edit-white"
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata( post );">
-            Editar
+            Edit
           </button>
         </div>
       </div>
@@ -75,14 +75,19 @@
 </div>
 
 <div bsModal #primaryModal="bs-modal" class="modal fade modal-fw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content card">
+      <div>
+        <button type="button" 
+                class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
+                (click)="primaryModal.hide()" 
+                aria-label="Close">
+          Close
         </button>
+        <br><br>
+        <h4 class="modal-title">Complete the information for the carrer: {{job_data.id}}</h4>
       </div>
+      <hr>
       <div class="form">
         <form #loginForm="ngForm" autocomplete="off">
           <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
@@ -154,9 +159,13 @@
 
         </div>
       </form -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="close_modal" (click)="primaryModal.hide()">Cerrar</button>
-        <button type="button" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
+      <div class="card__row margin-top-x" style="text-align: end;">
+        <button 
+              type="button" 
+              class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
+              (click)="updatephoto()">
+          Save
+        </button>
       </div>
     </div>
   </div>

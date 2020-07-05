@@ -1179,6 +1179,18 @@ select:active,
     background-color: rgba(0,0,0,.7);
   }
 
+  &__data {
+    padding: 20px 20px 10px 20px;
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    background-color: white;
+    border-radius: 5px;
+    width: 80%;
+    box-shadow: 0 0 7px 2px rgba(0, 0, 0, .5);
+  }
+
   &__pop {
 
     padding: 20px 20px 10px 20px;
@@ -4200,4 +4212,22 @@ select {
   // width: fit-content !important;
   // height: fit-content !important;
   // max-height: max-content !important;
+}
+
+hr{
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    border: 0 !important;
+    border-top: 0.1px solid #2e343a !important;
+}
+
+.new-modal{
+  position: fixed;
+    top: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 9999;
+    bottom: 0;
+    height: 100%;
+    overflow-y: auto;
+    left: 0;
 }

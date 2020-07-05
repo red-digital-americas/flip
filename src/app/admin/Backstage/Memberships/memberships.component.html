@@ -117,7 +117,7 @@
           <button 
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(post);"
-            class="button button-x">
+            class="button button-x button-green button-icon button-icon--add-white">
             Edit
           </button>
         </div>
@@ -125,16 +125,18 @@
     </div>
 </div>
 <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-fw">
-    <div class="modal-dialog modal-primary" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content card">
+        <div>
+          <button type="button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"  (click)="primaryModal.hide()" aria-label="Close">
+            Close
+          </button>
+          <br><br>
           <h4 class="modal-title">
             Edit information in section: {{back_stage_data.id}}
           </h4>
-          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
+        <hr>
         <div class="form">
           <form #loginForm="ngForm" autocomplete="off">
             <div class="ml-col-1 custom-input margin-top-m">
@@ -429,7 +431,7 @@
                   <button 
                     id="{{ icons.id }}"
                     (click)="deleteIconsServices( index )"
-                    class="ap-form__buttons-button ap-form__buttons-button--big button-orange">
+                    class="ap-form__buttons-button ap-form__buttons-button--big button-red button-icon button-icon--delete-white">
                     Delete
                   </button>
                 </div>
@@ -438,23 +440,16 @@
                 <button 
                   *ngIf="add_icon_button"
                   (click)="updatedIconsService()"
-                  class="ap-form__buttons-button ap-form__buttons-button--big button-green">
+                  class="ap-form__buttons-button ap-form__buttons-button--big button-pink button-icon button-icon--add-white">
                   Add Icon
                 </button>
               </div>
             </div>
           </form>
         </div>
-        <div class="modal-footer">
-          <button 
-            type="button" 
-            style="z-index: 9999;" 
-            id="close_modal" 
-            class="ap-form__buttons-button ap-form__buttons-button button-red" 
-            (click)="primaryModal.hide(); getBackStageData(); resetImagesData();">
-            Close
-          </button>
-          <button type="button" style="z-index: 9999;" class="ap-form__buttons-button ap-form__buttons-button button-black" (click)="updatephoto()">Save changes</button>
+        <div class="card__row margin-top-x" style="text-align: end;">
+          <hr>
+          <button type="button" class="ap-form__buttons-button ap-form__buttons-button button-green button-icon nutton-icon--add-white" (click)="updatephoto()">Save</button>
         </div>
       </div>
     </div>

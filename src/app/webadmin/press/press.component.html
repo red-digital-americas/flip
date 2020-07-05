@@ -3,6 +3,31 @@
     <h2 Class="text-ultra">Press</h2>
   </div>
   <div class="row padding-bottom-m">
+    <div *ngFor="let post of posts, index as index;" class="pCard_card" [ngClass]="{'pCard_on': post.id === select}">
+      <div class="pCard_up">
+        <img class="photo" [src]="post.photo" alt="">
+         <div class="pCard_text">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.reusme }}</p>
+         </div>
+         <div class="pCard_add" (click)="openmore(post)"><i class="fa fa-plus" [ngClass]="{'fa-minus':post.id === select}"></i></div>
+      </div>
+      <div class="pCard_down">
+        <div class="card__row text-center">
+          <button 
+          class="button padding-lateral button-green button-icon button-icon--edit-white"
+          data-toggle="modal" 
+          (click)="primaryModal.show(); passdata( post );">
+            Edit
+          </button>
+        </div>
+      </div>
+      <div class="pCard_back">
+        <br>
+         <p>{{ post.longresume }}</p>
+      </div>
+  </div>
+  <!--  
     <div class="big-card" *ngFor="let post of posts, index as index;">
       <div class="card">
         <div class="card__row">
@@ -36,6 +61,7 @@
         </div>
       </div>
     </div>
+  
   </div>
 </div>
 
@@ -73,17 +99,21 @@
     </mat-card>
   </div>
 </div>
-
+-->
 <div bsModal #primaryModal="bs-modal" class="modal fade modal-fw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Selecciona las Imagenes a cambiar de la posicion: {{PostId}}</h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+    <div class="modal-content card">
+      <div>
+        <button type="button" 
+                class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" 
+                (click)="primaryModal.hide()" 
+                aria-label="Close">
+          Close
         </button>
+        <br><br>
+        <h4 class="modal-title">Complete the information for press: {{press_data.id}}</h4>
       </div>
-
+      <hr>
       <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
           <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
@@ -164,15 +194,13 @@
           </div>
         </div>
       </form>
-      <div class="modal-footer">
-        <button 
-          type="button" 
-          class="btn btn-secondary"
-          id="close_modal" 
-          (click)="primaryModal.hide(); resetImagesData();">
-          Cerrar
-        </button>
-        <button type="button" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios</button>
+      <div class="card__row margin-top-x" style="text-align: end;">
+        <hr>
+         <button type="button" 
+                  class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
+                 (click)="updatephoto()">
+                 Save
+         </button>
       </div>
     </div>
   </div>

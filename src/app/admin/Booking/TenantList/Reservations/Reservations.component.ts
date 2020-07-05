@@ -247,7 +247,7 @@ import { resolve } from 'dns';
                 }
 
             }, (error: any) => {
-
+                this.loader.hideLoader();
                 console.error('Error WS CIO => ', error);
 
             });

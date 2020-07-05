@@ -42,6 +42,7 @@ export class PressComponent implements OnInit {
   PostId: number ;
   posttext: string = "";
   posttitle: string = "";
+  select:any;
   public user: string[];
 
   postphoto: string = "assets/img/Coliving.jpg";
@@ -81,6 +82,18 @@ export class PressComponent implements OnInit {
 
     }
   }
+
+  openmore(post){
+    console.log(post);
+    
+    if(this.select == post.id){
+      this.select = null;
+    }else if( this.select == null){
+      this.select = post.id;
+    }else{
+      this.select = post.id;
+    }
+}
 
 
   showSuccess() {

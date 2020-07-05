@@ -59,7 +59,7 @@
               <button 
                   data-toggle="modal" 
                   (click)="primaryModal.show();"
-                  class="button button-x">
+                  class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--edit-white">
                   Edit
               </button>
               </div>
@@ -75,16 +75,21 @@
   role="dialog" 
   aria-labelledby="myModalLabel" 
   aria-hidden="true">
-  <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content card">
+      <div>
+        <button type="button" 
+                class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" 
+                (click)="primaryModal.hide()" 
+                aria-label="Close">
+          Close
+        </button>
+        <br><br>
         <h4 class="modal-title">
             Edit Backstage information
         </h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
+      <hr>
       <div class="form">
         <form #loginForm="ngForm" autocomplete="off">
             <div class="ml-col-1 custom-input margin-top-m">
@@ -229,8 +234,8 @@
                     <div class="ml-col-1 ap-form__buttons bottom-separator">
                         <button 
                           (click)="deleteThisFaq( index )"
-                          class="ap-form__buttons-button ap-form__buttons-button--big button-orange">
-                          Eliminar
+                          class="ap-form__buttons-button ap-form__buttons-button--big button-red button-icon button-icon--cancel-white">
+                          Delete
                         </button>
                     </div>
                 </div>
@@ -238,25 +243,19 @@
             <div class="ml-col-1 ap-form__buttons">
                 <button 
                   (click)="addNewQuestion()"
-                  class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar">
+                  class="ap-form__buttons-button ap-form__buttons-button--big button-pink button-icon button-icon--add-white">
                   Add Question
                 </button>
             </div>
-            <div class="card__row">
-                <div class="modal-footer">
-                  <button 
-                    type="button" 
-                    class="btn btn-secondary" 
-                    id="close_modal" 
-                    (click)="primaryModal.hide(); resetImagesData(); getBackStageData();">
-                    Close
-                  </button>
-                  <button type="submit" class="btn btn-primary" (click)="sendBackstageData()">
-                    Guardar Cambios
-                  </button>
-                </div>
-            </div>
-        </form>
+          </form>
+              <div class="card__row margin-top-x" style="text-align: end;">
+                <hr>
+                    <button type="submit" 
+                    class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white" 
+                            (click)="sendBackstageData()">
+                      Save
+                    </button>
+              </div>
       </div>
     </div>
   </div>

@@ -123,8 +123,8 @@
           <button 
             data-toggle="modal" 
             (click)="infoModal.show(); passdataRoom(post);"
-            class="button">
-            Editar
+            class="button button-x button-green button-icon button-icon--edit-white">
+            Edit
           </button>
         </div>
       </div>
@@ -132,13 +132,15 @@
 
     <div class="ml-col-1">
       <div class="row">
+        
         <div *ngIf="showAddA" class="ml-col-1 position-relative margin-bottom-x">
+          <br><br>
           <button style="position: absolute;
           right: 40px;
           top: -37px;"
                   data-toggle="modal" 
                   (click)="primaryModal.show(); passPhotosDataA(this.post_blanck);"
-                  class="button button-x">
+                  class="button button-x button-pink button-icon button-icon--add-white">
                   Add Room Type
           </button>
         </div>
@@ -214,8 +216,8 @@
         <button 
           data-toggle="modal" 
           (click)="primaryModal.show(); passPhotosData( photo );"
-          class="button button-x">
-          Editar
+          class="button button-x button-green button-icon button-icon--edit-white">
+          Edit
         </button>
       </div>
     </div>
@@ -292,8 +294,8 @@
           <button 
             data-toggle="modal" 
             (click)="infoModal.show(); passdataRoom(post);"
-            class="button">
-            Editar
+            class="button button-x button-green button-icon button-icon--edit-white">
+            Edit
           </button>
         </div>
       </div>
@@ -302,12 +304,13 @@
     <div class="ml-col-1">
       <div class="row">
         <div *ngIf="showAddB" class="ml-col-1 position-relative margin-bottom-x">
+          <br><br>
           <button style="position: absolute;
           right: 40px;
-          top: -37px;"
+          top: -17px;"
                   data-toggle="modal" 
                   (click)="primaryModal.show(); passPhotosDataB(this.post_blanck);"
-                  class="button button-x">
+                  class="button button-x button-pink button-icon  button-icon--add-white">
                   Add Room Type
           </button>
         </div>
@@ -378,22 +381,27 @@
         <button 
           data-toggle="modal" 
           (click)="primaryModal.show(); passPhotosData( photo, post.id );"
-          class="button button-x">
-          Editar
+          class="button button-x button-green button-icon button-icon--edit-white">
+          Edit
         </button>
       </div>
     </div>
   </div>  
 </div>
 <div bsModal #primaryModal="bs-modal" class="modal fade modal-fw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Complete the slide information</h4>
-        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content card">
+      <div>
+        <button type="button" 
+                class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" 
+                (click)="primaryModal.hide()" 
+                aria-label="Close">
+          Close
         </button>
+        <br><br>
+        <h4 class="modal-title">Complete the slide information</h4>
       </div>
+      <hr>
       <form #loginForm="ngForm" autocomplete="off">
         <div class="modal-body">
           <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
@@ -551,35 +559,40 @@
             </label>
           </div>
         </div>
-        <div class="modal-footer">
-          <button 
-            type="button" 
-            style="z-index: 9999;" 
-            id="close_album" 
-            class="btn btn-secondary" 
-            (click)="primaryModal.hide(); resetImagesData();">
-            Close
-          </button>
-          <div *ngIf="canDeleteA">
-            <button type="submit" class="btn btn-warning" (click)="deleteSlide()">
-              Eliminar
+        <div  class="card__row margin-top-x" style="text-align: end;">
+          <div class="ml-col-2" *ngIf="canDeleteA">
+            <button type="submit" 
+            class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-red button-icon button-icon--delete-white" 
+                    (click)="deleteSlide()">
+              Delete
             </button>
           </div> 
-          <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updatephoto()">Guardar Cambios </button>
+          <div class="ml-col-2">
+               <button type="button" 
+                         class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white" 
+                        (click)="updatephoto()">
+                        Save 
+               </button>
+          </div>
         </div>
       </form>
     </div>
   </div>
 </div>
 <div bsModal #infoModal="bs-modal" class="modal fade modal-fw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Complete the Room information</h4>
-        <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content card">
+      <div>
+        <button type="button" 
+                class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" 
+                (click)="infoModal.hide()" 
+                aria-label="Close">
+          Close
         </button>
+        <br><br>
+        <h4 class="modal-title">Complete the Room information</h4>
       </div>
+      <hr>
       <div class="form">
         <form #loginForm="ngForm" autocomplete="off">
           <div class="ml-col-1 custom-input margin-top-m margin-bottom-x">
@@ -724,11 +737,16 @@
               [src]="room_data.get_video_url">
             </iframe>
           </div>
-          <div class="modal-footer">
-            <button type="button" style="z-index: 9999;" id="close_room" class="btn btn-secondary" (click)="infoModal.hide()">Cerrar</button>
-            <button type="button" style="z-index: 9999;" class="btn btn-primary" (click)="updateindo()">Guardar Cambios</button>
-          </div>
         </form>
+
+        <div class="card__row margin-top-x" style="text-align: end;">
+          <hr>
+          <button type="button" 
+                  class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
+                  (click)="updateindo()">
+                  Save
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -1,3 +1,4 @@
+<button (click)="onNoClick()"  class="ap-form__rButton button-red button-icon button-icon--cancel-white" >Close</button>
 <h1 mat-dialog-title>Messages</h1>
 <div mat-dialog-content class="heigh-users">
     <h5>Invite</h5>
@@ -34,8 +35,8 @@
 
     </div>
 
-    <button mat-button (click)="onNoClick()">Close</button>
-    <button [disabled]="!messageInput" mat-button *ngIf="!eventDetail?.activity.private" type="button" class="btn btn-outline-dark"
+    <br>
+    <button [disabled]="!messageInput" style="float: right;" *ngIf="!eventDetail?.activity.private" type="button" class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white"
         (click)="Send()">Send</button>
 
     <!-- <mat-form-field>

@@ -486,6 +486,7 @@ function getRoomsData( id_build ) {
 }
 
 function appendContentToPage( data ) { 
+    console.log("Rooms ==>>>", data);
     
     for( let index = 0; index < 4; index += 1 ) {
         // debugger;
@@ -669,7 +670,7 @@ let palntilla = `<div class="carousel-inner">`;
                                                                                 </span>
                                                                             </h2>
                                                                             <p class="textamen" style="margin-top: 5%;" room="slide-desc-0">
-                                                                                ${room.desc}
+                                                                                ${photos[slide_index].description}
                                                                             </p>
                                                                         </div>
                                                                         <br>

@@ -4,7 +4,7 @@
             <h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
                 Tenant list
                 <button 
-                    class="ap-form__titulo-button button-big button-icon button-icon--add-white"
+                    class="ap-form__titulo-button button-pink button-big button-icon button-icon--add-white"
                     (click)="goToPage('AddTenant')">
                     Add Tenant
                 </button>
@@ -88,11 +88,11 @@
                 </div>
               
               <div class="ml-col-1">
-                <div class="ml-col-4">
+                <div class="ml-col-2">
                   <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="applyFilterPeriod()">Filter</button>
                 </div>
-                <div class="ml-col-4">
-                    <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="resetForm()">Reset</button>
+                <div class="ml-col-2">
+                    <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black button-icon button-icon--refresh-white" (click)="resetForm()">Reset</button>
                 </div>
               </div>
 
@@ -233,12 +233,12 @@
         <div class="ml-modal__pop-buttons">
             <button 
                 (click)="showModal()"
-                class="ml-modal__pop-buttons-button button-pink">
+                class="ml-modal__pop-buttons-button button-red button-icon button-icon--cancel-white">
                 Cancel
             </button>
             <button 
                 (click)="confirmCheckInOut('out')"
-                class="ml-modal__pop-buttons-button button-black">
+                class="ml-modal__pop-buttons-button button-green button-icon button-icon--delete-white">
                 Check Out
             </button>
         </div>
