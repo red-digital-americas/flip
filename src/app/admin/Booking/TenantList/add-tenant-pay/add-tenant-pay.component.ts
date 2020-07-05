@@ -320,10 +320,12 @@ export class AddTenantPayComponent implements OnInit {
     form_data.totalBeds == null || form_data.totalBeds == undefined ?
       this.bt_form_data.no_beds = true : this.bt_form_data.no_beds = false;
 
+    
     for (let field in this.bt_form_data) {
       if (this.bt_form_data[field]) return false;
       else result = true;
     }
+
     return result;
   }
 
@@ -842,6 +844,25 @@ export class AddTenantPayComponent implements OnInit {
 
   }
 
+  public unableField( event_data:any, field_selected:string ):void {
+
+    const event = event_data.target,
+          field_to_hide = document.getElementById( field_selected );
+
+    if( event.value == '2' ) {
+
+        field_to_hide.classList.add('display-none');
+        this.booking_data.roomatePreferences = '1';
+        
+    } else {
+
+        field_to_hide.classList.remove('display-none');
+        this.booking_data.roomatePreferences = null;
+
+    }
+
+}
+
 }
 
 class CardDTO {
@@ -868,7 +889,7 @@ class BookingDetailModel {
   pets: boolean = null;
   roomType: number = null;
   smoke: boolean = null;
-  roomatePreferences: boolean = null;
+  roomatePreferences: any = null;
   totalBeds: number = null;
 }
 

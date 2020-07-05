@@ -1,9 +1,8 @@
 <booking-navbar [section]="section"></booking-navbar>
 <div class="ap-form ap-form--parent ml-col-1 background-white">
     <div class="ml-col-1">
-        <div class="ml-col-1 padding-general-m margin-bottom-g">
+        <div class="ml-col-1 margin-bottom-g">
           <div class="ml-col-1">
-      
           <div class="ml-col-1" >
             <div class="ml-col-1 margin-tb-min">
                 <h4 class="ap-form__titulo ap-form__titulo--auto-width">
@@ -186,6 +185,7 @@
                                     name="bd_roomate"
                                     [disabled]="able_section_two"
                                     [class.form_error_found]="bt_form_data.no_rtyp"
+                                    (change)="unableField( $event, 'bd_gender_container')"
                                     [(ngModel)]="booking_data.roomateFlip"
                                     class="ap-form__input-text">
                                     <option value="null" disabled>Roomate Type*</option>
@@ -204,7 +204,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ml-col-4">
+                        <div class="ml-col-4" id="bd_gender_container">
                             <div class="ml-col-1">
                                 <div class="ap-form__input">
                                   <select
@@ -779,30 +779,32 @@
                                 </div>
                             </div>
       
-                            <div class="ml-col-2 padding-top-m" *ngIf="!show_payment_form">
-                              <div class="credit-card">
-                                <div class="credit-card__container" >
-                                  <div class="credit-card__card card-style">
-                                    <button class="credit-card__card-favorite"
-                                      [class.credit-card__card-favorite--desactive]="ccObj.main == 0">
-                                    </button>
-                                    <h4 class="credit-card__card-titulo">
-                                      {{ ccObj.name }}
-                                    </h4>
-                                    <p class="credit-card__card-number credit-card__card-number--icon" [ngClass]="{
-                                      'credit-card__card-number--visa' : ccObj.kind == 'visa',
-                                      'credit-card__card-number--mcard' : ccObj.kind == 'mcard',
-                                      'credit-card__card-number--american' : ccObj.kind == 'american',
-                                      'credit-card__card-number--default' : ccObj.kind == ''
-                                    }">
-                                      <span>****</span>
-                                      <span>****</span>
-                                      <span>****</span>
-                                      <span>{{ ccObj.number | slice:-4 }}</span>
-                                    </p>
-                                    <p class="credit-card__card-date">
-                                      {{ ccObj.month }}/{{ ccObj.year | slice:-2 }}
-                                    </p>
+                            <div class="ml-col-1">
+                              <div class="ml-col-3" *ngIf="!show_payment_form">
+                                <div class="credit-card">
+                                  <div class="credit-card__container" >
+                                    <div class="credit-card__card card-style">
+                                      <button class="credit-card__card-favorite"
+                                        [class.credit-card__card-favorite--desactive]="ccObj.main == 0">
+                                      </button>
+                                      <h4 class="credit-card__card-titulo">
+                                        {{ ccObj.name }}
+                                      </h4>
+                                      <p class="credit-card__card-number credit-card__card-number--icon" [ngClass]="{
+                                        'credit-card__card-number--visa' : ccObj.kind == 'visa',
+                                        'credit-card__card-number--mcard' : ccObj.kind == 'mcard',
+                                        'credit-card__card-number--american' : ccObj.kind == 'american',
+                                        'credit-card__card-number--default' : ccObj.kind == ''
+                                      }">
+                                        <span>****</span>
+                                        <span>****</span>
+                                        <span>****</span>
+                                        <span>{{ ccObj.number | slice:-4 }}</span>
+                                      </p>
+                                      <p class="credit-card__card-date">
+                                        {{ ccObj.month }}/{{ ccObj.year | slice:-2 }}
+                                      </p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>

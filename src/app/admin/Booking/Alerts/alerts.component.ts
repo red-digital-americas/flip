@@ -179,32 +179,46 @@ export class AlertsComponent implements OnInit {
             element.date_worked = date_gotted;
             element.hour_worked = time_gotted_hour;
 
+            !element.archive ? 
+                element.visible_item = true : 
+                element.visible_item = false;
+
         });
 
     }
 
     public find_text: TextFinder = new TextFinder();
-    public filteringByText():void {
+    public filteringByText( archive: boolean = false ):void {
 
         const filter_by_container: any = document.getElementById('filter_by');
 
         if( filter_by_container.value == '1' ) {
 
-            this.filterDataFrom( this.pending_schedule_cards, {name: 'pending_schedule_cards'} );
-            this.filterDataFrom( this.confirming_completion_cards, {name: 'confirming_completion_cards'} );
-            this.filterDataFrom( this.awaiting_invoice_cards, {name: 'awaiting_invoice_cards'} );
-            this.filterDataFrom( this.confirming_paymnet_cards, {name: 'confirming_paymnet_cards'} );
-            this.filterDataFrom( this.completed_and_paid_cards, {name: 'completed_and_paid_cards'} );
+            this.filterDataFrom( this.pending_schedule_cards, {name: 'pending_schedule_cards', archive: archive} );
+            this.filterDataFrom( this.confirming_completion_cards, {name: 'confirming_completion_cards', archive: archive} );
+            this.filterDataFrom( this.awaiting_invoice_cards, {name: 'awaiting_invoice_cards', archive: archive} );
+            this.filterDataFrom( this.confirming_paymnet_cards, {name: 'confirming_paymnet_cards', archive: archive} );
+            this.filterDataFrom( this.completed_and_paid_cards, {name: 'completed_and_paid_cards', archive: archive} );
 
         } else {
 
-            this.filterDataFrom( this.other_cards, {name: 'other_cards'} );
-            this.filterDataFrom( this.schedule_month_cards, {name: 'schedule_month_cards'} );
-            this.filterDataFrom( this.schelude_today_cards, {name: 'schelude_today_cards'} );
-            this.filterDataFrom( this.schelude_week_cards, {name: 'schelude_week_cards'} );
-            this.filterDataFrom( this.urgent_cards, {name: 'urgent_cards'} );
+            this.filterDataFrom( this.other_cards, {name: 'other_cards', archive: archive} );
+            this.filterDataFrom( this.schedule_month_cards, {name: 'schedule_month_cards', archive: archive} );
+            this.filterDataFrom( this.schelude_today_cards, {name: 'schelude_today_cards', archive: archive} );
+            this.filterDataFrom( this.schelude_week_cards, {name: 'schelude_week_cards', archive: archive} );
+            this.filterDataFrom( this.urgent_cards, {name: 'urgent_cards', archive: archive} );
 
         }
+
+    }
+
+    public filteringByArchive():void {
+
+        !this.find_text.archive ?
+            this.find_text.archive = true :
+            this.find_text.archive = false; 
+
+        this.filteringByText( this.find_text.archive );
 
     }
 
@@ -226,6 +240,15 @@ export class AlertsComponent implements OnInit {
                 card.visible_item = true;
 
             }
+
+            if( card.archive !== extra_data.archive ) {
+
+                card.visible_item = false;
+
+            }
+
+            console.log('Pues aqui seria => ', card.archive);
+            console.log('Condition => ', extra_data.archive);
 
         });
 
@@ -462,7 +485,9 @@ export class AlertsComponent implements OnInit {
         no_cate: false,
         no_info: false,
         no_desc: false,
-        no_sche: false
+        no_sche: false,
+        no_mail_v1: false,
+        no_mail_v2: false
     }
     public newAlertForm():boolean {
 
@@ -487,6 +512,22 @@ export class AlertsComponent implements OnInit {
         this.new_alert_data.AvailableSchedule == '' ?
             this.new_alert_form.no_sche = true :
             this.new_alert_form.no_sche = false;
+
+        if( this.new_alert_data.alertDetails[0].EmailCompany != "" ) {
+
+            !this.isEmailValid( this.new_alert_data.alertDetails[0].EmailCompany ) ? 
+                this.new_alert_form.no_mail_v1 = true :
+                this.new_alert_form.no_mail_v1 = false;
+
+        } else this.new_alert_form.no_mail_v1 = false;
+
+        if( this.new_alert_data.alertDetails[0].EmailStaff != "" ) {
+
+            !this.isEmailValid( this.new_alert_data.alertDetails[0].EmailStaff ) ? 
+                this.new_alert_form.no_mail_v2 = true :
+                this.new_alert_form.no_mail_v2 = false;
+
+        } else this.new_alert_form.no_mail_v2 = false;
 
         for( let field in this.new_alert_form ) {
 
@@ -692,6 +733,9 @@ export class AlertsComponent implements OnInit {
 
             this.alert_detail_form.AlertStatusId = Number( this.alert_detail_form.AlertStatusId );
 
+            console.log('Update model => ', this.alert_detail_form);
+            console.log(this.alert_detail_form.archive);
+
             this._services.service_general_post('Alerts/UpdateAlertDetail', this.alert_detail_form)
                 .subscribe( (response: any) => {
 
@@ -798,7 +842,9 @@ export class AlertsComponent implements OnInit {
         no_smai: false,
         no_mbud: false,
         no_date: false,
-        no_hour: false
+        no_hour: false,
+        no_mail_v1: false,
+        no_mail_v2: false
     }
     public alterDetailFieldsValidator():boolean {
 
@@ -820,6 +866,10 @@ export class AlertsComponent implements OnInit {
             this.alert_detail_validator.no_cmai = true :
             this.alert_detail_validator.no_cmai = false;
 
+        !this.isEmailValid( this.alert_detail_form.EmailCompany ) ?
+            this.alert_detail_validator.no_mail_v1 = true :
+            this.alert_detail_validator.no_mail_v1 = false;
+
         this.alert_detail_form.AssignStaff == '' ?
             this.alert_detail_validator.no_snam = true :
             this.alert_detail_validator.no_snam = false;
@@ -831,6 +881,10 @@ export class AlertsComponent implements OnInit {
         this.alert_detail_form.EmailStaff == '' ?
             this.alert_detail_validator.no_smai = true :
             this.alert_detail_validator.no_smai = false;
+
+        !this.isEmailValid( this.alert_detail_form.EmailStaff ) ?
+            this.alert_detail_validator.no_mail_v2 = true :
+            this.alert_detail_validator.no_mail_v2 = false;
 
         this.alert_detail_form.MaxBudget == '' ?
             this.alert_detail_validator.no_mbud = true :
@@ -1189,10 +1243,114 @@ export class AlertsComponent implements OnInit {
         this._router.navigateByUrl( `app-profile/${ id }/${ idBooking }`, { state: { id: buildingId, name: 'TenantList To Profile' } });
     }
 
+    public validatingUserInput( event_data, kind_data:string = 'string' ) {
+
+        const event = event_data.target,
+              event_value = event.value;
+
+        switch( kind_data ) {
+
+            case 'string':
+
+                if( !validatingRegex("^[aA-zZ-\\s]*$", event_value) ) {
+
+                    event.value = '';
+
+                    this.system_message.showMessage({
+                        kind: 'warning',
+                        time: 3800,
+                        message: {
+                            header: 'Charaters only',
+                            text: 'Field can not contain numbers'
+                        }
+                    });
+
+                }
+                
+                break;
+
+            case 'number':
+
+                if( !validatingRegex("^[0-9-()]*$", event_value) ) {
+
+                    event.value = '';
+
+                    this.system_message.showMessage({
+                        kind: 'warning',
+                        time: 3800,
+                        message: {
+                            header: 'Charaters only',
+                            text: 'Field can not contain letters'
+                        }
+                    });
+
+                }
+
+                break;
+
+            case 'money':
+
+                if( !validatingRegex("^[0-9 .,]*$", event_value) ) {
+
+                    event.value = '';
+
+                    this.system_message.showMessage({
+                        kind: 'warning',
+                        time: 3800,
+                        message: {
+                            header: 'Charaters only',
+                            text: 'Field can not contain letters'
+                        }
+                    });
+
+                }
+                
+                break;
+
+        }
+
+        function validatingRegex(expresion:string, to_test:string) {
+
+            const regex_ex = new RegExp(expresion);
+            const result = regex_ex.test(to_test);
+
+            /*
+            console.log('Exp => ', expresion);
+            console.log("EX => ", regex_ex );
+            console.log("Re => ", result);*/
+
+            return result;
+
+        }
+
+    }
+
+    public isEmailValid( email: string ): boolean {
+
+        let result = false;
+    
+        const email_split = email.split('@'); 
+    
+        if( email_split.length > 1 ) {
+    
+            const email_nick_nosp = email_split[0].match(/[^a-zA-Z0-9.\-_]/),
+                email_doma_nosp = email_split[1].match(/[^a-zA-Z0-9.]/);
+
+            email_nick_nosp == null && email_doma_nosp == null ? 
+                ( email_split[1].length < 4 ? result = false : result = true ) :
+                result = false;
+    
+        } else result = false;
+    
+        return result;
+    
+    }
+
 }
 
 class TextFinder {
     text: string = '';
+    archive: boolean = false;
 }
 
 class AlertDetail {
@@ -1208,6 +1366,7 @@ class AlertDetail {
     HoreSchedule: string = '';
     AlertStatusId: any = '';
     IdAlert: number = -1;
+    archive: boolean = null;
 }
 
 export class AlertMessage {

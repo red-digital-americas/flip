@@ -1480,10 +1480,9 @@ import { Router } from '@angular/router';
 
                 if( response.result == 'Success' ) {  
 
-                    //this._router.navigateByUrl(`tenantList/${ this.build_selected }`);
                     this._router.navigateByUrl('generalTenantlist');
 
-                }
+                } 
 
                 setTimeout( () => this.loader.hideLoader(), 1777);
 
@@ -1493,8 +1492,8 @@ import { Router } from '@angular/router';
                     kind: 'error',
                     time: 4777,
                     message: {
-                        header: 'System error',
-                        text: 'We found an error please try later.'
+                        header: 'Error',
+                        text: error
                     }
                 });
 

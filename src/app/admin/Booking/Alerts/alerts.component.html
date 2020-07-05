@@ -33,9 +33,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="ml-col-2">
+                <div class="ml-col-3">
                     <div class="ml-col-1">
-                        <form (ngSubmit)="filteringByText()" class="ap-form__input">
+                        <form (ngSubmit)="filteringByText()" class="ap-form__input ap-form__input--full-width">
                             <input 
                                 required
                                 type="text" 
@@ -52,6 +52,19 @@
                             Find by id or name...
                           </label>
                         </form>
+                    </div>
+                </div>
+                <div class="ml-col-4 padding-left-g">
+                    <div class="ap-form__input ap-form__input--full-padding-top">
+                      <input 
+                        type="checkbox"
+                        id="filter_active" 
+                        name="filter_active"
+                        (change)="filteringByArchive()"
+                        class="ap-form__input-checkbox display-none" />
+                      <label for="filter_active" class="ap-form__label ap-form__label-checkbox">
+                        Archive
+                      </label>
                     </div>
                 </div>
             </div>
@@ -129,6 +142,20 @@
                             <div class="ml-col-1">{{ card.date_worked | date }}</div>
                             <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-4">
+                                <div class="ap-form__input ap-form__input-no-padding-tb">
+                                  <input 
+                                    type="checkbox"
+                                    disabled
+                                    [checked]="card.archive"
+                                    class="ap-form__input-checkbox display-none" />
+                                  <label class="ap-form__label ap-form__label-checkbox">
+                                    Archive
+                                  </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
@@ -177,6 +204,20 @@
                         <div class="ml-col-1">
                             <div class="ml-col-1">{{ card.date_worked | date }}</div>
                             <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-4">
+                                <div class="ap-form__input ap-form__input-no-padding-tb">
+                                  <input 
+                                    type="checkbox"
+                                    disabled
+                                    [checked]="card.archive"
+                                    class="ap-form__input-checkbox display-none" />
+                                  <label class="ap-form__label ap-form__label-checkbox">
+                                    Archive
+                                  </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
@@ -227,6 +268,20 @@
                             <div class="ml-col-1">{{ card.date_worked | date }}</div>
                             <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-4">
+                                <div class="ap-form__input ap-form__input-no-padding-tb">
+                                  <input 
+                                    type="checkbox"
+                                    disabled
+                                    [checked]="card.archive"
+                                    class="ap-form__input-checkbox display-none" />
+                                  <label class="ap-form__label ap-form__label-checkbox">
+                                    Archive
+                                  </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
@@ -276,6 +331,20 @@
                             <div class="ml-col-1">{{ card.date_worked | date }}</div>
                             <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-4">
+                                <div class="ap-form__input ap-form__input-no-padding-tb">
+                                  <input 
+                                    type="checkbox"
+                                    disabled
+                                    [checked]="card.archive"
+                                    class="ap-form__input-checkbox display-none" />
+                                  <label class="ap-form__label ap-form__label-checkbox">
+                                    Archive
+                                  </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
@@ -324,6 +393,20 @@
                         <div class="ml-col-1">
                             <div class="ml-col-1">{{ card.date_worked | date }}</div>
                             <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-4">
+                                <div class="ap-form__input ap-form__input-no-padding-tb">
+                                  <input 
+                                    type="checkbox"
+                                    disabled
+                                    [checked]="card.archive"
+                                    class="ap-form__input-checkbox display-none" />
+                                  <label class="ap-form__label ap-form__label-checkbox">
+                                    Archive
+                                  </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
@@ -376,6 +459,20 @@
                             <div class="ml-col-1">{{ card.date_worked | date }}</div>
                             <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-4">
+                                <div class="ap-form__input ap-form__input-no-padding-tb">
+                                  <input 
+                                    type="checkbox"
+                                    disabled
+                                    [checked]="card.archive"
+                                    class="ap-form__input-checkbox display-none" />
+                                  <label class="ap-form__label ap-form__label-checkbox">
+                                    Archive
+                                  </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
@@ -424,6 +521,20 @@
                         <div class="ml-col-1">
                             <div class="ml-col-1">{{ card.date_worked | date }}</div>
                             <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-4">
+                                <div class="ap-form__input ap-form__input-no-padding-tb">
+                                  <input 
+                                    type="checkbox"
+                                    disabled
+                                    [checked]="card.archive"
+                                    class="ap-form__input-checkbox display-none" />
+                                  <label class="ap-form__label ap-form__label-checkbox">
+                                    Archive
+                                  </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
@@ -523,6 +634,20 @@
                             <div class="ml-col-1">{{ card.date_worked | date }}</div>
                             <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
                         </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-4">
+                                <div class="ap-form__input ap-form__input-no-padding-tb">
+                                  <input 
+                                    type="checkbox"
+                                    disabled
+                                    [checked]="card.archive"
+                                    class="ap-form__input-checkbox display-none" />
+                                  <label class="ap-form__label ap-form__label-checkbox">
+                                    Archive
+                                  </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
@@ -571,6 +696,20 @@
                         <div class="ml-col-1">
                             <div class="ml-col-1">{{ card.date_worked | date }}</div>
                             <div class="ml-col-1">{{ card.hour_worked }} hrs</div>
+                        </div>
+                        <div class="ml-col-1">
+                            <div class="ml-col-4">
+                                <div class="ap-form__input ap-form__input-no-padding-tb">
+                                  <input 
+                                    type="checkbox"
+                                    disabled
+                                    [checked]="card.archive"
+                                    class="ap-form__input-checkbox display-none" />
+                                  <label class="ap-form__label ap-form__label-checkbox">
+                                    Archive
+                                  </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="ml-col-1 margin-top-x text-center">
                             <button 
@@ -766,6 +905,20 @@
                     </div>
                 </div>
             </div>
+            <div class="ml-col-4">
+                <div class="ap-form__input ap-form__input--full-padding-top">
+                  <input 
+                    type="checkbox"
+                    id="alert_archive" 
+                    name="alert_archive"
+                    [checked]="alert_detail_form.archive"
+                    class="ap-form__input-checkbox display-none"
+                    [(ngModel)]="alert_detail_form.archive" />
+                  <label for="alert_archive" class="ap-form__label ap-form__label-checkbox">
+                    Archive
+                  </label>
+                </div>
+            </div>
         </div>
         <div class="ml-col-1 margin-bottom-x margin-top-x">
             <div class="ml-col-1 at-bcard__stitle">Company</div>
@@ -780,6 +933,7 @@
                         name="company_name"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.Company"
+                        (change)="validatingUserInput( $event )"
                         [class.custom-input__text--error]="alert_detail_validator.no_cnam"/>
                       <label 
                         for="company_name" 
@@ -803,6 +957,7 @@
                         name="company_phone"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.Phone"
+                        (change)="validatingUserInput( $event, 'number' )"
                         [class.custom-input__text--error]="alert_detail_validator.no_cpho"/>
                       <label 
                         for="company_phone" 
@@ -826,7 +981,8 @@
                         name="company_mail"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.EmailCompany"
-                        [class.custom-input__text--error]="alert_detail_validator.no_cmai"/>
+                        [class.custom-input__text--error]="alert_detail_validator.no_cmai"
+                        [class.custom-input__text--error]="alert_detail_validator.no_mail_v1"/>
                       <label 
                         for="company_mail" 
                         class="ap-form__label ap-form__label-text">
@@ -834,6 +990,9 @@
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_cmai">
                         Email is required*
+                      </span>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="!alert_detail_validator.no_cmai && alert_detail_validator.no_mail_v1">
+                        Email format is not valid*
                       </span>
                     </div>
                 </div>
@@ -852,6 +1011,7 @@
                         name="staff_name"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.AssignStaff"
+                        (change)="validatingUserInput( $event )"
                         [class.custom-input__text--error]="alert_detail_validator.no_snam"/>
                       <label 
                         for="staff_name" 
@@ -875,6 +1035,7 @@
                         name="staff_phone"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.MobilPhone"
+                        (change)="validatingUserInput( $event, 'number' )"
                         [class.custom-input__text--error]="alert_detail_validator.no_spho"/>
                       <label 
                         for="staff_phone" 
@@ -898,7 +1059,8 @@
                         name="staff_mail"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.EmailStaff"
-                        [class.custom-input__text--error]="alert_detail_validator.no_smai"/>
+                        [class.custom-input__text--error]="alert_detail_validator.no_smai"
+                        [class.custom-input__text--error]="alert_detail_validator.no_mail_v2"/>
                       <label 
                         for="staff_mail" 
                         class="ap-form__label ap-form__label-text">
@@ -906,6 +1068,9 @@
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_smai">
                         Mail is required*
+                      </span>
+                      <span class="ml-col-1 form_error_found_label" *ngIf="!alert_detail_validator.no_smai && alert_detail_validator.no_mail_v2">
+                        Mail format is not valid*
                       </span>
                     </div>
                 </div>
@@ -924,6 +1089,7 @@
                         name="staff_mbadget"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.MaxBudget"
+                        (change)="validatingUserInput( $event, 'money' )"
                         [class.custom-input__text--error]="alert_detail_validator.no_mbud"/>
                       <label 
                         for="staff_mbadget" 
@@ -1352,6 +1518,7 @@
                                     name="new_alert_cname"
                                     class="ap-form__input-text"
                                     [(ngModel)]="new_alert_data.alertDetails[0].Company"
+                                    (change)="validatingUserInput( $event )"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_cname" 
@@ -1374,6 +1541,7 @@
                                     id="new_alert_cphone" 
                                     name="new_alert_cphone"
                                     class="ap-form__input-text"
+                                    (change)="validatingUserInput( $event, 'number' )"
                                     [(ngModel)]="new_alert_data.alertDetails[0].Phone"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
@@ -1398,14 +1566,14 @@
                                     name="new_alert_cmail"
                                     class="ap-form__input-text"
                                     [(ngModel)]="new_alert_data.alertDetails[0].EmailCompany"
-                                    [class.custom-input__text--error]="1 == 2"/>
+                                    [class.custom-input__text--error]="new_alert_form.no_mail_v1" />
                                   <label 
                                     for="new_alert_cmail" 
                                     class="ap-form__label ap-form__label-text">
                                     Email
                                   </label>
-                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    Email is required*
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_mail_v1">
+                                    Email format is not valid*
                                   </span>
                                 </div>
                             </div>
@@ -1423,6 +1591,7 @@
                                     id="new_alert_nstaff" 
                                     name="new_alert_nstaff"
                                     class="ap-form__input-text"
+                                    (change)="validatingUserInput( $event )"
                                     [(ngModel)]="new_alert_data.alertDetails[0].AssignStaff"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
@@ -1446,6 +1615,7 @@
                                     id="new_alert_pstaff" 
                                     name="new_alert_pstaff"
                                     class="ap-form__input-text"
+                                    (change)="validatingUserInput( $event, 'number' )"
                                     [(ngModel)]="new_alert_data.alertDetails[0].MobilPhone"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
@@ -1470,14 +1640,14 @@
                                     name="new_alert_estaff"
                                     class="ap-form__input-text"
                                     [(ngModel)]="new_alert_data.alertDetails[0].EmailStaff"
-                                    [class.custom-input__text--error]="1 == 2"/>
+                                    [class.custom-input__text--error]="new_alert_form.no_mail_v2"/>
                                   <label 
                                     for="new_alert_estaff" 
                                     class="ap-form__label ap-form__label-text">
                                     Mail
                                   </label>
-                                  <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    Mail is required*
+                                  <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_mail_v2">
+                                    Mail format is invalid*
                                   </span>
                                 </div>
                             </div>
@@ -1495,6 +1665,7 @@
                                     id="new_alert_mbud" 
                                     name="new_alert_mbud"
                                     class="ap-form__input-text"
+                                    (change)="validatingUserInput( $event, 'money' )"
                                     [(ngModel)]="new_alert_data.alertDetails[0].MaxBudget"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
