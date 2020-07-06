@@ -260,7 +260,7 @@ export class RoomAvailavilityComponent implements OnInit {
 
     public showModal( to_show: string = 'default', userId ): void {
         this.modalRef = this.modalService.show(CalendarComponent, {
-            initialState: { roomId: userId, responseData: {} },
+            initialState: { roomId: userId, buildingId: this.buildingId ,responseData: {} },
             class: 'modal-lg' // 'myCustomModalClass'
           });
           this.modalRef.content.closeBtnName = 'Close';
