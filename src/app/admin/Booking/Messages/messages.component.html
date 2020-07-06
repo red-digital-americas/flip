@@ -49,11 +49,11 @@
                 </div>
                 <div class="ap-chat__chat">
                     <div class="ml-col-1" *ngIf="showChat">
-                        <button class="ap-form__rButton button-red margin-bottom-x" (click)="hideChat()">
+                        <button class="ap-form__rButton button-icon button-icon--cancel-white button-red" (click)="hideChat()">
                             Close
                         </button>
                     </div>
-                    <div class="chatm card-style" *ngIf="showChat">
+                    <div class="chatm card-style margin-top-x" *ngIf="showChat">
                         <h4 style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" class="chatm__datos" (click)="viewDetail(userConversation.id, userConversation.idBooking)">
                             {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
                             <!-- img class="chatm__datos-photo" 
