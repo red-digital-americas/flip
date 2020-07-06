@@ -24,6 +24,8 @@ import { Router } from '@angular/router';
     ) {}
 
     dispalyMemberships = false;
+    emailExist = false;
+
 
     /*Welcome back Mr.Anderson we missed you.*/
     ngOnInit() {
@@ -1714,6 +1716,23 @@ import { Router } from '@angular/router';
             return crypt;
         } catch (e) { console.log(e); }
     }
+
+    public validateEmail(email) {
+        const obj = {
+          email: email
+        };
+        this._services.service_general_get_with_params('UsersAdmin/GetValidateEmail', obj).subscribe((value) => {
+        //   console.log('Success Service', value);
+          if (value.item === false) {
+            this.general_user_data.email = '';
+            this.emailExist = true;
+          } else {
+            this.emailExist = false;
+          }
+        }, (err) => {
+          console.log('Error Service', err);
+        });
+      }
 
     public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {
 

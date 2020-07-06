@@ -1,15 +1,14 @@
-<div class="ml-col-1">
     <div class="ml-col-1">
         <div class="ml-col-1 padding-general-m margin-bottom-g">
             <div class="ml-col-1 margin-top-m folder">
                 <div class="ml-col-1 margin-top-x" >
                 <form 
-                class="ap-form ap-form--no-tl-br ml-col-1 card-style"
+                class="ap-form ap-form--no-tl-br ml-col-1"
                 action="submit"
                 (submit)="update()">
                 <div class="ml-col-1">
                     <h4 class="text-left">
-                        Edit User
+                        Add User
                     </h4>
                 </div>
                         <div class="ml-col-3">
@@ -151,7 +150,8 @@
                                 name="profile_email"
                                 class="ap-form__input-text"
                                 [class.form_error_found]="form_required.no_email"
-                                [(ngModel)]="userObj.email" />
+                                [(ngModel)]="userObj.email"
+                                (blur)="validateEmail(userObj.email)" />
                                 <label 
                                 for="profile_price" 
                                 class="ap-form__label ap-form__label-text"
@@ -160,6 +160,9 @@
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_email">
                                 Email is required*
+                                </span>
+                                <span class="ml-col-1 form_error_found_label" *ngIf="emailExist">
+                                    Email already exist
                                 </span>
                             </div>
                             </div>
@@ -356,7 +359,7 @@
                                 Building Permission
                               </div>
                           </div>
-                            <table mat-table mat-sort [dataSource]="buildingList" class="mat-elevation-z8" style="width: 100%;">
+                            <table mat-table mat-sort [dataSource]="buildingList" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
                                 <ng-container matColumnDef="name">
                                     <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Name</th>
                                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.name }}</td>
@@ -407,7 +410,7 @@
                                 Permissions Building Operation
                               </div>
                           </div>
-                            <table mat-table mat-sort [dataSource]="permissionsList" class="mat-elevation-z8" style="width: 100%;">
+                            <table mat-table mat-sort [dataSource]="permissionsList" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
                                 <ng-container matColumnDef="permission1">
                                     <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Name</th>
                                     <td mat-cell *matCellDef="let item" class="table__data table__data-center">{{ item.permission1 }}</td>
@@ -459,4 +462,3 @@
             </div>
         </div>
     </div>
-</div>
