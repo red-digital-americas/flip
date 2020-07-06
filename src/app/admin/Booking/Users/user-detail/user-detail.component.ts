@@ -51,6 +51,8 @@ export class UserDetailComponent implements OnInit {
   systemType = [{ id: NaN, name: 'System type'}];
   systemTypeId;
   show = true;
+  emailExist = false;
+
 
   loader = new LoaderComponent();
   systemMessage = new SystemMessage();
@@ -264,6 +266,23 @@ export class UserDetailComponent implements OnInit {
         result = false;
       }
     return result;
+  }
+
+  public validateEmail(email) {
+    const obj = {
+      email: email
+    };
+    this.services.service_general_get_with_params('UsersAdmin/GetValidateEmail', obj).subscribe((value) => {
+      // console.log('Success Service', value);
+      if (value.item === false) {
+        this.userObj.email = '';
+        this.emailExist = true;
+      } else {
+        this.emailExist = false;
+      }
+    }, (err) => {
+      console.log('Error Service', err);
+    });
   }
 
   public validateImageUpload( event_data:any, dimensions_image:string, target_image:string, name_image:string ):void {

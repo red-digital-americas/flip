@@ -1117,7 +1117,8 @@
                           [(ngModel)]="general_user_data.email"
                           [class.form_error_found]="form_profile_validator.no_mail"
                           [class.form_error_found]="form_profile_validator.no_mail_valid"
-                          class="ap-form__input-text" />
+                          class="ap-form__input-text"
+                          (blur)="validateEmail(general_user_data.email)" />
                         <label 
                           for="profile_mail" 
                           class="ap-form__label ap-form__label-text"
@@ -1129,6 +1130,9 @@
                         </span>
                         <span class="ml-col-1 form_error_found_label" *ngIf="form_profile_validator.no_mail_valid">
                             Mail format is incorrect*
+                        </span>
+                        <span class="ml-col-1 form_error_found_label" *ngIf="emailExist">
+                          Email already exist
                         </span>
                       </div>
                     </div>
