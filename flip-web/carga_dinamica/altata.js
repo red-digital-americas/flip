@@ -487,7 +487,7 @@ function getRoomsData( id_build ) {
 
 function appendContentToPage( data ) { 
     console.log("Rooms ==>>>", data);
-    
+    var windowWidth = window.innerWidth, isItMobil = windowWidth <= 1024 ? true : false;
     for( let index = 0; index < 4; index += 1 ) {
         // debugger;
         const title_section = document.querySelectorAll('[service="name"]')[index],
@@ -502,19 +502,28 @@ function appendContentToPage( data ) {
               image_section.src = service.frontphoto;
 
               if( icons_container != undefined ) {
-
+                  
                 service_icons_data.forEach( (icon) => {
-
-                    let icon_content = `<figure class="icons-section__icon">
+                    let icon_content = "";
+                    if(isItMobil){
+                    icon_content = `<figure class="icons-section__icon">
+                                            <img src="${ icon.icon }" class="icons-section__icona" style="width: 25px; height: 25px; margin: 0 0 0 -10px;"/>
+                                            <img src="${ icon.icon2 }" class="icons-section__iconb" style="width: 25px; height: 25px; margin: 0 0 0 -10px;"/>
+                                            <span class="icons-section__name" style="margin: 0 0 0 25px;">
+                                                ${ icon.titleIcon }
+                                            </span>
+                                        </figure>`;
+// debugger;        
+                    }else{
+                        icon_content = `<figure class="icons-section__icon">
                                             <img src="${ icon.icon }" class="icons-section__icona" />
-                                            <img src="${ icon.icon2 }" class="icons-section__iconb" />
+                                            <img src="${ icon.icon2 }" class="icons-section__iconb"/>
                                             <span class="icons-section__name">
                                                 ${ icon.titleIcon }
                                             </span>
                                         </figure>`;
-// debugger;
+                    }
                     icons_container.innerHTML += icon_content;
-
                 });
 
               }

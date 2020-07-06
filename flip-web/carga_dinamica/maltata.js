@@ -131,7 +131,7 @@ $(document).ready(function () {
 
                 $("#p-altata-desc-00").text(respuesta.item[0].desc);
                 $("#p-altata-amenities-title-00").text(respuesta.item[0].title);
-                $("#img-maltata-amenities-slide-00").attr("src", respuesta.item[0].photomobile);
+                $("#img-maltata-amenities-slide-00").attr("src", respuesta.item[0].buildmobile);
              } else {
                 $('#img-altata-amenities-00').remove();
                 $("#amenidadesrightimg1").remove();
@@ -192,7 +192,7 @@ $(document).ready(function () {
 
                 $("#p-altata-amenities-title-01").text(respuesta.item[1].title);
                 $("#p-altata-desc-01").text(respuesta.item[1].desc);
-                $("#img-maltata-amenities-slide-01").attr("src", respuesta.item[1].photomobile);
+                $("#img-maltata-amenities-slide-01").attr("src", respuesta.item[1].buildmobile);
             } else {
                 $("#img-altata-amenities-01").remove();
                 $("#icon-altata-amenities-slide-01").remove();
@@ -251,7 +251,7 @@ $(document).ready(function () {
 
                 $("#p-altata-desc-02").text(respuesta.item[2].desc);
                 $("#p-altata-amenities-title-02").text(respuesta.item[2].title);
-                $("#img-maltata-amenities-slide-02").attr("src", respuesta.item[2].photomobile);
+                $("#img-maltata-amenities-slide-02").attr("src", respuesta.item[2].buildmobile);
             } else {
                 $("#img-altata-amenities-02").remove();
                 $("#icon-altata-amenities-slide-02").remove();
@@ -312,7 +312,7 @@ $(document).ready(function () {
                 //Titulo
                 $("#p-altata-amenities-title-03").text(respuesta.item[3].title);
                 ////////////////////////////Movil //////////////////////////////////////////////////////////
-                $("#img-maltata-amenities-slide-03").attr("src", respuesta.item[3].photomobile);
+                $("#img-maltata-amenities-slide-03").attr("src", respuesta.item[3].buildmobile);
             } else {
                 $("#img-altata-amenities-03").remove();
                 $("#icon-altata-amenities-slide-03").remove();
@@ -374,7 +374,7 @@ $(document).ready(function () {
 
                 $("#p-altata-amenities-title-04").text(respuesta.item[4].title);
 
-                $("#img-maltata-amenities-slide-04").attr("src", respuesta.item[4].photomobile);
+                $("#img-maltata-amenities-slide-04").attr("src", respuesta.item[4].buildmobile);
             } else {
                 $('#img-altata-amenities-04').remove();
                 $("#icon-altata-amenities-slide-04").remove();

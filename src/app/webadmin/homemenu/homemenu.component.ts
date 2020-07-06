@@ -65,7 +65,7 @@ export class HomemenuComponent implements OnInit {
   
   
     gotonewsfeed(id?: number) {
-       this.router.navigate(['webadmin/homeammenities/' + id])
+       this.router.navigate(['webadmin/homegeneral/' + id])
   
     }
   

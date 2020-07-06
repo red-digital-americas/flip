@@ -35,7 +35,7 @@ import { Utils } from '../../../utils/utils';
 
 
     public getBackstageFlipNetworkData():void {
-
+      this.loader.showLoader();
         const ws_data: any = {
             userid: 1, 
             id: 1
@@ -54,6 +54,7 @@ import { Utils } from '../../../utils/utils';
 
                     console.log('Network ==> ', this.flipNetworkMain);
                     console.log('Network slides ===> ', this.flipNetworkSlides);
+                    setTimeout( () => this.loader.hideLoader(), 777);
 
                 }
 
@@ -67,7 +68,7 @@ import { Utils } from '../../../utils/utils';
                         text: 'A system error has ocurred, please try later.'
                     }
                 });
-
+                setTimeout( () => this.loader.hideLoader(), 777);
             });
 
     }
@@ -160,11 +161,12 @@ import { Utils } from '../../../utils/utils';
     public update(){
         this.back_stage_data.networkBenefits = this.beneficios;
         console.log(this.back_stage_data);
-
+        this.loader.showLoader();
         if(this.modal == 1){
             this.back_stage_data.id = 0;
             this._services.updateSladerNetwork(this.back_stage_data).subscribe((data =>{
                 console.log(data);
+                setTimeout( () => this.loader.hideLoader(), 777);
                 this.getBackstageFlipNetworkData();
             }));
         }else if(this.modal == 2){
@@ -175,6 +177,7 @@ import { Utils } from '../../../utils/utils';
        console.log(this.back_stage_data);
             this._services.updateSladerNetwork(this.back_stage_data).subscribe((data =>{
                 console.log(data);
+                setTimeout( () => this.loader.hideLoader(), 777);
                 this.getBackstageFlipNetworkData();
             }));
         }

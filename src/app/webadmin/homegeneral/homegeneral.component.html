@@ -2,13 +2,13 @@
   
   <div class="ml-col-1 navbar__components">
     <div class="navbar__component ml-col-2o">
-      <button class="navbar__component-button" (click)="amm(IDBUILD)">
-        Build: Ammenities
+      <button class="navbar__component-button navbar__component-button--active" (click)="gene(IDBUILD)">
+        Build: General
       </button>
     </div>
     <div class="navbar__component ml-col-2o">
-      <button class="navbar__component-button navbar__component-button--active" (click)="gene(IDBUILD)">
-        Build: General
+      <button class="navbar__component-button" (click)="amm(IDBUILD)">
+        Build: Ammenities
       </button>
     </div>
     <div class="navbar__component ml-col-2o">
@@ -217,12 +217,12 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content card">
       <div>
-        <button type="button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
+        <button type="button" id="close_modal" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
                 (click)="primaryModal.hide()" aria-label="Close">
           Close
         </button>
         <br><br>
-        <h4 class="modal-title">Select the images to change at position: {{PostId}}</h4>
+        <h4 class="modal-title">Select the images to change at position</h4>
         
       </div>
       <hr>

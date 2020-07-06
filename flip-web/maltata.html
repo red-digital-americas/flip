@@ -326,7 +326,7 @@
                             <div class="col-12 col-md-9 No_PaDdInG">
                                 <div id="comamenitiesgallery" class="container portfolio3x1-galery ">
                                     <div id="myCarousel6" class="carousel slide" data-ride="carousel" data-interval="false">
-                                        <div class="carousel-inner">
+                                        <div class="carousel-inner" id="carrouselamenities">
                                             <div class="item active " id="slideAmenities0">
                                                 <img id="img-maltata-amenities-slide-00" alt="Los Angeles">
                                                 <div class="header-text-ame  ">
@@ -628,22 +628,7 @@
                                     <img src="assets/images/closebut.svg" alt="Los Angeles">
                                 </span>
                             </a>
-                            <div id="buttonmenucomam" class="margin-graltop">
-                                <div class="col-md-3 col-sm-4 col-xs-12 No_PaDdInG ">
-                                    <div id="quitportfolio1" class="single-portfolio_corporate  ">
-                                        <div class="card">
-                                            <div id="servicios" class="frontchange ">
-                                                <div id="comamenidades" class="paddingsalas">
-                                                    <img class=" amenidadesright" id="amenidadesrightimgm1" alt="Images">
-                                                    <!--<img class="hiddens amenidadesright" id="amenidadesrightimg2" src="assets/images/Communities/Coahuila/s_gym.jpg" alt="Images">-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="servgral" class="backchange">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -1458,7 +1443,7 @@ SECCION MAP
     **************************/
 
         $("#servicios").click(function () {
-            var url = "./maltataserv.html?buildingid="+ buildingid;
+            var url = "./maltataserv.html?buildingid="+ buildingid+"&title="+params.get('title');
             $(location).attr('href', url);
         });
         $("#textservicios").click(function () {
