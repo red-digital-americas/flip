@@ -82,6 +82,7 @@ export class CalendarComponent implements OnInit {
     idUser: ''
   };
   roomId;
+  buildingId;
 
   ngOnInit() {
     console.log('Enter');
@@ -89,20 +90,19 @@ export class CalendarComponent implements OnInit {
     this.InitCalendarSetup();
   }
 
-  private GetAmenities() {    
-    this._services.service_general_get_with_params("Amenity", {idBuilding: 1}).subscribe(      
-      (res)=> {
-        if(res.result === "Success"){                    
+  private GetAmenities() {
+    this._services.service_general_get_with_params('Amenity', {idBuilding: this.buildingId}).subscribe(
+      (res) => {
+        if (res.result === 'Success') {
           this.amenitiesArray = res.item;
           if (this.amenitiesArray.length <= 0) { return; }
 
           this.amenitySelect = this.amenitiesArray[0].id;
-          this.GetEvents();              
-        } else if(res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
-        else { console.log("Error"); }
+          this.GetEvents();
+        } else if (res.result === 'Error') { console.log('Ocurrio un error' + res.detalle); } else { console.log('Error'); }
       },
-      (err)=> {console.log(err);}
-    );  
+      (err) => {console.log(err); }
+    );
   }
 
   public showModal( to_show: string = 'default', userId ): void {
@@ -137,8 +137,9 @@ export class CalendarComponent implements OnInit {
     this._services.service_general_get_with_params('Room/GetScheduleByRoom', params).subscribe(
       (res) => {
         if (res.result === 'Success') {
-          console.log(res.item);
+          console.log('Item', res.item);
           this.schedulesArray = res.item;
+          console.log('scheduleArray', this.schedulesArray);
           this.LoadEventsToCalendar(this.schedulesArray);
         } else if (res.result === 'Error') {
           console.log('Ocurrio un error' + res.detalle);
@@ -238,8 +239,20 @@ export class CalendarComponent implements OnInit {
 
   private LoadEventsToCalendar(events: any) {
     this.calendarCustom.getApi().removeAllEvents();
-    //console.log('LoadEventsToCalendar', events);
+    console.log('LoadEventsToCalendar', events);
     events.forEach(ev => {
+      console.log('element before', ev);
+      let dattmp = new Date(ev.timeEnd);
+      dattmp.setDate(dattmp.getDate() + 2);
+      let dd = ('0' + dattmp.getDate()).slice(-2);
+      let mm = ('0' + (dattmp.getMonth() + 1)).slice(-2);
+      let y = dattmp.getFullYear();
+    
+      let someFormattedDate = y + '-' + mm + '-' + dd;
+
+      ev.timeEnd = someFormattedDate;
+      console.log('date', someFormattedDate);
+      console.log('element after', ev);
       this.calendarCustom.getApi().addEvent(this.ParseEvent(ev));
     });
 
@@ -293,7 +306,8 @@ export class CalendarComponent implements OnInit {
           // console.log(res.item);    
           this.scheduleModel = new ScheduleModel();
           this.scheduleModel = res.item[0];
-
+          console.log('timeStart', moment(arg.event.start).format('YYYY-MM-DDTHH:mm:ss'));
+          console.log('timeEnd', moment(arg.event.end).format('YYYY-MM-DDTHH:mm:ss'));
           this.scheduleModel.Date = moment(arg.event.start).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
           this.scheduleModel.TimeStart = moment(arg.event.start).format('YYYY-MM-DDTHH:mm:ss');
           this.scheduleModel.TimeEnd = moment(arg.event.end).format('YYYY-MM-DDTHH:mm:ss');
