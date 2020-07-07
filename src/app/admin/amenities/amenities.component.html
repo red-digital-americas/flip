@@ -47,8 +47,8 @@
 
   </div>
 </div>
-<div class="ml-col-1  padding-general-m margin-bottom-g new-modal" *ngIf="show_ammenity_form">
-<form (submit)="sendAmenityData()" onsubmit="return false;" class="ap-form ml-col-1 card-style">
+<div class="ml-col-1 padding-general-m margin-bottom-g new-modal" *ngIf="show_ammenity_form">
+<form (submit)="sendAmenityData()" onsubmit="return false;" class="ap-form ml-col-1 card-style ap-form--fixed margin-bottom-m">
   <div class="ml-col-1">
     <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
       {{ ammenity_form_action }}
@@ -221,13 +221,13 @@
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="toggleSectionForm('delete')"
-        class="ml-modal__pop-buttons-button button-pink">
-        Cancelar
+        class="ml-modal__pop-buttons-button button-pink button-icon button-icon--cancel-white">
+        Cancel
       </button>
       <button 
         (click)="confirmDeleteElement()"
-        class="ml-modal__pop-buttons-button button-black">
-        Eliminar
+        class="ml-modal__pop-buttons-button button-black button-icon button-icon--delete-white">
+        Delete
       </button>
     </div>
   </div>

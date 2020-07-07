@@ -95,12 +95,12 @@
               <div class="ap-cards__card-buttons">
                 <button 
                   (click)="toggleSectionForm( 'edit', promo )"
-                  class="ap-cards__card-button button-green">
-                  Edit Promotion
+                  class="ap-cards__card-button button-green button-icon button-icon--edit-white">
+                  Edit
                 </button>
                 <button 
                   (click)="deleteThisPromo( promo )"
-                  class="ap-cards__card-button button-black">
+                  class="ap-cards__card-button button-black button-icon button-icon--delete-white">
                   Delete
                 </button>
               </div>
@@ -117,12 +117,12 @@
 
 <div class="ml-col-1  padding-general-m margin-bottom-g new-modal" *ngIf="show_dperk_form">
   <form 
-    class="ap-form ml-col-1 card-style" 
+    class="ap-form ml-col-1 card-style ap-form--fixed margin-bottom-m" 
     (submit)="sendDataPromotion()" 
     onsubmit="return false;">
     <div class="ml-col-1">
       <button 
-           class="ap-form__rButton button-red padding-lateral-m"
+           class="ap-form__rButton button-red padding-lateral-m button-icon button-icon--cancel-white"
            (click)="toggleSectionForm('hide')">
            Close
        </button>
@@ -276,13 +276,13 @@
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="showModal()"
-        class="ml-modal__pop-buttons-button button-pink">
-        Cancelar
+        class="ml-modal__pop-buttons-button button-pink button-icon button-icon--cancel-white">
+        Cancel
       </button>
       <button 
         (click)="confirmDeleteElement()"
-        class="ml-modal__pop-buttons-button button-black">
-        Eliminar
+        class="ml-modal__pop-buttons-button button-black button-icon button-icon--delete-white">
+        Delete
       </button>
     </div>
   </div>

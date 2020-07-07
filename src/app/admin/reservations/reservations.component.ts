@@ -453,8 +453,6 @@ export class ReservationsComponent implements OnInit {
 
   public newReserversationWS():void {
 
-    console.log('Aqui ===> ', this.reservation_data);
-
     this.heroService.service_general_post("Activity", this.reservation_data)
         .subscribe( (response: any) => {
 
@@ -474,6 +472,7 @@ export class ReservationsComponent implements OnInit {
             });
 
             this.showModal();
+            this.Refresh();
             
             setTimeout( () => this.loader.hideLoader(), 1777);
 
