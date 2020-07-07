@@ -232,11 +232,37 @@ export class ReservationsComponent implements OnInit {
       (res)=> {                
         if(res.result === "Success"){          
           //console.log(res.item);                        
-          this.toasterService.pop('success', 'Success ', 'Your Activity was modified correctly.'); 
+          //this.toasterService.pop('success', 'Success ', 'Your Activity was modified correctly.'); 
+          this.system_message.showMessage({
+            kind: 'ok',
+            time: 3777,
+            message: {
+              header: 'Activity modified',
+              text: 'Your Activity was modified correctly.'
+            }
+          });
         } else if(res.result === "Error") {
           // console.log(res.detalle);
-          this.toasterService.pop('danger', 'Error', res.detalle);
-        } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
+          //this.toasterService.pop('danger', 'Error', res.detalle);
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 3777,
+            message: {
+              header: 'Error Activity',
+              text: res.detalle
+            }
+          });
+        } else { 
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 3777,
+            message: {
+              header: 'System Error',
+              text: 'An error has been ocurred.'
+            }
+          });
+          //console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); 
+        }
       },
       (err)=> { console.log(err);}       
     ); 
@@ -313,7 +339,15 @@ export class ReservationsComponent implements OnInit {
       newSubscriber.unsubscribe();
       console.log('CrearResponse',this.modalRef.content.responseData);
       if (this.modalRef.content.responseData.result) { 
-        this.toasterService.pop('success', 'Success ', 'Your Activity was created correctly.');  
+        //this.toasterService.pop('success', 'Success ', 'Your Activity was created correctly.');
+        this.system_message.showMessage({
+          kind: 'ok',
+          time: 4777,
+          message: {
+            header: 'Activity created',
+            text: 'Your Activity has been created correctly.'
+          }
+        });  
         this.GetEvents();
       }
     });      

@@ -779,7 +779,7 @@ export class PerksComponent implements OnInit {
    */
   public deleteImageFromGallery( id:number ):void {
 
-    this.images_in_gallery.splice( this.images_in_gallery.findIndex( (image:any) => {  image.id === id } ), 1);
+    this.images_in_gallery.splice( this.images_in_gallery.findIndex( (image:any) => image.id == id ), 1);
 
     this.images_in_gallery[this.images_in_gallery.length - 1].last_one = true;
 
