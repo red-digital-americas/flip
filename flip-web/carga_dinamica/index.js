@@ -37,7 +37,7 @@ $.ajax({
     success: function (data, textStatus, jqXHR) {
         var respuesta = JSON.parse(data);
 
-        // console.log(respuesta);
+         console.log("Desing=>>",respuesta);
 
         fill_grid_design_images(respuesta);
     },
