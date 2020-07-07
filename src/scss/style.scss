@@ -1410,6 +1410,19 @@ select:active,
     padding: 40px;
   }
 
+  &--fixed {
+
+    position: absolute;
+    width: 770px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &-big {
+      width: 840px;
+    }
+
+  }
+
   @media screen and (min-width: 1920px) {
     width: 60%;
     margin: 0 20%;
@@ -4223,11 +4236,11 @@ hr{
 
 .new-modal{
   position: fixed;
-    top: 0;
-    background: rgba(0,0,0,.5);
-    z-index: 9999;
-    bottom: 0;
-    height: 100%;
-    overflow-y: auto;
-    left: 0;
+  top: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 9999;
+  bottom: 0;
+  height: 100%;
+  overflow-y: auto;
+  left: 0;
 }
