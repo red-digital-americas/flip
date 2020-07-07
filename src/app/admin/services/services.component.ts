@@ -335,13 +335,14 @@ export class ServicesComponent implements OnInit {
             this.system_message.showMessage({
               kind: 'error',
               message: {
-                header: 'System Error',
-                text: 'Error WS => Delete Service'
+                header: 'Can not be deleted',
+                text: 'This item can not be deleted, it is being used by a reservation.'
               },
-              time: 2000
+              time: 4777
             });
-  
-            setTimeout( () => { location.reload() }, 2777);
+            
+            this.showModal();
+            setTimeout( () => this.loader.hideLoader(), 4000);
 
           }
 
