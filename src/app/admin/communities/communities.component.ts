@@ -80,18 +80,6 @@ export class CommunitiesComponent implements OnInit {
     }
   }
 
-  public showModal(to_show: string = 'default', userId): void {
-    this.modalRef = this.modalService.show(PerkCategoryComponent, {
-      initialState: { roomId: userId, responseData: {} },
-      class: 'modal-lg'
-    });
-    this.modalRef.content.closeBtnName = 'Close';
-
-    const newSubscriber = this.modalService.onHide.subscribe(r => {
-      newSubscriber.unsubscribe();
-    });
-  }
-
   get_builds() {
     // 
     var creadoobj = { buildingid: this.IDBUILD, userid: this.IDUSR };
