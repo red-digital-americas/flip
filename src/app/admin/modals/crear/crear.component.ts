@@ -7,6 +7,7 @@ import { DatosService } from '../../../../datos.service';
 import * as moment from 'moment';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { param } from 'jquery';
+import { SystemMessage } from '../../../../ts/systemMessage';
 
 class ScheduleModel {
   public Date;
@@ -67,6 +68,7 @@ export class CrearComponent implements OnInit {
   acitivyModel:ActivityModel = new ActivityModel();
   public newImages: any[] = [];
 
+  public system_message:SystemMessage = new SystemMessage();
 
   public toasterconfig: ToasterConfig = new ToasterConfig({
     tapToDismiss: true,
@@ -175,8 +177,27 @@ export class CrearComponent implements OnInit {
           this.modalRef.hide();
         } else if(res.result === "Error") {
           console.log(res.detalle);          
-          this.toasterService.pop('danger', 'Error', res.detalle);
-        } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
+          //this.toasterService.pop('danger', 'Error', res.detalle);
+          this.system_message.showMessage({
+            kind: 'error',
+            time: 3777,
+            message: {
+              header: 'Event Error',
+              text: res.detalle
+            }
+          });
+        } else {
+           console.log("Error"); 
+           //this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); 
+           this.system_message.showMessage({
+            kind: 'error',
+            time: 3777,
+            message: {
+              header: 'System Error',
+              text: 'Please try later or contact support.'
+            }
+          });
+          }
       },
       (err)=> {console.log(err);}      
     );       

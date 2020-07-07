@@ -286,8 +286,8 @@ export class PerksDetailComponent implements OnInit {
         this.edit_promo_button = true;
         this.data_promo.name = editable.name;
         this.data_promo.description = editable.description;
-        this.data_promo.startDate = editable.startDate;
-        this.data_promo.endDate = editable.endDate;
+        this.data_promo.startDate = this.dateWorker(editable.startDate, 'remove_time');
+        this.data_promo.endDate = this.dateWorker(editable.endDate, 'remove_time');
         this.data_promo.photo = editable.photo;
         this.show_dperk_form_action = 'Edit Promotion';
         break;
@@ -544,6 +544,26 @@ export class PerksDetailComponent implements OnInit {
 
     }
     
+  }
+
+  public dateWorker(date_to_work:string, action:string = 'default'):string {
+
+    let result:string = '';
+
+    switch( action ) {
+
+      case'default':
+        break;
+
+      case 'remove_time':
+        let working = date_to_work.split('T');
+            result = working[0];
+        break;
+
+    }
+
+    return result;
+
   }
 
   //========================== C&PS

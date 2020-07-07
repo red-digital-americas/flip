@@ -50,13 +50,13 @@
   
 </div>
 <div class="ml-col-1  padding-general-m margin-bottom-g new-modal" *ngIf="show_post_form">
-  <form class="ap-form ml-col-1 card-style" (submit)="sendPostData();" onsubmit="return false;" name="post_form">
+  <form class="ap-form ap-form--fixed margin-bottom-m ml-col-1 card-style" (submit)="sendPostData();" onsubmit="return false;" name="post_form">
     <div class="ml-col-1">
       <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
         {{ post_form_action }}
        </h4>
        <button 
-           class="ap-form__rButton button-red padding-lateral-m"
+           class="ap-form__rButton button-red padding-lateral-m button-icon button-icon--cancel-white"
            (click)="toggleSectionForm()">
            Close
        </button>
@@ -149,7 +149,7 @@
       </button> -->
       <button 
         type="submit"
-        class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
+        class="ap-form__buttons-button button-icon button-icon--add-white ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
         Save
       </button>
     </div>
@@ -186,8 +186,8 @@
             <button 
               (click)="addNewComment()"
               type="button"
-              class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-pink">
-              Save
+              class="ap-form__buttons-button button-icon button-icon--add-white ap-form__buttons-button--no-margin ap-form__buttons-button--big button-pink">
+              Add Comment
             </button>
           </div>
         </div>
@@ -220,7 +220,7 @@
       </div>
     </div>
   </form>
-</div>*9-+*/9
+</div>
 
 <!-- div class="bottom-container">
   <button 

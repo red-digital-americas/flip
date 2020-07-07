@@ -7,6 +7,8 @@ import { PerksGuide, PerksCategory } from '../models/Perks';
 import { Utils } from '../../utils/utils';
 import { LoaderComponent } from '../../../ts/loader';
 import { SystemMessage } from '../../../ts/systemMessage';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { PerkCategoryComponent } from '../modals/perk-category/perk-category.component';
 
 @Component({
   selector: 'app-perks',
@@ -30,8 +32,10 @@ export class PerksComponent implements OnInit {
   perkCategories:PerksCategory[] = [];
   perkModel:PerksGuide = new PerksGuide();
 
+  modalRef: BsModalRef;
+
   constructor(private router: Router, private heroService: DatosService, private route: ActivatedRoute,
-     private toasterService: ToasterService, private _formBuilder: FormBuilder
+     private toasterService: ToasterService, private _formBuilder: FormBuilder, private modalService: BsModalService
   ) { }
 
   ngOnInit() {
@@ -513,6 +517,18 @@ export class PerksComponent implements OnInit {
 
   }
 
+  public openModal(to_show: string = 'default', userId): void {
+    this.modalRef = this.modalService.show(PerkCategoryComponent, {
+      initialState: { roomId: userId, responseData: {} },
+      class: 'modal-lg'
+    });
+    this.modalRef.content.closeBtnName = 'Close';
+
+    const newSubscriber = this.modalService.onHide.subscribe(r => {
+      newSubscriber.unsubscribe();
+    });
+  }
+
 
   public form_data: any = {
     no_name: false,
@@ -779,7 +795,7 @@ export class PerksComponent implements OnInit {
    */
   public deleteImageFromGallery( id:number ):void {
 
-    this.images_in_gallery.splice( this.images_in_gallery.findIndex( (image:any) => {  image.id === id } ), 1);
+    this.images_in_gallery.splice( this.images_in_gallery.findIndex( (image:any) => image.id == id ), 1);
 
     this.images_in_gallery[this.images_in_gallery.length - 1].last_one = true;
 

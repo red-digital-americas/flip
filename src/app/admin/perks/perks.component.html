@@ -12,6 +12,11 @@
             Perks
           </h4>
           <button 
+            class="ap-form__rButton padding-lateral-m button-yellow button-icon button-icon--edit"
+            (click)="openModal( 'AddTenant' )">
+            Perk Categories
+          </button>
+          <button 
             class="ap-form__rButton button-pink padding-lateral-m button-icon button-icon--add-white"
             (click)="toggleSectionForm( 'new' )">
             Add Perk
@@ -58,7 +63,7 @@
 </div>
 
 <div class="ml-col-1  padding-general-m margin-bottom-g new-modal" *ngIf="show_perk_form">
-<form class="ap-form ml-col-1 card-style" (submit)="sendPerkData()" onsubmit="return false;"> <!-- El formulario -->
+<form class="ap-form ml-col-1 card-style ap-form--fixed ap-form--fixed-big margin-bottom-m" (submit)="sendPerkData()" onsubmit="return false;"> <!-- El formulario -->
   <div class="ml-col-1">
     <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
       {{ perk_form_action }}
@@ -401,12 +406,12 @@
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="showModal()"
-        class="ml-modal__pop-buttons-button button-pink">
+        class="ml-modal__pop-buttons-button button-pink button-icon button-icon--cancel-white">
         Cancel
       </button>
       <button 
         (click)="confirmDeleteElement()"
-        class="ml-modal__pop-buttons-button button-black">
+        class="ml-modal__pop-buttons-button button-black button-icon button-icon--delete-white">
         Delete
       </button>
     </div>
