@@ -63,6 +63,7 @@ export class BookingIndexComponent implements OnInit {
             break;
 
             case 'hide':
+                this.resetSettings(0);
                 this.show_booking_form = false;
             break;
 

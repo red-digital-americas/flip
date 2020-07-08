@@ -923,9 +923,6 @@ import { Router } from '@angular/router';
             pay_method: await this.creditCardValidator() 
         }
 
-        console.log('Validacion de la info => ', form_validation_result.information);
-        console.log('Validacion de metodo de pago => ', form_validation_result.pay_method);
-
         const cc_encrypt: CreditCardModel = {
             active: true,
             ccv: this.encryptData(this.credit_card_data.ccv),
@@ -938,8 +935,6 @@ import { Router } from '@angular/router';
         };
 
         if( is_short_term ) {
-
-            console.log('Entre aqui');
 
             if( form_validation_result.information && form_validation_result.pay_method ) {
 
@@ -1314,16 +1309,9 @@ import { Router } from '@angular/router';
 
             } else {
 
-                this.system_message.showMessage({
-                    kind: 'error',
-                    time: 4777,
-                    message: {
-                        header: 'Inputs required',
-                        text: 'Some inputs must be fill to continue.'
-                    }
-                }); 
-
                 this.sendToTopPage();
+
+                resolve( false );
 
             }
 
@@ -1335,7 +1323,7 @@ import { Router } from '@angular/router';
 
                 return result;
 
-            } else return null;
+            } else return false;
 
         });
 
