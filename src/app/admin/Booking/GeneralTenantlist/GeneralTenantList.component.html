@@ -175,7 +175,7 @@
                             <span>{{element.checkOut}}</span>
                         </ng-template>
                         <ng-template #elseOut>
-                            <div *ngIf="element.checkIn.includes('<span'); then elseCheckIn else thencheckOut"></div>
+                            <div *ngIf="element.checkIn.includes('<span') || element.checkIn.includes('N/A'); then elseCheckIn else thencheckOut"></div>
                             <ng-template #elseCheckIn>
                                 N/A
                             </ng-template>
