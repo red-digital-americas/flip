@@ -10,6 +10,7 @@ import { SystemMessage } from '../../../../../ts/systemMessage';
 import { TabsComponent } from '../../../../../ts/systemTabs';
 import { Utils } from '../../../../utils/utils';
 import { LoaderComponent } from '../../../../../ts/loader';
+import { profile } from 'console';
 
 @Component({
   selector: 'app-profile',
@@ -937,6 +938,7 @@ export class ProfileComponent implements OnInit {
 
     sessionStorage.setItem('user_id', this.profile_data.id.toString() );
     sessionStorage.setItem('booking_id', this.idBooking);
+    sessionStorage.setItem('fullName', this.profile_data.name + ' ' + this.profile_data.lastName + ' ' + this.profile_data.motherName);
     this.router.navigateByUrl( page );
 
   }

@@ -45,6 +45,7 @@ import { resolve } from 'dns';
     public name_build: string;
     public user_id: number;
     public booking_id: number;
+    public fullName: string;
     public section: string;
     public formCancel: any = {
         no_detail: false
@@ -68,6 +69,7 @@ import { resolve } from 'dns';
 
         this.user_id = Number( sessionStorage.getItem('user_id') );
         this.booking_id = Number(sessionStorage.getItem('booking_id'));
+        this.fullName = String(sessionStorage.getItem('fullName'));
         this.section = 'tenantList';
         this.getReservationData();
         this.name_build = sessionStorage.getItem('name_build');
