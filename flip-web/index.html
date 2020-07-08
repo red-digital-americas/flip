@@ -1419,10 +1419,10 @@
                 ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeDesignIndex'}).then( desing_data => {
 
                     let desing_bg_images = [
-                        { img: 'assets/images/design/home-design-2.jpg', text: 'philosophy'},
-                        { img: 'assets/images/design/home-design-3.jpg', text: 'Desing process'},
-                        { img: 'assets/images/design/home-design-4.jpg', text: 'Interior desing'},
-                        { img: 'assets/images/design/home-design-6.jpg', text: 'Acabados'}
+                        { img: 'assets/images/design/home-design-2.jpg', text: desing_data.item[0].title},
+                        { img: 'assets/images/design/home-design-3.jpg', text: desing_data.item[1].title},
+                        { img: 'assets/images/design/home-design-4.jpg', text: desing_data.item[2].title},
+                        { img: 'assets/images/design/home-design-6.jpg', text: desing_data.item[3].title}
                     ];
                     
                     desing_data.item.forEach( ( desing_card, index ) => {
@@ -1475,11 +1475,12 @@
             
                 ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex'}).then( more_data => {
 
+                    console.log(more_data.item[0].title);
                     let more_bg_images = [
-                        { img: 'assets/images/more/MORE1.jpg', text: 'Team'},
-                        { img: 'assets/images/more/MORE1.jpg', text: 'Press'},
-                        { img: 'assets/images/more/MORE3.jpg', text: 'Carrers'},
-                        { img: 'assets/images/more/MORE5.jpg', text: ''}
+                        { img: 'assets/images/more/MORE1.jpg', text: more_data.item[0].title},
+                        { img: 'assets/images/more/MORE1.jpg', text: more_data.item[1].title},
+                        { img: 'assets/images/more/MORE3.jpg', text: more_data.item[2].title},
+                        { img: 'assets/images/more/MORE5.jpg', text: more_data.item[3].title}
                     ];
 
                     more_data.item.forEach( ( more_card, index ) => {
