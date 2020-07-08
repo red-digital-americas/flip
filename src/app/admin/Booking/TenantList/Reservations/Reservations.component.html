@@ -77,7 +77,7 @@
                 <button 
                     *ngIf="check_in_active || statusBooking"
                     style="float: left;"
-                    class="ap-form__rButton button-blue"
+                    class="ap-form__rButtonap-form__rButton--no-margin button-blue"
                     (click)="showModal('check_in')">
                     Check In
                 </button>
@@ -99,7 +99,7 @@
                         [disabled]="ifCheckIn"
                         *ngIf="statusBooking"
                         style="float: left;"
-                        class="ap-form__rButton button-pink"
+                        class="ap-form__rButton ap-form__rButton--no-margin button-pink"
                         (click)="showModal('check_out')">
                         Check Out
                     </button>
