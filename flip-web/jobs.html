@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en" class="js no-touch csstransitions uk-notouch">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -12,6 +13,26 @@
             position: relative;
             z-index: 0;
         }
+
+        .padre {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 99999999;
+            top: 0;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hijo {
+            width: 100%;
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
     </style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +46,7 @@
     <script src="carga_dinamica/jobs.js"></script>
 
 </head>
+
 <body>
     <link rel="stylesheet" href="/assets/css/animation.css">
 
@@ -91,8 +113,7 @@
                                     <img src="assets/images/F.png" alt="back">
                                 </span>
                             </a>
-                            <a id="closemore"
-                               class="fclose-more pointer">
+                            <a id="closemore" class="fclose-more pointer">
                                 <span>
                                     <img src="assets/images/closebut_black.svg" style="width: 25px!important; height: 25px!important" alt="Close">
                                 </span>
@@ -170,7 +191,12 @@
                             <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  movilhidden square  " style="position: absolute; left: 861px; top: 0px;">
                                 <div id="cardgrid3" class="card">
 
-                                    <img class="content-more-image" src="assets/images/thejobs.png">
+                                    <img id="bg" class="img1" src="assets/images/more/MORE5.jpg" alt="Images">
+                                    <div class="padre">
+                                        <span id="text" class="hijo">
+
+                                        </span>
+                                    </div>
                                 </div>
 
                             </div>
@@ -239,7 +265,8 @@
                                     </div>
 
                                 </div>
-                            </div><!--.pportfolio2-item-->
+                            </div>
+                            <!--.pportfolio2-item-->
                             <div id="fliplogo" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 square " style="position: absolute; left: 574px; top: 232px;">
                                 <div id="card_more1" class="card">
 
@@ -262,7 +289,8 @@
 
                                 </div>
 
-                            </div><!--.pportfolio2-item-->
+                            </div>
+                            <!--.pportfolio2-item-->
                             <div id="cardmore2x14" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 861px; top: 232px;">
                                 <div id="card_more3" class="card">
 
@@ -330,7 +358,8 @@
 
                                 </div>
 
-                            </div><!--.pportfolio2-item-->
+                            </div>
+                            <!--.pportfolio2-item-->
                             <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  movilhidden square " id="dudequitmore" style="position: absolute; left: 287px; top: 464px;">
 
 
@@ -352,10 +381,9 @@
                                     </div>
                                 </div>
 
-                            </div><!--.pportfolio2-item onclick="mores()"  id="comMoreIndex" -->
-                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square"
-                                 style="position: relative; left: 1141px; top: 232px;   z-index: 1;"
-                                 onclick="mores()" id="flip">
+                            </div>
+                            <!--.pportfolio2-item onclick="mores()"  id="comMoreIndex" -->
+                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square" style="position: relative; left: 1141px; top: 232px;   z-index: 1;" onclick="mores()" id="flip">
 
 
                                 <div id="cardgrid5" class="card">
@@ -461,8 +489,7 @@
                         </p>
                     </div>
                     <div class="col-xs-6">
-                        <form name="formulario" method="post" action=""
-                              enctype="multipart/form-data">
+                        <form name="formulario" method="post" action="" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label style="margin-left: 0px" for="name">Name:</label>
                                 <input type="text" class="form-control" id="name" placeholder="name" required>
@@ -474,10 +501,7 @@
                             </div>
                             <div class="form-group">
                                 <label style="margin-left: 0px" for="telephone">Telephone:</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Put your # phone here "
-                                       maxlength="15"
-                                       minlength="10"
-                                       required>
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Put your # phone here " maxlength="15" minlength="10" required>
                             </div>
                             <!-- <input type="file" name="adjunto" accept=".pdf,.jpg,.png,.doc, .docx"  class="inputfile" > -->
                             <button type="submit" class="btn btn-default">Submit</button>
@@ -501,8 +525,7 @@
                 <span id="closelogin" class="close">&times;</span>
                 <p id="">LOGIN</p>
 
-                <form name="login" method="post" action=""
-                      enctype="multipart/form-data">
+                <form name="login" method="post" action="" enctype="multipart/form-data">
                     <div class="form-group" style="text-align: left;">
                         <label style="margin-left: 0px; text-align: left;" for="email">
                             <h4>
@@ -544,7 +567,9 @@
                 <li><a href="#">Backstage</a></li>
                 <li><a href="#">Design</a></li>
                 <li><a href="#">More</a></li>
-                <li class="movilhidden"><hr></li>
+                <li class="movilhidden">
+                    <hr>
+                </li>
 
                 <li class="">
 
@@ -578,7 +603,8 @@
             <br class="brhide hiddens">
             <br class="brhide hiddens">
 
-        </div><!--#footer-->
+        </div>
+        <!--#footer-->
     </footer>
     <!--jquery.min.js-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -644,8 +670,7 @@
     <script type="text/javascript" src="assets/js/jquery.flip.js"></script>
     <!--custom.js-->
     <script type="text/javascript" src="assets/js/custom.js"></script>
-    <script type="text/javascript"
-            src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
     </script>
     <script type="text/javascript" src="assets/js/custommenu.js"></script>
     <script>
@@ -655,7 +680,7 @@
             console.log(window.globaltime);
         }
 
-        window.onload = function () {
+        window.onload = function() {
 
 
             tiempo_carga();
@@ -668,7 +693,7 @@
                     debugger;
 
                     $("#preloader").delay((5 - window.globaltime) * 1000).fadeOut("slow");
-                    console.log((4 - window.globaltime) * 1000);    // estableces el localstorage en 1 para que no se vuelva a cumplir la condicion
+                    console.log((4 - window.globaltime) * 1000); // estableces el localstorage en 1 para que no se vuelva a cumplir la condicion
                     localStorage.setItem('ingreso', 1);
 
                 } else {
@@ -677,14 +702,13 @@
                     console.log(document.referrer);
                 }
 
-            }
-            else {
+            } else {
                 $("#preloader").delay(4000).fadeOut("slow");
 
             }
         }
 
-        $("#closemore").click(function () {
+        $("#closemore").click(function() {
             window.location = 'index.html?come=more';
         });
 
@@ -697,17 +721,17 @@
 
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
+        span.onclick = function() {
             modal.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-        
+
         var modal2 = document.getElementById('loginmodal');
 
         // Get the button that opens the modal
@@ -717,17 +741,17 @@
         var span2 = document.getElementById("closelogin");
 
         // When the user clicks on the button, open the modal
-        btn2.onclick = function () {
+        btn2.onclick = function() {
             modal2.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span2.onclick = function () {
+        span2.onclick = function() {
             modal2.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == modal2) {
                 modal2.style.display = "none";
             }
@@ -735,4 +759,5 @@
 
     </script>
 </body>
+
 </html>

@@ -8,6 +8,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="shortcut icon" type="image/x-icon" href="./assets/flip.ico" />
+        <style>
+   
+        .padre {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 99999999;
+            top: 0;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hijo {
+            width: 100%;
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+    </style>
     <title>FLIP</title>
 
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
@@ -153,8 +175,14 @@
 
                                 </div> 
                                 <div  class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square "   style="position: absolute; left: 287px; top: 0px;" >
-                                    <div id="cardgrid2" class="card"> 
-                                        <img   class="img1" src="assets/images/theteam.png" alt="Images" >
+                                    <div id="cardgrid2" class="card">
+                                      <img id="bg"  class="img1" src="assets/images/more/MORE5.jpg" alt="Images" >
+                                         <div class="padre">
+                                            <span id="text" class="hijo">
+                                                
+                                            </span>
+                                        </div>
+                                        
                                     </div>
 
 
@@ -1190,6 +1218,33 @@
                 $("#close14").addClass("hiddens");                
 
             });
+            
+            $(document).ready(function() {
+            // debugger;
+            $.ajax({
+                type: 'POST',
+                url: "http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex",
+                // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
+                data: JSON.stringify({
+                    userid: 1
+                }),
+                contentType: "application/json",
+                dataType: "text",
+
+                success: function(data, textStatus, jqXHR) {
+                    //   debugger;
+                    respuesta = JSON.parse(data);
+                    console.log(' MORE ========> ', respuesta);
+                    var info = respuesta.item;
+                    $("#text").text(info[0].title);
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // debugger;
+                    console.log(jqXHR, textStatus, errorThrown);
+                },
+            });
+        })
         </script>
     </body>
 </html>

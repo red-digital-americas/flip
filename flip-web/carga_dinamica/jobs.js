@@ -9,6 +9,30 @@
 var respuesta;
 var _html;
 $(document).ready(function () {
+     $.ajax({
+                type: 'POST',
+                url: "http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex",
+                // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
+                data: JSON.stringify({
+                    userid: 1
+                }),
+                contentType: "application/json",
+                dataType: "text",
+
+                success: function(data, textStatus, jqXHR) {
+                    //   debugger;
+                    respuesta = JSON.parse(data);
+                    console.log(' MORE ========> ', respuesta);
+                    var info = respuesta.item;
+                    $("#text").text(info[2].title);
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // debugger;
+                    console.log(jqXHR, textStatus, errorThrown);
+                },
+            });
+
     $.ajax({
         type: 'POST',
         url: "http://34.237.214.147/back/api_flip/api/Post/SeeJobs",

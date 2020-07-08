@@ -11,6 +11,25 @@
             position: relative;
             z-index: 0;
         }
+        
+        .padre {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 99999999;
+            top: 0;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hijo {
+            width: 100%;
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
     </style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -90,7 +109,12 @@
 
                                 <div id="cardmore2x11" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 0px; top: 0px;">
                                     <div id="cardgrid2" class="card">
-                                        <img class="content-more-image" src="assets/images/thepress.png">
+                                        <img id="bg"  class="img1" src="assets/images/more/MORE5.jpg" alt="Images" >
+                                         <div class="padre">
+                                            <span id="text" class="hijo">
+                                                
+                                            </span>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -589,6 +613,33 @@
                     modal.style.display = "none";
                 }
             }
+            
+                        $(document).ready(function() {
+            // debugger;
+            $.ajax({
+                type: 'POST',
+                url: "http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex",
+                // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
+                data: JSON.stringify({
+                    userid: 1
+                }),
+                contentType: "application/json",
+                dataType: "text",
+
+                success: function(data, textStatus, jqXHR) {
+                    //   debugger;
+                    respuesta = JSON.parse(data);
+                    console.log(' MORE ========> ', respuesta);
+                    var info = respuesta.item;
+                    $("#text").text(info[1].title);
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // debugger;
+                    console.log(jqXHR, textStatus, errorThrown);
+                },
+            });
+        })
         </script>
     </body>
 </html>

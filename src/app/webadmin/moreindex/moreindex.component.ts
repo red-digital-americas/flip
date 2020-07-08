@@ -25,6 +25,7 @@ export class MoreindexComponent implements OnInit {
     public warningModal;
     public dangerModal;
     public infoModal;
+    postTitle:any;
   
     constructor(private router: Router,
       private heroService: DatosService,
@@ -92,7 +93,7 @@ export class MoreindexComponent implements OnInit {
        //debugger;
        this.heroService.ServicioPostPost("SeeMoreIndex", creadoobj).subscribe((value) => {
    
-   
+
          switch (value.result) {
            case "Error":
              console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
@@ -102,14 +103,18 @@ export class MoreindexComponent implements OnInit {
              if (value.result == "Success") {
               //  debugger;
                this.posts = value.item;
+               console.log(this.posts);
              }
          }
        });
      }
   
   
-     passdata(id:any ){
-      this.PostId = id ; 
+     passdata(data:any ){
+       console.log(data);
+      this.PostId = data.id ;
+      this.postTitle =  data.title;
+      console.log(this.postTitle);
      }
      updatesn(){
       var creadoobj = { id: this.sn[0].id, FacebookUrl: this.Facebook,  TwitterUrl: this.Twitter , InstagramUrl :this.Instagram, YoutubeUrl:this.Youtube};
@@ -170,7 +175,7 @@ export class MoreindexComponent implements OnInit {
       if(this.imageInputLabel!="Choose file"){
 
       this.loader.showLoader();
-      var creadoobj = { id: this.PostId, Photo: this.postphoto,  Position: this.PostId };
+      var creadoobj = { id: this.PostId, Photo: this.postphoto,  Position: this.PostId, title: this.postTitle };
       //debugger;
   
       this.heroService.ServicioPostPost("UpdateMoreIndex", creadoobj).subscribe((value) => {
