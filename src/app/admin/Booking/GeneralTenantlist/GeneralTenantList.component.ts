@@ -132,6 +132,13 @@ import { DataSource } from '@angular/cdk/table';
         this._router.navigateByUrl( the_page );
     }
 
+    public viewBookingDetail( page: string, idUser, idBooking, fullName ): void {
+        sessionStorage.setItem('user_id', idUser.toString() );
+        sessionStorage.setItem('booking_id', idBooking);
+        sessionStorage.setItem('fullName', fullName);
+        this._router.navigateByUrl( page );
+    }
+
     public goToProfile( profile: any ):void { 
         sessionStorage.setItem('id_section_active', profile.id );
         sessionStorage.setItem('name_section_active', profile.build );

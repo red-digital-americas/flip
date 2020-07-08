@@ -184,9 +184,10 @@ export class TenantListComponent implements OnInit {
             });
     }
 
-    public viewBookingDetail( page: string, idUser, idBooking ):void {
+    public viewBookingDetail( page: string, idUser, idBooking, fullName ): void {
         sessionStorage.setItem('user_id', idUser.toString() );
         sessionStorage.setItem('booking_id', idBooking);
+        sessionStorage.setItem('fullName', fullName);
         this.router.navigateByUrl( page );
       }
 

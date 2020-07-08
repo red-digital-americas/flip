@@ -44,7 +44,15 @@
                 <div *ngIf="current_membership.status.idStatusBooking === 3">Check Out</div>
                 <div *ngIf="current_membership.status.idStatusBooking === 4">Cancel</div>
             </div>
-        </div>     
+        </div> 
+        <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
+            <div class="ml-col-1">
+                Tenant:
+            </div>
+            <div class="ml-col1 text-bold">
+                {{ fullName }}
+            </div>
+        </div>    
     </div>
     <div class="ml-col-1 margin-bottom-x">
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
