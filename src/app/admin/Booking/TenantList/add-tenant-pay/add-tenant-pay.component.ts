@@ -89,6 +89,17 @@ export class AddTenantPayComponent implements OnInit {
     });
   }
 
+  public getDigits(the_string: any, how_many: number ): string {
+    let this_chain = '',
+        string_to = '';
+    if (the_string != null) {
+        this_chain = '',
+        string_to = the_string.toString();
+        this_chain = string_to.substr( string_to.length - how_many );
+    }
+    return this_chain;
+}
+
   PayBooking() {
     console.log(this.ccObj);
     var response;
@@ -643,7 +654,6 @@ export class AddTenantPayComponent implements OnInit {
       amount: ''
     };
     console.log('DATA Booking', obj);
-    return;
     this.loader.showLoader();
     this._service.service_general_post('Tenant/PostBooking', this.booking_post_data)
       .subscribe((response: any) => {

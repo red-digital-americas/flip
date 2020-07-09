@@ -799,10 +799,10 @@
                                         <span>****</span>
                                         <span>****</span>
                                         <span>****</span>
-                                        <span>{{ ccObj.number.toString() | slice:-4 }}</span>
+                                        <span>{{ getDigits(ccObj.number, 4) }}</span>
                                       </p>
                                       <p class="credit-card__card-date">
-                                        {{ ccObj.month }}/{{ ccObj.year | slice:-2 }}
+                                        {{ getDigits(ccObj.month, 2) }}/{{ getDigits(ccObj.year, 2) }}
                                       </p>
                                     </div>
                                   </div>

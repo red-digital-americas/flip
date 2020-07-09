@@ -51,7 +51,7 @@ import { resolve } from 'dns';
         no_detail: false
     };
     detailCancel = '';
-    statusBooking: boolean;
+    statusBooking = false;
     ifCheckIn: boolean;
 
     constructor(
@@ -103,7 +103,41 @@ import { resolve } from 'dns';
     public current_topay: any;
     public current_history: any;
     public current_card: any;
-    public current_membership: any;
+    public current_membership = {
+        additionalBeds: [],
+        beds: 0,
+        costPerNigth: 0,
+        dateEnd: '',
+        dateEndProgram: '',
+        dateEndReal: '',
+        dateStart: '',
+        dateStartProgram: '',
+        dateStartReal: '',
+        historyPaymentService: [],
+        historyPaymentsMemberships: [],
+        idBooking: 0,
+        idMembershipBooking: 0,
+        idRoom: 0,
+        membresia: '',
+        memdesc: '',
+        price: 0,
+        roomName: '',
+        roomateType: '',
+        services: [],
+        servicesAditional: [],
+        status: {
+            date: '',
+            detalle: '',
+            id: 0,
+            idBooking: 0,
+            idStatusBooking: 0
+        },
+        toPay: [],
+        typeRoom: '',
+        customDateS: '',
+        customDateE: '',
+        customDateDif: ''
+    };
     public current_paymentHis: any;
     public current_paymentSer: any;
     public current_beds: any;
