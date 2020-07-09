@@ -70,11 +70,11 @@
                                     {{ message.message.message1 }}
                                 </span -->
                                 <span class="chatm__chat-message-msg chatm__chat-message-msg-own" 
-                                      *ngIf="IDUSR == message.message.userId">
+                                      *ngIf="id_conserge == message.message.userId">
                                     {{ message.message.message1 }}
                                 </span>
                                 <span class="chatm__chat-message-msg chatm__chat-message-msg-from" 
-                                      *ngIf="IDUSR != message.message.userId">
+                                      *ngIf="id_conserge != message.message.userId">
                                     {{ message.message.message1 }}
                                 </span>
                             </div>

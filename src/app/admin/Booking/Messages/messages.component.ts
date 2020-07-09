@@ -253,7 +253,8 @@ export class MessagesComponent implements OnInit {
           }
         });
       }
-    
+      
+      public id_conserge:number = null;
       private GetMessages() {
         //debugger;
         var creadoobj = { conversationId: this.conversationId, buildingid: this.build };
@@ -266,6 +267,9 @@ export class MessagesComponent implements OnInit {
               console.log("GetMEsages=>", value.item);
               if (value.result == "Success") {
                 this.messages = value.item;
+                this.id_conserge = value.consierge;
+                console.log("CP ===> ", this.messages);
+                console.log(value.consierge);
                 this.ReplaceInvitations(value.item);
                 const chat_messages = document.getElementById('chat_messages');
                 setTimeout( () => { chat_messages.scrollTo( 0, chat_messages.scrollHeight ) }, 200);
