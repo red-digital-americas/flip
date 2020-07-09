@@ -663,8 +663,8 @@ import { Router } from '@angular/router';
         if( service.startDate != '' && service.endDate != '' ) {
 
             service.lapse == '1' ?
-                service.total_ammount = service.price * service.day_diff :
-                service.total_ammount = service.priceUnit * service.day_diff;
+                service.total_ammount = service.priceUnit * service.day_diff :
+                service.total_ammount = service.price * service.day_diff;
 
         }
 
@@ -687,8 +687,8 @@ import { Router } from '@angular/router';
             if( service.lapse != '' ) {
 
                 service.lapse == '1' ?
-                    service.total_ammount = service.price * service.day_diff :
-                    service.total_ammount = service.priceUnit * service.day_diff;
+                    service.total_ammount = service.priceUnit * service.day_diff :
+                    service.total_ammount = service.price * service.day_diff;
 
             }
 
@@ -731,6 +731,8 @@ import { Router } from '@angular/router';
             service.type_service = 'Extra';
 
             this.all_services_selected.push( service );
+
+            console.log("Estos => ", this.all_services_selected);
 
         });
 

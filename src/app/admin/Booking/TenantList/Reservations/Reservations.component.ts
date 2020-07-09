@@ -428,8 +428,8 @@ import { resolve } from 'dns';
         if( service.days_diff ) {
 
             service.service_lapse == '1' ? 
-                service.total = service.price * service.days_diff :
-                service.total = service.priceUnit * service.days_diff;
+                service.total = service.priceUnit * service.days_diff :
+                service.total = service.price * service.days_diff;
 
         }
 
@@ -438,11 +438,15 @@ import { resolve } from 'dns';
     public clearServicesSelected():void {
 
         this.services_selected = [];
+        this.services_to_send = [];
 
     }
 
     public popup_payment_service: boolean = false;
+    public add_services_to_sts:boolean = true;
     public payServicesConfirm( action: boolean = true ):void {
+
+        this.add_services_to_sts = false;
 
         if( this.validateServicesSelectedForm() ) {
 
@@ -457,15 +461,21 @@ import { resolve } from 'dns';
                     header: 'Information Error',
                     text: 'All Inputs must be fill to continue'
                 }
-            }); 
+            });
+            
+        console.log("Checkpoint 3 ===> ", this.services_to_send);
 
     }
 
     public saveOrPayServicesSelected( action: string = '' ):void {
 
+        this.add_services_to_sts = true;
+
         if( this.validateServicesSelectedForm() ) {
 
             this.loader.showLoader();
+
+            console.log("Checkpoint ==> ", this.services_to_send);
 
             if( action == 'pay' ) {
 
@@ -546,6 +556,8 @@ import { resolve } from 'dns';
     }
 
     public saveOrPayServices():void {
+
+        console.log("Checkpoint 2 ==> ", this.services_to_send);
 
         this._services.service_general_post('BookingServiceAdmin/PostBookingService', this.services_to_send )
             .subscribe( (response: any) => {
@@ -674,7 +686,16 @@ import { resolve } from 'dns';
                             paymentDate: ''
                         }
 
-                    this.services_to_send.push( object_service );
+                    if( this.add_services_to_sts ) {
+
+                        console.log("Agregue los servicios");
+                        this.services_to_send.push( object_service );
+
+                    } else {
+
+                        console.log("No agregue los servicios");
+
+                    }
 
                 }
 
@@ -727,8 +748,8 @@ import { resolve } from 'dns';
                 if( service.id == id_service ) {
 
                     service.service_lapse == '1' ? 
-                        service.total = service.price * days_diff : 
-                        service.total = service.priceUnit * days_diff;
+                        service.total = service.priceUnit * days_diff : 
+                        service.total = service.price * days_diff;
 
                     service.days_diff = days_diff;
 

@@ -932,7 +932,6 @@
                         name="company_name"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.Company"
-                        (change)="validatingUserInput( $event )"
                         [class.custom-input__text--error]="alert_detail_validator.no_cnam"/>
                       <label 
                         for="company_name" 
@@ -1517,7 +1516,6 @@
                                     name="new_alert_cname"
                                     class="ap-form__input-text"
                                     [(ngModel)]="new_alert_data.alertDetails[0].Company"
-                                    (change)="validatingUserInput( $event )"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_cname" 
@@ -1754,7 +1752,7 @@
                     <h4 style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" (click)="viewDetail(userSendMessage.userId, userSendMessage.booking, userSendMessage.building)" class="chatm__datos">
                         {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
                         <img class="chatm__datos-photo" 
-                             src="{{ userSendMessage.info.photo }}" />
+                             [src]="userSendMessage.info.photo == '' ? '../../../../assets/avatar-def.png' : userSendMessage.info.photo" />
                     </h4>
                     <div class="chatm__chat" id="chat_messages">
                         <div *ngFor="let message of messages"

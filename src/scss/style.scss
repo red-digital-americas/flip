@@ -1423,6 +1423,20 @@ select:active,
 
   }
 
+  &--normal {
+
+    width: 100%;
+    margin: 0;
+
+    @media screen and (min-width: 1920px) {
+      
+      width: 60%;
+      margin: 0 20%;
+
+    }
+
+  }
+
   &--no-tl-br {
     border-radius: 0 5px 5px 5px;
   }

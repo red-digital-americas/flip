@@ -51,7 +51,9 @@
                 </div>
             </div>            
             <div class="col-4">
-                <img class="event__photo" [src]="eventDetail?.activity.photo" alt="Event Photo">
+                <img class="event__photo" 
+                    [src]="eventDetail?.activity.photo == '' ? '../../../../assets/avatar-def.png' : eventDetail?.activity.photo" 
+                    alt="Event Photo" />
             </div>
         </div>
 
@@ -63,7 +65,8 @@
                 <div class="section-books">
                     <div class="book" *ngFor="let bookElement of booksArray">                        
                         <!-- <img class="book__avatar" src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">                         -->
-                        <img class="book__avatar" [src]="bookElement.user.avatar" alt="">       
+                        <img class="book__avatar" 
+                            [src]="bookElement.user.avatar == '' ? '../../../../assets/avatar-def.png' : bookElement.user.avatar" />       
                         <div class="book__username">{{bookElement.user.name}} {{bookElement.user.lastName}}</div>                                                            
                     </div>                        
                 </div>                                                          
@@ -87,12 +90,19 @@
                         </ng-template>                        
                         
                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                            <span class="ng-value-label"><img [src]="item.avatar" style="border-radius: 50%;" width="20px" height="20px"> {{item.name}}</span>                            
+                            <span class="ng-value-label">
+                                <img [src]="item.avatar == '' ? '../../../../assets/avatar-def.png' : item.avatar" 
+                                    style="border-radius: 50%;" 
+                                    width="20px" height="20px"> 
+                                {{item.name}}</span>                            
                             <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                         </ng-template>
                     
                         <ng-template ng-option-tmp let-item="item">
-                            <img [src]="item.avatar" style="border-radius: 50%;" width="20px" height="20px"> {{item.name}} {{item.lastName}}
+                            <img [src]="item.avatar == '' ? '../../../../assets/avatar-def.png' : item.avatar"
+                                style="border-radius: 50%;" 
+                                width="20px" height="20px"> 
+                            {{item.name}} {{item.lastName}}
                         </ng-template>     
                                                 
                         <!-- <ng-template ng-footer-tmp>
@@ -237,7 +247,8 @@
                 </div>  
 
                 <div class="col-4">
-                    <img style="width:100%" class="img-size" [src]="acitivyModel.Photo" />
+                    <img style="width:100%" class="img-size" 
+                        [src]="acitivyModel.Photo == '' ? '../../../../assets/avatar-def.png' : acitivyModel.Photo" />
                 </div>                                                                                    
                       
                 <div class="col">

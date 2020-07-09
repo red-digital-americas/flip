@@ -64,9 +64,17 @@
                         <div class="chatm__chat" id="chat_messages">
                             <div *ngFor="let message of messages"
                                  class="chatm__chat-message">
-                                <span class="chatm__chat-message-msg"
+                                <!-- span class="chatm__chat-message-msg"
                                       [ngClass]="{'chatm__chat-message-msg-own': IDUSR == message.message.userId, 
                                                   'chatm__chat-message-msg-from': IDUSR != message.message.userId}">
+                                    {{ message.message.message1 }}
+                                </span -->
+                                <span class="chatm__chat-message-msg chatm__chat-message-msg-own" 
+                                      *ngIf="IDUSR == message.message.userId">
+                                    {{ message.message.message1 }}
+                                </span>
+                                <span class="chatm__chat-message-msg chatm__chat-message-msg-from" 
+                                      *ngIf="IDUSR != message.message.userId">
                                     {{ message.message.message1 }}
                                 </span>
                             </div>

@@ -85,7 +85,7 @@
                 <button 
                     *ngIf="check_in_active || statusBooking"
                     style="float: left;"
-                    class="ap-form__rButtonap-form__rButton--no-margin button-blue"
+                    class="ap-form__rButton ap-form__rButton--no-margin button-blue"
                     (click)="showModal('check_in')">
                     Check In
                 </button>
@@ -955,11 +955,11 @@
                 <div class="ml-col-4 ap-form__group" *ngIf="service.service_lapse != ''">
                     <p class="ap-form__group-dato" *ngIf="service.service_lapse == '1'">
                         <span class="text-bold">Price Recurrent</span>
-                        {{ service?.price | currency }}
+                        {{ service?.priceUnit | currency }}
                     </p>
                     <p class="ap-form__group-dato" *ngIf="service.service_lapse == '2'">
                         <span class="text-bold">Price Once</span>
-                        {{ service?.priceUnit | currency }}
+                        {{ service?.price | currency }}
                     </p>
                     <p class="ap-form__group-dato">
                         <span class="text-bold">Total</span>

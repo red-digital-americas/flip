@@ -1,4 +1,4 @@
-<div class="ap-form ap-form--parent ml-col-1 background-white">
+<div class="ap-form ap-form--normal ap-form--parent ml-col-1 background-white">
     <div class="ml-col-1 margin-bottom-x">
         <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
             Add Tenant
@@ -2932,11 +2932,11 @@
                 </ng-container>
                 <ng-container matColumnDef="recurrent">
                     <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Recurrent</th>
-                    <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.price | currency }}</td>
+                    <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.priceUnit | currency }}</td>
                 </ng-container>
                 <ng-container matColumnDef="once">
                     <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Once cost</th>
-                    <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.priceUnit | currency }}</td>
+                    <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.price | currency }}</td>
                 </ng-container>
                 <ng-container matColumnDef="able">
                     <th mat-header-cell *matHeaderCellDef class="table__header"></th>
@@ -3067,11 +3067,11 @@
                 <div class="ml-col-4 ap-form__group">
                     <p class="ap-form__group-dato" *ngIf="service.lapse == '1'">
                         <span class="text-bold">Price Recurrent</span>
-                        {{ service?.price | currency }}
+                        {{ service?.priceUnit | currency }}
                     </p>
                     <p class="ap-form__group-dato" *ngIf="service.lapse == '2'">
                         <span class="text-bold">Price Once</span>
-                        {{ service?.priceUnit | currency }}
+                        {{ service?.price | currency }}
                     </p>
                     <p class="ap-form__group-dato">
                         <span class="text-bold">Total</span>

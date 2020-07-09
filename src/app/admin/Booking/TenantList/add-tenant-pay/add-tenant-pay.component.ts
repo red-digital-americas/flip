@@ -781,8 +781,8 @@ export class AddTenantPayComponent implements OnInit {
     service.lapse = event_root.value;
     if (service.startDate != '' && service.endDate != '') {
       service.lapse == '1' ?
-        service.total_ammount = service.price * service.day_diff :
-        service.total_ammount = service.priceUnit * service.day_diff;
+        service.total_ammount = service.priceUnit * service.day_diff :
+        service.total_ammount = service.price * service.day_diff;
     }
   }
 
@@ -796,8 +796,8 @@ export class AddTenantPayComponent implements OnInit {
       service.day_diff = days_diff == 0 ? 1 : days_diff;
       if (service.lapse != '') {
         service.lapse == '1' ?
-          service.total_ammount = service.price * service.day_diff :
-          service.total_ammount = service.priceUnit * service.day_diff;
+          service.total_ammount = service.priceUnit * service.day_diff :
+          service.total_ammount = service.price * service.day_diff;
       }
     }
     function getDaysDifference(sDate, eDate): number {

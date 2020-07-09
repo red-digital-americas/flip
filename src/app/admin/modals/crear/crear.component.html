@@ -239,11 +239,19 @@
                                     bindLabel="name" 
                                     bindValue="id">
                                     <ng-template ng-label-tmp let-item="item">
-                                        <span class="ng-value-label"><img [src]="item.avatar" style="border-radius: 50%;" width="20px" height="20px"> {{item.name}} {{item.lastName}} </span>                                                                
+                                        <span class="ng-value-label">
+                                            <img [src]="item.avatar == '' ? '../../../../assets/avatar-def.png' : item.avatar"  
+                                                style="border-radius: 50%;" 
+                                                width="20px" height="20px" /> 
+                                                {{item.name}} {{item.lastName}}
+                                        </span>                                                                
                                     </ng-template>
 
                                     <ng-template ng-option-tmp let-item="item">
-                                        <img [src]="item.avatar" style="border-radius: 50%;" width="20px" height="20px"> {{item.name}} {{item.lastName}}
+                                        <img [src]="item.avatar == '' ? '../../../../assets/avatar-def.png' : item.avatar" 
+                                            style="border-radius: 50%;" 
+                                            width="20px" height="20px" /> 
+                                            {{item.name}} {{item.lastName}}
                                     </ng-template>  
                                 </ng-select>
                         </div>
