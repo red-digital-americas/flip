@@ -30,7 +30,7 @@
                     </button -->
                 </div>
                 <div class="ap-chat__people">
-                    <div class="ml-col-1">
+                    <div class="ml-col-1" *ngIf="no_chats">
                         <div 
                             *ngFor="let friend of posts;"
                             (click)="showConversation(friend, friend.iduser, $event)" 
@@ -69,12 +69,12 @@
                                                   'chatm__chat-message-msg-from': IDUSR != message.message.userId}">
                                     {{ message.message.message1 }}
                                 </span -->
-                                <span class="chatm__chat-message-msg chatm__chat-message-msg-own" 
-                                      *ngIf="id_conserge == message.message.userId">
+                                <span class="chatm__chat-message-msg chatm__chat-message-msg-from" 
+                                      *ngIf="CONSIERGE == message.message.userId">
                                     {{ message.message.message1 }}
                                 </span>
-                                <span class="chatm__chat-message-msg chatm__chat-message-msg-from" 
-                                      *ngIf="id_conserge != message.message.userId">
+                                <span class="chatm__chat-message-msg chatm__chat-message-msg-own" 
+                                      *ngIf="CONSIERGE != message.message.userId">
                                     {{ message.message.message1 }}
                                 </span>
                             </div>
@@ -88,8 +88,8 @@
                             </button>
                         </div>
                     </div>
-                    <span class="chatm--selecting center-element-absolute" *ngIf="!showChat">
-                        Select a conversation or start one
+                    <span class="chatm--selecting center-element-absolute" *ngIf="!showChat || showChat && !no_chats">
+                        Select a conversation or start one  
                     </span>
                 </div>
             </div>
