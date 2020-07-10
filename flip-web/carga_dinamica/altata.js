@@ -534,35 +534,7 @@ function appendContentToPage( data ) {
 
 function appendRoomContentToPage( rooms_data ) {
     console.log('Rooms Data', rooms_data.length);
-    // rooms_data.forEach((element, index) => {
-    //     console.log('index', index);
-    //     const room = rooms_data[index],
-    //           room_card_name = document.querySelectorAll('[room="card_name"]')[index],
-    //           room_card_desc_o = document.querySelectorAll('[room="card_desc_one"]')[index],
-    //           room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
-    //         //  room_card_desc_t = document.querySelectorAll('[room="card_desc_two"]')[index],
-    //           room_card_prie_o = document.querySelectorAll('[room="card_price_one"]')[index],
-    //           room_card_prie_t = document.querySelectorAll('[room="card_price_two"]')[index];
-    //     if( room_card_name != undefined ) {
-
-    //         room_card_name.innerHTML = room.title;
-    //         room_card_desc_o.innerHTML = `${room.descPrice}<br>
-    //                                     <p style="font-weight: 700; font-size: 1.5em;">
-    //                                         $ ${room.price}
-    //                                         <br>
-    //                                     </p>`;
-    //         room_card_desc_t.innerHTML = `${room.descPrice1}<br>
-    //                                     <p style="font-weight: 700; font-size: 1.5em;">
-    //                                         $ ${room.price1}
-    //                                         <br>
-    //                                     </p>`;
-
-    //         sliderRoomContent( room.photos, index );
-    //         sliderViewVideo( room.view360, index );
-
-    //     }
-    // });
-
+   
     for( var index = 0; index < rooms_data.length; index+= 1 ) {
         console.log('index', index);
         const room = rooms_data[index],
@@ -647,7 +619,7 @@ function sliderRoomContent( room, index ) {
     
 
 let palntilla = `<div class="carousel-inner">`;
-    for( let slide_index = 0; slide_index < 4; slide_index += 1 ) {
+    for( let slide_index = 0; slide_index < photos.length; slide_index += 1 ) {
 
         if( photos[slide_index] != undefined ) {
             
@@ -655,6 +627,19 @@ let palntilla = `<div class="carousel-inner">`;
                  palntilla +=`<div class="item active">`;
             }else{
                 palntilla +=`<div class="item">`;
+            }
+            let icons = "";
+            for(let m = 0; m < photos.length; m++){
+                if(index ==0){
+                    icons+= `<div class="col-sm-3 icondiv"><label data-target="#myCarousel7" data-slide-to="${m}" class="">`;
+                }else{
+                    icons+= `<div class="col-sm-3 icondiv"><label data-target="#myCarousel8" data-slide-to="${m}" class="">`;  
+                }
+                icons+= `  <a href="#">
+                              <img class="iconscom" src="${photos[m].icon}" onmouseover="this.src='${photos[m].icon2}'" onmouseout="this.src='${photos[m].icon}'" border="0" alt="">
+                           </a>${photos[m].titleIcon}
+                          </label>
+                            </div>`;
             }
             
             palntilla +=`
@@ -684,16 +669,9 @@ let palntilla = `<div class="carousel-inner">`;
                                                                         </div>
                                                                         <br>
 
-                                                                        <div room="icons-sections-0">
-                                                                            <div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                                                                                <label data-target="#myCarousel7" data-slide-to="0" class="">
-                                                                                    <a href="#">
-                                                                                        <img class="iconscom" src="${photos[slide_index].icon}" onmouseover="this.src='${photos[slide_index].icon2}'" onmouseout="this.src='${photos[slide_index].icon}'" border="0" alt="">
-                                                                                    </a>
-                                                                                    Lorem
-                                                                                </label>
-                                                                                <br>
-                                                                            </div>
+                                                                        <div room="icons-sections-${slide_index}">
+                                                                            
+                                                                                ${icons}
                                                                         </div>
                                                                         <br>
                                                                     </div>

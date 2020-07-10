@@ -1350,7 +1350,7 @@ SECCION MAP
         ***********************/
 
         $("#room").click(function () {
-            var url = "./maltataroom.html?buildingid=" + buildingid;;
+            var url = "./maltataroom.html?buildingid=" + buildingid+"&title="+params.get('title');
             $(location).attr('href', url);
         });
 

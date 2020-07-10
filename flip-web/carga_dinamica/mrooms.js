@@ -6,9 +6,9 @@ var respuesta;
 var _html;
 let params = new URLSearchParams(location.search);
 var buildingid = params.get('buildingid');
-
+var title = params.get('title');
 $(document).ready(function () {
-
+$('#titlepage').html(`${title}`);
 });
 
 function change_image(item) {
@@ -61,7 +61,7 @@ function change_image_movil(item) {
 
 function getRoomsData( id_build ) {
 
-    const ws_data = { buildingid: id_build }
+    const ws_data = { buildingid: params.get('buildingid') }
 
     let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function( response ) {
@@ -89,35 +89,23 @@ function appendRoomContentToPage( rooms_data ) {
 
     
         let room = rooms_data[index];
-        let tittle = document.querySelectorAll("#comserv-activetext")[index];
+        //let tittle = document.querySelectorAll("#comserv-activetext")[index];
         let descripcion = document.querySelectorAll(".textamen")[index];
-              console.log("=>>>",tittle);
-        if( tittle != undefined)  {
-            
-            tittle.append(room.title);
-            
-            descripcion.append(room.desc);
-            
-            
-            descripcion.innerHTML = `<p>${room.desc}</p> <br>
-                                        ${room.descPrice}<br>
-                                        <div>
-                                        <p style="font-weight: 700; font-size: 1.5em;">
-                                            $ ${room.price}
-                                        </p>
-                                        <br>
-                                        <spam style="flex: 1 1 auto;"></spam>
-                                        ${room.descPrice1}<br>
-                                        <p style="font-weight: 700; font-size: 1.5em;">
-                                            $ ${room.price1}
-                                            <br>
-                                        </p>
-                                        </div>`;
-
+             // console.log("=>>>",tittle);
+       
+            if(index == 0){
+                $('#texttileA').text(room.title);
+                $('#price1A').html(`$ ${room.price} <br> ${room.descPrice}`);
+                $('#price2A').html(`$ ${room.price1} <br> ${room.descPrice1}`);
+            }else{
+                $('#texttileB').text(room.title);
+                $('#price1B').html(`$ ${room.price} <br> ${room.descPrice}`);
+                $('#price2B').html(`$ ${room.price1} <br> ${room.descPrice1}`);
+            }
            sliderRoomContent( room.photos, index );
            sliderViewVideo( room.view360, index );
 
-        }
+        
 
     }
 
@@ -130,6 +118,7 @@ function sliderViewVideo( video_url ,index ) {
           modal_video_close_button = document.getElementById('modal_video_close'),
           video_frame_container = document.getElementById('video_frame');
 
+    console.log(video_url);
     if( view_video_button != undefined ) {
 
         for( let button_index = 0; button_index < view_video_button.length; button_index += 1 ) {
@@ -137,6 +126,12 @@ function sliderViewVideo( video_url ,index ) {
             view_video_button[button_index].onclick = function() {
 
                 modal_video_container.classList.remove('display-none');
+                modal_video_close_button.onclick = function() {
+
+        modal_video_container.classList.add('display-none');
+        video_frame_container.src = '#';
+
+    }
                 video_frame_container.src = getUrlVideoToEmbed( video_url );
 
             }            
@@ -145,12 +140,12 @@ function sliderViewVideo( video_url ,index ) {
 
     }
 
-    modal_video_close_button.onclick = function() {
+    /*modal_video_close_button.onclick = function() {
 
         modal_video_container.classList.add('display-none');
         video_frame_container.src = '#';
 
-    }
+    }*/
 
 }
 
@@ -170,68 +165,48 @@ function getUrlVideoToEmbed( video_url ) {
 function sliderRoomContent( photos, index ) {
     console.log('Photos', photos);
     console.log('Index', index);
-    const slider_room_image = document.querySelectorAll(`[room="slide-image-${ index }"]`),
-          slider_room_title = document.querySelectorAll(`[room="slide-title-${ index }"]`),
-          slider_room_desc = document.querySelectorAll(`[room="slide-desc-${ index }"]`),
-          slider_room_icons = document.querySelectorAll(`[room="icons-sections-${ index }"]`);
-
-    console.log(slider_room_image);
-    for( let slide_index = 0; slide_index < 4; slide_index += 1 ) {
+    
+    let plantilla  = "";
+    let plantilla2 = "";
+    for( let slide_index = 0; slide_index < photos.length; slide_index += 1 ) {
 
         if( photos[slide_index] != undefined ) {
-            console.log('Index', photos[slide_index]);
-            slider_room_image[slide_index].src = photos[slide_index].photo;
-            slider_room_title[slide_index].innerHTML = `${ photos[slide_index].titleIcon }<br />`;
-            slider_room_desc[slide_index].innerHTML = photos[slide_index].titleIcon;
-
-            let icon = `<div class="col-sm-3 icondiv" style="margin-top: 50px;">
-                            <label data-target="#myCarousel${ 7 + index }" data-slide-to="0" class="">
-                                <a href="#">
-                                    <img class="iconscom" src="${ photos[0].icon }"
-                                        onmouseover="this.src='${ photos[0].icon2 }'"
-                                        onmouseout="this.src='${ photos[0].icon }'"
-                                        border="0" alt="" />
-                                </a>
-                                ${ photos[0].titleIcon }
-                            </label>
-                            <br>`;
-            icon = typeof photos[1] !== 'undefined' ? icon + `<label data-target="#myCarousel${ 7 + index }" data-slide-to="1" class="">
-                                <a href="#">
-                                    <img class="iconscom" src="${ photos[1].icon }"
-                                        onmouseover="this.src='${ photos[1].icon2 }'"
-                                        onmouseout="this.src='${ photos[1].icon }'"
-                                        border="0" alt="" />
-                                </a> 
-                                ${ photos[1].titleIcon }
-                            </label>` : icon;
-            icon = icon + `</div>`;
-            icon = icon + `<div class="col-sm-3 icondiv" style="margin-top: 50px;">`
-            icon = typeof photos[2] !== 'undefined' ? `<label data-target="#myCarousel${ 7 + index }" data-slide-to="2" class="">
-                                <a href="#">
-                                    <img class="iconscom" src="${ photos[2].icon }"
-                                        onmouseover="this.src='${ photos[2].icon2 }'"
-                                        onmouseout="this.src='${ photos[2].icon }'"
-                                        border="0" alt="" />
-                                </a>
-                                ${ photos[2].titleIcon }
-                            </label>
-                            <br>` : icon;
-            icon = typeof photos[3] !== 'undefined' ? `<label data-target="#myCarousel${ 7 + index }" data-slide-to="3" class="">
-                                <a href="#">
-                                    <img class="iconscom" src="${ photos[3].icon }"
-                                        onmouseover="this.src='a${ photos[3].icon2 }'"
-                                        onmouseout="this.src='${ photos[3].icon }'"
-                                        border="0" alt="" />
-                                </a> 
-                                ${ photos[3].titleIcon }
-                            </label>` : incon;
-            icon = icon + `</div>`;
-
-            slider_room_icons[slide_index].innerHTML = icon;
+            //console.log('Index', photos[slide_index]);
+            if(slide_index == 0){
+                plantilla += `<div class="item active ">`;
+            }else{
+                plantilla += `<div class="item ">`;
+            }
+            plantilla += `
+                             <img src="${photos[slide_index].photoMobile}" alt="Los Angeles">
+                           </div>`;
+                
+            if(index == 0){
+                plantilla2 += `<label  data-target="#myCarousel7" data-slide-to="${slide_index}"  class="">`;
+            }else{
+                 plantilla2 += `<label  data-target="#myCarousel8" data-slide-to="${slide_index}"  class="">`
+            }
+            plantilla2 += `
+                                 <a href="#">
+                                     <img  class="iconscom" src="${photos[slide_index].icon}" 
+                                            onmouseover="this.src='${photos[slide_index].icon2}'"
+                                            onmouseout="this.src='${photos[slide_index].icon}'"
+                                            border="0" alt=""/>
+                                 </a> ${photos[slide_index].titleIcon}  
+                           </label> `;
+            
 
         }
-
+           
     }
+    if(index == 0){
+                $('#a').html(`${plantilla}`);
+                $('#iconsA').html(`${plantilla2}`);
+               
+            }else{
+                $('#b').html(`${plantilla}`);
+                $('#iconsB').html(`${plantilla2}`);
+            }
 
 }
 

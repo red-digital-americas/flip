@@ -49,9 +49,62 @@
     <script src="carga_dinamica/config.js"></script>
     <script src="carga_dinamica/mrooms.js"></script>
 
+   <style>
+    
+        .modal-video {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            background-color: rgba(0,0,0,.777);
+        }
+
+        .modal-video__video {
+            position: absolute;
+            width: 77%;
+            height: 77%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: none;
+            outline: none;
+        }
+
+        .modal-video__close {
+            text-transform: uppercase;
+            position: absolute;
+            right: 40px;
+            top: 5.5%;
+            height: 10px;
+            font-size: 37px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+        }
+
+        .modal-video__close:focus {
+            outline: none;
+            border: none;
+        }
+       .display-none {
+            display: none;
+        }
+    </style>
     </head>
     <body>
 
+<div class="modal-video display-none" id="modal-video">
+        <button class="modal-video__close" id="modal_video_close">x</button>
+        <iframe 
+            id="video_frame"
+            class="modal-video__video" 
+            src="" 
+            allowfullscreen="allowfullscreen">
+        </iframe>
+    </div>
 
 
         <!--FIN LOAD -->
@@ -83,15 +136,8 @@
                                                     <!-- Indicators -->
 
                                                     <!-- Wrapper for slides -->
-                                                    <div class="carousel-inner">
-                                                        <div class="item active ">
-                                                            <img src="assets/images/Communities/Altata/altata9.jpg" alt="Los Angeles">
-                                                       
-                                                        </div>
-
-                                                        <div class="item">
-                                                            <img src="assets/images/Communities/Altata/altata10.jpg" alt="Chicago">
-                                                         </div>
+                                                    <div class="carousel-inner" id="a">
+                                                        
                                                     </div>
 
                                                     <!-- Left and right controls -->
@@ -137,15 +183,8 @@
                                                     <!-- Indicators -->
 
                                                     <!-- Wrapper for slides -->
-                                                    <div class="carousel-inner">
-                                                        <div class="item active ">
-                                                            <img src="assets/images/Communities/Altata/altata11.jpg" alt="Los Angeles">
+                                                    <div class="carousel-inner" id="b">
                                                        
-                                                        </div>
-
-                                                        <div class="item">
-                                                            <img src="assets/images/Communities/Altata/altata9.jpg" alt="Chicago">
-                                                         </div>
                                                     </div>
 
                                                    
@@ -171,7 +210,7 @@
                                                         </span -->
                                                     </a>
                                                     <span style="    margin-left: 9%;" class="titlepagesection" >
-                                                    <p id="titlepage">  </p>
+                                                    <p id="title">  </p>
                                                     </span>
                                                 </div>
 
@@ -234,14 +273,14 @@
                                             </div>
                                         </div>--> 
                                              <div id="roomA" class="header-text-room   ">
-                                                                <div class="col-md-12 text-center">
+                                                 <div class="col-md-12 text-center">
 
 
                                                                     <span class="btn_rooms_span"> 
                                                                         
                                                                             <button id="getguidebtn10" type="button" class="button_menu_rooms btn-form btn font-size-tab "style="padding-left: 1px;"> <span style="    margin-left: -10%;"> BOOK A TOUR  </span>   </button>
 
-                                                                        <button type="button" class="button_menu_rooms  btn-form btn font-size-tab "> <span style="    margin-left: -10%;" >VIEW 360° </span>  <hr class="hrcenter" style=" margin-left: 30%;"> </button>
+                                                                        <button type="button" class="button_menu_rooms  btn-form btn font-size-tab view_video_0"> <span style="    margin-left: -10%;" >VIEW 360° </span>  <hr class="hrcenter" style=" margin-left: 30%;"> </button>
 
                                                                         <button type="button"  id="getguidebtn2" class="button_menu_rooms btn-form btn font-size-tab "> <span> GET GUIDE   <hr class="hrcenter" style=" margin-left: 30%;"></span></button>
                                                                     </span>
@@ -250,29 +289,23 @@
                                                                         <div id =""class="row rightmenuroom">
                                                                            
                                                                         </div>
-                                                                        <div class=""> 
+                                                                        <div class="" > 
                                                                             <div class="col-sm-6">
                                                                                 <h3>
-                                                                                    <p id="comserv-activetext" style="  margin-top: 5%; margin-left: 5%;" >ROOM A </p>
+                                                                                    <p id="texttileA" style="  margin-top: 5%; margin-left: 5%;" ></p>
                                                                                 </h3>
-                                                                                <p class="textamen" style="margin-left: 5%;">
-                                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur 
+                                                                                <p id="price1A" class="textamen" style="margin-left: 5%;">
+                                                                                   
+                                                                                </p>
+                                                                                
+                                                                                <p id="price2A" class="textamen" style="margin-left: 5%;">
+                                                                                   
                                                                                 </p>
                                                                             </div> 
-                                                                            <div class ="col-sm-3 icondiv" style="margin-left: 7%;">
-                                                                                <br> 
-                                                                                <label  data-target="#myCarousel7" data-slide-to="1"  class="">
-                                                                                    <a href="#">
-                                                                                        <img  class="iconscom" src="assets/images/icon_test4.svg" 
-                                                                                             onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                             onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                             border="0" alt=""/></a> Lorem  </label> <label   style="margin-left: 20%;"  data-target="#myCarousel7" data-slide-to="0"   class="">   <a href="#">
-                                                                                    <img  class="iconscom" src="assets/images/icon_test1.svg" 
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt=""/></a>
-                                                                                     Lorem</label>
-
+                                                                            <br>
+                                                                            <div id="iconsA" class ="col-sm-3 icondiv" style="margin-left: 7%;">
+                                                                                
+                                                                        
                                                                             </div>
                                                                             
 
@@ -286,51 +319,46 @@
                                                                     </span>
 
                                                                 </div>
-                                                            </div><!-- /header-text -->
+                                            </div><!-- /header-text -->
                                           <div id="roomB" class="header-text-room  hiddens">
-                                                                <div class="col-md-12 text-center">
+                                            <div class="col-md-12 text-center">
 
 
                                                                     <span class="btn_rooms_span"> 
                                                                         
-                                                                            <button id="getguidebtn11" type="button" class="button_menu_rooms btn-form btn font-size-tab "style="padding-left: 1px;"> <span style="    margin-left: -10%;"> BOOK A TOUR  </span>   </button>
+                                                                            <button id="getguidebtn10" type="button" class="button_menu_rooms btn-form btn font-size-tab "style="padding-left: 1px;"> <span style="    margin-left: -10%;"> BOOK A TOUR  </span>   </button>
 
-                                                                        <button type="button" class="button_menu_rooms  btn-form btn font-size-tab "> <span style="    margin-left: -10%;" >VIEW 360° </span> <hr class="hrcenter" style=" margin-left: 30%;"> </button>
+                                                                        <button type="button" class="button_menu_rooms  btn-form btn font-size-tab view_video_1"> <span style="    margin-left: -10%;" >VIEW 360° </span>  <hr class="hrcenter" style=" margin-left: 30%;"> </button>
 
-                                                                        <button type="button"  id="getguidebtn22" class="button_menu_rooms btn-form btn font-size-tab "> <span> GET GUIDE   <hr class="hrcenter" style=" margin-left: 30%;"></span></button>
+                                                                        <button type="button"  id="getguidebtn2" class="button_menu_rooms btn-form btn font-size-tab "> <span> GET GUIDE   <hr class="hrcenter" style=" margin-left: 30%;"></span></button>
                                                                     </span>
                                                                     <br>
                                                                     <span>
                                                                         <div id =""class="row rightmenuroom">
-                                                                          
+                                                                           
                                                                         </div>
-                                                                        <div class=""> 
-                                                                            <div class="col-sm-6">
+                                                                        <div class="" > 
+                                                                           <div class="col-sm-6">
                                                                                 <h3>
-                                                                                    <p id="comserv-activetext"  style="margin-top: 5%; margin-left: 5%;">ROOM B  </p>
+                                                                                    <p id="texttileB" style="  margin-top: 5%; margin-left: 5%;" ></p>
                                                                                 </h3>
-                                                                                <p class="textamen" style="margin-left: 5%;">
-                                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur 
+                                                                                <p id="price1B" class="textamen" style="margin-left: 5%;">
+                                                                                   
+                                                                                </p>
+                                                                                
+                                                                                <p id="price2B" class="textamen" style="margin-left: 5%;">
+                                                                                   
                                                                                 </p>
                                                                             </div> 
-                                                                            <div class ="col-sm-3 icondiv" style="margin-left: 7%;">
-                                                                                <br>
-                                                                                <label  data-target="#myCarousel8" data-slide-to="1"  class="">
-                                                                                    <a href="#">
-                                                                                        <img  class="iconscom" src="assets/images/icon_test4.svg" 
-                                                                                             onmouseover="this.src='assets/images/icon_test3.svg'"
-                                                                                             onmouseout="this.src='assets/images/icon_test4.svg'"
-                                                                                             border="0" alt=""/></a> Lorem  </label>  <label   style="margin-left: 20%;" data-target="#myCarousel8" data-slide-to="0"   class="">   <a href="#">
-                                                                                    <img  class="iconscom" src="assets/images/icon_test1.svg" 
-                                                                                         onmouseover="this.src='assets/images/icon_test2.svg'"
-                                                                                         onmouseout="this.src='assets/images/icon_test1.svg'"
-                                                                                         border="0" alt=""/></a>
-                                                                                     Lorem</label>
-
-
+                                                                            <br>                                                                 
+                                                                            <div id="iconsB" class ="col-sm-3 icondiv" style="margin-left: 7%;">
+                                                                                
+                                                                        
                                                                             </div>
-                                                                               
+                                                                            
 
+
+                                                                            <br>
 
 
                                                                         </div>
@@ -338,9 +366,8 @@
 
                                                                     </span>
 
-                                                                    <br> 
                                                                 </div>
-                                                            </div><!-- /header-text -->
+                                        </div><!-- /header-text -->
                                       
                                             
                                             
@@ -477,7 +504,7 @@
             // When the user clicks on the button, open the modal 
              btn2.onclick = function() {
                  
-                window.location = './maltata.html?buildingid='+ buildingid;
+                window.location = './maltata.html?buildingid='+ buildingid+"&title="+params.get('title');
             //     modal2.style.display = "block";
              }
 
