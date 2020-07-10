@@ -263,7 +263,8 @@
                 id="profile_nationality" 
                 name="profile_nationality"
                 class="ap-form__input-text"
-                [(ngModel)]="profile_data.userData.countryId">
+                [(ngModel)]="profile_data.userData.countryId"
+                (change)="updateStates($event.target.value)">
                 <option value="null" disabled>Nationality</option>
                 <option *ngFor="let country of country_catalogo;" [value]="country.id">
                   {{ country.name }}

@@ -408,6 +408,19 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  public updateStates(newValue) {
+    console.log('Values', newValue);
+    const country_data = {countryId: newValue};
+    this.services.service_general_get_with_params('Tenant/getStateListById', country_data)
+      .subscribe((response: any) => {
+        if (response.result == 'Sucess') {
+          this.stateCountry_catalogo = response.item;
+        }
+      }, (error: any) => {
+        console.log('Error WS getStateListById => ', error);
+      });
+  }
+
 
   public sendProfileData():void {
 

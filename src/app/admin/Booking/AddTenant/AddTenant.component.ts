@@ -917,6 +917,19 @@ import { Router } from '@angular/router';
 
     }
 
+    public updateStates(newValue) {
+        console.log('Values', newValue);
+        const country_data = {countryId: newValue};
+        this._services.service_general_get_with_params('Tenant/getStateListById', country_data)
+          .subscribe((response: any) => {
+            if (response.result == 'Sucess') {
+              this.birthplace_list_gotten = response.item;
+            }
+          }, (error: any) => {
+            console.log('Error WS getStateListById => ', error);
+          });
+      }
+
     public profile_section_card: boolean = false;
     public async profileTenantCompleted( is_short_term: boolean = true ):Promise<void> {
 

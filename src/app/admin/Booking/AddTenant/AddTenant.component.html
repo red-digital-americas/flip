@@ -1177,7 +1177,8 @@
                           input-family="profile"
                           class="ap-form__input-text"
                           [class.form_error_found]="form_profile_validator.no_nati"
-                          [(ngModel)]="general_user_data.userData.countryId">
+                          [(ngModel)]="general_user_data.userData.countryId"
+                          (change)="updateStates($event.target.value)">
                           <option value="" disabled>Nationality</option>
                           <option *ngFor="let list of country_list_gotten;" [value]="list.id">
                             {{ list.name }}
