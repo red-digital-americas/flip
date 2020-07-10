@@ -122,14 +122,17 @@ export class MessagesComponent implements OnInit {
           console.log('Error', error);
         });
       }
-    
+      
+      public no_chats:boolean = false;
       get_chats() {
         //debugger;
         var creadoobj = { buildingid: this.build, userid: this.IDUSR };
+        console.log('Esto ====> ', creadoobj);
         this.heroService.ServicioPostMessage("SeeChatsConsierge", creadoobj).subscribe((value) => {
           //debugger;
           switch (value.result) {
             case "Error":
+              this.no_chats = true;
               console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
               break;
             default:
@@ -139,6 +142,11 @@ export class MessagesComponent implements OnInit {
                 console.log('Los chats ===> ', this.posts);
               }
           }
+          console.log("Response Chats Cons => ", value);
+        }, (error: any) => {
+
+          console.log("Response Error Chats Cons => ", error);
+
         });
       }
     
@@ -364,6 +372,7 @@ export class MessagesComponent implements OnInit {
     
     
       SentMessage(send) {
+        console.log("Entre al de send Meesage");
         //debugger;
         let SendTXT = "";
         let message;
@@ -389,6 +398,7 @@ export class MessagesComponent implements OnInit {
     
         // console.log(newMessageModel); return;
         this.heroService.service_general_post("Message/SentMessageConsierge", message).subscribe((value) => {
+          console.log("Response en el message enviado ===> ", value);
           switch (value.result) {
             case "Error":
               console.log("Ocurrio un error " + value.detalle);
@@ -406,6 +416,10 @@ export class MessagesComponent implements OnInit {
                 setTimeout( () => { chat_messages.scrollTo( 0, chat_messages.scrollHeight ) }, 200);
               }
           }
+        }, (error: any) => {
+
+          console.log("Error en el message enviado ===> ", error);
+
         });
       }
       private ResetTextArea() {
