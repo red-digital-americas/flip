@@ -35,10 +35,16 @@
 
     <!-- </fieldset> -->
     <br>
-    <div class="row">
-        <textarea placeholder="Type your message" autoresize [(ngModel)]="messageInput" id="sent-input" class="sent__input" maxlength="1900"
-            rows="1"></textarea>
-
+    <div class="row padding-lateral-min">
+        <textarea 
+            placeholder="Type your message" 
+            autoresize [(ngModel)]="messageInput" 
+            style="border-bottom: solid 1px black; border-radius: 0; padding: 0;"
+            id="sent-input" 
+            class="sent__input" 
+            maxlength="1900"
+            rows="1">
+        </textarea>
     </div>
 
     <br>

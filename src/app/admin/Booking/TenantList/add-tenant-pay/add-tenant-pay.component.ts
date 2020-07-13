@@ -837,19 +837,22 @@ export class AddTenantPayComponent implements OnInit {
 
   public card_data: CardDTO = new CardDTO();
   public kindCardDetecter(card_number: string): any {
-    let card_kind = '';
+    let card_kind = '',
+        card_number_to_s = card_number.toString(); 
+      console.log('Here we go ===> ', card_number);
     const visa_regex = new RegExp("^4[0-9]{12}(?:[0-9]{3})?$"),
       mcard_regex = new RegExp("^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$"),
       american_regex = new RegExp("^3[47][0-9]{13}$");
-    if (visa_regex.test(card_number) &&
-      card_number.length >= 13 &&
-      card_number.length <= 16) card_kind = 'visa';
-    if (mcard_regex.test(card_number) &&
-      card_number.length == 16) card_kind = 'mcard';
+    if (visa_regex.test(card_number_to_s) &&
+      card_number_to_s.length >= 13 &&
+      card_number_to_s.length <= 16) card_kind = 'visa';
+    if (mcard_regex.test(card_number_to_s) &&
+      card_number_to_s.length == 16) card_kind = 'mcard';
 
-    if (american_regex.test(card_number) &&
-      card_number.length == 15) card_kind = 'american';
+    if (american_regex.test(card_number_to_s) &&
+      card_number_to_s.length == 15) card_kind = 'american';
     this.card_data.kind = card_kind;
+    console.log(this.card_data.kind )
     return card_kind;
 
   }
@@ -871,7 +874,15 @@ export class AddTenantPayComponent implements OnInit {
 
     }
 
-}
+  }
+
+  public windowBackPage():void {
+
+    window.history.back();
+
+    return
+
+  }
 
 }
 

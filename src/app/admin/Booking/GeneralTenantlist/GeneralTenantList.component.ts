@@ -77,9 +77,9 @@ import { DataSource } from '@angular/cdk/table';
         'totalBeds',
         'roomateFlip',
         'status',
+        'active',
         'checkIn',
         'checkOut',
-        'active',
         'more'
     ];
 

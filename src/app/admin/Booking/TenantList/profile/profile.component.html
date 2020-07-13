@@ -6,7 +6,7 @@
          Profile
        </h4>
        <button 
-          class="ap-form__rButton button-yellow button-icon button-icon--edit padding-lateral-m"
+          class="ap-form__rButton button-yellow button-icon padding-lateral-m"
           (click)="goToPage('reservations')">
           Booking detail
       </button>
@@ -15,6 +15,12 @@
           class="ap-form__rButton button-pink button-icon button-icon--add-white padding-lateral-m"
           (click)="addBooking()">
           Add New Booking
+      </button>
+      <button 
+          type="button"
+          class="ap-form__rButton button-blue button-icon padding-lateral-m"
+          (click)="showModal('reocverPassword')">
+          Recover Password
       </button>
     </div>
     <div class="ml-col-1 margin-top-m folder">
@@ -1709,6 +1715,28 @@
 </div>
 <div class="black-box">
   <img src="" id="image_real_dimension" />
+</div>
+<div class="ml-modal ml-modal--bg-black" *ngIf="show_page_modal">
+  <div class="ml-modal__pop" *ngIf="modal_to_show == 'reocverPassword'"> 
+    <p class="ml-modal__pop-titulo margin-bottom-m">
+        Change Password
+    </p>
+    <p class="ml-modal__pop-text">
+        Are you sure to change Password?
+    </p>
+    <div class="ml-modal__pop-buttons">
+        <button 
+            (click)="showModal();"
+            class="ml-modal__pop-buttons-button button-pink">
+            Cancel
+        </button>
+        <button 
+            (click)="recoverPassword(profile_data.email)"
+            class="ml-modal__pop-buttons-button button-black">
+            Confirm
+        </button>
+    </div>
+  </div>
 </div>
 
 
