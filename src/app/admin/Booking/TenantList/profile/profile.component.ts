@@ -960,6 +960,41 @@ export class ProfileComponent implements OnInit {
     this.router.navigateByUrl('AddTenantPay/' + this.profile_data.id.toString());
   }
 
+  public show_page_modal: boolean = false;
+  public modal_to_show: string;
+  public showModal( to_show: string = 'default' ):void {
+      !this.show_page_modal ?
+          this.show_page_modal = true :
+          this.show_page_modal = false;
+      this.modal_to_show = to_show;
+  }
+
+  recoverPassword(mail) {
+    let data = {
+      username: mail
+    };
+    this.services.ServicioPostRecoverPass('RecoverPassword', data).subscribe((value) => {
+      this.showModal();
+      this.system_message.showMessage({
+        kind: 'ok',
+        time: 4777,
+        message: {
+          header: 'Recover Password',
+          text: 'Password has been updated successfully'
+        }
+      });
+    }, (error) => {
+      this.system_message.showMessage({
+        kind: 'error',
+        time: 4777,
+        message: {
+          header: 'Recover Password',
+          text: 'Error in updated password'
+        }
+      });
+    });
+  }
+
   /*
    * Autor: Carlos Hernandez Hernandez
    * Contacto: carlos.hernandez@minimalist.com
