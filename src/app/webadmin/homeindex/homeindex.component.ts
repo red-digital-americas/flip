@@ -25,6 +25,12 @@ export class HomeindexComponent implements OnInit {
   public dangerModal;
   public infoModal;
 
+  modal_to_show: any;
+  page_modal:any;
+
+  datadelete:any;
+
+
   constructor(private router: Router,
     private heroService: DatosService,
     private route: ActivatedRoute,
@@ -201,6 +207,55 @@ debugger;
   }
 
   }
+
+  delete(data){
+    console.log(data);
+    this.datadelete = data;
+    this.showModal();
+  }
+
+  public showModal( section: string = 'default' ):void {
+
+    this.modal_to_show = section;
+    !this.page_modal ? this.page_modal = true : this.page_modal = false; 
+
+  }
+
+  confirmDeleteElement(){
+
+    this.heroService.service_general_get(`Post/DeleteHomeIndex?id=${ this.datadelete.id }`)
+    .subscribe( (response: any) => {
+
+      if( response.result == 'Success' ) {
+
+        this.get_photos();
+        this.showModal();
+        this.loader.hideLoader(); 
+        this.system_message.showMessage({
+          kind: 'ok',
+          message: {
+            header: 'Perk Deleted',
+            text: 'Perk has been deleted successfully.'
+          },
+          time: 2000
+        });
+
+      }
+
+    }, (error: any) => {
+
+      this.system_message.showMessage({
+        kind: 'error',
+        message: {
+          header: 'System Error',
+          text: 'Error WS => Deleted Perk'
+        },
+        time: 2000
+      });
+
+    });
+  }
+
    
   prepareImages(e) {
     //debugger; 

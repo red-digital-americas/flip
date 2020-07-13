@@ -383,7 +383,7 @@ public confirmDeleteElement():void {
    public updatephoto():void {
 
     const close_modal: any = document.getElementById('close_modal');
-
+console.log(close_modal);
     var creadoobj = { 
       id: this.general_data.id, 
       title: this.general_data.title,
