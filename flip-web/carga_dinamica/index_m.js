@@ -90,7 +90,21 @@ function fill_grid_images(respuesta) {
                 faces_back[index_].src = respuesta.item[i].backphoto;
             }
         }
+        
+    
     }
+    
+    for(let m = 0; m < respuesta.titles.length; m++){
+        var id_title = "title" + respuesta.titles[m].id;
+        var title_elem = document.getElementById(id_title);
+        console.log(title_elem);
+        if(title_elem == null || title_elem == "undefined"){
+            console.log(title_elem, "no encontrado");
+        }else{
+            title_elem.innerHTML = respuesta.titles[m].name.toUpperCase();
+        }
+    }
+    
    // alert(document.getElementById('backphoto1').src)
 }
 
