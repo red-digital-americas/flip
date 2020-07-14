@@ -39,14 +39,14 @@
         </div>
         <br>
         <div class="card__row text-center">
-          <button 
+          <button style="width: 45%;"
             class="button button-red button-icon button-icon--delete-white" 
             data-toggle="modal" 
             (click)="delete(post);">
             Delete
           </button>
-
-          <button 
+          &nbsp;
+          <button style="width: 45%;"
             class="button button-green button-icon button-icon--edit-white" 
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(post.id, post.title, post.direction, post.iscomming); showImagesSpaces( 'image_space_' + index );">

@@ -272,7 +272,7 @@ map(id?: number) {
      
      public service_data: ServiceData = new ServiceData();
      public passdata( post: any ):void {
-      
+      debugger;
       this.resetImagesData();
        
       this.service_data.id = post.id;
@@ -283,7 +283,7 @@ map(id?: number) {
       this.service_data.frontphoto = post.frontphoto;
       this.service_data.photomobile = post.photomobile;
       this.service_data.communitiesServicesWebItems = post.communitiesServicesWebItems;
-
+debugger;
       this.updatedIconsService( false );
 
       console.log('Service From server ===> ', post);
@@ -295,7 +295,8 @@ map(id?: number) {
      public system_message: SystemMessage = new SystemMessage();
      public loader: LoaderComponent = new LoaderComponent();
      public updatephoto():void {
-
+ console.log(this.service_data);
+      
       const close_modal = document.getElementById('close_modal'),
             validation_form: boolean = this.formValidator( this.service_data ),
             validation_icons: boolean = this.getIconsData();
@@ -306,7 +307,7 @@ map(id?: number) {
 
         this.heroService.ServicioPostPost("UpdateHomeServicios", this.service_data)
             .subscribe( (response: any) => {
-
+debugger;
               if( response.result == 'Success' ) {
 
                 this.system_message.showMessage({
@@ -322,6 +323,17 @@ map(id?: number) {
                 this.get_photos();
   
                 setTimeout( () => this.loader.hideLoader(),777);
+
+              }else{
+                setTimeout( () => this.loader.hideLoader(),777);
+                this.system_message.showMessage({
+                  kind: 'error',
+                  time: 4700,
+                  message: {
+                    header: 'Fatal Error',
+                    text: 'Error Fatal'
+                  }
+                });
 
               }
 
@@ -394,6 +406,8 @@ map(id?: number) {
           }
            */
           this.heroService.UploadImgSuc(f).subscribe((r) => {
+            console.log(r);
+            debugger;
             if (Utils.isDefined(r)) {
               url = <string>r.message;
               url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');
@@ -412,7 +426,7 @@ map(id?: number) {
                 const root_element = e.target,
                       image_container = root_element.parentElement.querySelectorAll('[icon-image="icon"]');
                       image_container[0].src = url;
-
+                console.log(url);
               }
 
             }
@@ -433,7 +447,7 @@ map(id?: number) {
                   es contenida por el elemento HTML interno. 
    */
   public readImageData( event_data, dimension, image_index: number ):void {
-
+debugger;
     const file = event_data.target.files,
           root_event = event_data.target,
           img_target = event_data.target.parentElement.getElementsByClassName('image_to_preview')[0],
@@ -525,7 +539,7 @@ map(id?: number) {
   public updatedIconsService( add_in: boolean = true ):void { 
 
     const icons_in = this.service_data.communitiesServicesWebItems;
-
+debugger;
     setTimeout( () => {
 
       let icons_length = icons_in.length != 5 ? icons_in.length + 1 : 6;
@@ -592,6 +606,7 @@ map(id?: number) {
             icon_model.icon2 = icon_url2.src;
 
             new_icons_object.push( icon_model );
+            debugger;
 
     });
 
