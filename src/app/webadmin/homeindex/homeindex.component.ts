@@ -234,8 +234,8 @@ debugger;
         this.system_message.showMessage({
           kind: 'ok',
           message: {
-            header: 'Perk Deleted',
-            text: 'Perk has been deleted successfully.'
+            header: 'Home Deleted',
+            text: 'Home has been deleted successfully.'
           },
           time: 2000
         });
