@@ -241,6 +241,7 @@ export class RoomDetailComponent implements OnInit {
     const ws_data = {
       username: this.userIdSelected
     };
+    console.log('Check Out', ws_data);
     this.loader.showLoader();
     this._services.service_general_post(`Profile/checkOut`, ws_data)
       .subscribe((response: any) => {
@@ -259,6 +260,7 @@ export class RoomDetailComponent implements OnInit {
       }, (error: any) => {
         console.error('Error WS CIO => ', error);
       });
+      this.getRoomDetail(this.roomId);
   }
 
   filterTable(ifActive: any) {
