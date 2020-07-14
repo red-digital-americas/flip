@@ -133,11 +133,10 @@
     <div class="ml-col-1">
       <div class="row">
         
-        <div *ngIf="showAddA" class="ml-col-1 position-relative margin-bottom-x">
-          <br><br>
-          <button style="position: absolute;
-          right: 40px;
-          top: -37px;"
+        <div *ngIf="showAddA" class="ml-col-1 position-relative margin-bottom-x" style="    width: 100%;
+        display: flex;
+        justify-content: flex-end;">
+          <button 
                   data-toggle="modal" 
                   (click)="primaryModal.show(); passPhotosDataA(this.post_blanck);"
                   class="button button-x button-pink button-icon button-icon--add-white">
@@ -303,11 +302,10 @@
 
     <div class="ml-col-1">
       <div class="row">
-        <div *ngIf="showAddB" class="ml-col-1 position-relative margin-bottom-x">
-          <br><br>
-          <button style="position: absolute;
-          right: 40px;
-          top: -17px;"
+        <div *ngIf="showAddB" class="ml-col-1 position-relative margin-bottom-x"  style="    width: 100%;
+        display: flex;
+        justify-content: flex-end;">
+          <button 
                   data-toggle="modal" 
                   (click)="primaryModal.show(); passPhotosDataB(this.post_blanck);"
                   class="button button-x button-pink button-icon  button-icon--add-white">
