@@ -1430,7 +1430,7 @@ select:active,
 
     @media screen and (min-width: 1920px) {
       
-      width: 60%;
+      width: 1100px;
       margin: 0 20%;
 
     }
@@ -1752,6 +1752,10 @@ select:active,
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+      }
+
+      &--bigger {
+        max-width: none;
       }
 
     }

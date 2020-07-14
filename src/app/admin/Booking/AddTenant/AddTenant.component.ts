@@ -767,10 +767,10 @@ import { Router } from '@angular/router';
     public terms_of_use: string = '';
     public getDaysReserved():number {
 
-        const start_date: any = new Date( this.booking_data.startDate ),
+        let start_date: any = new Date( this.booking_data.startDate ),
             end_date: any = new Date( this.booking_data.finishDate ),
             diff_time = Math.abs( start_date - end_date ),
-            diff_days = Math.ceil(diff_time / (1000 * 60 * 60 * 24));
+            diff_days = Math.ceil(diff_time / (1000 * 60 * 60 * 24)) + 1;
 
             this.terms_of_use = diff_days < 31 ? 'short_t' : 'long_t';
 

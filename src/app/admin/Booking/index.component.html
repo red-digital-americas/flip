@@ -197,7 +197,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
             (change)="prepareImages( $event ); validateImageUpload( $event, '350x350', 'booking_img_0', 'booking_img_name_0' );" />
           <label for="booking_img" class="ap-form__label-image">
             <figure class="ap-form__image">
-              <img class="ap-form__image-image no-image" 
+              <img class="ap-form__image-image ap-form__image-image--bigger no-image" 
                    id="booking_img_0"
                    [class.forms_errors_nimage]="form_data.no_phot"
                    src="{{ booking_data.photo}}" />
