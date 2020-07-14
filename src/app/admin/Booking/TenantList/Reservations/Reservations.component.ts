@@ -196,7 +196,7 @@ import { resolve } from 'dns';
 
                         const card_number = this.decryptData( history.paymentData.cc );
 
-                        history.creditNumber = card_number.substr( card_number.toString().length - 4); 
+                        history.creditNumber = card_number.toString().substr( card_number.toString().length - 4); 
 
                     });
                     this.current_paymentSer.forEach( (service: any) => {
@@ -205,7 +205,7 @@ import { resolve } from 'dns';
 
                             const card_number = this.decryptData( service.cc.cc );
 
-                            service.cardClue = card_number.substr( card_number.toString().length - 4);
+                            service.cardClue = card_number.toString().substr( card_number.toString().length - 4);
 
                         } else {
 
@@ -821,7 +821,7 @@ import { resolve } from 'dns';
 
             const card_number = this.decryptData( card.paymentData.cc );
 
-            card.creditNumber = card_number.substr( card_number.toString().length - 4);
+            card.creditNumber = card_number.toString().substr( card_number.toString().length - 4);
 
         });
 
@@ -831,7 +831,7 @@ import { resolve } from 'dns';
 
                 const card_number = this.decryptData( card.cc.cc );
 
-                card.cardClue = card_number.substr( card_number.toString().length - 4);
+                card.cardClue = card_number.toString().substr( card_number.toString().length - 4);
 
             } else {
 
@@ -1092,7 +1092,7 @@ import { resolve } from 'dns';
                 date_e = new Date(`${ day_gotted_b.month }/${ day_gotted_b.day }/${ day_gotted_b.year }`),
                 time_diff =  Math.abs(date_e.getTime() - date_s.getTime());
                 diff_days = Math.ceil(time_diff / (1000 * 3600 * 24));
-                result = diff_days;
+                result = diff_days + 1;
                 break;
 
         }

@@ -732,9 +732,9 @@ import { Router } from '@angular/router';
 
             this.all_services_selected.push( service );
 
-            console.log("Estos => ", this.all_services_selected);
-
         });
+
+        this.total_services_ammount = 0;
 
         this.all_services_selected.forEach( (service) => {
 

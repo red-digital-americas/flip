@@ -455,6 +455,7 @@ export class AddTenantPayComponent implements OnInit {
       service.type_service = 'Extra';
       this.all_services_selected.push(service);
     });
+    this.total_services_ammount = 0;
     this.all_services_selected.forEach((service) => {
       this.total_services_ammount += service.total_ammount;
     });

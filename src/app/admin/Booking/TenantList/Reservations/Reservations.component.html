@@ -13,19 +13,19 @@
         </button>
         <button 
             *ngIf="statusBooking"
-            class="ap-form__rButton button-green"
+            class="ap-form__rButton button-green button-icon button-icon--add-white"
             (click)="showModal('add_service'); getServicesData();">
             Add Service
         </button>
         <button 
             *ngIf="statusBooking"
-            class="ap-form__rButton button-yellow"
+            class="ap-form__rButton button-yellow button-icon button-icon--edit-white"
             (click)="showModal('edit_end_date'); editEndDateInit();">
             Edit End Date
         </button>
         <button 
             *ngIf="statusBooking"
-            class="ap-form__rButton button-red"
+            class="ap-form__rButton button-red button-icon button-icon--cancel-white"
             (click)="showModal('cancel_booking')">
             Cancel
         </button>
@@ -502,7 +502,7 @@
     </div>
     <div class="ml-col-1 bottom-separator margin-bottom-x">
         <button 
-            *ngIf="statusBooking"
+            *ngIf="statusBooking && bill_services_topay != 0"
             class="ap-form__rButton button-black text-bold padding-lateral-m"
             (click)="showModal('confirm_payment')">
             Pay
@@ -825,11 +825,11 @@
                 </ng-container>
                 <ng-container matColumnDef="recurrent">
                     <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Recurrent</th>
-                    <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.price | currency }}</td>
+                    <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.priceUnit | currency }}</td>
                 </ng-container>
                 <ng-container matColumnDef="once">
                     <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Once cost</th>
-                    <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.priceUnit | currency }}</td>
+                    <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.price | currency }}</td>
                 </ng-container>
                 <ng-container matColumnDef="select">
                     <th mat-header-cell *matHeaderCellDef class="table__header"></th>
