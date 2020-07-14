@@ -595,10 +595,11 @@ export class AddTenantPayComponent implements OnInit {
   }
 
   public getDaysReserved(): number {
-    const start_date: any = new Date(this.booking_data.startDate),
+    let start_date: any = new Date(this.booking_data.startDate),
       end_date: any = new Date(this.booking_data.finishDate),
       diff_time = Math.abs(start_date - end_date),
       diff_days = Math.ceil(diff_time / (1000 * 60 * 60 * 24));
+      diff_days == 0 ? diff_days = 1 : diff_days;
     return diff_days;
   }
 
