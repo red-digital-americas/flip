@@ -128,6 +128,15 @@
                 width: 70px !important;
                 height: 70px !important;
         }
+        
+        .amenidadesrights{
+            position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 22% !important;
+    height: 60% !important;
+    z-index: 9 !important;
+        }
     </style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -893,6 +902,7 @@
                                                 <div class="carousel-inner">
                                                     <div class="item active " id="slideAmenities0">
                                                         <img id="img-altata-amenities-00" alt="Los Angeles">
+                                                        <img class="amenidadesrights" id="amenidadesrightimg1" alt="Images">
                                                         <div class="header-text-ame hidden-xs">
                                                             <div class="col-md-12  text-center">
                                                                 <span class="btn_rooms_span">
@@ -960,6 +970,7 @@
 
                                                     <div class="item" id="slideAmenities1">
                                                         <img id="img-altata-amenities-01" alt="Los Angeles">
+                                                         <img class="amenidadesrights" id="amenidadesrightimg2" alt="Images">
                                                         <div class="header-text-ame hidden-xs">
                                                             <div class="col-md-12  text-center">
                                                                 <span class="btn_rooms_span">
@@ -1093,6 +1104,7 @@
 
                                                     <div class="item" id="slideAmenities3">
                                                         <img id="img-altata-amenities-03" alt="Los Angeles">
+                                                         <img class="amenidadesrights" id="amenidadesrightimg3" alt="Images">
                                                         <div class="header-text-ame hidden-xs">
                                                             <div class="col-md-12  text-center">
                                                                 <span class="btn_rooms_span">
@@ -1159,6 +1171,7 @@
 
                                                     <div class="item" id="slideAmenities4">
                                                         <img id="img-altata-amenities-04" alt="Los Angeles">
+                                                         <img class="amenidadesrights" id="amenidadesrightimg4" alt="Images">
                                                         <div class="header-text-ame hidden-xs">
                                                             <div class="col-md-12  text-center">
                                                                 <span class="btn_rooms_span">
@@ -1823,7 +1836,7 @@
                                                             <!-- <img id="loginbar2" src="assets/images/signin.png" class="pointer"
                                                                  class="movilhidden" /> -->
                                                             <div id="comamenidades" class="hiddens globalheigt">
-                                                                <img class="hiddens amenidadesright" id="amenidadesrightimg1" alt="Images">
+                                                                <img class="hiddens amenidadesright" alt="Images">
                                                                 <!--<img class="hiddens amenidadesright" id="amenidadesrightimg2" src="assets/images/Communities/Coahuila/s_gym.jpg" alt="Images">-->
                                                                 <div id="RoomA" class=" hiddens textmenucommunities   globalheigt" style="flex-direction: column">
                                                                     <p style="font-weight: 700" room="card_name"></p>
@@ -3338,7 +3351,7 @@ SECCION MAP
             $("#mapp").removeClass("hiddens");
             $("#textservicios").addClass("textmenucommunities");
             $("#comamenidades").addClass("hiddens");
-            $("#amenidadesrightimg1").addClass("hiddens");
+            //$("#amenidadesrightimg1").addClass("hiddens");
             $("#amenidadesrightimg2").addClass("hiddens");
             $("#lateral-menuserv").addClass("lateral-menuserv");
             $("#quitportfolio1").addClass("pportfolio-communities-item");

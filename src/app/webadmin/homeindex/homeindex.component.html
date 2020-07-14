@@ -40,6 +40,13 @@
         <br>
         <div class="card__row text-center">
           <button 
+            class="button button-red button-icon button-icon--delete-white" 
+            data-toggle="modal" 
+            (click)="delete(post);">
+            Delete
+          </button>
+
+          <button 
             class="button button-green button-icon button-icon--edit-white" 
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(post.id, post.title, post.direction, post.iscomming); showImagesSpaces( 'image_space_' + index );">
@@ -54,7 +61,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content card">
       <div>
-        <button type="button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" (click)="primaryModal.hide()" aria-label="Close">
+        <button type="button" id="close_button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" (click)="primaryModal.hide()" aria-label="Close">
           Close
         </button>
         <br><br>
@@ -132,6 +139,30 @@
           </div>
         </form>
       </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
+  <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
+    <p class="ml-modal__pop-titulo margin-bottom-m">
+      Delete Map
+    </p>
+    <p class="ml-modal__pop-text">
+      Are you sure to delete <br />
+      <span class="text-bold">"{{ datadelete.title}}"</span>?
+    </p>
+    <div class="ml-modal__pop-buttons">
+      <button (click)="showModal()"
+        class="ml-modal__pop-buttons-button button-black button-icon button-icon--cancel-white">
+        Cancel
+      </button>
+      <button (click)="confirmDeleteElement()"
+        class="ml-modal__pop-buttons-button button-red button-icon button-icon--delete-white">
+        Delete
+      </button>
     </div>
   </div>
 </div>

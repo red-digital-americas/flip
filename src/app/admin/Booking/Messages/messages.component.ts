@@ -11,6 +11,7 @@ import { Contact, ContactSend, Info } from '../../models/contact';
 import { type } from 'os';
 import { MessageData, Conversation } from '../../models/message';
 import { ActivatedRoute } from '@angular/router';
+import { isUndefined } from 'util';
 
 class MessageCustom {
     public message;
@@ -43,7 +44,7 @@ export class MessagesComponent implements OnInit {
       IDBUILD: string = "0";
       public user: string[];
       userInfo: any;
-      posts: any;
+      posts: any = [];
 
       userConversation;
       messages: MessageCustom[] = [];
@@ -63,19 +64,21 @@ export class MessagesComponent implements OnInit {
         timeout: 3000,
         positionClass: "toast-top-center",
       });
-      build;
+      build: string;
       ngOnInit() {
         //debugger;
         this.build = this.route.snapshot.paramMap.get('id');
+        console.log('BUILD', this.build);
         this.user = JSON.parse(localStorage.getItem("user"));
         console.log(this.user);
         this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
         this.IDBUILD = JSON.parse(localStorage.getItem("user")).buildingId;
+        console.log('BUILD', this.IDBUILD);
         // this.GetBuildingCoverImage()
+        this.getConsierge(this.build);
         this.get_chats();
         this.get_users();
         this.getInfoUser();
-        this.getConsierge(this.IDBUILD);
         this.section = 'messages';
         this.hubConnection = new HubConnectionBuilder()
           .configureLogging(signalR.LogLevel.Debug)
@@ -126,7 +129,7 @@ export class MessagesComponent implements OnInit {
       public no_chats:boolean = false;
       get_chats() {
         //debugger;
-        var creadoobj = { buildingid: this.build, userid: this.IDUSR };
+        var creadoobj = { buildingid: this.build, userid: this.CONSIERGE };
         console.log('Esto ====> ', creadoobj);
         this.heroService.ServicioPostMessage("SeeChatsConsierge", creadoobj).subscribe((value) => {
           //debugger;
@@ -317,41 +320,57 @@ export class MessagesComponent implements OnInit {
         const dialogRef = this.dialog.open(MessageUsersComponent, {
           width: '512px',
           height: '400px',
-          data: { buildId: this.IDBUILD }
+          data: { buildId: this.build.toString() }
         });
     
         dialogRef.afterClosed().subscribe(async selectedUser => {
-          //debugger;
+          debugger;
           console.log("SElectedUser", selectedUser);
-          console.log("SElectedUser", selectedUser);
+          console.log("SElectedUser", this.CONSIERGE);
+          console.log('POSTS', this.posts);
     
           let messageList = new Array<MessageData>();
           await selectedUser.users.forEach(async users => {
             let noRepeat = 0;
-            await this.posts.forEach(messageFor => {
-              if (users == messageFor.iduser && users != parseInt(this.CONSIERGE)) {
-                let messageAdd = new MessageData();
-                messageAdd.conversationId = messageFor.conversationId;
-                messageAdd.message1 = selectedUser.message;
-                messageAdd.userId = parseInt(this.CONSIERGE);
-                messageList.push(messageAdd);
-                console.log("Se agrego1");
-              } else
-                noRepeat++;
-              if (noRepeat == this.posts.length && users != parseInt(this.CONSIERGE)) {
-                let messageAdd = new MessageData();
-                messageAdd.conversation = new Conversation();
-                messageAdd.conversationId = 0;
-                messageAdd.message1 = selectedUser.message;
-                messageAdd.userId = parseInt(this.CONSIERGE);
-                messageAdd.conversation.userId = parseInt(this.CONSIERGE);
-                messageAdd.conversation.status = false;
-                messageAdd.conversation.userIdReciver = users;
-                messageList.push(messageAdd);
-
-                console.log('Se agrego2', );
-              }
-            });
+            if (this.posts.length > 0) {
+              await this.posts.forEach(messageFor => {
+                debugger;
+                if (users == messageFor.iduser && users != parseInt(this.CONSIERGE)) {
+                  let messageAdd = new MessageData();
+                  messageAdd.conversationId = messageFor.conversationId;
+                  messageAdd.message1 = selectedUser.message;
+                  messageAdd.userId = parseInt(this.CONSIERGE);
+                  messageList.push(messageAdd);
+                  console.log("Se agrego1");
+                } else
+                  noRepeat++;
+                if (noRepeat == this.posts.length && users != parseInt(this.CONSIERGE)) {
+                  let messageAdd = new MessageData();
+                  messageAdd.conversation = new Conversation();
+                  messageAdd.conversationId = 0;
+                  messageAdd.message1 = selectedUser.message;
+                  messageAdd.userId = parseInt(this.CONSIERGE);
+                  messageAdd.conversation.userId = parseInt(this.CONSIERGE);
+                  messageAdd.conversation.status = false;
+                  messageAdd.conversation.userIdReciver = users;
+                  messageList.push(messageAdd);
+  
+                  console.log('Se agrego2', );
+                }
+              });
+            } else {
+              let messageAdd = new MessageData();
+                  messageAdd.conversation = new Conversation();
+                  messageAdd.conversationId = 0;
+                  messageAdd.message1 = selectedUser.message;
+                  messageAdd.userId = parseInt(this.CONSIERGE);
+                  messageAdd.conversation.userId = parseInt(this.CONSIERGE);
+                  messageAdd.conversation.status = false;
+                  messageAdd.conversation.userIdReciver = users;
+                  messageList.push(messageAdd);
+  
+                  console.log('Se agrego2', );
+            }
 
           });
           console.log("MessageList=>", messageList);

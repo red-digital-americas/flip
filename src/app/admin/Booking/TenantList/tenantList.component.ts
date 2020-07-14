@@ -39,9 +39,9 @@ export class TenantListComponent implements OnInit {
         'totalBeds',
         'roomateFlip',
         'status',
+        'active',
         'checkIn',
         'checkOut',
-        'active',
         // 'doCheckOut',
         // 'idUser',
         'showBooking'

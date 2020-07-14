@@ -30,7 +30,7 @@
                     </button -->
                 </div>
                 <div class="ap-chat__people">
-                    <div class="ml-col-1" *ngIf="no_chats">
+                    <div class="ml-col-1" >
                         <div 
                             *ngFor="let friend of posts;"
                             (click)="showConversation(friend, friend.iduser, $event)" 
@@ -88,7 +88,7 @@
                             </button>
                         </div>
                     </div>
-                    <span class="chatm--selecting center-element-absolute" *ngIf="!showChat || showChat && !no_chats">
+                    <span class="chatm--selecting center-element-absolute" *ngIf="!showChat">
                         Select a conversation or start one  
                     </span>
                 </div>

@@ -69,9 +69,9 @@ export class RoomDetailComponent implements OnInit {
     'totalBeds',
     'roomateFlip',
     'status',
+    'active',
     'checkIn',
     'checkOut',
-    'active',
     // 'idUser',
     'showBooking'
 ];
@@ -92,9 +92,9 @@ export class RoomDetailComponent implements OnInit {
     'totalBeds',
     'roomateFlip',
     'status',
+    'active',
     'checkIn',
     'checkOut',
-    'active',
     // 'idUser',
     'showBooking'
     ];
