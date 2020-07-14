@@ -133,7 +133,8 @@ export class AddTenantPayComponent implements OnInit {
           id: this.userId
         },
         token: value.item,
-        amount: this.booking_detail_total_ammount
+        amount: this.booking_detail_total_ammount,
+        amountMembership: this.getTotalAmmount()
       };
       console.log('DATA Booking', obj);
       this._service.service_general_post('Tenant/NewTenantExist', obj).subscribe((value) => {
@@ -301,6 +302,7 @@ export class AddTenantPayComponent implements OnInit {
         return service;
       }
     });
+    this.joinAllMyServices()
   }
 
   public formBookingDetailValidator(form_data: BookingDetailModel): boolean {
@@ -401,6 +403,7 @@ export class AddTenantPayComponent implements OnInit {
         card.active = true : card.active = false;
     });
     this.getAddiotionalServices();
+    console.log('this.membership_selected => ', this.membership_selected);
   }
 
   public getAddiotionalServices(): void {
@@ -438,7 +441,9 @@ export class AddTenantPayComponent implements OnInit {
   public booking_detail_total_ammount: number = 0;
   public joinAllMyServices(): void {
     this.all_services_selected = [];
-    this.current_build.services.forEach((service: any) => {
+    console.log('Aqui ====> ');
+    console.log(this.membership_selected);
+    this.membership_selected.services.forEach((service: any) => {
       service.type_service = 'Included';
       service.lapse = '1';
       service.startDate = this.booking_data.startDate;
@@ -602,6 +607,12 @@ export class AddTenantPayComponent implements OnInit {
       beds_reserved = this.getTotalBeds(this.booking_data.totalBeds.toString()),
       price_membership = this.membership_selected.price,
       total = (price_membership * days_reserved) * beds_reserved;
+
+      console.log('days_reserved => ', days_reserved);
+      console.log('beds_reserved => ', days_reserved);
+      console.log('price_membership => ', price_membership);
+      console.log('total => ', total);
+      
     return total;
   }
 
