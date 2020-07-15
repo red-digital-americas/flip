@@ -1201,13 +1201,13 @@
                       <div class="ap-form__input">
                         <select
                           required 
-                          placeholder="Birthplace"
+                          placeholder="State"
                           id="profile_bplace" 
                           name="profile_bplace"
                           class="ap-form__input-text"
                           input-family="profile"
                           [(ngModel)]="general_user_data.userData.stateId">
-                          <option value="" disabled>Birthplace</option>
+                          <option value="" disabled>State</option>
                           <option *ngFor="let list of birthplace_list_gotten;" [value]="list.id">
                             {{ list.name }}
                            </option>
@@ -1216,7 +1216,7 @@
                           for="profile_bplace" 
                           class="ap-form__label ap-form__label-text"
                           [class.ap-form__label-text--active]="general_user_data.userData.stateId != ''">
-                          Birthplace
+                          State
                         </label>
                       </div>
                     </div>
