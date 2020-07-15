@@ -137,7 +137,7 @@
                 Beds reserved:
             </div>
             <div class="ml-col-1 text-bold">
-                {{ current_membership?.beds + current_membership?.additionalBeds.length }} 
+                {{ current_membership?.beds }} 
             </div>
         </div>
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
@@ -356,7 +356,7 @@
                         Beds:
                     </div>
                     <div class="ml-col-1 text-bold">
-                        {{ current_membership?.beds + current_membership?.additionalBeds.length }} 
+                        {{ current_membership?.beds }} 
                     </div>
                 </div>
             </div>
@@ -503,7 +503,7 @@
     <div class="ml-col-1 bottom-separator margin-bottom-x">
         <button 
             *ngIf="statusBooking && bill_services_topay != 0"
-            class="ap-form__rButton button-black text-bold padding-lateral-m"
+            class="ap-form__rButton button-black text-bold padding-lateral-m button-icon button-icon--ccard-white"
             (click)="showModal('confirm_payment')">
             Pay
         </button>
@@ -794,7 +794,7 @@
                 Add Services
             </p>
             <button 
-                class="ap-form__rButton button-red"
+                class="ap-form__rButton button-red button-icon button-icon--cancel-white"
                 (click)="showModal('edit_end_date'); editEndDateInit();">
                 Close
             </button>
@@ -870,7 +870,7 @@
                 <div class="ml-col-1 margin-bottom-x">
                     <button 
                         (click)="removeServices( service.id )"
-                        class="ap-form__rButton button-red">
+                        class="ap-form__rButton button-red button-icon button-icon--delete-white">
                         Remove service
                     </button>
                     <h4 class="ap-form__titulo ap-form__titulo--auto-width">
@@ -980,13 +980,13 @@
                 <button 
                   type="button"
                   (click)="saveOrPayServicesSelected()"
-                  class="ap-form__buttons-button button-green">
+                  class="ap-form__buttons-button button-green button-icon button-icon--add-white">
                   Add to account
                 </button>
                 <button 
                   type="button"
                   (click)="payServicesConfirm()"
-                  class="ap-form__buttons-button ap-form__buttons-button--no-margin button-blue">
+                  class="ap-form__buttons-button ap-form__buttons-button--no-margin button-blue button-icon button-icon--ccard-white">
                   Pay services
                 </button>
             </div>
@@ -998,7 +998,7 @@
                 Edit End Date
             </p>
             <button 
-                class="ap-form__rButton button-red"
+                class="ap-form__rButton button-red button-icon button-icon--cancel-white"
                 (click)="showModal('edit_end_date'); editEndDateInit();">
                 Close
             </button>
@@ -1035,7 +1035,7 @@
                     Beds:
                 </div>
                 <div class="ml-col-1 text-bold">
-                    {{ current_membership?.beds + current_membership?.additionalBeds.length }} 
+                    {{ current_membership?.beds }} 
                 </div>
             </div>
         </div>
@@ -1106,7 +1106,7 @@
                 <div class="table__footer-dato">
                     <p class="table__footer-dato-a no-padding-left">Additional Ammount:</p> 
                     <span class="text-bold table__footer-dato-b table__footer-dato--big">
-                        {{ ( endDateData?.total_pay * ( current_membership?.beds + current_membership?.additionalBeds.length ) ) | currency }}
+                        {{ ( endDateData?.total_pay * ( current_membership?.beds ) ) | currency }}
                     </span>
                 </div>
             </div>
@@ -1135,7 +1135,7 @@
             <button 
                 (click)="updateEndDateConfirm()"
                 type="button"
-                class="ml-modal__pop-buttons-button button-black">
+                class="ml-modal__pop-buttons-button button-black button-icon button-icon--ccard-white">
                 Pay
             </button>
         </div>
@@ -1163,12 +1163,12 @@
         <div class="ml-modal__pop-buttons">
             <button 
                 (click)="updateEndDateConfirm( false );"
-                class="ml-modal__pop-buttons-button button-pink">
+                class="ml-modal__pop-buttons-button button-pink button-icon button-icon--cancel-white">
                 Cancel
             </button>
             <button 
                 (click)="updateEndDate()"
-                class="ml-modal__pop-buttons-button button-black">
+                class="ml-modal__pop-buttons-button button-black button-icon button-icon--ccard-white">
                 Confirm Payment
             </button>
         </div>
@@ -1179,7 +1179,7 @@
                 Booking's Detail
             </p>
             <button 
-                class="ap-form__rButton button-red"
+                class="ap-form__rButton button-red button-icon button-icon--cancel-white"
                 (click)="showModal();">
                 Close
             </button>
@@ -1245,7 +1245,7 @@
                     Beds reserved:
                 </div>
                 <div class="ml-col-1 text-bold">
-                    {{ history_selected?.beds + history_selected?.additionalBeds.length }}
+                    {{ history_selected?.beds }}
                 </div>
             </div>
             <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
@@ -1439,7 +1439,7 @@
                         Beds:
                     </div>
                     <div class="ml-col-1 text-bold">
-                        {{ history_selected?.beds + history_selected?.additionalBeds.length }} 
+                        {{ history_selected?.beds }} 
                     </div>
                 </div>
             </div>
@@ -1634,7 +1634,7 @@
             <button 
               type="button"
               (click)="showModal();"
-              class="ap-form__buttons-button button-red">
+              class="ap-form__buttons-button button-red button-icon button-icon--cancel-white">
               Close
             </button>
         </div>
@@ -1649,12 +1649,12 @@
         <div class="ml-modal__pop-buttons">
             <button 
                 (click)="showModal()"
-                class="ml-modal__pop-buttons-button button-pink">
+                class="ml-modal__pop-buttons-button button-pink button-icon button-icon--cancel-white">
                 Cancel
             </button>
             <button 
                 (click)="payPendingItems()"
-                class="ml-modal__pop-buttons-button button-black">
+                class="ml-modal__pop-buttons-button button-black button-icon button-icon--ccard-white">
                 Confirm Payment
             </button>
         </div>
@@ -1671,12 +1671,12 @@
         <div class="ml-modal__pop-buttons">
             <button 
                 (click)="payServicesConfirm( false );"
-                class="ml-modal__pop-buttons-button button-pink">
+                class="ml-modal__pop-buttons-button button-pink button-icon button-icon--cancel-white">
                 Cancel
             </button>
             <button 
                 (click)="saveOrPayServicesSelected('pay')"
-                class="ml-modal__pop-buttons-button button-black">
+                class="ml-modal__pop-buttons-button button-black button-icon button-icon--ccard-white">
                 Confirm Payment
             </button>
         </div>
