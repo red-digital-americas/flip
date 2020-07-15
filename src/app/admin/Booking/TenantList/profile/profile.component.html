@@ -6,7 +6,7 @@
          Profile
        </h4>
        <button 
-          class="ap-form__rButton button-yellow button-icon padding-lateral-m"
+          class="ap-form__rButton button-yellow button-icon button-icon--edit padding-lateral-m"
           (click)="goToPage('reservations')">
           Booking detail
       </button>
@@ -18,7 +18,7 @@
       </button>
       <button 
           type="button"
-          class="ap-form__rButton button-blue button-icon padding-lateral-m"
+          class="ap-form__rButton button-blue button-icon button-icon--refresh-white padding-lateral-m"
           (click)="showModal('reocverPassword')">
           Recover Password
       </button>
@@ -290,12 +290,12 @@
             <div class="ap-form__input">
               <select
                 required 
-                placeholder="Birthplace"
+                placeholder="State"
                 id="profile_bplace" 
                 name="profile_bplace"
                 class="ap-form__input-text"
                 [(ngModel)]="profile_data.userData.stateId">
-                <option value="null" disabled>Birthplace</option>
+                <option value="null" disabled>State</option>
                 <option *ngFor="let state of stateCountry_catalogo;" [value]="state.id">
                   {{ state.name }}
                 </option>
@@ -304,7 +304,7 @@
                 for="profile_bplace" 
                 class="ap-form__label ap-form__label-text"
                 [class.ap-form__label-text--active]="profile_data.userData.stateId != null">
-                Birthplace
+                State
               </label>
             </div>
           </div>

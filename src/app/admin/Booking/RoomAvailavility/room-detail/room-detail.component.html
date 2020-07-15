@@ -99,14 +99,14 @@
                           <div class="ml-col-1">
                               Reservations Active: <br>
                             <span class="text-bold">
-                              {{ roomData.disponibility }}     
+                              {{ roomData.reservationsActive }}     
                             </span>
                           </div>
                       </div>
                 </div>
 
                 <div class="ml-col-1 padding-general-m">
-                    <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
+                    <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding">
                         <div class="ml-col-1">
                             Description: <br>
                           <span class="text-bold">
@@ -272,7 +272,7 @@
                                 </ng-template>
                                 <ng-template #thencheckOut>
                                     <button [disabled]="element.pending !== 0 || element.checkOut.includes('N/A')"
-                                      (click)="showModal('check_out',element.idUser)" mat-raised-button class="text-center"
+                                      (click)="showModal('check_out',element.idUser, element.idBooking)" mat-raised-button class="text-center"
                                       [class.table__data-button-yellow]="element.checkOut === 'Check Out'"
                                       [class.table__data-button-red]="element.checkOut  !== 'Check Out'">
                                       {{element.checkOut === 'Check Out' ? element.checkOut : 'CheckOut' }}
@@ -464,7 +464,7 @@
                                 </ng-template>
                                 <ng-template #thencheckOut>
                                     <button [disabled]="element.pending !== 0 || element.checkOut.includes('N/A')"
-                                      (click)="showModal('check_out',element.idUser)" mat-raised-button class="text-center"
+                                      (click)="showModal('check_out',element.idUser, element.idBooking)" mat-raised-button class="text-center"
                                       [class.table__data-button-yellow]="element.checkOut === 'Check Out'"
                                       [class.table__data-button-red]="element.checkOut  !== 'Check Out'">
                                       {{element.checkOut === 'Check Out' ? element.checkOut : 'CheckOut' }}
