@@ -846,7 +846,8 @@ import { resolve } from 'dns';
         this.history_selected.customDateDif = 
                     this.dateWorker('calc' , this.history_selected.dateStart, this.history_selected.dateEnd );
         this.history_selected_services_bill = this.getBillFrom( this.history_selected.servicesAditional );
-        this.history_selected_services_total = this.getBillFrom( this.history_selected.servicesAditional ) + this.history_selected.price; 
+        this.history_selected_services_total = (this.history_selected.price - this.getBillFrom( this.history_selected.servicesAditional )) 
+                                                + this.getBillFrom( this.history_selected.servicesAditional );
 
     }
 

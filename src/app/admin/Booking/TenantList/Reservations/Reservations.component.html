@@ -1539,7 +1539,7 @@
                 <div class="table__footer-dato">
                     <p class="table__footer-dato-a">Membership cost:</p> 
                     <span class="text-bold table__footer-dato-b">
-                        {{ history_selected?.price | currency }}
+                        {{ history_selected?.price - history_selected_services_bill | currency }}
                     </span>
                 </div>
                 <div class="table__footer-dato">
