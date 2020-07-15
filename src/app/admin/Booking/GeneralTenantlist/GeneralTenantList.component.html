@@ -181,7 +181,7 @@
                             </ng-template>
                             <ng-template #thencheckOut>
                                 <button [disabled]="element.pending !== 0 || element.checkOut.includes('N/A')"
-                                  (click)="showModal('check_out',element.idUser)" mat-raised-button class="text-center"
+                                  (click)="showModal('check_out',element.idUser, element.idBooking)" mat-raised-button class="text-center"
                                   [class.table__data-button-yellow]="element.checkOut === 'Check Out'"
                                   [class.table__data-button-red]="element.checkOut  !== 'Check Out'">
                                   {{element.checkOut === 'Check Out' ? element.checkOut : 'CheckOut' }}

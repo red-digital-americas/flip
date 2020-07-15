@@ -62,6 +62,7 @@ import { DataSource } from '@angular/cdk/table';
     show_page_modal = false;
     modal_to_show: string;
     userIdSelected;
+    bookingSelected;
 
     public tenantList = new MatTableDataSource();
     public table_colums: any[] = [
@@ -187,18 +188,20 @@ import { DataSource } from '@angular/cdk/table';
         this.getTenantList();
     }
 
-    public showModal( to_show: string = 'default', userId ): void {
+    public showModal( to_show: string = 'default', userId, idBooking ): void {
         !this.show_page_modal ? this.show_page_modal = true : this.show_page_modal = false;
         this.modal_to_show = to_show;
         this.userIdSelected = userId;
+        this.bookingSelected = idBooking;
     }
 
     confirmCheckInOut() {
         const ws_data = {
-            username: this.userIdSelected
+            username: this.userIdSelected,
+            booking: this.bookingSelected
         };
         this.loader.showLoader();
-        this._services.service_general_post(`Profile/checkOut`, ws_data)
+        this._services.service_general_post(`Profile/checkOutAdmin`, ws_data)
             .subscribe((response: any) => {
                 if (response.result === 'Success') {
                     this.systemMessage.showMessage({
@@ -209,7 +212,7 @@ import { DataSource } from '@angular/cdk/table';
                             text: `You have been Check out successfully`
                         }
                     });
-                    this.showModal('', 0);
+                    this.showModal('', 0, 0);
                     this.resetForm();
                     setTimeout(() => this.loader.hideLoader(), 1777);
                 }

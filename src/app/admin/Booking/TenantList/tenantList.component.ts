@@ -56,6 +56,7 @@ export class TenantListComponent implements OnInit {
     show_page_modal = false;
     modal_to_show: string;
     userIdSelected;
+    bookingSelected;
 
     activeLs: ActiveModel[] = [
         {id: 0, name: 'Yes', value: true},
@@ -153,18 +154,20 @@ export class TenantListComponent implements OnInit {
         this.getTenantList(this.buildingId);
     }
 
-    public showModal( to_show: string = 'default', userId ):void {
+    public showModal( to_show: string = 'default', userId, idBooking ):void {
         !this.show_page_modal ? this.show_page_modal = true : this.show_page_modal = false;
         this.modal_to_show = to_show;
         this.userIdSelected = userId;
+        this.bookingSelected = idBooking;
     }
 
     confirmCheckInOut() {
         const ws_data = {
-            username: this.userIdSelected
+            username: this.userIdSelected,
+            booking: this.bookingSelected
         };
         this.loader.showLoader();
-        this.services.service_general_post(`Profile/checkOut`, ws_data)
+        this.services.service_general_post(`Profile/checkOutAdmin`, ws_data)
             .subscribe((response: any) => {
                 if (response.result === 'Success') {
                     this.systemMessage.showMessage({
@@ -175,7 +178,7 @@ export class TenantListComponent implements OnInit {
                             text: `You have been Check out successfully`
                         }
                     });
-                    this.showModal('', 0);
+                    this.showModal('', 0, 0);
                     this.resetForm();
                     setTimeout(() => this.loader.hideLoader(), 1777);
                 }
