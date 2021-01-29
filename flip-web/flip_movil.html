@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
+    <script src="carga_dinamica/config.js"></script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style>
@@ -176,6 +176,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  movilhidden square  " style="position: absolute; left: 861px; top: 0px;">
                                 <div id="cardgrid3" class="card">
                                     <div class="hover-img frontchange ">
@@ -197,10 +198,10 @@
                                         <div class="playposition">
                                             <div id="card8">
                                                 <!--<video autoplay loop muted playsinline>
-<source src="assets/images/gif.webm" type="video/webm">
-</video>-->
+                                                    <source src="assets/images/gif.webm" type="video/webm">
+                                                    </video>-->
                                                 <!--<button type="button" class="btn .btn-primary btn-sm">
-<span class="glyphicon playbut glyphicon-play trans-play"></span> -->
+                                                    <span class="glyphicon playbut glyphicon-play trans-play"></span> -->
                                                 <span id="play" class="input-group-addon  playbut ">
                                                     <img id="playempty" src="assets/images/play.png">
 
@@ -213,7 +214,7 @@
 
 
                             </div>
-
+                            <!--ABOUT-->
                             <div onclick="backstage()" id="backquitmore" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 861px; top: 0px;">
                                 <div class="card">
                                     <div class="hover-img frontchange title">
@@ -260,7 +261,7 @@
 
                             </div>
                             <!--.pportfolio2-item-->
-
+                            <!--DESIGN-->
                             <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " id="comGridIndex" style="position: absolute; left: 1141px; top: 232px;   " onclick="design()">
 
                                 <div id="card_more2" class="card">
@@ -282,8 +283,8 @@
                             <div id="cardmore2x14" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 861px; top: 232px;">
                                 <div id="card_more3" class="card">
                                     <div class="hover-img frontchange ">
-                                        <img id="frontphoto5" src="assets/images/avatares/face5-d1.jpg" class="img1" />
-                                        <img id="backphoto5" src="assets/images/avatares/faced5.jpg" class="img2" />
+                                      <img id="frontphoto5" src="assets/images/avatares/face5-1.jpg" class="img1" />
+                                        <img id="backphoto5" src="assets/images/avatares/face5.jpg" class="img2" />
 
 
                                     </div>
@@ -312,6 +313,9 @@
                                 </div>
 
                             </div>
+
+
+                            <!--//MORE-->
                             <!--.pportfolio2-item onclick="mores()"  id="comMoreIndex" -->
                             <div id="girlquitmore" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 square " style="position: absolute; left: 861px; top: 464px;">
 
@@ -355,7 +359,7 @@
 
                             </div>
 
-                            <div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 movilhidden square " style="position: absolute; left: 1141px; top: 464px; position: relative">
+                            <!--<div class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4 movilhidden square " style="position: absolute; left: 1141px; top: 464px; position: relative">
                                 <div class="card">
                                     <div class="frontchange ">
                                         <img src="assets/images/book-now.jpg" alt="book_now" class="super">
@@ -367,7 +371,43 @@
                                 </div>
 
 
+                            </div>-->
+                            <!--FIND-->
+                            <div  id="backquitmore" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square " style="position: absolute; left: 861px; top: 0px;">
+                                <div class="card">
+                                    <a href="https://landing.minimalist.mx/flip/">
+                                    <div class="hover-img frontchange title">
+
+                                        <h2 class="titulo_sec pointer" id="title5">FIND MY HOME</h2>
+                                        <img  id="frontphoto" class="img1" src="assets/images/book-now.jpg" alt="Images">
+                                        
+                                        <img  id="backphoto6" class="img2" src="assets/images/book-now.jpg" alt="Images ">
+                                        
+                                    </div>
+                                </a>
+                                    <div class="backchange  ">
+
+                                    </div>
+                                </div>
+
+
                             </div>
+
+                            <div id="cardmore2x12" class="pportfolio2-item single-portfolio_corporate pportfolio2-item--width4  square" style="position: absolute; left: 287px; top: 232px;" contenteditable="false">
+                                <div id="card_more1" class="card">
+                                    <div class="hover-img frontchange ">
+                                        <img id=frontphoto src="assets/images/avatares/face8-1.jpg" class="img1" />
+                                        <img id="backphoto2" src="assets/images/avatares/face8.jpg" class="img2" />
+
+
+                                    </div>
+                                    <div class="backchange  ">
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
 
                         </div>
                         <!--Fin Index -->
@@ -877,6 +917,8 @@
             $(location).attr('href', url);
 
         }
+
+        
 
         function mores() {
             $("#fliplogo").addClass("hiddens");

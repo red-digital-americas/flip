@@ -18,7 +18,7 @@ $(document).ready(function () {
     $.ajax({
         type: 'POST',
         url: urlbase_api +"Post/SeeHomeGeneral",
-        // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
+        // url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeGeneral",
         data: JSON.stringify({ buildingid: buildingid, userid: 1 }),
         contentType: "application/json",
         dataType: "text",
@@ -458,7 +458,7 @@ function getServiceData( id_build ) {
             }
 
         };
-        xhttp.open('POST', urlbase_api + 'Post/SeeHomeServicios', true);
+        xhttp.open('POST', urlbase_api + 'http://34.237.214.147/back/api_flip/api/Post/SeeHomeServicios', true);
         xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhttp.send( JSON.stringify( ws_data ) );
 
@@ -482,7 +482,7 @@ function getRoomsData( id_build ) {
             }
 
         };
-        xhttp.open('POST',urlbase_api + 'Post/SeeHomeRoom', true);
+        xhttp.open('POST',urlbase_api +'Post/SeeHomeRoom', true);
         xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhttp.send( JSON.stringify( ws_data ) );
 

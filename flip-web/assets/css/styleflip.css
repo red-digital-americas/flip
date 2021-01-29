@@ -3736,6 +3736,19 @@ video{
     padding: 6%;
     text-align: justify; 
 }
+
+#servadcbodyB{
+    font-size:.4em; 
+    padding: 6%;
+    text-align: justify; 
+}
+
+#servadcbodyC{
+    font-size:.4em; 
+    padding: 6%;
+    text-align: justify; 
+}
+
 .caption-style-2 img{
     margin: 0px;
     padding: 0px;
@@ -3780,8 +3793,14 @@ video{
     margin-bottom: 10px;
 }
 .marginprice{
-        margin-top: 8%;
+        margin-top: 2%;
         margin-left: 30%;
+
+}
+
+.testJJ{
+    margin-top: 8%;
+    margin-left: 80%;
 
 }
 .caption-style-2 .caption-text{

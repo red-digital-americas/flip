@@ -8,6 +8,8 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="./assets/flip.ico" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="carga_dinamica/config.js"></script>
+    
     <style>
         .jquery-ripples {
             position: relative;
@@ -48,7 +50,7 @@
 </head>
 
 <body>
-    <link rel="stylesheet" href="/assets/css/animation.css">
+    <link rel="stylesheet" href="assets/css/animation.css">
 
     <!--font-awesome.min.css-->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -722,8 +724,8 @@
             // debugger;
             $.ajax({
                 type: 'POST',
-                url: "http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex",
-                // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
+                url: urlbase_api +"Post/SeeMoreIndex",
+                // url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeGeneral",
                 data: JSON.stringify({
                     userid: 1
                 }),

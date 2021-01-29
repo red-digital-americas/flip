@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <script src="carga_dinamica/config.js"></script>
 
     <link rel="shortcut icon" type="image/x-icon" href="./assets/flip.ico" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -848,8 +849,8 @@
             // debugger;
             $.ajax({
                 type: 'POST',
-                url: "http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex",
-                // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
+                url: urlbase_api +"Post/SeeMoreIndex",
+                // url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeGeneral",
                 data: JSON.stringify({
                     userid: 1
                 }),

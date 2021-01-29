@@ -5,9 +5,12 @@
 
 /////////////////////////////////////// INDEX HOME ///////////////////////////////////////////////////////////
 
+
+
 $.ajax({
     type: 'POST',
-    url: "http://34.237.214.147/back/api_flip/api/Post/SeeIndex",
+    url: urlbase_api +"Post/SeeIndex",
+    //url: "http://34.237.214.147/back/api_flip/api/Post/SeeIndex",
     data: JSON.stringify({ userid: 1, buildingid: 1 }),
     contentType: "application/json",
     dataType: "text",

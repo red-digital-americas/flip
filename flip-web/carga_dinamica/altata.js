@@ -13,12 +13,12 @@ var buildingid = params.get('buildingid');
 var title = params.get('title');
 
 $(document).ready(function () {
-   // debugger;
+   
      $('#titlepage').html(`${title}`);
     $.ajax({
         type: 'POST',
         url: urlbase_api +"Post/SeeHomeGeneral",
-        // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
+         //url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeGeneral",
         data: JSON.stringify({ buildingid: buildingid, userid: 1 }),
         contentType: "application/json",
         dataType: "text",
@@ -490,7 +490,8 @@ function getRoomsData( id_build ) {
             }
 
         };
-        xhttp.open('POST',urlbase_api + 'Post/SeeHomeRoom', true);
+        xhttp.open('POST', urlbase_api +'Post/SeeHomeRoom', true);
+        //xhttp.open('POST','http://34.237.214.147/back/api_flip/api/Post/SeeHomeRoom', true);
         xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhttp.send( JSON.stringify( ws_data ) );
 

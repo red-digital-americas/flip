@@ -171,6 +171,7 @@ function getBackstageData() {
             }
 
         }
+        xhttp.open('POST',urlbase_api +'Post/SeeBackstageWhatIs', true);
         xhttp.open('POST','http://34.237.214.147/back/api_flip/api/Post/SeeBackstageWhatIs', true);
         xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhttp.send( JSON.stringify( ws_data ) );
@@ -245,6 +246,7 @@ function getFlipnetworkData() {
             }
 
         }
+        xhttp.open('POST',urlbase_api +'Post/SeeBacksNetworkSection', true);
         xhttp.open('POST','http://34.237.214.147/back/api_flip/api/Post/SeeBacksNetworkSection', true);
         xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhttp.send( JSON.stringify( ws_data ) );

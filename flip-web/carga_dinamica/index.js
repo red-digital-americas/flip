@@ -12,7 +12,8 @@ $(document).ready(function () {
 
 $.ajax({
     type: 'POST',
-    url: "http://34.237.214.147/back/api_flip/api/Post/SeeIndex",
+    url: urlbase_api +"Post/SeeIndex",
+    //url: "http://34.237.214.147/back/api_flip/api/Post/SeeIndex",
     data: JSON.stringify({ userid: 1, buildingid: 1 }),
     contentType: "application/json",
     dataType: "text",
@@ -29,7 +30,8 @@ $.ajax({
 
 $.ajax({
     type: 'POST',
-    url: "http://34.237.214.147/back/api_flip/api/Post/SeeDesignIndex",
+    url: urlbase_api +"Post/SeeDesignIndex",
+    //url: "http://34.237.214.147/back/api_flip/api/Post/SeeDesignIndex",
     data: JSON.stringify({ userid: 1, buildingid: 1 }),
     contentType: "application/json",
     dataType: "text",
@@ -46,7 +48,8 @@ $.ajax({
 
 $.ajax({
     type: 'POST',
-    url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeIndex",
+    url: urlbase_api +"Post/SeeHomeIndex",
+    //url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeIndex",
     data: JSON.stringify({ userid: 1, buildingid: 1 }),
     contentType: "application/json",
     dataType: "text",
@@ -63,7 +66,8 @@ $.ajax({
 
 $.ajax({
     type: 'POST',
-    url: "http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex",
+    url: urlbase_api + "Post/SeeMoreIndex",
+    //url: "http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex",
     data: JSON.stringify({ userid: 1, buildingid: 1 }),
     contentType: "application/json",
     dataType: "text",
@@ -80,7 +84,8 @@ $.ajax({
 
 $.ajax({
     type: 'POST',
-    url: "http://34.237.214.147/back/api_flip/api/Post/SeeSocialNetworks",
+    url: urlbase_api +"Post/SeeSocialNetworks",
+    //url: "http://34.237.214.147/back/api_flip/api/Post/SeeSocialNetworks",
     data: JSON.stringify({ userid: 1, buildingid: 1 }),
     contentType: "application/json",
     dataType: "text",

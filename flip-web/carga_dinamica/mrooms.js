@@ -77,7 +77,7 @@ function getRoomsData( id_build ) {
             }
 
         };
-        xhttp.open('POST',urlbase_api + 'Post/SeeHomeRoom', true);
+        xhttp.open('POST',urlbase_api +'Post/SeeHomeRoom', true);
         xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhttp.send( JSON.stringify( ws_data ) );
 

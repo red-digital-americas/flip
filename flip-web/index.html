@@ -6,6 +6,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
         <link rel="shortcut icon" type="image/x-icon" href="./assets/flip.ico" />
         <script src="carga_dinamica/config.js"></script>
+        
         <style>
         
             *, *::after, *::before {
@@ -1180,7 +1181,7 @@
                   about_membresia = document.getElementById('about_membresia'),
                   footer_container = document.getElementById('footer_container'),
                   footer_link = document.getElementsByClassName('footer_link');
-
+            
             var ajaxRequest = function( request_data ) { 
 
                 return new Promise( resolve => {
@@ -1229,6 +1230,7 @@
             
 
             ////SET CUADROS BACKSTAGE
+            
             ajaxRequest({where_to_go: urlbase_api +"Post/SeeHomeBackstage"}).then( home_content => {
                 var p_backstage_01 = document.getElementById('p-backstage-01')
                  p_backstage_01.innerHTML = home_content.item[0].description;
@@ -1240,7 +1242,7 @@
 
                
 
-            ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeIndex'}).then( cards => { 
+            ajaxRequest({where_to_go: urlbase_api +'Post/SeeIndex'}).then( cards => { 
                 console.log('DATA', cards);
                 
                 function cardSettings( card_id ) {
@@ -1340,7 +1342,7 @@
             function bringMeAllConetent() {
 
                 ajaxRequest({where_to_go: urlbase_api +'Post/SeeHomeIndex2'}).then( home_content => {
-//debugger;
+
                     let home_bg_images = [
                         'assets/images/comm/grid-1.jpg',
                         'assets/images/comm/grid-2.jpg',
@@ -1358,7 +1360,7 @@
                             dom_home_card += '<div class="card__big">'; 
                             index % 2 == 0 ? 
                              (function IIFE() { 
-                                 ////debugger;
+                                 
                                 if(home_card.iscomming) {
                                     dom_home_card += '<figure class="card__big-img">';
                                     dom_home_card += '<span  class="card__proximamente">Coming soon</span>';  
@@ -1416,7 +1418,7 @@
                     let dom_home_card_balnck =""
                 });
 
-                ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeDesignIndex'}).then( desing_data => {
+                ajaxRequest({where_to_go: urlbase_api +'Post/SeeDesignIndex'}).then( desing_data => {
 
                     let desing_bg_images = [
                         { img: 'assets/images/design/home-design-2.jpg', text: desing_data.item[0].title},
@@ -1473,7 +1475,7 @@
                 }, !1);
 
             
-                ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex'}).then( more_data => {
+                ajaxRequest({where_to_go: urlbase_api +'Post/SeeMoreIndex'}).then( more_data => {
 
                     console.log(more_data.item[0].title);
                     let more_bg_images = [

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" class="js no-touch csstransitions uk-notouch"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" /> <meta name="apple-mobile-web-app-capable" content="yes" /> <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
-
+    
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.jquery-ripples { position: relative; z-index: 0; }</style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="carga_dinamica/config.js"></script>
 
     <link rel="shortcut icon" type="image/x-icon" href="./assets/flip.ico" />
         <style>
@@ -56,7 +57,7 @@
         <!--<link rel="shortcut icon" href="http://template.helloxpart.com/picasso/picasso/images/favicon.ico" type="image/x-icon">-->
 
         <!--animation-->
-        <link rel="stylesheet" href="/assets/css/animation.css">
+        <link rel="stylesheet" href="assets/css/animation.css">
 
         <!--font-awesome.min.css-->
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -877,9 +878,9 @@
             var span2 = document.getElementById("closelogin");
 
             // When the user clicks on the button, open the modal 
-            btn2.onclick = function() {
-                modal2.style.display = "block";
-            }
+            //btn2.onclick = function() {
+            //    modal2.style.display = "block";
+            //}
 
             // When the user clicks on <span> (x), close the modal
             span2.onclick = function() {
@@ -949,7 +950,7 @@
         <script type="text/javascript" src="assets/js/waypoints.min.js"></script>
         <!--bootstrap and bootsnav-->
         <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="assets/js/bootsnavdos.js"></script>
+        <!-- <script type="text/javascript" src="assets/js/bootsnavdos.js"></script>-->
         <!-- uikit.min.js and sticky.min.js -->
         <script type="text/javascript" src="assets/js/uikit.min.js"></script>
         <script type="text/javascript" src="assets/js/sticky.min.js"></script>
@@ -1223,8 +1224,8 @@
             // debugger;
             $.ajax({
                 type: 'POST',
-                url: "http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex",
-                // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
+                url: urlbase_api+"Post/SeeMoreIndex",
+                // url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeGeneral",
                 data: JSON.stringify({
                     userid: 1
                 }),

@@ -3,6 +3,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+        <script src="carga_dinamica/config.js"></script>
         <style>
         
             *, *::after, *::before {
@@ -1197,7 +1198,7 @@
 
             }
 
-            ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeIndex'}).then( cards => { 
+            ajaxRequest({where_to_go: urlbase_api +'Post/SeeIndex'}).then( cards => { 
 
                 function cardSettings( card_id ) {
 
@@ -1294,7 +1295,7 @@
 
             function bringMeAllConetent() {
 
-                ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeHomeIndex'}).then( home_content => {
+                ajaxRequest({where_to_go: urlbase_api +'apiPost/SeeHomeIndex'}).then( home_content => {
 
                     let home_bg_images = [
                         'assets/images/comm/grid-1.jpg',
@@ -1358,7 +1359,7 @@
 
                 });
 
-                ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeDesignIndex'}).then( desing_data => {
+                ajaxRequest({where_to_go: urlbase_api +'apiPost/SeeDesignIndex'}).then( desing_data => {
 
                     let desing_bg_images = [
                         { img: 'assets/images/design/home-design-2.jpg', text: 'philosophy'},
@@ -1402,7 +1403,7 @@
 
                 }, !1);
 
-                ajaxRequest({where_to_go: 'http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex'}).then( more_data => {
+                ajaxRequest({where_to_go: urlbase_api +'Post/SeeMoreIndex'}).then( more_data => {
 
                     let more_bg_images = [
                         { img: 'assets/images/more/MORE1.jpg', text: 'philosophy'},

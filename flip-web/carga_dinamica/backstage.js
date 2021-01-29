@@ -288,10 +288,13 @@ $(document).ready(function () {
             //A
             $("#span_title_mem1").text(respuesta.item[0].title);
             $("#p_title_mem1").text(respuesta.item[0].title);
+            $("#servadcbody").text(respuesta.item[0].description);
             $("#aimage").attr("src", respuesta.item[0].photoSlider);
-            let plantilla = "";
+            let plantilla = "<div class ='col-sm-12'>";
             for (let i = 0; i < 8; i++) {
                 let icon = respuesta.item[0].backstageMembershipItems[i];
+                if (icon != undefined) //Se valida que icon traiga informacion..
+                {
                 plantilla += `<div class ="col-sm-3 icondiv" >
                                    <label   data-target="#myCarousel6" data-slide-to="0"   class="yogaam marginlabel">   
                                          <a href="#">
@@ -304,29 +307,36 @@ $(document).ready(function () {
                                    </label>
                               </div>
                 `;
+                }
             }
-            plantilla += `<div class ="col-sm-6" >
-                          <label class="marginprice">
-                                <p style="margin-bottom: 8%; font-size: 20px;"> Price 1 <br> </p> 
-                                <p> <strong style="font-size: 20px;">$${respuesta.item[0].price}</strong></p>
-                          </label>
-                         </div>
-                         <div class ="col-sm-6" >
-                         <label class="marginprice">
-                                <p style="margin-bottom: 8%; font-size: 20px;"> Price 2 <br> </p> 
-                                <p> <strong style="font-size: 20px;">$${respuesta.item[0].price1}</strong></p>
-                          </label>
-                          </div>`;
+            plantilla += `</div><div class ="col-sm-6" >
+            <label class="marginprice">
+                  <p> <strong style="margin-bottom: 8%; font-size: 20px;">${respuesta.item[0].descPrice}</strong></p>
+                  <p> <strong style="font-size: 20px;">$${respuesta.item[0].price}</strong></p>
+                  
+            </label>
+           </div>
+           <div class ="col-sm-6" >
+           <label class="marginprice">
+              <p> <strong style="margin-bottom: 8%; font-size: 20px;">${respuesta.item[0].descPrice1}</strong></p>
+                  <p> <strong style="font-size: 20px;">$${respuesta.item[0].price1}</strong></p>
+            </label>
+            </div>`;
+$('#bicons').html(`${plantilla}`);
+                         
             $('#aicons').html(`${plantilla}`);
 
 
             //B
             $("#span_title_mem2").text(respuesta.item[1].title);
             $("#p_title_mem2").text(respuesta.item[1].title);
+            $("#servadcbodyB").text(respuesta.item[1].description);
             $("#aimage").attr("src", respuesta.item[1].photoSlider);
-            plantilla = "";
+            plantilla = "<div class ='col-sm-12'>";
             for (let i = 0; i < 8; i++) {
                 let icon = respuesta.item[1].backstageMembershipItems[i];
+                if (icon != undefined) //Se valida que icon traiga informacion..
+                {
                 plantilla += `<div class ="col-sm-3 icondiv" >
                                    <label   data-target="#myCarousel6" data-slide-to="0"   class="yogaam marginlabel">   
                                          <a href="#">
@@ -340,15 +350,17 @@ $(document).ready(function () {
                               </div>
                 `;
             }
-            plantilla += `<div class ="col-sm-6" >
+        }
+            plantilla += `</div><div class ="col-sm-6" >
                           <label class="marginprice">
-                                <p style="margin-bottom: 8%; font-size: 20px;"> Price 1 <br> </p> 
+                                <p> <strong style="margin-bottom: 8%; font-size: 20px;">${respuesta.item[1].descPrice}</strong></p>
                                 <p> <strong style="font-size: 20px;">$${respuesta.item[1].price}</strong></p>
+                                
                           </label>
                          </div>
                          <div class ="col-sm-6" >
                          <label class="marginprice">
-                                <p style="margin-bottom: 8%; font-size: 20px;"> Price 2 <br> </p> 
+                            <p> <strong style="margin-bottom: 8%; font-size: 20px;">${respuesta.item[1].descPrice1}</strong></p>
                                 <p> <strong style="font-size: 20px;">$${respuesta.item[1].price1}</strong></p>
                           </label>
                           </div>`;
@@ -357,8 +369,9 @@ $(document).ready(function () {
             //c
             $("#span_title_mem3").text(respuesta.item[2].title);
             $("#textservadicionales").text(respuesta.item[2].title);
+            $("#servadcbodyC").text(respuesta.item[2].description);
             $("#cimage").attr("src", respuesta.item[2].photoSlider);
-            plantilla = "";
+            plantilla = "<div class ='col-sm-12'>";
             for (let i = 0; i < 8; i++) {
                 let icon = respuesta.item[2].backstageMembershipItems[i];
                 plantilla += `<div class ="col-sm-3 icondiv" >
@@ -374,7 +387,7 @@ $(document).ready(function () {
                               </div>
                 `;
             }
-            plantilla += `<div class ="col-sm-6" >
+            plantilla += `</div><div class ="col-sm-6" >
                           <label class="marginprice">
                                 <p style="margin-bottom: 8%; font-size: 20px;"> Price 1 <br> </p> 
                                 <p> <strong style="font-size: 20px;">$${respuesta.item[2].price}</strong></p>
@@ -427,7 +440,8 @@ function getBackstageData() {
         }
 
     }
-    xhttp.open('POST', 'http://34.237.214.147/back/api_flip/api/Post/SeeBackstageWhatIs', true);
+    xhttp.open('POST', urlbase_api +'Post/SeeBackstageWhatIs', true);
+    //xhttp.open('POST', 'http://34.237.214.147/back/api_flip/api/Post/SeeBackstageWhatIs', true);
     xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     xhttp.send(JSON.stringify(ws_data));
 
@@ -464,8 +478,8 @@ function createContentForWhatIsColiving(data_content) {
                 </div>
             </div>
         `;
-
-        wi_backstage_container.innerHTML += slide_html;
+        //REVISAR
+       // wi_backstage_container.innerHTML += slide_html;
 
     });
 
@@ -605,7 +619,9 @@ function getFlipnetworkData() {
         }
 
     }
-    xhttp.open('POST', 'http://34.237.214.147/back/api_flip/api/Post/SeeBacksNetworkSection', true);
+
+    xhttp.open('POST', urlbase_api +'Post/SeeBacksNetworkSection', true);
+    //xhttp.open('POST', 'http://34.237.214.147/back/api_flip/api/Post/SeeBacksNetworkSection', true);
     xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     xhttp.send(JSON.stringify(ws_data));
 
@@ -615,12 +631,12 @@ function mainCardData(card_data) {
 
     const fnc_title_container = document.getElementById('fnc_title'),
         fnc_desc_container = document.querySelector('[fnc_desc]');
-
-    fnc_title_container.innerHTML = card_data.title;
-    fnc_desc_container.innerHTML = `
-        ${ card_data.description }
-        <span  id="butredflipmas"class="glyphicon glyphicon-plus pointer" style="font-size: 1.25em; left: 50%; color: white; position: absolute; top: 110%; transform: translate(-50%,-50%);"></span> 
-    `;
+    //REVISAR
+    //fnc_title_container.innerHTML = card_data.title;
+    //fnc_desc_container.innerHTML = `
+    //    ${ card_data.description }
+    //    <span  id="butredflipmas"class="glyphicon glyphicon-plus pointer" style="font-size: 1.25em; left: 50%; color: white; position: absolute; top: 110%; transform: translate(-50%,-50%);"></span> 
+    //`;
 
 }
 

@@ -284,9 +284,11 @@ $(document).ready(function () {
             $("#m1title").text(respuesta.item[0].title);
             $(".m1title").text(respuesta.item[0].title);
             $("#m1imagen").attr("src",respuesta.item[0].photoMobileSlider);
+            $(".m1description").text(respuesta.item[0].description);
             let plantilla = "";
             for(let i = 0 ; i < 8; i++){
                 let icon = respuesta.item[0].backstageMembershipItems[i];
+                if (icon != undefined) //Se valida que icon traiga informacion..
                 plantilla += `
                              <label data-target="#myCarousel6" data-slide-to="0"   class="yogaam paddingmovil ">   
                                 <a href="#">
@@ -317,9 +319,11 @@ $(document).ready(function () {
             $("#m2title").text(respuesta.item[1].title);
             $(".m2title").text(respuesta.item[1].title);
             $("#m2imagen").attr("src",respuesta.item[1].photoMobileSlider);
+            $(".m2description").text(respuesta.item[1].description);
             plantilla = "";
             for(let i = 0 ; i < 8; i++){
                 let icon = respuesta.item[1].backstageMembershipItems[i];
+                if (icon != undefined) //Se valida que icon traiga informacion..
                 plantilla += `
                              <label data-target="#myCarousel6" data-slide-to="0"   class="yogaam paddingmovil ">   
                                 <a href="#">
@@ -348,6 +352,7 @@ $(document).ready(function () {
             $("#m3title").text(respuesta.item[2].title);
             $(".m3title").text(respuesta.item[2].title);
             $("#m3imagen").attr("src",respuesta.item[2].photoMobileSlider);
+            $(".m3description").text(respuesta.item[2].description);
             plantilla = "<br>";
             for(let i = 0 ; i < 8; i++){
                 let icon = respuesta.item[2].backstageMembershipItems[i];
@@ -412,6 +417,7 @@ function getBackstageData() {
             }
 
         }
+        xhttp.open('POST', urlbase_api +'Post/SeeBackstageWhatIs', true);
         xhttp.open('POST','http://34.237.214.147/back/api_flip/api/Post/SeeBackstageWhatIs', true);
         xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhttp.send( JSON.stringify( ws_data ) );
@@ -450,7 +456,7 @@ function createContentForWhatIsColiving( data_content ) {
             </div>
         `;
 
-        wi_backstage_container.innerHTML += slide_html;
+        //wi_backstage_container.innerHTML += slide_html;
 
         });
 
@@ -596,6 +602,7 @@ function getFlipnetworkData() {
             }
 
         }
+        xhttp.open('POST', urlbase_api +'Post/SeeBacksNetworkSection', true);
         xhttp.open('POST','http://34.237.214.147/back/api_flip/api/Post/SeeBacksNetworkSection', true);
         xhttp.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhttp.send( JSON.stringify( ws_data ) );

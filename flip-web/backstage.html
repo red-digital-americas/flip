@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.jquery-ripples { position: relative; z-index: 0; }</style>
     <!-- META DATA -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="carga_dinamica/config.js"></script>
 
 
     <title>FLIP</title>
@@ -17,7 +18,7 @@
 
     <!--font-awesome.min.css-->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <script src="carga_dinamica/config.js"></script>
+    
     <script src="carga_dinamica/backstage.js"></script>
 
     <!--flaticon.css-->
@@ -631,7 +632,7 @@
                                                     pretium 
                                                     velit. 
                                                     Morbi 
-                                                    <span  id="butmem1mas"class="glyphicon pointer glyphicon-plus" style="font-size: 1.25em; left: 50%; color: white; position: absolute; top: 110%; transform: translate(-50%,-50%);"></span>
+                                                    <span  id="butmem1mas"class="glyphicon pointer glyphicon-plus" style="font-size: .5em;"></span>
                                                 </p>
                                             </div>
                                             
@@ -654,7 +655,7 @@
                                                     pretium 
                                                     velit. 
                                                     Morbi
-                                                    <span  id="butredflipmas"class="glyphicon glyphicon-plus pointer" style="font-size: 1.25em; left: 50%; color: white; position: absolute; top: 110%; transform: translate(-50%,-50%);"></span> 
+                                                    <span  id="butredflipmas"class="glyphicon glyphicon-plus pointer" style="font-size: .5em;"></span> 
                                                 </p>
                                             </div>
                                         </div>
@@ -684,7 +685,7 @@
 
                                                                 <!-- img   id="loginbar3" src="assets/images/signin.png" class="pointer movilhidden "/ -->
                                                                 <div class="textmenubackstage pointer membresiados lineaux globalheigt"> <p id="p_title_mem2"  class="lineaux " >MEMBRESÍA 2 </p>
-                                                                    <p id="servadcbody"   >
+                                                                    <p id="servadcbodyB"  style="position: relative;"  >
                                                                         Lorem 
                                                                         ipsum 
                                                                         dolor sit 
@@ -700,7 +701,8 @@
                                                                         velit. 
                                                                         Morbi 
                                                                     </p>
-                                                                    <span  id="butmem2mas"class="glyphicon  pointer glyphicon-plus" style="font-size: .5em; color: white"></span>
+                                                                    <span  id="butmem2mas"class="glyphicon pointer glyphicon-plus" style="font-size: .5em;"></span>
+                                                                </p>
                                                                 </div>
 
                                                             </div>
@@ -727,7 +729,7 @@
                                                             <div id="membre" class="  textmenucommunities globalheigt"> <p id="textmenumembresias">MEMBRESÍAS </p>
                                                             </div>
                                                             <div id="servadic" class=" hiddens lineaux textmenubackstage serviciosadicionales  globalheigt"> <p class="lineaux" id="textservadicionales  ">SERVICIOS ADICIONALES </p>
-                                                                <p    id="servadcbody">
+                                                                <p    id="servadcbodyC" style="position: relative;"  fnc_desc>
                                                                     Lorem 
                                                                     ipsum 
                                                                     dolor sit 
@@ -844,7 +846,8 @@
                 <ul class="footer_menu"> 
                     <br class ="brhide hiddens">
 
-                    <li class="movilhidden "><img src="assets/images/14.jpg" alt="FLIP_LOGO"></li>    
+                    <li class="movilhidden "><img src="assets/images/14.jpg" alt="FLIP_LOGO"></li>   
+                     
 
                     <li><a href="#">Communities</a></li>
                     <li><a href="#">Backstage</a></li>
@@ -953,7 +956,7 @@
 
         <script>
 
-            $(document).ready(function(){
+/*            $(document).ready(function(){
 
                 if( localStorage.getItem('contentSelected') != null ) {
 
@@ -974,7 +977,7 @@
 
                 }
 
-            });
+            });*/
 
             function resizeHandler(e) {
                 console.log(e.type + ' triggered.');

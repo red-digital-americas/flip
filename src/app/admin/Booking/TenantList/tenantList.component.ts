@@ -8,11 +8,13 @@ import { LoaderComponent } from '../../../../ts/loader';
 import { SystemMessage } from '../../../../ts/systemMessage';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'tenantList',
     templateUrl: './tenantList.component.html',
-    styleUrls: ['./tenantList.component.scss']
+    styleUrls: ['./tenantList.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class TenantListComponent implements OnInit {

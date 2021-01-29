@@ -145,22 +145,6 @@
                         </div>
 
                         <div class="ml-col-3">
-                            <div class="ap-form__input">
-                              <input 
-                                type="checkbox"
-                                id="profile_active" 
-                                name="profile_active"
-                                [checked]="roomObj.active"
-                                [(ngModel)]="roomObj.active"
-                                [ngModelOptions]="{standalone: true}"
-                                class="ap-form__input-checkbox display-none" />
-                              <label for="profile_active" class="ap-form__label ap-form__label-checkbox">
-                                Active
-                              </label>
-                            </div>
-                        </div>   
-
-                        <div class="ml-col-3">
                           <div class="ap-form__input">
                             <input 
                               type="checkbox"
@@ -172,6 +156,21 @@
                               class="ap-form__input-checkbox display-none" />
                             <label for="profile_smoke" class="ap-form__label ap-form__label-checkbox">
                               Smoke
+                            </label>
+                          </div> 
+                        </div>      
+                        <div class="ml-col-6">
+                          <div class="ap-form__input">
+                            <input 
+                              type="checkbox"
+                              id="profile_active" 
+                              name="profile_active"
+                              [checked]="roomObj.active"
+                              [(ngModel)]="roomObj.active"
+                              [ngModelOptions]="{standalone: true}"
+                              class="ap-form__input-checkbox display-none" />
+                            <label for="profile_active" class="ap-form__label ap-form__label-checkbox">
+                              Active
                             </label>
                           </div>
                         </div> 

@@ -11,8 +11,9 @@ var _html;
 $(document).ready(function () {
      $.ajax({
                 type: 'POST',
-                url: "http://34.237.214.147/back/api_flip/api/Post/SeeMoreIndex",
-                // url: "http://localhost:49314/api/Post/SeeHomeGeneral",
+
+                url: urlbase_api +"Post/SeeMoreIndex",
+                // url: "http://34.237.214.147/back/api_flip/api/Post/SeeHomeGeneral",
                 data: JSON.stringify({
                     userid: 1
                 }),
@@ -35,7 +36,8 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'POST',
-        url: "http://34.237.214.147/back/api_flip/api/Post/SeeJobs",
+        url: urlbase_api +"Post/SeeJobs",
+        //url: "http://34.237.214.147/back/api_flip/api/Post/SeeJobs",
         data: JSON.stringify({ userid: 1 }),
         contentType: "application/json",
         dataType: "text",

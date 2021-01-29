@@ -11,7 +11,8 @@ var _html;
 $(document).ready(function () {
     $.ajax({
         type: 'POST',
-        url: "http://34.237.214.147/back/api_flip/api/Post/SeeDesign",
+        url:  urlbase_api +"Post/SeeDesign",
+        //url: "http://34.237.214.147/back/api_flip/apiPost/SeeDesign",
         data: JSON.stringify({ userid: 1 }),
         contentType: "application/json",
         dataType: "text",

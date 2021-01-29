@@ -948,6 +948,7 @@ pre code {
   }
   .col-sm-6 {
     width: 50%;
+    text-align: center;
   }
   .col-sm-5 {
     width: 41.66666666666667%;
