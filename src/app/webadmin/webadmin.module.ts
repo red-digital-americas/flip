@@ -35,7 +35,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MapsComponent } from './maps/perks.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({

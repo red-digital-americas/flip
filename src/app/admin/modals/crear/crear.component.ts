@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Utils } from '../../../utils/utils';
 import { ActivatedRoute } from '@angular/router';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';

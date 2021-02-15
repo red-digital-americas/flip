@@ -7,7 +7,7 @@ import { PerksGuide, PerksCategory } from '../models/Perks';
 import { Utils } from '../../utils/utils';
 import { LoaderComponent } from '../../../ts/loader';
 import { SystemMessage } from '../../../ts/systemMessage';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { PerkCategoryComponent } from '../modals/perk-category/perk-category.component';
 
 @Component({

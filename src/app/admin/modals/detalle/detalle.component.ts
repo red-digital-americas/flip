@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, forwardRef, TemplateRef, Output, EventEmitter } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../../utils/utils';
 import { DatosService } from '../../../../datos.service';

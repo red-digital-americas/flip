@@ -19,7 +19,7 @@ import { EventInput } from '@fullcalendar/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import * as moment from 'moment';
 
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CalendarComponent } from '../../modals/calendar/calendar.component';
 
 class ScheduleModel {

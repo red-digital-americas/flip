@@ -13,7 +13,7 @@ import {DayBgRow, DayGrid, DayGridSeg, DayGridSlicer, DayGridView }  from '@full
 import { EventInput } from '@fullcalendar/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { BsComponentRef } from 'ngx-bootstrap/component-loader/bs-component-ref.class';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DetalleComponent } from '../modals/detalle/detalle.component';
 import { CrearComponent } from '../modals/crear/crear.component';
 import * as moment from 'moment';

@@ -11,7 +11,7 @@ import * as moment from 'moment';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../../../datos.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CalendarDetailComponent } from '../calendar-detail/calendar-detail.component';
 
 class ScheduleModel {

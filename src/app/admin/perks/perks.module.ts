@@ -11,7 +11,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { PerksComponent } from './perks.component';
 import { PerksDetailComponent } from './detail/perks-detail.component';
 import { PerksPromotionAddComponent } from '../perk-promotions/add/perk-promotions-add.component';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PerksPromotionDetailComponent } from '../perk-promotions/detail/perk-promotions-detail.component';
 import { PerksPromotionEditComponent } from '../perk-promotions/edit/perk-promotions-edit.component';
 import { PerksEditComponent } from './edit/perks-edit.component';

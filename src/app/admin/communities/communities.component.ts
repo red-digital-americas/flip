@@ -8,7 +8,7 @@ import { DatosService } from '../../../datos.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Building } from '../models/building';
 import { ModalMLComponent } from '../../../ts/modal_ml';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { PerkCategoryComponent } from '../modals/perk-category/perk-category.component';
 
 @Component({
