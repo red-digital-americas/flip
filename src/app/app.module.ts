@@ -71,6 +71,9 @@ import { ChartsModule } from 'ng2-charts';
 import { MaterialModule } from './material/material.module';
 import { AdminModule } from './admin/admin.module';
 import { MatCardModule } from '@angular/material/card';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   imports: [
@@ -92,8 +95,8 @@ import { MatCardModule } from '@angular/material/card';
     ToasterModule,
     ImageCropperModule,
     // MaterialModule,
- 
-    StripeModule.forRoot()
+    StripeModule.forRoot(),
+    NgxMaskModule.forRoot(options)
   ],
   declarations: [
     AppComponent,
