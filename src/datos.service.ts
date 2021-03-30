@@ -107,6 +107,11 @@ export class DatosService {
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.http.delete(this.heroesUrl + url, { headers: headers });
   }
+  service_general_delete_with_params(url, parametros): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.delete(this.heroesUrl + url, { headers: headers, params: parametros });
+  }
   ServicioPostMessage(url, parametros): Observable<any> {
     let headers = new HttpHeaders();
     console.log(parametros);

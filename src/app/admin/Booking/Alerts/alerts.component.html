@@ -954,8 +954,9 @@
                         id="company_phone" 
                         name="company_phone"
                         class="ap-form__input-text"
+                        mask="000 000 00 00"
+                        (change)="validatingUserInput( $event, 'phone' )"
                         [(ngModel)]="alert_detail_form.Phone"
-                        (change)="validatingUserInput( $event, 'number' )"
                         [class.custom-input__text--error]="alert_detail_validator.no_cpho"/>
                       <label 
                         for="company_phone" 
@@ -1033,7 +1034,8 @@
                         name="staff_phone"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.MobilPhone"
-                        (change)="validatingUserInput( $event, 'number' )"
+                        mask="000 000 00 00"
+                        (change)="validatingUserInput( $event, 'phone' )"
                         [class.custom-input__text--error]="alert_detail_validator.no_spho"/>
                       <label 
                         for="staff_phone" 
@@ -1248,7 +1250,7 @@
                         class="ap-form__input-text">
                         <option value="-1" disabled>Users</option>
                         <option *ngFor="let user of build_users_list;" [value]="user.id">
-                            {{ user.name }}
+                            {{ user.name + " " + user.lastName + " " + user.motherName}}
                         </option>
                       </select>
                       <label 
@@ -1273,6 +1275,7 @@
                         name="new_alert_status"
                         [(ngModel)]="new_alert_data.AlertCategoryId"
                         [class.custom-input__text--error]="new_alert_form.no_cate"
+                        (change)="ifSecurity(new_alert_data.AlertCategoryId)"
                         class="ap-form__input-text">
                         <option value="-1" disabled>Alert Category</option>
                         <option *ngFor="let work of work_type_catalog;" [value]="work.id">
@@ -1374,7 +1377,7 @@
                             <div class="days-icons__container">
                                 <div class="days-icons__day" day-index="4">
                                     <span day="day-letter" day-selecter="day" class="days-icons__day-letter cursor-pointer">
-                                        R
+                                        T
                                     </span>
                                 </div>
                             </div>
@@ -1426,6 +1429,7 @@
                                         id="new_alert_close" 
                                         name="new_alert_close"
                                         class="ap-form__input-text"
+                                        (change)="validatingUserInput( $event, 'close' )"
                                         [class.custom-input__text--error]="1 == 2"/>
                                       <label 
                                         for="new_alert_close" 
@@ -1538,7 +1542,8 @@
                                     id="new_alert_cphone" 
                                     name="new_alert_cphone"
                                     class="ap-form__input-text"
-                                    (change)="validatingUserInput( $event, 'number' )"
+                                    mask="000 000 00 00"
+                                    (change)="validatingUserInput( $event, 'phone' )"
                                     [(ngModel)]="new_alert_data.alertDetails[0].Phone"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
@@ -1612,7 +1617,8 @@
                                     id="new_alert_pstaff" 
                                     name="new_alert_pstaff"
                                     class="ap-form__input-text"
-                                    (change)="validatingUserInput( $event, 'number' )"
+                                    mask="000 000 00 00"
+                                    (change)="validatingUserInput( $event, 'phone' )"
                                     [(ngModel)]="new_alert_data.alertDetails[0].MobilPhone"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
@@ -1683,6 +1689,7 @@
                                     required
                                     type="date" 
                                     [min]="today"
+                                    onkeydown="event.preventDefault()"
                                     placeholder="When?"
                                     id="new_alert_date" 
                                     name="new_alert_date"

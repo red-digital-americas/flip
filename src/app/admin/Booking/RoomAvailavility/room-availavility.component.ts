@@ -110,7 +110,12 @@ export class RoomAvailavilityComponent implements OnInit {
 
     modalRef: BsModalRef;
 
+    todayDate: any;
+    latest_date: any;
+
     ngOnInit() {
+        this.todayDate = new Date();
+        console.info('DATE TODAY', this.todayDate, this.latest_date);
         this.section = 'roomAvailavility';
         this.buildingId = this.route.snapshot.paramMap.get('id');
         this.getRoomList(this.buildingId);

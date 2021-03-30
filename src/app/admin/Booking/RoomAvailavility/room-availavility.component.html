@@ -117,7 +117,9 @@
                     </ng-container>
                     <ng-container matColumnDef="dateUnemployment">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Next full avaibility date</th>
-                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.dateUnemployment }}</td>
+                        <td mat-cell *matCellDef="let element" class="table__data table__data-center">
+                            {{ (element?.dateUnemployment !== null) ? (todayDate >= element.dateUnemployment ? "Avaible" : element.dateUnemployment ) : "Avaible" }}
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="amountStanding">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Total Billed</th>

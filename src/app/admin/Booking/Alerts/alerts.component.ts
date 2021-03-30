@@ -703,7 +703,7 @@ export class AlertsComponent implements OnInit {
     }
 
     public setDaysActives( days_active: any ):void {
-
+        console.info('DAY SELECTED', days_active);
         function getDataFromDom() {
 
             setTimeout( () => {
@@ -1190,6 +1190,14 @@ export class AlertsComponent implements OnInit {
             case 'Error':
               console.log('Ocurrio un error ' + value.detalle);
             //   this.presentToast(value.detalle);
+              this.system_message.showMessage({
+                kind: 'warning',
+                time: 3800,
+                message: {
+                    header: 'Chat Alert',
+                    text: value.detalle
+                }
+            });
               break;
             default:
               console.log(value.item);
@@ -1309,6 +1317,35 @@ export class AlertsComponent implements OnInit {
                 }
                 
                 break;
+            case 'phone':
+                if(!validatingRegex("[0-9 ]+", event_value) ) {
+                    event.value = '';
+                    this.system_message.showMessage({
+                        kind: 'warning',
+                        time: 3800,
+                        message: {
+                            header: 'Charaters only',
+                            text: 'Field can not contain letters'
+                        }
+                    });
+                }
+                break;
+            case 'close':
+                let new_alert_open: any = document.getElementById('new_alert_open');
+                let new_alert_close: any = document.getElementById('new_alert_close');
+                console.log('ALERTS', new_alert_open.value, new_alert_close.value);
+                if(new_alert_close.value <= new_alert_open.value) {
+                    event.value = '';
+                    this.system_message.showMessage({
+                        kind: 'warning',
+                        time: 3800,
+                        message: {
+                            header: 'Schedule Time Close',
+                            text: 'Time Close is Less Time '
+                        }
+                    });
+                }
+                break;
 
         }
 
@@ -1347,6 +1384,94 @@ export class AlertsComponent implements OnInit {
     
         return result;
     
+    }
+
+    ifSecurity(status: any){
+        console.log("Status Security", status);
+        if(status == 14){
+            this.new_alert_data.id = 0;
+            this.new_alert_data.BuildingId = this.root_id_build;
+            this.new_alert_data.AlertStatusId = 1;
+            this.new_alert_data.CreationDate = this.today;
+            
+            this.new_alert_data.alertDetails[0].id = 0;
+            this.new_alert_data.alertDetails[0].IdAlert = 0;
+            this.new_alert_data.alertDetails[0].AlertStatusId = 9;
+            this.new_alert_data.alertDetails[0].AssignStaff = "Example";
+            this.new_alert_data.alertDetails[0].EmailStaff = "example@email.com";
+            this.new_alert_data.alertDetails[0].MobilPhone = "111 111 111";
+            this.new_alert_data.alertDetails[0].MaxBudget = "0";
+            this.new_alert_data.alertDetails[0].DateSchedule = this.today;
+            this.new_alert_data.alertDetails[0].HoreSchedule = "01:00:00";
+            this.new_alert_data.AvailableSchedule = JSON.stringify({"startTime":"06:00","endTime":"18:00","daysOfWeek":["0","1","2","3","4","5","6"]});
+            // this.setDaysActives( ["0","1","2","3","4","5","6"] );
+            this.setScheduleData();
+            console.log("Status Security ===>", this.new_alert_data);
+        }
+    }
+
+    setScheduleData():void {
+        let days_selected: any[] = [];
+        const selecter: any = document.querySelector('[day-selecter="container"]').children,
+              new_alert_open: any = document.getElementById('new_alert_open'),
+              new_alert_close: any = document.getElementById('new_alert_close'),
+              schedule_validator = {
+                  no_days: false,
+                  no_ohou: false,
+                  no_chou: false
+              };
+        selecter.forEach( (day: any) => {
+            const day_button = day.querySelector('[day-selecter="day"]');
+            if( day_button.classList.contains('days-icons__day-letter') ) {
+                new_alert_open.classList.remove('days-icons__day-letter');
+                day_button.classList.add('days-icons__day-letter--active')
+                days_selected.push( day_button.parentElement.getAttribute('day-index') );
+            }
+        });
+        this.avaible_schedule.daysOfWeek = days_selected;
+        if( new_alert_open.value != '' ) {
+            this.avaible_schedule.startTime = new_alert_open.value;
+            schedule_validator.no_ohou = false;
+            new_alert_open.classList.remove('custom-input__text--error');
+
+        } else {
+            
+            this.avaible_schedule.startTime = '01:01';
+            new_alert_open.value = "01:01"
+            // schedule_validator.no_ohou = true;
+            // new_alert_open.classList.add('custom-input__text--error');
+
+        }
+
+        if( new_alert_close.value != '' ) {
+
+            this.avaible_schedule.endTime = new_alert_close.value;
+            schedule_validator.no_chou = false;
+            new_alert_close.classList.remove('custom-input__text--error');
+
+        } else {
+            
+            this.avaible_schedule.endTime = '23:59';
+            new_alert_close.value = '23:59'
+            // schedule_validator.no_chou = true;
+            // new_alert_close.classList.add('custom-input__text--error');
+
+        }
+
+        if(
+            schedule_validator.no_ohou || 
+            schedule_validator.no_chou
+        ) {
+
+            this.new_alert_data.AvailableSchedule = '';
+
+        } else {
+
+            this.new_alert_data.AvailableSchedule = JSON.stringify( this.avaible_schedule );
+            //"{\"daysOfWeek\":[1,3,4],\"startTime\":\"9:00\",\"endTime\":\"18:00\"}"
+
+        }
+
     }
 
 }

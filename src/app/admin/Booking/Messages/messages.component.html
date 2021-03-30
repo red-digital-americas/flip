@@ -31,7 +31,7 @@
                 </div>
                 <div class="ap-chat__people">
                     <div class="ml-col-1" >
-                        <div 
+                        <div class="ml-col-1"
                             *ngFor="let friend of posts;"
                             (click)="showConversation(friend, friend.iduser, $event)" 
                             class="ap-chat__people-person ap-chat__people-person--friend">
@@ -52,6 +52,13 @@
                         <button class="ap-form__rButton button-icon button-icon--cancel-white button-red" (click)="hideChat()">
                             Close
                         </button>
+                        <input 
+                            type="checkbox"
+                            id="archive"
+                            name="archive"
+                            class="ap-form__rRadioButton "
+                            (change)="archive()" />
+                        <label for="archive"> Archive</label>
                     </div>
                     <div class="chatm card-style margin-top-x" *ngIf="showChat">
                         <h4 style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" class="chatm__datos" (click)="viewDetail(userConversation.id, userConversation.idBooking)">

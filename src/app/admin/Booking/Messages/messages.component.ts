@@ -12,6 +12,7 @@ import { type } from 'os';
 import { MessageData, Conversation } from '../../models/message';
 import { ActivatedRoute } from '@angular/router';
 import { isUndefined } from 'util';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 class MessageCustom {
     public message;
@@ -260,6 +261,7 @@ export class MessagesComponent implements OnInit {
               console.log("GetConversationUSer=>", value.item);
               if (value.result == "Success") {
                 this.userConversation = value.item;
+                console.log('CONVERSATION', this.userConversation);
               }
           }
         });
@@ -459,8 +461,29 @@ export class MessagesComponent implements OnInit {
       }
 
       viewDetail(id: number, idBooking: number) {
-        // console.log('Id user', id);
+        console.warn('Id user', id);
         this.router.navigateByUrl( `app-profile/${ id }/${ idBooking }`, { state: { id: this.IDBUILD, name: 'TenantList To Profile' } });
+    }
+
+    archive(){
+      this.heroService.service_general_put("Message/Archive?key="+this.conversationId, null).subscribe((value) => {
+        console.log("Response Archive ===> ", value);
+        switch (value.result) {
+          case "Error":
+            console.log("Ocurrio un error " + value.detalle);
+            break;
+          default:
+            console.log(value.item);
+            if (value.result == "Success") {
+              this.hideChat()
+              this.get_chats();
+            }
+        }
+      }, (error: any) => {
+
+        console.log("Error en el message enviado ===> ", error);
+
+      });
     }
 
 }

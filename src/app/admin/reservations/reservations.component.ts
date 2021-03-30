@@ -73,9 +73,12 @@ export class ReservationsComponent implements OnInit {
         if(res.result === "Success"){                    
           this.amenitiesArray = res.item;
           if (this.amenitiesArray.length <= 0) { return; }
-
+          // this.amenitiesArray.push();
+          this.amenitiesArray.push({id: 0, name: "All", description: "", buildingId: this.amenitiesArray[0].buildingId, photo: ""})
+          this.amenitiesArray.sort((a, b) => a.id - b.id);
           this.amenitySelect = this.amenitiesArray[0].id;
-          this.GetEvents();              
+          this.GetEvents();     
+          console.log('AMENITIES', this.amenitiesArray);         
         } else if(res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
         else { console.log("Error"); }
       },
@@ -222,7 +225,7 @@ export class ReservationsComponent implements OnInit {
   }
 
   private ParseEvent(event:any) {            
-    let newEvent = { id: event.id, title: event.activity.name, start: event.timeStart, end: event.timeEnd, startEditable:true, durationEditable:true, overlap: false, backgroundColor: event.activity.private ? '#d8209e' : '#3788d8' };
+    let newEvent = { id: event.id, title: event.activity.name + ", " + event.user.name + " " + event.user.lastName + ", " + event.name , start: event.timeStart, end: event.timeEnd, startEditable:true, durationEditable:true, overlap: false, backgroundColor: event.activity.private ? '#d8209e' : '#3788d8' };
     return newEvent;
   }  
 
