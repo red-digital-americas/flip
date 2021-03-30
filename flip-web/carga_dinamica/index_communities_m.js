@@ -30,7 +30,7 @@ $.ajax({
 /////////////////////////////////////// INDEX  HOMES //////////soon0/////////////////////////////////////////////////
 
 function fill_grid_home_images(respuesta) {
-     
+     console.log('Fill Grid', respuesta);
     document.getElementById('communitiesflip2x12').src = respuesta.item[0].frontphoto;
     document.getElementById('0_title').innerHTML = respuesta.item[0].title;
     if(respuesta.item[0].direction.length > 0)
@@ -96,7 +96,7 @@ function fill_grid_home_images(respuesta) {
     }
     else{
         document.getElementById('soon2').innerHTML = "";
-        document.getElementById('3_direction').innerHTML
+        document.getElementById('2_direction').innerHTML
         if(respuesta.item[2].direction.length > 0)
         {
             $("#communitiesflip2x13").click(function () {
@@ -129,5 +129,180 @@ function fill_grid_home_images(respuesta) {
             });
         }
     }
-   
+
+    if(respuesta.item.length == 4){
+        console.log('ENTRO');
+        document.getElementById('communitiesflip2x15').src = respuesta.item[4].frontphoto;
+        document.getElementById('4_title').innerHTML = respuesta.item[4].title;
+        if(respuesta.item[4].direction.length > 0)
+            {
+                document.getElementById('4_direction').innerHTML =  '<img src="assets/images/gps.svg" alt="Images" style="height: 15px; width: 15px; " /> ' + respuesta.item[4].direction;
+            }
+        if(respuesta.item[4].iscomming) {
+            document.getElementById('communitiesflip2x15').style.opacity = "0.7";
+            document.getElementById('communitiesflip2x15').style.filter = "grayscale(100%)";
+            document.getElementById('soon4').innerHTML = "COOMING SOON";
+        }
+        else{
+            document.getElementById('soon4').innerHTML = "";
+            document.getElementById('4_direction').innerHTML
+            if(respuesta.item[4].direction.length > 0)
+            {
+                $("#communitiesflip2x15").click(function () {
+                    var url = "./maltata.html?buildingid="+respuesta.item[4].id+'&title='+respuesta.item[4].title;
+                    $(location).attr('href', url);
+                });
+            }
+        }
+    } 
+    else
+    {
+        document.querySelector('#bulding15').style.display = none;
+    }
+
+    if(respuesta.item.length == 5){
+        document.getElementById('communitiesflip2x16').src = respuesta.item[5].frontphoto;
+        document.getElementById('5_title').innerHTML = respuesta.item[5].title;
+        if(respuesta.item[5].direction.length > 0)
+            {
+                document.getElementById('5_direction').innerHTML =  '<img src="assets/images/gps.svg" alt="Images" style="height: 15px; width: 15px; " /> ' + respuesta.item[5].direction;
+            }
+        if(respuesta.item[5].iscomming) {
+            document.getElementById('communitiesflip2x16').style.opacity = "0.7";
+            document.getElementById('communitiesflip2x16').style.filter = "grayscale(100%)";
+            document.getElementById('soon5').innerHTML = "COOMING SOON";
+        }
+        else{
+            document.getElementById('soon5').innerHTML = "";
+            document.getElementById('5_direction').innerHTML
+            if(respuesta.item[5].direction.length > 0)
+            {
+                $("#communitiesflip2x16").click(function () {
+                    var url = "./maltata.html?buildingid="+respuesta.item[5].id+'&title='+respuesta.item[5].title;
+                    $(location).attr('href', url);
+                });
+            }
+        }
+    } 
+    else
+    {
+        document.querySelector('#bulding16').style.display = none;
+    }
+
+    if(respuesta.item.length == 6){
+        document.getElementById('communitiesflip2x17').src = respuesta.item[6].frontphoto;
+        document.getElementById('6_title').innerHTML = respuesta.item[6].title;
+        if(respuesta.item[6].direction.length > 0)
+            {
+                document.getElementById('6_direction').innerHTML =  '<img src="assets/images/gps.svg" alt="Images" style="height: 15px; width: 15px; " /> ' + respuesta.item[6].direction;
+            }
+        if(respuesta.item[6].iscomming) {
+            document.getElementById('communitiesflip2x17').style.opacity = "0.7";
+            document.getElementById('communitiesflip2x17').style.filter = "grayscale(100%)";
+            document.getElementById('soon6').innerHTML = "COOMING SOON";
+        }
+        else{
+            document.getElementById('soon6').innerHTML = "";
+            document.getElementById('6_direction').innerHTML
+            if(respuesta.item[6].direction.length > 0)
+            {
+                $("#communitiesflip2x17").click(function () {
+                    var url = "./maltata.html?buildingid="+respuesta.item[6].id+'&title='+respuesta.item[6].title;
+                    $(location).attr('href', url);
+                });
+            }
+        }
+    }
+    else
+    {
+        document.querySelector('#bulding17').style.display = none;
+    }
+
+    if(respuesta.item.length == 7){
+        document.getElementById('communitiesflip2x18').src = respuesta.item[7].frontphoto;
+        document.getElementById('7_title').innerHTML = respuesta.item[7].title;
+        if(respuesta.item[7].direction.length > 0)
+            {
+                document.getElementById('7_direction').innerHTML =  '<img src="assets/images/gps.svg" alt="Images" style="height: 15px; width: 15px; " /> ' + respuesta.item[7].direction;
+            }
+        if(respuesta.item[7].iscomming) {
+            document.getElementById('communitiesflip2x18').style.opacity = "0.7";
+            document.getElementById('communitiesflip2x18').style.filter = "grayscale(100%)";
+            document.getElementById('soon7').innerHTML = "COOMING SOON";
+        }
+        else{
+            document.getElementById('soon7').innerHTML = "";
+            document.getElementById('7_direction').innerHTML
+            if(respuesta.item[7].direction.length > 0)
+            {
+                $("#communitiesflip2x18").click(function () {
+                    var url = "./maltata.html?buildingid="+respuesta.item[7].id+'&title='+respuesta.item[7].title;
+                    $(location).attr('href', url);
+                });
+            }
+        }
+    }
+    else
+    {
+        document.querySelector('#bulding17').style.display = none;
+    }
+
+    if(respuesta.item.length == 8){
+        document.getElementById('communitiesflip2x18').src = respuesta.item[7].frontphoto;
+        document.getElementById('7_title').innerHTML = respuesta.item[7].title;
+        if(respuesta.item[7].direction.length > 0)
+            {
+                document.getElementById('7_direction').innerHTML =  '<img src="assets/images/gps.svg" alt="Images" style="height: 15px; width: 15px; " /> ' + respuesta.item[7].direction;
+            }
+        if(respuesta.item[7].iscomming) {
+            document.getElementById('communitiesflip2x18').style.opacity = "0.7";
+            document.getElementById('communitiesflip2x18').style.filter = "grayscale(100%)";
+            document.getElementById('soon7').innerHTML = "COOMING SOON";
+        }
+        else{
+            document.getElementById('soon7').innerHTML = "";
+            document.getElementById('7_direction').innerHTML
+            if(respuesta.item[7].direction.length > 0)
+            {
+                $("#communitiesflip2x18").click(function () {
+                    var url = "./maltata.html?buildingid="+respuesta.item[7].id+'&title='+respuesta.item[7].title;
+                    $(location).attr('href', url);
+                });
+            }
+        }
+    }
+    else
+    {
+        document.querySelector('#bulding18').style.display = none;
+    }
+
+    if(respuesta.item.length == 9){
+        document.getElementById('communitiesflip2x18').src = respuesta.item[7].frontphoto;
+        document.getElementById('7_title').innerHTML = respuesta.item[7].title;
+        if(respuesta.item[7].direction.length > 0)
+            {
+                document.getElementById('7_direction').innerHTML =  '<img src="assets/images/gps.svg" alt="Images" style="height: 15px; width: 15px; " /> ' + respuesta.item[7].direction;
+            }
+        if(respuesta.item[7].iscomming) {
+            document.getElementById('communitiesflip2x18').style.opacity = "0.7";
+            document.getElementById('communitiesflip2x18').style.filter = "grayscale(100%)";
+            document.getElementById('soon7').innerHTML = "COOMING SOON";
+        }
+        else{
+            document.getElementById('soon7').innerHTML = "";
+            document.getElementById('7_direction').innerHTML
+            if(respuesta.item[7].direction.length > 0)
+            {
+                $("#communitiesflip2x18").click(function () {
+                    var url = "./maltata.html?buildingid="+respuesta.item[7].id+'&title='+respuesta.item[7].title;
+                    $(location).attr('href', url);
+                });
+            }
+        }
+    }
+    else
+    {
+        document.getElementsByClassName('bulding19').style.display = none;
+    }
+    
 }

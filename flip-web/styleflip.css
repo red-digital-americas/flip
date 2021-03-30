@@ -4348,6 +4348,9 @@ background-image: url(../images/book-now.jpg);
 }
 .pportfolio2-container{
     position: relative;
+    display: inline-flex;
+    overflow-y: auto; 
+    overflow-x: hidden;    
 }
 .pportfolio2-item{
     -webkit-perspective: 1000;
@@ -4479,6 +4482,8 @@ background-image: url(../images/book-now.jpg);
 }
 .single-portfolio_corporate-communities-index img{
     width: 95%; 
+    flex: 0 0 95%;
+    object-fit: cover;
 }
 .pportfolio-communities-item img{
     width:100%;
