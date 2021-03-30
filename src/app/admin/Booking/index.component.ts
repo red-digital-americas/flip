@@ -96,8 +96,8 @@ export class BookingIndexComponent implements OnInit {
 
     public goToPage( page: string, extra_data: any = '' ):void {
 
+        sessionStorage.setItem('community_select', extra_data.name);
         this.router.navigateByUrl( `${ page }/${ extra_data.id }` );
-
     }
 
 

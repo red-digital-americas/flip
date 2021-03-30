@@ -28,6 +28,12 @@
                               (click)="goToPage('MembershipCatalog', card)">
                               Memberships
                           </button>
+                          
+                          <button 
+                              (click)="toggleSectionForm( 'edit', card )"
+                              class="index-cards__card-buttons-button button-green button-icon button-icon--edit-white">
+                              Edit
+                          </button>
                       </div>
                     </div>
                 </figure>
@@ -41,9 +47,9 @@
                         Operation
                     </button>
                     <button 
-                        (click)="toggleSectionForm( 'edit', card )"
-                        class="index-cards__card-buttons-button button-green button-icon button-icon--edit-white">
-                        Edit
+                        class="index-cards__card-buttons-button button-yellow"
+                        (click)="goToPage('newsfeed', card)">
+                        App Manager
                     </button>
                 </div>
             </div>

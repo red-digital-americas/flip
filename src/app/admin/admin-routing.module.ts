@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommunitiesComponent } from './communities/communities.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import { AlertComponent } from './alert/alert.component';
 import { BuildingComponent } from './building/building.component';
 import { EditcommentComponent } from './editcomment/editcomment.component';
 import { ActivitiesComponent } from './activities/activities.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'communities' },
       { path: 'newsfeed/:id', component: NewsfeedComponent, data: {title:'newsfeed'} },
+      { path: 'alert/:id', component: AlertComponent, data: {title:'alert'} },
       { path: 'communities', component: CommunitiesComponent, data: { title: 'Communities' } },
       { path: 'building/:id', component: BuildingComponent, data: {title:'Building'} },
       { path: 'editcomment/:id', component: EditcommentComponent, data: { title: 'Building' } },

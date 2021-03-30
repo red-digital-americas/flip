@@ -82,8 +82,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { CalendarComponent } from './modals/calendar/calendar.component';
 import { CalendarDetailComponent } from './modals/calendar-detail/calendar-detail.component';
 import { PerkCategoryComponent } from './modals/perk-category/perk-category.component';
-
-
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { AlertComponent } from './alert/alert.component';
+ 
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
   imports: [    
     BsDatepickerModule.forRoot(),
@@ -113,7 +115,8 @@ import { PerkCategoryComponent } from './modals/perk-category/perk-category.comp
     MatNativeDateModule,
     MatSelectModule,
     MatCheckboxModule,
-    [ StripeModule.forRoot("pk_test_WiAYJgrEz6XKxL2MwKD89oqO00bfPcrlOF") ]
+    [ StripeModule.forRoot("pk_test_WiAYJgrEz6XKxL2MwKD89oqO00bfPcrlOF") ],
+    NgxMaskModule.forRoot(options)
   ],
   declarations: [
     CommunitiesComponent,  
@@ -159,7 +162,8 @@ import { PerkCategoryComponent } from './modals/perk-category/perk-category.comp
     AddTenantPayComponent,
     CalendarComponent,
     CalendarDetailComponent,
-    PerkCategoryComponent
+    PerkCategoryComponent,
+    AlertComponent
   ],
   entryComponents: [
     DetalleComponent,

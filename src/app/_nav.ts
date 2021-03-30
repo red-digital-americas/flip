@@ -75,7 +75,7 @@ export class MenuService {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   private navSections = [
     {id:1, name: 'Web Manager', url: '/webadmin', permisos: [1, 4]},
-    {id:2, name: 'App Content Manager', url: '/communities', permisos: [4, 5]},
+    // {id:2, name: 'App Content Manager', url: '/communities', permisos: [4, 5]},
     {id:3, name: 'Building Operation', url: '/booking', permisos: [3, 4]},
   ]
 
