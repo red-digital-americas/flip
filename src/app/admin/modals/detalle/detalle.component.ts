@@ -319,7 +319,8 @@ export class DetalleComponent implements OnInit {
           this.usersBuildingArray = res.item;                       
           this.usersBuildingArray = this.usersBuildingArray.filter(user => {                        
             return !this.booksArray.map(book => book.user.id).includes(user.id); 
-          });         
+          });
+          this.usersBuildingArray = this.usersBuildingArray.filter(x => x.id !== this.eventDetail.activity.userId);
         } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
         else { console.log("Error");}
       },

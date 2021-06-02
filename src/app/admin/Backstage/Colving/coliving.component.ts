@@ -11,8 +11,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'coliving-component',
-    templateUrl: '/coliving.component.html',
-    styleUrls: ['/coliving.component.scss']
+    templateUrl: './coliving.component.html',
+    styleUrls: ['./coliving.component.scss']
 }) export class ColivingComponent implements OnInit {
 
     @ViewChild(ImageCropperComponent, { read: ImageCropperComponent, static: true }) imageCropper: ImageCropperComponent;

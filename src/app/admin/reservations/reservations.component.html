@@ -111,6 +111,30 @@
               </div>
           </div>
         </div>
+        <div class="ml-col-2">
+          <div class="ml-col-1">
+            <div class="ap-form__input">
+              <select
+                  required
+                  type="text" 
+                  placeholder="Lapse Time"
+                  [(ngModel)]="reservation_data.AmenityId"
+                  [class.form_error_found]="event_form_validator.no_amenity"
+                  class="ap-form__input-text">
+                  <option *ngFor="let amenity of amenitiesArray" [value]="amenity.id" >
+                    {{amenity.name}}
+                  </option>
+              </select>
+              <label 
+                class="ap-form__label ap-form__label-text">
+                Amenity
+              </label>
+              <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_amenity">
+                Amenity is required*
+              </span>
+            </div>
+          </div>
+        </div>
         <div class="ml-col-1">
           <div class="ml-col-1">
             <div class="ap-form__input">

@@ -379,7 +379,7 @@ import { Router } from '@angular/router';
             roomType: this.booking_data.roomType,
             smoke: this.booking_data.smoke,
             roomatePreferences: this.booking_data.roomatePreferences,
-            totalBeds: this.booking_data.totalBeds
+            totalBeds: Number(this.booking_data.totalBeds) + 1
         }
 
         this.loader.showLoader();

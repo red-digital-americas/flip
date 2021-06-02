@@ -56,7 +56,7 @@
                       name="profile_gender"
                       (change)="buildSelected( $event )"
                       class="ap-form__input-text">
-                      <option value="null" disabled>Build*</option>
+                      <option value="null" disabled>Location*</option>
                       <option *ngFor="let build of builds_list;" [value]="build.id">
                         {{ build.name }}
                       </option> 
@@ -64,7 +64,7 @@
                     <label 
                       for="profile_gender" 
                       class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                      Build
+                      Location
                     </label>
                   </div>
                 </div>
@@ -737,7 +737,7 @@
                                 </div>
                                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                                     <div class="ml-col-1">
-                                        Room Type
+                                        Room
                                     </div>
                                     <div class="ml-col-1 text-bold">
                                         {{ room_selected.name }}
@@ -2627,7 +2627,7 @@
                                 <div class="ap-form__input">
                                   <input 
                                     required
-                                    type="number" 
+                                    type="text" 
                                     placeholder="CVV*"
                                     min="0"
                                     id="card_cvv" 
@@ -2867,7 +2867,13 @@
                       {{ credit_card_data.name == '' ? 'Card Name' : credit_card_data.name }}
                     </h4>
                     <p 
-                      class="credit-card__card-number credit-card__card-number--visa">
+                      class="credit-card__card-number credit-card__card-number--visa"
+                      [ngClass]="{
+                        'credit-card__card-number--visa' : kind_card == 'visa',
+                        'credit-card__card-number--mcard' : kind_card == 'mcard',
+                        'credit-card__card-number--american' : kind_card == 'american',
+                        'credit-card__card-number--default' : kind_card == ''
+                      }">
                       <span>****</span>
                       <span>****</span>
                       <span>****</span>

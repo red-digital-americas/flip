@@ -42,9 +42,17 @@
                 <div *ngIf="current_membership.status.idStatusBooking === 1">Pending</div>
                 <div *ngIf="current_membership.status.idStatusBooking === 2">Check In</div>
                 <div *ngIf="current_membership.status.idStatusBooking === 3">Check Out</div>
-                <div *ngIf="current_membership.status.idStatusBooking === 4">Cancel</div>
+                <div *ngIf="current_membership.status.idStatusBooking === 4">Cancel </div>
             </div>
         </div> 
+        <div *ngIf="current_membership.status.idStatusBooking === 4" class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
+            <div class="ml-col-1">
+                Cancel Detail:
+            </div>
+            <div class="ml-col1 text-bold">
+                {{ current_membership?.status.detalle }}
+            </div>
+        </div>
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
             <div class="ml-col-1">
                 Tenant:
@@ -98,7 +106,7 @@
             <div *ngIf="current_membership?.dateEndReal != null; then elseOut else thenOut"></div>
             <ng-template #elseOut >
                 <div class="ml-col-1 text-bold">
-                    {{ current_membership?.dateEndReal != null ? current_membership?.dateStartReal : 'No Date' }}  
+                    {{ current_membership?.dateEndReal != null ? current_membership?.dateEndReal : 'No Date' }}  
                 </div>
             </ng-template>
             <ng-template #thenOut>

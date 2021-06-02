@@ -6,8 +6,8 @@ import { Utils } from '../../../utils/utils';
 
 @Component({
     selector: 'flip-network',
-    templateUrl: '/flipNetwork.component.html',
-    styleUrls: ['/flipNetwork.component.scss']
+    templateUrl: './flipNetwork.component.html',
+    styleUrls: ['./flipNetwork.component.scss']
 }) export class FlipNetworkComponent implements OnInit {
 
     public system_message: SystemMessage = new SystemMessage();

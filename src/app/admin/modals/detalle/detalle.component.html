@@ -40,10 +40,10 @@
                      
                     <div class="col-12 margin-bottom-x">
                         <h5>Host</h5>
-                        <div class="book"> 
-                            <img class="book__avatar"
+                        <div class="book-host"> 
+                            <img class="book-host__avatar"
                                  [src]="eventDetail?.user.avatar != '' ? eventDetail?.user.avatar : '../../../../assets/avatar-def.png'" />       
-                            <div class="book__username">
+                            <div class="book-host__username">
                                 {{ eventDetail?.user.name }} {{ eventDetail?.user.lastName }}
                             </div>                                                            
                         </div>   
@@ -62,12 +62,20 @@
                 <h5>Books</h5>                   
                 <div *ngIf="!booksArray.length">No books for this event</div>            
                 
-                <div class="section-books">
-                    <div class="book" *ngFor="let bookElement of booksArray">                        
+                <div class="">
+                    <div class=" book" *ngFor="let bookElement of booksArray">                        
                         <!-- <img class="book__avatar" src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">                         -->
                         <img class="book__avatar" 
                             [src]="bookElement.user.avatar == '' ? '../../../../assets/avatar-def.png' : bookElement.user.avatar" />       
-                        <div class="book__username">{{bookElement.user.name}} {{bookElement.user.lastName}}</div>                                                            
+                        <div class="book__username">{{bookElement.user.name}} {{bookElement.user.lastName}}</div>       
+                        <div class="book__icon">
+                            <div *ngIf="bookElement.status == 1">
+                                <label class="icon-check"></label>
+                            </div>
+                            <div *ngIf="bookElement.status == 0">
+                                <label class="icon-ban"></label>
+                            </div>
+                        </div>                                                     
                     </div>                        
                 </div>                                                          
             </div>    

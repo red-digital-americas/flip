@@ -12,7 +12,7 @@ export class MenuService {
         { name: 'Main Index', url: '/webadmin/webadmin', icon: 'icon-docs sangria'}, 
         { name: 'Design index', url: '/webadmin/designindex', icon: 'icon-tag sangria'}, 
         { name: 'More Index', url: '/webadmin/moreindex', icon: 'icon-book-open sangria' },
-        { name: 'Builds Index', url: '/webadmin/homeindex/1', icon: 'icon-globe-alt sangria'}
+        { name: 'Locations Index', url: '/webadmin/homeindex/1', icon: 'icon-globe-alt sangria'}
       ]
     },  
     //{
@@ -21,7 +21,7 @@ export class MenuService {
         // { name: 'Home Services', url: '/webadmin/homeservices', icon: 'icon-drop' },
         // { name: 'Home Ammenities', url: '/webadmin/homeammenities', icon: 'icon-drop' },
         // { name: 'Home General', url: '/webadmin/homegeneral', icon: 'icon-drop' },
-    { name: 'Builds', type: 1, url: '/webadmin/homemenu', icon: 'icon-docs' },
+    { name: 'Locations', type: 1, url: '/webadmin/homemenu', icon: 'icon-docs' },
       //]
     //},
     { name: 'Design', type: 1, url: '/webadmin/design', icon: 'icon-grid' },
@@ -37,9 +37,9 @@ export class MenuService {
       name: 'Backstage', type: 1, url: '/', icon: 'icon-organization reduce',
       children: [  
         { name: 'Index', url: '/backstage', icon: 'icon-globe sangria'},
-        { name: 'What is Colving', url: '/coliving', icon: 'icon-book-open sangria'},
+        { name: 'About', url: '/coliving', icon: 'icon-book-open sangria'},
         { name: 'Memberships', url: '/memberships', icon: 'icon-people sangria'},
-        { name: 'Flip Network', url: '/flipNetwork', icon: 'icon-globe-alt sangria'}
+        { name: 'Network', url: '/flipNetwork', icon: 'icon-globe-alt sangria'}
       ]
     }
   ] 
@@ -76,7 +76,7 @@ export class MenuService {
   private navSections = [
     {id:1, name: 'Web Manager', url: '/webadmin', permisos: [1, 4]},
     // {id:2, name: 'App Content Manager', url: '/communities', permisos: [4, 5]},
-    {id:3, name: 'Building Operation', url: '/booking', permisos: [3, 4]},
+    {id:3, name: 'Project Operation', url: '/booking', permisos: [3, 4]},
   ]
 
   public CreateNavSections(systemType:number) {

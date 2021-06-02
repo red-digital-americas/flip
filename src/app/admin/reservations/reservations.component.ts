@@ -418,7 +418,7 @@ export class ReservationsComponent implements OnInit {
 
     if( this.newEventFormValidator() ) {
 
-      this.reservation_data.AmenityId = this.amenitySelect;
+      // this.reservation_data.AmenityId = this.amenitySelect;
       this.newReserversationWS();
 
     } else {
@@ -511,6 +511,7 @@ export class ReservationsComponent implements OnInit {
     no_name: false,
     no_desc: false,
     no_host: false,
+    no_amenity: false,
     no_date: false,
     no_shou: false,
     no_ehou: false,
@@ -531,6 +532,10 @@ export class ReservationsComponent implements OnInit {
     this.reservation_data.UserId == 0 ? 
       this.event_form_validator.no_host = true : 
       this.event_form_validator.no_host = false; 
+
+    this.reservation_data.AmenityId == 0 ? 
+      this.event_form_validator.no_amenity = true : 
+      this.event_form_validator.no_amenity = false; 
 
     this.reservation_data.Photo == '' ? 
       this.event_form_validator.no_phot = true : 

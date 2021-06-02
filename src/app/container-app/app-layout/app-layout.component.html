@@ -1,6 +1,6 @@
 <app-header [fixed]="true"
-            [navbarBrandFull]="{src: 'assets/flipF.png', width: 50, height: 50, alt: 'Flip'}"
-            [navbarBrandMinimized]="{src: 'assets/flipF.png', width: 30, height: 30, alt: 'Flip'}"
+            [navbarBrandFull]="{src: 'assets/Icon Background Black.png', width: auto, height: 50, alt: 'Flip'}"
+            [navbarBrandMinimized]="{src: 'assets/Icon Background Black.png', width: 30, height: 30, alt: 'Flip'}"
             [sidebarToggler]="'lg'"
             [asideMenuToggler]="false"
             [mobileAsideMenuToggler]="false">
@@ -28,7 +28,7 @@
         <div *ngFor="let alert of alerts">
           <a (click)="goNotifications(alert)" class="dropdown-item">
             <div class="message">
-              <div class="py-3 mr-3 float-left">
+              <div class="py-4 mr-4 float-left">
                 <div class="avatar">
                   <!-- <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"> -->
                   <img [src]="alert.icon" class="img-avatar" alt="">
@@ -36,8 +36,10 @@
               </div>
               <div>
                 <small class="text-muted">{{ alert.nameComplete }}</small>
-                <small class="text-muted float-right mt-1"> {{ alert.status }}</small>
+                <!-- <br>
+                <small class="text-muted float-right mt-1"> {{ alert.status }}</small> -->
               </div>
+              <div class="text-muted">{{ alert.status }}</div>
               <div class="text-muted"> {{ alert.date }} </div>
               <div class="text-truncate font-weight-bold"> {{ alert.name }}</div>
               <div class="small text-muted text-truncate font-weight-bold"> {{ alert.message }}</div>
@@ -58,7 +60,7 @@
         <div *ngFor="let item of messages">
           <a (click)="goMessage(item)" class="dropdown-item">
             <div class="message">
-              <div class="py-3 mr-3 float-left">
+              <div class="py-4 mr-4 float-left">
                 <div class="avatar">
                   <!-- <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"> -->
                   <img [src]="item.photo" class="img-avatar" alt="">
@@ -66,8 +68,9 @@
               </div>
               <div>
                 <small class="text-muted">{{ item.name + " " + item.lastname}}</small>
-                <small class="text-muted float-right mt-1">{{ item.lastMessageTime }}</small>
+                <!-- <small class="text-muted float-right mt-1">{{ item.lastMessageTime }}</small> -->
               </div>
+              <div class="text-muted">{{ item.lastMessageTime }}</div>
               <div class="text-truncate font-weight-bold"><span ></span> {{ item.lastMessage }}</div>
               <div class="small text-muted text-truncate">Unread messages : {{ item.unreadMessages }}</div>
             </div>

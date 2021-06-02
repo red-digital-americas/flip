@@ -557,7 +557,15 @@ import { resolve } from 'dns';
 
                                     console.error('WS PayService => ', error);
                                     this.popup_payment_service = false;
-
+                                    this.loader.hideLoader();
+                                    this.system_message.showMessage({
+                                        kind: 'error',
+                                        time: 5200,
+                                        message: {
+                                            header: 'Information Error',
+                                            text: error
+                                        }
+                                    });
 
                                 });
 
@@ -567,6 +575,15 @@ import { resolve } from 'dns';
 
                         console.error('Error WS Stripe => ', error);
                         this.popup_payment_service = false;
+                        this.loader.hideLoader();
+                        this.system_message.showMessage({
+                            kind: 'error',
+                            time: 5200,
+                            message: {
+                                header: 'Information Error',
+                                text: error
+                            }
+                        });
 
 
                     });
@@ -952,6 +969,15 @@ import { resolve } from 'dns';
                                         }, (error: any) => {
 
                                             console.error('Error WS END => ', error);
+                                            this.loader.hideLoader();
+                                            this.system_message.showMessage({
+                                                kind: 'error',
+                                                time: 5200,
+                                                message: {
+                                                    header: 'Information Error',
+                                                    text: error
+                                                }    
+                                            });
 
                                         });
 
@@ -960,6 +986,15 @@ import { resolve } from 'dns';
                             }, (error: any) => {
 
                                 console.error('WS End Date Stripe 2 => ', error );
+                                this.loader.hideLoader();
+                                this.system_message.showMessage({
+                                    kind: 'error',
+                                    time: 5200,
+                                    message: {
+                                        header: 'Information Error',
+                                        text: error
+                                    }    
+                                });
 
                             });
 
@@ -968,6 +1003,15 @@ import { resolve } from 'dns';
                 }, (error: any) => {
 
                     console.error('WS End Date Stripe 1 => ', error );
+                    this.loader.hideLoader();
+                    this.system_message.showMessage({
+                        kind: 'error',
+                        time: 5200,
+                        message: {
+                            header: 'Information Error',
+                            text: error
+                        }    
+                    });
 
                 });
 

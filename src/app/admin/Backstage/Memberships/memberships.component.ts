@@ -11,7 +11,7 @@ import { LoaderComponent } from '../../../../ts/loader';
 
 @Component({
     selector: 'membershipt-component',
-    templateUrl: '/memberships.component.html',
+    templateUrl: './memberships.component.html',
     styleUrls: ['./memberships.component.scss']
 }) export class MembershipComponent implements OnInit {
 

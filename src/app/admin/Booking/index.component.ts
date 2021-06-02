@@ -232,7 +232,7 @@ export class BookingIndexComponent implements OnInit {
         if( !this.new_build_button && this.edit_build_button ) {
 
             //Anteriormente se pensaba que se eliminarian los cuartos
-            //this.deleteRoomService( event_data, id_room );
+            this.deleteRoomService( event_data, id_room );
 
         }
 
@@ -240,26 +240,33 @@ export class BookingIndexComponent implements OnInit {
 
 
     public deleteRoomService( event_data: any, id_room: any ):void {
-
-        const element = event_data.target.parentElement,
-              element_id = element.querySelector('input').id,
-              get_element_id = element_id.split('_')[element_id.split('_').length -1];
-
-        this.room_to_delete = {
-            idBuild: this.booking_data.id,
-            type: element.querySelector('input').value,
-            capacity: element.querySelector('select').value,
-            active: false,
-            id: Number( get_element_id )
-          };
-
-        if( this.room_to_delete.type == '' || this.room_to_delete.capacity == '' ) {
-
+        console.info(event_data);
+        console.info(id_room);
+        let room = id_room;
+        this.services.service_general_delete_with_params('Room/RemoveTypeRoom',{ room: id_room})
+        .subscribe((response: any) => {
+            if (response.result === 'Success') {
+            this.system_message.showMessage({
+                kind: 'ok',
+                time: 2500,
+                message: {
+                header: 'Room has been deleted',
+                text: 'Your Room has been delete succesfully.'
+                }
+            });
+            }
             this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === id_room ), 1);
             this.rooms[this.rooms.length -1].last_one = true;
-
-        } else this.confirmDeleteRoomModal();
-
+        }, (error: any) => {
+            console.log('Error en el servicio: ', error);
+            this.system_message.showMessage({
+                kind: 'error',
+                time: 2500,
+                message: {
+                header: 'Room has been deleted',
+                text: 'Your Room has not been delete.'
+                }});
+            });
     }
 
     /*

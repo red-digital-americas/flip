@@ -179,7 +179,7 @@ export class LoginComponent implements OnInit {
               time: 2000
             });
             setTimeout( () => this.loader.hideLoader(), 1777);
-            this.message = "Usuario y/o contraseña incorrecta";
+            this.message = "Usuario no existe o deshabilitado";
             this.validar = true;
             break;
           case "password incorrecto":

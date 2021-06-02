@@ -6,8 +6,8 @@ import { Utils } from '../../utils/utils';
 
 @Component({
     selector: 'backstage-index',
-    templateUrl: '/index.component.html',
-    styleUrls: ['/index.component.scss']
+    templateUrl: './index.component.html',
+    styleUrls: ['./index.component.scss']
 }) export class BackstageIndexComponent implements OnInit {
 
     public system_message: SystemMessage = new SystemMessage();

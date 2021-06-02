@@ -25,7 +25,7 @@
                           name="profile_gender"
                           (change)="buildSelected( $event )"
                           class="ap-form__input-text">
-                          <option value="null" disabled>Build*</option>
+                          <option value="null" disabled>Location*</option>
                           <option *ngFor="let build of builds_list;" [value]="build.id">
                             {{ build.name }}
                           </option> 
@@ -33,7 +33,7 @@
                         <label 
                           for="profile_gender" 
                           class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                          Build
+                          Location
                         </label>
                       </div>
                     </div>
