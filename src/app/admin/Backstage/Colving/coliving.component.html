@@ -17,7 +17,7 @@
           <div class="icon-viewB">
             <div class="icon-viewB__container">
               <p class="icon-viewB__title text-center">
-                Icon Description: {{ post.titleIcon }}
+                Icon Descripción: {{ post.titleIcon }}
               </p>
               <div class="icon-viewB__icon">
                 <span class="icon-viewB__icon-label text-center">Icon: </span>
@@ -37,7 +37,7 @@
           </p> -->
           <br><br>
           <p class="card__info-dato">
-            <span class="text-bold">Description Slide: </span>
+            <span class="text-bold">Descripción Slide: </span>
             {{ post.description }}
           </p>
         </div>
@@ -64,7 +64,7 @@
         <div class="ml-col-1 text-center margin-top-m">
           <button data-toggle="modal" (click)="primaryModal.show(); passdata(post);"
             class="button button-x button-green button-icon button-icon--edit-white">
-            Edit
+            Editar
           </button>
         </div>
       </div>
@@ -78,8 +78,8 @@
       <div>
         <button type="button" id="close_modal"
           class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
-          (click)="primaryModal.hide()" aria-label="Close">
-          Close
+          (click)="primaryModal.hide()" aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
         <h4 class="modal-title">
@@ -92,13 +92,13 @@
           <br><br>
           <div class="ml-col-1 custom-input margin-bottom-x">
             <input type="text" class="custom-input__text" name="room_icon_name" id="room_icon_name"
-              placeholder="Icon Name" [(ngModel)]="back_stage_data.titleIcon"
+              placeholder="Icon Nombre" [(ngModel)]="back_stage_data.titleIcon"
               [class.custom-input__text--error]="form_watcher.no_name" required />
             <label class="custom-input__label custom-input__label--active" for="room_icon_name">
-              Icon Title
+              Icon Titulo
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_name">
-              Icon Tile is required
+              Icon Tile se requiere
             </span>
           </div>
           <div class="form__image form__image--fix">
@@ -114,9 +114,9 @@
               <span class="padding-tb-min">
                 <strong>Icon Default:</strong> <br />
                 <span class="color-red" *ngIf="form_watcher.no_ico0">
-                  Icon Default is required <br />
+                  Icon Default se requiere <br />
                 </span>
-                *Image resolution 512x512px.
+                *Resolución de imagen 512x512px.
               </span>
             </label>
           </div>
@@ -133,21 +133,21 @@
               <span class="padding-tb-min">
                 <strong>Icon Hover:</strong> <br />
                 <span class="color-red" *ngIf="form_watcher.no_ico1">
-                  Icon Hover is required <br />
+                  Icon Hover se requiere <br />
                 </span>
-                *Image resolution 512x512px.
+                *Resolución de imagen 512x512px.
               </span>
             </label>
           </div>
           <div class="ml-col-1 custom-input margin-top-x">
             <textarea class="custom-input__textarea" name="descripcion_home" id="descripcion_home"
-              placeholder="Description" [(ngModel)]="back_stage_data.description"
+              placeholder="Descripción" [(ngModel)]="back_stage_data.description"
               [class.custom-input__textarea--error]="form_watcher.no_desc" required></textarea>
             <label class="custom-input__label custom-input__label--active" for="descripcion_home">
-              Description
+              Descripción
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
-              Description is required
+              Descripción se requiere
             </span>
           </div>
           <div class="form__image form__image--fix">
@@ -164,9 +164,9 @@
               <span class="padding-tb-min">
                 <strong>Slide Image:</strong> <br />
                 <span class="color-red" *ngIf="form_watcher.no_img0">
-                  Slide Image is required <br />
+                  Slide Image se requiere <br />
                 </span>
-                *Image resolution 1920x1080px.
+                *Resolución de imagen 1920x1080px.
               </span>
             </label>
           </div>
@@ -184,9 +184,9 @@
               <span class="padding-tb-min">
                 <strong>Mobile Slide Image:</strong> <br />
                 <span class="color-red" *ngIf="form_watcher.no_img1">
-                  Mobile Slide Image is required <br />
+                  Mobile Slide Image se requiere <br />
                 </span>
-                *Image resolution 940x1080px.
+                *Resolución de imagen 940x1080px.
               </span>
             </label>
           </div>
@@ -198,14 +198,14 @@
               class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-red button-icon button-icon--delete-white"
               *ngIf="show_delete_button && back_stage_data_array?.length &gt; 1"
               (click)="deleteThisSlide( back_stage_data )">
-              Delete
+              Eliminar
             </button>
           </div>
           <div class="ml-col-2">
             <button type="submit"
               class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
               (click)="sendBackstageData()">
-              Save
+              Guardar
             </button>
           </div>
         </div>
@@ -219,7 +219,7 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="show_modal">
   <div class="ml-modal__pop">
     <p class="ml-modal__pop-titulo margin-bottom-m">
-      Delete Slide
+      Eliminar Slide
     </p>
     <p class="ml-modal__pop-text">
       Are You sure to delete slide <br />
@@ -227,10 +227,10 @@
     </p>
     <div class="ml-modal__pop-buttons">
       <button class="ml-modal__pop-buttons-button button-blue" (click)="showModal()">
-        Cancel
+        Cancelar
       </button>
       <button class="ml-modal__pop-buttons-button button-red" (click)="confirmDeleteSlide()">
-        Delete
+        Eliminar
       </button>
     </div>
   </div>

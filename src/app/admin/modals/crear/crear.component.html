@@ -30,7 +30,7 @@
                 id="new_service_desc"
                 name="new_service_desc"
                 placeholder="Descripcion"
-                [(ngModel)]="reservationData.Description"
+                [(ngModel)]="reservationData.Descripción"
                 class="ap-form__label ap-form__input-textarea"></textarea>
               <label for="new_service_desc" class="ap-form__label ap-form__label-text">
                 Descripción
@@ -182,12 +182,12 @@
 <!-- ----------------------------------------------------------- -->
 <div class="modal-header">
     <h4 class="modal-title pull-left">Nueva Reservación</h4>
-    <!-- button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <!-- button type="button" class="close pull-right" aria-label="Cerrar" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button -->
     <button 
         class="ap-form__rButton button-red button-icon button-icon--cancel-white" (click)="modalRef.hide()">
-        Close
+        Cerrar
     </button>
 </div>
 <div class="modal-body">
@@ -208,7 +208,7 @@
                         </div>
                     </div>
                     <div class="col-12 mb-2">
-                        <input type="text" formControlName="activityNameCtrl" class="form-control" placeholder="Title">
+                        <input type="text" formControlName="activityNameCtrl" class="form-control" placeholder="Titulo">
                     </div>          
                     <div class="col-12 mb-2">
                         <div class="custom-file">
@@ -220,7 +220,7 @@
                     <div class="col-12 mb-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Description</span>
+                                <span class="input-group-text">Descripción</span>
                             </div>
                             <textarea formControlName="activityDescriptionCtrl" class="form-control" aria-label="With textarea"></textarea>
                         </div>                        
@@ -299,7 +299,7 @@
                 <img style="width:100%" class="img-size" [src]="acitivyModel.Photo" />
             </div>    
             <!--div class="col-12">
-                <button (click)="AddActivity()" type="submit" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Activity</button>
+                <button (click)="AddActivity()" type="submit" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Actividad</button>
             </div-->
             <div class="ml-col-1 ap-form__buttons margin-top-x">
                 <button 
@@ -307,7 +307,7 @@
                     (click)="AddActivity()"
                     type="submit"
                     [disabled]="formGroup.invalid">
-                    Add Activity
+                    Add Actividad
                 </button>
             </div>                    
         </div>  

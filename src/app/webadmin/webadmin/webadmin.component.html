@@ -15,7 +15,7 @@
                 [(ngModel)]="titlesObj[0].name">
             </mat-form-field>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_home">
-              Home is required*
+              Home se requiere*
             </span>
           </div>
         </div>
@@ -30,7 +30,7 @@
                 [(ngModel)]="titlesObj[1].name">
             </mat-form-field>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_about">
-              About is required*
+              About se requiere*
             </span>
           </div>
         </div>
@@ -45,7 +45,7 @@
                 [(ngModel)]="titlesObj[2].name">
             </mat-form-field>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_design">
-              Design is required*
+              Design se requiere*
             </span>
           </div>
         </div>
@@ -60,7 +60,7 @@
                 [(ngModel)]="titlesObj[3].name">
             </mat-form-field>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_more">
-              More is required*
+              More se requiere*
             </span>
           </div>
         </div>
@@ -75,7 +75,7 @@
                 [(ngModel)]="titlesObj[4].name">
             </mat-form-field>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_">
-              Button Text is required*
+              Button Text se requiere*
             </span>
           </div>
         </div>
@@ -85,7 +85,7 @@
         <div class="ml-col-1">
           <button style="width: 100px;"
             class="ap-form__buttons-button padding-lateral-m button-pink button-icon button-icon--add-white"
-            (click)="updateTitles()">Update</button>
+            (click)="updateTitles()">Guardar</button>
         </div>
       </div>
 
@@ -106,7 +106,7 @@
           <button class="button" data-toggle="modal"
             (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index )"
             class="index-cards__card-buttons-button button-green button-icon button-icon--edit-white">
-            &nbsp; Edit
+            &nbsp; Editar
           </button>
         </div>
       </div>
@@ -197,8 +197,8 @@
       <div>
         <button type="button"
           class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
-          id="close_button" (click)="primaryModal.hide()" aria-label="Close">
-          Close
+          id="close_button" (click)="primaryModal.hide()" aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
         <h4 class="card-title">
@@ -239,7 +239,7 @@
             <hr>
             <button type="submit" [disabled]="!loginForm.form.valid" (click)="updatephoto()"
               class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white">
-              Save
+              Guardar
             </button>
           </div>
         </form>

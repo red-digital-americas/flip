@@ -3,12 +3,12 @@
     <div class="ml-col-1 padding-general-m margin-bottom-g background-white">
         <div class="ml-col-1 margin-bottom-x">
             <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-               Messages
+               Mensajes
             </h4>
             <button 
                 class="ap-form__rButton button-yellow button-icon button-icon--add padding-lateral-m button-big"
                 (click)="openModal()">
-                New Conversation
+                Nueva conversación
             </button>
         </div>
         <div class="ml-col-1 position-relative">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="ap-chat__people-person ap-chat__people-person--contacts block-tets" style="height: 40px;">
                     <p class="ap-chat__people-person-name ap-chat__people-person--contacts-subtitle padding-left-min">
-                        Conversations
+                        Conversaciones
                     </p>
                     <!-- button class="ap-chat__people-person--contacts-button button-yellow button-icon button-icon--edit">
                         New Message
@@ -50,7 +50,7 @@
                 <div class="ap-chat__chat">
                     <div class="ml-col-1" *ngIf="showChat">
                         <button class="ap-form__rButton button-icon button-icon--cancel-white button-red" (click)="hideChat()">
-                            Close
+                            Cerrar
                         </button>
                         <input 
                             type="checkbox"
@@ -58,7 +58,7 @@
                             name="archive"
                             class="ap-form__rRadioButton "
                             (change)="archive()" />
-                        <label for="archive"> Archive</label>
+                        <label for="archive"> Archivar</label>
                     </div>
                     <div class="chatm card-style margin-top-x" *ngIf="showChat">
                         <h4 style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" class="chatm__datos" (click)="viewDetail(userConversation.id, userConversation.idBooking)">
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     <span class="chatm--selecting center-element-absolute" *ngIf="!showChat">
-                        Select a conversation or start one  
+                        Selecciona una conversación o inicia una  
                     </span>
                 </div>
             </div>

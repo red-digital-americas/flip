@@ -1,9 +1,9 @@
-<button (click)="onNoClick()"  class="ap-form__rButton button-red button-icon button-icon--cancel-white" >Close</button>
-<h1 mat-dialog-title>Messages</h1>
+<button (click)="onNoClick()"  class="ap-form__rButton button-red button-icon button-icon--cancel-white" >Cerrar</button>
+<h1 mat-dialog-title>Mensajes</h1>
 <div mat-dialog-content class="heigh-users">
-    <h5>Invite</h5>
+    <h5>Invitar</h5>
     <!-- <fieldset class="form-group"> -->
-    <ng-select placeholder="Invite people" [multiple]="true" [items]="usersBuildingArray" usersBuildingArray
+    <ng-select placeholder="Invitar gente" [multiple]="true" [items]="usersBuildingArray" usersBuildingArray
         [(ngModel)]="selectedUsers" bindLabel="name" bindValue="id">
 
         <ng-template ng-header-tmp>
@@ -37,7 +37,7 @@
     <br>
     <div class="row padding-lateral-min">
         <textarea 
-            placeholder="Type your message" 
+            placeholder="Escribe tu mensaje" 
             autoresize [(ngModel)]="messageInput" 
             style="border-bottom: solid 1px black; border-radius: 0; padding: 0;"
             id="sent-input" 

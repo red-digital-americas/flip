@@ -24,7 +24,7 @@
         <i class="icon-bell"></i><span class="badge badge-pill badge-danger">{{ alertsCount }}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
-        <div class="dropdown-header text-center"><strong>You have {{ alertsCount }} alerts</strong></div>
+        <div class="dropdown-header text-center"><strong>Tienes {{ alertsCount }} alerts</strong></div>
         <div *ngFor="let alert of alerts">
           <a (click)="goNotifications(alert)" class="dropdown-item">
             <div class="message">
@@ -56,7 +56,7 @@
         <i class="fa fa-comments"></i><span class="badge badge-pill badge-info">{{ messagesCount }}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
-        <div class="dropdown-header text-center"><strong>You have {{ messagesCount }} messages</strong></div>
+        <div class="dropdown-header text-center"><strong>Tienes {{ messagesCount }} messages</strong></div>
         <div *ngFor="let item of messages">
           <a (click)="goMessage(item)" class="dropdown-item">
             <div class="message">
@@ -89,7 +89,7 @@
         <i class="fa fa-tasks"></i><span class="badge badge-pill badge-warning">{{ actionsCount }}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
-        <div class="dropdown-header text-center"><strong>You have {{ actionsCount }} actions</strong></div>
+        <div class="dropdown-header text-center"><strong>Tienes {{ actionsCount }} actions</strong></div>
         <div *ngFor="let action of actions">
           <a (click)="goActions(action)" class="dropdown-item">
             <div class="message">
@@ -130,12 +130,12 @@
 
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
         <div class="dropdown-header text-center"><strong>Account</strong></div>
-        <a class="dropdown-item" (click)="goNotifications(alerts[0])" *ngIf="systemTypeId === 3 || systemTypeId === 4"><i class="fa fa-bell-o"></i> Alerts<span class="badge badge-info">{{ alertsCount }}</span></a>
-        <a class="dropdown-item" (click)="goMessage(messages[0])" *ngIf="systemTypeId === 3 || systemTypeId === 4"><i class="fa fa-comments"></i> Messages<span class="badge badge-success">{{ messagesCount }}</span></a>
+        <a class="dropdown-item" (click)="goNotifications(alerts[0])" *ngIf="systemTypeId === 3 || systemTypeId === 4"><i class="fa fa-bell-o"></i> Alertas<span class="badge badge-info">{{ alertsCount }}</span></a>
+        <a class="dropdown-item" (click)="goMessage(messages[0])" *ngIf="systemTypeId === 3 || systemTypeId === 4"><i class="fa fa-comments"></i> Mensajes<span class="badge badge-success">{{ messagesCount }}</span></a>
         <a class="dropdown-item" (click)="goActions(actions[0])" *ngIf="systemTypeId === 3 || systemTypeId === 4"><i class="fa fa-tasks"></i> Actions<span class="badge badge-danger">{{ actionsCount }}</span></a>
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comment<span class="badge badge-warning">42</span></a> fa-envelope-o -->
         <div class="dropdown-header text-center"><strong>Settings</strong></div>
-        <a class="dropdown-item" (click)="goToProfile(userId)"><i class="fa fa-user"></i> Profile</a>
+        <a class="dropdown-item" (click)="goToProfile(userId)"><i class="fa fa-user"></i> Perfil</a>
         <div class="divider"></div>
         <a class="dropdown-item" (click)="salir($event)"><i class="fa fa-lock"></i> Logout</a>
       </div>

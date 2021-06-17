@@ -46,12 +46,12 @@
               <button 
               (click)="deleteThisPerk( perk )"
               class="ap-cards__card-button button-red button-icon button-icon--delete-white">
-              Delete
+              Eliminar
             </button>
             <button 
               (click)="toggleSectionForm( 'edit', perk)"
               class="ap-cards__card-button button-green button-icon button-icon--edit-white">
-              Edit
+              Editar
             </button>
             </div>
           </div>
@@ -70,7 +70,7 @@
      <button 
          class="ap-form__rButton button-red padding-lateral-m button-icon button-icon--cancel-white"
          (click)="toggleSectionForm()">
-         Close
+         Cerrar
      </button>
    </div>
   <div class="ml-col-7 margin-top-x">
@@ -78,7 +78,7 @@
       <div class="ap-form__input">
         <input 
           type="text"
-          placeholder="Title"
+          placeholder="Titulo"
           id="new_perk_title" 
           name="new_perk_title"
           [(ngModel)]="data_perk.name"
@@ -88,10 +88,10 @@
           for="new_perk_title" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_perk.name != ''">
-          Title
+          Titulo
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
-          Title is required*
+          Titulo se requiere*
         </span>
       </div>
     </div>
@@ -100,7 +100,7 @@
         <textarea 
           id="new_perk_desc"
           name="new_perk_desc"
-          placeholder="Description"
+          placeholder="Descripción"
           [class.form_error_found]="form_data.no_desc"
           [(ngModel)]="data_perk.description"
           class="ap-form__label ap-form__input-textarea"></textarea>
@@ -108,10 +108,10 @@
           for="new_perk_desc" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_perk.description != ''">
-          Description
+          Descripción
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
-          Description is required*
+          Descripción se requiere*
         </span>
       </div>
     </div>
@@ -136,7 +136,7 @@
           Category
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_cate">
-          Category is required*
+          Category se requiere*
         </span>
       </div>
     </div>
@@ -144,7 +144,7 @@
       <div class="ap-form__input">
         <input 
           type="text"
-          placeholder="Street"
+          placeholder="Calle"
           id="new_perk_street" 
           name="new_perk_street"
           [(ngModel)]="data_perk.streetAddress"
@@ -154,10 +154,10 @@
           for="new_perk_street" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_perk.streetAddress != ''">
-          Street
+          Calle
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_stre">
-          Street is required*
+          Calle se requiere*
         </span>
       </div>
     </div>
@@ -165,7 +165,7 @@
       <div class="ap-form__input">
         <input 
           type="text"
-          placeholder="City"
+          placeholder="Ciudad"
           id="new_perk_city" 
           name="new_perk_city"
           [class.form_error_found]="form_data.no_city"
@@ -175,10 +175,10 @@
           for="new_perk_city" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_perk.city != ''">
-          City
+          Ciudad
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_city">
-          City is required*
+          Ciudad se requiere*
         </span>
       </div>
     </div>
@@ -186,7 +186,7 @@
       <div class="ap-form__input">
         <input 
           type="text"
-          placeholder="State Provincy"
+          placeholder="Estado / Provincia"
           id="new_perk_sp" 
           name="new_perk_sp"
           [class.form_error_found]="form_data.no_stat"
@@ -196,10 +196,10 @@
           for="new_perk_sp" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_perk.stateProvincy != ''">
-          State Provincy
+          Estado / Provincia
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_stat">
-          State Provincy is required*
+          Estado / Provincia se requiere*
         </span>
       </div>
     </div>
@@ -221,7 +221,7 @@
           Zip
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_zip">
-          Zip is required*
+          Zip se requiere*
         </span>
       </div>
     </div>
@@ -229,7 +229,7 @@
       <div class="ap-form__input">
         <input 
           type="text"
-          placeholder="Country"
+          placeholder="País"
           id="new_perk_country" 
           name="new_perk_country"
           [(ngModel)]="data_perk.country"
@@ -239,10 +239,10 @@
           for="new_perk_country" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_perk.country != ''">
-          Country
+          País
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_coun">
-          Country is required*
+          País se requiere*
         </span>
       </div>
     </div>
@@ -250,7 +250,7 @@
       <div class="ap-form__input">
         <input 
           type="number"
-          placeholder="Latitude"
+          placeholder="Latitud"
           id="new_perk_latitud" 
           name="new_perk_latitud"
           [(ngModel)]="data_perk.latitude"
@@ -260,10 +260,10 @@
           for="new_perk_latitud" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_perk.latitude != null">
-          Latitude
+          Latitud
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
-          Latitude is required*
+          Latitud se requiere*
         </span>
       </div>
     </div>
@@ -271,7 +271,7 @@
       <div class="ap-form__input">
         <input 
           type="number"
-          placeholder="Longitude"
+          placeholder="Longitud"
           id="new_perk_longitud" 
           name="new_perk_longitud"
           [class.form_error_found]="form_data.no_long"
@@ -281,10 +281,10 @@
           for="new_perk_longitud" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_perk.longitude != null">
-          Longitude
+          Longitud
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">
-          Longitude is required*
+          Longitud se requiere*
         </span>
       </div>
     </div>
@@ -309,7 +309,7 @@
             <span class="text-bold">350x350</span> 
           </span>
           <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
-            Image is required*
+            Image se requiere*
           </span>
         </figure>
       </label>
@@ -318,7 +318,7 @@
   <div class="ml-col-1 ap-form__gallery margin-top-x" id="images_on_gallery">
     <div class="ml-col-1">
       <h4 class="ap-form__titulo text-left">
-        Gallery
+        Galería
       </h4>
     </div>
     <div class="ap-form__gallery-image" *ngFor="let image of images_in_gallery, index as index;">
@@ -366,12 +366,12 @@
       type="button"
       (click)="toggleSectionForm()"
       class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
-      Cancel
+      Cancelar
     </button> -->
     <button 
       type="submit"
       class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white">
-      Save
+      Guardar
     </button>
   </div>
 </form>
@@ -396,22 +396,22 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
     <p class="ml-modal__pop-titulo margin-bottom-m">
-      Delete Perk
+      Eliminar Perk
     </p>
     <p class="ml-modal__pop-text">
-      Are you sure to delete perk<br />
+      ¿Estás seguro de eliminar perk<br />
       <span class="text-bold">"{{ perk_to_delete.name }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="showModal()"
         class="ml-modal__pop-buttons-button button-pink button-icon button-icon--cancel-white">
-        Cancel
+        Cancelar
       </button>
       <button 
         (click)="confirmDeleteElement()"
         class="ml-modal__pop-buttons-button button-black button-icon button-icon--delete-white">
-        Delete
+        Eliminar
       </button>
     </div>
   </div>
@@ -443,13 +443,13 @@
           <div class="col-12 col-lg-8 col-xl-8">
             <div class="row">                                      
               <div class="col-12 mb-2">
-                  <input type="text" formControlName="perkNameCtrl" class="form-control" placeholder="Title">
+                  <input type="text" formControlName="perkNameCtrl" class="form-control" placeholder="Titulo">
               </div>          
                                                             
               <div class="col-12 mb-2">
                   <div class="input-group">
                       <div class="input-group-prepend">
-                          <span class="input-group-text">Description</span>
+                          <span class="input-group-text">Descripción</span>
                       </div>
                       <textarea formControlName="perkDescriptionCtrl" class="form-control" aria-label="With textarea"></textarea>
                   </div>                        
@@ -459,7 +459,7 @@
                 <input type="text" formControlName="perkStreetAddressCtrl" class="form-control" placeholder="StreetAddress">
               </div>   
               <div class="col-4 mb-2">
-                <input type="text" formControlName="perkCityCtrl" class="form-control" placeholder="City">
+                <input type="text" formControlName="perkCityCtrl" class="form-control" placeholder="Ciudad">
               </div>   
               <div class="col-4 mb-2">
                 <input type="text" formControlName="perkStateProvincyCtrl" class="form-control" placeholder="StateProvincy">
@@ -468,13 +468,13 @@
                 <input type="text" formControlName="perkZipCtrl" class="form-control" placeholder="Zip">
               </div>   
               <div class="col-3 mb-2">
-                <input type="text" formControlName="perkCountryCtrl" class="form-control" placeholder="Country">
+                <input type="text" formControlName="perkCountryCtrl" class="form-control" placeholder="País">
               </div>   
               <div class="col-3 mb-2">
-                <input type="text" formControlName="perkLatitudeCtrl" class="form-control" placeholder="Latitude">
+                <input type="text" formControlName="perkLatitudeCtrl" class="form-control" placeholder="Latitud">
               </div>   
               <div class="col-3 mb-2">
-                <input type="text" formControlName="perkLongitudeCtrl" class="form-control" placeholder="Longitude">
+                <input type="text" formControlName="perkLongitudeCtrl" class="form-control" placeholder="Longitud">
               </div>                 
               
               <div class="col-6 mb-2">                        
@@ -561,7 +561,7 @@
               </div>
             </div>
             <button (click)="DetailPerk(post.id)" type="button" class="btn btn-outline-primary">View Perk</button>
-            <button (click)="DeletePerk(post.id)" type="button" class="btn  btn-outline-danger">Delete Perk</button>
+            <button (click)="DeletePerk(post.id)" type="button" class="btn  btn-outline-danger">Eliminar Perk</button>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@
       </div>
       <div class="navbar__component ml-col-4">
         <button class="navbar__component-button" (click)="serv(IDBUILD)">
-          Additional Services
+          Additional Servicios
         </button>
       </div>
       <div class="navbar__component ml-col-4">
@@ -18,39 +18,39 @@
     </div>
   </div> -->
 <div class="row">
-    <h3 Class="text-ultra" style="padding-left: 55px; padding-top: 25px;"> Memberships</h3>
+    <h3 Class="text-ultra" style="padding-left: 55px; padding-top: 25px;"> Membresías</h3>
 </div>
 <div class="row padding-bottom-m padding-general-m" style="padding-top: 15px;">
     <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-x" *ngFor="let post of back_stage_data_array, let i = index;">
         <h2 Class="" style="font-family: headerFont;
         font-size: large; padding-bottom: 25px;">
-             Section: {{ post.id }}
+             Sección {{ post.id }}
         </h2>
       <div class="ml-col-1">
         <div class="card__info margin-bottom-x" style="height: auto !important;">
           <p class="card__info-dato">
-            <span class="text-bold">Title Slide: </span> 
+            <span class="text-bold">Titulo Slide: </span> 
             {{ post.title }}
           </p>
           <br><br> 
           <p class="card__info-dato">
-            <span class="text-bold">Description: </span> 
+            <span class="text-bold">Descripción: </span> 
             {{ post.description }}
           </p>
         </div>
         <div class="card__info margin-bottom-x" style="height: auto !important;"  *ngIf="post.id != '4'">
           
                 <p class="card__info-dato ml-col-4o">
-                  <span class="text-bold">Price1: </span> 
+                  <span class="text-bold">Precio 1: </span> 
                   {{ post.price | currency }} <br><br>
-                  <span class="text-bold">Description: </span> 
+                  <span class="text-bold">Descripción: </span> 
                   {{post.descPrice}}
                 </p>
 
                 <p class="card__info-dato ml-col-4o">
-                  <span class="text-bold">Price2: </span> 
+                  <span class="text-bold">Precio 2: </span> 
                   {{ post.price1 | currency}} <br><br>
-                  <span class="text-bold">Description: </span> 
+                  <span class="text-bold">Descripción: </span> 
                   {{post.descPrice1}}
                 </p>
 
@@ -59,13 +59,13 @@
           </div>
         <!--   <div class="card__info margin-bottom-x" style="height: auto !important;">
             <p class="card__info-dato">
-              <span class="text-bold">Price2: </span> 
+              <span class="text-bold">Precio 2: </span> 
               {{ post.price1 | currency}}
             </p>
           </div> -->
         <div *ngIf="post.id == '4'" class="card__info margin-bottom-x" style="height: auto !important;">
             <p class="card__info-dato">
-              <span class="text-bold">Description Slide: </span> 
+              <span class="text-bold">Descripción Slide: </span> 
               {{ post.description }}
             </p>
         </div>
@@ -118,7 +118,7 @@
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(post);"
             class="button button-x button-green button-icon button-icon--add-white">
-            Edit
+            Editar
           </button>
         </div>
       </div>
@@ -128,8 +128,8 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content card">
         <div>
-          <button type="button" id="close_modal" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"  (click)="primaryModal.hide()" aria-label="Close">
-            Close
+          <button type="button" id="close_modal" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"  (click)="primaryModal.hide()" aria-label="Cerrar">
+            Cerrar
           </button>
           <br><br>
           <h4 class="modal-title">
@@ -145,16 +145,16 @@
                 class="custom-input__text" 
                 name="titulo_home" 
                 id="titulo_home" 
-                placeholder="Title" 
+                placeholder="Titulo" 
                 [(ngModel)]="back_stage_data.title"
                 maxlength="20"
                 [class.custom-input__text--error]="form_watcher.no_titl"
                 required />
               <label class="custom-input__label custom-input__label--active" for="titulo_home">
-                Title
+                Titulo
               </label>
               <span class="custom-input__text--errorm" *ngIf="form_watcher.no_titl">
-                Title is required
+                Titulo se requiere
               </span>
             </div>
 
@@ -164,16 +164,16 @@
                 class="custom-input__text" 
                 name="titulo_home" 
                 id="titulo_home" 
-                placeholder="Title" 
+                placeholder="Titulo" 
                 [(ngModel)]="back_stage_data.description"
                 maxlength="20"
                 [class.custom-input__text--error]="form_watcher.no_titl"
                 required />
               <label class="custom-input__label custom-input__label--active" for="titulo_home">
-                Description
+                Descripción
               </label>
               <span class="custom-input__text--errorm" *ngIf="form_watcher.no_desc">
-                Description is required
+                Descripción se requiere
               </span>
             </div>
 
@@ -183,16 +183,16 @@
                   class="custom-input__text" 
                   name="precio" 
                   id="precio" 
-                  placeholder="Title" 
+                  placeholder="Titulo" 
                   [(ngModel)]="back_stage_data.price"
                   maxlength="20"
                   [class.custom-input__text--error]="form_watcher.no_p"
                   required />
                 <label class="custom-input__label custom-input__label--active" for="precio">
-                  Price
+                  Precio
                 </label>
                 <span class="custom-input__text--errorm" *ngIf="form_watcher.no_p">
-                  Price is required
+                  Precio se requiere
                 </span>
               </div>
 
@@ -202,16 +202,16 @@
                   class="custom-input__text" 
                   name="desprecio" 
                   id="desprecio" 
-                  placeholder="Title" 
+                  placeholder="Titulo" 
                   [(ngModel)]="back_stage_data.descPrice"
                   maxlength="20"
                   [class.custom-input__text--error]="form_watcher.no_p"
                   required />
                 <label class="custom-input__label custom-input__label--active" for="desprecio">
-                  Price description
+                  Precio description
                 </label>
                 <span class="custom-input__text--errorm" *ngIf="form_watcher.no_p">
-                  Price description is required
+                  Precio description se requiere
                 </span>
               </div>
 
@@ -221,16 +221,16 @@
                   class="custom-input__text" 
                   name="precio1" 
                   id="precio1" 
-                  placeholder="Title" 
+                  placeholder="Titulo" 
                   [(ngModel)]="back_stage_data.price1"
                   maxlength="20"
                   [class.custom-input__text--error]="form_watcher.no_p1"
                   required />
                 <label class="custom-input__label custom-input__label--active" for="precio1">
-                  Price 1  
+                  Precio 1  
                 </label>
                 <span class="custom-input__text--errorm" *ngIf="form_watcher.no_p1">
-                  Proce 1 is required
+                  Proce 1 se requiere
                 </span>
               </div>
 
@@ -240,16 +240,16 @@
                   class="custom-input__text" 
                   name="desprecio1" 
                   id="desprecio1" 
-                  placeholder="Title" 
+                  placeholder="Titulo" 
                   [(ngModel)]="back_stage_data.descPrice1"
                   maxlength="20"
                   [class.custom-input__text--error]="form_watcher.no_p"
                   required />
                 <label class="custom-input__label custom-input__label--active" for="desprecio1">
-                  Price 1 description
+                  Precio 1 descripción
                 </label>
                 <span class="custom-input__text--errorm" *ngIf="form_watcher.no_p">
-                  Price 1 description is required
+                  Precio 1 descripción se requiere
                 </span>
               </div>
           <!--   <div class="ml-col-1 custom-input margin-top-m" *ngIf="back_stage_data.id == '4'">
@@ -258,7 +258,7 @@
                   class="custom-input__text" 
                   name="no_desc" 
                   id="no_desc" 
-                  placeholder="Title" 
+                  placeholder="Titulo" 
                   [(ngModel)]="back_stage_data.description"
                   maxlength="500"
                   [class.custom-input__text--error]="form_watcher.no_titl"
@@ -267,7 +267,7 @@
                   Description
                 </label>
                 <span class="custom-input__text--errorm" *ngIf="form_watcher.no_titl">
-                  Description is required
+                  Description se requiere
                 </span>
               </div> -->
               <div class="ml-col-1 custom-input margin-top-m" *ngIf="back_stage_data.id == '4'">
@@ -275,15 +275,15 @@
                   class="custom-input__textarea" 
                   name="descripcion_home" 
                   id="descripcion_home" 
-                  placeholder="Description" 
+                  placeholder="Descripción" 
                   [(ngModel)]="back_stage_data.description"
                   [class.custom-input__textarea--error]="form_watcher.no_desc"
                   required></textarea>
                 <label class="custom-input__label custom-input__label--active" for="descripcion_home">
-                    Description
+                    Descripción
                 </label>
                 <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
-                    Description is required
+                    Descripción se requiere
                 </span>
                 </div>
             <div class="form__image">
@@ -306,9 +306,9 @@
                 <span class="padding-tb-min">
                   <strong>Desktop photo:</strong> <br /> 
                   <span class="color-red" *ngIf="form_watcher.no_img0">
-                    Desktop photo is required <br />
+                    Desktop photo se requiere <br />
                   </span>
-                  *Image resolution 1920x1080px.
+                  *Resolución de imagen 1920x1080px.
                 </span>
               </label>
             </div>
@@ -332,9 +332,9 @@
                 <span class="padding-tb-min">
                   <strong>Desktop mobile:</strong> <br /> 
                   <span class="color-red" *ngIf="form_watcher.no_img1">
-                    Desktop mobile is required <br />
+                    Desktop mobile se requiere <br />
                   </span>
-                  *Image resolution 441x660px.
+                  *Resolución de imagen 441x660px.
                 </span>
               </label>
             </div>
@@ -349,16 +349,16 @@
                     class="custom-input__text" 
                     name="icon_name_{{ 1 + index }}" 
                     id="icon_name_{{ 1 + index }}" 
-                    placeholder="Icon Name" 
+                    placeholder="Icon Nombre" 
                     maxlength="14"
                     [value]="icons.titleIcon"
                     [class.custom-input__text--error]="icons.titleIcon == null"
                     required />
                   <label class="custom-input__label custom-input__label--active" for="icon_name_{{ 1 + index }}">
-                    Icon Name
+                    Icon Nombre
                   </label>
                   <span class="custom-input__text--errorm" *ngIf="icons.titleIcon == null">
-                    Icon Name is required
+                    Icon Nombre se requiere
                   </span>
                 </div>
                 <div class="form__image">
@@ -387,9 +387,9 @@
                     <span class="padding-tb-min">
                       <strong>Icon Default:</strong> <br /> 
                       <span class="color-red" *ngIf="form_watcher.no_ico1">
-                        Icon Default is required <br />
+                        Icon Default se requiere <br />
                       </span>
-                      *Image resolution 512x512px.
+                      *Resolución de imagen 512x512px.
                     </span>
                   </label>
                 </div>
@@ -421,9 +421,9 @@
                     <span class="padding-tb-min">
                       <strong>Icon Default:</strong> <br /> 
                       <span class="color-red" *ngIf="form_watcher.no_ico0">
-                        Icon Default is required <br />
+                        Icon Default se requiere <br />
                       </span>
-                      *Image resolution 512x512px.
+                      *Resolución de imagen 512x512px.
                     </span>
                   </label>
                 </div>
@@ -432,7 +432,7 @@
                     id="{{ icons.id }}"
                     (click)="deleteIconsServices( index )"
                     class="ap-form__buttons-button ap-form__buttons-button--big button-red button-icon button-icon--delete-white">
-                    Delete
+                    Eliminar
                   </button>
                 </div>
               </div>
@@ -449,7 +449,7 @@
         </div>
         <div class="card__row margin-top-x" style="text-align: end;">
           <hr>
-          <button type="button" class="ap-form__buttons-button ap-form__buttons-button button-green button-icon nutton-icon--add-white" (click)="updatephoto()">Save</button>
+          <button type="button" class="ap-form__buttons-button ap-form__buttons-button button-green button-icon nutton-icon--add-white" (click)="updatephoto()">Guardar</button>
         </div>
       </div>
     </div>

@@ -12,12 +12,12 @@
     </div>
     <div class="navbar__component ml-col-2o">
       <button class="navbar__component-button" (click)="serv(IDBUILD)">
-        Build: Services
+        Build: Servicios
       </button>
     </div>
     <div class="navbar__component ml-col-2o">
       <button class="navbar__component-button navbar__component-button--active" (click)="room(IDBUILD)">
-        Build: Room
+        Build: Cuarto
       </button>
     </div>
     <div class="navbar__component ml-col-2o">
@@ -37,17 +37,17 @@
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(this.post_blanck);"
             class="button button-x">
-            Add Room Type
+            Add Tipo de Habitación
     </button>
   </div> -->
 </div>
 <div class="row padding-bottom-m padding-general-m" style="padding-top: 0px;">
   <div class="ml-col-1 room-data__tabs text-center">
     <span class="room-data__tab room-data__tab--active" (click)="showSection( $event, 'room_a')">
-      Room type 1
+      Cuarto type 1
     </span>
     <span class="room-data__tab" (click)="showSection( $event ,'room_b')">
-      Room type 2
+      Cuarto type 2
     </span>
   </div>
   <div 
@@ -60,13 +60,13 @@
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
           <p class="room-data__card-titulo">
-            <span class="text-bold">Room type title: </span>
+            <span class="text-bold">Cuarto type title: </span>
             {{ post.title }}
           </p>
         </div>
         <div class="ml-col-1">
           <p class="room-data__card-dato">
-            <span class="text-bold">Room Description: </span>
+            <span class="text-bold">Cuarto Descripción: </span>
             {{ post.desc }}
           </p>
         </div>
@@ -79,13 +79,13 @@
         <div class="ml-col-1 ">
           <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
-              <span class="text-bold">Price Description: <br /> </span>
+              <span class="text-bold">Precio Descripción: <br /> </span>
               {{ post.descPrice }}
             </p>
           </div>
           <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
-              <span class="text-bold">Price: <br /> </span>
+              <span class="text-bold">Precio: <br /> </span>
               {{ post.price | currency }}
             </p>
           </div>
@@ -93,13 +93,13 @@
         <div class="ml-col-1">
           <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
-              <span class="text-bold">Price 2 Description: <br /> </span>
+              <span class="text-bold">Precio 2 Descripción: <br /> </span>
               {{ post.descPrice1 }}
             </p>
           </div>
           <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
-              <span class="text-bold">Price 2: <br /> </span>
+              <span class="text-bold">Precio 2: <br /> </span>
               {{ post.price1 | currency }}
             </p>
           </div>
@@ -124,7 +124,7 @@
             data-toggle="modal" 
             (click)="infoModal.show(); passdataRoom(post);"
             class="button button-x button-green button-icon button-icon--edit-white">
-            Edit
+            Editar
           </button>
         </div>
       </div>
@@ -140,7 +140,7 @@
                   data-toggle="modal" 
                   (click)="primaryModal.show(); passPhotosDataA(this.post_blanck);"
                   class="button button-x button-pink button-icon button-icon--add-white">
-                  Add Room Type
+                  Add Tipo de Habitación
           </button>
         </div>
       </div>
@@ -164,7 +164,7 @@
           </div>
           <div class="ml-col-1">
             <p class="room-data__card-dato">
-              <span class="text-bold">Slide Description: </span>
+              <span class="text-bold">Slide Descripción: </span>
               {{ photo.description }}
             </p>
           </div>
@@ -177,7 +177,7 @@
               Icon Title: {{ photo.titleIcon }}
             </p> -->
             <p class="room-data__card-dato text-center">
-              <span class="text-bold">Icon Title:  </span>
+              <span class="text-bold">Icon Titulo:  </span>
               {{ photo.titleIcon }}
             </p>
             <div class="icon-viewB__icon">
@@ -216,7 +216,7 @@
           data-toggle="modal" 
           (click)="primaryModal.show(); passPhotosData( photo );"
           class="button button-x button-green button-icon button-icon--edit-white">
-          Edit
+          Editar
         </button>
       </div>
     </div>
@@ -230,13 +230,13 @@
       <div class="room-data__card ml-col-1 card-style padding-general-m ">
         <div class="ml-col-1">
           <p class="room-data__card-titulo">
-            <span class="text-bold">Room type title: </span>
+            <span class="text-bold">Cuarto type title: </span>
             {{ post.title }}
           </p>
         </div>
         <div class="ml-col-1">
           <p class="room-data__card-dato">
-            <span class="text-bold">Room Description: </span>
+            <span class="text-bold">Cuarto Descripción: </span>
             {{ post.desc }}
           </p>
         </div>
@@ -249,13 +249,13 @@
         <div class="ml-col-1 ">
           <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
-              <span class="text-bold">Price Description: <br /> </span>
+              <span class="text-bold">Precio Descripción: <br /> </span>
               {{ post.descPrice }}
             </p>
           </div>
           <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
-              <span class="text-bold">Price: <br /> </span>
+              <span class="text-bold">Precio: <br /> </span>
               {{ post.price | currency }}
             </p>
           </div>
@@ -263,13 +263,13 @@
         <div class="ml-col-1">
           <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
-              <span class="text-bold">Price 2 Description: <br /> </span>
+              <span class="text-bold">Precio 2 Descripción: <br /> </span>
               {{ post.descPrice1 }}
             </p>
           </div>
           <div class="ml-col-2">
             <p class="room-data__card-dato text-center">
-              <span class="text-bold">Price 2: <br /> </span>
+              <span class="text-bold">Precio 2: <br /> </span>
               {{ post.price1 | currency }}
             </p>
           </div>
@@ -294,7 +294,7 @@
             data-toggle="modal" 
             (click)="infoModal.show(); passdataRoom(post);"
             class="button button-x button-green button-icon button-icon--edit-white">
-            Edit
+            Editar
           </button>
         </div>
       </div>
@@ -309,7 +309,7 @@
                   data-toggle="modal" 
                   (click)="primaryModal.show(); passPhotosDataB(this.post_blanck);"
                   class="button button-x button-pink button-icon  button-icon--add-white">
-                  Add Room Type
+                  Add Tipo de Habitación
           </button>
         </div>
       </div>
@@ -332,7 +332,7 @@
           </div>
           <div class="ml-col-1">
             <p class="room-data__card-dato">
-              <span class="text-bold">Slide Description: </span>
+              <span class="text-bold">Slide Descripción: </span>
               {{ photo.description }}
             </p>
           </div>
@@ -342,7 +342,7 @@
         <div class="icon-viewB">
           <div class="icon-viewB__container">
             <p class="icon-viewB__title text-center">
-              Icon Description: {{ photo.titleIcon }}
+              Icon Descripción: {{ photo.titleIcon }}
             </p>
             <div class="icon-viewB__icon">
               <span class="icon-viewB__icon-label text-center">Icon: </span> 
@@ -380,7 +380,7 @@
           data-toggle="modal" 
           (click)="primaryModal.show(); passPhotosData( photo, post.id );"
           class="button button-x button-green button-icon button-icon--edit-white">
-          Edit
+          Editar
         </button>
       </div>
     </div>
@@ -394,8 +394,8 @@
                 id="close_album"
                 class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" 
                 (click)="primaryModal.hide()" 
-                aria-label="Close">
-          Close
+                aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
         <h4 class="modal-title">Complete the slide information</h4>
@@ -409,15 +409,15 @@
               class="custom-input__text" 
               name="title_slide_name" 
               id="title_slide_name" 
-              placeholder="Icon Name" 
+              placeholder="Icon Nombre" 
               [(ngModel)]="photos_data.title"
               [class.custom-input__text--error]="form_watcher_b.no_name"
               required />
             <label class="custom-input__label custom-input__label--active" for="title_slide_name">
-              Title Slide
+              Titulo Slide
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher_b.no_name">
-              Tile Slide is required
+              Tile Slide se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -427,13 +427,13 @@
               name="room_slide_desc" 
               id="room_slide_desc" 
               [class.custom-input__textarea--error]="form_watcher.no_desc"
-              placeholder="Description" 
+              placeholder="Descripción" 
               required></textarea>
             <label class="custom-input__label custom-input__label--active" for="room_slide_desc">
-              Slide Description  
+              Slide Descripción  
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
-              Slide Description is required
+              Slide Descripción se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -442,15 +442,15 @@
               class="custom-input__text" 
               name="room_icon_name" 
               id="room_icon_name" 
-              placeholder="Icon Name" 
+              placeholder="Icon Nombre" 
               [(ngModel)]="photos_data.titleIcon"
               [class.custom-input__text--error]="form_watcher_b.no_name"
               required />
             <label class="custom-input__label custom-input__label--active" for="room_icon_name">
-              Icon Title
+              Icon Titulo
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher_b.no_name">
-              Icon Tile is required
+              Icon Tile se requiere
             </span>
           </div>
           <div class="form__image form__image--fix">
@@ -473,9 +473,9 @@
               <span class="padding-tb-min">
                 <strong>Icon Default:</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher_b.no_ico0">
-                  Icon Default is required <br />
+                  Icon Default se requiere <br />
                 </span>
-                *Image resolution 512x512px.
+                *Resolución de imagen 512x512px.
               </span>
             </label>
           </div>
@@ -499,9 +499,9 @@
               <span class="padding-tb-min">
                 <strong>Icon Hover:</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher_b.no_ico1">
-                  Icon Hover is required <br />
+                  Icon Hover se requiere <br />
                 </span>
-                *Image resolution 512x512px.
+                *Resolución de imagen 512x512px.
               </span>
             </label>
           </div>
@@ -525,9 +525,9 @@
               <span class="padding-tb-min">
                 <strong>Desktop Photo:</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher_b.no_img0">
-                  Desktop Photo is required <br />
+                  Desktop Photo se requiere <br />
                 </span>
-                *Image resolution 1920x1080px.
+                *Resolución de imagen 1920x1080px.
               </span>
             </label>
           </div>
@@ -551,9 +551,9 @@
               <span class="padding-tb-min">
                 <strong>Mobile photo:</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher_b.no_img1">
-                  Mobile Photo is required <br />
+                  Mobile Photo se requiere <br />
                 </span>
-                *Image resolution 441x660px.
+                *Resolución de imagen 441x660px.
               </span>
             </label>
           </div>
@@ -563,14 +563,14 @@
             <button type="submit" 
             class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-red button-icon button-icon--delete-white" 
                     (click)="deleteSlide()">
-              Delete
+              Eliminar
             </button>
           </div> 
           <div class="ml-col-2">
                <button type="button" 
                          class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white" 
                         (click)="updatephoto()">
-                        Save 
+                        Guardar 
                </button>
           </div>
         </div>
@@ -586,11 +586,11 @@
                 id="close_room"
                 class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" 
                 (click)="infoModal.hide()" 
-                aria-label="Close">
-          Close
+                aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
-        <h4 class="modal-title">Complete the Room information</h4>
+        <h4 class="modal-title">Complete the Cuarto information</h4>
       </div>
       <hr>
       <div class="form">
@@ -606,10 +606,10 @@
               [class.custom-input__text--error]="form_watcher.no_titl"
               required />
             <label class="custom-input__label custom-input__label--active" for="room_titulo">
-              Title
+              Titulo
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
-              Title is required
+              Titulo se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -619,13 +619,13 @@
               name="room_desc" 
               id="room_desc" 
               [class.custom-input__textarea--error]="form_watcher.no_desc"
-              placeholder="Description" 
+              placeholder="Descripción" 
               required></textarea>
             <label class="custom-input__label custom-input__label--active" for="room_desc">
-              Description
+              Descripción
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
-              Description is required
+              Descripción se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -635,15 +635,15 @@
               class="custom-input__text" 
               name="room_serv" 
               id="room_serv" 
-              placeholder="Price" 
-              [(ngModel)]="room_data.Price"
+              placeholder="Precio" 
+              [(ngModel)]="room_data.Precio"
               [class.custom-input__text--error]="form_watcher.no_pric"
               required />
             <label class="custom-input__label custom-input__label--active" for="room_serv">
-              Price
+              Precio
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_pric">
-              Price is required
+              Precio se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -653,13 +653,13 @@
               id="room_price_0" 
               [(ngModel)]="room_data.descPrice"
               [class.custom-input__textarea--error]="form_watcher.no_pde0"
-              placeholder="Price Description" 
+              placeholder="Precio Descripción" 
               required></textarea>
             <label class="custom-input__label custom-input__label--active" for="room_price_0">
-              Price Description
+              Precio Descripción
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_pde0">
-              Price Description is required
+              Precio Descripción se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -670,14 +670,14 @@
               class="custom-input__text" 
               name="room_price_num_1" 
               id="room_price_num_1" 
-              placeholder="Price 2" 
+              placeholder="Precio 2" 
               [class.custom-input__text--error]="form_watcher.no_pri1"
               required />
             <label class="custom-input__label custom-input__label--active" for="room_price_num_1">
-              Price 2
+              Precio 2
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_pri1">
-              Price 2 is required
+              Precio 2 se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -687,13 +687,13 @@
               id="room_price_1" 
               [(ngModel)]="room_data.descPrice1"
               [class.custom-input__textarea--error]="form_watcher.no_pde1"
-              placeholder="Price 2 Description" 
+              placeholder="Precio 2 Descripción" 
               required></textarea>
             <label class="custom-input__label custom-input__label--active" for="room_price_1">
-              Price 2 Description
+              Precio 2 Descripción
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_pde1">
-              Price 2 Description is required
+              Precio 2 Descripción se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -710,7 +710,7 @@
               Get Guide URL
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_guid">
-              Get Guide URL is required
+              Get Guide URL se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input">
@@ -727,7 +727,7 @@
               View 360 URL
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_view">
-              View 360 URL is required
+              View 360 URL se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input__video margin-bottom-x custom-input__video--input" *ngIf="room_data.View360">
@@ -744,7 +744,7 @@
           <button type="button" 
                   class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
                   (click)="updateindo()">
-                  Save
+                  Guardar
           </button>
         </div>
       </div>

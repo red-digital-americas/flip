@@ -18,7 +18,7 @@
           class="button padding-lateral button-green button-icon button-icon--edit-white"
           data-toggle="modal" 
           (click)="primaryModal.show(); passdata( post );">
-            Edit
+            Editar
           </button>
         </div>
       </div>
@@ -33,7 +33,7 @@
         <div class="card__row">
           <div class="card__info card__info--reziser">
             <p class="card__info-dato">
-              <span class="text-bold">Title: </span>
+              <span class="text-bold">Titulo: </span>
               {{ post.title }}
             </p>
             <p class="card__info-dato">
@@ -79,7 +79,7 @@
         <img class="img-size-build" src="{{post.photo}}" />
       </div>
       <div style="margin-bottom:15px; word-wrap: break-word;">
-        <p><strong> Title : </strong>{{post.title}}</p>
+        <p><strong> Titulo : </strong>{{post.title}}</p>
         <br>
         <p><strong> Short Resume :  </strong> {{post.reusme}}</p>
         <br>
@@ -108,8 +108,8 @@
                 id="close_modal"
                 class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" 
                 (click)="primaryModal.hide()" 
-                aria-label="Close">
-          Close
+                aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
         <h4 class="modal-title">Complete the information for press</h4>
@@ -123,15 +123,15 @@
               class="custom-input__text" 
               name="room_titulo" 
               id="room_titulo" 
-              placeholder="Title" 
+              placeholder="Titulo" 
               [(ngModel)]="press_data.Title"
               [class.custom-input__text--error]="form_watcher.no_titl"
               required />
             <label class="custom-input__label custom-input__label--active" for="room_titulo">
-              Title
+              Titulo
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
-              Title is required
+              Titulo se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -140,15 +140,15 @@
               class="custom-input__text" 
               name="room_titulo" 
               id="room_titulo" 
-              placeholder="Short Description" 
+              placeholder="Short Descripción" 
               [(ngModel)]="press_data.Resume"
               [class.custom-input__text--error]="form_watcher.no_sdes"
               required />
             <label class="custom-input__label custom-input__label--active" for="room_titulo">
-              Short Description
+              Short Descripción
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_sdes">
-              Short Description is required
+              Short Descripción se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -158,13 +158,13 @@
               id="room_desc" 
               [(ngModel)]="press_data.LongResumen"
               [class.custom-input__textarea--error]="form_watcher.no_ldes"
-              placeholder="Long Description" 
+              placeholder="Long Descripción" 
               required></textarea>
             <label class="custom-input__label custom-input__label--active" for="room_desc">
-              Long Description
+              Long Descripción
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_ldes">
-              Long Description is required
+              Long Descripción se requiere
             </span>
           </div>
           <div class="form__image form__image--fix">
@@ -187,9 +187,9 @@
               <span class="padding-tb-min">
                 <strong>Desktop Photo :</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher.no_phot">
-                  Desktop Photo is required <br />
+                  Desktop Photo se requiere <br />
                 </span>
-                *Image resolution 640x450px.
+                *Resolución de imagen 640x450px.
               </span>
             </label>
           </div>
@@ -200,7 +200,7 @@
          <button type="button" 
                   class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
                  (click)="updatephoto()">
-                 Save
+                 Guardar
          </button>
       </div>
     </div>

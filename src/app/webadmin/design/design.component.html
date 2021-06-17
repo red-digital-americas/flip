@@ -20,7 +20,7 @@
               <button 
                   (click)="primaryModal.show(); passdata( post );"
                   class="ap-cards__card-button button-green button-icon button-icon--edit-white">
-                  Edit
+                  Editar
               </button>
           </div>
       </div>
@@ -36,8 +36,8 @@
               id="close_modal"
               class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
               (click)="primaryModal.hide()" 
-              aria-label="Close">
-            Close
+              aria-label="Cerrar">
+            Cerrar
         </button>
         <br><br>
         <h4 class="modal-title">Select the images to change at position</h4>
@@ -58,7 +58,7 @@
               Category
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
-              Category is required
+              Category se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -68,13 +68,13 @@
               id="room_desc" 
               [(ngModel)]="desing_data.Description"
               [class.custom-input__textarea--error]="form_watcher.no_desc"
-              placeholder="Description" 
+              placeholder="Descripción" 
               required></textarea>
             <label class="custom-input__label custom-input__label--active" for="room_desc">
-              Description
+              Descripción
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
-              Description is required
+              Descripción se requiere
             </span>
           </div>
           <div class="form__image form__image--fix">
@@ -97,9 +97,9 @@
               <span class="padding-tb-min">
                 <strong>Desktop Photo :</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher.no_img0">
-                  Desktop Photo is required <br />
+                  Desktop Photo se requiere <br />
                 </span>
-                *Image resolution 1920x1080px.
+                *Resolución de imagen 1920x1080px.
               </span>
             </label>
           </div>
@@ -110,7 +110,7 @@
         <button type="button" 
                 class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white" 
                 (click)="updatephoto()">
-               Save
+               Guardar
         </button>
       </div>
     </div>

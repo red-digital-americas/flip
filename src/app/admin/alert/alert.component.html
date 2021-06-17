@@ -10,7 +10,7 @@
             <button style="float: right;"
               class="button button-x button-pink padding-lateral-m button-icon button-icon--add-white"
               (click)="toggleSectionForm( 'new' )">
-              Add Alert
+              Agregar alerta
             </button>
           </div>
           <div class="ml-col-1 margin-top-m font-big color-red text-center" *ngIf="alerts?.length == 0">
@@ -33,13 +33,13 @@
                 type="button"
                 (click)="toggleSectionForm('delete', alert)"
                 class="ap-cards__card-button button-red button-icon button-icon--delete-white">
-                Delete
+                Eliminar
               </button>
               <button 
                 type="button"
                 (click)="toggleSectionForm( 'edit', alert )"
                 class="ap-cards__card-button ap-cards__card-button--aceptar button-green button-icon button-icon--edit-white">
-                Edit 
+                Editar 
               </button>
               </div>
             </div>
@@ -60,7 +60,7 @@
          <button 
              class="ap-form__rButton button-red padding-lateral-m button-icon button-icon--cancel-white"
              (click)="toggleSectionForm()">
-             Close
+             Cerrar
          </button>
        </div>
       <div class="ml-col-7 margin-top-x">
@@ -69,7 +69,7 @@
             <input 
               required
               type="text" 
-              placeholder="Title"
+              placeholder="Titulo"
               id="new_post_title" 
               name="new_post_title"
               [(ngModel)]="data_post.name"
@@ -79,10 +79,10 @@
               for="new_post_title" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_post.name != ''">
-              Title
+              Titulo
             </label>
             <span class="form_error_found_label" *ngIf="forms_erros_found.no_title">
-              Title is required*
+              Titulo se requiere*
             </span>
           </div>
         </div>
@@ -92,7 +92,7 @@
               required
               id="new_post_desc"
               name="new_post_desc"
-              placeholder="Description"
+              placeholder="Descripción"
               [(ngModel)]="data_post.description"
               [class.form_error_found]="forms_erros_found.no_post"
               class="ap-form__label ap-form__input-textarea"></textarea>
@@ -100,10 +100,10 @@
               for="new_post_desc" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="data_post.description != ''">
-              Description
+              Descripción
             </label>
             <span class="form_error_found_label" *ngIf="forms_erros_found.no_post">
-                Description is required*
+                Descripción se requiere*
             </span>
           </div>
         </div>
@@ -129,7 +129,7 @@
                      <span class="text-bold"></span>
                    </span>
               <span class="ml-col-1 form_error_found_label text-center" *ngIf="forms_erros_found.no_photo">
-                Icon is required*
+                Icon se requiere*
               </span>
             </figure>
           </label>
@@ -139,7 +139,7 @@
         <button 
           type="submit"
           class="ap-form__buttons-button button-icon button-icon--add-white ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
-          Save
+          Guardar
         </button>
       </div>
     </form>
@@ -148,22 +148,22 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
     <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
       <p class="ml-modal__pop-titulo margin-bottom-m">
-        Delete alert
+        Eliminar alert
       </p>
       <p class="ml-modal__pop-text">
-        Are you sure to delete uk-alert <br />
+        ¿Estás seguro de eliminar uk-alert <br />
         <span class="text-bold">"{{ data_post.name }}"</span>?
       </p>
       <div class="ml-modal__pop-buttons">
         <button 
           (click)="toggleSectionForm('delete')"
           class="ml-modal__pop-buttons-button button-pink button-icon button-icon--cancel-white">
-          Cancel
+          Cancelar
         </button>
         <button 
           (click)="confirmDeleteElement()"
           class="ml-modal__pop-buttons-button button-black button-icon button-icon--delete-white">
-          Delete
+          Eliminar
         </button>
       </div>
     </div>

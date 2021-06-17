@@ -6,7 +6,7 @@
       <button 
           class="ap-form__rButton button-pink padding-lateral-m button-big button-icon button-icon--add-white"
           (click)="toggleSectionForm( 'new' )">
-          Add Projects 
+          Agregar Projects 
       </button>
     </div>
     <div class="ml-col-1 index-cards" *ngIf="!show_booking_form">
@@ -21,18 +21,18 @@
                         <button 
                               class="index-cards__card-buttons-button button-pink"
                               (click)="goToPage('roomCatalog', card)">
-                              Rooms
+                              Habitaciones
                           </button>
                           <button 
                               class="index-cards__card-buttons-button button-yellow"
                               (click)="goToPage('MembershipCatalog', card)">
-                              Memberships
+                              Membresías
                           </button>
                           
                           <button 
                               (click)="toggleSectionForm( 'edit', card )"
                               class="index-cards__card-buttons-button button-green button-icon button-icon--edit-white">
-                              Edit
+                              Editar
                           </button>
                       </div>
                     </div>
@@ -44,7 +44,7 @@
                   <button 
                         (click)="goToBooking( card.id, card.name )"
                         class="index-cards__card-buttons-button button-black">
-                        Operation
+                        Operación
                     </button>
                     <button 
                         class="index-cards__card-buttons-button button-yellow"
@@ -70,7 +70,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
      <button 
          class="ap-form__rButton button-red padding-lateral-m button-icon button-icon--cancel-white"
          (click)="toggleSectionForm()">
-         Close
+         Cerrar
      </button>
    </div>
   <div class="ml-col-7 margin-top-x">
@@ -78,7 +78,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
           <div class="ap-form__input">
             <input 
               type="text"
-              placeholder="Name"
+              placeholder="Nombre"
               id="booking_title" 
               name="booking_title"
               class="ap-form__input-text"
@@ -88,10 +88,10 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
               for="booking_title" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="booking_data.name != ''">
-              Name
+              Nombre
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
-              The field is required*
+              The field se requiere*
             </span>
           </div>
       </div>
@@ -108,10 +108,10 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
               for="booking_desc" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="booking_data.description != ''">
-              Description
+              Descripción
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
-              The field is required*
+              The field se requiere*
             </span>
           </div>
       </div>
@@ -120,7 +120,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
             <textarea 
               id="booking_direccion"
               name="booking_direccion"
-              placeholder="Address"
+              placeholder="Direccion"
               [class.form_error_found]="form_data.no_dire"
               [(ngModel)]="booking_data.direction"
               class="ap-form__label ap-form__input-textarea"></textarea>
@@ -128,10 +128,10 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
               for="booking_direccion" 
               class="ap-form__label ap-form__label-text"
               [class.ap-form__label-text--active]="booking_data.direction != ''">
-              Address
+              Direccion
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_dire">
-              The field is required*
+              The field se requiere*
             </span>
           </div>
       </div>
@@ -139,7 +139,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
         <div class="ap-form__input">
           <input 
             type="number"
-            placeholder="Latitude"
+            placeholder="Latitud"
             id="booking_latitud" 
             name="booking_latitud"
             class="ap-form__input-text"
@@ -149,10 +149,10 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
             for="booking_latitud" 
             class="ap-form__label ap-form__label-text"
             [class.ap-form__label-text--active]="booking_data.latitude != null">
-            Latitude
+            Latitud
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
-            The field is required*
+            The field se requiere*
           </span>
         </div>
       </div>
@@ -160,7 +160,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
         <div class="ap-form__input">
           <input 
             type="number"
-            placeholder="Longitude"
+            placeholder="Longitud"
             id="booking_longitud" 
             name="booking_longitud"
             class="ap-form__input-text"
@@ -170,10 +170,10 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
             for="booking_longitud"
             class="ap-form__label ap-form__label-text"
             [class.ap-form__label-text--active]="booking_data.longitude != null">
-            Longitude
+            Longitud
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">
-            The field is required*
+            The field se requiere*
           </span>
         </div>
       </div>
@@ -187,7 +187,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
             [(ngModel)]="booking_data.status"
             class="ap-form__input-checkbox display-none" />
           <label for="booking_active" class="ap-form__label ap-form__label-checkbox">
-            Build Active
+            Project Activo
           </label>
         </div>
       </div>
@@ -208,11 +208,11 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
                    [class.forms_errors_nimage]="form_data.no_phot"
                    src="{{ booking_data.photo}}" />
               <span class="ap-form__image-data text-center" id="booking_img_name_0">
-                Image resolution<br />
+                Resolución de imagen<br />
                 <span class="text-bold">350x350</span> 
               </span>
               <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
-                The field is required*
+                The field se requiere*
               </span>
             </figure>
           </label>
@@ -221,7 +221,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
   <div class="ml-col-1 ap-form__rooms" id="rooms_added">
       <div class="ml-col-1">
         <h4 class="ap-form__titulo text-left">
-          Rooms Category
+          Habitaciones Categorias
         </h4>
       </div>
       <div class="ap-form__rooms-room room" *ngFor="let room of rooms;" room="added">
@@ -230,7 +230,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
             <div class="ap-form__input ap-form__input--full-width">
               <input 
                 type="text"
-                placeholder="Room Type"
+                placeholder="Tipo de Habitación"
                 id="booking_room_title_{{ room.id }}" 
                 name="booking_room_title_{{ room.id }}"
                 value="{{ room.input }}"
@@ -239,7 +239,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
                 for="booking_room_title_{{ room.id }}" 
                 class="ap-form__label ap-form__label-text"
                 [class.ap-form__label-text--active]="room.input != ''">
-                Room Type
+                Tipo de Habitación
               </label>
             </div>
           </div>
@@ -247,7 +247,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
             <div class="ap-form__input ap-form__input--full-width">
               <textarea 
                 type="text"
-                placeholder="Description"
+                placeholder="Descripción"
                 id="booking_room_num_{{ room.id }}"
                 value="{{ room.select }}" 
                 name="booking_num_title_{{ room.id }}"
@@ -256,7 +256,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
                 for="booking_num_title_{{ room.id }}" 
                 class="ap-form__label ap-form__label-text"
                 [class.ap-form__label-text--active]="room.select != ''">
-                Description
+                Descripción
               </label>
             </div>
           </div>
@@ -269,7 +269,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
                 [checked]="room.active"
                 class="ap-form__input-checkbox display-none" />
               <label for="booking_room_active_{{ room.id }}" class="ap-form__label ap-form__label-checkbox">
-                Active
+                Activo
               </label>
             </div>
           </div>
@@ -292,12 +292,12 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
       type="button"
       (click)="toggleSectionForm()"
       class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
-      Cancel
+      Cancelar
     </button> -->
     <button 
       type="submit"
       class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white">
-      Save
+      Guardar
     </button>
   </div>
 </form>
@@ -306,7 +306,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop">
     <p class="ml-modal__pop-titulo">
-      Delete Element
+      Eliminar Element
     </p>
     <p class="ml-modal__pop-text">
       Are you sure you want to delete the item? <br />
@@ -316,12 +316,12 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
       <button 
         (click)="confirmDeleteRoomModal()"
         class="ml-modal__pop-buttons-button button-black button-icon button-icon--cancel-white">
-        Cancel
+        Cancelar
       </button>
       <button 
         (click)="confirmDeleteRoom()"
         class="ml-modal__pop-buttons-button button-red button-icon button-icon--delete-white">
-        Delete
+        Eliminar
       </button>
     </div>
   </div>

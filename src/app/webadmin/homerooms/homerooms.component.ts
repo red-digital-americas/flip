@@ -195,7 +195,7 @@ export class HomeroomsComponent implements OnInit {
     this.loader.showLoader();
     this.heroService.ServicioPostPost("SeeHomeRoom", creadoobj).subscribe((value) => {
 
-      console.log('Home Rooms =====> ',value.item );
+      console.log('Home Habitaciones =====> ',value.item );
       switch (value.result) {
         case "Error":
           console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);

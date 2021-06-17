@@ -8,7 +8,7 @@
               <div class="card-body">
                 <form #loginForm="ngForm" autocomplete="off">
 
-                  <h1>Recover Password</h1>
+                  <h1>Recuperar contraseña</h1>
                   <p class="text-muted">Put your email to recover your password</p>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -21,7 +21,7 @@
                       <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 
                       <button type="button" data-style="expand-right" class="btn btn-success btn-ladda" [disabled]="!loginForm.form.valid" (click)="RecoverPass()">
-                        Recover Password
+                        Recuperar contraseña
                       </button>
                     </div>
                   </div>

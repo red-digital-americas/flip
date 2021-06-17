@@ -8,7 +8,7 @@
                 (submit)="update()">
                 <div class="ml-col-1">
                     <h4 class="text-left">
-                        Edit User
+                        Editar Usuario
                     </h4>
                 </div>
                         <div class="ml-col-3">
@@ -17,7 +17,7 @@
                                 <input 
                                 required
                                 type="text" 
-                                placeholder="Name*"
+                                placeholder="Nombre*"
                                 id="profile_name" 
                                 name="profile_name"
                                 class="ap-form__input-text"
@@ -27,10 +27,10 @@
                                 for="profile_name" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="userObj.name != ''">
-                                Name <span class="color-red text-bold">*</span>
+                                Nombre <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_name">
-                                Name is required*
+                                Nombre se requiere*
                                 </span>
                             </div>
                             </div>
@@ -42,7 +42,7 @@
                                 <input 
                                 required
                                 type="text" 
-                                placeholder="Last Name*"
+                                placeholder="Apellido Paterno*"
                                 id="profile_last_name" 
                                 name="profile_last_name"
                                 class="ap-form__input-text"
@@ -52,10 +52,10 @@
                                 for="profile_last_name" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="userObj.lastName != ''">
-                                Last Name <span class="color-red text-bold">*</span>
+                                Apellido Paterno <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_lastName">
-                                Last Name is required*
+                                Apellido Paterno se requiere*
                                 </span>
                             </div>
                             </div>
@@ -95,7 +95,7 @@
                                 <input 
                                 required
                                 type="text" 
-                                placeholder="Mother Name*"
+                                placeholder="Apellido Materno*"
                                 id="profile_mother_name" 
                                 name="profile_mother_name"
                                 class="ap-form__input-text"
@@ -105,10 +105,10 @@
                                 for="profile_mother_name" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="userObj.motherName != ''">
-                                Mother Name <span class="color-red text-bold">*</span>
+                                Apellido Materno <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_motherName">
-                                Mother Name is required*
+                                Apellido Materno se requiere*
                                 </span>
                             </div>
                             </div>
@@ -133,7 +133,7 @@
                                 Password <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_password">
-                                Password is required*
+                                Password se requiere*
                                 </span>
                             </div>
                             </div>
@@ -159,7 +159,7 @@
                                 Email <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_email">
-                                Email is required*
+                                Email se requiere*
                                 </span>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="emailExist">
                                     Email already exist
@@ -174,12 +174,12 @@
                                 <select
                                 [disabled]="show"
                                 required
-                                placeholder="System type"
+                                placeholder="Tipo de sistema"
                                 id="profile_systemType" 
                                 name="profile_systemType"
                                 class="ap-form__input-text"
                                 [(ngModel)]="userObj.systemTypeId">
-                                <option value="null" disabled>System type*</option>
+                                <option value="null" disabled>Tipo de sistema*</option>
                                 <option *ngFor="let system of systemType;" [value]="system.id">
                                     {{ system.name }}
                                 </option>
@@ -188,7 +188,7 @@
                                 for="profile_systemType" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="userObj.systemTypeId != null">
-                                System type <span class="color-red text-bold">*</span> 
+                                Tipo de sistema <span class="color-red text-bold">*</span> 
                                 </label>
                             </div>
                             </div>
@@ -200,7 +200,7 @@
                                 <input 
                                 required
                                 type="tel" 
-                                placeholder="Phone*"
+                                placeholder="Teléfono*"
                                 id="profile_phone" 
                                 name="profile_phone"
                                 class="ap-form__input-text"
@@ -210,10 +210,10 @@
                                 for="profile_phone" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="userObj.phone != ''">
-                                Phone <span class="color-red text-bold">*</span>
+                                Teléfono <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_phone">
-                                Phone is required*
+                                Teléfono se requiere*
                                 </span>
                             </div>
                             </div>
@@ -225,7 +225,7 @@
                                 <input 
                                 required
                                 type="tel" 
-                                placeholder="Cellphone*"
+                                placeholder="Teléfono Móvil*"
                                 id="profile_cellphone" 
                                 name="profile_cellphone"
                                 class="ap-form__input-text"
@@ -235,10 +235,10 @@
                                 for="profile_cellphone" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="userObj.cellPhone != ''">
-                                Cellphone <span class="color-red text-bold">*</span>
+                                Teléfono Móvil <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_cellphone">
-                                Cellphone is required*
+                                Teléfono Móvil se requiere*
                                 </span>
                             </div>
                             </div>
@@ -250,7 +250,7 @@
                                 <input 
                                 required
                                 type="text" 
-                                placeholder="Workplace*"
+                                placeholder="Lugar de trabajo*"
                                 id="profile_workplace" 
                                 name="profile_workplace"
                                 class="ap-form__input-text"
@@ -260,10 +260,10 @@
                                 for="profile_workplace" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="userObj.workplace != ''">
-                                Workplace <span class="color-red text-bold">*</span>
+                                Lugar de trabajo <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_workplace">
-                                Workplace is required*
+                                Lugar de trabajo se requiere*
                                 </span>
                             </div>
                             </div>
@@ -285,10 +285,10 @@
                                 for="profile_aboutMe" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="userObj.aboutMe != ''">
-                                About me <span class="color-red text-bold">*</span>
+                                Acerca de mí <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_aboutMe">
-                                About me is required*
+                                Acerca de mí se requiere*
                                 </span>
                             </div>
                             </div>
@@ -300,7 +300,7 @@
                                 <input 
                                 required
                                 type="date" 
-                                placeholder="Birthday"
+                                placeholder="Fecha de nacimiento"
                                 id="profile_bday" 
                                 name="profile_bday"
                                 [(ngModel)]="userObj.birth"
@@ -309,7 +309,7 @@
                                 for="profile_bday" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="userObj.birth != ''">
-                                Birthday
+                                Fecha de nacimiento
                             </label>
                             </div>
                         </div>
@@ -333,7 +333,7 @@
                                 RFC <span class="color-red text-bold">*</span>
                             </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_rfc">
-                                    RFC is required*
+                                    RFC se requiere*
                                 </span>
                             </div>
                         </div>
@@ -349,7 +349,7 @@
                                 [ngModelOptions]="{standalone: true}"
                                 class="ap-form__input-checkbox display-none" />
                                 <label for="profile_active" class="ap-form__label ap-form__label-checkbox">
-                                Active
+                                Activo
                                 </label>
                             </div>
                         </div>   
@@ -357,24 +357,24 @@
                         <div class="ml-col-1 margin-top-x" *ngIf="!show">
                             <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
                               <div class="ml-col-1 ap-form__sdato--bbottom font-big">
-                                Building Permission
+                                Permisos de Project
                               </div>
                           </div>
                             <table mat-table mat-sort [dataSource]="buildingList" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
                                 <ng-container matColumnDef="name">
-                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Name</th>
+                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Nombre</th>
                                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.name }}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="description">
-                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Description</th>
+                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Descripción</th>
                                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.description }}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="direction">
-                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Direction</th>
+                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Dirección</th>
                                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.direction }}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="status">
-                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Status</th>
+                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Estatus</th>
                                     <td mat-cell *matCellDef="let element" class="table__data table__header-center">
                                         <div *ngIf="element.status">
                                             <label class="icon-check"></label>
@@ -407,20 +407,20 @@
                         <div class="ml-col-1 margin-top-x" *ngIf="!show">
                             <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
                               <div class="ml-col-1 ap-form__sdato--bbottom font-big">
-                                Permissions Building Operation
+                                Operación del edificio de permisos
                               </div>
                           </div>
                             <table mat-table mat-sort [dataSource]="permissionsList" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
                                 <ng-container matColumnDef="permission1">
-                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Name</th>
+                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Nombre</th>
                                     <td mat-cell *matCellDef="let item" class="table__data table__data-center">{{ item.permission1 }}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="description">
-                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Description</th>
+                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Descripción</th>
                                     <td mat-cell *matCellDef="let item" class="table__data table__data-center">{{ item.description }}</td>
                                 </ng-container>
                                 <ng-container matColumnDef="active">
-                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Active</th>
+                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Activo</th>
                                     <td mat-cell *matCellDef="let item" class="table__data table__header-center">
                                         <div *ngIf="item.active">
                                             <label class="icon-check"></label>
@@ -454,7 +454,7 @@
                             <button 
                             type="submit"
                             class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big ap-form__buttons-button--aceptar button-green button-icon button-icon--add-white">
-                            Save
+                            Guardar
                             </button>
                         </div>
                 </form>

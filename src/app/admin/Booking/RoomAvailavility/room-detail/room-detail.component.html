@@ -4,14 +4,14 @@
         <div class="ml-col-1 margin-bottom-x">
             <div class="ml-col-1 position-relative">
                 <h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
-                  Room detail
+                  Cuarto detail
                 </h4>
             </div>
             <div class="ml-col-1">
                 <div class="ml-col-1 padding-general-m" >
                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                         <div class="ml-col-1">
-                          Name: <br>
+                          Nombre: <br>
                           <span class="text-bold">
                             {{ roomObj.name }}     
                           </span>
@@ -20,7 +20,7 @@
                     
                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
                         <div class="ml-col-1">
-                            Occupation: <br>
+                            Ocupación: <br>
                           <span class="text-bold">
                             {{ roomObj.totalBeds }}     
                           </span>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
                         <div class="ml-col-1">
-                            Type room: <br>
+                            Tipo de cuarto: <br>
                           <span class="text-bold">
                             {{ roomObj.typeRoom }}     
                           </span>
@@ -37,7 +37,7 @@
 
                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-right">
                         <div class="ml-col-1">
-                            Next full avaibility date: <br>
+                            Próxima fecha de disponibilidad completa: <br>
                           <span class="text-bold">
                             {{ roomObj.dateUnemployment }}     
                           </span>
@@ -49,7 +49,7 @@
                 <div class="ml-col-1 padding-general-m">
                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                         <div class="ml-col-1">
-                          Roomate Type:
+                          Roomate Tipo:
                           <div *ngIf="roomData.roomateFlip">
                               <span class="text-bold">
                                   Roomate Flip
@@ -65,7 +65,7 @@
   
                       <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
                           <div class="ml-col-1">
-                              Smoking: 
+                              Fuma: 
                               <div *ngIf="roomData.smoke">
                                   <span class="text-bold">
                                       Yes
@@ -81,10 +81,10 @@
   
                       <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
                           <div class="ml-col-1">
-                              Room Active: 
+                              Cuarto Activo: 
                               <div *ngIf="roomData.status">
                                   <span class="text-bold">
-                                      Yes
+                                      Si
                                   </span>
                               </div>
                               <div *ngIf="!roomData.status">
@@ -97,7 +97,7 @@
   
                       <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-right">
                           <div class="ml-col-1">
-                              Reservations Active: <br>
+                              Reservaciones Activas: <br>
                             <span class="text-bold">
                               {{ roomData.reservationsActive }}     
                             </span>
@@ -108,7 +108,7 @@
                 <div class="ml-col-1 padding-general-m">
                     <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding">
                         <div class="ml-col-1">
-                            Description: <br>
+                            Descripción: <br>
                           <span class="text-bold">
                             {{ roomObj.description }}     
                           </span>
@@ -122,25 +122,25 @@
             <div class="ml-col-1 padding-general-m" *ngIf="displayMembership">
                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                     <div class="ml-col-1 text-bold">
-                        Memberships Asociate:
+                        Membresías Asociate:
                     </div>
                 </div>
                 <table mat-table mat-sort [dataSource]="membershipRelationshipObj" class="mat-elevation-z8 table--no-shadow">
                     
                     <ng-container matColumnDef="room">
-                        <th mat-header-cell *matHeaderCellDef fxFlex="40" class="table__header">Type Room</th>
+                        <th mat-header-cell *matHeaderCellDef fxFlex="40" class="table__header">Tipo Habitacion</th>
                         <td mat-cell *matCellDef="let element" fxFlex="40" class="table__data">{{ roomObj.typeRoom }}</td>
                     </ng-container>
                     <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef class="table__header">Name</th>
+                        <th mat-header-cell *matHeaderCellDef class="table__header">Nombre</th>
                         <td mat-cell *matCellDef="let element" class="table__data">{{ element.name }}</td>
                     </ng-container>
                     <ng-container matColumnDef="description">
-                        <th mat-header-cell *matHeaderCellDef class="table__header">Description</th>
+                        <th mat-header-cell *matHeaderCellDef class="table__header">Descripción</th>
                         <td mat-cell *matCellDef="let element" class="table__data">{{ element.description }}</td>
                     </ng-container>
                     <ng-container matColumnDef="price">
-                        <th mat-header-cell *matHeaderCellDef class="table__header">Price Per Bed</th>
+                        <th mat-header-cell *matHeaderCellDef class="table__header">Precio Por Cama</th>
                         <td mat-cell *matCellDef="let element" class="table__data">{{ element.price | currency }}</td>
                     </ng-container>
                     
@@ -150,11 +150,11 @@
             </div>
 
             <div class="ml-col-1 padding-general-m" *ngIf="!displayMembership">
-                <span class="text-bold">Memberships :</span> No Data
+                <span class="text-bold">Membresías :</span> No Data
             </div>
 
             <div class="ml-col-1 padding-general-m" *ngIf="displayActive">
-                <span class="text-bold">Active Booking :</span>
+                <span class="text-bold">Activo Booking :</span>
                 <form class="ap-form__titulo ap-form__titulo--no-border date-block" [formGroup]="filterActiveForm">          
                     <div class="ml-col-1">
                         <div class="ml-col-4">
@@ -177,7 +177,7 @@
                             <div class="ml-col-1">
                                 <div class="ap-form__input">
                                     <mat-form-field>
-                                        <mat-label>Pending</mat-label>
+                                        <mat-label>Pendiente</mat-label>
                                         <mat-select [formControl]="animalControl" formControlName="pending">
                                           <mat-option>--</mat-option>
                                           <mat-option *ngFor="let pending of pendingLs" [value]="pending">
@@ -191,22 +191,22 @@
                     </div>
                   <div class="ml-col-1 margin-bottom-m">
                     <div class="ml-col-4">
-                      <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(true)">Filter</button>
+                      <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(true)">Filtrar</button>
                     </div>
                     <div class="ml-col-4">
-                        <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(true)">Reset</button>
+                        <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(true)">Reiniciar</button>
                     </div>
                   </div>
     
                 </form>
                 
                 <mat-form-field>
-                    <mat-label>Search</mat-label>
+                    <mat-label>Buscar</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
                 </mat-form-field>
                 <mat-table mat-table matSort [dataSource]="activeObj" class="mat-elevation-z8 table--no-shadow">
                     <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Name </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Nombre </th>
                         <td mat-cell *matCellDef="let element" class="table__data" > 
                             <a style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" (click)="viewDetail(element)">
                                 {{element.firstName}}
@@ -214,11 +214,11 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="room">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Room </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Cuarto </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.room}} </td>
                     </ng-container>
                     <ng-container matColumnDef="membership">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Membership </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Membresía </th>
                         <td mat-cell *matCellDef="let element" class="table__data">
                             <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
                             <ng-template #thenBlock>{{element.membership.membershipType}}</ng-template>
@@ -226,16 +226,16 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="dateInit">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Arrival date </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Fecha de Llegada </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.dateInit}} </td>
                     </ng-container>
             
                     <ng-container matColumnDef="dateEnd">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> End Reservation </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Fin de la reserva </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.dateEnd}} </td>
                     </ng-container>
                     <ng-container matColumnDef="amountOutstanding">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Total Billed </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Total facturado </th>
                         <td mat-cell *matCellDef="let element" class="table__data">
                             <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
                             <ng-template #thenBlock>{{element.membership.priceMembership + element.amountOutstanding | currency }}</ng-template>
@@ -243,15 +243,15 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="pendingBilled">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Pending</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Pendiente</th>
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.pending | currency }}</td>
                     </ng-container>
                     <ng-container matColumnDef="totalBeds">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Total Beds	 </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Total Camas	 </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.totalBeds}} </td>
                     </ng-container>
                     <ng-container matColumnDef="roomateFlip">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Roomate Type </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Roomate Tipo </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
                     </ng-container>
                     <ng-container matColumnDef="checkIn">
@@ -282,16 +282,16 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="active">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Active </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Activo </th>
                         <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.active">  </td>
                     </ng-container>
                     <ng-container matColumnDef="status">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Status </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Estatus </th>
                         <td mat-cell *matCellDef="let element" class="table__data" >
-                            <div *ngIf="element.status.idStatusBooking === 1">Pending</div>
+                            <div *ngIf="element.status.idStatusBooking === 1">Pendiente</div>
                             <div *ngIf="element.status.idStatusBooking === 2">Check In</div>
                             <div *ngIf="element.status.idStatusBooking === 3">Check Out</div>
-                            <div *ngIf="element.status.idStatusBooking === 4">Cancel</div>
+                            <div *ngIf="element.status.idStatusBooking === 4">Cancelar</div>
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="idUser">
@@ -301,7 +301,7 @@
                                 (click)="viewDetail(element)" 
                                 mat-raised-button color="accent"
                                 class="table__data-button">
-                                Detail
+                                Detalle
                             </button>
                         </td>
                     </ng-container>
@@ -312,7 +312,7 @@
                                 (click)="viewBookingDetail('reservations', element.idUser, element.idBooking)" 
                                 mat-raised-button color="accent"
                                 class="table__data-button button-pink">
-                                Detail
+                                Detalle
                             </button>
                         </td>
                     </ng-container>
@@ -324,13 +324,13 @@
                     <div class="ml-col-1 padding-general-m" >
                         <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                             <div class="ml-col-1">
-                              Total Billed: 
+                              Total facturado: 
                               <span class="text-bold">
                                 {{ activeTotal | currency }}     
                               </span>
                             </div>
                             <div class="ml-col-1">
-                                Total Billed: 
+                                Total facturado: 
                                 <span class="text-bold">
                                   {{ activeTotalPending | currency }}     
                                 </span>
@@ -343,7 +343,7 @@
              
 
             <div class="ml-col-1 padding-general-m" *ngIf="!displayActive">
-                <span class="text-bold">Active Booking :</span> No Data
+                <span class="text-bold">Activo Booking :</span> No Data
             </div>
 
             <div class="ml-col-1 padding-general-m" *ngIf="displayinactive">
@@ -370,7 +370,7 @@
                             <div class="ml-col-1">
                                 <div class="ap-form__input">
                                     <mat-form-field>
-                                        <mat-label>Pending</mat-label>
+                                        <mat-label>Pendiente</mat-label>
                                         <mat-select [formControl]="animalControl" formControlName="pending">
                                           <mat-option>--</mat-option>
                                           <mat-option *ngFor="let pending of pendingLs" [value]="pending">
@@ -384,21 +384,21 @@
                     </div>
                   <div class="ml-col-1 margin-bottom-m">
                     <div class="ml-col-4">
-                      <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(false)">Filter</button>
+                      <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(false)">Filtrar</button>
                     </div>
                     <div class="ml-col-4">
-                        <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(false)">Reset</button>
+                        <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(false)">Reiniciar</button>
                     </div>
                   </div>
     
                 </form>
                 <mat-form-field>
-                    <mat-label>Search</mat-label>
+                    <mat-label>Buscar</mat-label>
                     <input matInput (keyup)="applyFilterInactive($event)" placeholder="Ex. Mia">
                 </mat-form-field>
                 <mat-table mat-table matSort [dataSource]="inactiveObj" class="mat-elevation-z8 table--no-shadow">
                     <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Name </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Nombre </th>
                         <td mat-cell *matCellDef="let element" class="table__data" > 
                             <a style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" (click)="viewDetail(element)">
                                 {{element.firstName}} 
@@ -406,11 +406,11 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="room">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Room </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Cuarto </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.room}} </td>
                     </ng-container>
                     <ng-container matColumnDef="membership">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Membership </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Membresía </th>
                         <td mat-cell *matCellDef="let element" class="table__data">
                             <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
                             <ng-template #thenBlock>{{element.membership.membershipType}}</ng-template>
@@ -418,16 +418,16 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="dateInit">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Arrival date </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Fecha de Llegada </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.dateInit}} </td>
                     </ng-container>
             
                     <ng-container matColumnDef="dateEnd">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> End Reservation </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Fin de la reserva </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.dateEnd}} </td>
                     </ng-container>
                     <ng-container matColumnDef="amountOutstanding">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Total Billed </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Total facturado </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> 
                             <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
                             <ng-template #thenBlock>{{element.membership.priceMembership + element.amountOutstanding | currency }}</ng-template>
@@ -435,15 +435,15 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="pendingBilled">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Pending</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Pendiente</th>
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.pending | currency }}</td>
                     </ng-container>
                     <ng-container matColumnDef="totalBeds">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Total Beds	 </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Total Camas	 </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.totalBeds}} </td>
                     </ng-container>
                     <ng-container matColumnDef="roomateFlip">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Roomate Type </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Roomate Tipo </th>
                         <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
                     </ng-container>
                     <ng-container matColumnDef="checkIn">
@@ -474,16 +474,16 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="active">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Active </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Activo </th>
                         <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.active">  </td>
                     </ng-container>
                     <ng-container matColumnDef="status">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Status </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Estatus </th>
                         <td mat-cell *matCellDef="let element" class="table__data" >
-                            <div *ngIf="element.status.idStatusBooking === 1">Pending</div>
+                            <div *ngIf="element.status.idStatusBooking === 1">Pendiente</div>
                             <div *ngIf="element.status.idStatusBooking === 2">Check In</div>
                             <div *ngIf="element.status.idStatusBooking === 3">Check Out</div>
-                            <div *ngIf="element.status.idStatusBooking === 4">Cancel</div>
+                            <div *ngIf="element.status.idStatusBooking === 4">Cancelar</div>
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="idUser">
@@ -493,7 +493,7 @@
                                 (click)="viewDetail(element)" 
                                 mat-raised-button color="accent"
                                 class="table__data-button">
-                                Detail
+                                Detalle
                             </button>
                         </td>
                     </ng-container>
@@ -504,7 +504,7 @@
                                 (click)="viewBookingDetail('reservations', element.idUser, element.idBooking)" 
                                 mat-raised-button color="accent"
                                 class="table__data-button">
-                                Detail
+                                Detalle
                             </button>
                         </td>
                     </ng-container>
@@ -517,13 +517,13 @@
                     <div class="ml-col-1 padding-general-m" >
                         <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                             <div class="ml-col-1">
-                              Total Billed: 
+                              Total facturado: 
                               <span class="text-bold">
                                 {{ inactiveTotal | currency }}     
                               </span>
                             </div>
                             <div class="ml-col-1">
-                                Total Billed: 
+                                Total facturado: 
                                 <span class="text-bold">
                                   {{ inactiveTotalPending | currency }}     
                                 </span>
@@ -547,13 +547,13 @@
             Check Out
         </p>
         <p class="ml-modal__pop-text">
-            Are you sure to Check Out?
+            ¿Estás seguro de Check Out?
         </p>
         <div class="ml-modal__pop-buttons">
             <button 
                 (click)="showModal()"
                 class="ml-modal__pop-buttons-button button-pink">
-                Cancel
+                Cancelar
             </button>
             <button 
                 (click)="confirmCheckInOut('out')"

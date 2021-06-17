@@ -7,10 +7,10 @@
       <div class="row">
         <div class="col-md-6 col-sm-6 ">
           <div class="form-group ">
-            <input placeholder="Name" type="text" formControlName="name" class="form-control"
+            <input placeholder="Nombre" type="text" formControlName="name" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && buildingForm.controls.type.errors }" />
             <div *ngIf="submitted && buildingForm.controls.type.errors" class="invalid-feedback">
-              <div *ngIf="buildingForm.controls.type.errors.required">Name is required</div>
+              <div *ngIf="buildingForm.controls.type.errors.required">Nombre se requiere</div>
             </div>
           </div>
           <div class="custom-file form-group margin-choose">
@@ -26,7 +26,7 @@
           </div>
           <div class="input-group form-group ">
             <div class="input-group-prepend">
-              <span class="input-group-text">Description</span>
+              <span class="input-group-text">Descripción</span>
             </div>
             <textarea placeholder="type a description" formControlName="description" class="form-control"
               aria-label="With textarea"></textarea>
@@ -40,30 +40,30 @@
         <div class="form-group col-md-12 col-sm-12">
           <select formControlName="typeNumber" class="form-control" (change)="onChangeType($event)"
             [ngClass]="{ 'is-invalid': submitted && f.typeNumber.errors }">
-            <option value="">Type Room</option>
+            <option value="">Tipo Habitacion</option>
             <option *ngFor="let i of typeNumber">{{i}}</option>
           </select>
           <div *ngIf="submitted && f.typeNumber.errors" class="invalid-feedback">
-            <div *ngIf="f.typeNumber.errors.required">Type rooms is required</div>
+            <div *ngIf="f.typeNumber.errors.required">Type rooms se requiere</div>
           </div>
         </div>
         <div *ngFor="let typeR of formType.controls; let i = index" class=" col-6">
           <div class="list-group-item margin-bottom">
-            <h5 class="">Type Room {{i + 1}}</h5>
+            <h5 class="">Tipo Habitacion {{i + 1}}</h5>
             <div [formGroup]="typeR" class="form-row">
               <div class="form-group ">
-                <input placeholder="Description" type="text" formControlName="type" class="form-control margin-gral"
+                <input placeholder="Descripción" type="text" formControlName="type" class="form-control margin-gral"
                   [ngClass]="{ 'is-invalid': submitted && typeR.controls.type.errors }" />
                 <div *ngIf="submitted && typeR.controls.type.errors" class="invalid-feedback">
-                  <div *ngIf="typeR.controls.type.errors.required">description is required</div>
+                  <div *ngIf="typeR.controls.type.errors.required">description se requiere</div>
                 </div>
               </div>
               <div class="form-group ">
-                <input placeholder="Number of Rooms" type="number" formControlName="capacity"
+                <input placeholder="Number of Habitaciones" type="number" formControlName="capacity"
                   class="form-control margin-gral"
                   [ngClass]="{ 'is-invalid': submitted && typeR.controls.capacity.errors }" />
                 <div *ngIf="submitted && typeR.controls.capacity.errors" class="invalid-feedback">
-                  <div *ngIf="typeR.controls.capacity.errors.required">Description is required</div>
+                  <div *ngIf="typeR.controls.capacity.errors.required">Descripción se requiere</div>
                 </div>
               </div>
             </div>
@@ -141,11 +141,11 @@
           <div class="ap-form__input">
             <input 
               type="text" 
-              placeholder="Name"
+              placeholder="Nombre"
               id="community_name" 
               class="ap-form__input-text" />
             <label for="community_name" class="ap-form__label ap-form__label-text">
-              Name
+              Nombre
             </label>
           </div>
         </div>
@@ -153,10 +153,10 @@
           <div class="ap-form__input">
             <textarea 
             id="community_direccion"
-            placeholder="Address"
+            placeholder="Direccion"
             class="ap-form__label ap-form__input-textarea"></textarea>
             <label for="community_direccion" class="ap-form__label ap-form__label-text">
-              Address
+              Direccion
             </label>
           </div>
         </div>
@@ -164,10 +164,10 @@
           <div class="ap-form__input">
             <textarea 
             id="community_desc"
-            placeholder="Description"
+            placeholder="Descripción"
             class="ap-form__label ap-form__input-textarea"></textarea>
             <label for="community_desc" class="ap-form__label ap-form__label-text">
-              Description
+              Descripción
             </label>
           </div>
         </div>
@@ -185,7 +185,7 @@
                    id="form_newcommunity_image_0"
                    src="../../../assets/14.jpg" />
               <span class="ap-form__image-data" id="form_newcommunity_name_0">
-                Image resolution <br />
+                Resolución de imagen <br />
                 <span class="text-bold">350x350</span> 
               </span>
             </figure>
@@ -201,7 +201,7 @@
               <div class="ap-form__input">
                 <input 
                   type="text" 
-                  placeholder="Description"
+                  placeholder="Descripción"
                   id="add_room_desc_{{ room.room }}" 
                   class="ap-form__input-text" />
                 <label for="add_room_desc_{{ room.room }}" class="ap-form__label ap-form__label-text">
@@ -241,7 +241,7 @@
         <button 
           class="ap-form__buttons-button ap-form__buttons-button--big ap-form__buttons-button--aceptar"
           section-to-show="add-new-rooms">
-          Add Room
+          Agregar Cuarto
         </button>
       </div>
       <div class="ml-col-1 ap-form__buttons">

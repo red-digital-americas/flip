@@ -74,7 +74,7 @@
             <alert [type]="alert.type" [dismissible]="dismissible">{{ alert.msg }}</alert>
           </div>
           <button type="button" class="btn btn-primary" (click)="dismissible = !dismissible">Toggle dismissible</button>
-          <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
+          <button type="button" class="btn btn-primary" (click)="reset()">Reiniciar</button>
         </div>
       </div>
     </div>
@@ -104,7 +104,7 @@
             <button class="btn btn-primary" (click)="changeText()">Change text</button>
           </div>
           <ng-template #elseBlock>
-            <button class="btn btn-primary" (click)="index = 0">Reset</button>
+            <button class="btn btn-primary" (click)="index = 0">Reiniciar</button>
           </ng-template>
         </div>
       </div>

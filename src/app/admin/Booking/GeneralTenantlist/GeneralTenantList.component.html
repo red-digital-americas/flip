@@ -2,11 +2,11 @@
     <div class="ml-col-1 padding-general-m background-white">
         <div class="ml-col-1 margin-bottom-x text-cente">
             <h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
-                Tenant list
+                Tenant lista
                 <button 
                     class="ap-form__titulo-button button-pink button-big button-icon button-icon--add-white"
                     (click)="goToPage('AddTenant')">
-                    Add Tenant
+                    Agregar inquilino
                 </button>
             </h4>
         </div>
@@ -18,7 +18,7 @@
                         <div class="ml-col-1">
                             <div class="ap-form__input">
                                 <mat-form-field>
-                                  <input matInput [matDatepicker]="fromDate" placeholder="From Date" formControlName="fromDate">
+                                  <input matInput [matDatepicker]="fromDate" placeholder="A Partir De La Fecha" formControlName="fromDate">
                                   <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
                                   <mat-datepicker #fromDate></mat-datepicker>
                                 </mat-form-field>                       
@@ -30,7 +30,7 @@
                         <div class="ml-col-1">
                             <div class="ap-form__input">
                                 <mat-form-field >
-                                  <input matInput [matDatepicker]="toDate" placeholder="To Date" formControlName="toDate">
+                                  <input matInput [matDatepicker]="toDate" placeholder="Hasta la fecha" formControlName="toDate">
                                   <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
                                   <mat-datepicker #toDate></mat-datepicker>
                                 </mat-form-field>
@@ -42,7 +42,7 @@
                         <div class="ml-col-1">
                             <div class="ap-form__input">
                                 <mat-form-field>
-                                    <mat-label>Pending</mat-label>
+                                    <mat-label>Pendiente</mat-label>
                                     <mat-select [formControl]="animalControl" formControlName="pending">
                                       <mat-option>--</mat-option>
                                       <mat-option *ngFor="let pending of pendingLs" [value]="pending">
@@ -74,7 +74,7 @@
                         <div class="ml-col-1">
                             <div class="ap-form__input">
                                 <mat-form-field>
-                                    <mat-label>Active</mat-label>
+                                    <mat-label>Activo</mat-label>
                                     <mat-select [formControl]="animalControl" formControlName="active">
                                       <mat-option>--</mat-option>
                                       <mat-option *ngFor="let active of activeLs" [value]="active">
@@ -89,33 +89,33 @@
               
               <div class="ml-col-1">
                 <div class="ml-col-2">
-                  <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="applyFilterPeriod()">Filter</button>
+                  <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="applyFilterPeriod()">Filtrar</button>
                 </div>
                 <div class="ml-col-2">
-                    <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black button-icon button-icon--refresh-white" (click)="resetForm()">Reset</button>
+                    <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black button-icon button-icon--refresh-white" (click)="resetForm()">Reiniciar</button>
                 </div>
               </div>
 
             </form>
             <mat-form-field class="ap-form__input">
-                <mat-label>Search</mat-label>
+                <mat-label>Buscar</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
             </mat-form-field>
             <mat-table mat-table [dataSource]="tenantList" matSort class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
                 <ng-container matColumnDef="build">
-                    <th mat-header-cell mat-sort-header *matHeaderCellDef fxFlex="40" class="table__header"> Location</th>
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef fxFlex="40" class="table__header"> Localización</th>
                     <td mat-cell *matCellDef="let element" fxFlex="40" class="table__data">{{ element.build }}</td>
                 </ng-container>
                 <ng-container matColumnDef="room">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Room</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Cuarto</th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.room }}</td>
                 </ng-container>
                 <ng-container matColumnDef="typeRoom">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Type Room</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Tipo Habitacion</th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.typeRoom }}</td>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Name</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Nombre</th>
                     <td mat-cell *matCellDef="let element" class="table__data">
                         <a style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" (click)="goToProfile( element )">
                             {{ element.firstName }}
@@ -127,24 +127,24 @@
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.age }}</td>
                 </ng-container>
                 <ng-container matColumnDef="membership">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Membership</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Membresía</th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.membership?.membershipType }}</td>
                 </ng-container>
                 <ng-container matColumnDef="dateInit">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">
                         Arraival<br />date
                         <!-- <mat-form-field>
-                            <input matInput class="form-field" [formControl]="arrivalFilter" placeholder="Postion Filter">
+                            <input matInput class="form-field" [formControl]="arrivalFilter" placeholder="Postion Filtrar">
                         </mat-form-field> -->
                     </th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.dateInit }}</td>
                 </ng-container>
                 <ng-container matColumnDef="dateEnd">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">End Reservation</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Fin de la reserva</th>
                     <td mat-cell *matCellDef="let element" class="table__data">{{ element.dateEnd }}</td>
                 </ng-container>
                 <ng-container matColumnDef="amountOutstanding">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Total Billed</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Total facturado</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center"> 
                         <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
                         <ng-template #thenBlock>{{element.membership.priceMembership + element.amountOutstanding | currency }}</ng-template>
@@ -152,15 +152,15 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="pendingBilled">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Pending</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Pendiente</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center"> {{element.pending | currency }} </td>
                 </ng-container>
                 <ng-container matColumnDef="totalBeds">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Total Beds </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Total Camas </th>
                     <td mat-cell *matCellDef="let element" class="table__data"> {{element.totalBeds}} </td>
                 </ng-container>
                 <ng-container matColumnDef="roomateFlip">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Roomate Type </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Roomate Tipo </th>
                     <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
                 </ng-container>
                 <ng-container matColumnDef="checkIn">
@@ -191,26 +191,26 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="active">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Active </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Activo </th>
                     <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.active"></td>
                 </ng-container>
                 <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Status </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Estatus </th>
                     <td mat-cell *matCellDef="let element" class="table__data" >
-                        <div *ngIf="element.status.idStatusBooking === 1">Pending</div>
+                        <div *ngIf="element.status.idStatusBooking === 1">Pendiente</div>
                         <div *ngIf="element.status.idStatusBooking === 2">Check In</div>
                         <div *ngIf="element.status.idStatusBooking === 3">Check Out</div>
-                        <div *ngIf="element.status.idStatusBooking === 4">Cancel</div>
+                        <div *ngIf="element.status.idStatusBooking === 4">Cancelar</div>
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="more">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> View Detail </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> View Detalle </th>
                     <td mat-cell *matCellDef="let element" class="table__data">
                         <button 
                             (click)="viewBookingDetail('reservations', element.idUser, element.idBooking, element.firstName)"
                             mat-raised-button color="accent"
                             class="table__data-button">
-                            Detail
+                            Detalle
                         </button>   
                     </td>
                 </ng-container>
@@ -228,13 +228,13 @@
             Check Out
         </p>
         <p class="ml-modal__pop-text">
-            Are you sure to Check Out?
+            ¿Estás seguro de Check Out?
         </p>
         <div class="ml-modal__pop-buttons">
             <button 
                 (click)="showModal()"
                 class="ml-modal__pop-buttons-button button-red button-icon button-icon--cancel-white">
-                Cancel
+                Cancelar
             </button>
             <button 
                 (click)="confirmCheckInOut('out')"

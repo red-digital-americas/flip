@@ -346,7 +346,7 @@ import { Router } from '@angular/router';
 
               });
 
-              console.log('Beds to add => ', this.beds_to_add);
+              console.log('Camas to add => ', this.beds_to_add);
 
               this.beds_to_add.forEach( (bed: any) => {
 

@@ -13,12 +13,12 @@
     </div>
     <div class="navbar__component ml-col-2o">
       <button class="navbar__component-button navbar__component-button--active" (click)="serv(IDBUILD)">
-        Build: Services
+        Build: Servicios
       </button>
     </div>
     <div class="navbar__component ml-col-2o">
       <button class="navbar__component-button" (click)="room(IDBUILD)">
-        Build: Room
+        Build: Cuarto
       </button>
     </div>
     <div class="navbar__component ml-col-2o">
@@ -82,7 +82,7 @@
           data-toggle="modal" 
           (click)="primaryModal.show(); passdata(post);"
           class="button button-x button-green button-icon button-icon--edit-white"> 
-          Edit
+          Editar
         </button>
       </div>
     </div>
@@ -98,8 +98,8 @@
         <button type="button" 
                 id="close_modal"
                 class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
-                (click)="primaryModal.hide()" aria-label="Close">
-          Close
+                (click)="primaryModal.hide()" aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
         <h4 class="modal-title">Edit service : {{service_data.title}}</h4>
@@ -113,16 +113,16 @@
               class="custom-input__text" 
               name="titulo_home" 
               id="titulo_home" 
-              placeholder="Title" 
+              placeholder="Titulo" 
               [(ngModel)]="service_data.title"
               maxlength="14"
               [class.custom-input__text--error]="form_watcher.no_titl"
               required />
             <label class="custom-input__label custom-input__label--active" for="titulo_home">
-              Title
+              Titulo
             </label>
             <span class="custom-input__text--errorm" *ngIf="form_watcher.no_titl">
-              Title is required
+              Titulo se requiere
             </span>
           </div>
           <div class="form__image">
@@ -145,9 +145,9 @@
               <span class="padding-tb-min">
                 <strong>Desktop photo:</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher.no_img0">
-                  Desktop photo is required <br />
+                  Desktop photo se requiere <br />
                 </span>
-                *Image resolution 1920x1080px.
+                *Resolución de imagen 1920x1080px.
               </span>
             </label>
           </div>
@@ -171,9 +171,9 @@
               <span class="padding-tb-min">
                 <strong>Desktop mobile:</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher.no_img1">
-                  Desktop mobile is required <br />
+                  Desktop mobile se requiere <br />
                 </span>
-                *Image resolution 441x660px.
+                *Resolución de imagen 441x660px.
               </span>
             </label>
           </div>
@@ -188,15 +188,15 @@
                   class="custom-input__text" 
                   name="icon_name_{{ 1 + index }}" 
                   id="icon_name_{{ 1 + index }}" 
-                  placeholder="Icon Name" 
+                  placeholder="Icon Nombre" 
                   [value]="icons.titleIcon"
                   [class.custom-input__text--error]="icons.titleIcon == null"
                   required />
                 <label class="custom-input__label custom-input__label--active" for="icon_name_{{ 1 + index }}">
-                  Icon Name
+                  Icon Nombre
                 </label>
                 <span class="custom-input__text--errorm" *ngIf="icons.titleIcon == null">
-                  Icon Name is required
+                  Icon Nombre se requiere
                 </span>
               </div>
               <div class="form__image">
@@ -225,9 +225,9 @@
                   <span class="padding-tb-min">
                     <strong>Icon Default:</strong> <br /> 
                     <span class="color-red" *ngIf="form_watcher.no_ico1">
-                      Icon Default is required <br />
+                      Icon Default se requiere <br />
                     </span>
-                    *Image resolution 512x512px.
+                    *Resolución de imagen 512x512px.
                   </span>
                 </label>
               </div>
@@ -259,9 +259,9 @@
                   <span class="padding-tb-min">
                     <strong>Icon Default:</strong> <br /> 
                     <span class="color-red" *ngIf="form_watcher.no_ico0">
-                      Icon Default is required <br />
+                      Icon Default se requiere <br />
                     </span>
-                    *Image resolution 512x512px.
+                    *Resolución de imagen 512x512px.
                   </span>
                 </label>
               </div>
@@ -270,7 +270,7 @@
                   id="{{ icons.id }}"
                   (click)="deleteIconsServices( index )"
                   class="ap-form__buttons-button ap-form__buttons-button--big button-red button-icon button-icon--delete-white">
-                  Delete
+                  Eliminar
                 </button>
               </div>
             </div>
@@ -289,7 +289,7 @@
         <button type="button"
         class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
                 (click)="updatephoto()">
-                Save
+                Guardar
         </button>
       </div>
     </div>

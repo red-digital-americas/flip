@@ -25,7 +25,7 @@
                                 <input 
                                 required
                                 type="text" 
-                                placeholder="Name*"
+                                placeholder="Nombre*"
                                 id="profile_name" 
                                 name="profile_name"
                                 class="ap-form__input-text"
@@ -35,10 +35,10 @@
                                 for="profile_name" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="roomObj.name != ''">
-                                Name <span class="color-red text-bold">*</span>
+                                Nombre <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_name">
-                                Name is required*
+                                Nombre se requiere*
                                 </span>
                             </div>
                             </div>
@@ -50,7 +50,7 @@
                                 <input 
                                 required
                                 type="text" 
-                                placeholder="Description*"
+                                placeholder="Descripción*"
                                 id="profile_description" 
                                 name="profile_description"
                                 class="ap-form__input-text"
@@ -60,10 +60,10 @@
                                 for="profile_description" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="roomObj.description != ''">
-                                Description <span class="color-red text-bold">*</span>
+                                Descripción <span class="color-red text-bold">*</span>
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_description">
-                                Description is required*
+                                Descripción se requiere*
                                 </span>
                             </div>
                             </div>
@@ -75,7 +75,7 @@
                               <input 
                               required
                               type="number" 
-                              placeholder="Beds*"
+                              placeholder="Camas*"
                               id="profile_price" 
                               name="profile_price"
                               class="ap-form__input-text"
@@ -85,10 +85,10 @@
                               for="profile_price" 
                               class="ap-form__label ap-form__label-text"
                               [class.ap-form__label-text--active]="roomObj.totalBeds != ''">
-                              Total Beds <span class="color-red text-bold">*</span>
+                              Total Camas <span class="color-red text-bold">*</span>
                               </label>
                               <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_price">
-                              Bed is required*
+                              Bed se requiere*
                               </span>
                           </div>
                           </div>
@@ -104,7 +104,7 @@
                                 name="typeRoom"
                                 class="ap-form__input-text"
                                 [(ngModel)]="roomObj.typeRoomId">
-                                <option value="null" disabled>Type Room*</option>
+                                <option value="null" disabled>Tipo Habitacion*</option>
                                 <option *ngFor="let room of typeRoomList;" [value]="room.id">
                                     {{ room.type }}
                                 </option>
@@ -113,7 +113,7 @@
                                 for="profile_typeRoom" 
                                 class="ap-form__label ap-form__label-text"
                                 [class.ap-form__label-text--active]="roomObj.typeRoomId != null">
-                                Type Room <span class="color-red text-bold">*</span> 
+                                Tipo Habitacion <span class="color-red text-bold">*</span> 
                                 </label>
                             </div>
                             </div>
@@ -125,7 +125,7 @@
                               <input 
                               required
                               type="text" 
-                              placeholder="Floor*"
+                              placeholder="Planta*"
                               id="profile_floor" 
                               name="profile_floor"
                               class="ap-form__input-text"
@@ -135,10 +135,10 @@
                               for="profile_floor" 
                               class="ap-form__label ap-form__label-text"
                               [class.ap-form__label-text--active]="roomObj.floor != ''">
-                              Floor <span class="color-red text-bold">*</span>
+                              Planta <span class="color-red text-bold">*</span>
                               </label>
                               <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_floor">
-                              Floor is required*
+                              Planta se requiere*
                               </span>
                           </div>
                           </div>
@@ -155,7 +155,7 @@
                               [ngModelOptions]="{standalone: true}"
                               class="ap-form__input-checkbox display-none" />
                             <label for="profile_smoke" class="ap-form__label ap-form__label-checkbox">
-                              Smoke
+                              Fumar
                             </label>
                           </div> 
                         </div>      
@@ -170,7 +170,7 @@
                               [ngModelOptions]="{standalone: true}"
                               class="ap-form__input-checkbox display-none" />
                             <label for="profile_active" class="ap-form__label ap-form__label-checkbox">
-                              Active
+                              Activo
                             </label>
                           </div>
                         </div> 
@@ -178,7 +178,7 @@
                         <div class="ml-col-1 ap-form__gallery padding-general-m" id="images_on_gallery">
                             <div class="ml-col-1">
                               <h4 class="ap-form__titulo text-left">
-                                Gallery
+                                Galería
                               </h4>
                             </div>
                             <div class="ap-form__gallery-image margin-top-x" *ngFor="let image of images_in_gallery, index as index;">
@@ -224,7 +224,7 @@
                             <button 
                             type="submit"
                             class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white">
-                            Save
+                            Guardar
                             </button>
                         </div>
                 </form>

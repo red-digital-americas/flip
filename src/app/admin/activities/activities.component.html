@@ -2,7 +2,7 @@
   
 <div class="card card-height-newsfeed">  
     <div class="card-body">
-      <h5 class="card-title">Add Activity </h5>
+      <h5 class="card-title">Add Actividad </h5>
       
       <form #loginForm="ngForm" autocomplete="off">
         <div class="row">
@@ -10,7 +10,7 @@
 
             <div class="form-row">
               <div class="col-12  margin-gral">
-                <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Title" required>
+                <input type="text" [(ngModel)]="posttitle" class="form-control" name="postitle" id="postitle" placeholder="Titulo" required>
               </div>
             </div>
               
@@ -62,8 +62,8 @@
             </div>
           </div>
 
-          <button (click)="editPost(post.idpost)" type="button" class="btn btn-outline-primary">Edit Post</button>
-          <button (click)="deletePost(post.idpost)" type="button" class="btn  btn-outline-danger">Delete Post</button>  
+          <button (click)="editPost(post.idpost)" type="button" class="btn btn-outline-primary">Editar Post</button>
+          <button (click)="deletePost(post.idpost)" type="button" class="btn  btn-outline-danger">Eliminar Post</button>  
         </div>
       </div>
     </div>

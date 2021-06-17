@@ -6,12 +6,12 @@
           <div class="ml-col-1" >
             <div class="ml-col-1 margin-tb-min">
                 <h4 class="ap-form__titulo ap-form__titulo--auto-width">
-                    Booking Configuration
+                    Configuración de Reserva
                 </h4>
                 <button 
                   class="ap-form__rButton button-red"
                   (click)="windowBackPage()">
-                  My Profile
+                  Mi Perfil
                 </button>
             </div>
             <div class="ml-col-1">
@@ -20,12 +20,12 @@
                       <div class="ap-form__input">
                         <select
                           required
-                          placeholder="Gender"
+                          placeholder="Género"
                           id="profile_gender" 
                           name="profile_gender"
                           (change)="buildSelected( $event )"
                           class="ap-form__input-text">
-                          <option value="null" disabled>Location*</option>
+                          <option value="null" disabled>Localización*</option>
                           <option *ngFor="let build of builds_list;" [value]="build.id">
                             {{ build.name }}
                           </option> 
@@ -33,7 +33,7 @@
                         <label 
                           for="profile_gender" 
                           class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                          Location
+                          Localización
                         </label>
                       </div>
                     </div>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="ml-col-1 margin-bottom-x">
                         <div class="ap-form__titulo margin-bottom-x">
-                           Services Included
+                           Servicios Incluidos
                         </div>
                         <div class="ml-col-8">
                             <div class="ml-col-4 margin-bottom-x" *ngFor="let service_included of current_build.services">
@@ -68,20 +68,20 @@
                                 </div>
                             </div>
                             <div class="ml-col-1" *ngIf="current_build.services.length == 0">
-                                No Services included
+                               No Servicios Incluidos
                             </div>
                         </div>
                     </div>
                     <div class="ml-col-1 margin-bottom-x">
                         <div class="ap-form__titulo margin-bottom-x">
-                           Room Types
+                           Tipos de habitaciones
                         </div>
                         <div class="ml-col-4o" *ngIf="current_build.roomType.length != 0">
                             <div class="at-room__rooms">
                                 <div class="ml-col-1 at-room__rooms-header">
-                                    <div class="ml-col-3">Room Type</div>
-                                    <div class="ml-col-3">Rooms</div>
-                                    <div class="ml-col-3">Active</div>
+                                    <div class="ml-col-3">Tipo de Habitación</div>
+                                    <div class="ml-col-3">Habitaciones</div>
+                                    <div class="ml-col-3">Activo</div>
                                 </div>
                                 <div class="ml-col-1 at-room__rooms-data" *ngFor="let room_included of current_build.roomType;">
                                     <div class="ml-col-3">{{ room_included.name }}</div>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="ml-col-1 top-separator">
                         <div class="ap-form__titulo margin-tb-min">
-                            Booking Detail
+                            Booking Detalle
                         </div>
                         <div class="ml-col-4">
                             <div class="ml-col-1">
@@ -104,7 +104,7 @@
                                 <input 
                                   required
                                   type="date" 
-                                  placeholder="Start Date"
+                                  placeholder="Fecha Inicio"
                                   id="bd_sDate" 
                                   name="bd_sDate"
                                   class="ap-form__input-text"
@@ -116,10 +116,10 @@
                                 <label 
                                   for="bd_sDate" 
                                   class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                  Start Date
+                                  Fecha Inicio
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_sdat">
-                                    Start date is required*
+                                    Start date se requiere*
                                 </span>
                               </div>
                             </div>
@@ -130,7 +130,7 @@
                                 <input 
                                   required
                                   type="date" 
-                                  placeholder="End Date"
+                                  placeholder="Fecha de Finalización"
                                   id="bd_eDate" 
                                   name="bd_eDate"
                                   disabled
@@ -141,10 +141,10 @@
                                 <label 
                                   for="bd_eDate" 
                                   class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                  End Date
+                                  Fecha de Finalización
                                 </label>
                                 <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_edat">
-                                    End date is required*
+                                    End date se requiere*
                                 </span>
                               </div>
                             </div>
@@ -154,7 +154,7 @@
                                 <div class="ap-form__input">
                                   <select
                                     required
-                                    placeholder="Beds required"
+                                    placeholder="Camas required"
                                     id="bd_aBeds" 
                                     name="bd_aBeds"
                                     [disabled]="able_section_two"
@@ -162,7 +162,7 @@
                                     [(ngModel)]="booking_data.totalBeds"
                                     (change)="setBedsSelected( $event )"
                                     class="ap-form__input-text">
-                                    <option value="null" disabled>Beds required*</option>
+                                    <option value="null" disabled>Camas required*</option>
                                     <option value="0">No additional bed</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -172,10 +172,10 @@
                                   <label 
                                     for="bd_aBeds" 
                                     class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                    Beds required
+                                    Camas required
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_beds">
-                                    Beds is required*
+                                    Camas se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@
                                 <div class="ap-form__input">
                                   <select
                                     required
-                                    placeholder="Roomate Type"
+                                    placeholder="Roomate Tipo"
                                     id="bd_roomate" 
                                     name="bd_roomate"
                                     [disabled]="able_section_two"
@@ -193,7 +193,7 @@
                                     (change)="unableField( $event, 'bd_gender_container')"
                                     [(ngModel)]="booking_data.roomateFlip"
                                     class="ap-form__input-text">
-                                    <option value="null" disabled>Roomate Type*</option>
+                                    <option value="null" disabled>Roomate Tipo*</option>
                                     <option *ngFor="let roommate of roomates_catalog;" value="{{ roommate.id }}">
                                         {{ roommate.roomateType1 }}
                                     </option>
@@ -201,10 +201,10 @@
                                   <label 
                                     for="bd_roomate" 
                                     class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                    Roomate Type
+                                    Roomate Tipo
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_rtyp">
-                                    Roomate is required*
+                                    Roomate se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -231,7 +231,7 @@
                                     Roomate gender preference
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_gend">
-                                    Roomate gender is required*
+                                    Roomate gender se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -258,7 +258,7 @@
                                     Do you smoke?
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_smok">
-                                    Do you smoke? is required*
+                                    Do you smoke? se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -285,7 +285,7 @@
                                     Pets
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_pets">
-                                    Pets is required*
+                                    Pets se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -295,14 +295,14 @@
                                 <div class="ap-form__input">
                                   <select
                                     required
-                                    placeholder="Room Type"
+                                    placeholder="Tipo de Habitación"
                                     id="bd_room" 
                                     name="bd_room"
                                     [disabled]="able_section_two"
                                     [class.form_error_found]="bt_form_data.no_room"
                                     [(ngModel)]="booking_data.roomType"
                                     class="ap-form__input-text">
-                                    <option value="null" disabled>Room Type*</option>
+                                    <option value="null" disabled>Tipo de Habitación*</option>
                                     <option *ngFor="let typeroom of typesrooms_catalog;" value="{{ typeroom.id }}">
                                         {{ typeroom.type }}
                                     </option>
@@ -310,10 +310,10 @@
                                   <label 
                                     for="bd_room" 
                                     class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                    Room Type
+                                    Tipo de Habitación
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_room">
-                                    Room Type is required*
+                                    Tipo de Habitación se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -321,7 +321,7 @@
 
                         <div class="ml-col-1" *ngIf="show_beds_section">
                           <div class="ap-form__titulo margin-tb-min">
-                            Additional Beds
+                            Additional Camas
                           </div>
                           <div class="ml-col-1">
                             <div class="ml-col-1 padding-general-m card-style margin-bottom-x"
@@ -330,16 +330,16 @@
                                 <div class="ml-col-4">
                                   <div class="ml-col-1">
                                     <div class="ap-form__input">
-                                      <input required type="text" placeholder="Name*" id="ab_name_{{ index }}"
+                                      <input required type="text" placeholder="Nombre*" id="ab_name_{{ index }}"
                                         name="ab_name_{{ index }}" class="ap-form__input-text"
                                         [disabled]="able_section_two" [class.form_error_found]="bed.name == 'no_data'"
                                         value="{{ bed?.name == 'no_data' ? '' : bed?.name }}" />
                                       <label for="ab_name_{{ index }}"
                                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                        Name*
+                                        Nombre*
                                       </label>
                                       <span class="ml-col-1 form_error_found_label" *ngIf="bed.name == 'no_data'">
-                                        Name is required*
+                                        Nombre se requiere*
                                       </span>
                                     </div>
                                   </div>
@@ -347,17 +347,17 @@
                                 <div class="ml-col-4">
                                   <div class="ml-col-1">
                                     <div class="ap-form__input">
-                                      <input required type="text" placeholder="Last Name*" id="ab_lname_{{ index }}"
+                                      <input required type="text" placeholder="Apellido Paterno*" id="ab_lname_{{ index }}"
                                         name="ab_lname_{{ index }}" class="ap-form__input-text"
                                         [disabled]="able_section_two"
                                         [class.form_error_found]="bed.lastName == 'no_data'"
                                         value="{{ bed?.lastName == 'no_data' ? '' : bed?.lastName }}" />
                                       <label for="ab_lname_{{ index }}"
                                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                        Last Name*
+                                        Apellido Paterno*
                                       </label>
                                       <span class="ml-col-1 form_error_found_label" *ngIf="bed.lastName == 'no_data'">
-                                        Last Name is required*
+                                        Apellido Paterno se requiere*
                                       </span>
                                     </div>
                                   </div>
@@ -365,17 +365,17 @@
                                 <div class="ml-col-4">
                                   <div class="ml-col-1">
                                     <div class="ap-form__input">
-                                      <input required type="text" placeholder="Mother Name*" id="ab_mname_{{ index }}"
+                                      <input required type="text" placeholder="Apellido Materno*" id="ab_mname_{{ index }}"
                                         name="ab_mname_{{ index }}" class="ap-form__input-text"
                                         [disabled]="able_section_two"
                                         [class.form_error_found]="bed.motherName == 'no_data'"
                                         value="{{ bed?.motherName == 'no_data' ? '' : bed?.motherName }}" />
                                       <label for="ab_mname_{{ index }}"
                                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                        Mother Name*
+                                        Apellido Materno*
                                       </label>
                                       <span class="ml-col-1 form_error_found_label" *ngIf="bed.motherName == 'no_data'">
-                                        Mother Name is required*
+                                        Apellido Materno se requiere*
                                       </span>
                                     </div>
                                   </div>
@@ -383,7 +383,7 @@
                                 <div class="ml-col-4">
                                   <div class="ml-col-1">
                                     <div class="ap-form__input">
-                                      <select required placeholder="Roomate Type" id="profile_gender_{{ index }}"
+                                      <select required placeholder="Roomate Tipo" id="profile_gender_{{ index }}"
                                         name="profile_gender_{{ index }}" [disabled]="able_section_two"
                                         [class.form_error_found]="bed.genderId == 'no_data'"
                                         value="{{ bed?.genderId == 'no_data' ? '0' : bed?.genderId }}"
@@ -394,10 +394,10 @@
                                       </select>
                                       <label for="profile_gender_{{ index }}"
                                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                        Gender
+                                        Género
                                       </label>
                                       <span class="ml-col-1 form_error_found_label" *ngIf="bed.genderId == 'no_data'">
-                                        Gender is required*
+                                        Género se requiere*
                                       </span>
                                     </div>
                                   </div>
@@ -414,7 +414,7 @@
                                         Email*
                                       </label>
                                       <span class="ml-col-1 form_error_found_label" *ngIf="bed.email == 'no_data'">
-                                        Email is required*
+                                        Email se requiere*
                                       </span>
                                       <span class="ml-col-1 form_error_found_label" *ngIf="bed.email == 'no_valid'">
                                         Email format is not valid*
@@ -425,16 +425,16 @@
                                 <div class="ml-col-4">
                                   <div class="ml-col-1">
                                     <div class="ap-form__input">
-                                      <input required type="text" placeholder="Phone Number*" id="ab_phone_{{ index }}"
+                                      <input required type="text" placeholder="Número de teléfono*" id="ab_phone_{{ index }}"
                                         name="ab_phone_{{ index }}" class="ap-form__input-text"
                                         [disabled]="able_section_two" value="{{ bed?.phone }}"
                                         [class.form_error_found]="bed.phone == 'no_data'" />
                                       <label for="ab_phone_{{ index }}"
                                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                        Phone Number*
+                                        Número de teléfono*
                                       </label>
                                       <span class="ml-col-1 form_error_found_label" *ngIf="bed.phone == 'no_data'">
-                                        Phone Number is required*
+                                        Número de teléfono se requiere*
                                       </span>
                                     </div>
                                   </div>
@@ -455,14 +455,14 @@
                                 class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black"
                                 *ngIf="able_section_two"
                                 (click)="ableBookingDetail( false )">
-                                Edit Booking Detail
+                                Editar detalle de reserva
                             </button>
                         </div>
                     </div>
                     <div class="ml-col-1" *ngIf="able_section_two">
                         <div class="ml-col-1 top-separator margin-top-x">
                             <div class="ap-form__titulo margin-tb-min">
-                                Select Room
+                                Seleccionar habitación
                             </div>
                             <div class="ml-col-1 at-bcard">
                                 <div 
@@ -479,7 +479,7 @@
                                     <div class="ml-col-1 margin-top-x">
                                         <div class="ml-col-2">
                                             <div class="ml-col-1 text-bold">
-                                                Beds:
+                                                Camas:
                                             </div>
                                             <div class="ml-col-1">
                                                 {{ room.totalBeds }}
@@ -487,7 +487,7 @@
                                         </div>
                                         <div class="ml-col-2">
                                             <div class="ml-col-1 text-bold">
-                                                Floor:
+                                                Planta:
                                             </div>
                                             <div class="ml-col-1">
                                                 {{ room.totalBeds }}
@@ -510,7 +510,7 @@
                         </div>
                         <div class="ml-col-1 top-separator margin-top-x">
                             <div class="ap-form__titulo margin-tb-min">
-                                Avaible Memberships
+                                Avaible Membresías
                             </div>
                             <div class="ml-col-1 at-bcard">
                                 <div 
@@ -529,7 +529,7 @@
                                             <div class="ml-col-1 at-bcard__stitle margin-bottom-x text-bold">Characteristics</div>
                                             <div class="ml-col-2 ap-form__sdato ap-form__sdato--no-padding">
                                                 <div class="ml-col-1 text-bold">
-                                                    Room type:
+                                                    Cuarto type:
                                                 </div>
                                                 <div class="ml-col-1">
                                                     {{ membership.name }}
@@ -548,7 +548,7 @@
                                         </div>
                                     </div>
                                     <div class="ml-col-1 margin-top-x">
-                                        <div class="ml-col-1 margin-bottom-x at-bcard__stitle text-bold">Services Included</div>
+                                        <div class="ml-col-1 margin-bottom-x at-bcard__stitle text-bold">Servicios Incluidos</div>
                                         <div class="ml-col-1">
                                             <div class="ml-col-4 margin-bottom-x" *ngFor="let room_service of membership.services">
                                                 <span class="color-yellow">*</span>{{ room_service.name }}
@@ -557,14 +557,14 @@
                                     </div>
                                 </div>
                                 <div class="ml-col-1" *ngIf="memberships_cards?.length == 0">
-                                    No Memberships avaible
+                                    No Membresías avaible
                                 </div>
                             </div>
                         </div>
                         <div class="ml-col-1 margin-bottom-m top-separator" *ngIf="additional_services_section">
                             <div class="ml-col-1 margin-tb-min">
                                 <div class="ap-form__titulo ap-form__titulo--auto-width">
-                                    Additional Services
+                                    Additional Servicios
                                 </div>
                                 <button 
                                     class="ap-form__rButton button-green"
@@ -578,9 +578,9 @@
                                         <div class="table-as__row-i"></div>
                                         <div class="table-as__row-s text-left">Service</div>
                                         <div class="table-as__row-s">Lapse</div>
-                                        <div class="table-as__row-s">Start Date</div>
-                                        <div class="table-as__row-s">End Date</div>
-                                        <div class="table-as__row-s">Ammount</div>
+                                        <div class="table-as__row-s">Fecha Inicio</div>
+                                        <div class="table-as__row-s">Fecha de Finalización</div>
+                                        <div class="table-as__row-s">Monto</div>
                                         <div class="table-as__row-d"></div>
                                     </div>
                                     <div class="ml-col-1 at-room__rooms-data" *ngFor="let service of additional_services_selected;">
@@ -590,7 +590,7 @@
                                             </figure> 
                                         </div>
                                         <div class="table-as__row-s text-left">{{ service.name }}</div>
-                                        <div class="table-as__row-s">{{ service.lapse == '1' ? 'Recurrent' : 'Once' }}</div>
+                                        <div class="table-as__row-s">{{ service.lapse == '1' ? 'Recurrente' : 'Once' }}</div>
                                         <div class="table-as__row-s">{{ service.startDate | date }}</div>
                                         <div class="table-as__row-s">{{ service.endDate | date }}</div>
                                         <div class="table-as__row-s">{{ service.total_ammount | currency }}</div>
@@ -612,7 +612,7 @@
                                 <div class="ml-col-1 margin-bottom-x">
                                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                                         <div class="ml-col-1">
-                                            Start Date
+                                            Fecha Inicio
                                         </div>
                                         <div class="ml-col-1 text-bold">
                                             {{ booking_data.startDate | date }}
@@ -620,7 +620,7 @@
                                     </div>
                                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                                         <div class="ml-col-1">
-                                            End Date
+                                            Fecha de Finalización
                                         </div>
                                         <div class="ml-col-1 text-bold">
                                             {{ booking_data.finishDate | date }}
@@ -628,7 +628,7 @@
                                     </div>
                                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                                         <div class="ml-col-1">
-                                            Total Beds
+                                            Total Camas
                                         </div>
                                         <div class="ml-col-1 text-bold">
                                             {{ getTotalBeds( booking_data.totalBeds ) }}
@@ -636,7 +636,7 @@
                                     </div>
                                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                                         <div class="ml-col-1">
-                                            Roomate Type
+                                            Roomate Tipo
                                         </div>
                                         <div class="ml-col-1 text-bold">
                                             {{ getNameRoomateType( booking_data.roomateFlip ) }}
@@ -646,7 +646,7 @@
                                 <div class="ml-col-1 margin-bottom-x">
                                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                                         <div class="ml-col-1">
-                                            Roomate Gender Preference
+                                            Roomate Género Preference
                                         </div>
                                         <div class="ml-col-1 text-bold">
                                             {{ booking_data.roomatePreferences == '1' ? 'Male' : 'Female' }}
@@ -670,7 +670,7 @@
                                     </div>
                                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                                         <div class="ml-col-1">
-                                            Room Type
+                                            Tipo de Habitación
                                         </div>
                                         <div class="ml-col-1 text-bold">
                                             {{ room_selected.name }}
@@ -689,7 +689,7 @@
                                     <div class="ml-col-5e3">
                                         <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
                                             <div class="ml-col-1 padding-bottom-x">
-                                                Nights reserved:
+                                                Noches reservadas:
                                             </div>
                                             <div class="ml-col-1 text-bold">
                                                 {{ getDaysReserved() }}
@@ -699,7 +699,7 @@
                                     <div class="ml-col-5e3">
                                         <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-center">
                                             <div class="ml-col-1 padding-bottom-x">
-                                                Total Beds:
+                                                Total Camas:
                                             </div>
                                             <div class="ml-col-1 text-bold">
                                                 {{ getTotalBeds( booking_data.totalBeds ) }}
@@ -709,7 +709,7 @@
                                     <div class="ml-col-5e3">
                                         <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding text-right">
                                             <div class="ml-col-1 padding-bottom-x">
-                                                Ammount:
+                                                Monto:
                                             </div>
                                             <div class="ml-col-1 text-bold">
                                                 {{ getTotalAmmount() | currency }}
@@ -719,7 +719,7 @@
                                 </div>
                                 <div class="ml-col-1">
                                     <div class="ml-col-1 text-bold margin-bottom-x">
-                                        Services 
+                                        Servicios 
                                     </div>
                                 </div>
                                 <table 
@@ -752,23 +752,23 @@
                                     <ng-container matColumnDef="lapse">
                                         <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Lapse</th>
                                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">
-                                            {{ element.lapse == '1' ? 'Recurrent' : 'Once' }}
+                                            {{ element.lapse == '1' ? 'Recurrente' : 'Once' }}
                                         </td>
                                     </ng-container>
                                     <ng-container matColumnDef="sdate">
-                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Start Date</th>
+                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Fecha Inicio</th>
                                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                                             {{ element.startDate | date }}
                                         </td>
                                     </ng-container>
                                     <ng-container matColumnDef="edate">
-                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">End Date</th>
+                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Fecha de Finalización</th>
                                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                                             {{ element.endDate | date }}
                                         </td>
                                     </ng-container>
                                     <ng-container matColumnDef="ammount">
-                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-right">Ammount</th>
+                                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-right">Monto</th>
                                         <td mat-cell *matCellDef="let element" class="table__data table__data-right">
                                             {{ element.total_ammount | currency }}
                                         </td>
@@ -821,7 +821,7 @@
                                 <button 
                                     class="ap-form__rButton button-black button-big"
                                     (click)="PayBooking()">
-                                    Confirm Pay
+                                    Confirmar Pay
                                 </button>
                             </div>
                         </div>
@@ -832,7 +832,7 @@
             <!-- <div class="ml-col-1 ap-form__buttons">
               <button (click)="PayBooking()"
                 class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black">
-                Confirm Pay
+                Confirmar Pay
               </button>
             </div> -->
           </div>
@@ -845,13 +845,13 @@
   <div class="ml-modal__content card-style" *ngIf="show_modal_content == 'services'">
       <div class="ml-col-1 margin-bottom-m">
           <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
-              Add Services
+              Add Servicios
           </p>
           <button 
               class="ap-form__rButton button-red"
               *ngIf="additional_services_selected == 0"
               (click)="showModal();">
-              Close
+              Cerrar
           </button>
           <h4 class="ap-form__titulo">
               Additional services
@@ -873,17 +873,17 @@
                   <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.name }}</td>
               </ng-container>
               <ng-container matColumnDef="description">
-                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Description</th>
+                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Descripción</th>
                   <td mat-cell *matCellDef="let element" class="table__data table__data-center padding-tbi-x">
                       {{ element.description }}
                   </td>
               </ng-container>
               <ng-container matColumnDef="recurrent">
-                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Recurrent</th>
+                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Recurrente</th>
                   <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.priceUnit | currency }}</td>
               </ng-container>
               <ng-container matColumnDef="once">
-                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Once cost</th>
+                  <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Una vez costo</th>
                   <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.price | currency }}</td>
               </ng-container>
               <ng-container matColumnDef="able">
@@ -906,12 +906,12 @@
       </div>
       <div class="ml-col-1 margin-top-m">
           <span class="font-big" *ngIf="additional_services_selected != 0">
-              Services selected
+              Servicios seleccionados
           </span>
       </div>
       <div class="ml-col-1 ap-info__buttons" *ngIf="additional_services_selected == 0">
           <span class="ap-info__noitems">
-              No services selected yet
+              Aún no se han seleccionado servicios
           </span>
       </div>
       <div class="ml-col-1 margin-top-x" id="form_services_added" *ngIf="services_selected != 0">
@@ -921,7 +921,7 @@
                   <button 
                       (click)="removeAdditionalServiceSelected( service )"
                       class="ap-form__rButton button-red">
-                      Remove service
+                      Quitar servicio
                   </button>
                   <h4 class="ap-form__titulo ap-form__titulo--auto-width">
                       {{ service.name }}
@@ -944,7 +944,7 @@
                           value="{{ service.lapse }}"
                           class="ap-form__input-text">
                           <option value="" disabled>Select type</option>
-                          <option value="1">Recurrent</option>
+                          <option value="1">Recurrente</option>
                           <option value="2">Once</option>
                       </select>
                       <label 
@@ -954,7 +954,7 @@
                         Lapse Time 
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="service.validator?.no_laps">
-                          Lapse Time is required*
+                          Lapse Time se requiere*
                       </span>
                     </div>
                   </div>
@@ -970,7 +970,7 @@
                         [class.form_error_found]="service.validator?.no_sdat"
                         (change)="ableDateSelection('addServ_sDate_' + index, 'addServ_eDate_' + index );
                                   getAdditionalServiceAmmount( $event, 0, service );"
-                        placeholder="Start Date*"
+                        placeholder="Fecha Inicio*"
                         id="addServ_sDate_{{ index }}" 
                         name="addServ_sDate_{{ index }}"
                         value="{{ service.startDate }}"
@@ -978,10 +978,10 @@
                       <label 
                         for="addServ_sDate_{{ index }}" 
                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                        Start Date 
+                        Fecha Inicio 
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="service.validator?.no_sdat">
-                          Start is required*
+                          Start se requiere*
                       </span>
                     </div>
                   </div>
@@ -993,7 +993,7 @@
                         required
                         type="date" 
                         disabled
-                        placeholder="End Date*"
+                        placeholder="Fecha de Finalización*"
                         [min]="service.startDate"
                         [max]="booking_data.finishDate"
                         [class.form_error_found]="service.validator?.no_edat"
@@ -1005,21 +1005,21 @@
                       <label 
                         for="addServ_eDate_{{ index }}" 
                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                        End Date 
+                        Fecha de Finalización 
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="service.validator?.no_edat">
-                          End Date is required*
+                          Fecha de Finalización se requiere*
                       </span>
                     </div>
                   </div>
               </div>
               <div class="ml-col-4 ap-form__group">
                   <p class="ap-form__group-dato" *ngIf="service.lapse == '1'">
-                      <span class="text-bold">Price Recurrent</span>
+                      <span class="text-bold">Precio Recurrente</span>
                       {{ service?.priceUnit | currency }}
                   </p>
                   <p class="ap-form__group-dato" *ngIf="service.lapse == '2'">
-                      <span class="text-bold">Price Once</span>
+                      <span class="text-bold">Precio Once</span>
                       {{ service?.price | currency }}
                   </p>
                   <p class="ap-form__group-dato">
@@ -1029,14 +1029,14 @@
               </div>
           </div>
           <div class="ml-col-1 text-center margin-top-x" *ngIf="additional_services_selected != 0">
-              Required fields <span class="color-red text-bold">*</span>
+              Campos requeridos <span class="color-red text-bold">*</span>
           </div>
           <div class="ml-col-1 ap-form__buttons" *ngIf="additional_services_selected != 0">
               <button 
                 type="button"
                 (click)="getAdditionalServicesSelected()"
                 class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black">
-                Confirm
+                Confirmar
               </button>
           </div>
       </div>   

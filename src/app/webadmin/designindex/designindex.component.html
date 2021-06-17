@@ -17,7 +17,7 @@
             class="index-cards__card-buttons-button button-green button-icon button-icon--edit-white" 
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(post.id); showImagesSpaces( 'image_space_' + index );">
-            Edit
+            Editar
           </button>
         </div>
       </div>
@@ -43,11 +43,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content card">
       <div>
-        <button type="button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" id="close_button" (click)="primaryModal.hide()" aria-label="Close">
-          Close
+        <button type="button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" id="close_button" (click)="primaryModal.hide()" aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
-        <h4 class="modal-title">Select the Image to change at position</h4>
+        <h4 class="modal-title">Seleccione la imagen para cambiar en la posición</h4>
       </div>
       <hr>
       <div class="form">
@@ -75,7 +75,7 @@
           <div class="card__row" style="text-align: end; margin-top: 20px;">
             <hr>
               <button type="submit" class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white" [disabled]="!loginForm.form.valid" (click)="updatephoto()">
-                Save
+                Guardar
               </button>
           </div>
         </form>

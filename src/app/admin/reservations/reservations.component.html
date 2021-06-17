@@ -3,17 +3,17 @@
   <div class="ml-col-1 padding-general-m margin-bottom-g">
     <div class="ml-col-1">
       <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-        Events
+        Eventos
       </h4>
       <button 
         class="ap-form__rButton button-pink padding-lateral-m button-big button-icon button-icon--add-white"
         (click)="showModal()">
-        New Event
+        Nuevo Evento
       </button>
       <button 
         class="ap-form__rButton button-black padding-lateral-m button-big button-icon button-icon--refresh-white"
         (click)="Refresh()">
-        Refresh Calendar
+        Actualizar Calendario
       </button>
     </div>
     <form class="ap-form ap-form__sdato--no-padding ml-col-2 margin-bottom-x">
@@ -66,11 +66,11 @@
   <div class="ml-modal__content card-style">
     <div class="ml-col-1 margin-bottom-x">
         <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
-            New Event
+            Nuevo Evento
         </p>
         <button 
             class="ap-form__rButton button-red button-icon button-icon--cancel-white" (click)="showModal()">
-            Close
+            Cerrar
         </button>
     </div> 
     <div class="ml-col-1">
@@ -79,7 +79,7 @@
           <div class="ml-col-1">
               <div class="ap-form__input">
                   <p class="ml-col-1">
-                      Kind of reservation:
+                      Tipo de reserva:
                   </p>
               </div>
           </div>
@@ -130,7 +130,7 @@
                 Amenity
               </label>
               <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_amenity">
-                Amenity is required*
+                Amenity se requiere*
               </span>
             </div>
           </div>
@@ -141,19 +141,19 @@
               <input 
                 required
                 type="text" 
-                placeholder="Name*"
+                placeholder="Nombre*"
                 id="profile_name" 
                 name="profile_name"
                 class="ap-form__input-text"
-                [(ngModel)]="reservation_data.Name"
+                [(ngModel)]="reservation_data.Nombre"
                 [class.form_error_found]="event_form_validator.no_name" />
               <label 
                 for="profile_name" 
                 class="ap-form__label ap-form__label-text">
-                Name
+                Nombre
               </label>
               <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_name">
-                Name is required*
+                Nombre se requiere*
               </span>
             </div>
           </div>
@@ -163,7 +163,7 @@
             <div class="ap-form__input">
               <textarea 
                 required 
-                placeholder="Description*"
+                placeholder="Descripción*"
                 id="profile_desc" 
                 name="profile_desc"
                 [(ngModel)]="reservation_data.Description"
@@ -172,10 +172,10 @@
               <label 
                 for="profile_name" 
                 class="ap-form__label ap-form__label-text">
-                Description
+                Descripción
               </label>
               <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_desc">
-                Description is required*
+                Descripción se requiere*
               </span>
             </div>
           </div>
@@ -201,7 +201,7 @@
                 Host
               </label>
               <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_host">
-                Host is required*
+                Host se requiere*
               </span>
             </div>
           </div>
@@ -212,7 +212,7 @@
                 <input 
                   required
                   type="date" 
-                  placeholder="When?"
+                  placeholder="¿Cuando?"
                   id="staff_when" 
                   name="staff_when"
                   class="ap-form__input-text"
@@ -222,10 +222,10 @@
                 <label 
                   for="staff_when" 
                   class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
-                  Date
+                  Fecha
                 </label>
                 <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_date">
-                  Date is required*
+                  Fecha se requiere*
                 </span>
               </div>
           </div>
@@ -236,7 +236,7 @@
                 <input 
                   required
                   type="time" 
-                  placeholder="What time?"
+                  placeholder="¿Qué hora?"
                   id="staff_when" 
                   name="staff_when"
                   class="ap-form__input-text"
@@ -246,10 +246,10 @@
                 <label 
                   for="staff_when" 
                   class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
-                  Open at:
+                  Abre a las:
                 </label>
                 <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_shou">
-                  Open at is required*
+                  Abre a las se requiere*
                 </span>
               </div>
           </div>
@@ -260,7 +260,7 @@
                 <input 
                   required
                   type="time" 
-                  placeholder="What time?"
+                  placeholder="¿Qué hora?"
                   id="staff_when" 
                   name="staff_when"
                   class="ap-form__input-text"
@@ -270,10 +270,10 @@
                 <label 
                   for="staff_when" 
                   class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
-                  Close at:
+                  Cierra a las:
                 </label>
                 <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_ehou">
-                  Close at: is required*
+                  Cierra a las: se requiere*
                 </span>
               </div>
           </div>
@@ -294,7 +294,7 @@
                    [class.forms_errors_nimage]="event_form_validator.no_phot"
                    src="../../../assets/14.jpg" />
               <span class="ap-form__image-data text-center" id="new_amm_name_0">
-                Image resolution must be <br />
+                La resolución de la imagen debe ser <br />
                 <span class="text-bold">350x350</span> 
               </span>
             </figure>

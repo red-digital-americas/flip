@@ -5,12 +5,12 @@
       <div class="ap-cards">
         <div class="ml-col-1 margin-bottom-x">
           <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-            Services
+            Servicios
           </h4>
           <button 
             class="ap-form__rButton button-pink padding-lateral-m button-icon button-icon--add-white"
             (click)="toggleSectionForm( 'new' )">
-            Add Service
+            Agregar Servicio
           </button>
         </div>
         <div class="ml-col-1 margin-top-m font-big color-red text-center" *ngIf="servicesArray?.length == 0">
@@ -26,11 +26,11 @@
               {{ service.description }}
             </p>
             <p class="ap-cards__card-desc">
-              <span class="text-bold">Recurrent Price:</span>
+              <span class="text-bold">Recurrente Precio:</span>
               {{ service.price | currency:'USD' }}
             </p>
             <p class="ap-cards__card-desc">
-              <span class="text-bold">Once day Price:</span>
+              <span class="text-bold">Once day Precio:</span>
               {{ service.priceUnit | currency:'USD' }}
             </p>
             <figure class="ap-cards__card-image">
@@ -40,12 +40,12 @@
               <button 
               (click)="deleteThisService( service )"
               class="ap-cards__card-button button-red button-icon button-icon--delete-white">
-              Delete
+              Eliminar
             </button>
             <button 
               (click)="toggleSectionForm( 'edit', service )"
               class="ap-cards__card-button button-green button-icon button-icon--edit-white">
-              Edit
+              Editar
             </button>
             </div>
             <figure class="ap-cards__card-icon">
@@ -70,7 +70,7 @@
      <button 
          class="ap-form__rButton button-red padding-lateral-m button-icon button-icon--cancel-white"
          (click)="toggleSectionForm()">
-         Close
+         Cerrar
      </button>
    </div>
   <div class="ml-col-6 margin-top-x">
@@ -78,7 +78,7 @@
       <div class="ap-form__input">
         <input 
           type="text"
-          placeholder="Title"
+          placeholder="Titulo"
           id="new_service_title" 
           name="new_service_title"
           [class.form_error_found]="form_service.no_name"
@@ -88,10 +88,10 @@
           for="new_service_title" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_service.name != ''">
-          Title
+          Titulo
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_name">
-          Title is required*
+          Titulo se requiere*
         </span>
       </div>
     </div>
@@ -100,7 +100,7 @@
         <textarea 
           id="new_service_desc"
           name="new_service_desc"
-          placeholder="Description"
+          placeholder="Descripción"
           [class.form_error_found]="form_service.no_desc"
           [(ngModel)]="data_service.description"
           class="ap-form__label ap-form__input-textarea"></textarea>
@@ -108,10 +108,10 @@
           for="new_service_desc" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_service.description != ''">
-          Description
+          Descripción
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_desc">
-          Description is required*
+          Descripción se requiere*
         </span>
       </div>
     </div>
@@ -132,7 +132,7 @@
           Provider
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_prov">
-          Provider is required*
+          Provider se requiere*
         </span>
       </div>
     </div>
@@ -140,7 +140,7 @@
       <div class="ap-form__input">
         <input 
           type="number"
-          placeholder="Recurrent day price"
+          placeholder="Recurrente day price"
           id="new_service_price" 
           name="new_service_price"
           [class.form_error_found]="form_service.no_pric"
@@ -150,10 +150,10 @@
           for="new_service_price" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_service.price != null">
-          Recurrent day price
+          Recurrente day price
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_pric">
-          Recurrent day price is required*
+          Recurrente day price se requiere*
         </span>
       </div>
     </div>
@@ -161,7 +161,7 @@
       <div class="ap-form__input">
         <input 
           type="number"
-          placeholder="Once day Price"
+          placeholder="Once day Precio"
           id="new_service_unitp" 
           name="new_service_unitp"
           [(ngModel)]="data_service.priceUnit"
@@ -171,10 +171,10 @@
           for="new_service_unitp" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_service.priceUnit != null">
-          Once day Price
+          Once day Precio
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_puni">
-          Once day Price is required*
+          Once day Precio se requiere*
         </span>
       </div>
     </div>
@@ -199,7 +199,7 @@
               <span class="text-bold">350x350</span> 
             </span>
             <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_phot">
-              Image is required*
+              Image se requiere*
             </span>
           </figure>
         </label>
@@ -224,7 +224,7 @@
               <span class="text-bold">150x150</span> 
             </span>
             <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_icon">
-              Image is required*
+              Image se requiere*
             </span>
           </figure>
         </label>
@@ -243,12 +243,12 @@
       type="button"
       (click)="toggleSectionForm()"
       class="ap-form__buttons-button ap-form__buttons-button--big button-pink">
-      Cancel
+      Cancelar
     </button> -->
     <button 
       type="submit"
       class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white">
-      Save
+      Guardar
     </button>
   </div>
 </form>
@@ -272,22 +272,22 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
     <p class="ml-modal__pop-titulo margin-bottom-m">
-      Delete Service
+      Eliminar Service
     </p>
     <p class="ml-modal__pop-text">
-      Are you sure to delete service<br />
+      ¿Estás seguro de eliminar service<br />
       <span class="text-bold">"{{ service_to_delete.name }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="toggleSectionForm('delete')"
         class="ml-modal__pop-buttons-button button-pink button-icon button-icon--cancel-white">
-        Cancel
+        Cancelar
       </button>
       <button 
         (click)="confirmDeleteElement()"
         class="ml-modal__pop-buttons-button button-black button-icon button-icon--delete-white">
-        Delete
+        Eliminar
       </button>
     </div>
   </div>
@@ -303,7 +303,7 @@
 <!-- div class="animated fadeIn">
   <div class="card">    
     <div class="card-body">
-      <h5 class="card-title">Add Service</h5>
+      <h5 class="card-title">Agregar Servicio</h5>
         
       <form [formGroup]="formGroup" autocomplete="off">
         <div class="row">                      
@@ -316,7 +316,7 @@
               <div class="col-12 mb-2">
                   <div class="input-group">
                       <div class="input-group-prepend">
-                          <span class="input-group-text">Description</span>
+                          <span class="input-group-text">Descripción</span>
                       </div>
                       <textarea formControlName="descriptionCtrl" class="form-control" aria-label="With textarea"></textarea>
                   </div>                        
@@ -326,7 +326,7 @@
                 <input type="text" formControlName="providerCtrl" class="form-control" placeholder="Provider">
               </div>
               <div class="col-4 mb-2">
-                <input type="text" formControlName="priceCtrl" class="form-control" placeholder="Price">
+                <input type="text" formControlName="priceCtrl" class="form-control" placeholder="Precio">
               </div>
               <div class="col-4 mb-2">
                 <input type="text" formControlName="priceUnitCtrl" class="form-control" placeholder="PriceUnit">
@@ -370,7 +370,7 @@
               
         <div style="margin-bottom: 1rem;"></div>
         <div class="col-12">
-          <button (click)="AddService()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Service</button>          
+          <button (click)="AddService()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Agregar Servicio</button>          
         </div>   
       </form>           
 
@@ -384,8 +384,8 @@
 
             <div class="card-body">
               <label> {{post.description | slice:0:100}}</label>
-              <div>Month Price: {{post.price | currency:'USD'}}</div>
-              <div>Unit Price: {{post.priceUnit | currency:'USD'}}</div>
+              <div>Month Precio: {{post.price | currency:'USD'}}</div>
+              <div>Unit Precio: {{post.priceUnit | currency:'USD'}}</div>
               <div class="col-sm-6 col-md-4">
                 <img class="img-size" src="{{post.photo}}">
               </div>

@@ -13,12 +13,12 @@
     </div>
     <div class="navbar__component ml-col-2o">
       <button class="navbar__component-button" (click)="serv(IDBUILD)">
-        Build: Services
+        Build: Servicios
       </button>
     </div>
     <div class="navbar__component ml-col-2o">
       <button class="navbar__component-button" (click)="room(IDBUILD)">
-        Build: Room
+        Build: Cuarto
       </button>
     </div>
     <div class="navbar__component ml-col-2o">
@@ -41,11 +41,11 @@
         <div class="ml-col-1">
           <div class="ap-form__input">
               <mat-form-field >
-                  <mat-label>Services</mat-label>
+                  <mat-label>Servicios</mat-label>
                   <input matInput formControlName="servicios" placeholder="Example Service" type="text" [(ngModel)]="titlesObj[0].name">
               </mat-form-field> 
               <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_servicios">
-                Service is required*
+                Service se requiere*
               </span>
           </div>
         </div>
@@ -59,7 +59,7 @@
                   <input matInput formControlName="amenidades" placeholder="Example Ammenities" type="text" [(ngModel)]="titlesObj[1].name">
               </mat-form-field> 
               <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_amenidades">
-                Ammenities is required*
+                Ammenities se requiere*
               </span>
           </div>
         </div>
@@ -69,11 +69,11 @@
         <div class="ml-col-1">
           <div class="ap-form__input">
               <mat-form-field >
-                  <mat-label>Rooms</mat-label>
-                  <input matInput formControlName="rooms" placeholder="Example Rooms" type="text" [(ngModel)]="titlesObj[2].name">
+                  <mat-label>Habitaciones</mat-label>
+                  <input matInput formControlName="rooms" placeholder="Example Habitaciones" type="text" [(ngModel)]="titlesObj[2].name">
               </mat-form-field> 
               <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_rooms">
-                Rooms is required*
+                Habitaciones se requiere*
               </span>
           </div>
         </div>
@@ -87,7 +87,7 @@
                   <input matInput formControlName="map" placeholder="Example Map" type="text" [(ngModel)]="titlesObj[3].name">
               </mat-form-field> 
               <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_map">
-                Map is required*
+                Map se requiere*
               </span>
           </div>
         </div>
@@ -101,7 +101,7 @@
                   <input matInput formControlName="btnText" placeholder="Example Text buttin" type="text" [(ngModel)]="titlesObj[4].name">
               </mat-form-field> 
               <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_">
-                Button Text is required*
+                Button Text se requiere*
               </span>
           </div>
         </div>
@@ -112,7 +112,7 @@
           <button style="width: 100px;"
                   class="ap-form__buttons-button padding-lateral-m button-pink button-icon button-icon--add-white" 
                   (click)="updateTitles()">
-                  Update
+                  Actualizar
           </button>
         </div>         
       </div>
@@ -131,12 +131,12 @@
     <div class="ml-col-1">
       <div class="card__info margin-bottom-x" style="height: auto !important;">
         <p class="card__info-dato">
-          <span class="text-bold">Name Slide: </span> 
+          <span class="text-bold">Nombre Slide: </span> 
           {{ post.title }}
         </p>
         <br><br>
         <p class="card__info-dato">
-          <span class="text-bold">Description Slide: </span> 
+          <span class="text-bold">Descripción Slide: </span> 
           {{ post.desc }}
         </p>
       </div>
@@ -164,14 +164,14 @@
         <button 
                 (click)="delete(post)"
                 class="button button-x padding-lateral button-red button-icon button-icon--delete-white">
-                Delete
+                Eliminar
         </button>
         &nbsp;&nbsp;
         <button 
           data-toggle="modal" 
           (click)="primaryModal.show();passdata(post);"
           class="button button-x padding-lateral button-green button-icon button-icon--edit-white">
-          Edit
+          Editar
         </button>
       </div>
     </div>
@@ -181,22 +181,22 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
     <p class="ml-modal__pop-titulo margin-bottom-m">
-      Delete Slide
+      Eliminar Slide
     </p>
     <p class="ml-modal__pop-text">
-      Are you sure to delete slide<br />
+      ¿Estás seguro de eliminar slide<br />
       <span class="text-bold">"{{ slide_to_delete.title }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
       <button 
         (click)="showModal()"
         class="ml-modal__pop-buttons-button button-pink">
-        Cancel
+        Cancelar
       </button>
       <button 
         (click)="confirmDeleteElement()"
         class="ml-modal__pop-buttons-button button-black">
-        Delete
+        Eliminar
       </button>
     </div>
   </div>
@@ -218,8 +218,8 @@
     <div class="modal-content card">
       <div>
         <button type="button" id="close_modal" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m"
-                (click)="primaryModal.hide()" aria-label="Close">
-          Close
+                (click)="primaryModal.hide()" aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
         <h4 class="modal-title">Select the images to change at position</h4>
@@ -239,10 +239,10 @@
               [class.custom-input__text--error]="form_watcher.no_titl"
               required />
             <label class="custom-input__label custom-input__label--active" for="titulo_home">
-              Name
+              Nombre
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_titl">
-              Name is required
+              Nombre se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input">
@@ -255,10 +255,10 @@
               [class.custom-input__textarea--error]="form_watcher.no_desc"
               required></textarea>
             <label class="custom-input__label custom-input__label--active" for="descripcion_home">
-              Description
+              Descripción
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
-              Description is required
+              Descripción se requiere
             </span>
           </div>
           <div class="form__image">
@@ -281,9 +281,9 @@
               <span class="padding-tb-min">
                 <strong>Desktop photo:</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher.no_img0">
-                  Desktop photo is required <br />
+                  Desktop photo se requiere <br />
                 </span>
-                *Image resolution 1920x1080px.
+                *Resolución de imagen 1920x1080px.
               </span>
             </label>
           </div>
@@ -307,9 +307,9 @@
               <span class="padding-tb-min">
                 <strong>Mobile photo:</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher.no_img1">
-                  Mobile photo is required <br />
+                  Mobile photo se requiere <br />
                 </span>
-                *Image resolution 441x660px.
+                *Resolución de imagen 441x660px.
               </span>
             </label>
           </div>
@@ -320,7 +320,7 @@
         <button type="button"
                 class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
                 (click)="updatephoto()">
-            Save
+            Guardar
         </button>
       </div>
     </div>

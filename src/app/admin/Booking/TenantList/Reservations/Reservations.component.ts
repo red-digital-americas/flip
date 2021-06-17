@@ -78,20 +78,20 @@ import { resolve } from 'dns';
 
     public beds_section: boolean = false;
     public history_section: boolean = false;
-    public toggle_label_button: string = 'Show';
-    public toggle1_label_button: String = 'Show';
+    public toggle_label_button: string = 'Mostrar';
+    public toggle1_label_button: String = 'Mostrar';
     public showSection( section_to_show: string ):void {
 
         switch( section_to_show ) {
 
             case 'beds':
                 this.beds_section ? this.beds_section = false : this.beds_section = true;
-                this.beds_section ? this.toggle_label_button = 'Hide' : this.toggle_label_button = 'Show'; 
+                this.beds_section ? this.toggle_label_button = 'Ocultar' : this.toggle_label_button = 'Mostrar'; 
                 break;
 
             case 'history_section':
                 this.history_section ? this.history_section = false : this.history_section = true;
-                this.history_section ? this.toggle1_label_button = 'Hide' : this.toggle1_label_button = 'Show'; 
+                this.history_section ? this.toggle1_label_button = 'Ocultar' : this.toggle1_label_button = 'Mostrar'; 
                 break;
 
         }
@@ -216,12 +216,17 @@ import { resolve } from 'dns';
                     });
                     this.card_month_year_data = `${ this.current_card.month }/${this.current_card.year.slice(-2)}`;
 
+                    this.current_aditionals.forEach(element => {
+                        element.creditCard = this.decryptData(element.creditCard).toString();
+                        element.creditCard = element.creditCard.substr(element.creditCard.length - 4);
+                    });
+
                     console.log('Card date ==> ', this.card_month_year_data);
 
                 }
 
                 console.log('General => ', this.current_membership);
-                console.log('Add Beds => ', this.current_beds );
+                console.log('Add Camas => ', this.current_beds );
                 console.log('Services => ', this.current_services);
                 console.log('Services add => ', this.current_aditionals);
                 console.log('Services to pay => ', this.current_topay);
@@ -947,8 +952,8 @@ import { resolve } from 'dns';
                                                     kind: 'ok',
                                                     time: 5200,
                                                     message: {
-                                                        header: 'End Date Updated',
-                                                        text: 'End Date has been updated successfully'
+                                                        header: 'Fecha de Finalización Updated',
+                                                        text: 'Fecha de Finalización has been updated successfully'
                                                     }
                                                 });
 
@@ -985,7 +990,7 @@ import { resolve } from 'dns';
 
                             }, (error: any) => {
 
-                                console.error('WS End Date Stripe 2 => ', error );
+                                console.error('WS Fecha de Finalización Stripe 2 => ', error );
                                 this.loader.hideLoader();
                                 this.system_message.showMessage({
                                     kind: 'error',
@@ -1002,7 +1007,7 @@ import { resolve } from 'dns';
 
                 }, (error: any) => {
 
-                    console.error('WS End Date Stripe 1 => ', error );
+                    console.error('WS Fecha de Finalización Stripe 1 => ', error );
                     this.loader.hideLoader();
                     this.system_message.showMessage({
                         kind: 'error',

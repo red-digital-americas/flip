@@ -1,12 +1,12 @@
 <div class="modal-header">
     <h4 class="modal-title pull-left">{{ !isEditVisible ? eventDetail?.activity.name : 'Editar'}}</h4>               
     <!-- <h4 class="modal-title pull-left">IdProps {{idProps}}</h4> -->
-    <!-- button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <!-- button type="button" class="close pull-right" aria-label="Cerrar" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button -->
     <button 
         class="ap-form__rButton button-red button-icon button-icon--cancel-white" (click)="modalRef.hide()">
-        Close
+        Cerrar
     </button>
 </div>
 
@@ -18,7 +18,7 @@
             <div class="col-8">
                 <div class="row">                                            
                     <div class="col-12">
-                        <h5>Description</h5>
+                        <h5>Descripción</h5>
                         <div>{{eventDetail?.activity.description}}</div>
                     </div>
 
@@ -31,7 +31,7 @@
                     <hr style="width:100%;">
                      
                     <div class="col-12">
-                        <h5>Schedule</h5>
+                        <h5>Horario</h5>
                     </div>
                     <div class="col-12">
                         {{eventDetail?.date | date:'yyyy/MM/dd'}} {{eventDetail?.timeStart | date:'HH:mm'}} - {{eventDetail?.timeEnd | date:'HH:mm'}}
@@ -81,10 +81,10 @@
             </div>    
             
             <div class="col-6" *ngIf="showInvite">
-                <h5>Invite</h5>
+                <h5>Invitar</h5>
                 <fieldset class="form-group">
                     <ng-select 
-                        placeholder="Invite people"
+                        placeholder="Invitar gente"
                         [multiple]="true"
                         [items]="usersBuildingArray"
                         usersBuildingArray                         
@@ -139,12 +139,12 @@
             <button 
                 class="ap-form__buttons-button ap-form__buttons-button--big button-yellow button-icon button-icon--add-white"
                 (click)="Edit()">
-                Edit
+                Editar
             </button>
             <button 
                 class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-red button-icon button-icon--delete-white"
                 (click)="Delete()">
-                Delete
+                Eliminar
             </button>
         </div>
     </div>
@@ -156,8 +156,8 @@
                 <div class="col-8">
                     <div class="row">  
                         <div class="col-12 mb-2">
-                                <!-- <input type="text" [(ngModel)]="acitivyModel.Name" [disabled]="acitivyModel.Private" class="form-control" name="activityName" id="activityName" placeholder="Title" required> -->
-                                <input type="text" [(ngModel)]="acitivyModel.Name" class="form-control" name="activityName" id="activityName" placeholder="Title" required>
+                                <!-- <input type="text" [(ngModel)]="acitivyModel.Name" [disabled]="acitivyModel.Private" class="form-control" name="activityName" id="activityName" placeholder="Titulo" required> -->
+                                <input type="text" [(ngModel)]="acitivyModel.Name" class="form-control" name="activityName" id="activityName" placeholder="Titulo" required>
                         </div>          
                         
                         <div class="col-12 mb-2">
@@ -171,7 +171,7 @@
                         <div class="col-12 mb-2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Description</span>
+                                    <span class="input-group-text">Descripción</span>
                                 </div>
                                 <textarea name="activityDescription" id="activityDescription" class="form-control" [(ngModel)]="acitivyModel.Description" aria-label="With textarea"></textarea>
                             </div>
@@ -260,7 +260,7 @@
                 </div>                                                                                    
                       
                 <div class="col">
-                    <button (click)="Update()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="!loginForm.form.valid" >Update</button>
+                    <button (click)="Update()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="!loginForm.form.valid" >Actualizar</button>
                     <button (click)="isEditVisible=!isEditVisible" type="button" class="btn btn-outline-danger margin-gral">Cancelar</button>                
                 </div>                
             </div>  

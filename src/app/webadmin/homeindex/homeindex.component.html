@@ -8,7 +8,7 @@
               data-toggle="modal" 
               (click)="primaryModal.show(); passdata(0, '', '', false);"
               class="button button-x button-pink button-icon button-icon--add-white">
-              Add Biulding
+              Agregar Project
       </button>
     </div>
   </div>
@@ -22,7 +22,7 @@
               {{post.title}}
             </p>
             <p class="card__info-dato">
-              <span class="text-bold">Address: </span>
+              <span class="text-bold">Direccion: </span>
               {{post.direction}}
             </p>
           </div>
@@ -43,14 +43,14 @@
             class="button button-red button-icon button-icon--delete-white" 
             data-toggle="modal" 
             (click)="delete(post);">
-            Delete
+            Eliminar
           </button>
           &nbsp;
           <button style="width: 45%;"
             class="button button-green button-icon button-icon--edit-white" 
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(post.id, post.title, post.direction, post.iscomming); showImagesSpaces( 'image_space_' + index );">
-            Edit
+            Editar
           </button>
         </div>
       </div>
@@ -61,11 +61,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content card">
       <div>
-        <button type="button" id="close_button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" (click)="primaryModal.hide()" aria-label="Close">
-          Close
+        <button type="button" id="close_button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" (click)="primaryModal.hide()" aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
-        <h4 class="modal-title">Complete the information of the Project</h4>
+        <h4 class="modal-title">Completa la información del Project</h4>
       </div>
       <hr>
       <div class="form">
@@ -97,10 +97,10 @@
                 class="custom-input__text" 
                 name="titulo_home" 
                 id="titulo_home" 
-                placeholder="Name" 
+                placeholder="Nombre" 
                 required />
               <label class="custom-input__label" for="titulo_home">
-                Name
+                Nombre
               </label>
             </div>
             <div class="ml-col-1 custom-input">
@@ -123,7 +123,7 @@
                 [(ngModel)]="comming"
                 class="ap-form__input-checkbox display-none" />
               <label for="profile_active" class="ap-form__label ap-form__label-checkbox">
-                Cooming soon
+                Muy pronto
               </label>
             </div>
           </div>
@@ -134,7 +134,7 @@
                 class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white" 
                 [disabled]="!loginForm.form.valid" 
                 (click)="updatephoto()">
-                Save
+                Guardar
               </button>
           </div>
         </form>
@@ -148,20 +148,20 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
     <p class="ml-modal__pop-titulo margin-bottom-m">
-      Delete Map
+      Eliminar Mapa
     </p>
     <p class="ml-modal__pop-text">
-      Are you sure to delete <br />
+      ¿Estás seguro de eliminar <br />
       <span class="text-bold">"{{ datadelete.title}}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
       <button (click)="showModal()"
         class="ml-modal__pop-buttons-button button-black button-icon button-icon--cancel-white">
-        Cancel
+        Cancelar
       </button>
       <button (click)="confirmDeleteElement()"
         class="ml-modal__pop-buttons-button button-red button-icon button-icon--delete-white">
-        Delete
+        Eliminar
       </button>
     </div>
   </div>

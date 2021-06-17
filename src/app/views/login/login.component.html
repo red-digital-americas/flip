@@ -32,7 +32,7 @@
             Email
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_user">
-            Email is required*
+            Email se requiere*
           </span>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_val_mail && !form_data.no_user">
             Email no valid, It can not contain special characters*
@@ -56,7 +56,7 @@
             Password
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_pass">
-            Password is required*
+            Password se requiere*
           </span>
         </div>
       </div>
@@ -84,7 +84,7 @@
       (submit)="recoverPasswordAction()" 
       *ngIf="!login_action">
       <h4 class="ap-form__titulo text-left">
-        Recover Password
+        Recuperar contraseña
       </h4>
       <div class="ml-col-1">
         <div class="ap-form__input ap-form__input--full-width">
@@ -104,7 +104,7 @@
             Email
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_pass.no_emai">
-            Email is required*
+            Email se requiere*
           </span>
           <span 
             class="ml-col-1 form_error_found_label" 

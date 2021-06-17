@@ -5,7 +5,7 @@
           <div class="ml-col-1">
             <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
                 <span class="title_back_button" (click)="backButton()"></span><br />
-                <span class="padding-left-m">Edit Membership</span>
+                <span class="padding-left-m">Edit Membresía</span>
              </h4>
           </div>
           <div class="ml-col-1">
@@ -25,7 +25,7 @@
                             <input 
                               required
                               type="text" 
-                              placeholder="Name*"
+                              placeholder="Nombre*"
                               id="profile_name" 
                               name="profile_name"
                               class="ap-form__input-text"
@@ -35,10 +35,10 @@
                               for="profile_name" 
                               class="ap-form__label ap-form__label-text"
                               [class.ap-form__label-text--active]="membershipObj.name != ''">
-                              Name <span class="color-red text-bold">*</span>
+                              Nombre <span class="color-red text-bold">*</span>
                             </label>
                             <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_name">
-                              Name is required*
+                              Nombre se requiere*
                             </span>
                           </div>
                         </div>
@@ -50,7 +50,7 @@
                             <input 
                               required
                               type="text" 
-                              placeholder="Description*"
+                              placeholder="Descripción*"
                               id="profile_description" 
                               name="profile_description"
                               class="ap-form__input-text"
@@ -60,10 +60,10 @@
                               for="profile_description" 
                               class="ap-form__label ap-form__label-text"
                               [class.ap-form__label-text--active]="membershipObj.description != ''">
-                              Description <span class="color-red text-bold">*</span>
+                              Descripción <span class="color-red text-bold">*</span>
                             </label>
                             <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_description">
-                              Description is required*
+                              Descripción se requiere*
                             </span>
                           </div>
                         </div>
@@ -76,7 +76,7 @@
                               required
                               type="number" 
                               min="0"
-                              placeholder="Price*"
+                              placeholder="Precio*"
                               id="profile_price" 
                               name="profile_price"
                               class="ap-form__input-text"
@@ -86,10 +86,10 @@
                               for="profile_price" 
                               class="ap-form__label ap-form__label-text"
                               [class.ap-form__label-text--active]="membershipObj.price != ''">
-                              Individual price per night <span class="color-red text-bold">*</span>
+                              Precio individual por noche <span class="color-red text-bold">*</span>
                             </label>
                             <span class="ml-col-1 form_error_found_label" *ngIf="form_required.no_price">
-                              Price is required*
+                              Precio se requiere*
                             </span>
                           </div>
                         </div>
@@ -105,7 +105,7 @@
                               name="typeRoom"
                               class="ap-form__input-text"
                               [(ngModel)]="membershipObj.typeRoomId">
-                              <option value="null" disabled>Type Room*</option>
+                              <option value="null" disabled>Tipo Habitacion*</option>
                               <option *ngFor="let room of typeRoomList;" [value]="room.id">
                                 {{ room.type }}
                               </option>
@@ -114,7 +114,7 @@
                               for="profile_typeRoom" 
                               class="ap-form__label ap-form__label-text"
                               [class.ap-form__label-text--active]="membershipObj.typeRoomId != null">
-                              Type Room <span class="color-red text-bold">*</span> 
+                              Tipo Habitacion <span class="color-red text-bold">*</span> 
                             </label>
                           </div>
                         </div>
@@ -137,7 +137,7 @@
                     <div class="ml-col-1 margin-top-x" >
                       <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
                         <div class="ml-col-1 ap-form__sdato--bbottom font-big">
-                            Include services
+                            Servicios Incluidos
                         </div>
                     </div>
                       <table mat-table mat-sort [dataSource]="servicesList" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
@@ -155,17 +155,17 @@
                               <td mat-cell *matCellDef="let element" class="table__data table__data-center text-bold">{{ element.name }}</td>
                           </ng-container>
                           <ng-container matColumnDef="description">
-                              <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Description</th>
+                              <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Descripción</th>
                               <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                                   {{element.description}}
                               </td>
                           </ng-container>
                           <ng-container matColumnDef="recurrent">
-                              <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Recurrent</th>
+                              <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Recurrente</th>
                               <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.price | currency }}</td>
                           </ng-container>
                           <ng-container matColumnDef="once">
-                              <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Once cost</th>
+                              <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Una vez costo</th>
                               <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.priceUnit | currency }}</td>
                           </ng-container>
                           <ng-container matColumnDef="select">
@@ -194,7 +194,7 @@
                           type="submit"
                           class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green
                                   button-icon button-icon--add-white">
-                          Save
+                          Guardar
                         </button>
                       </div>
               </form>

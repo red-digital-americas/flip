@@ -62,7 +62,7 @@
     </div>
     <div  class="ml-col-1 custom-input">
       <button type="button" class="button button-x center-element-absolute button-green button-icon button-icon--add-white" (click)="updatesn()">
-        Save
+        Guardar
       </button>
     </div>
   </div>
@@ -81,7 +81,7 @@
             class="index-cards__card-buttons-button button-green button-icon button-icon--edit-white" 
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata(post); showImagesSpaces( 'image_space_' + index );">
-            Edit
+            Editar
           </button>
         </div>
       </div>
@@ -137,11 +137,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content card">
       <div>
-        <button type="button" id="close_button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" (click)="primaryModal.hide()" aria-label="Close">
-          Close
+        <button type="button" id="close_button" class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" (click)="primaryModal.hide()" aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
-        <h4 class="modal-title">Select the Image to change at position</h4>
+        <h4 class="modal-title">Seleccione la imagen para cambiar en la posición</h4>
       </div>
       <hr>
       <div class="form">
@@ -155,10 +155,10 @@
               class="custom-input__text" 
               name="" 
               id="title" 
-              placeholder="Title" 
+              placeholder="Titulo" 
               required />
             <label class="custom-input__label" for="title">
-              Title
+              Titulo
             </label>
           </div>
           <div class="form__image form__image--full">
@@ -185,7 +185,7 @@
             <hr>
               <button type="submit" [disabled]="!loginForm.form.valid" (click)="updatephoto()"
               class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white">
-                Save
+                Guardar
               </button>
           </div>
         </form>

@@ -3,12 +3,12 @@
     <div class="ml-col-1 padding-general-m margin-bottom-g background-white">
         <div class="ml-col-1">
             <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-               Alerts
+               Alertas
             </h4>
             <button 
                 class="ap-form__rButton button-big button-pink button-icon button-icon--add-white"
                 (click)="showModal('new_alert'); initNewAlertModule()">
-                Add Alert
+                Agregar alerta
             </button>
         </div>
         <div class="ml-col-1">
@@ -22,13 +22,13 @@
                             name="filter_by"
                             (change)="getAlertsData( $event.target.value )"
                             class="ap-form__input-text">
-                            <option value="1" selected>Status</option>
+                            <option value="1" selected>Estatus</option>
                             <option value="2">Urgency</option>
                           </select>
                           <label 
                             for="filter_by" 
                             class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                            Alerts By
+                            Alertas Por
                           </label>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             <input 
                                 required
                                 type="text" 
-                                placeholder="Find by id or name..."
+                                placeholder="Buscar por id o nombre..."
                                 id="filter_text" 
                                 name="filter_text"
                                 [(ngModel)]="find_text.text"
@@ -49,7 +49,7 @@
                             for="filter_text" 
                             class="ap-form__label ap-form__label-text"
                             [class.ap-form__label-text--active]="find_text.text != ''">
-                            Find by id or name...
+                            Buscar por id o nombre...
                           </label>
                         </form>
                     </div>
@@ -63,7 +63,7 @@
                         (change)="filteringByArchive()"
                         class="ap-form__input-checkbox display-none" />
                       <label for="filter_active" class="ap-form__label ap-form__label-checkbox">
-                        Archive
+                        Archivar
                       </label>
                     </div>
                 </div>
@@ -77,14 +77,14 @@
                             type="date" 
                             [min]="today"
                             [value]="today"
-                            placeholder="Start Date"
+                            placeholder="Fecha Inicio"
                             id="filter_start" 
                             name="filter_start"
                             class="ap-form__input-text" />
                           <label 
                             for="filter_start" 
                             class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                            Start Date
+                            Fecha Inicio
                           </label>
                         </div>
                     </div>
@@ -95,14 +95,14 @@
                           <input 
                             required
                             type="date" 
-                            placeholder="End Date"
+                            placeholder="Fecha de Finalización"
                             id="filter_end" 
                             name="filter_end"
                             class="ap-form__input-text" />
                           <label 
                             for="filter_end" 
                             class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                            End Date
+                            Fecha de Finalización
                           </label>
                         </div>
                     </div>
@@ -114,14 +114,14 @@
             <div class="alerts__section" *ngIf="pending_schedule_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
-                        Pending Schedule
+                        Horario pendiente
                     </h4>
                     <div class="alerts__card-card card-style"
                          *ngFor="let card of pending_schedule_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
                             <div class="alerts__card-card--status">
-                                Order Number: {{ card.id }}
+                                Número de orden: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
@@ -151,7 +151,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archive
+                                    Archivar
                                   </label>
                                 </div>
                             </div>
@@ -160,13 +160,13 @@
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>
                     <span class="text-center color-red text-big text-bold margin-tb-m"
                           *ngIf="pending_schedule_cards?.length == 0">
-                        There's no cards
+                        No hay cartas
                     </span> 
                     <span id="pending_schedule_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
@@ -177,14 +177,14 @@
             <div class="alerts__section" *ngIf="confirming_completion_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
-                        Confirming Completion
+                        Confirmación de finalización
                     </h4>
                     <div class="alerts__card-card card-style"
                          *ngFor="let card of confirming_completion_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
                             <div class="alerts__card-card--status">
-                                Order Number: {{ card.id }}
+                                Número de orden: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
@@ -214,7 +214,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archive
+                                    Archivar
                                   </label>
                                 </div>
                             </div>
@@ -223,13 +223,13 @@
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>
                     <span class="text-center color-red text-big text-bold margin-tb-m"
                           *ngIf="confirming_completion_cards?.length == 0">
-                        There's no cards
+                        No hay cartas
                     </span> 
                     <span id="confirming_completion_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
@@ -240,14 +240,14 @@
             <div class="alerts__section" *ngIf="awaiting_invoice_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
-                        Awaiting Invoice
+                        Esperando factura
                     </h4>
                     <div class="alerts__card-card card-style"
                          *ngFor="let card of awaiting_invoice_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
                             <div class="alerts__card-card--status">
-                                Order Number: {{ card.id }}
+                                Número de orden: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
@@ -277,7 +277,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archive
+                                    Archivar
                                   </label>
                                 </div>
                             </div>
@@ -286,13 +286,13 @@
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>
                     <span class="text-center color-red text-big text-bold margin-tb-m"
                           *ngIf="awaiting_invoice_cards?.length == 0">
-                        There's no cards
+                        No hay cartas
                     </span> 
                     <span id="awaiting_invoice_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
@@ -303,14 +303,14 @@
             <div class="alerts__section" *ngIf="confirming_paymnet_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
-                        Confirming payment
+                        Confirmando pago
                     </h4>
                     <div class="alerts__card-card card-style"
                          *ngFor="let card of confirming_paymnet_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
                             <div class="alerts__card-card--status">
-                                Order Number: {{ card.id }}
+                                Número de orden: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
@@ -340,7 +340,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archive
+                                    Archivar
                                   </label>
                                 </div>
                             </div>
@@ -349,13 +349,13 @@
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>
                     <span class="text-center color-red text-big text-bold margin-tb-m"
                           *ngIf="confirming_paymnet_cards?.length == 0">
-                        There's no cards
+                        No hay cartas
                     </span> 
                     <span id="confirming_paymnet_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
@@ -366,14 +366,14 @@
             <div class="alerts__section" *ngIf="completed_and_paid_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
-                        Completed and Paid
+                        Completado y Pagado
                     </h4>
                     <div class="alerts__card-card card-style"
                          *ngFor="let card of completed_and_paid_cards"
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
                             <div class="alerts__card-card--status">
-                                Order Number: {{ card.id }}
+                                Número de orden: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
@@ -403,7 +403,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archive
+                                    Archivar
                                   </label>
                                 </div>
                             </div>
@@ -412,13 +412,13 @@
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>
                     <span class="text-center color-red text-big text-bold margin-tb-m"
                           *ngIf="completed_and_paid_cards?.length == 0">
-                        There's no cards
+                        No hay cartas
                     </span> 
                     <span id="completed_and_paid_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
@@ -438,7 +438,7 @@
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
                             <div class="alerts__card-card--status">
-                                Order Number: {{ card.id }}
+                                Número de orden: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
@@ -468,7 +468,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archive
+                                    Archivar
                                   </label>
                                 </div>
                             </div>
@@ -477,13 +477,13 @@
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>
                     <span class="text-center color-red text-big text-bold margin-tb-m"
                           *ngIf="urgent_cards?.length == 0">
-                        There's no cards
+                        No hay cartas
                     </span> 
                     <span id="urgent_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
@@ -501,7 +501,7 @@
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
                             <div class="alerts__card-card--status">
-                                Order Number: {{ card.id }}
+                                Número de orden: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
@@ -531,7 +531,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archive
+                                    Archivar
                                   </label>
                                 </div>
                             </div>
@@ -540,13 +540,13 @@
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>
                     <span class="text-center color-red text-big text-bold margin-tb-m"
                           *ngIf="schelude_today_cards?.length == 0">
-                        There's no cards
+                        No hay cartas
                     </span> 
                     <span id="schelude_today_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
@@ -564,7 +564,7 @@
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
                             <div class="alerts__card-card--status">
-                                Order Number: {{ card.id }}
+                                Número de orden: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
@@ -589,13 +589,13 @@
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>
                     <span class="text-center color-red text-big text-bold margin-tb-m"
                           *ngIf="schelude_week_cards?.length == 0">
-                        There's no cards
+                        No hay cartas
                     </span> 
                     <span id="schelude_week_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
@@ -613,7 +613,7 @@
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
                             <div class="alerts__card-card--status">
-                                Order Number: {{ card.id }}
+                                Número de orden: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
@@ -643,7 +643,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archive
+                                    Archivar
                                   </label>
                                 </div>
                             </div>
@@ -652,13 +652,13 @@
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduuleData( card, 'edit' );">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>
                     <span class="text-center color-red text-big text-bold margin-tb-m"
                           *ngIf="schelude_week_cards?.length == 0">
-                        There's no cards
+                        No hay cartas
                     </span> 
                     <span id="schelude_week_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
@@ -676,7 +676,7 @@
                          [class.display-none]="!card?.visible_item">
                         <div class="ml-col-1 text-bold position-relative">
                             <div class="alerts__card-card--status">
-                                Order Number: {{ card.id }}
+                                Número de orden: {{ card.id }}
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="card.color">
                                 </span>
@@ -706,7 +706,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archive
+                                    Archivar
                                   </label>
                                 </div>
                             </div>
@@ -715,13 +715,13 @@
                             <button 
                                 class="alerts__card-button button-big button-green button-icon button-icon--edit-white"
                                 (click)="showModal(); passScheduleData( card, 'edit' );">
-                                Edit
+                                Editar
                             </button>
                         </div>
                     </div>
                     <span class="text-center color-red text-big text-bold margin-tb-m"
                           *ngIf="other_cards?.length == 0">
-                        There's no cards
+                        No hay cartas
                     </span> 
                     <span id="other_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
@@ -737,7 +737,7 @@
     <div class="ml-modal__content card-style" *ngIf="section_to_show == 'default'">
         <div class="ml-col-1 margin-bottom-x">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
-                Schedule
+                Horario
                 <span class="schedule__color" 
                       [style.background-color]="schedule_object.color">
                 </span>
@@ -745,7 +745,7 @@
             <button 
                 class="ap-form__rButton button-red button-icon button-icon--cancel-white"
                 (click)="showModal();">
-                Close
+                Cerrar
             </button>
         </div> 
         <div class="ml-col-1 margin-bottom-x">
@@ -762,7 +762,7 @@
             <div class="ml-col-4">
                 <div class="ml-col-2">
                     <div class="ml-col-1">
-                        Phone:
+                        Teléfono:
                     </div>
                     <div class="ml-col-1 text-bold">
                         {{ schedule_object.user.phone }}
@@ -791,7 +791,7 @@
             </div>
             <div class="ml-col-4">
                 <div class="ml-col-1">
-                    Work type: 
+                    Tipo de trabajo: 
                 </div>
                 <div class="ml-col-1 text-bold">
                     {{ schedule_object.name }}
@@ -799,7 +799,7 @@
             </div>
             <div class="ml-col-4">
                 <div class="ml-col-1">
-                    Alerts name: 
+                    Nombre de alerta: 
                 </div>
                 <div class="ml-col-1 text-bold">
                     {{ schedule_object.information }}
@@ -808,7 +808,7 @@
             <div class="ml-col-1 margin-top-x">
                 <div class="ml-col-1">
                     <div class="ml-col-1">
-                        Description:
+                        Descripción:
                     </div>
                     <div class="ml-col-1 text-bold">
                         {{ schedule_object.description }}
@@ -818,7 +818,7 @@
         </div>
         <div class="ml-col-3">
             <div class="ml-col-1">
-                Avaibility Schedule: 
+                Calendario de disponibilidad: 
             </div>
             <div class="days-icons" id="days_container">
                 <div class="days-icons__container">
@@ -865,7 +865,7 @@
                     </span>
                 </div>
                 <div class="ml-col-2">
-                    Close:
+                    Cerrar:
                     <span class="text-bold">
                         {{ schedule_avaible.endTime }}
                     </span>
@@ -879,14 +879,14 @@
                       <select 
                         required
                         type="text" 
-                        placeholder="Alert status"
+                        placeholder="Estado de alerta"
                         id="company_status" 
                         name="company_status"
                         class="ap-form__input-text"
                         [(ngModel)]="alert_detail_form.AlertStatusId"
                         (change)="changeColorStatus( alert_detail_form.AlertStatusId )"
                         [class.custom-input__text--error]="alert_detail_validator.no_aler">
-                        <option value="-1" disabled>Status</option>
+                        <option value="-1" disabled>Estatus</option>
                         <option *ngFor="let status of alerts_status_catalog;" [value]="status.id">
                             {{ status.status }}
                         </option>
@@ -894,13 +894,13 @@
                       <label 
                         for="company_status" 
                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                        Alert status
+                        Estado de alerta
                         <span class="schedule__color schedule--mini" 
                               [style.background-color]="color_alert_updated">
                         </span>
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_aler">
-                        Alert status is required*
+                        Estado de alerta se requiere*
                       </span>
                     </div>
                 </div>
@@ -914,20 +914,20 @@
                     class="ap-form__input-checkbox display-none"
                     [(ngModel)]="alert_detail_form.archive" />
                   <label for="alert_archive" class="ap-form__label ap-form__label-checkbox">
-                    Archive 
+                    Archivar 
                   </label>
                 </div>
             </div>
         </div>
         <div class="ml-col-1 margin-bottom-x margin-top-x">
-            <div class="ml-col-1 at-bcard__stitle">Company</div>
+            <div class="ml-col-1 at-bcard__stitle">Compañia</div>
             <div class="ml-col-3">
                 <div class="ml-col-1">
                     <div class="ap-form__input">
                       <input 
                         required
                         type="text" 
-                        placeholder="Name"
+                        placeholder="Nombre"
                         id="company_name" 
                         name="company_name"
                         class="ap-form__input-text"
@@ -936,10 +936,10 @@
                       <label 
                         for="company_name" 
                         class="ap-form__label ap-form__label-text">
-                        Name
+                        Nombre
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_cnam">
-                        Name is required*
+                        Nombre se requiere*
                       </span>
                     </div>
                 </div>
@@ -950,21 +950,21 @@
                       <input 
                         required
                         type="text" 
-                        placeholder="Phone"
+                        placeholder="Teléfono"
                         id="company_phone" 
                         name="company_phone"
                         class="ap-form__input-text"
                         mask="000 000 00 00"
                         (change)="validatingUserInput( $event, 'phone' )"
-                        [(ngModel)]="alert_detail_form.Phone"
+                        [(ngModel)]="alert_detail_form.phone"
                         [class.custom-input__text--error]="alert_detail_validator.no_cpho"/>
                       <label 
                         for="company_phone" 
                         class="ap-form__label ap-form__label-text">
-                        Phone
+                        Teléfono
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_cpho">
-                        Phone is required*
+                        Teléfono se requiere*
                       </span>
                     </div>
                 </div>
@@ -988,7 +988,7 @@
                         Email
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_cmai">
-                        Email is required*
+                        Email se requiere*
                       </span>
                       <span class="ml-col-1 form_error_found_label" *ngIf="!alert_detail_validator.no_cmai && alert_detail_validator.no_mail_v1">
                         Email format is not valid*
@@ -998,14 +998,14 @@
             </div>
         </div>
         <div class="ml-col-1 margin-bottom-x">
-            <div class="ml-col-1 at-bcard__stitle">Staff Asign</div>
+            <div class="ml-col-1 at-bcard__stitle">Staff Asignado</div>
             <div class="ml-col-3">
                 <div class="ml-col-1">
                     <div class="ap-form__input">
                       <input 
                         required
                         type="text" 
-                        placeholder="Staff Name"
+                        placeholder="Staff Nombre"
                         id="staff_name" 
                         name="staff_name"
                         class="ap-form__input-text"
@@ -1015,10 +1015,10 @@
                       <label 
                         for="staff_name" 
                         class="ap-form__label ap-form__label-text">
-                        Staff Name
+                        Staff Nombre
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_snam">
-                        Staff Name is required*
+                        Staff Nombre se requiere*
                       </span>
                     </div>
                 </div>
@@ -1029,7 +1029,7 @@
                       <input 
                         required
                         type="text" 
-                        placeholder="Phone"
+                        placeholder="Teléfono"
                         id="staff_phone" 
                         name="staff_phone"
                         class="ap-form__input-text"
@@ -1040,10 +1040,10 @@
                       <label 
                         for="staff_phone" 
                         class="ap-form__label ap-form__label-text">
-                        Phone
+                        Teléfono
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_spho">
-                        Phone is required*
+                        Teléfono se requiere*
                       </span>
                     </div>
                 </div>
@@ -1067,7 +1067,7 @@
                         Mail
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_smai">
-                        Mail is required*
+                        Mail se requiere*
                       </span>
                       <span class="ml-col-1 form_error_found_label" *ngIf="!alert_detail_validator.no_smai && alert_detail_validator.no_mail_v2">
                         Mail format is not valid*
@@ -1077,7 +1077,7 @@
             </div>
         </div>
         <div class="ml-col-1 margin-bottom-x">
-            <div class="ml-col-1 at-bcard__stitle">Schedule</div>
+            <div class="ml-col-1 at-bcard__stitle">Horario</div>
             <div class="ml-col-3 clear-left">
                 <div class="ml-col-1">
                     <div class="ap-form__input">
@@ -1097,7 +1097,7 @@
                         Max Budget
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_mbud">
-                        Max Budget is required*
+                        Max Budget se requiere*
                       </span>
                     </div>
                 </div>
@@ -1109,7 +1109,7 @@
                         required
                         type="date" 
                         [min]="today"
-                        placeholder="When?"
+                        placeholder="¿Cuando?"
                         id="staff_when" 
                         name="staff_when"
                         class="ap-form__input-text"
@@ -1118,10 +1118,10 @@
                       <label 
                         for="staff_when" 
                         class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
-                        When?
+                        ¿Cuando?
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_date">
-                        When date is required*
+                        When date se requiere*
                       </span>
                     </div>
                 </div>
@@ -1132,7 +1132,7 @@
                       <input 
                         required
                         type="time" 
-                        placeholder="What time?"
+                        placeholder="¿Qué hora?"
                         id="staff_when" 
                         name="staff_when"
                         class="ap-form__input-text"
@@ -1141,10 +1141,10 @@
                       <label 
                         for="staff_when" 
                         class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
-                        What time?
+                        ¿Qué hora?
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_hour">
-                        What time is required*
+                        What time se requiere*
                       </span>
                     </div>
                 </div>
@@ -1154,19 +1154,19 @@
             <button 
                 class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white"
                 (click)="saveAlertDetail()">
-                Save
+                Guardar
             </button>
         </div>
     </div>
     <div class="ml-modal__content card-style " *ngIf="section_to_show == 'new_alert'">
         <div class="ml-col-1">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
-                Add Alert
+                Agregar alerta
             </p>
             <button 
                 class="ap-form__rButton button-red button-icon button-icon--cancel-white"
                 (click)="showModal();">
-                Close
+                Cerrar
             </button>
         </div>
         <div class="ml-col-1 margin-bottom-x margin-top-x">
@@ -1187,7 +1187,7 @@
                         Name
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                        Name is required*
+                        Name se requiere*
                       </span>
                     </div>
                 </div>
@@ -1209,7 +1209,7 @@
                         Email
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                        Email is required*
+                        Email se requiere*
                       </span>
                     </div>
                 </div>
@@ -1220,7 +1220,7 @@
                       <input 
                         required
                         type="text" 
-                        placeholder="Phone"
+                        placeholder="Teléfono"
                         id="new_alert_phone" 
                         name="new_alert_phone"
                         class="ap-form__input-text"
@@ -1228,10 +1228,10 @@
                       <label 
                         for="new_alert_phone" 
                         class="ap-form__label ap-form__label-text">
-                        Phone
+                        Teléfono
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                        Phone is required*
+                        Teléfono se requiere*
                       </span>
                     </div>
                 </div>
@@ -1242,13 +1242,13 @@
                       <select 
                         required
                         type="text" 
-                        placeholder="Alert status"
+                        placeholder="Estado de alerta"
                         id="new_alert_status" 
                         name="new_alert_status"
                         [(ngModel)]="new_alert_data.UserId"
                         [class.custom-input__text--error]="new_alert_form.no_user"
                         class="ap-form__input-text">
-                        <option value="-1" disabled>Users</option>
+                        <option value="-1" disabled>Usuarios</option>
                         <option *ngFor="let user of build_users_list;" [value]="user.id">
                             {{ user.name + " " + user.lastName + " " + user.motherName}}
                         </option>
@@ -1256,10 +1256,10 @@
                       <label 
                         for="new_alert_status" 
                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                        Users
+                        Usuarios
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_user">
-                        Users is required*
+                        Usuarios se requiere*
                       </span>
                     </div>
                 </div>
@@ -1270,14 +1270,14 @@
                       <select 
                         required
                         type="text" 
-                        placeholder="Alert status"
+                        placeholder="Estado de alerta"
                         id="new_alert_status" 
                         name="new_alert_status"
                         [(ngModel)]="new_alert_data.AlertCategoryId"
                         [class.custom-input__text--error]="new_alert_form.no_cate"
                         (change)="ifSecurity(new_alert_data.AlertCategoryId)"
                         class="ap-form__input-text">
-                        <option value="-1" disabled>Alert Category</option>
+                        <option value="-1" disabled>Categoría de alerta</option>
                         <option *ngFor="let work of work_type_catalog;" [value]="work.id">
                             {{ work.name }}
                         </option>
@@ -1285,10 +1285,10 @@
                       <label 
                         for="new_alert_status" 
                         class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                        Alert Category
+                        Categoría de alerta
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_cate">
-                        Alert Category required*
+                        Categoría de alerta required*
                       </span>
                     </div>
                 </div>
@@ -1299,7 +1299,7 @@
                       <input 
                         required
                         type="text" 
-                        placeholder="Alerts name"
+                        placeholder="Nombre de alerta"
                         id="new_alert_jdesc" 
                         name="new_alert_jdesc"
                         class="ap-form__input-text"
@@ -1309,10 +1309,10 @@
                         for="new_alert_jdesc" 
                         class="ap-form__label ap-form__label-text"
                         [class.ap-form__label-text--active]="new_alert_data.Information != ''">
-                        Alerts name
+                        Nombre de alerta
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_info">
-                        Alerts name is required*
+                        Nombre de alerta se requiere*
                       </span>
                     </div>
                 </div>
@@ -1324,7 +1324,7 @@
                           <textarea 
                             required
                             type="text" 
-                            placeholder="Description"
+                            placeholder="Descripción"
                             id="mc_desc" 
                             name="mc_desc"
                             class="ap-form__input-textarea"
@@ -1334,16 +1334,16 @@
                             for="mc_desc" 
                             class="ap-form__label ap-form__label-text"
                             [class.ap-form__label-text--active]="new_alert_data.Description != ''">
-                            Description
+                            Descripción
                           </label>
                           <span class="ml-col-1 form_error_found_label" *ngIf="new_alert_form.no_desc">
-                            Description is required*
+                            Descripción se requiere*
                           </span>
                         </div>
                     </div>
                     <div class="ml-col-6">
                         <div class="ml-col-1">
-                            Avaibility Schedule: 
+                            Calendario de disponibilidad: 
                         </div>
                         <div class="days-icons margin-bottom-x" day-selecter="container">
                             <div class="days-icons__container">
@@ -1403,7 +1403,7 @@
                                       <input 
                                         required
                                         type="time" 
-                                        placeholder="Open at: "
+                                        placeholder="Abre a las: "
                                         id="new_alert_open" 
                                         name="new_alert_open"
                                         class="ap-form__input-text"
@@ -1411,10 +1411,10 @@
                                       <label 
                                         for="new_alert_open" 
                                         class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
-                                        Open at: 
+                                        Abre a las: 
                                       </label>
                                       <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                        Open at is required*
+                                        Abre a las se requiere*
                                       </span>
                                     </div>
                                 </div>
@@ -1425,7 +1425,7 @@
                                       <input 
                                         required
                                         type="time" 
-                                        placeholder="Close at:"
+                                        placeholder="Cierra a las:"
                                         id="new_alert_close" 
                                         name="new_alert_close"
                                         class="ap-form__input-text"
@@ -1434,10 +1434,10 @@
                                       <label 
                                         for="new_alert_close" 
                                         class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
-                                        Close at:
+                                        Cierra a las:
                                       </label>
                                       <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                        Close at is required*
+                                        Cierra a las se requiere*
                                       </span>
                                     </div>
                                 </div>
@@ -1482,7 +1482,7 @@
                                 required
                                 type="text" 
                                 disabled
-                                placeholder="Alert status"
+                                placeholder="Estado de alerta"
                                 id="new_alert_status" 
                                 name="new_alert_status"
                                 class="ap-form__input-text"
@@ -1496,38 +1496,38 @@
                               <label 
                                 for="new_alert_status" 
                                 class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                Alert status
+                                Estado de alerta
                                 <span class="schedule__color schedule--mini" 
                                       [style.background-color]="color_alert_updated">
                                 </span>
                               </label>
                               <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                Alert status is required*
+                                Estado de alerta se requiere*
                               </span>
                             </div>
                         </div>
                     </div>
                     <div class="ml-col-1 margin-bottom-x margin-top-x">
-                        <div class="ml-col-1 at-bcard__stitle">Company</div>
+                        <div class="ml-col-1 at-bcard__stitle">Compañia</div>
                         <div class="ml-col-3">
                             <div class="ml-col-1">
                                 <div class="ap-form__input">
                                   <input 
                                     required
                                     type="text" 
-                                    placeholder="Name"
+                                    placeholder="Nombre"
                                     id="new_alert_cname" 
                                     name="new_alert_cname"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="new_alert_data.alertDetails[0].Company"
+                                    [(ngModel)]="Company"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_cname" 
                                     class="ap-form__label ap-form__label-text">
-                                    Name
+                                    Nombre
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    Name is required*
+                                    Nombre se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -1538,21 +1538,21 @@
                                   <input 
                                     required
                                     type="text" 
-                                    placeholder="Phone"
+                                    placeholder="Teléfono"
                                     id="new_alert_cphone" 
                                     name="new_alert_cphone"
                                     class="ap-form__input-text"
                                     mask="000 000 00 00"
                                     (change)="validatingUserInput( $event, 'phone' )"
-                                    [(ngModel)]="new_alert_data.alertDetails[0].Phone"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].phone"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_cphone" 
                                     class="ap-form__label ap-form__label-text">
-                                    Phone
+                                    Teléfono
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    Phone is required*
+                                    Teléfono se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -1582,14 +1582,14 @@
                         </div>
                     </div>
                     <div class="ml-col-1 margin-bottom-x">
-                        <div class="ml-col-1 at-bcard__stitle">Staff Asign</div>
+                        <div class="ml-col-1 at-bcard__stitle">Staff Asignado</div>
                         <div class="ml-col-3">
                             <div class="ml-col-1">
                                 <div class="ap-form__input">
                                   <input 
                                     required
                                     type="text" 
-                                    placeholder="Staff Name"
+                                    placeholder="Staff Nombre"
                                     id="new_alert_nstaff" 
                                     name="new_alert_nstaff"
                                     class="ap-form__input-text"
@@ -1599,10 +1599,10 @@
                                   <label 
                                     for="new_alert_nstaff" 
                                     class="ap-form__label ap-form__label-text">
-                                    Staff Name
+                                    Staff Nombre
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    Staff Name is required*
+                                    Staff Nombre se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -1613,7 +1613,7 @@
                                   <input 
                                     required
                                     type="text" 
-                                    placeholder="Phone"
+                                    placeholder="Teléfono"
                                     id="new_alert_pstaff" 
                                     name="new_alert_pstaff"
                                     class="ap-form__input-text"
@@ -1624,10 +1624,10 @@
                                   <label 
                                     for="new_alert_pstaff" 
                                     class="ap-form__label ap-form__label-text">
-                                    Phone
+                                    Teléfono
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    Phone is required*
+                                    Teléfono se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -1657,7 +1657,7 @@
                         </div>
                     </div>
                     <div class="ml-col-1 margin-bottom-x">
-                        <div class="ml-col-1 at-bcard__stitle">Schedule</div>
+                        <div class="ml-col-1 at-bcard__stitle">Horario</div>
                         <div class="ml-col-3 clear-left">
                             <div class="ml-col-1">
                                 <div class="ap-form__input">
@@ -1677,7 +1677,7 @@
                                     Max Budget
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    Max Budget is required*
+                                    Max Budget se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -1690,7 +1690,7 @@
                                     type="date" 
                                     [min]="today"
                                     onkeydown="event.preventDefault()"
-                                    placeholder="When?"
+                                    placeholder="¿Cuando?"
                                     id="new_alert_date" 
                                     name="new_alert_date"
                                     class="ap-form__input-text"
@@ -1699,10 +1699,10 @@
                                   <label 
                                     for="new_alert_date" 
                                     class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
-                                    When?
+                                    ¿Cuando?
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    When date is required*
+                                    When date se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -1713,7 +1713,7 @@
                                   <input 
                                     required
                                     type="time" 
-                                    placeholder="What time?"
+                                    placeholder="¿Qué hora?"
                                     id="new_alert_time" 
                                     name="new_alert_time"
                                     class="ap-form__input-text"
@@ -1722,10 +1722,10 @@
                                   <label 
                                     for="new_alert_time" 
                                     class="ap-form__label ap-form__label-text ap-form__label ap-form__label-text--active">
-                                    What time?
+                                    ¿Qué hora?
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    What time is required*
+                                    What time se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -1738,19 +1738,19 @@
             <button 
                 class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white"
                 (click)="saveNewAlertData()">
-                Save
+                Guardar
             </button>
         </div>
     </div>
     <div class="ml-modal__content card-style " *ngIf="section_to_show == 'chat'">
         <div class="ml-col-1 margin-bottom-x">
             <p class="ml-modal__pop-titulo ap-form__titulo--auto-width">
-                Chat Alerts
+                Chat Alertas
             </p>
             <button 
                 class="ap-form__rButton button-red"
                 (click)="closeChatAlerts();">
-                Close
+                Cerrar
             </button>
         </div>
         <div class="ml-col-1 margin-top-x">

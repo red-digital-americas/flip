@@ -29,7 +29,7 @@
                          autofocus
                          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors, 'is-valid': f.firstName.touched && !f.firstName.errors }" />
                   <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
-                    <div *ngIf="f['firstName'].errors.required">First Name is required</div>
+                    <div *ngIf="f['firstName'].errors.required">First Nombre se requiere</div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -43,7 +43,7 @@
                          required
                          [ngClass]="{ 'is-invalid': submitted && f.lastName.errors, 'is-valid': f.lastName.touched && !f.lastName.errors }" />
                   <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
-                    <div *ngIf="f['lastName'].errors.required">Last Name is required</div>
+                    <div *ngIf="f['lastName'].errors.required">Last Nombre se requiere</div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -57,7 +57,7 @@
                          required
                          [ngClass]="{ 'is-invalid': submitted && f.username.errors, 'is-valid': f.username.touched && !f.username.errors }" />
                   <div *ngIf="submitted && simpleForm.controls['username'].errors" class="invalid-feedback">
-                    <div *ngIf="f['username'].errors.required">Username is required</div>
+                    <div *ngIf="f['username'].errors.required">Username se requiere</div>
                     <div *ngIf="f['username'].errors.minlength">{{formErrors.username.minLength}}</div>
                   </div>
                 </div>
@@ -72,7 +72,7 @@
                          required
                          [ngClass]="{ 'is-invalid': submitted && f.email.errors, 'is-valid': f.email.touched && !f.email.errors }" />
                   <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                    <div *ngIf="f['email'].errors.required">Email is required</div>
+                    <div *ngIf="f['email'].errors.required">Email se requiere</div>
                     <div *ngIf="f['email'].errors.email">{{formErrors.email.email}}</div>
                   </div>
                 </div>
@@ -88,18 +88,18 @@
                            required
                            [ngClass]="{ 'is-invalid': submitted && f.password.errors, 'is-valid': f.password.touched && !f.password.errors }" />
                     <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                      <div *ngIf="f['password'].errors.required">Password is required</div>
+                      <div *ngIf="f['password'].errors.required">Password se requiere</div>
                       <div *ngIf="f['password'].errors.minlength">{{formErrors.password.minLength}}</div>
                       <div *ngIf="f['password'].errors.pattern">{{formErrors.password.pattern}}</div>
                     </div>
                   </div>
                   <div class="form-group col-md-6">
-                    <label class="col-form-label" for="confirmPassword">Confirm password</label>
+                    <label class="col-form-label" for="confirmPassword">Confirmar password</label>
                     <input class="form-control"
                            id="confirmPassword"
                            type="password"
                            formControlName="confirmPassword"
-                           placeholder="Confirm password"
+                           placeholder="Confirmar password"
                            autocomplete="new-password"
                            required
                            [ngClass]="{ 'is-invalid': submitted && simpleForm.errors, 'is-valid': f.confirmPassword.touched && !simpleForm.errors }" />
@@ -125,7 +125,7 @@
                 <div class="form-group">
                   <button class="btn btn-primary mr-1" type="submit" [disabled]="simpleForm.pristine || simpleForm.invalid">Submit</button>
                   <button class="btn btn-success mr-1" type="submit" [disabled]="simpleForm.valid">Validate</button>
-                  <button class="btn btn-danger" type="reset" [disabled]="simpleForm.pristine && !submitted" (click)="onReset()">Reset</button>
+                  <button class="btn btn-danger" type="reset" [disabled]="simpleForm.pristine && !submitted" (click)="onReset()">Reiniciar</button>
                 </div>
               </form>
             </div>

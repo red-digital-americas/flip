@@ -4,7 +4,7 @@
     <button 
             class="ap-form__rButton button-red button-icon button-icon--cancel-white"
             (click)="modalRef.hide()">
-            Close
+            Cerrar
     </button>
 </div>
 <div class="modal-body">
@@ -17,29 +17,29 @@
     <div class="example-container">
       <mat-table mat-table [dataSource]="categoriesList" matSort class="mat-elevation-z8 table--no-shadow" >
           <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Category Name</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Category Nombre</th>
               <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.name }}</td>
           </ng-container>
           
           <ng-container matColumnDef="edit">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Edit</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Editar</th>
               <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                   <button 
                       (click)="showModal('edit',element)"
                       mat-raised-button
                       class="table__data-button button-green button-icon button-icon--edit-white">
-                      Edit
+                      Editar
                   </button>   
               </td>
           </ng-container>
           <ng-container matColumnDef="eliminate">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Delete</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Eliminar</th>
               <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                   <button 
                       mat-raised-button color="accent"
                       (click)="showModal('delete', element)"
                       class="table__data-button display-none table__data-button-red button-icon button-icon--delete-white">
-                      Delete
+                      Eliminar
                   </button>   
               </td>
           </ng-container>
@@ -64,7 +64,7 @@
             <button 
                 class="ap-form__rButton button-red"
                 (click)="showModal('edit', userVoidSelected);">
-                Close
+                Cerrar
             </button>
         </div>
         <div class="ml-col-1 margin-top-x">
@@ -74,7 +74,7 @@
                     <input 
                       required
                       type="text" 
-                      placeholder="Name*"
+                      placeholder="Nombre*"
                       id="nameCategory" 
                       name="nameCategory"
                       class="ap-form__input-text"
@@ -84,10 +84,10 @@
                     <label 
                       for="nameCategory" 
                       class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                      Name
+                      Nombre
                     </label>
                     <span class="ml-col-1 form_error_found_label" *ngIf="name_form.no_name">
-                        Name is required*
+                        Nombre se requiere*
                     </span>
                   </div>
                 </div>
@@ -108,7 +108,7 @@
                           id="category_icon_img"
                           src="{{ userIdSelected.icon }}" />
                       <span class="ap-form__image-data text-center" id="category_icon_name">
-                        Image resolution <br />
+                        Resolución de imagen <br />
                         <span class="text-bold">350x350</span> 
                       </span>
                     </figure>
@@ -121,7 +121,7 @@
                 (click)="add()"
                 type="button"
                 class="ml-modal__pop-buttons-button button-green button-big button-icon button-icon--add-white">
-                Save
+                Guardar
             </button>
         </div>
     </form>
@@ -133,7 +133,7 @@
             <button 
                 class="ap-form__rButton button-red button-icon button-icon--cancel-white"
                 (click)="showModal('edit', userVoidSelected);">
-                Close
+                Cerrar
             </button>
         </div>
         <div class="ml-col-1 margin-top-x">
@@ -143,7 +143,7 @@
                     <input 
                       required
                       type="text" 
-                      placeholder="Name*"
+                      placeholder="Nombre*"
                       id="nameCategory" 
                       name="nameCategory"
                       class="ap-form__input-text"
@@ -153,10 +153,10 @@
                     <label 
                       for="nameCategory" 
                       class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                      Name
+                      Nombre
                     </label>
                     <span class="ml-col-1 form_error_found_label" *ngIf="name_form.no_name">
-                        Name is required*
+                        Nombre se requiere*
                     </span>
                   </div>
                 </div>
@@ -177,7 +177,7 @@
                           id="category_icon_img"
                           src="{{ userIdSelected.icon }}" />
                       <span class="ap-form__image-data text-center" id="category_icon_name">
-                        Image resolution <br />
+                        Resolución de imagen <br />
                         <span class="text-bold">350x350</span> 
                       </span>
                     </figure>
@@ -190,27 +190,27 @@
                 (click)="update()"
                 type="button"
                 class="ml-modal__pop-buttons-button button-green  button-big button-icon button-icon--add-white">
-                Update
+                Actualizar
             </button>
         </div>
     </form>
     <div class="ml-modal__pop" *ngIf="modal_to_show == 'delete'">
         <p class="ml-modal__pop-titulo margin-bottom-m">
-            Delete Category
+            Eliminar Category
         </p>
         <p class="ml-modal__pop-text">
-            Are you sure to delete?
+            ¿Estás seguro de eliminar?
         </p>
         <div class="ml-modal__pop-buttons">
             <button 
                 (click)="showModal('', userVoidSelected)"
                 class="ml-modal__pop-buttons-button button-black button-icon button-icon--cancel-white">
-                Cancel
+                Cancelar
             </button>
             <button 
                 (click)="delete()"
                 class="ml-modal__pop-buttons-button button-red button-icon button-icon--delete-white">
-                Delete
+                Eliminar
             </button>
         </div>
     </div>

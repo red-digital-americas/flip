@@ -232,7 +232,17 @@ export class BookingIndexComponent implements OnInit {
         if( !this.new_build_button && this.edit_build_button ) {
 
             //Anteriormente se pensaba que se eliminarian los cuartos
-            this.deleteRoomService( event_data, id_room );
+            console.log('REMOVE ROOM SERVICE: ', event_data, id_room);
+            console.log('typeof',id_room, typeof id_room == 'number' );
+            
+            if (typeof id_room == 'number') {
+                this.deleteRoomService( event_data, id_room );
+            }
+            else
+            {
+                this.rooms.splice( this.rooms.findIndex( (room:any) => room.id === id_room ), 1);
+                this.rooms[this.rooms.length -1].last_one = true;
+            }
 
         }
 

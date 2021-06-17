@@ -18,12 +18,12 @@
           class="button padding-lateral button-green button-icon button-icon--edit-white"
             data-toggle="modal" 
             (click)="primaryModal.show(); passdata( post );">
-            Edit
+            Editar
           </button>
         </div>
       </div>
       <div class="pCard_back">
-         <p>Description: {{post.desc}}</p>
+         <p>Descripción: {{post.desc}}</p>
          <div class="ml-col-1 social" *ngIf="post.link && post.link != null && post.link != undefined">
           <a href="post.link">
             <img src="../../../assets/iconfinder_linkedin_circle_color_107178.svg" alt="" srcset="">
@@ -200,8 +200,8 @@
             id="close_modal"
             class="ap-form__rButton button-red button-icon button-icon--cancel-white padding-lateral-m" 
             (click)="primaryModal.hide()" 
-            aria-label="Close">
-          Close
+            aria-label="Cerrar">
+          Cerrar
         </button>
         <br><br>
         <h4 class="modal-title">Select the images to change at position</h4>
@@ -215,15 +215,15 @@
               class="custom-input__text" 
               name="team_name" 
               id="team_name" 
-              placeholder="Name" 
+              placeholder="Nombre" 
               [(ngModel)]="team_data.Name"
               [class.custom-input__text--error]="form_watcher.no_name"
               required />
             <label class="custom-input__label custom-input__label--active" for="team_name">
-              Name
+              Nombre
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_name">
-              Name is required
+              Nombre se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -232,15 +232,15 @@
               class="custom-input__text" 
               name="team_lastname" 
               id="team_lastname" 
-              placeholder="Lastname" 
+              placeholder="Apellidos" 
               [(ngModel)]="team_data.LastName"
               [class.custom-input__text--error]="form_watcher.no_lnam"
               required />
             <label class="custom-input__label custom-input__label--active" for="team_lastname">
-              Lastname
+              Apellidos
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_lnam">
-              Lastname is required
+              Apellidos se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -249,15 +249,15 @@
               class="custom-input__text" 
               name="team_position" 
               id="team_position" 
-              placeholder="Position" 
+              placeholder="Posición" 
               [(ngModel)]="team_data.Position"
               [class.custom-input__text--error]="form_watcher.no_post"
               required />
             <label class="custom-input__label custom-input__label--active" for="team_position">
-              Position
+              Posición
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_post">
-              Position is required
+              Posición se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -267,13 +267,13 @@
               id="team_desc" 
               [(ngModel)]="team_data.Description"
               [class.custom-input__textarea--error]="form_watcher.no_desc"
-              placeholder="Description" 
+              placeholder="Descripción" 
               required></textarea>
             <label class="custom-input__label custom-input__label--active" for="team_desc">
-              Description
+              Descripción
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_desc">
-              Description is required
+              Descripción se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -290,7 +290,7 @@
               Linkedin
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_link">
-              Linkedin is required
+              Linkedin se requiere
             </span>
           </div>
           <div class="ml-col-1 custom-input margin-bottom-x">
@@ -299,7 +299,7 @@
               class="custom-input__text" 
               name="team_twitter" 
               id="team_twitter" 
-              placeholder="Title"
+              placeholder="Titulo"
               [(ngModel)]="team_data.TwitterUrl" 
               [class.custom-input__text--error]="form_watcher.no_twit"
               required />
@@ -307,7 +307,7 @@
               Twitter
             </label>
             <span class="custom-input__textarea--errorm" *ngIf="form_watcher.no_twit">
-              Twitter is required
+              Twitter se requiere
             </span>
           </div>
           <div class="form__image form__image--fix">
@@ -330,9 +330,9 @@
               <span class="padding-tb-min">
                 <strong>Desktop Photo :</strong> <br /> 
                 <span class="color-red" *ngIf="form_watcher.no_img0">
-                  Desktop Photo is required <br />
+                  Desktop Photo se requiere <br />
                 </span>
-                *Image resolution 350x350px.
+                *Resolución de imagen 350x350px.
               </span>
             </label>
           </div>
@@ -341,7 +341,7 @@
           <button type="button" 
           class="ap-form__buttons-button margin-gral ap-form__buttons-button--big button-green button-icon button-icon--add-white"
                   (click)="updatephoto()">
-                  Save
+                  Guardar
           </button>
         </div>
       </form>
