@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
   <div class="card">    
     <div class="card-body">
-      <h5 class="card-title">Edit Service</h5>
+      <h5 class="card-title">Editar Servicio</h5>
         
       <form [formGroup]="formGroup" autocomplete="off">
         <div class="row">                      
@@ -21,13 +21,13 @@
               </div>  
               
               <div class="col-4 mb-2">
-                <input type="text" formControlName="providerCtrl" class="form-control" placeholder="Provider">
+                <input type="text" formControlName="providerCtrl" class="form-control" placeholder="Proveedor">
               </div>
               <div class="col-4 mb-2">
                 <input type="text" formControlName="priceCtrl" class="form-control" placeholder="Precio">
               </div>
               <div class="col-4 mb-2">
-                <input type="text" formControlName="priceUnitCtrl" class="form-control" placeholder="PriceUnit">
+                <input type="text" formControlName="priceUnitCtrl" class="form-control" placeholder="Precio Unitario">
               </div>
            
               <div class="col-6 mb-2">
@@ -68,7 +68,7 @@
               
         <div style="margin-bottom: 1rem;"></div>
         <div class="col-12">
-          <button (click)="UpdateService()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Actualizar Service</button>          
+          <button (click)="UpdateService()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Actualizar Servicio</button>          
         </div>   
       </form>           
       <!-- {{formGroup.value | json}} -->

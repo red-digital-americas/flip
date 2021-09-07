@@ -54,6 +54,9 @@ export class CrearComponent implements OnInit {
   minDate:Date = new Date();
 
   usersArray = [];
+  amenitiesArray = [];
+  amenitySelect;
+  IDBUILD: string = "0";
 
   ////////////////////////////////////////////////////////
   // Form
@@ -90,13 +93,16 @@ export class CrearComponent implements OnInit {
       this.endTime = moment(new Date()).add(2, 'hour').toDate();
     }
     
+    this.IDBUILD = this.route.snapshot.params['id']; 
+    debugger;
     this.responseData = {result:false};
     this.GetUsers();
-
+    this.GetAmenities();
     this.formGroup = this._formBuilder.group({
       activityNameCtrl: [, Validators.required],
       activityDescriptionCtrl: [''],
-      activityUserIdCtrl: [, Validators.required],      
+      activityUserIdCtrl: [, Validators.required],
+      activityAmenityIdCtrl: [, Validators.required],     
       schedulesCtrl: this._formBuilder.array(
         [this.AddScheduleFormGroup()], [Validators.required, this.OverlapScheduleValidation])
     });   
@@ -121,6 +127,25 @@ export class CrearComponent implements OnInit {
       },
       (err)=> {console.log(err);}
     );        
+  }
+
+  private GetAmenities() {    
+    this.heroService.service_general_get_with_params("Amenity", {idBuilding: this.buildingIdProps}).subscribe(      
+      (res)=> {
+        if(res.result === "Success"){                    
+          this.amenitiesArray = res.item;
+          if (this.amenitiesArray.length <= 0) { return; }
+          // this.amenitiesArray.push();
+          this.amenitiesArray.push({id: 0, name: "All", description: "", buildingId: this.amenitiesArray[0].buildingId, photo: ""})
+          this.amenitiesArray.sort((a, b) => a.id - b.id);
+          this.amenitySelect = this.amenitiesArray[0].id;
+          // this.GetEvents();     
+          console.log('AMENITIES', this.amenitiesArray);         
+        } else if(res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
+        else { console.log("Error"); }
+      },
+      (err)=> {console.log(err);}
+    );  
   }
   
   public AddActivity() {                
@@ -161,7 +186,7 @@ export class CrearComponent implements OnInit {
     this.acitivyModel.Name = this.formGroup.controls.activityNameCtrl.value;
     this.acitivyModel.Description = this.formGroup.controls.activityDescriptionCtrl.value;
     this.acitivyModel.UserId = this.formGroup.controls.activityUserIdCtrl.value;
-    this.acitivyModel.AmenityId = this.amenityIdProps;
+    this.acitivyModel.AmenityId = this.formGroup.controls.activityAmenityIdCtrl.value;
     this.reservationData.AmenityId = this.acitivyModel.AmenityId;
     // if (this.acitivyModel.Private) { this.acitivyModel.Photo = "assets/img/Coliving.jpg"; }
     

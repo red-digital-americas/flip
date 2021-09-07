@@ -498,7 +498,7 @@ import { resolve } from 'dns';
                 time: 5200,
                 message: {
                     header: 'Information Error',
-                    text: 'All Inputs must be fill to continue'
+                    text: 'Todos los campos deben estar llenas para continuar'
                 }
             });
             
@@ -605,7 +605,7 @@ import { resolve } from 'dns';
                     time: 5200,
                     message: {
                         header: 'Information Error',
-                        text: 'All Inputs must be fill to continue'
+                        text: 'Todos los campos deben estar llenas para continuar'
                     }
                 });
 
@@ -917,7 +917,7 @@ import { resolve } from 'dns';
                 idBooking: this.current_membership.idBooking,
                 idCard: this.current_card.id,
                 dateEnd: this.endDateData.date_e,
-                amount: this.endDateData.total_pay * ( this.current_beds.length + this.current_membership.beds )
+                amount: this.endDateData.total_pay * (this.current_membership.beds )
             }, card_data = {
                 number: this.decryptData( this.current_card.number ),
                 expYear: Number( this.current_card.year ),
@@ -925,7 +925,6 @@ import { resolve } from 'dns';
                 cvc: this.decryptData( this.current_card.ccv ).toString(),
                 id: this.current_card.id
             }
-
             this.loader.showLoader();
 
             this._services.service_general_post('Stripe', card_data)

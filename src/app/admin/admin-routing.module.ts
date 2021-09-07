@@ -39,6 +39,7 @@ import { UserDetailComponent } from './Booking/Users/user-detail/user-detail.com
 import { UserNewComponent } from './Booking/Users/user-new/user-new.component';
 import { RoomDetailComponent } from './Booking/RoomAvailavility/room-detail/room-detail.component';
 import { AddTenantPayComponent } from './Booking/TenantList/add-tenant-pay/add-tenant-pay.component';
+import {EmailComponent} from './email/email.component';
 const routes: Routes = [
   { path: '', data: { title: 'AdminApp', expectedRole: [4, 5, 1, 3] }, canActivate: [RoleGuardService],
     children: [
@@ -53,7 +54,7 @@ const routes: Routes = [
       { path: 'editamenity/:id', component: EditAmenitiesComponent, data: { title: 'Amenities' } },
       { path: 'reservations/:id', component: ReservationsComponent, data: { title: 'Reservations' } },
       { path: 'chat/:id', component: ChatComponent, data: { title: 'Chat' } },
-
+      { path: 'Emails', component: EmailComponent, data: { title: 'Email' } },
       //CHH => Booking 
       { path: 'booking', component: BookingIndexComponent, data: { title: 'Booking' } },
       { path: 'tenantList/:id', component: TenantListComponent, data: { title: 'Tenant List' } },

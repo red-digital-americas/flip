@@ -1,5 +1,5 @@
 <app-header [fixed]="true"
-            [navbarBrandFull]="{src: 'assets/Icon Background Black.png', width: auto, height: 50, alt: 'Flip'}"
+            [navbarBrandFull]="{src: 'assets/Icon Background Black.png', width: auto, height: 30, alt: 'Flip'}"
             [navbarBrandMinimized]="{src: 'assets/Icon Background Black.png', width: 30, height: 30, alt: 'Flip'}"
             [sidebarToggler]="'lg'"
             [asideMenuToggler]="false"
@@ -24,7 +24,7 @@
         <i class="icon-bell"></i><span class="badge badge-pill badge-danger">{{ alertsCount }}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
-        <div class="dropdown-header text-center"><strong>Tienes {{ alertsCount }} alerts</strong></div>
+        <div class="dropdown-header text-center"><strong>Tienes {{ alertsCount }} alertas</strong></div>
         <div *ngFor="let alert of alerts">
           <a (click)="goNotifications(alert)" class="dropdown-item">
             <div class="message">
@@ -56,7 +56,7 @@
         <i class="fa fa-comments"></i><span class="badge badge-pill badge-info">{{ messagesCount }}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
-        <div class="dropdown-header text-center"><strong>Tienes {{ messagesCount }} messages</strong></div>
+        <div class="dropdown-header text-center"><strong>Tienes {{ messagesCount }} mensajes</strong></div>
         <div *ngFor="let item of messages">
           <a (click)="goMessage(item)" class="dropdown-item">
             <div class="message">
@@ -89,7 +89,7 @@
         <i class="fa fa-tasks"></i><span class="badge badge-pill badge-warning">{{ actionsCount }}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
-        <div class="dropdown-header text-center"><strong>Tienes {{ actionsCount }} actions</strong></div>
+        <div class="dropdown-header text-center"><strong>Tienes {{ actionsCount }} acciones</strong></div>
         <div *ngFor="let action of actions">
           <a (click)="goActions(action)" class="dropdown-item">
             <div class="message">

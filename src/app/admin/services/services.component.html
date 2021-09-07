@@ -14,8 +14,8 @@
           </button>
         </div>
         <div class="ml-col-1 margin-top-m font-big color-red text-center" *ngIf="servicesArray?.length == 0">
-          We don't have services yet,
-          <span class="text-underline cursor-pointer" (click)="toggleSectionForm( 'new' )">add one</span>.
+          No tenemos servicios aun.
+          <span class="text-underline cursor-pointer" (click)="toggleSectionForm( 'new' )">Agregar Uno</span>.
         </div>
         <div class="ap-cards__container margin-bottom-x" *ngFor="let service of servicesArray;">
           <div class="ap-cards__card ap-cards__card--bbuttons card-style">
@@ -30,7 +30,7 @@
               {{ service.price | currency:'USD' }}
             </p>
             <p class="ap-cards__card-desc">
-              <span class="text-bold">Once day Precio:</span>
+              <span class="text-bold">Una vex Precio:</span>
               {{ service.priceUnit | currency:'USD' }}
             </p>
             <figure class="ap-cards__card-image">
@@ -119,7 +119,7 @@
       <div class="ap-form__input">
         <input 
           type="text"
-          placeholder="Provider"
+          placeholder="Proveedor"
           id="new_service_prov" 
           name="new_service_prov"
           [class.form_error_found]="form_service.no_prov"
@@ -129,10 +129,10 @@
           for="new_service_prov" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_service.provider != ''">
-          Provider
+          Proveedor
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_prov">
-          Provider se requiere*
+          Proveedor se requiere*
         </span>
       </div>
     </div>
@@ -140,7 +140,7 @@
       <div class="ap-form__input">
         <input 
           type="number"
-          placeholder="Recurrente day price"
+          placeholder="Precio Recurrente un día"
           id="new_service_price" 
           name="new_service_price"
           [class.form_error_found]="form_service.no_pric"
@@ -150,10 +150,10 @@
           for="new_service_price" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_service.price != null">
-          Recurrente day price
+          Precio Recurrente un día
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_pric">
-          Recurrente day price se requiere*
+          Precio Recurrente un día se requiere*
         </span>
       </div>
     </div>
@@ -161,7 +161,7 @@
       <div class="ap-form__input">
         <input 
           type="number"
-          placeholder="Once day Precio"
+          placeholder="Un día Precio"
           id="new_service_unitp" 
           name="new_service_unitp"
           [(ngModel)]="data_service.priceUnit"
@@ -171,10 +171,10 @@
           for="new_service_unitp" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_service.priceUnit != null">
-          Once day Precio
+          Un día Precio
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_service.no_puni">
-          Once day Precio se requiere*
+          Un día Precio se requiere*
         </span>
       </div>
     </div>
@@ -195,11 +195,11 @@
                  [class.forms_errors_nimage]="form_service.no_phot"
                  src="{{ data_service.photo }}" />
             <span class="ap-form__image-data text-center" id="nuevo_servicio_name_0">
-              Image size must be <br />
+              La resolución de la imagen debe ser <br />
               <span class="text-bold">350x350</span> 
             </span>
             <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_phot">
-              Image se requiere*
+              Imagen se requiere*
             </span>
           </figure>
         </label>
@@ -220,11 +220,11 @@
                  [class.forms_errors_nimage]="form_service.no_icon"
                  src="{{ data_service.icon }}" />
             <span class="ap-form__image-data text-center" id="nuevo_servicio_icon_name_0">
-              Image size must be<br />
+              La resolución de la imagen debe ser<br />
               <span class="text-bold">150x150</span> 
             </span>
             <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_service.no_icon">
-              Image se requiere*
+              Imagen se requiere*
             </span>
           </figure>
         </label>
@@ -272,10 +272,10 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
     <p class="ml-modal__pop-titulo margin-bottom-m">
-      Eliminar Service
+      Eliminar Servicio
     </p>
     <p class="ml-modal__pop-text">
-      ¿Estás seguro de eliminar service<br />
+      ¿Estás seguro de eliminar servicio<br />
       <span class="text-bold">"{{ service_to_delete.name }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">

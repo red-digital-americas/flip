@@ -69,8 +69,8 @@ import { DataSource } from '@angular/cdk/table';
         'name',
         'build',
         'room',
-        'typeRoom',
-        'membership',
+        // 'typeRoom',
+        // 'membership',
         'dateInit',
         'dateEnd',
         'amountOutstanding',
@@ -78,7 +78,7 @@ import { DataSource } from '@angular/cdk/table';
         'totalBeds',
         'roomateFlip',
         'status',
-        'active',
+        // 'active',
         'checkIn',
         'checkOut',
         'more'
@@ -97,7 +97,7 @@ import { DataSource } from '@angular/cdk/table';
         roomateFlip: '',
         checkIn: '',
         checkOut: '',
-        active: '',
+        // active: '',
         more: ''
     };
 

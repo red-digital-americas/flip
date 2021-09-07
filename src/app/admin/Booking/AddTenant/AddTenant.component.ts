@@ -331,18 +331,21 @@ import { Router } from '@angular/router';
                     bed_in.lastName = 'no_data' : bed_in.lastName = bed_inputs[0].value;
 
                 bed_inputs[2].value == '' ?
-                    bed_in.motherName = 'no_data' : bed_in.motherName = bed_inputs[2].value; 
+                    bed_in.motherName = 'no_data' : bed_in.motherName = bed_inputs[2].value;
+                    
+                bed_inputs[3].value == '' ?
+                    bed_in.birth = 'no_valid' : bed_in.birth = bed_inputs[3].value; 
 
                 bed_select[0].value == '0' ?
                     bed_in.genderId = 'no_data' : bed_in.genderId = bed_select[0].value;
 
-                bed_inputs[3].value == '' ?
-                    bed_in.email = 'no_data' : 
-                    ( !this.isEmailValid( bed_inputs[3].value ) ? 
-                        bed_in.email = 'no_valid' : bed_in.email = bed_inputs[3].value );
-
                 bed_inputs[4].value == '' ?
-                    bed_in.phone = 'no_data' : bed_in.phone = bed_inputs[4].value;
+                    bed_in.email = 'no_data' : 
+                    ( !this.isEmailValid( bed_inputs[4].value ) ? 
+                        bed_in.email = 'no_valid' : bed_in.email = bed_inputs[4].value );
+
+                bed_inputs[5].value == '' ?
+                    bed_in.phone = 'no_data' : bed_in.phone = bed_inputs[5].value;
 
               });
 
@@ -357,7 +360,8 @@ import { Router } from '@angular/router';
                     bed.genderId == 'no_data' ||
                     bed.email == 'no_data' ||
                     bed.email == 'no_valid' ||
-                    bed.phone == 'no_data'
+                    bed.phone == 'no_data' ||
+                    bed.birth == 'no_data'
                 ) result = false;
 
               });
@@ -670,6 +674,17 @@ import { Router } from '@angular/router';
 
     }
 
+    public selectedEndDate: Date;
+    setEndDate(event: any) {
+        this.selectedEndDate = new Date();
+        console.log(event);
+        let i = new Date(event.target.value);
+        console.log(i); 
+        this.selectedEndDate.setDate(i.getDate() + 2);
+        console.log('DATE SELECTED', this.selectedEndDate, i);
+        console.log(this.selectedEndDate.toDateString());
+    }
+
     public getAdditionalServiceAmmount( event_data: any, date_position: number, service: any ):void {
 
         const root_event: any = event_data.target;
@@ -965,8 +980,8 @@ import { Router } from '@angular/router';
                     kind: 'error',
                     time: 4777,
                     message: {
-                        header: 'Inputs required',
-                        text: 'Some inputs must be fill to continue.'
+                        header: 'Campos son requeridos',
+                        text: 'Algunos campos deben llenarse para continuar.'
                     }
                 });
     
@@ -1001,7 +1016,7 @@ import { Router } from '@angular/router';
                     time: 4777,
                     message: {
                         header: 'Inputs required',
-                        text: 'Some inputs must be fill to continue.'
+                        text: 'Algunos campos deben llenarse para continuar.'
                     }
                 });
     

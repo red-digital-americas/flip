@@ -4,7 +4,7 @@
         <div class="ml-col-1">
             <div class="ml-col-1 margin-bottom-x">
                 <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-                    Cuarto Avaibility
+                    Disponibilidad de Cuartos
                 </h4>
             </div>
 
@@ -49,7 +49,7 @@
                             <div class="ml-col-1">
                                 <div class="ap-form__input">
                                     <mat-form-field>
-                                        <mat-label>Pending Billed</mat-label>
+                                        <mat-label>Facturado Pendiente</mat-label>
                                         <mat-select [formControl]="animalControl" formControlName="pending">
                                           <mat-option>--</mat-option>
                                           <mat-option *ngFor="let pending of pendingLs" [value]="pending">
@@ -74,11 +74,14 @@
                     </div>
                   
                   <div class="ml-col-1">
-                    <div class="ml-col-2">
+                    <div class="ml-col-4">
                       <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="applyFilterPeriod()">Filtrar</button>
                     </div>
-                    <div class="ml-col-2">
-                        <button class="ap-form__buttons-button button-x button-black button-icon button-icon--refresh-white" (click)="resetForm()">Reiniciar</button>
+                    <div class="ml-col-4">
+                        <button class="ap-form__buttons-button ap-form__buttons-button--align-left button-black button-icon button-icon--refresh-white" (click)="resetForm()">Reiniciar</button>
+                    </div>
+                    <div class="ml-col-4">
+                        <button class="ap-form__buttons-button ap-form__buttons-button--align-left button-black button-icon button-icon--export-file" (click)="exporter.exportTable('xlsx', {fileName:'Habitaciones Disponibilidad', sheet: 'hoja 1', Props: {Author: 'Wander'}})">Exportar</button>
                     </div>
                   </div>
     
@@ -88,9 +91,9 @@
                     <mat-label>Buscar</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
                 </mat-form-field>
-                <mat-table mat-table [dataSource]="roomList" matSort class="mat-elevation-z8 table--no-shadow">
+                <mat-table mat-table matTableExporter [dataSource]="roomList" matSort class="mat-elevation-z8 table--no-shadow" #exporter="matTableExporter">
                     <ng-container matColumnDef="room">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Cuarto</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Habitación</th>
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.room }}</td>
                     </ng-container>
                     <ng-container matColumnDef="beds">
@@ -112,13 +115,13 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="reservationsActive">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Reservaciones Activo</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Reservaciones activas</th>
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.reservationsActive  }}</td>
                     </ng-container>
                     <ng-container matColumnDef="dateUnemployment">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Próxima fecha de disponibilidad completa</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Disponibilidad</th>
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">
-                            {{ (element?.dateUnemployment !== null) ? (todayDate >= element.dateUnemployment ? "Avaible" : element.dateUnemployment ) : "Avaible" }}
+                            {{ (element?.dateUnemployment !== null) ? (todayDate >= element.dateUnemployment ? "Disponible" : element.dateUnemployment ) : "Disponible" }}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="amountStanding">
@@ -126,14 +129,14 @@
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.amountStanding  | currency}}</td>
                     </ng-container>
                     <ng-container matColumnDef="pending">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Pendiente</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Pendiente de Pago</th>
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.pending  | currency}}</td>
                     </ng-container>
                     <ng-container matColumnDef="roomateFlip">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Roomate tipo</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header">Roomate</th>
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                             <div *ngIf="element.roomateFlip">
-                                Roomate Flip
+                                Roomate
                             </div>
                             <div *ngIf="!element.roomateFlip">
                                 No Roomate

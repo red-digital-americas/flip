@@ -23,7 +23,7 @@
                             (change)="getAlertsData( $event.target.value )"
                             class="ap-form__input-text">
                             <option value="1" selected>Estatus</option>
-                            <option value="2">Urgency</option>
+                            <option value="2">Urgencia</option>
                           </select>
                           <label 
                             for="filter_by" 
@@ -170,7 +170,7 @@
                     </span> 
                     <span id="pending_schedule_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
-                        Any result has been found.
+                        Ningun resultado fue encontrado.
                     </span>
                 </div>
             </div>
@@ -233,7 +233,7 @@
                     </span> 
                     <span id="confirming_completion_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
-                        Any result has been found.
+                          Ningun resultado fue encontrado.
                     </span>
                 </div>
             </div>
@@ -296,7 +296,7 @@
                     </span> 
                     <span id="awaiting_invoice_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
-                        Any result has been found.
+                          Ningun resultado fue encontrado.
                     </span>
                 </div>
             </div>
@@ -359,7 +359,7 @@
                     </span> 
                     <span id="confirming_paymnet_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
-                        Any result has been found.
+                          Ningun resultado fue encontrado.
                     </span>
                 </div>
             </div>
@@ -422,7 +422,7 @@
                     </span> 
                     <span id="completed_and_paid_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
-                        Any result has been found.
+                          Ningun resultado fue encontrado.
                     </span>
                 </div>
             </div>
@@ -431,7 +431,7 @@
             <div class="alerts__section" *ngIf="urgent_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
-                        Urgent
+                        Urgente
                     </h4>
                     <div class="alerts__card-card card-style"
                          *ngFor="let card of urgent_cards"
@@ -487,14 +487,14 @@
                     </span> 
                     <span id="urgent_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
-                        Any result has been found.
+                          Ningun resultado fue encontrado.
                     </span>
                 </div>
             </div>
             <div class="alerts__section" *ngIf="schelude_today_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
-                        Schedule Today
+                        Programado Hoy
                     </h4>
                     <div class="alerts__card-card card-style"
                          *ngFor="let card of schelude_today_cards"
@@ -550,14 +550,14 @@
                     </span> 
                     <span id="schelude_today_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
-                        Any result has been found.
+                          Ningun resultado fue encontrado.
                     </span>
                 </div>
             </div>
             <div class="alerts__section" *ngIf="schelude_week_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
-                        Schedule Week
+                        Programado de la Semana
                     </h4>
                     <div class="alerts__card-card card-style"
                          *ngFor="let card of schelude_week_cards"
@@ -599,14 +599,14 @@
                     </span> 
                     <span id="schelude_week_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
-                        Any result has been found.
+                          Ningun resultado fue encontrado.
                     </span>
                 </div>
             </div>
             <div class="alerts__section" *ngIf="schelude_week_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
-                        Schedule Month
+                        Programado del Mes
                     </h4>
                     <div class="alerts__card-card card-style"
                          *ngFor="let card of schelude_week_cards"
@@ -662,14 +662,14 @@
                     </span> 
                     <span id="schelude_week_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
-                        Any result has been found.
+                          Ningun resultado fue encontrado.
                     </span>
                 </div>
             </div>
             <div class="alerts__section" *ngIf="other_cards != undefined">
                 <div class="alerts__card-container card-style">
                     <h4 class="alerts__card-titulo">
-                        Other
+                        Otro
                     </h4>
                     <div class="alerts__card-card card-style"
                          *ngFor="let card of other_cards"
@@ -725,7 +725,7 @@
                     </span> 
                     <span id="other_cards_nr" 
                           class="display-none text-center color-black text-big text-bold margin-tb-m">
-                        Any result has been found.
+                          Ningun resultado fue encontrado.
                     </span>
                 </div>
             </div>
@@ -752,7 +752,7 @@
             <div class="ml-col-3o">
                 <div class="ml-col-2">
                     <div class="ml-col-1">
-                        Tenant:
+                        Inquilino:
                     </div>
                     <div class="ml-col-1 text-bold">
                         {{ schedule_object.user.name }} {{ schedule_object.user.lastName }}
@@ -783,7 +783,7 @@
         <div class="ml-col-1 margin-bottom-x">
             <div class="ml-col-3o">
                 <div class="ml-col-1">
-                    Order number: 
+                    Número de orden: 
                 </div>
                 <div class="ml-col-1 text-bold">
                     {{ schedule_object.id }}
@@ -859,13 +859,13 @@
             </div>
             <div class="ml-col-1">
                 <div class="ml-col-2">
-                    Open:
+                    Abierto:
                     <span class="text-bold">
                         {{ schedule_avaible.startTime }}
                     </span>
                 </div>
                 <div class="ml-col-2">
-                    Cerrar:
+                    Cierra:
                     <span class="text-bold">
                         {{ schedule_avaible.endTime }}
                     </span>
@@ -956,7 +956,7 @@
                         class="ap-form__input-text"
                         mask="000 000 00 00"
                         (change)="validatingUserInput( $event, 'phone' )"
-                        [(ngModel)]="alert_detail_form.phone"
+                        [(ngModel)]="alert_detail_form.Phone"
                         [class.custom-input__text--error]="alert_detail_validator.no_cpho"/>
                       <label 
                         for="company_phone" 
@@ -1084,7 +1084,7 @@
                       <input 
                         required
                         type="text" 
-                        placeholder="Max Budget"
+                        placeholder="Presupuesto maximo"
                         id="staff_mbadget" 
                         name="staff_mbadget"
                         class="ap-form__input-text"
@@ -1094,10 +1094,10 @@
                       <label 
                         for="staff_mbadget" 
                         class="ap-form__label ap-form__label-text">
-                        Max Budget
+                        Presupuesto maximo
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_mbud">
-                        Max Budget se requiere*
+                        Presupuesto maximo se requiere*
                       </span>
                     </div>
                 </div>
@@ -1121,7 +1121,7 @@
                         ¿Cuando?
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_date">
-                        When date se requiere*
+                        ¿Cuando? date se requiere*
                       </span>
                     </div>
                 </div>
@@ -1144,7 +1144,7 @@
                         ¿Qué hora?
                       </label>
                       <span class="ml-col-1 form_error_found_label" *ngIf="alert_detail_validator.no_hour">
-                        What time se requiere*
+                        ¿Qué hora? se requiere*
                       </span>
                     </div>
                 </div>
@@ -1463,7 +1463,7 @@
                                   id="profile_avatar_img"
                                   src="../../../../assets/14.jpg" />
                               <span class="ap-form__image-data text-center" id="profile_avatar_name">
-                                Image size must be <br />
+                                Tamaño de imagen debe ser <br />
                                 <span class="text-bold">350x350px</span> 
                               </span>
                             </figure>
@@ -1473,7 +1473,7 @@
                 </div>
             </div>
             <div class="ml-col-1">
-                <div class="ml-col-1 at-bcard__stitle margin-tb-x">Alert Information</div>
+                <div class="ml-col-1 at-bcard__stitle margin-tb-x">Información de Alerta</div>
                 <div class="ml-col-1 margin-top-x">
                     <div class="ml-col-3">
                         <div class="ml-col-1">
@@ -1519,7 +1519,7 @@
                                     id="new_alert_cname" 
                                     name="new_alert_cname"
                                     class="ap-form__input-text"
-                                    [(ngModel)]="Company"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].Company"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_cname" 
@@ -1544,7 +1544,7 @@
                                     class="ap-form__input-text"
                                     mask="000 000 00 00"
                                     (change)="validatingUserInput( $event, 'phone' )"
-                                    [(ngModel)]="new_alert_data.alertDetails[0].phone"
+                                    [(ngModel)]="new_alert_data.alertDetails[0].Phone"
                                     [class.custom-input__text--error]="1 == 2"/>
                                   <label 
                                     for="new_alert_cphone" 
@@ -1674,10 +1674,10 @@
                                   <label 
                                     for="new_alert_mbud" 
                                     class="ap-form__label ap-form__label-text">
-                                    Max Budget
+                                    Presupuesto maximo
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    Max Budget se requiere*
+                                    Presupuesto maximo se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -1702,7 +1702,7 @@
                                     ¿Cuando?
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    When date se requiere*
+                                    ¿Cuando? se requiere*
                                   </span>
                                 </div>
                             </div>
@@ -1725,7 +1725,7 @@
                                     ¿Qué hora?
                                   </label>
                                   <span class="ml-col-1 form_error_found_label" *ngIf="1 == 2">
-                                    What time se requiere*
+                                    ¿Qué hora? se requiere*
                                   </span>
                                 </div>
                             </div>

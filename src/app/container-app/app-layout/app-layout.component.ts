@@ -3,8 +3,9 @@ import { MenuService } from '../../_nav';
 import { Router } from '@angular/router';
 import { DatosService } from '../../../datos.service';
 import { ConsoleService } from '@ng-select/ng-select/ng-select/console.service';
-
-
+import { interval, Subscription  } from 'rxjs';
+import { SystemMessage } from '../../../ts/systemMessage';
+import { BsModalService } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-app-layout',
   templateUrl: './app-layout.component.html',
@@ -14,7 +15,7 @@ export class AppLayoutComponent {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
-
+  subscription: Subscription;
   public selectedSection:number;
   public navSections = []
   public dataUser;
@@ -23,7 +24,7 @@ export class AppLayoutComponent {
   constructor(
     private menuService: MenuService,
     private router: Router,
-    public services: DatosService,
+    public services: DatosService
   ) {
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
@@ -35,6 +36,8 @@ export class AppLayoutComponent {
     this.dataUser = JSON.parse(localStorage.getItem('user')).avatar;
     this.userId = JSON.parse(localStorage.getItem('user')).id;
     this.getActions(this.userId);
+    const source = interval(60000);
+    this.subscription = source.subscribe(val => this.getActions(this.userId));
     ////console.log(this.dataUser);
     if (localStorage.getItem("SystemTypeId") == undefined ) { return; }
     this.systemTypeId = parseInt(localStorage.getItem("SystemTypeId"));        
@@ -63,6 +66,7 @@ export class AppLayoutComponent {
   alertsCount = 0;
   messages;
   messagesCount = 0;
+  public system_message:SystemMessage = new SystemMessage();
   getActions(id: any) {
     let obj = { userId: id };
     this.services.service_general_get_with_params('UsersAdmin/GetAlerts', obj).subscribe((value) => {
@@ -73,6 +77,21 @@ export class AppLayoutComponent {
 
       this.alerts = value.alerts;
       this.alertsCount = value.alerts.length;
+      if (value.alerts != null) {
+        value.alerts.forEach(element => {
+          if (element.showNow) {
+            this.system_message.showMessage({
+              kind: 'ok',
+              time: 4777,
+              message: {
+                header: 'Nueva alerta',
+                text: element.message
+              }
+            });
+          }
+        });
+        
+      }
 
       this.messages = value.messages;
       this.messagesCount = value.messages.length;
@@ -151,6 +170,10 @@ export class AppLayoutComponent {
 
     this.addPaddingWidthJS();
     
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

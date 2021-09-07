@@ -170,8 +170,8 @@ export class TeamComponent implements OnInit {
                 kind: 'ok',
                 time: 4700,
                 message: {
-                  header: 'Content updated',
-                  text: 'Content has been updated successfully'
+                  header: 'Contenido actualizado',
+                  text: 'Contenido ha sido actualizado correcatamente'
                 }
               });
 
@@ -194,8 +194,8 @@ export class TeamComponent implements OnInit {
         kind: 'error',
         time: 4700,
         message: {
-          header: 'Form must be completed',
-          text: 'All inputs must be filled to continue'
+          header: 'Formulario',
+          text: 'Todos los campos deben ser llenados'
         }
       });
 
@@ -338,8 +338,8 @@ export class TeamComponent implements OnInit {
                     kind: 'error',
                     time: 4777,
                     message: {
-                      header: 'Image Resolution',
-                      text: 'Image resolution is not valid'
+                      header: 'Resolución de Imagen',
+                      text: 'No Valida'
                     }
                   });
 

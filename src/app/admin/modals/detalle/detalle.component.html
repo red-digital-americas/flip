@@ -16,7 +16,12 @@
     <div class="container clearfix" *ngIf="!isEditVisible">
         <div class="row">
             <div class="col-8">
-                <div class="row">                                            
+                <div class="row">
+                    <div class="col-12">
+                        <h5>Amenidad</h5>
+                        <div>{{eventDetail?.amenity}}</div>
+                    </div>
+                    <hr style="width:100%;">                                            
                     <div class="col-12">
                         <h5>Descripción</h5>
                         <div>{{eventDetail?.activity.description}}</div>
@@ -59,8 +64,8 @@
 
         <div class="row margin-bottom-x" *ngIf="!eventDetail?.activity.private">
             <div class="col-6">
-                <h5>Books</h5>                   
-                <div *ngIf="!booksArray.length">No books for this event</div>            
+                <h5>Resrevaciones</h5>                   
+                <div *ngIf="!booksArray.length">No hay ninguna reservación para este evento</div>            
                 
                 <div class="">
                     <div class=" book" *ngFor="let bookElement of booksArray">                        
@@ -156,6 +161,9 @@
                 <div class="col-8">
                     <div class="row">  
                         <div class="col-12 mb-2">
+                            <input disabled type="text" [(ngModel)]="eventDetail.amenity" class="form-control" name="activityAmenity" id="activityAmenity" placeholder="Amenidad" >
+                        </div>
+                        <div class="col-12 mb-2">
                                 <!-- <input type="text" [(ngModel)]="acitivyModel.Name" [disabled]="acitivyModel.Private" class="form-control" name="activityName" id="activityName" placeholder="Titulo" required> -->
                                 <input type="text" [(ngModel)]="acitivyModel.Name" class="form-control" name="activityName" id="activityName" placeholder="Titulo" required>
                         </div>          
@@ -195,7 +203,7 @@
                             
                                 <div class="input-group schedule__datetime">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">Date</span>
+                                        <span class="input-group-text">Fecha</span>
                                     </div>  
                                     <!-- <input type="text" formControlName="dateCtrl" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', adaptivePosition: true }" placeholder="Datepicker" class="form-control" bsDatepicker> -->
                                     <input type="text" name="date" [(ngModel)]="datePicker" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" placeholder="Datepicker" class="form-control" bsDatepicker>

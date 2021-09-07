@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Editar Template</h4>
+    <button 
+        class="ap-form__rButton button-red button-icon button-icon--cancel-white"
+         (click)="modalRef.hide()">
+        Cerrar
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container clearfix">
+       <form autocomplete="off">
+        <div class="row">                      
+            <div class="col-12 col-lg-8 col-xl-8">
+                <div class="row"> 
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="name" class="form-control" placeholder="Nombre">
+                    </div> 
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="subject" class="form-control" placeholder="Subject">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="greeting" class="form-control" placeholder="Saludo">
+                    </div>  
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="body" class="form-control" placeholder="Cuerpo">
+                    </div>       
+                    <div class="col-12 mb-2">
+                        <div class="custom-file">
+                            <input type="file" accept="image/*"
+                                (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
+                            <label class="custom-file-label" for="customFile">{{imageInputLabel}}</label>        
+                        </div>
+                    </div>        
+                </div>
+            </div>
+            <div class="col-4">
+                <img style="width:100%" class="img-size" [src]="templetaObj.image" />
+            </div>  
+            <div class="ml-col-1 ap-form__buttons margin-top-x">
+                <button 
+                    class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--add-white"
+                    (click)="Update()"
+                    type="submit">
+                    Guardar
+                </button>
+            </div>                    
+        </div>  
+      </form>
+    </div>
+</div>

@@ -42,7 +42,7 @@ export class BookingIndexComponent implements OnInit {
                 this.new_build_button = true;
                 this.edit_build_button = false;
                 this.resetSettings();
-                this.booking_form_action = 'Add New Build';
+                this.booking_form_action = 'Agregar Nuevo Proyecto';
             break;
 
             case 'edit': 
@@ -59,7 +59,7 @@ export class BookingIndexComponent implements OnInit {
                 this.booking_data.status = editable.status;
                 this.booking_data.photo = editable.photo;
                 this.getRoomsToEdit(  editable.typeRoom );
-                this.booking_form_action = 'Edit Build';
+                this.booking_form_action = 'Editar Proyecto';
             break;
 
             case 'hide':
@@ -419,7 +419,7 @@ debugger;
                 kind: 'error',
                 message: {
                   header: 'Inputs required',
-                  text: 'All inputs must be fill to continue'
+                  text: 'Todos los campos deben estar llenas para continuar'
                 },
                 time: 4777
               });

@@ -84,7 +84,11 @@ import { CalendarDetailComponent } from './modals/calendar-detail/calendar-detai
 import { PerkCategoryComponent } from './modals/perk-category/perk-category.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { AlertComponent } from './alert/alert.component';
- 
+import { MatTableExporterModule } from 'mat-table-exporter';
+import { EmailComponent } from './email/email.component';
+import { EmailDetailComponent } from './email/email-detail/email-detail.component';
+import { FooterDetailComponent } from './email/footer-detail/footer-detail.component';
+
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
   imports: [    
@@ -116,7 +120,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatSelectModule,
     MatCheckboxModule,
     [ StripeModule.forRoot("pk_test_WiAYJgrEz6XKxL2MwKD89oqO00bfPcrlOF") ],
-    NgxMaskModule.forRoot(options)
+    NgxMaskModule.forRoot(options),
+    MatTableExporterModule,
   ],
   declarations: [
     CommunitiesComponent,  
@@ -163,7 +168,10 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     CalendarComponent,
     CalendarDetailComponent,
     PerkCategoryComponent,
-    AlertComponent
+    AlertComponent,
+    EmailComponent,
+    EmailDetailComponent,
+    FooterDetailComponent
   ],
   entryComponents: [
     DetalleComponent,
@@ -173,7 +181,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     RoomModalComponent,
     CalendarComponent,
     CalendarDetailComponent,
-    PerkCategoryComponent
+    PerkCategoryComponent,
+    EmailDetailComponent,
+    FooterDetailComponent
   ],
   exports:[Autoresize]
 })

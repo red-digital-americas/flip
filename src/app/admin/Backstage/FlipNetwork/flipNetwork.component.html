@@ -54,7 +54,7 @@
             </h4>
             <button data-toggle="modal" (click)="primaryModal.show(); new(1,null);"
               class="ap-form__rButton button-big button-pink button-icon button-icon--add-white">
-              Add new slide
+              Agregar nuevo slide
             </button>
           </div>
           <div class="ml-col-1 size-controller card-style padding-general-m margin-bottom-m"
@@ -85,12 +85,12 @@
               </div>
             </div>
             <div class="ml-col-1 top-separator margin-top-x">
-              <h4 class="ml-col-1 margin-tb-min text-ultra">Benefits</h4>
+              <h4 class="ml-col-1 margin-tb-min text-ultra">Beneficios</h4>
               <div class="ml-col-1 margin-bottom-m" *ngFor="let beneficio of card.networkBenefits">
                 <div class="ml-col-3">
                   <div class="ml-col-1 margin-bottom-x">
                     <p class="card__info-dato">
-                      <span class="text-bold">Benefit: <br /> </span>
+                      <span class="text-bold">Beneficio: <br /> </span>
                       {{ beneficio.title }}
                     </p>
                   </div>
@@ -156,13 +156,13 @@
           </button>
           <br><br>
           <h4 class="modal-title" *ngIf="modal === 1 && flipNetworkSlides.length < 5">
-            Add Slide
+            Agregar Slide
           </h4>
           <h4 class="modal-title" *ngIf="modal === 1 && flipNetworkSlides.length >= 5">
-            The maximum allowed slides are already available
+            El maximo de Slides ya se alcanzo
           </h4>
           <h4 class="modal-title" *ngIf="modal === 2">
-            Edit information in section
+            Editar información de Sección
           </h4>
         </div>
         <hr>
@@ -211,10 +211,10 @@
             <div class="ml-col-1 custom-input margin-top-m">
               <button class="ap-form__rButton button-big button-pink button-icon button-icon--add-white" *ngIf="beneficios.length < 4"
                 (click)="addbeneficio()">
-                Add Benefits
+                Agregar beneficios
               </button>
               <h4 class="modal-title">
-                Benefit
+                Beneficios
               </h4>
             </div>
 
@@ -268,7 +268,7 @@
               </div>
               <div class="ml-col-1 custom-input margin-top-m">
                 <button class="ap-form__rButton button-big button-red button-icon button-icon--cancel-white" (click)="deletebeneficio(index, beneficio)">
-                  Remove Benefit
+                  Quitar Beneficio
                 </button>
                 <br><br>
                 <div style="width: 100%; border: solid .5px;"></div>

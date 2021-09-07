@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Http } from '@angular/http';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { ToasterModule, ToasterService } from 'angular2-toaster/angular2-toaster';
@@ -72,6 +72,7 @@ import { MaterialModule } from './material/material.module';
 import { AdminModule } from './admin/admin.module';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { AlertModalComponent } from './container-app/app-layout/alert-modal/alert-modal.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -114,6 +115,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     Wizard5Component,
     FooterComponent,
     RecoverpassComponent,
+    AlertModalComponent,
    // WebadminComponent,
  //  AppLayoutComponent
   ],

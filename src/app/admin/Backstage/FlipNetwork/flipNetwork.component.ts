@@ -65,7 +65,7 @@ import { Utils } from '../../../utils/utils';
                     time: 4777,
                     message: {
                         header: 'System error',
-                        text: 'A system error has ocurred, please try later.'
+                        text: 'A ocurrido un problema intente mas tarde.'
                     }
                 });
                 setTimeout( () => this.loader.hideLoader(), 777);
@@ -87,8 +87,8 @@ import { Utils } from '../../../utils/utils';
                         kind: 'ok',
                         time: 4777,
                         message: {
-                            header: 'Main card data updated',
-                            text: 'Main card data has been updated successfully.'
+                            header: 'Main card actualizada',
+                            text: 'Main card actualizada correctamente'
                         }
                     });
 
@@ -103,7 +103,7 @@ import { Utils } from '../../../utils/utils';
                     time: 4777,
                     message: {
                         header: 'System error',
-                        text: 'A system error has ocurred, please try later.'
+                        text: 'A ocurrido un problema intente mas tarde.'
                     }
                 });
 

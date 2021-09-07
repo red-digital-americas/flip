@@ -5,16 +5,16 @@
       <div class="ap-cards">
         <div class="ml-col-1 margin-bottom-x">
           <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-            Ammenities
+            Amenidades
           </h4>
           <button 
             class="ap-form__rButton button-pink padding-lateral-m button-icon button-icon--add-white"
             (click)="toggleSectionForm( 'new' )">
-            Add Ammenity
+            Agregar
           </button>
         </div>
         <div class="ml-col-1 margin-top-m font-big color-red text-center" *ngIf="amenitiesArray?.length == 0">
-          We don't have ammenitie yet,
+          No tenemos amenidades aún.
           <span class="text-underline cursor-pointer" (click)="toggleSectionForm( 'new' )">add one</span>.
         </div>
         <div class="ap-cards__container" *ngFor="let amenity of amenitiesArray;">
@@ -162,7 +162,7 @@
             <span class="text-bold">350x350</span> 
           </span>
           <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_amenity.no_photo">
-            Image se requiere*
+            Imagen se requiere*
           </span>
         </figure>
       </label>
@@ -212,10 +212,10 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
     <p class="ml-modal__pop-titulo margin-bottom-m">
-      Eliminar Amenity
+      Eliminar Amenidad
     </p>
     <p class="ml-modal__pop-text">
-      ¿Estás seguro de eliminar amenity<br />
+      ¿Estás seguro de eliminar la amenidad<br />
       <span class="text-bold">"{{ amenity_to_delete.name }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">

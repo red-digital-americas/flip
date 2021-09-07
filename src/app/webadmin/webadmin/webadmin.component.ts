@@ -134,7 +134,7 @@ export class WebadminComponent implements OnInit {
           kind: 'ok',
           message: {
               header: 'Ok',
-              text: 'Update success'
+              text: 'Actualizado correctamente'
           },
           time: 2000
       });
@@ -229,8 +229,8 @@ export class WebadminComponent implements OnInit {
                 kind: 'ok',
                 time: 4777,
                 message: {
-                  header: 'Content updated',
-                  text: 'Content has been updated successfully'
+                  header: 'Contenido actualizado',
+                  text: 'Contenido actualizado correctamente'
                 }
               });
               //location.reload();
@@ -396,8 +396,8 @@ export class WebadminComponent implements OnInit {
                     kind: 'error',
                     time: 4700,
                     message: {
-                      header: 'Image Resolution',
-                      text: 'Image Resolution is not valid'
+                      header: 'Resolción de Imagen',
+                      text: 'No valida'
                     }
                   });
                   root_event.value = "";

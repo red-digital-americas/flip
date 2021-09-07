@@ -1,0 +1,37 @@
+<div class="ml-col-1">
+    <div class="ml-col-1 padding-general-m margin-bottom-m">
+        <div class="ml-col-1 padding-general-m">
+            <h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
+                Lista de Correos
+            </h4>
+            <mat-form-field style="width: 100%;">
+                <mat-label>Filtrar</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+            </mat-form-field>
+            <table mat-table mat-sort [dataSource]="mailList" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="table__header">Nombre</th>
+                    <td mat-cell *matCellDef="let element" class="table__data">{{ element.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef class="table__header">Tipo</th>
+                    <td mat-cell *matCellDef="let element" class="table__data">{{ element.type }}</td>
+                </ng-container>
+                <ng-container matColumnDef="more">
+                    <th mat-header-cell *matHeaderCellDef class="table__header">Detalle</th>
+                    <td mat-cell *matCellDef="let element" class="table__data">
+                        <button 
+                            (click)="viewDetail( element )"
+                            mat-raised-button color="accent"
+                            class="table__data-button button-yellow button-icon button-icon--detail">
+                            Detalle
+                        </button>   
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
+        </div>
+    </div>
+</div>

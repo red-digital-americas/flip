@@ -292,6 +292,31 @@ export class MessagesComponent implements OnInit {
         });
     
       }
+
+      showArchive(){
+        var creadoobj = { buildingid: this.build, userid: this.CONSIERGE };
+        console.log('Esto ====> ', creadoobj);
+        this.heroService.ServicioPostMessage("SeeChatsConsiergeArchived", creadoobj).subscribe((value) => {
+          //debugger;
+          switch (value.result) {
+            case "Error":
+              this.no_chats = true;
+              console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
+              break;
+            default:
+              console.log("Post==>", value.item);
+              if (value.result == "Success") {
+                this.posts = value.item;
+                console.log('Los chats ===> ', this.posts);
+              }
+          }
+          console.log("Response Chats Cons => ", value);
+        }, (error: any) => {
+
+          console.log("Response Error Chats Cons => ", error);
+
+        });
+      }
     
     
       private scrollToBottom(): void {

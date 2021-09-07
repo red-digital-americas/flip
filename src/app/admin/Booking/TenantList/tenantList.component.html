@@ -8,7 +8,7 @@
              <button 
                     class="ap-form__rButton button-pink padding-lateral-m button-big button-icon button-icon--add-white"
                     (click)="goToPage( 'AddTenant' )">
-                    Add Reservaciones
+                    Reservar
             </button>
         </div>
         <div class="ml-col-1">
@@ -71,7 +71,7 @@
                         </div>
                     </div>
 
-                    <div class="ml-col-4">
+                    <!-- <div class="ml-col-4">
                         <div class="ml-col-1">
                             <div class="ap-form__input">
                                 <mat-form-field>
@@ -85,7 +85,7 @@
                                   </mat-form-field>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
               
               <div class="ml-col-1">
@@ -93,7 +93,10 @@
                   <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="applyFilterPeriod()">Filtrar</button>
                 </div>
                 <div class="ml-col-4">
-                    <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="resetForm()">Reiniciar</button>
+                    <button class="ap-form__buttons-button ap-form__buttons-button--align-left button-black button-icon button-icon--refresh-white" (click)="resetForm()">Reiniciar</button>
+                </div>
+                <div class="ml-col-4">
+                    <button class="ap-form__buttons-button ap-form__buttons-button--align-left button-black button-icon button-icon--export-file" (click)="exporter.exportTable('xlsx', {fileName:'Reservaciones', sheet: 'hoja 1', Props: {Author: 'Wander'}})">Exportar</button>
                 </div>
               </div>
 
@@ -102,15 +105,15 @@
                 <mat-label>Buscar</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
             </mat-form-field>
-            <mat-table mat-table matSort [dataSource]="tenantList" class="mat-elevation-z8 table--no-shadow">
+            <mat-table mat-table matSort matTableExporter  [dataSource]="tenantList" class="mat-elevation-z8 table--no-shadow" #exporter="matTableExporter">
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Nombre </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Inquilino </th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center"  >
                          <a style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" (click)="viewDetail(element.idUser, element.idBooking)" > {{element.firstName}} </a>
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="room">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Cuarto</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Habitación</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center"> {{element.room}} </td>
                 </ng-container>
                 
@@ -127,16 +130,16 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="dateInit">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Fecha de Llegada </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Llegada </th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center"> {{element.dateInit}} </td>
                 </ng-container>
         
                 <ng-container matColumnDef="dateEnd">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Fin de la reserva </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Salida </th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center"> {{element.dateEnd}} </td>
                 </ng-container>
                 <ng-container matColumnDef="amountOutstanding">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Total facturado </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Facturado </th>
                     <td mat-cell *matCellDef="let element" class="table__data">
                         <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
                         <ng-template #thenBlock>{{element.membership.priceMembership + element.amountOutstanding | currency }}</ng-template>
@@ -148,11 +151,11 @@
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.pending | currency }}</td>
                 </ng-container>
                 <ng-container matColumnDef="totalBeds">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Total Camas </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Camas </th>
                     <td mat-cell *matCellDef="let element" class="table__data"> {{element.totalBeds}} </td>
                 </ng-container>
                 <ng-container matColumnDef="roomateFlip">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Roomate Tipo </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Roomate </th>
                     <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
                 </ng-container>
                 <ng-container matColumnDef="checkIn">
@@ -182,10 +185,10 @@
                         </ng-template>
                     </td>
                 </ng-container>
-                <ng-container matColumnDef="active">
+                <!-- <ng-container matColumnDef="active">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Activo </th>
                     <td mat-cell *matCellDef="let element" class="table__data" [innerHTML]="element.active">  </td>
-                </ng-container>
+                </ng-container> -->
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Estatus </th>
                     <td mat-cell *matCellDef="let element" class="table__data" >
@@ -219,7 +222,7 @@
                     </td>
                 </ng-container> -->
                 <ng-container matColumnDef="showBooking">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Booking </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Reservación </th>
                     <td mat-cell *matCellDef="let element">
                         <button 
                             (click)="viewBookingDetail('reservations', element.idUser, element.idBooking, element.firstName)" 

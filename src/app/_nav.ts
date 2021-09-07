@@ -49,10 +49,11 @@ export class MenuService {
   ] 
 
   private booking = [
-    { id: 1, name: 'Booking', url: '/booking', icon: 'icon-screen-tablet' },
-    { id: 2, name: 'General Tenant Lista', url: '/generalTenantlist', icon: 'icon-list' },
-    { id: 3, name: 'Agregar Tenant', url: '/AddTenant', icon: 'icon-user-follow' },
-    { id: 4, name: 'Users Admin', url: '/Users', icon: 'icon-people' },
+    { id: 1, name: 'Proyectos', url: '/booking', icon: 'icon-screen-tablet' },
+    { id: 2, name: 'Lista Reservaciones', url: '/generalTenantlist', icon: 'icon-list' },
+    { id: 3, name: 'Agregar Reservación', url: '/AddTenant', icon: 'icon-user-follow' },
+    { id: 4, name: 'Administrar Usuarios', url: '/Users', icon: 'icon-people' },
+    { id: 5, name: 'Administrar Correos', url: '/Emails', icon: 'icon-envelope' },
     // { name: 'Roles', url: '/Roles', icon: 'icon-settings' }
   ]
 
@@ -76,7 +77,7 @@ export class MenuService {
   private navSections = [
     {id:1, name: 'Web Manager', url: '/webadmin', permisos: [1, 4]},
     // {id:2, name: 'App Content Manager', url: '/communities', permisos: [4, 5]},
-    {id:3, name: 'Project Operation', url: '/booking', permisos: [3, 4]},
+    {id:3, name: 'Operación de Proyectos', url: '/booking', permisos: [3, 4]},
   ]
 
   public CreateNavSections(systemType:number) {

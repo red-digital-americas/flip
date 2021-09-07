@@ -1,12 +1,12 @@
 <div class="ml-col-1 padding-general-m margin-bottom-m background-white">
   <div class="ml-col-1" *ngIf="!show_booking_form">
      <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-        Projects 
+        Proyectos 
       </h4>
       <button 
           class="ap-form__rButton button-pink padding-lateral-m button-big button-icon button-icon--add-white"
           (click)="toggleSectionForm( 'new' )">
-          Agregar Projects 
+          Agregar Poryecto 
       </button>
     </div>
     <div class="ml-col-1 index-cards" *ngIf="!show_booking_form">
@@ -91,7 +91,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
               Nombre
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_name">
-              The field se requiere*
+              El campo se requiere*
             </span>
           </div>
       </div>
@@ -111,7 +111,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
               Descripción
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_desc">
-              The field se requiere*
+              El campo se requiere*
             </span>
           </div>
       </div>
@@ -131,7 +131,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
               Direccion
             </label>
             <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_dire">
-              The field se requiere*
+              El campo se requiere*
             </span>
           </div>
       </div>
@@ -152,7 +152,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
             Latitud
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_lati">
-            The field se requiere*
+            El campo se requiere*
           </span>
         </div>
       </div>
@@ -173,7 +173,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
             Longitud
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_long">
-            The field se requiere*
+            El campo se requiere*
           </span>
         </div>
       </div>
@@ -187,7 +187,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
             [(ngModel)]="booking_data.status"
             class="ap-form__input-checkbox display-none" />
           <label for="booking_active" class="ap-form__label ap-form__label-checkbox">
-            Project Activo
+            Proyecto Activo
           </label>
         </div>
       </div>
@@ -212,7 +212,7 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
                 <span class="text-bold">350x350</span> 
               </span>
               <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
-                The field se requiere*
+                El campo se requiere*
               </span>
             </figure>
           </label>
@@ -306,10 +306,10 @@ class="ap-form ml-col-1 padding-general-m card-style ap-form--fixed ap-form--fix
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop">
     <p class="ml-modal__pop-titulo">
-      Eliminar Element
+      Eliminar Elemento
     </p>
     <p class="ml-modal__pop-text">
-      Are you sure you want to delete the item? <br />
+      Estas seguro de eliminar este elemento? <br />
       <span class="text-bold">"{{ room_to_delete.type }}"</span>
     </p>
     <div class="ml-modal__pop-buttons">

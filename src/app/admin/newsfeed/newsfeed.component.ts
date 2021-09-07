@@ -348,7 +348,7 @@ export class NewsfeedComponent implements OnInit {
         time: 4777,
         message: {
           header: 'Form Data',
-          text: 'All inputs must be fill to continue'
+          text: 'Todos los campos deben estar llenas para continuar'
         }
       });
 

@@ -6,6 +6,11 @@
                Mensajes
             </h4>
             <button 
+                class="ap-form__rButton button-red padding-lateral-m button-big button-icon button-icon--eye-white"
+                (click)="showArchive()">
+                Ver Arhivadas
+            </button>
+            <button 
                 class="ap-form__rButton button-yellow button-icon button-icon--add padding-lateral-m button-big"
                 (click)="openModal()">
                 Nueva conversación
@@ -52,17 +57,19 @@
                         <button class="ap-form__rButton button-icon button-icon--cancel-white button-red" (click)="hideChat()">
                             Cerrar
                         </button>
-                        <input 
+                    </div>
+                    <div class="chatm card-style margin-top-x" *ngIf="showChat">
+                        <h4 style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" class="chatm__datos">
+                            <span (click)="viewDetail(userConversation.id, userConversation.idBooking)">
+                                {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
+                            </span>
+                            <br><input 
                             type="checkbox"
                             id="archive"
                             name="archive"
                             class="ap-form__rRadioButton "
                             (change)="archive()" />
                         <label for="archive"> Archivar</label>
-                    </div>
-                    <div class="chatm card-style margin-top-x" *ngIf="showChat">
-                        <h4 style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" class="chatm__datos" (click)="viewDetail(userConversation.id, userConversation.idBooking)">
-                            {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
                             <!-- img class="chatm__datos-photo" 
                                  src="{{ userSendMessage.info.photo }}" / -->
                             <img *ngIf="userSendMessage.info.photo != ''" class="chatm__datos-photo" src="{{ userSendMessage.info.photo }}" />

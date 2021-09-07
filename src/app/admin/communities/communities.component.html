@@ -1,7 +1,7 @@
 
   <mat-card class="margintop-button" *ngIf="buildButton" >
     <mat-card-header>
-      <mat-card-title>Add Community</mat-card-title>
+      <mat-card-title>Agregar Comunidad</mat-card-title>
     </mat-card-header>
     <form [formGroup]="buildingForm" (ngSubmit)="onSubmit()" *ngIf="buildButton">
       <div class="row">
@@ -16,11 +16,11 @@
           <div class="custom-file form-group margin-choose">
             <input type="file" formControlName="photo" accept="image/*" (change)="uploadPhoto($event)"
               class="custom-file-input">
-            <label class="custom-file-label" for="customFile">Choose file</label>
+            <label class="custom-file-label" for="customFile">Escoger Archivo</label>
           </div>
           <div class="input-group form-group">
             <div class="input-group-prepend">
-              <span class="input-group-text">Adress</span>
+              <span class="input-group-text">Durección</span>
             </div>
             <textarea formControlName="direction" class="form-control" aria-label="With textarea"></textarea>
           </div>
@@ -44,7 +44,7 @@
             <option *ngFor="let i of typeNumber">{{i}}</option>
           </select>
           <div *ngIf="submitted && f.typeNumber.errors" class="invalid-feedback">
-            <div *ngIf="f.typeNumber.errors.required">Type rooms se requiere</div>
+            <div *ngIf="f.typeNumber.errors.required">Tipo Habitacion se requiere</div>
           </div>
         </div>
         <div *ngFor="let typeR of formType.controls; let i = index" class=" col-6">
@@ -55,7 +55,7 @@
                 <input placeholder="Descripción" type="text" formControlName="type" class="form-control margin-gral"
                   [ngClass]="{ 'is-invalid': submitted && typeR.controls.type.errors }" />
                 <div *ngIf="submitted && typeR.controls.type.errors" class="invalid-feedback">
-                  <div *ngIf="typeR.controls.type.errors.required">description se requiere</div>
+                  <div *ngIf="typeR.controls.type.errors.required">Description se requiere</div>
                 </div>
               </div>
               <div class="form-group ">
@@ -72,7 +72,7 @@
       </div>
       <div class="row">
           <div class="form-group col-md-3 col-sm-3">
-              <button class="btn btn-outline-dark form-group" [disabled]="!buildingForm.valid">Add Community</button>
+              <button class="btn btn-outline-dark form-group" [disabled]="!buildingForm.valid">AAgregar</button>
             </div>
             <div class="form-group col-md-3 col-sm-3">
                 <button class="btn btn-outline-dark form-group" (click)="cancel()">Cancelar</button>
@@ -87,7 +87,7 @@
   <div class="ml-col-1 padding-general-m margin-bottom-m background-white">
     <div class="ml-col-1">
        <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-          Communities
+          Comunidades
         </h4>
       </div>
       <div class="ml-col-1 index-cards">
@@ -133,7 +133,7 @@
     <div class="ap-form ap-form__center card-style">
       <div class="ml-col-1">
         <h4 class="ap-form__titulo text-left">
-          New Community
+          Nueva Comunidad
         </h4>
       </div>
       <div class="ml-col-6">
@@ -205,7 +205,7 @@
                   id="add_room_desc_{{ room.room }}" 
                   class="ap-form__input-text" />
                 <label for="add_room_desc_{{ room.room }}" class="ap-form__label ap-form__label-text">
-                  Descrition
+                  Descripción
                 </label>
               </div>
               <div class="ap-form__input">
@@ -215,7 +215,7 @@
                   id="add_room_cantidad_{{ room.room }}" 
                   class="ap-form__input-text" />
                 <label for="add_room_cantidad_{{ room.room }}" class="ap-form__label ap-form__label-text">
-                Number of rooms
+                Number de cuartos
                 </label>
               </div>
               <button 

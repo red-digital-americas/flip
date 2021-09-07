@@ -7,11 +7,13 @@ import { DatosService } from '../../../../../datos.service';
 import { LoaderComponent } from '../../../../../ts/loader';
 import { SystemMessage } from '../../../../../ts/systemMessage';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-room-detail',
   templateUrl: './room-detail.component.html',
-  styleUrls: ['./room-detail.component.scss']
+  styleUrls: ['./room-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RoomDetailComponent implements OnInit {
 
@@ -60,7 +62,7 @@ export class RoomDetailComponent implements OnInit {
   activeObj;
   activeDisplayedColumns: string[] = [
     'name',
-    'room',
+    // 'room',
     'membership',
     'dateInit',
     'dateEnd',
@@ -69,7 +71,7 @@ export class RoomDetailComponent implements OnInit {
     'totalBeds',
     'roomateFlip',
     'status',
-    'active',
+    // 'active',
     'checkIn',
     'checkOut',
     // 'idUser',
@@ -254,8 +256,8 @@ export class RoomDetailComponent implements OnInit {
             kind: 'ok',
             time: 4200,
             message: {
-              header: `Check out successfully.`,
-              text: `You have been Check out successfully`
+              header: `Check out existoso.`,
+              text: `Has hecho Check Out exitoso`
             }
           });
           this.showModal('', 0, 0);
@@ -273,7 +275,7 @@ export class RoomDetailComponent implements OnInit {
       roomId: this.roomId,
       pending: this.pending === null ? '' : this.pending.value,
       ifCheckOut: this.ifCheckOut === null ? '' : this.ifCheckOut.value,
-      active: ifActive
+      // active: ifActive
     };
     console.log(data);
     this.loader.showLoader();

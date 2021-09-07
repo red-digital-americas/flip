@@ -31,7 +31,7 @@
           <div class="custom-file margin-gral ">
             <input type="file" accept="image/*"
                    (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile">
-            <label class="custom-file-label" for="customFile">Choose file</label>
+            <label class="custom-file-label" for="customFile">Escoger Archivo</label>
 
           </div>
 
@@ -53,7 +53,7 @@
 
           <div class="input-group margin-gral ">
             <div class="input-group-prepend">
-              <span class="input-group-text">Write Post</span>
+              <span class="input-group-text">Escribir Post</span>
             </div>
             <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="posttext" aria-label="With textarea" required></textarea>
           </div>
@@ -68,7 +68,7 @@
   </div>
 
   <div class="card-body">
-    <h5 class="card-title">Add Comments </h5>
+    <h5 class="card-title">Agregar Comentarios </h5>
 
     <div class="form-row">
       <div class="col-12">
@@ -78,7 +78,7 @@
 
 
 
-    <button (click)="addComment()" type="button" class="btn btn-outline-dark">Add comment</button>
+    <button (click)="addComment()" type="button" class="btn btn-outline-dark">Agregar Comentario</button>
   </div>
 
 
@@ -95,7 +95,7 @@
 
 
         </div>
-        <button (click)="deleteComment(post.idpost)" type="button" class="btn  btn-outline-danger">Eliminar Comment</button>
+        <button (click)="deleteComment(post.idpost)" type="button" class="btn  btn-outline-danger">Eliminar Comentario</button>
 
       </div>
     </div>

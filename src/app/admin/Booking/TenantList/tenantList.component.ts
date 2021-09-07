@@ -41,7 +41,7 @@ export class TenantListComponent implements OnInit {
         'totalBeds',
         'roomateFlip',
         'status',
-        'active',
+        // 'active',
         'checkIn',
         'checkOut',
         // 'doCheckOut',
@@ -61,17 +61,17 @@ export class TenantListComponent implements OnInit {
     bookingSelected;
 
     activeLs: ActiveModel[] = [
-        {id: 0, name: 'Yes', value: true},
+        {id: 0, name: 'Si', value: true},
         {id: 1, name: 'No', value: false}
     ];
 
     pendingLs: ActiveModel[] = [
-        {id: 0, name: 'Yes', value: true},
+        {id: 0, name: 'Si', value: true},
         {id: 1, name: 'No', value: false}
     ];
 
     ifCheckOutLs: ActiveModel[] = [
-        {id: 0, name: 'Yes', value: true},
+        {id: 0, name: 'Si', value: true},
         {id: 1, name: 'No', value: false}
     ];
 

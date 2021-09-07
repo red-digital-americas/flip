@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Editar Footer</h4>
+    <button 
+        class="ap-form__rButton button-red button-icon button-icon--cancel-white"
+         (click)="modalRef.hide()">
+        Cerrar
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container clearfix">
+       <form autocomplete="off">
+        <div class="row">                      
+            <div class="col-12 col-lg-8 col-xl-8">
+                <div class="row"> 
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="text1" class="form-control" placeholder="Texto 1">
+                    </div> 
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="text2" class="form-control" placeholder="Texto 2">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="text3" class="form-control" placeholder="Texto 3">
+                    </div>  
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="text4" class="form-control" placeholder="Texto 4">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="facebookUrl" class="form-control" placeholder="URL 1">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="instagramUrl" class="form-control" placeholder="URL 2">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="twitterUrl" class="form-control" placeholder="URL 3">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="youtubeUrl" class="form-control" placeholder="URL 4">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <input type="text" [formControl]="footerText" class="form-control" placeholder="Texto Final">
+                    </div>   
+                </div>
+            </div>
+            <div class="ml-col-1 ap-form__buttons margin-top-x">
+                <button 
+                    class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-black button-icon button-icon--add-white"
+                    (click)="Update()"
+                    type="submit">
+                    Guardar
+                </button>
+            </div>                    
+        </div>  
+      </form>
+    </div>
+</div>

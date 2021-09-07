@@ -347,8 +347,8 @@ export class ReservationsComponent implements OnInit {
           kind: 'ok',
           time: 4777,
           message: {
-            header: 'Activity created',
-            text: 'Your Activity has been created correctly.'
+            header: 'Activida Creada',
+            text: 'Tu actividad fue creada exitosamente.'
           }
         });  
         this.GetEvents();

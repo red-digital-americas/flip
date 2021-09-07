@@ -11,8 +11,8 @@ import { Router, ActivatedRoute } from '@angular/router';
     
     public section_name: string;
     public navbar_options = [
-        {name: 'Reservations', id: 'tenantList', active: true},
-        {name: 'Disponibilidad de cuarto', id: 'roomAvailavility', active: false},
+        {name: 'Reservaciones', id: 'tenantList', active: true},
+        {name: 'Disponibilidad', id: 'roomAvailavility', active: false},
         {name: 'Eventos', id: 'reservations', active: false},
         {name: 'Mensajes', id: 'messages', active: false},
         {name: 'Alertas', id: 'alerts', active: false},

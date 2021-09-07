@@ -10,12 +10,12 @@
           <button style="float: right;"
             class="button button-x button-pink padding-lateral-m button-icon button-icon--add-white"
             (click)="toggleSectionForm( 'new' )">
-            Add Post
+            Agregar Post
           </button>
         </div>
         <div class="ml-col-1 margin-top-m font-big color-red text-center" *ngIf="posts?.length == 0">
-          We don't have post yet,
-          <span class="text-underline cursor-pointer" (click)="toggleSectionForm( 'new' )">add one</span>.
+          No tenemos Post aun.
+          <span class="text-underline cursor-pointer" (click)="toggleSectionForm( 'new' )">Agregar</span>.
         </div>
         <div class="ap-cards__container" *ngFor="let post of posts;">
           <div class="ap-cards__card ap-cards__card--bbuttons card-style">
@@ -158,7 +158,7 @@
         <div class="ap-form ap-form__sdato--no-padding ml-col-1">
           <div class="ml-col-1">
             <h4 class="ap-form__titulo text-left">
-              Add Comment
+              Agregar Comentario
             </h4>
           </div>
           <div class="ml-col-1">
@@ -167,7 +167,7 @@
                 required
                 id="new_post_comment"
                 name="new_post_comment"
-                placeholder="Write your comment..."
+                placeholder="Escribe tu comentario..."
                 [class.form_error_found]="form_comment_errors.no_comment"
                 [(ngModel)]="comment_data"
                 class="ap-form__label ap-form__input-textarea"></textarea>
@@ -175,10 +175,10 @@
                 for="new_post_comment" 
                 class="ap-form__label ap-form__label-text"
                 [class.ap-form__label-textarea--active]="comment_data != ''">
-                Comment
+                Comentario
               </label>
               <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_comment_errors.no_comment">
-                Comment se requiere*
+                Comentario se requiere*
               </span>
             </div>
           </div>
@@ -187,13 +187,13 @@
               (click)="addNewComment()"
               type="button"
               class="ap-form__buttons-button button-icon button-icon--add-white ap-form__buttons-button--no-margin ap-form__buttons-button--big button-pink">
-              Add Comment
+              Agregar comentario
             </button>
           </div>
         </div>
         <div class="ml-col-1">
           <h4 class="ap-form__titulo text-left">
-            Comments
+            Comentario
           </h4>
         </div>
         <div class="ap-cards__container ap-cards__container--comment" *ngFor="let comment of postComments;">
@@ -215,7 +215,7 @@
           </div>
         </div>
         <span class="ml-col-1 no-content" *ngIf="postComments == null">
-          No Comment on this post
+          No hay comentarios para este Post.
         </span>
       </div>
     </div>
@@ -245,7 +245,7 @@
       Eliminar post
     </p>
     <p class="ml-modal__pop-text">
-      ¿Estás seguro de eliminar post <br />
+      ¿Estás seguro de eliminar este post <br />
       <span class="text-bold">"{{ data_post.title }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
@@ -263,10 +263,10 @@
   </div>
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'delete_comment'">
     <p class="ml-modal__pop-titulo margin-bottom-m">
-      Eliminar Comment
+      Eliminar Comentario
     </p>
     <p class="ml-modal__pop-text">
-      ¿Estás seguro de eliminar this comment?
+      ¿Estás seguro de eliminar este comentario?
     </p>
     <div class="ml-modal__pop-buttons">
       <button 

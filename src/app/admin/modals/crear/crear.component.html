@@ -207,6 +207,36 @@
                             <label class="custom-control-label" for="customRadioInline2">Espacio</label>
                         </div>
                     </div>
+                    <div class="col-12 mb-2">                        
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="position: relative; z-index:1;">
+                                <span class="input-group-text">Amenidad</span>
+                            </div>  
+                                <ng-select    
+                                    style="flex: 1"
+                                    formControlName="activityAmenityIdCtrl" 
+                                    [clearable]="false"
+                                    [items]="amenitiesArray"                                                                                              
+                                    bindLabel="name" 
+                                    bindValue="id">
+                                    <ng-template ng-label-tmp let-item="item">
+                                        <span class="ng-value-label">
+                                            <!-- <img [src]="item.avatar == '' ? '../../../../assets/avatar-def.png' : item.avatar"  
+                                                style="border-radius: 50%;" 
+                                                width="20px" height="20px" />  -->
+                                                {{item.name}}
+                                        </span>                                                                
+                                    </ng-template>
+
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <!-- <img [src]="item.avatar == '' ? '../../../../assets/avatar-def.png' : item.avatar" 
+                                            style="border-radius: 50%;" 
+                                            width="20px" height="20px" />  -->
+                                            {{item.name}}
+                                    </ng-template>  
+                                </ng-select>
+                        </div>
+                    </div>  
                     <div class="col-12 mb-2">
                         <input type="text" formControlName="activityNameCtrl" class="form-control" placeholder="Titulo">
                     </div>          
@@ -299,7 +329,7 @@
                 <img style="width:100%" class="img-size" [src]="acitivyModel.Photo" />
             </div>    
             <!--div class="col-12">
-                <button (click)="AddActivity()" type="submit" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Actividad</button>
+                <button (click)="AddActivity()" type="submit" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Agregar Actividad</button>
             </div-->
             <div class="ml-col-1 ap-form__buttons margin-top-x">
                 <button 
@@ -307,7 +337,7 @@
                     (click)="AddActivity()"
                     type="submit"
                     [disabled]="formGroup.invalid">
-                    Add Actividad
+                    Agregar Actividad
                 </button>
             </div>                    
         </div>  

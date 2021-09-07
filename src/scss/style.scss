@@ -1472,7 +1472,7 @@ select:active,
 
     color: #2e343a;
     width: 100%;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bolder;
     line-height: normal;
     letter-spacing: normal;
@@ -1891,6 +1891,10 @@ select:active,
 
       &--med {
         width: 100px;
+      }
+      
+      &--align-left {
+        text-align: right;
       }
 
     }
@@ -3165,12 +3169,12 @@ select:active,
 }
 
 .button-black {
-  background-color: #2e343a;
+  background-color: #1F2817;
   color: white;
 }
 
 .button-red {
-  background-color: #a61919;
+  background-color: #FF9929;
   color: white;
 }
 
@@ -3185,22 +3189,22 @@ select:active,
 }
 
 .button-green {
-  background-color: #309b8a;
+  background-color: #828C70;
   color: white;
 }
 
 .button-yellow {
-  background-color: #fccd0a;
+  background-color: #EC8026;
   color: #2e343a;
 }
 
 .button-pink {
-  background-color: #f499bb;
+  background-color: #5D5225;
   color: white;
 }
 
 .button-toggle {
-  background-color: #f499bb;
+  background-color: #F5C24F;
   color: white;
   // color: #2e343a;
   padding-left: 40px;
@@ -3260,6 +3264,14 @@ select:active,
 
   &--ccard-white {
     background-image: url('../assets/icon/ccard-white.png');
+  }
+
+  &--eye-white{
+    background-image: url('../assets/icon/eye-white.png');
+  }
+
+  &--export-file {
+    background-image: url('../assets/icon/export-excel.png');
   }
 
 }
@@ -3433,6 +3445,11 @@ select:active,
 .padding-lateral-min {
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.padding-lateral-medium {
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .padding-lateral-m {
@@ -4021,7 +4038,7 @@ select:active,
       width: 80px;
       border-radius: 16px !important;
       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-      background-color: #4ac1ba !important;
+      background-color: #5F6128 !important;
       padding: 0;
       font-size: 10px;
       line-height: 20px !important;
@@ -4031,7 +4048,7 @@ select:active,
       width: 80px;
       border-radius: 16px !important;
       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-      background-color: #fccd0a !important;
+      background-color: #EC8026 !important;
       padding: 0;
       font-size: 10px;
       line-height: 20px !important;
@@ -4309,4 +4326,12 @@ hr{
   height: 100%;
   overflow-y: auto;
   left: 0;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #828C71;
+}
+
+.sidebar .nav-link.active .nav-icon {
+  color: #EB8026;
 }

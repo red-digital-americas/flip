@@ -1,7 +1,7 @@
   
 <div class="card card-height-newsfeed">  
     <div class="card-body">
-      <h5 class="card-title">Edit Amenity</h5>
+      <h5 class="card-title">Editar</h5>
       
       <form #loginForm="ngForm" autocomplete="off">
         <div class="row">
@@ -16,7 +16,7 @@
             <div class="custom-file margin-gral ">
               <input type="file" accept="image/*"
                      (change)="prepareImages($event)" class="custom-file-input" id="validatedCustomFile" required>
-              <label class="custom-file-label" for="customFile">Choose file</label>  
+              <label class="custom-file-label" for="customFile">Escoger archivo</label>  
             </div>                    
                 
             <div class="input-group margin-gral ">
@@ -26,7 +26,7 @@
               <textarea name="posttext" id="posttext" class="form-control" [(ngModel)]="amenityRequestModel.description" aria-label="With textarea" required></textarea>
             </div>
             
-            <button (click)="EditAmenity()" type="button" [disabled]="!loginForm.form.valid" class="btn btn-outline-dark margin-gral">Edit Amenity</button>
+            <button (click)="EditAmenity()" type="button" [disabled]="!loginForm.form.valid" class="btn btn-outline-dark margin-gral">Editar</button>
           </div>
 
           <div class="col-md-6 col-sm-6 ">

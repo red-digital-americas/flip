@@ -207,8 +207,8 @@ import { LoaderComponent } from '../../../../ts/loader';
                         kind: 'error',
                         time: 4777,
                         message: {
-                          header: 'Image Resolution',
-                          text: 'Image resolution is not valid'
+                          header: 'Resolución de Imagen',
+                          text: 'Resolución de Imagen  no valida'
                         }
                       });
     
@@ -361,8 +361,8 @@ import { LoaderComponent } from '../../../../ts/loader';
                     kind: 'ok',
                     time: 4700,
                     message: {
-                      header: 'wwContent updated',
-                      text: 'wwContent has been updated successfully'
+                      header: 'wwContent actualizado',
+                      text: 'wwContent ha sido actualizado correcatamente'
                     }
                   });
                   this.set_post_blanck();
@@ -392,8 +392,8 @@ import { LoaderComponent } from '../../../../ts/loader';
             kind: 'error',
             time: 4700,
             message: {
-              header: 'Form must be completed',
-              text: 'All inputs must be filled to continue'
+              header: 'Formulario',
+              text: 'Todos los campos deben ser llenados'
             }
           });
     

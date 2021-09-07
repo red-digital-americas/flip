@@ -14,16 +14,16 @@
           <button 
             class="ap-form__rButton padding-lateral-m button-yellow button-icon"
             (click)="openModal( 'AddTenant' )">
-            Perk Categories
+            Perk Categorias
           </button>
           <button 
             class="ap-form__rButton button-pink padding-lateral-m button-icon button-icon--add-white"
             (click)="toggleSectionForm( 'new' )">
-            Add Perk
+            Agregar Perk
           </button>
         </div>
         <div class="ml-col-1 margin-top-m font-big color-red text-center" *ngIf="perksArray?.length == 0">
-          We don't have perks yet,
+         No tenemos Perks aún.
           <span class="text-underline cursor-pointer" (click)="toggleSectionForm( 'new' )">add one</span>.
         </div>
         <div class="ap-cards__container" *ngFor="let perk of perksArray;">
@@ -41,7 +41,7 @@
               <button 
                 (click)="DetailPerk( perk.id )"
                 class="ap-cards__card-button ap-cards__card-button--other button-yellow button-icon">
-                See Promotions
+                Ver promociones
               </button>
               <button 
               (click)="deleteThisPerk( perk )"
@@ -120,11 +120,11 @@
         <select 
           id="new_perk_desc"
           name="new_perk_category"
-          placeholder="Category"
+          placeholder="Categoría"
           [(ngModel)]="data_perk.packCategoryId"
           [class.form_error_found]="form_data.no_cate"
           class="ap-form__label ap-form__input-text">
-          <option disabled="disabled" value="-1">Category</option>
+          <option disabled="disabled" value="-1">Categoría</option>
           <option *ngFor="let category of perkCategories;" value="{{ category.id }}">
             {{ category.name }}
           </option>
@@ -133,10 +133,10 @@
           for="new_perk_category" 
           class="ap-form__label ap-form__label-text"
           [class.ap-form__label-text--active]="data_perk.packCategoryId != '-1'">
-          Category
+          Categoría
         </label>
         <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_cate">
-          Category se requiere*
+          Categoría se requiere*
         </span>
       </div>
     </div>
@@ -305,11 +305,11 @@
                [class.forms_errors_nimage]="form_data.no_phot"
                src="{{ data_perk.photo }}" />
           <span class="ap-form__image-data text-center" id="new_serv_name_0">
-            Image size must be <br />
+            Imagen debe medir <br />
             <span class="text-bold">350x350</span> 
           </span>
           <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
-            Image se requiere*
+            Imagen se requiere*
           </span>
         </figure>
       </label>
@@ -335,7 +335,7 @@
                id="gallery_img_{{ image.id }}"
                src="{{ image.src }}" />
           <span class="ap-form__image-data text-center" id="gallery_img_name_{{ image.id }}">
-            Image Size must be <br />
+            Imagen debe medir <br />
             <span class="text-bold">350x350</span> 
           </span>
           <button 
@@ -437,7 +437,7 @@
 <div class="animated fadeIn display-none">
   <div class="card">    
     <div class="card-body">
-      <h5 class="card-title">Add Perks</h5>   
+      <h5 class="card-title">Agregar Perks</h5>   
       <form [formGroup]="formGroup" autocomplete="off">
         <div class="row">                      
           <div class="col-12 col-lg-8 col-xl-8">
@@ -451,18 +451,18 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text">Descripción</span>
                       </div>
-                      <textarea formControlName="perkDescriptionCtrl" class="form-control" aria-label="With textarea"></textarea>
+                      <textarea formControlName="perkDescriptionCtrl" class="form-control" aria-label="Descripcion"></textarea>
                   </div>                        
               </div>  
               
               <div class="col-4 mb-2">
-                <input type="text" formControlName="perkStreetAddressCtrl" class="form-control" placeholder="StreetAddress">
+                <input type="text" formControlName="perkStreetAddressCtrl" class="form-control" placeholder="Calle">
               </div>   
               <div class="col-4 mb-2">
                 <input type="text" formControlName="perkCityCtrl" class="form-control" placeholder="Ciudad">
               </div>   
               <div class="col-4 mb-2">
-                <input type="text" formControlName="perkStateProvincyCtrl" class="form-control" placeholder="StateProvincy">
+                <input type="text" formControlName="perkStateProvincyCtrl" class="form-control" placeholder="Estado / Provincia">
               </div>   
               <div class="col-3 mb-2">
                 <input type="text" formControlName="perkZipCtrl" class="form-control" placeholder="Zip">
@@ -539,12 +539,12 @@
             <img class="input-file__img" [src]="formGroup.get('perkGalleryCtrl').at(i).get('serverUrlCtrl').value" alt="">
           </div>
           
-          <div (click)="AddGalleryCtrl()" class="add-btn">+ Add Image</div>
+          <div (click)="AddGalleryCtrl()" class="add-btn">+ Agregar Imagen</div>
         </div>  
 
         <div style="margin-bottom: 1rem;"></div>
         <div class="col-12">
-          <button (click)="AddPerk()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Add Perk</button>
+          <button (click)="AddPerk()" type="button" class="btn btn-outline-dark margin-gral" [disabled]="formGroup.invalid" >Agregar Perk</button>
         </div>   
       </form>           
       <div style="margin-bottom: 1rem;"></div>
@@ -560,7 +560,7 @@
                 <img class="img-size" src="{{post.photo}}">
               </div>
             </div>
-            <button (click)="DetailPerk(post.id)" type="button" class="btn btn-outline-primary">View Perk</button>
+            <button (click)="DetailPerk(post.id)" type="button" class="btn btn-outline-primary">Ver Perk</button>
             <button (click)="DeletePerk(post.id)" type="button" class="btn  btn-outline-danger">Eliminar Perk</button>
           </div>
         </div>

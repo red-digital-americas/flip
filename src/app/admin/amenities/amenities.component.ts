@@ -285,8 +285,8 @@ export class AmenitiesComponent implements OnInit {
                   this.system_message.showMessage({
                     kind: 'ok',
                     message: {
-                      header: 'Amenity has been created',
-                      text: 'You can now see your amenity.'
+                      header: 'Amenidad ha sido creada',
+                      text: 'Ahora puedes ver tu aminidad.'
                     },
                     time: 2000
                   });
@@ -314,8 +314,8 @@ export class AmenitiesComponent implements OnInit {
             kind: 'error',
             time: 4777,
             message: {
-              header: 'Form Data',
-              text: 'All inputs must be fill to continue.'
+              header: 'Formulario',
+              text: 'Todos los campos deben estar llenas para continuar.'
             }
           });
 
@@ -340,8 +340,8 @@ export class AmenitiesComponent implements OnInit {
                   this.system_message.showMessage({
                     kind: 'ok',
                     message: {
-                      header: 'Amenity has been edited',
-                      text: 'Your amenity has been updated.'
+                      header: 'Amenidad ha sido editada',
+                      text: 'Tu amenidad ha sido editada exitosamente'
                     },
                     time: 2000
                   });
@@ -455,8 +455,8 @@ export class AmenitiesComponent implements OnInit {
           this.system_message.showMessage({
             kind: 'ok',
             message: {
-              header: 'Amenity has been deleted',
-              text: 'The amenity has been deleted successfully.'
+              header: 'Amenidad ha sido eliminada',
+              text: 'Aminidad eliminada exitosamente.'
             },
             time: 2000
           });

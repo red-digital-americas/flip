@@ -211,8 +211,8 @@ import { DomSanitizer } from '@angular/platform-browser';
                 kind: 'ok',
                 time: 4777,
                 message: {
-                  header: 'Slide Deleted',
-                  text: 'Slide has been deleted successfully'
+                  header: 'Slide Eliminado',
+                  text: 'Slide ha sido eliminado exitosamente.'
                 }
               });
               
@@ -227,7 +227,7 @@ import { DomSanitizer } from '@angular/platform-browser';
               time: 4777,
               message: {
                 header: 'System Error',
-                text: 'A system error has ocurred, please try leater.'
+                text: 'A ocurrido un problema, por favor intente mas tarde'
               }
             });
 
@@ -282,8 +282,8 @@ debugger;
                             kind: 'ok',
                             time: 4777,
                             message: {
-                                header: 'Backstage updated',
-                                text: 'Backstage has been updated successfully.'
+                                header: 'Backstage actualizado',
+                                text: 'Backstage ha sido actualizado exitosamente.'
                             }
                         });
 
@@ -300,8 +300,8 @@ debugger;
                             kind: 'error',
                             time: 4700,
                             message: {
-                                header: 'Error in service',
-                                text: 'The service response error.'
+                                header: 'Error en el servicio',
+                                text: 'El servicio respondio con error'
                             }
                         });
                     }
@@ -327,8 +327,8 @@ debugger;
                 kind: 'error',
                 time: 4700,
                 message: {
-                    header: 'Form must be completed',
-                    text: 'All inputs must be filled to continue'
+                    header: 'Formulario',
+                    text: 'Todos los campos deben ser llenados para continuar'
                 }
             });
         
@@ -461,8 +461,8 @@ debugger;
                         kind: 'error',
                         time: 4777,
                         message: {
-                          header: 'Image Resolution',
-                          text: 'Image resolution is not valid'
+                          header: 'Resolution de imagen',
+                          text: 'Resolución de imagen no es valida.'
                         }
                       });
     

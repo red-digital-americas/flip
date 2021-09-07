@@ -78,8 +78,8 @@ import { Utils } from '../../utils/utils';
                             kind: 'ok',
                             time: 4777,
                             message: {
-                                header: 'Backstage updated',
-                                text: 'Backstage has been updated successfully.'
+                                header: 'Backstage actualizado',
+                                text: 'Backstage ha sido actualizado exitosamente.'
                             }
                         });
 
@@ -110,8 +110,8 @@ import { Utils } from '../../utils/utils';
                 kind: 'error',
                 time: 4700,
                 message: {
-                    header: 'Form must be completed',
-                    text: 'All inputs must be filled to continue'
+                    header: 'Formulario',
+                    text: 'Todos los campos deben ser llenados para continuar.'
                 }
             });
         
@@ -311,8 +311,8 @@ import { Utils } from '../../utils/utils';
                         kind: 'error',
                         time: 4777,
                         message: {
-                          header: 'Image Resolution',
-                          text: 'Image resolution is not valid'
+                          header: 'Resolución de imagen',
+                          text: 'Resolución de imagen es invalida'
                         }
                       });
     

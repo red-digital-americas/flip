@@ -1,7 +1,7 @@
 <div class="ap-form ap-form--normal ap-form--parent ml-col-1 background-white">
     <div class="ml-col-1 margin-bottom-x">
         <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
-            Agregar inquilino
+            Reservación
         </h4>
         <button 
             class="ap-form__rButton button-big button-yellow"
@@ -56,7 +56,7 @@
                       name="profile_gender"
                       (change)="buildSelected( $event )"
                       class="ap-form__input-text">
-                      <option value="null" disabled>Localización*</option>
+                      <option value="null" disabled>Proyecto*</option>
                       <option *ngFor="let build of builds_list;" [value]="build.id">
                         {{ build.name }}
                       </option> 
@@ -64,7 +64,7 @@
                     <label 
                       for="profile_gender" 
                       class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                      Localización
+                      Proyecto
                     </label>
                   </div>
                 </div>
@@ -117,7 +117,7 @@
                             <div class="ml-col-1 at-room__rooms-data" *ngFor="let room_included of current_build.roomType;">
                                 <div class="ml-col-3">{{ room_included.name }}</div>
                                 <div class="ml-col-3">{{ room_included.rooms }}</div>
-                                <div class="ml-col-3">{{ room_included.active ? 'Yes' : 'No' }}</div>
+                                <div class="ml-col-3">{{ room_included.active ? 'Si' : 'No' }}</div>
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                 </div>
                 <div class="ml-col-1 top-separator">
                     <div class="ap-form__titulo margin-tb-min">
-                        Booking detalle
+                        Reservación detalle
                     </div>
                     <div class="ml-col-4">
                         <div class="ml-col-1">
@@ -135,7 +135,7 @@
                             <input 
                               required
                               type="date" 
-                              placeholder="Fecha Inicio"
+                              placeholder="Fecha Entrada"
                               id="bd_sDate" 
                               name="bd_sDate"
                               class="ap-form__input-text"
@@ -147,10 +147,10 @@
                             <label 
                               for="bd_sDate" 
                               class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                              Fecha Inicio
+                              Fecha Entrada
                             </label>
                             <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_sdat">
-                                Fecha Inicio es requerido*
+                                Fecha Entrada es requerido*
                             </span>
                           </div>
                         </div>
@@ -161,10 +161,11 @@
                             <input 
                               required
                               type="date" 
-                              placeholder="Fecha de Finalización"
+                              placeholder="Fecha Salida"
                               id="bd_eDate" 
                               name="bd_eDate"
                               disabled
+                              (change)="setEndDate($event)"
                               [class.form_error_found]="bt_form_data.no_edat"
                               [disabled]="able_section_two"
                               [(ngModel)]="booking_data.finishDate"
@@ -172,10 +173,10 @@
                             <label 
                               for="bd_eDate" 
                               class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                              Fecha de Finalización
+                              Fecha Salida
                             </label>
                             <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_edat">
-                              Fecha de Finalización es requerido*
+                              Fecha Salida es requerido*
                             </span>
                           </div>
                         </div>
@@ -224,7 +225,7 @@
                                 [class.form_error_found]="bt_form_data.no_rtyp"
                                 [(ngModel)]="booking_data.roomateFlip"
                                 class="ap-form__input-text">
-                                <option value="null" disabled>Roomate Tipo*</option>
+                                <option value="null" disabled>Roomate*</option>
                                 <option *ngFor="let roommate of roomates_catalog;" value="{{ roommate.id }}">
                                     {{ roommate.roomateType1 }}
                                 </option>
@@ -232,7 +233,7 @@
                               <label 
                                 for="bd_roomate" 
                                 class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                Roomate Tipo
+                                Roomate 
                               </label>
                               <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_rtyp">
                                 Roomate es requerido*
@@ -252,17 +253,17 @@
                                 [class.form_error_found]="bt_form_data.no_gend"
                                 [(ngModel)]="booking_data.roomatePreferences"
                                 class="ap-form__input-text">
-                                <option value="null" disabled>Roomate Preferencia de género*</option>
+                                <option value="null" disabled>Preferencia de género*</option>
                                 <option value="1">Hombre</option>
                                 <option value="2">Mujer</option>
                               </select>
                               <label 
                                 for="bd_gender" 
                                 class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                                Roomate Preferencia de género
+                                Preferencia de género
                               </label>
                               <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_gend">
-                                Roomate Género es requerido*
+                                Preferencia de Género es requerido*
                               </span>
                             </div>
                         </div>
@@ -351,7 +352,7 @@
                     </div>
                     <div class="ml-col-1" *ngIf="show_beds_section">
                         <div class="ap-form__titulo margin-tb-min">
-                            Additional Camas
+                            Camas adicionales
                         </div>
                         <div class="ml-col-1">
                             <div 
@@ -412,7 +413,7 @@
                                                 <input 
                                                     required
                                                     type="text" 
-                                                    placeholder="Mother Name*"
+                                                    placeholder="Apellido Materno*"
                                                     id="ab_mname_{{ index }}" 
                                                     name="ab_mname_{{ index }}"
                                                     class="ap-form__input-text"
@@ -429,6 +430,30 @@
                                                 </span>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="ml-col-4">
+                                      <div class="ml-col-1">
+                                        <div class="ap-form__input">
+                                          <input 
+                                            required
+                                            type="date" 
+                                            placeholder="Fecha de Nacimiento"
+                                            id="ab_birth_{{ index }}" 
+                                            name="ab_birth_{{ index }}"
+                                            [disabled]="able_section_two"
+                                            [class.form_error_found]="bed.birth == 'no_valid'"
+                                            [(ngModel)]="bed.birth"
+                                            class="ap-form__input-text" />
+                                          <label 
+                                            for="bd_eDate" 
+                                            class="ap-form__label ap-form__label-text ap-form__label-text--active">
+                                            Fecha de Nacimiento
+                                          </label>
+                                          <span class="ml-col-1 form_error_found_label" *ngIf="bt_form_data.no_edat">
+                                            Fecha de Nacimiento es requerido*
+                                          </span>
+                                        </div>
+                                      </div>
                                     </div>
                                     <div class="ml-col-4">
                                         <div class="ml-col-1">
@@ -564,7 +589,7 @@
                                     </div>
                                 </div>
                                 <div class="ml-col-1 margin-top-x">
-                                    <div class="ml-col-1 at-bcard__stitle text-bold">Photos</div>
+                                    <div class="ml-col-1 at-bcard__stitle text-bold">Fotos</div>
                                     <figure class="ml-col-1 margin-tb-x at-bcard__album">
                                         <img *ngFor="let room_image of room.imageRooms;" 
                                             src="{{ room_image.photoUrl }}" 
@@ -624,7 +649,7 @@
                                 </div>
                             </div>
                             <div class="ml-col-1" *ngIf="memberships_cards?.length == 0">
-                                No Membresias Disponibles
+                                Membresias No Disponibles
                             </div>
                         </div>
                     </div>
@@ -643,10 +668,10 @@
                             <div class="at-room__rooms">
                                 <div class="ml-col-1 at-room__rooms-header">
                                     <div class="table-as__row-i"></div>
-                                    <div class="table-as__row-s text-left">Serivicio</div>
+                                    <div class="table-as__row-s text-left">Servicio</div>
                                     <div class="table-as__row-s">Lapso</div>
-                                    <div class="table-as__row-s">Fecha Inicio</div>
-                                    <div class="table-as__row-s">Fecha de Finalización</div>
+                                    <div class="table-as__row-s">Fecha Entrada</div>
+                                    <div class="table-as__row-s">Fecha Salida</div>
                                     <div class="table-as__row-s">Monto</div>
                                     <div class="table-as__row-d"></div>
                                 </div>
@@ -679,7 +704,7 @@
                             <div class="ml-col-1 margin-bottom-x">
                                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                                     <div class="ml-col-1">
-                                        Fecha Inicio
+                                        Fecha Entrada
                                     </div>
                                     <div class="ml-col-1 text-bold">
                                         {{ booking_data.startDate | date }}
@@ -687,10 +712,10 @@
                                 </div>
                                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                                     <div class="ml-col-1">
-                                      Fecha de Finalización
+                                      Fecha Salida
                                     </div>
                                     <div class="ml-col-1 text-bold">
-                                        {{ booking_data.finishDate | date }}
+                                        {{ selectedEndDate | date }}
                                     </div>
                                 </div>
                                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
@@ -724,7 +749,7 @@
                                       ¿Podrías fumar?
                                     </div>
                                     <div class="ml-col-1 text-bold">
-                                        {{ booking_data.smoke == 'true' ? 'Yes' : 'No' }}
+                                        {{ booking_data.smoke == 'true' ? 'Si' : 'No' }}
                                     </div>
                                 </div>
                                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
@@ -732,7 +757,7 @@
                                       Acepta mascotas
                                     </div>
                                     <div class="ml-col-1 text-bold">
-                                        {{ booking_data.pets == 'true' ? 'Yes' : 'No' }}
+                                        {{ booking_data.pets == 'true' ? 'Si' : 'No' }}
                                     </div>
                                 </div>
                                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
@@ -817,19 +842,19 @@
                                     </td>
                                 </ng-container>
                                 <ng-container matColumnDef="lapse">
-                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Lapso/th>
+                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Lapso</th>
                                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                                         {{ element.lapse == '1' ? 'Recurrente' : 'Una vez' }}
                                     </td>
                                 </ng-container>
                                 <ng-container matColumnDef="sdate">
-                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Fecha Inicio</th>
+                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Fecha Entrada</th>
                                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                                         {{ element.startDate | date }}
                                     </td>
                                 </ng-container>
                                 <ng-container matColumnDef="edate">
-                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Fecha de Finalización</th>
+                                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Fecha Salida</th>
                                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                                         {{ element.endDate | date }}
                                     </td>
@@ -899,7 +924,7 @@
             <div class="ml-col-1">
                 <div class="ml-col-4">
                     <div class="ml-col-1">
-                        Fecha Inicio
+                        Fecha Entrada
                     </div>
                     <div class="ml-col-1 text-bold">
                         {{ booking_data.startDate | date }}
@@ -907,10 +932,10 @@
                 </div>
                 <div class="ml-col-4">
                     <div class="ml-col-1">
-                        Fecha de Finalización
+                        Fecha Salida
                     </div>
                     <div class="ml-col-1 text-bold">
-                        {{ booking_data.finishDate | date }}
+                        {{ selectedEndDate | date }}
                     </div>
                 </div>
                 <div class="ml-col-4">
@@ -1312,13 +1337,13 @@
                         <div class="ap-form__input">
                           <select
                             required 
-                            placeholder="Civil Estatus"
+                            placeholder="Estado Civil"
                             id="profile_cstatus" 
                             name="profile_cstatus"
                             input-family="profile"
                             class="ap-form__input-text"
                             [(ngModel)]="general_user_data.userData.civilStatusId">
-                            <option value="" disabled>Civil Estatus</option>
+                            <option value="" disabled>Estado Civil</option>
                             <option *ngFor="let list of civilstatus_list_gotten;" [value]="list.id">
                                 {{ list.name }}
                             </option>
@@ -1327,7 +1352,7 @@
                             for="profile_cstatus" 
                             class="ap-form__label ap-form__label-text"
                             [class.ap-form__label-text--active]="general_user_data.userData.civilStatusId != ''">
-                            Civil Estatus
+                            Estado Civil
                           </label>
                         </div>
                       </div>
@@ -2682,13 +2707,13 @@
         <div class="ml-col-1 top-separator margin-bottom-m">
             <div class="ml-col-1 margin-tb-min">
                 <div class="ap-form__titulo">
-                    Resume
+                    Resumen
                 </div>
             </div>
             <div class="ml-col-1 margin-bottom-x">
                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                     <div class="ml-col-1">
-                        Fecha Inicio
+                        Fecha Entrada
                     </div>
                     <div class="ml-col-1 text-bold">
                         {{ booking_data.startDate | date }}
@@ -2696,10 +2721,10 @@
                 </div>
                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                     <div class="ml-col-1">
-                        Fecha de Finalización
+                        Fecha Salida
                     </div>
                     <div class="ml-col-1 text-bold">
-                        {{ booking_data.finishDate | date }}
+                        {{ selectedEndDate | date }}
                     </div>
                 </div>
                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
@@ -2725,7 +2750,7 @@
                         Roomate Preferencia de género
                     </div>
                     <div class="ml-col-1 text-bold">
-                        {{ booking_data.roomatePreferences == '1' ? 'Male' : 'Female' }}
+                        {{ booking_data.roomatePreferences == '1' ? 'Hombre' : 'Mujer' }}
                     </div>
                 </div>
                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
@@ -2733,12 +2758,12 @@
                       ¿Podrías fumar?
                     </div>
                     <div class="ml-col-1 text-bold">
-                        {{ booking_data.smoke == 'true' ? 'Yes' : 'No' }}
+                        {{ booking_data.smoke == 'true' ? 'Si' : 'No' }}
                     </div>
                 </div>
                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                     <div class="ml-col-1">
-                        Pet friendly
+                        mascotas
                     </div>
                     <div class="ml-col-1 text-bold">
                         {{ booking_data.pets == 'true' ? 'Yes' : 'No' }}
@@ -2832,13 +2857,13 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="sdate">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Fecha Inicio</th>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Fecha Entrada</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         {{ element.startDate | date }}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="edate">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Fecha de Finalización</th>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Fecha Entrada</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         {{ element.endDate | date }}
                     </td>
@@ -2950,7 +2975,7 @@
                     <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.priceUnit | currency }}</td>
                 </ng-container>
                 <ng-container matColumnDef="once">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Una vez cuesta</th>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Una vez</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__header-center">{{ element.price | currency }}</td>
                 </ng-container>
                 <ng-container matColumnDef="able">
@@ -3047,7 +3072,7 @@
                           Fecha Inicio 
                         </label>
                         <span class="ml-col-1 form_error_found_label" *ngIf="service.validator?.no_sdat">
-                            Start se requiere*
+                          Fecha Inicio se requiere*
                         </span>
                       </div>
                     </div>
@@ -3059,11 +3084,11 @@
                           required
                           type="date" 
                           disabled
-                          placeholder="Fecha de Finalización*"
+                          placeholder="Fecha Salida*"
                           [min]="service.startDate"
                           [max]="booking_data.finishDate"
                           [class.form_error_found]="service.validator?.no_edat"
-                          (change)="getAdditionalServiceAmmount( $event, 1, service );"
+                          (change)="getAdditionalServiceAmmount( $event, 1, service );setEndDate($event);"
                           id="addServ_eDate_{{ service.id }}" 
                           name="addServ_eDate_{{ service.id }}"
                           class="ap-form__input-text"
@@ -3071,10 +3096,10 @@
                         <label 
                           for="addServ_eDate_{{ service.id }}" 
                           class="ap-form__label ap-form__label-text ap-form__label-text--active">
-                          Fecha de Finalización 
+                          Fecha Salida 
                         </label>
                         <span class="ml-col-1 form_error_found_label" *ngIf="service.validator?.no_edat">
-                            Fecha de Finalización se requiere*
+                            Fecha Salida se requiere*
                         </span>
                       </div>
                     </div>

@@ -13,7 +13,7 @@
           <button 
             class="ap-form__rButton button-yellow button-icon button-icon--edit padding-lateral-m"
             (click)="changeLevel()">
-            Perks List
+            Lista de Perks
           </button>
         </div>
         <div class="ml-col-6">
@@ -75,10 +75,10 @@
             <button 
               class="ap-form__rButton button-pink  button-icon  button-icon--add-white"
               (click)="toggleSectionForm( 'new' )">
-              Add Promotion
+              Agregar Promoción
             </button>
             <h4 class="ap-form__titulo ap-form__titulo--auto-width">
-              Promotions
+              Promociones
             </h4>
           </div>
           <div class="ap-cards__container ap-cards__container--comment"  *ngFor="let promo of promotionsArray;">
@@ -211,7 +211,7 @@
             Fecha de Finalización
           </label>
           <span class="ml-col-1 form_error_found_label" *ngIf="form_data.no_edat">
-            Fecha de Finalización is requited*
+            Fecha de Finalización es requerido*
           </span>
         </div>
       </div>
@@ -231,11 +231,11 @@
                   [class.forms_errors_nimage]="form_data.no_phot"
                   src="{{ data_promo.photo }}" />
             <span class="ap-form__image-data text-center" id="new_promo_name_0">
-              Image size must be <br />
+              Imagen debe medir <br />
               <span class="text-bold">350x350</span> 
             </span>
             <span class="ml-col-1 form_error_found_label text-center" *ngIf="form_data.no_phot">
-              Image se requiere*
+              Imagen se requiere*
             </span>
           </figure>
         </label>
@@ -267,10 +267,10 @@
 <div class="ml-modal ml-modal--bg-black" *ngIf="page_modal">
   <div class="ml-modal__pop" *ngIf="modal_to_show == 'default'">
     <p class="ml-modal__pop-titulo margin-bottom-m">
-      Eliminar Promotion
+      Eliminar Promoción
     </p>
     <p class="ml-modal__pop-text">
-      ¿Estás seguro de eliminar promotion <br />
+      ¿Estás seguro de eliminar promoción <br />
       <span class="text-bold">"{{ promo_to_delete.name }}"</span>?
     </p>
     <div class="ml-modal__pop-buttons">
@@ -346,17 +346,17 @@
           </div>
 
             <div class="col-12 mb-2">
-                <button (click)="EditPerk()" type="button" class="btn btn-outline-dark margin-gral">Edit Perk</button>
+                <button (click)="EditPerk()" type="button" class="btn btn-outline-dark margin-gral">Editar Perk</button>
                 <button (click)="DeletePerk()" type="button" class="btn btn-outline-danger margin-gral">Eliminar Perk</button>
             </div>  
         </div>                      
             
 
       <div style="margin-bottom: 1rem;"></div>
-      <h5 class="card-title">Promotions</h5>
+      <h5 class="card-title">Promociones</h5>
       <div class="row">
         <div class="col-12 mb-2">
-            <button (click)="AddPromotion()" type="button" class="btn btn-outline-dark margin-gral">Add Promotion</button>            
+            <button (click)="AddPromotion()" type="button" class="btn btn-outline-dark margin-gral">Agregar Promoción</button>            
         </div>           
         <div class="col-sm-6 col-md-4" *ngFor="let post of promotionsArray">
           <div class="card">
@@ -370,8 +370,8 @@
                 <img class="img-size" src="{{post.photo}}">
               </div>
             </div>
-            <button (click)="DetailPromotion(post.id)" type="button" class="btn btn-outline-primary">View Promotion</button>
-            <button (click)="DeletePromotion(post.id)" type="button" class="btn  btn-outline-danger">Eliminar Promotion</button>
+            <button (click)="DetailPromotion(post.id)" type="button" class="btn btn-outline-primary">Ver Promoción</button>
+            <button (click)="DeletePromotion(post.id)" type="button" class="btn  btn-outline-danger">Eliminar Promoción</button>
 
           </div>
         </div>

@@ -1,0 +1,27 @@
+.reservacion {
+    &__text {
+        display: inline-block;
+        margin-right: 1rem;
+        font-weight: bold;
+    }
+}
+
+.schedule {
+    display: flex;
+
+    &__datetime {
+        display: flex;
+        align-items: center;
+
+        &:not(:last-child){
+            margin-right: 1rem;
+        }
+    }
+}
+
+.allDay {
+    display: flex;
+    &__text{
+        margin-left: 1rem;
+    }
+}

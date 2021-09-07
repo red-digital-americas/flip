@@ -82,8 +82,8 @@ export class AlertComponent implements OnInit {
                   kind: 'ok',
                   time: 2500,
                   message: {
-                    header: 'Alert has been created',
-                    text: 'You can now see your alert.'
+                    header: 'Alerta ha sido creada',
+                    text: 'Ahora puedes ver tu alerta'
                   }
                 });
 
@@ -97,8 +97,8 @@ export class AlertComponent implements OnInit {
         kind: 'error',
         time: 4777,
         message: {
-          header: 'Form Data',
-          text: 'All inputs must be fill to continue'
+          header: 'Formulario',
+          text: 'Todos los campos deben estar llenas para continuar'
         }
       });
     }
@@ -116,8 +116,8 @@ export class AlertComponent implements OnInit {
             kind: 'ok',
             time: 2500,
             message: {
-              header: 'Alert has been deleted',
-              text: 'Your Alert has been delete succesfully.'
+              header: 'Alerta ha sido eliminada',
+              text: 'Tu alerta ha sido eliminada exitosamente'
             }
           });
         }
@@ -130,8 +130,8 @@ export class AlertComponent implements OnInit {
             kind: 'error',
             time: 2500,
             message: {
-              header: 'Alert has been deleted',
-              text: 'Your Alert has not been delete.'
+              header: 'Alerta no ha sido eliminada',
+              text: 'Tu alerta no ha sido eliminada'
             }
           });
       });

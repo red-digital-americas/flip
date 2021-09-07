@@ -167,8 +167,8 @@ export class PressComponent implements OnInit {
                 kind: 'ok',
                 time: 4700,
                 message: {
-                  header: 'Content updated',
-                  text: 'Content has been updated successfully'
+                  header: 'Actualizado',
+                  text: 'Actualizado correctamente'
                 }
               });
 
@@ -191,8 +191,8 @@ export class PressComponent implements OnInit {
         kind: 'error',
         time: 4700,
         message: {
-          header: 'Form must be completed',
-          text: 'All inputs must be filled to continue'
+          header: 'Formulario',
+          text: 'Todos los campos deben ser llenados'
         }
       });
 
@@ -319,8 +319,8 @@ export class PressComponent implements OnInit {
                     kind: 'error',
                     time: 4777,
                     message: {
-                      header: 'Image Resoltion',
-                      text: 'Image resolution is not valid'
+                      header: 'Resolución de Imagen',
+                      text: 'No Valida'
                     }
                   });
 

@@ -7,7 +7,7 @@
       </h4>
       <button 
         class="ap-form__rButton button-pink padding-lateral-m button-big button-icon button-icon--add-white"
-        (click)="showModal()">
+        (click)="Crear($event)">
         Nuevo Evento
       </button>
       <button 
@@ -30,7 +30,7 @@
           </option>                  
         </select>
         <label for="select_kind" class="ap-form__label ap-form__label-text">
-          Select Amenity
+          Seleccionar Amenidad
         </label>
       </div>
     </form>
@@ -79,7 +79,7 @@
           <div class="ml-col-1">
               <div class="ap-form__input">
                   <p class="ml-col-1">
-                      Tipo de reserva:
+                      Tipo de reservación:
                   </p>
               </div>
           </div>
@@ -93,7 +93,7 @@
                       class="ap-form__input-radio display-none"
                       (change)="updateKindReservation( false )" />
                   <label for="profile_single" class="ap-form__label-radio">
-                    Activity
+                    Actividad
                   </label>
               </div>
           </div>
@@ -106,7 +106,7 @@
                       class="ap-form__input-radio display-none"
                       (change)="updateKindReservation()" />
                   <label for="profile_buss" class="ap-form__label-radio">
-                    Space
+                    Espacio
                   </label>
               </div>
           </div>
@@ -127,10 +127,10 @@
               </select>
               <label 
                 class="ap-form__label ap-form__label-text">
-                Amenity
+                Amenidad
               </label>
               <span class="ml-col-1 form_error_found_label" *ngIf="event_form_validator.no_amenity">
-                Amenity se requiere*
+                Amenidad se requiere*
               </span>
             </div>
           </div>
@@ -145,7 +145,7 @@
                 id="profile_name" 
                 name="profile_name"
                 class="ap-form__input-text"
-                [(ngModel)]="reservation_data.Nombre"
+                [(ngModel)]="reservation_data.Name"
                 [class.form_error_found]="event_form_validator.no_name" />
               <label 
                 for="profile_name" 
@@ -190,7 +190,7 @@
                   [(ngModel)]="reservation_data.UserId"
                   [class.form_error_found]="event_form_validator.no_host"
                   class="ap-form__input-text">
-                  <option value="0" disabled>Select Host</option>
+                  <option value="0" disabled>Seleccionar Host</option>
                   <option *ngFor="let host of host_list, index as index;" [value]="host.id">
                     {{ host.name }} {{ host.lastName }} {{ host.motherName }}
                   </option>
@@ -305,7 +305,7 @@
         <button 
             class="ap-form__buttons-button ap-form__buttons-button--no-margin ap-form__buttons-button--big button-green button-icon button-icon--add-white"
             (click)="newEventTrigger()">
-            Create event
+            Crear Evento
         </button>
       </div>
     </div>
