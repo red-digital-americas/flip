@@ -26,26 +26,37 @@ export class MessageUsersComponent implements OnInit {
 
   ngOnInit() {
     this.LoadInvitableUsers();
+    debugger; 
+    //console.log("this.data.booksArray[0].Contact");
+    //console.log(this.data.booksArray
+    //console.log(this.data.booksArray[0].Contact);
   }
+
   LoadInvitableUsers() {
     this.heroService.service_general_get_with_params("Users", { buildingId: this.data.buildId }).subscribe(
       (res) => {
-        console.log(res.item);
+       // console.log(res.item);
         if (res.result === "Success") {
           this.usersBuildingArray = res.item;
 
-          this.usersBuildingArray = this.usersBuildingArray.filter(user => {
-            return !this.booksArray.map(book => book.user.id).includes(user.id);
-          });
-        } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); }
-        else { console.log("Error"); }
+          // this.usersBuildingArray = this.usersBuildingArray.filter(user => {
+          //   return !this.data.booksArray.map(book => book.info.iduser).includes(user.id);
+          // });
+        } else if (res.result === "Error") { 
+          console.log("Ocurrio un error" + res.detalle);
+         }
+        else { 
+          console.log("Error");
+         }
       },
-      (err) => { console.log(err); }
+      (err) => { 
+        console.log(err);
+       }
     );
   }
 
   selectAll() {
-    console.log(this.usersBuildingArray);
+   // console.log(this.usersBuildingArray);
     this.selectedUsers = this.usersBuildingArray.map(x => x.id);
    
     // console.log()

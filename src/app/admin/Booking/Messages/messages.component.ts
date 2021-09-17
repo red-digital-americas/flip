@@ -8,11 +8,12 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { MatDialog } from '@angular/material/dialog';
 import { MessageUsersComponent } from '../../modals/message-users/message-users/message-users.component';
 import { Contact, ContactSend, Info } from '../../models/contact';
-import { type } from 'os';
+//import { type } from 'os';
 import { MessageData, Conversation } from '../../models/message';
 import { ActivatedRoute } from '@angular/router';
 import { isUndefined } from 'util';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+//import {MatCheckboxModule} from '@angular/material/checkbox';
+import { LoaderComponent } from '../../../../ts/loader';
 
 class MessageCustom {
     public message;
@@ -44,9 +45,10 @@ export class MessagesComponent implements OnInit {
       CONSIERGE: string = '0';
       IDBUILD: string = "0";
       public user: string[];
+      viendo_archive: boolean = false;
       userInfo: any;
       posts: any = [];
-
+      loader = new LoaderComponent();
       userConversation;
       messages: MessageCustom[] = [];
       selectedContacts: Contact[] = [];
@@ -66,26 +68,27 @@ export class MessagesComponent implements OnInit {
         positionClass: "toast-top-center",
       });
       build: string;
+
       ngOnInit() {
         //debugger;
         this.build = this.route.snapshot.paramMap.get('id');
-        console.log('BUILD', this.build);
+      //  console.log('BUILD', this.build);
         this.user = JSON.parse(localStorage.getItem("user"));
-        console.log(this.user);
+       // console.log(this.user);
         this.IDUSR = JSON.parse(localStorage.getItem("user")).id;
         this.IDBUILD = JSON.parse(localStorage.getItem("user")).buildingId;
-        console.log('BUILD', this.IDBUILD);
+       // console.log('BUILD', this.IDBUILD);
         // this.GetBuildingCoverImage()
+        this.loader.showLoader();
         this.getConsierge(this.build);
         this.get_chats();
         this.get_users();
-        this.getInfoUser();
+        this.loader.hideLoader();
+
         this.section = 'messages';
         this.hubConnection = new HubConnectionBuilder()
           .configureLogging(signalR.LogLevel.Debug)
           .withUrl(`${Gvars.URL}/chatHub`, {
-            // .withUrl("http://localhost:49314/chatHub", {
-            // .withUrl("http://23.253.173.64:8088/chatHub", {
             skipNegotiation: true,
             transport: signalR.HttpTransportType.WebSockets
           })
@@ -119,7 +122,7 @@ export class MessagesComponent implements OnInit {
         }
         this.heroService.service_general_get_with_params('Message/GetUserBulding', params).subscribe((value) => {
           if (value.result === 'Success') {
-            console.log('GetUserBulding', value);
+           // console.log('GetUserBulding', value);
             this.CONSIERGE = value.item.id;
           }
         }, (error) => {
@@ -128,27 +131,31 @@ export class MessagesComponent implements OnInit {
       }
       
       public no_chats:boolean = false;
+
       get_chats() {
         //debugger;
         var creadoobj = { buildingid: this.build, userid: this.CONSIERGE };
-        console.log('Esto ====> ', creadoobj);
+       // console.log('Esto ====> ', creadoobj);
+       this.loader.showLoader();
         this.heroService.ServicioPostMessage("SeeChatsConsierge", creadoobj).subscribe((value) => {
           //debugger;
+          this.loader.hideLoader();
           switch (value.result) {
             case "Error":
               this.no_chats = true;
+              this.posts .splice(0, this.posts .length);
               console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
               break;
             default:
-              console.log("Post==>", value.item);
+             // console.log("Post==>", value.item);
               if (value.result == "Success") {
                 this.posts = value.item;
-                console.log('Los chats ===> ', this.posts);
+              //  console.log('Los chats ===> ', this.posts);
               }
           }
           console.log("Response Chats Cons => ", value);
         }, (error: any) => {
-
+          this.posts .splice(0, this.posts .length);
           console.log("Response Error Chats Cons => ", error);
 
         });
@@ -156,6 +163,7 @@ export class MessagesComponent implements OnInit {
     
       get_users() {
         var creadoobj = { buildingid: this.build, userid: this.IDUSR };
+        this.loader.showLoader();
         this.heroService.ServicioPostMessage("SeeUsers", creadoobj).subscribe((value) => {
           switch (value.result) {
             case "Error":
@@ -170,21 +178,24 @@ export class MessagesComponent implements OnInit {
                   this.rawContacts.push(new Contact(value.item[i]));
     
                 }
-                console.log("rewContact=>", this.rawContacts);
+               // console.log("rewContact=>", this.rawContacts);
                 this.rawContacts.forEach((contact) => {
                   this.selectedContacts.forEach((selected) => {
                     if (contact.info.iduser == selected.info.iduser) { contact.selected = true; }
                   });
                 });
-                console.log("SelectedContact=>", this.selectedContacts);
-                console.log("rewContact=>", this.rawContacts);
+               // console.log("SelectedContact=>", this.selectedContacts);
+               // console.log("rewContact=>", this.rawContacts);
     
                 this.tmpContacts = this.rawContacts;
-                console.log("tmpContacrs=>", this.tmpContacts);
+                this.getInfoUser();
+                this.loader.hideLoader();
+               // console.log("tmpContacrs=>", this.tmpContacts);
               }
           }
         });
       }
+
       seemessage(id: any) {
         this.router.navigate(['messages', id]);
       }
@@ -192,19 +203,20 @@ export class MessagesComponent implements OnInit {
       getInfoUser() {
         var creadoobj = { Id: this.IDUSR };
         this.heroService.ServicioPostUsers("SeeDetailUser", creadoobj).subscribe((value) => {
-          console.log(value.item[0]);
+          //console.log(value.item[0]);
           switch (value.result) {
             case "Error":
               console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
               break;
             default:
               if (value.result == "Success") {
-                console.log(value);
+               // console.log(value);
                 this.userInfo = value.item[0];
               }
           }
         });
       }
+
       showConversation(contact: any, id: any, event_data:any) {
         //debugger;
         this.showChat = true;
@@ -250,9 +262,10 @@ export class MessagesComponent implements OnInit {
       }
     
       private GetConversationUser(id) {
-        //debugger;
+        debugger;
         var creadoobj = { conversationId: id, buildingid: this.build };
         this.heroService.service_general_get_with_params("Message/GetConversationUserConsierge", creadoobj).subscribe((value) => {
+          debugger;
           switch (value.result) {
             case "Error":
               console.log("Ocurrio un error " + value.detalle);
@@ -269,20 +282,21 @@ export class MessagesComponent implements OnInit {
       
       public id_conserge:number = null;
       private GetMessages() {
-        //debugger;
+        debugger;
         var creadoobj = { conversationId: this.conversationId, buildingid: this.build };
         this.heroService.service_general_get_with_params("Message/GetMessagesConsierge", creadoobj).subscribe((value) => {
+          debugger;
           switch (value.result) {
             case "Error":
               console.log("Ocurrio un error " + value.detalle);
               break;
             default:
-              console.log("GetMEsages=>", value.item);
+              //console.log("GetMEsages=>", value.item);
               if (value.result == "Success") {
                 this.messages = value.item;
                 this.id_conserge = value.consierge;
-                console.log("CP ===> ", this.messages);
-                console.log(value.consierge);
+               // console.log("CP ===> ", this.messages);
+               //console.log(value.consierge);
                 this.ReplaceInvitations(value.item);
                 const chat_messages = document.getElementById('chat_messages');
                 setTimeout( () => { chat_messages.scrollTo( 0, chat_messages.scrollHeight ) }, 200);
@@ -295,27 +309,43 @@ export class MessagesComponent implements OnInit {
 
       showArchive(){
         var creadoobj = { buildingid: this.build, userid: this.CONSIERGE };
-        console.log('Esto ====> ', creadoobj);
-        this.heroService.ServicioPostMessage("SeeChatsConsiergeArchived", creadoobj).subscribe((value) => {
-          //debugger;
-          switch (value.result) {
-            case "Error":
-              this.no_chats = true;
-              console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
-              break;
-            default:
-              console.log("Post==>", value.item);
-              if (value.result == "Success") {
-                this.posts = value.item;
-                console.log('Los chats ===> ', this.posts);
+       // console.log('Esto ====> ', creadoobj);
+       //debugger;
+       this.showChat = false;
+        if(this.viendo_archive == false)
+        {
+            this.loader.showLoader();
+            this.heroService.ServicioPostMessage("SeeChatsConsiergeArchived", creadoobj).subscribe((value) => {
+              //debugger;
+              this.loader.hideLoader();
+              this.viendo_archive = true;
+              switch (value.result) {
+                case "Error":
+                  this.no_chats = true;
+                  this.posts .splice(0, this.posts .length);
+                  console.log("Ocurrio un error al cargar los catalogos: " + value.detalle);
+                  break;
+                default:
+                // console.log("Post==>", value.item);
+                  if (value.result == "Success") {
+                    this.posts = value.item;
+                  // console.log('Los chats ===> ', this.posts);
+                  }
               }
-          }
-          console.log("Response Chats Cons => ", value);
-        }, (error: any) => {
+              console.log("Response Chats Cons => ", value);
+            }, (error: any) => {
 
-          console.log("Response Error Chats Cons => ", error);
+              console.log("Response Error Chats Cons => ", error);
 
-        });
+            });
+        }
+        else
+        {
+         // alert("es true");
+          this.get_chats();
+          this.get_users();
+          this.viendo_archive = false;
+        }
       }
     
     
@@ -347,14 +377,14 @@ export class MessagesComponent implements OnInit {
         const dialogRef = this.dialog.open(MessageUsersComponent, {
           width: '512px',
           height: '400px',
-          data: { buildId: this.build.toString() }
+          data: { buildId: this.build.toString(), booksArray: this.rawContacts }
         });
     
         dialogRef.afterClosed().subscribe(async selectedUser => {
-          debugger;
-          console.log("SElectedUser", selectedUser);
-          console.log("SElectedUser", this.CONSIERGE);
-          console.log('POSTS', this.posts);
+         // debugger;
+         // console.log("SElectedUser", selectedUser);
+         // console.log("SElectedUser", this.CONSIERGE);
+         // console.log('POSTS', this.posts);
     
           let messageList = new Array<MessageData>();
           await selectedUser.users.forEach(async users => {
@@ -368,7 +398,7 @@ export class MessagesComponent implements OnInit {
                   messageAdd.message1 = selectedUser.message;
                   messageAdd.userId = parseInt(this.CONSIERGE);
                   messageList.push(messageAdd);
-                  console.log("Se agrego1");
+                 // console.log("Se agrego1");
                 } else
                   noRepeat++;
                 if (noRepeat == this.posts.length && users != parseInt(this.CONSIERGE)) {
@@ -382,7 +412,7 @@ export class MessagesComponent implements OnInit {
                   messageAdd.conversation.userIdReciver = users;
                   messageList.push(messageAdd);
   
-                  console.log('Se agrego2', );
+                 // console.log('Se agrego2', );
                 }
               });
             } else {
@@ -396,11 +426,11 @@ export class MessagesComponent implements OnInit {
                   messageAdd.conversation.userIdReciver = users;
                   messageList.push(messageAdd);
   
-                  console.log('Se agrego2', );
+                 // console.log('Se agrego2', );
             }
 
           });
-          console.log("MessageList=>", messageList);
+          //console.log("MessageList=>", messageList);
           this.heroService.ServicioPostMessageList(messageList).subscribe(response => {
             //debugger;
             this.get_chats();
@@ -420,9 +450,8 @@ export class MessagesComponent implements OnInit {
         document.getElementById('sent-input').style.cssText = 'height:' + space + 'rem';
       }
     
-    
       SentMessage(send) {
-        console.log("Entre al de send Meesage");
+        //console.log("Entre al de send Meesage");
         //debugger;
         let SendTXT = "";
         let message;
@@ -441,20 +470,16 @@ export class MessagesComponent implements OnInit {
           SendTXT = 'SentMessageAll';
     
         }
-        //debugger;
-        //   this.selectedContacts.forEach((selected)=> {
-        //     if (contact.info.iduser == selected.info.iduser) { contact.selected = true;}                  
-        // });
-    
-        // console.log(newMessageModel); return;
+        this.loader.showLoader();
         this.heroService.service_general_post("Message/SentMessageConsierge", message).subscribe((value) => {
-          console.log("Response en el message enviado ===> ", value);
-          switch (value.result) {
+         // console.log("Response en el message enviado ===> ", value);
+         this.loader.hideLoader(); 
+         switch (value.result) {
             case "Error":
               console.log("Ocurrio un error " + value.detalle);
               break;
             default:
-              console.log(value.item);
+             // console.log(value.item);
               if (value.result == "Success") {
                 let dataMessage = { message1: this.messageInput, conversationId: this.conversationId, userId: this.IDUSR };
                 this.messageInput = "";
@@ -472,9 +497,11 @@ export class MessagesComponent implements OnInit {
 
         });
       }
+
       private ResetTextArea() {
         document.getElementById('sent-input').style.cssText = 'height:' + 0 + 'px';
       }
+
       toggleSelected(contact) {
         if (!contact.selected) {
           this.selectedContacts.push(contact);
@@ -491,14 +518,16 @@ export class MessagesComponent implements OnInit {
     }
 
     archive(){
+      this.loader.showLoader();
       this.heroService.service_general_put("Message/Archive?key="+this.conversationId, null).subscribe((value) => {
-        console.log("Response Archive ===> ", value);
+        this.loader.hideLoader();
+       // console.log("Response Archive ===> ", value);
         switch (value.result) {
           case "Error":
             console.log("Ocurrio un error " + value.detalle);
             break;
           default:
-            console.log(value.item);
+           // console.log(value.item);
             if (value.result == "Success") {
               this.hideChat()
               this.get_chats();

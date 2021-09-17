@@ -21,27 +21,19 @@
                         <h5>Amenidad</h5>
                         <div>{{eventDetail?.amenity}}</div>
                     </div>
-                    <hr style="width:100%;">                                            
+                    <hr style="width:100%; border-top: 0.1px solid #fff !important;">                                            
                     <div class="col-12">
                         <h5>Descripción</h5>
-                        <div>{{eventDetail?.activity.description}}</div>
+                        <div>{{eventDetail?.activity.description}}&nbsp;</div>
                     </div>
-
-                    <!-- Uncomment for Host, uncomment on service user display, or fetch from User service -->
-                    <!-- <div class="col-12">
-                        <img [src]="eventDetail?.user.avatar" alt="">
-                        <h5>{{eventDetail?.user.name}}</h5>
-                    </div> -->
-        
-                    <hr style="width:100%;">
-                     
+                    <hr style="width:100%; border-top: 0.1px solid #fff !important;">
                     <div class="col-12">
                         <h5>Horario</h5>
                     </div>
                     <div class="col-12">
                         {{eventDetail?.date | date:'yyyy/MM/dd'}} {{eventDetail?.timeStart | date:'HH:mm'}} - {{eventDetail?.timeEnd | date:'HH:mm'}}
                     </div>
-                    <hr style="width:100%;">
+                    <hr style="width:100%; border-top: 0.1px solid #fff !important;">
                      
                     <div class="col-12 margin-bottom-x">
                         <h5>Host</h5>
@@ -64,24 +56,18 @@
 
         <div class="row margin-bottom-x" *ngIf="!eventDetail?.activity.private">
             <div class="col-6">
-                <h5>Resrevaciones</h5>                   
-                <div *ngIf="!booksArray.length">No hay ninguna reservación para este evento</div>            
+                <h5>Invitaciones</h5>                   
+                <div *ngIf="!booksArray.length">No hay invitados para este evento</div>            
                 
-                <div class="">
-                    <div class=" book" *ngFor="let bookElement of booksArray">                        
-                        <!-- <img class="book__avatar" src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">                         -->
-                        <img class="book__avatar" 
+                <div class="" style="max-height: 125px; overflow-y: auto;">
+                    <div class="book-host" *ngFor="let bookElement of booksArray">      
+                        <img class="book-host__avatar" 
                             [src]="bookElement.user.avatar == '' ? '../../../../assets/avatar-def.png' : bookElement.user.avatar" />       
-                        <div class="book__username">{{bookElement.user.name}} {{bookElement.user.lastName}}</div>       
-                        <div class="book__icon">
-                            <div *ngIf="bookElement.status == 1">
-                                <label class="icon-check"></label>
-                            </div>
-                            <div *ngIf="bookElement.status == 0">
-                                <label class="icon-ban"></label>
-                            </div>
-                        </div>                                                     
-                    </div>                        
+                        <div class="book-host__username">{{bookElement.user.name}} {{bookElement.user.lastName}}
+                            <label *ngIf="bookElement.status == 1" class="icon-check"></label>
+                            <label *ngIf="bookElement.status == 0" class="icon-clock"></label>
+                        </div>                                                        
+                    </div>                                            
                 </div>                                                          
             </div>    
             
@@ -89,19 +75,17 @@
                 <h5>Invitar</h5>
                 <fieldset class="form-group">
                     <ng-select 
-                        placeholder="Invitar gente"
+                        placeholder="Seleccionar Inquilinos"
                         [multiple]="true"
                         [items]="usersBuildingArray"
                         usersBuildingArray                         
                         [(ngModel)]="selectedUsers" 
                         bindLabel="name" 
                         bindValue="id">
-
                         <ng-template ng-header-tmp>
-                            <button (click)="selectAll()" class="btn btn-sm btn-secondary">Select all</button>
-                            <button (click)="unselectAll()" class="btn btn-sm btn-secondary">Unselect all</button>
-                        </ng-template>                        
-                        
+                            <button (click)="selectAll()" class="btn btn-sm btn-secondary">Todos</button>
+                            <button (click)="unselectAll()" class="btn btn-sm btn-secondary">Ninguno</button>
+                        </ng-template> 
                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                             <span class="ng-value-label">
                                 <img [src]="item.avatar == '' ? '../../../../assets/avatar-def.png' : item.avatar" 
@@ -110,25 +94,23 @@
                                 {{item.name}}</span>                            
                             <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                         </ng-template>
-                    
                         <ng-template ng-option-tmp let-item="item">
                             <img [src]="item.avatar == '' ? '../../../../assets/avatar-def.png' : item.avatar"
                                 style="border-radius: 50%;" 
                                 width="20px" height="20px"> 
                             {{item.name}} {{item.lastName}}
-                        </ng-template>     
-                                                
+                        </ng-template>           
                         <!-- <ng-template ng-footer-tmp>
                             Selected count: {{selectedCity.length}}
                         </ng-template> -->
                     </ng-select>
                 </fieldset>
                 <!--button *ngIf="!eventDetail?.activity.private" type="button" class="btn btn-outline-dark" (click)="Invite()" >Invite</button -->
-                <div class="ml-col-1 ap-form__buttons" *ngIf="showEditBtn">
-                    <button 
+                <div class="ml-col-1 ap-form__buttons" *ngIf="showEditBtn" style="text-align: right; padding-top: 0%;">
+                    <button style="height: auto; margin-right: 0%; width: auto;"
                         class="ap-form__buttons-button ap-form__buttons-button--big button-pink button-icon button-icon--add-white"
                         (click)="Invite()">
-                        Invite
+                        &nbsp;&nbsp;&nbsp;&nbsp;Invitar
                     </button>
                 </div>                                         
             </div>
@@ -140,7 +122,7 @@
                 <button type="button" class="btn btn-outline-danger" (click)="Delete()">Eliminar</button>
             </div>            
         </div -->
-        <div class="ml-col-1 ap-form__buttons margin-top-m" *ngIf="showEditBtn">
+        <div class="ml-col-1 ap-form__buttons margin-top-m" *ngIf="showEditBtn" style="margin-top: 0px;">
             <button 
                 class="ap-form__buttons-button ap-form__buttons-button--big button-yellow button-icon button-icon--add-white"
                 (click)="Edit()">
@@ -165,7 +147,7 @@
                         </div>
                         <div class="col-12 mb-2">
                                 <!-- <input type="text" [(ngModel)]="acitivyModel.Name" [disabled]="acitivyModel.Private" class="form-control" name="activityName" id="activityName" placeholder="Titulo" required> -->
-                                <input type="text" [(ngModel)]="acitivyModel.Name" class="form-control" name="activityName" id="activityName" placeholder="Titulo" required>
+                                <input type="text" [(ngModel)]="acitivyModel.Name" class="form-control" name="activityName" id="activityName" placeholder="Título" required>
                         </div>          
                         
                         <div class="col-12 mb-2">

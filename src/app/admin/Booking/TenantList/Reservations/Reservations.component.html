@@ -2,7 +2,7 @@
 <div class="ap-form ap-form--parent ml-col-1 background-white">
     <div class="ml-col-1 margin-bottom-x">
         <h4 class="ap-form__titulo ap-form__titulo--header text-left">
-            Reservaciones
+            Detalle de reservación
         </h4>
     </div>
     <div class="ml-col-1 margin-bottom-m">
@@ -20,6 +20,7 @@
         <button 
             *ngIf="statusBooking"
             class="ap-form__rButton button-yellow button-icon button-icon--edit-white"
+            style="color: #fff;"
             (click)="showModal('edit_end_date'); editEndDateInit();">
             Editar Fecha Termino
         </button>
@@ -29,9 +30,9 @@
             (click)="showModal('cancel_booking')">
             Cancelar
         </button>
-        <h4 class="ap-form__titulo ap-form__titulo--auto-width">
+        <!-- <h4 class="ap-form__titulo ap-form__titulo--auto-width">
             {{ name_build }}
-        </h4>
+        </h4> -->
     </div>
     <div class="ml-col-1 margin-bottom-x">
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
@@ -55,7 +56,7 @@
         </div>
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
             <div class="ml-col-1">
-                Tenant:
+                Inquilino:
             </div>
             <div class="ml-col1 text-bold">
                 {{ fullName }}
@@ -124,7 +125,7 @@
         </div>
         <div class="ml-col-2o ap-form__sdato ap-form__sdato--no-padding">
             <div class="ml-col-1">
-                Roomate tipo:
+                Roomate:
             </div>
             <div class="ml-col-1 text-bold">
                 {{ current_membership?.roomateType }}
@@ -357,13 +358,13 @@
         </div>
     </div -->
     <div class="ml-col-1 top-separator padding-tb-m margin-top-m">
-        <h4 class="ap-form__titulo">
-            Pagos
+        <h4 class="ap-form__titulo ap-form__titulo--header text-left" style="font-size: 20px; padding-bottom: 20px;;">
+            Pagos Realizados
         </h4>
         <div class="ml-col-1">
             <div class="ml-col-4o margin-bottom-x">
                 <div class="ml-col-1 text-bold margin-bottom-x">
-                   {{ current_membership?.membresia }}
+                  Membresia pagada: {{ current_membership?.membresia }}
                 </div>
                 <div class="ml-col-1 padding-right-m">
                     {{ current_membership?.memdesc }}
@@ -412,11 +413,11 @@
         </div>
         <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
             <div class="ml-col-1 text-bold">
-                Servicios de pago
+                Servicios pagados
             </div>
         </div>
         <table mat-table mat-sort [dataSource]="current_aditionals" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
-            <ng-container matColumnDef="icon">
+            <!-- <ng-container matColumnDef="icon">
                 <th mat-header-cell *matHeaderCellDef class="table__header table__header-center"></th>
                 <td mat-cell *matCellDef="let element" class="table__data table__icon--width table__data-center">
                     <figure class="table__icon">
@@ -424,7 +425,7 @@
                              class="table__icon-img filter-brightness" />
                     </figure>
                 </td>
-            </ng-container>
+            </ng-container> -->
             <ng-container matColumnDef="service">
                 <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Servicio</th>
                 <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.booked }}</td>
@@ -479,9 +480,9 @@
     </div>
     <div class="ml-col-1 margin-bottom-x">
         <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
-            <div class="ml-col-1 text-bold">
-                Pendiente de pagar
-            </div>
+            <h4 class="ap-form__titulo ap-form__titulo--header text-left" style="font-size: 20px;">
+                Pagos pendientes
+            </h4>
         </div>
         <table mat-table mat-sort [dataSource]="current_topay" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
             <ng-container matColumnDef="icon">
@@ -537,7 +538,7 @@
             Pago
         </button>
         <h4 class="ap-form__titulo ap-form__titulo--auto-width">
-            Pago por método predeterminado
+            Método predeterminado
         </h4>
         <div class="ml-col-1 margin-bottom-x">
             <div class="ml-col-3">
@@ -571,14 +572,15 @@
     </div>
     <div class="ml-col-1 margin-bottom-min">
         <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
+            <h4 class="ap-form__titulo ap-form__titulo--header text-left" style="font-size: 20px;">
+                Historial de Pagos 
+            </h4>
             <button 
                 class="ap-form__rButton button-toggle text-bold"
                 (click)="showSection('history_section')">
                 {{ toggle1_label_button }}
             </button>
-            <h4 class="ap-form__titulo ap-form__titulo--auto-width">
-                Historial de Pagos
-            </h4>
+            
         </div>
         <div class="ml-col-1" *ngIf="history_section">
             <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
@@ -604,7 +606,7 @@
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.dateEnd }}</td>
                 </ng-container>
                 <ng-container matColumnDef="card">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Card clue</th>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Tarjeta</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">**** {{ element.creditNumber }}</td>
                 </ng-container>
                 <ng-container matColumnDef="ammount">
@@ -637,7 +639,7 @@
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.dateEnd }}</td>
                 </ng-container>
                 <ng-container matColumnDef="card">
-                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Card clue</th>
+                    <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Tarjeta</th>
                     <td mat-cell *matCellDef="let element" class="table__data table__data-center">
                         <span *ngIf="element.cardClue == null">No Data</span>
                         <span *ngIf="element.cardClue != null">**** {{ element.cardClue }}</span>
@@ -654,13 +656,14 @@
     </div>
     <div class="ml-col-1 margin-tb-min">
         <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
-            <div class="ml-col-1 text-bold">
-                Booking Historial
-            </div>
+            <h4 class="ap-form__titulo ap-form__titulo--header text-left" style="font-size: 20px; padding-bottom: 20px;">
+                Historial de reservaciones
+            </h4>
         </div>
-        <mat-table mat-table matSort [dataSource]="current_history" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
+        <div *ngIf="current_history.length > 0">
+            <mat-table mat-table matSort [dataSource]="current_history" class="mat-elevation-z8 table--no-shadow" style="width: 100%;">
             <ng-container matColumnDef="build">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Project</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Proyecto</th>
                 <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.build }}</td>
             </ng-container>
             <ng-container matColumnDef="room">
@@ -680,19 +683,19 @@
                 </td>
             </ng-container>
             <ng-container matColumnDef="adate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Fecha<br />Llegada</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Llegada</th>
                 <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.dateStart }}</td>
             </ng-container>
             <ng-container matColumnDef="ddate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Fecha<br />Salida</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Salida</th>
                 <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.dateEnd }}</td>
             </ng-container>
             <ng-container matColumnDef="roomateFlip">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Roomate Tipo </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center"> Roomate  </th>
                 <td mat-cell *matCellDef="let element" class="table__data"> {{element.roomateFlip}} </td>
             </ng-container>
             <ng-container matColumnDef="aout">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Total facturado</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header table__header-center">Total Facturado</th>
                 <td mat-cell *matCellDef="let element" class="table__data">
                     <div *ngIf="element.membership !== null; then thenBlock else elseBlock"></div>
                     <ng-template #thenBlock>{{element.membership.priceMembership + element.amountOutstanding | currency }}</ng-template>
@@ -731,7 +734,12 @@
             </ng-container> -->
             <tr mat-header-row *matHeaderRowDef="table_history_colums"></tr>
             <tr mat-row *matRowDef="let row; columns: table_history_colums;"></tr>
-        </mat-table>
+            </mat-table>
+        </div>
+        <div *ngIf="current_history.length < 1">
+            No hay mas reservaciones
+        </div>
+        
     </div>
 </div>
 <div class="ml-modal ml-modal--bg-black" *ngIf="show_page_modal">
@@ -1440,9 +1448,10 @@
                 </div>
             </div>
         </div>
-        <h4 class="ap-form__titulo">
-            Pagos
+        <h4 class="ap-form__titulo" style="padding-bottom: 15px; font-size: 25px;">
+            Pagos Realizados
         </h4>
+
         <div class="ml-col-1">
             <div class="ml-col-4o margin-bottom-x">
                 <div class="ml-col-1 text-bold margin-bottom-x">
@@ -1581,7 +1590,7 @@
         </div>
         <div class="ml-col-1 margin-bottom-min">
             <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding padding-tb-x">
-                <div class="ap-form__titulo">
+                <div class="ap-form__titulo" style="font-size: 20px;">
                     Historial de Pagos
                 </div>
             </div>
@@ -1613,7 +1622,7 @@
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">{{ element.paymentData.amount | currency }}</td>
                     </ng-container>
                     <ng-container matColumnDef="card">
-                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Card clue</th>
+                        <th mat-header-cell *matHeaderCellDef class="table__header table__header-center">Tarjeta</th>
                         <td mat-cell *matCellDef="let element" class="table__data table__data-center">**** {{ element.creditNumber }}</td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="table_payHistory_colums"></tr>

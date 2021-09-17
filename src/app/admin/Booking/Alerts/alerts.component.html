@@ -13,7 +13,7 @@
         </div>
         <div class="ml-col-1">
             <div class="ml-col-1">
-                <div class="ml-col-4">
+                <!-- <div class="ml-col-4">
                     <div class="ml-col-1">
                         <div class="ap-form__input">
                           <select
@@ -32,14 +32,16 @@
                           </label>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                <input type="hidden" id="filter_by" 
+                name="filter_by" value="1">
                 <div class="ml-col-3">
                     <div class="ml-col-1">
                         <form (ngSubmit)="filteringByText()" class="ap-form__input ap-form__input--full-width">
                             <input 
                                 required
                                 type="text" 
-                                placeholder="Buscar por id o nombre..."
+                                placeholder="Buscar por id o nombre y oprime enter"
                                 id="filter_text" 
                                 name="filter_text"
                                 [(ngModel)]="find_text.text"
@@ -54,7 +56,8 @@
                         </form>
                     </div>
                 </div>
-                <div class="ml-col-4 padding-left-g">
+                
+                <div class="ml-col-6 padding-left-g">
                     <div class="ap-form__input ap-form__input--full-padding-top">
                       <input 
                         type="checkbox"
@@ -63,7 +66,7 @@
                         (change)="filteringByArchive()"
                         class="ap-form__input-checkbox display-none" />
                       <label for="filter_active" class="ap-form__label ap-form__label-checkbox">
-                        Archivar
+                        Ver archivadas
                       </label>
                     </div>
                 </div>
@@ -151,7 +154,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archivar
+                                    Archivada
                                   </label>
                                 </div>
                             </div>
@@ -214,7 +217,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archivar
+                                    Archivada
                                   </label>
                                 </div>
                             </div>
@@ -277,7 +280,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archivar
+                                    Archivada
                                   </label>
                                 </div>
                             </div>
@@ -340,7 +343,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archivar
+                                    Archivada
                                   </label>
                                 </div>
                             </div>
@@ -403,7 +406,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archivar
+                                    Archivada
                                   </label>
                                 </div>
                             </div>
@@ -468,7 +471,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archivar
+                                    Archivada
                                   </label>
                                 </div>
                             </div>
@@ -531,7 +534,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archivar
+                                    Archivada
                                   </label>
                                 </div>
                             </div>
@@ -643,7 +646,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archivar
+                                    Archivada
                                   </label>
                                 </div>
                             </div>
@@ -706,7 +709,7 @@
                                     [checked]="card.archive"
                                     class="ap-form__input-checkbox display-none" />
                                   <label class="ap-form__label ap-form__label-checkbox">
-                                    Archivar
+                                    Archivada
                                   </label>
                                 </div>
                             </div>
@@ -859,13 +862,13 @@
             </div>
             <div class="ml-col-1">
                 <div class="ml-col-2">
-                    Abierto:
+                    Desde:
                     <span class="text-bold">
                         {{ schedule_avaible.startTime }}
                     </span>
                 </div>
                 <div class="ml-col-2">
-                    Cierra:
+                    Hasta:
                     <span class="text-bold">
                         {{ schedule_avaible.endTime }}
                     </span>
@@ -1077,7 +1080,7 @@
             </div>
         </div>
         <div class="ml-col-1 margin-bottom-x">
-            <div class="ml-col-1 at-bcard__stitle">Horario</div>
+            <div class="ml-col-1 at-bcard__stitle">Presupuesto y Horario</div>
             <div class="ml-col-3 clear-left">
                 <div class="ml-col-1">
                     <div class="ap-form__input">

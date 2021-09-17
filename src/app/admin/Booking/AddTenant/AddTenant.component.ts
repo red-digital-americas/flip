@@ -390,7 +390,7 @@ import { Router } from '@angular/router';
 
         this._services.service_general_post('Tenant/PostValidateTenant', tenant_data)
             .subscribe( (response: any) => {
-
+debugger;
                 if( response.result == 'Sucess' ) {
 
                     this.memberships_cards = response.membershipsAvaible;

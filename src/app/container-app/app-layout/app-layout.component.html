@@ -1,3 +1,22 @@
+<style>
+#navbar-toggle {
+  position: absolute;
+  top: -99999px;
+  left: -99999px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.nav-menu {
+  display: none;
+}
+
+#navbar-toggle:checked + label .nav-menu {
+  display: block;
+}
+
+</style>
+
 <app-header [fixed]="true"
             [navbarBrandFull]="{src: 'assets/Icon Background Black.png', width: auto, height: 30, alt: 'Flip'}"
             [navbarBrandMinimized]="{src: 'assets/Icon Background Black.png', width: 30, height: 30, alt: 'Flip'}"

@@ -3,9 +3,10 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { Utils } from '../../../utils/utils';
 import { DatosService } from '../../../../datos.service';
-import { InviteComponent } from '../invite/invite.component';
+//import { InviteComponent } from '../invite/invite.component';
 import * as moment from 'moment';
 import { SystemMessage } from '../../../../ts/systemMessage';
+import { LoaderComponent } from '../../../../ts/loader';
 
 class ScheduleModel {
   public Id:number;
@@ -67,6 +68,7 @@ export class DetalleComponent implements OnInit {
     showSec: boolean = false;
     isMeridian:boolean = false;
     minDate:Date = new Date();  
+    loader = new LoaderComponent();
     ////////////////////////////////////////////////////////
     // Form
     datePicker;
@@ -91,44 +93,75 @@ export class DetalleComponent implements OnInit {
   ) { }
 
   ngOnInit() {    
+    this.loader.showLoader();
     this.responseData = {action:'None'};
     var params = { "id": this.idProps };
-    //debugger;
-    this.heroService.service_general_get_with_params("Schedules", params).subscribe((res) => {
-      //debugger;
-      // console.log(res.item);
-      if (res.result === "Success") {
-        if (res.item.length < 0) {
-          return;
-        }
-        this.eventDetail = res.item[0];
-        console.log("info evento => ", this.eventDetail);
-        this.isPastEvent();
-        // this.isAllDayEvent();
-      }
-      else if (res.result === "Error") {
-        console.log("Ocurrio un error" + res.detalle);
-      }
-      else {
-        console.log("Error");
-      }
-    }, (err) => { console.log(err); });   
-        
     this.heroService.service_general_get_with_params("Books", {scheduleId: this.idProps}).subscribe(
       (res)=> {
-        console.log('Bef ===> ',res);
-        if(res.result === "Success"){                    
+       // console.log('Books Lis ===> ',res);
+        if(res.result === "Success"){  
           this.booksArray = res.item;
-          this.LoadInvitableUsers();
-          // this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);this.booksArray.push(res.item[0]);
-        } else if (res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
-        else { console.log("Error");}
+          this.heroService.service_general_get_with_params("Schedules", params).subscribe((res) => {  
+            if (res.result === "Success") {
+              this.loader.hideLoader(); 
+              if (res.item.length < 0) {
+                return;
+              }
+              this.eventDetail = res.item[0];
+             // console.log("Schedule detail => ", this.eventDetail);
+              this.isPastEvent();
+              this.LoadInvitableUsers();
+            }
+            else if (res.result === "Error") {
+              this.loader.hideLoader(); 
+              console.log("Ocurrio un error" + res.detalle);
+            }
+            else {
+              this.loader.hideLoader(); 
+              console.log("Error");
+            }
+          }, (err) => { 
+            this.loader.hideLoader(); 
+            console.log(err); 
+          }); 
+        } 
+        else if (res.result === "Error") 
+        {
+          this.loader.hideLoader(); 
+          console.log("Ocurrio un error" + res.detalle);
+        } 
+        else { 
+          this.loader.hideLoader(); 
+          console.log("Error");
+        }
       },
-      (err)=> {console.log(err);}
-    ); 
-
-       
+      (err)=> {
+        console.log(err);
+        this.loader.hideLoader(); 
+      }
+    );   
   }
+
+public RefrescarListaInvitados()
+{
+  this.heroService.service_general_get_with_params("Books", {scheduleId: this.idProps}).subscribe(
+    (res)=> {
+      console.log('Books Lis ===> ',res);
+      if(res.result === "Success"){  
+        this.booksArray = res.item;
+      } 
+      else if (res.result === "Error") 
+      { 
+        console.log("Ocurrio un error" + res.detalle);
+      } 
+      else { 
+        console.log("Error");
+      }
+    },
+    (err)=> {console.log(err);}
+  ); 
+}
+
 
   public Edit() {
     this.isEditVisible = !this.isEditVisible;
@@ -170,20 +203,20 @@ export class DetalleComponent implements OnInit {
     ///////// Adding the complementaryData to the activityModel ///////////////////
     this.acitivyModel.Schedules = [];        
     this.acitivyModel.Schedules.push(this.scheduleModel);            
-    console.log(this.acitivyModel);               
+    //console.log(this.acitivyModel);               
     // return;
+    this.loader.showLoader(); 
     this.heroService.service_general_put(`Activity/${this.acitivyModel.Id}`, this.acitivyModel).subscribe(
-      (res)=> {        
-        // console.log(res);
-        // this.responseData = {action:'Edit'};        
-
+      (res)=> {      
         if(res.result === "Success"){          
           console.log(res.item);  
           // this.responseData = {result:true, id:res.item.id, name:res.item.name};                
           this.responseData = {action:'Edit'};  
           this.modalRef.hide();
+          this.loader.hideLoader(); 
         } else if(res.result === "Error") {
-          console.log(res.detalle, res.item);
+          this.loader.hideLoader(); 
+          //console.log(res.detalle, res.item);
           //this.toasterService.pop('danger', 'Error', res.detalle);
           this.system_message.showMessage({
             kind: 'error',
@@ -194,7 +227,7 @@ export class DetalleComponent implements OnInit {
             }
           });
         } else { 
-
+          this.loader.hideLoader(); 
           this.system_message.showMessage({
             kind: 'error',
             time: 4777,
@@ -207,20 +240,25 @@ export class DetalleComponent implements OnInit {
          }
 
       },
-      (err)=> { console.log(err);}       
+      (err)=> { 
+        this.loader.hideLoader(); 
+        console.log(err);
+      }       
     );        
   }
   
   public Delete() {    
-    if (!confirm('Would you like to delete this event?')) { return;}    
 
-    let params = this.eventDetail.activity.id;        
+    if (!confirm('¿ Estas seguro de eliminar el Evento ?')) { return;}  
+    let params = this.eventDetail.activity.id;  
+    this.loader.showLoader();       
     this.heroService.service_general_delete(`Activity/${params}`).subscribe(
       (res)=> {        
-        console.log(res);
+        this.loader.hideLoader(); 
         this.responseData = {action:'Delete'};        
       },
       (err)=> {
+        this.loader.hideLoader(); 
         console.log(err);
       },
       () => { this.modalRef.hide(); }      
@@ -255,8 +293,10 @@ export class DetalleComponent implements OnInit {
     if (!Utils.isEmpty(this.newImages)) {
       for (let f of this.newImages) {        
         this.imageInputLabel = f.name;
+        this.loader.showLoader(); 
         this.heroService.UploadImgSuc(f).subscribe((r) => {
           if (Utils.isDefined(r)) {
+            this.loader.hideLoader(); 
             url = <string>r.message;            
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');            
             this.acitivyModel.Photo = url;            
@@ -295,13 +335,12 @@ export class DetalleComponent implements OnInit {
         kind: 'error',
         time: 3777,
         message: {
-          header: 'Select users',
-          text: 'Please select some users to send invitations.'
+          header: 'Completar',
+          text: 'Por favor seleccione usuarios.'
         }
       });
-
+      
       return;
-
     }
 
     this.inviteModel.idActivity = this.eventDetail.activity.id;
@@ -310,8 +349,11 @@ export class DetalleComponent implements OnInit {
     this.SentInvites();
   }   
 
-  LoadInvitableUsers() {       
-    this.heroService.service_general_get_with_params("Users", {buildingId: this.buildingIdProps, dateInit: this.eventDetail.timeStart,dateEnd:this.eventDetail.timeEnd}).subscribe(
+  LoadInvitableUsers() {      
+    this.heroService.service_general_get_with_params("Users", {
+                                                    buildingId: this.buildingIdProps, 
+                                                    dateInit: this.eventDetail.timeStart,
+                                                    dateEnd:this.eventDetail.timeEnd}).subscribe(
       (res)=> {
         // console.log(res.item);
         console.log('Here ===> ', res);
@@ -329,29 +371,30 @@ export class DetalleComponent implements OnInit {
   }  
 
   private SentInvites() {
+    this.loader.showLoader();
     this.heroService.service_general_post("Message/SentInviteActivity", this.inviteModel).subscribe(
       (res)=> {
-        console.log(res);
+        this.loader.hideLoader();
         if(res.result === "Success"){                    
           this.selectedUsers = [];
-          //this.toasterService.pop('success', 'Success', 'Invitations sent.');
           this.system_message.showMessage({
             kind: 'ok',
             time: 4777,
             message: {
-              header: 'Invitations sent',
-              text: 'Invitations has been sent successfully'
+              header: 'Invitaciones Enviadas',
+              text: 'Los invitados recibirán un mensaje.'
             }
           });
+          this.RefrescarListaInvitados();
+          //this.modalRef.hide();
         } else if (res.result === "Error") { 
           console.log("Ocurrio un error" + res.detalle); 
-          //this.toasterService.pop('danger', 'Error', 'Error Sending invites.');
           this.system_message.showMessage({
             kind: 'error',
             time: 4777,
             message: {
-              header: 'Invitations Error',
-              text: 'Invitations can not been send correctly'
+              header: 'Error',
+              text: 'Por favor intente mas tarde.'
             }
           });
         } 
@@ -360,8 +403,8 @@ export class DetalleComponent implements OnInit {
             kind: 'error',
             time: 4777,
             message: {
-              header: 'Invitations Error',
-              text: 'Invitations can not been send correctly'
+              header: 'Error',
+              text: 'Por favor intente mas tarde.'
             }
           });
         }
@@ -371,8 +414,8 @@ export class DetalleComponent implements OnInit {
           kind: 'error',
           time: 4777,
           message: {
-            header: 'Invitations Error',
-            text: 'Invitations can not been send correctly'
+            header: 'Error',
+              text: 'Por favor intente mas tarde.'
           }
         });
       }

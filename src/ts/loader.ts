@@ -11,7 +11,7 @@ export class LoaderComponent {
               new_loader.innerHTML = `
                 <div class="loader__container">
                 <figure class="loader__image">
-                    <img src="https://www.grupovelca.com.mx/images/loading_12.gif?crc=3993585413" class="loader__image-photo" />
+                    <img src="http://34.237.214.147/back/api_flip/PhotoPost/default/loader3.gif" class="loader__image-photo" />
                 </figure>
                 </div>
               `;

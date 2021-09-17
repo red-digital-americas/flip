@@ -6,8 +6,9 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster';
 import { DatosService } from '../../../../datos.service';
 import * as moment from 'moment';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
-import { param } from 'jquery';
+//import { param } from 'jquery';
 import { SystemMessage } from '../../../../ts/systemMessage';
+import { LoaderComponent } from '../../../../ts/loader';
 
 class ScheduleModel {
   public Date;
@@ -57,7 +58,7 @@ export class CrearComponent implements OnInit {
   amenitiesArray = [];
   amenitySelect;
   IDBUILD: string = "0";
-
+  loader = new LoaderComponent();
   ////////////////////////////////////////////////////////
   // Form
     //Form Configuration (Setup in ngOnInit)
@@ -170,14 +171,6 @@ export class CrearComponent implements OnInit {
         scheduleModel.TimeStart = moment(schedule.dateCtrl).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
         scheduleModel.TimeEnd = moment(schedule.dateCtrl).startOf('day').add(1, 'day').format('YYYY-MM-DDTHH:mm:ss');
       }
-      
-      // Falta la comprobacion del mismo dia que esta en el de abajo
-      // this.acitivyModel.Schedules.forEach(s => {                
-      //   if (moment(scheduleModel.TimeStart).isBefore(moment(s.TimeEnd)) && 
-      //     moment(s.TimeStart).isBefore(moment(scheduleModel.TimeEnd))) {
-      //     console.log("Translaping schedule"); return;
-      //   }
-      // })
 
       this.acitivyModel.Schedules.push(scheduleModel);
     });
@@ -190,18 +183,21 @@ export class CrearComponent implements OnInit {
     this.reservationData.AmenityId = this.acitivyModel.AmenityId;
     // if (this.acitivyModel.Private) { this.acitivyModel.Photo = "assets/img/Coliving.jpg"; }
     
-    console.log('Model Old => ',this.acitivyModel);
+    //console.log('Model Old => ',this.acitivyModel);
     // return;
-
+    this.loader.showLoader();
+    debugger;
     this.heroService.service_general_post("Activity", this.acitivyModel).subscribe(
-      (res)=> { console.log('Tienes que mandar => ', this.acitivyModel );
-        console.log(res);
+      (res)=> { 
+        //console.log('Tienes que mandar => ', this.acitivyModel );
+        //console.log(res);
+        this.loader.hideLoader();
         if(res.result === "Success"){          
-          console.log(res.item);  
+         // console.log(res.item);  
           this.responseData = {result:true, id:res.item.id, name:res.item.name};                
           this.modalRef.hide();
         } else if(res.result === "Error") {
-          console.log(res.detalle);          
+         // console.log(res.detalle);          
           //this.toasterService.pop('danger', 'Error', res.detalle);
           this.system_message.showMessage({
             kind: 'error',
@@ -224,7 +220,18 @@ export class CrearComponent implements OnInit {
           });
           }
       },
-      (err)=> {console.log(err);}      
+      (err)=> {
+        this.loader.hideLoader();
+        console.log(err);
+        this.system_message.showMessage({
+          kind: 'error',
+          time: 3777,
+          message: {
+            header: 'Completa Info.',
+            text: 'Por favor llena todos los campos.'
+          }
+        });
+      }      
     );       
   }  
 
@@ -254,7 +261,9 @@ export class CrearComponent implements OnInit {
     if (!Utils.isEmpty(this.newImages)) {
       for (let f of this.newImages) {        
         this.imageInputLabel = f.name;
+        this.loader.showLoader();
         this.heroService.UploadImgSuc(f).subscribe((r) => {
+          this.loader.hideLoader();
           if (Utils.isDefined(r)) {
             url = <string>r.message;            
             url = url.replace('/Imagenes', this.heroService.getURL() + 'Flip');            
@@ -312,16 +321,6 @@ export class CrearComponent implements OnInit {
     this.schedulesCrtlArray.removeAt(this.schedulesCrtlArray.length - 1);    
   }
 
-
-
-
-
-
-
-
-  
-
-
   //Que paso ak con todo y 47
   public reservationData: ReservationData = new ReservationData(); 
   public reservationDate: ReservationDate = new ReservationDate();
@@ -329,7 +328,7 @@ export class CrearComponent implements OnInit {
 
       this.AddActivity();
 
-      console.log('Old => ', this.acitivyModel );
+      //console.log('Old => ', this.acitivyModel );
 
       this.reservationData.UserId = this.acitivyModel.UserId;
       this.reservationData.AmenityId = this.acitivyModel.AmenityId;
@@ -341,7 +340,7 @@ export class CrearComponent implements OnInit {
       }];
       this.reservationData.Private == 'act' ? this.reservationData.Private  = true : this.reservationData.Private = false; 
 
-      console.log('New => ', this.reservationData );
+     // console.log('New => ', this.reservationData );
 
       this.heroService.service_general_post("Activity", this.reservationData)
           .subscribe( (response: any) => {

@@ -9,10 +9,10 @@ import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import bootstrapPlugin from '@fullcalendar/bootstrap'
-import {DayBgRow, DayGrid, DayGridSeg, DayGridSlicer, DayGridView }  from '@fullcalendar/daygrid';
+//import {DayBgRow, DayGrid, DayGridSeg, DayGridSlicer, DayGridView }  from '@fullcalendar/daygrid';
 import { EventInput } from '@fullcalendar/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-import { BsComponentRef } from 'ngx-bootstrap/component-loader/bs-component-ref.class';
+//import { BsComponentRef } from 'ngx-bootstrap/component-loader/bs-component-ref.class';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DetalleComponent } from '../modals/detalle/detalle.component';
 import { CrearComponent } from '../modals/crear/crear.component';
@@ -78,11 +78,17 @@ export class ReservationsComponent implements OnInit {
           this.amenitiesArray.sort((a, b) => a.id - b.id);
           this.amenitySelect = this.amenitiesArray[0].id;
           this.GetEvents();     
-          console.log('AMENITIES', this.amenitiesArray);         
-        } else if(res.result === "Error") { console.log("Ocurrio un error" + res.detalle); } 
-        else { console.log("Error"); }
+        //  console.log('AMENITIES', this.amenitiesArray);         
+        } else if(res.result === "Error") { 
+          console.log("Ocurrio un error" + res.detalle);
+         } 
+        else { 
+          console.log("Error");
+         }
       },
-      (err)=> {console.log(err);}
+      (err)=> {
+        console.log(err);
+      }
     );  
   }
 
@@ -114,12 +120,12 @@ export class ReservationsComponent implements OnInit {
   scheduleModel:ScheduleModel;    // For Modifications through Calendar handles Events  
   
   GetEvents() {  
-    // let params = {buildingId: this.IDBUILD, amenityId: this.amenitySelect};        
+    this.loader.showLoader();      
     let params = {buildingId: this.IDBUILD, amenityId: this.amenitySelect, startDate: this.activeStart, endDate: this.activeEnd};      
     this.heroService.service_general_get_with_params("Schedules", params).subscribe(
       (res)=> {
+        this.loader.hideLoader();
         if(res.result === "Success"){   
-          console.log(res.item);
           this.schedulesArray = res.item;
           this.LoadEventsToCalendar(this.schedulesArray);
         } else if(res.result === "Error") {
@@ -128,7 +134,9 @@ export class ReservationsComponent implements OnInit {
           console.log("Error");          
         }
       },
-      (err)=> {console.log(err);}
+      (err)=> {
+        console.log(err);
+      }
     );  
   }
 
@@ -208,9 +216,7 @@ export class ReservationsComponent implements OnInit {
   }
 
   Refresh() {       
-    console.log(this.calendarComponent.getApi().view.type);
-    console.log(this.calendarComponent.getApi().view.activeEnd, this.calendarComponent.getApi().view.activeStart, 
-                this.calendarComponent.getApi().view.currentEnd, this.calendarComponent.getApi().view.currentStart);     
+    //this.calendarComponent.getApi().view.currentEnd, this.calendarComponent.getApi().view.currentStart);     
     this.GetEvents();
   }  
 
@@ -267,7 +273,9 @@ export class ReservationsComponent implements OnInit {
           //console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); 
         }
       },
-      (err)=> { console.log(err);}       
+      (err)=> { 
+        console.log(err);
+      }       
     ); 
   }
 
@@ -288,9 +296,13 @@ export class ReservationsComponent implements OnInit {
         } else if(res.result === "Error") {
           // console.log(res.detalle);
           this.toasterService.pop('danger', 'Error', res.detalle);
-        } else { console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.'); }
+        } else { 
+          console.log("Error"); this.toasterService.pop('danger', 'Error', 'An error has been ocurred.');
+         }
       },
-      (err)=> { console.log(err);}       
+      (err)=> { 
+        console.log(err);
+      }       
     ); 
   }
 
@@ -309,19 +321,19 @@ export class ReservationsComponent implements OnInit {
     
     let newSubscriber = this.modalService.onHide.subscribe(r=>{
       newSubscriber.unsubscribe();
-      console.log('DetalleResponse',this.modalRef.content.responseData);
+     // console.log('DetalleResponse',this.modalRef.content.responseData);
       if(this.modalRef.content.responseData.action === 'Delete') {
-        this.toasterService.pop('success', 'Success ', 'Your Activity was deleted correctly.');  
+        this.toasterService.pop('success', 'Success ', 'Evento actualizado correctamente.');  
         this.GetEvents();
       } else if (this.modalRef.content.responseData.action === 'Edit') {
-        this.toasterService.pop('success', 'Success ', 'Your Activity was modified correctly.');  
+        this.toasterService.pop('success', 'Success ', 'Evento actualizado correctamnete.');  
         this.GetEvents();
       }
     });      
   }  
 
   Crear (arg) { 
-    console.log('Arg => ', arg);   
+  //  console.log('Arg => ', arg);   
     //"dayGridMonth" "timeGridWeek" "timeGridDay"
     if(moment(arg.date).isBefore(moment(new Date()), 'day') && this.calendarComponent.getApi().view.type === 'dayGridMonth') { 
       this.calendarComponent.getApi().unselect(); return; 
@@ -340,7 +352,7 @@ export class ReservationsComponent implements OnInit {
     
     let newSubscriber = this.modalService.onHide.subscribe(r=>{
       newSubscriber.unsubscribe();
-      console.log('CrearResponse',this.modalRef.content.responseData);
+     // console.log('CrearResponse',this.modalRef.content.responseData);
       if (this.modalRef.content.responseData.result) { 
         //this.toasterService.pop('success', 'Success ', 'Your Activity was created correctly.');
         this.system_message.showMessage({
@@ -368,21 +380,17 @@ export class ReservationsComponent implements OnInit {
   
     this.heroService.service_general_get_with_params("Users", params)
         .subscribe( (response: any) => {
-
           if( response.result == "Success" ) {
-
             this.host_list = response.item;
-
           }
-
         }, (error: any) => {
 
           this.system_message.showMessage({
             kind: 'error',
             time: 4777,
             message: {
-              header: 'System Error',
-              text: 'Users Catalog has not been loaded.'
+              header: 'Error',
+              text: 'EL catalogo de usuarios no pudo ser cargado.'
             }
           });
 
@@ -455,16 +463,11 @@ export class ReservationsComponent implements OnInit {
   }
 
   public newReserversationWS():void {
-
+    this.loader.showLoader();
     this.heroService.service_general_post("Activity", this.reservation_data)
         .subscribe( (response: any) => {
-
-          console.log('Response del activity => ', response);
-
+          this.loader.hideLoader();
           if( response.result == "Success" ) {
-
-            this.loader.showLoader();
-
             this.system_message.showMessage({
               kind: 'ok',
               time: 4777,
@@ -480,7 +483,7 @@ export class ReservationsComponent implements OnInit {
             setTimeout( () => this.loader.hideLoader(), 1777);
 
           } else {
-
+            this.loader.hideLoader();
             this.system_message.showMessage({
               kind: 'error',
               time: 4777,
@@ -493,18 +496,16 @@ export class ReservationsComponent implements OnInit {
           }
 
         }, (error: any) => {
-
+          this.loader.hideLoader();
           this.system_message.showMessage({
             kind: 'error',
             time: 4777,
             message: {
-              header: 'System Error',
-              text: 'Event can not be created, please contact support or try later.'
+              header: ' Error',
+              text: 'Por favor intente mas tarde.'
             }
           });
-
         });
-
   }
 
   public event_form_validator: any = {

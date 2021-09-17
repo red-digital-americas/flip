@@ -26,17 +26,17 @@ import { DataSource } from '@angular/cdk/table';
     }
 
     activeLs: ActiveModel[] = [
-        {id: 0, name: 'Yes', value: true},
+        {id: 0, name: 'Si', value: true},
         {id: 1, name: 'No', value: false}
     ];
 
     pendingLs: ActiveModel[] = [
-        {id: 0, name: 'Yes', value: true},
+        {id: 0, name: 'Si', value: true},
         {id: 1, name: 'No', value: false}
     ];
 
     ifCheckOutLs: ActiveModel[] = [
-        {id: 0, name: 'Yes', value: true},
+        {id: 0, name: 'Si', value: true},
         {id: 1, name: 'No', value: false}
     ];
 
@@ -157,6 +157,7 @@ import { DataSource } from '@angular/cdk/table';
     }
 
     public applyFilterPeriod() {
+        //debugger;
         const params = {
             activeBooking: this.active === null ? '' : this.active.value,
             dateInit: this.fromDate === null ? '' : this.pipe.transform(this.fromDate, 'MM/dd/yyyy'),
@@ -164,6 +165,12 @@ import { DataSource } from '@angular/cdk/table';
             pending: this.pending === null ? '' : this.pending.value,
             ifCheckOut: this.ifCheckOut === null ? '' : this.ifCheckOut.value
         };
+        // debugger;
+        // if(this.pending.value === null)
+        //     params.pending = ''
+        // if(this.ifCheckOut.value === null)
+        //     params.ifCheckOut = ''
+        // debugger;
         console.log(params);
         this.loader.showLoader();
         this._services.service_general_get_with_params('Tenant/getGeneralTenantList', params)

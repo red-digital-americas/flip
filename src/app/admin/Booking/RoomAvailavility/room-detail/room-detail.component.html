@@ -2,9 +2,9 @@
 <div class="ml-col-1">
     <div class="ml-col-1 padding-general-m margin-bottom-m background-white">
         <div class="ml-col-1 margin-bottom-x">
-            <div class="ml-col-1 position-relative">
-                <h4 class="ap-form__titulo ap-form__titulo--no-border text-left">
-                  Detalle de la habitación
+            <div class="ml-col-1 margin-bottom-x">
+                <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
+                    Detalle de la habitación
                 </h4>
             </div>
             <div class="ml-col-1">
@@ -21,9 +21,12 @@
                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
                         <div class="ml-col-1">
                             Ocupación: <br>
-                          <span class="text-bold">
-                            {{ roomObj.totalBeds }}     
-                          </span>
+                          <span class="text-bold" *ngIf="roomObj.totalBeds == null">
+                            Disponible  
+                           </span>
+                           <span class="text-bold" *ngIf="roomObj.totalBeds != null">
+                            {{roomObj.totalBeds}} 
+                           </span>
                         </div>
                     </div>
                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
@@ -37,10 +40,13 @@
 
                     <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-right">
                         <div class="ml-col-1">
-                            Próxima fecha de disponibilidad completa: <br>
-                          <span class="text-bold">
-                            {{ roomObj.dateUnemployment }}     
-                          </span>
+                            Fecha de disponibilidad completa: <br>
+                          <span class="text-bold" *ngIf="roomObj.dateUnemployment == null">
+                            Disponible  
+                           </span>
+                           <span class="text-bold" *ngIf="roomObj.dateUnemployment != null">
+                            {{ roomObj.dateUnemployment }}  
+                           </span>
                         </div>
                     </div>
 
@@ -52,7 +58,7 @@
                           Roomate Tipo:
                           <div *ngIf="roomData.roomateFlip">
                               <span class="text-bold">
-                                  Roomate Flip
+                                  Roomate 
                               </span>
                           </div>
                           <div *ngIf="!roomData.roomateFlip">
@@ -65,10 +71,10 @@
   
                       <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding text-center">
                           <div class="ml-col-1">
-                              Fuma: 
+                              Fumar: 
                               <div *ngIf="roomData.smoke">
                                   <span class="text-bold">
-                                      Yes
+                                      Si
                                   </span>
                               </div>
                               <div *ngIf="!roomData.smoke">
@@ -108,7 +114,7 @@
                 <div class="ml-col-1 padding-general-m">
                     <div class="ml-col-1 ap-form__sdato ap-form__sdato--no-padding">
                         <div class="ml-col-1">
-                            Descripción: <br>
+                            Descripción de la habitación: <br>
                           <span class="text-bold">
                             {{ roomObj.description }}     
                           </span>
@@ -122,7 +128,7 @@
             <div class="ml-col-1 padding-general-m" *ngIf="displayMembership">
                 <div class="ml-col-4 ap-form__sdato ap-form__sdato--no-padding">
                     <div class="ml-col-1 text-bold">
-                        Membresías Asociada:
+                        Membresías Asociadas:
                     </div>
                 </div>
                 <table mat-table mat-sort [dataSource]="membershipRelationshipObj" class="mat-elevation-z8 table--no-shadow">
@@ -150,7 +156,7 @@
             </div>
 
             <div class="ml-col-1 padding-general-m" *ngIf="!displayMembership">
-                <span class="text-bold">Membresías :</span> No Data
+                <span class="text-bold">Membresías :</span> Sin membresias
             </div>
 
             <div class="ml-col-1 padding-general-m" *ngIf="displayActive">
@@ -191,13 +197,20 @@
                     </div>
                   <div class="ml-col-1 margin-bottom-m">
                     <div class="ml-col-4">
-                      <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(true)">Filtrar</button>
+                      <!-- <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(true)">Filtrar</button> -->
+                      <button style ="width: auto;" class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(true)">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button> 
                     </div>
                     <div class="ml-col-4">
-                        <button class="ap-form__buttons-button ap-form__buttons-button--align-left button-black button-icon button-icon--refresh-white" (click)="filterTable(true)">Reiniciar</button>
+                        <button style ="width: auto;" class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="filterTable(true)">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reiniciar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </button>
                     </div>
                     <div class="ml-col-4">
-                        <button class="ap-form__buttons-button ap-form__buttons-button--align-left button-black button-icon button-icon--export-file" (click)="exporter.exportTable('xlsx', {fileName:'Reservaciones', sheet: 'hoja 1', Props: {Author: 'Wander'}})">Exportar</button>
+                        <button style ="width: auto;" class="ap-form__buttons-button ap-form__buttons-button--align-left button-black button-icon button-icon--export-file" (click)="exporter.exportTable('xlsx', {fileName:'Reservaciones Habitación', sheet: 'hoja 1', Props: {Author: 'Wander'}})">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exportar&nbsp;&nbsp;&nbsp;&nbsp;
+                        </button>      
                     </div>
                   </div>
     
@@ -209,7 +222,7 @@
                 </mat-form-field>
                 <mat-table mat-table matSort matTableExporter #exporter="matTableExporter" [dataSource]="activeObj" class="mat-elevation-z8 table--no-shadow">
                     <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Nombre </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table__header"> Inquilino </th>
                         <td mat-cell *matCellDef="let element" class="table__data" > 
                             <a style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" (click)="viewDetail(element)">
                                 {{element.firstName}}
@@ -346,7 +359,7 @@
              
 
             <div class="ml-col-1 padding-general-m" *ngIf="!displayActive">
-                <span class="text-bold">Reservaciones</span> No Data
+                <span class="text-bold">Reservaciones</span> <br><br>Sin Reservaciones
             </div>
 
             <!-- <div class="ml-col-1 padding-general-m" *ngIf="displayinactive" displa>

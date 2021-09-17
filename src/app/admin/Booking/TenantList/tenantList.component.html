@@ -45,7 +45,6 @@
                                 <mat-form-field>
                                     <mat-label>Pendiente</mat-label>
                                     <mat-select [formControl]="animalControl" formControlName="pending">
-                                      <mat-option>--</mat-option>
                                       <mat-option *ngFor="let pending of pendingLs" [value]="pending">
                                         {{pending.name}}
                                       </mat-option>
@@ -61,7 +60,6 @@
                                 <mat-form-field>
                                     <mat-label>Check Out</mat-label>
                                     <mat-select [formControl]="animalControl" formControlName="ifCheckOut">
-                                      <mat-option>--</mat-option>
                                       <mat-option *ngFor="let ifCheckOut of ifCheckOutLs" [value]="ifCheckOut">
                                         {{ifCheckOut.name}}
                                       </mat-option>
@@ -90,20 +88,26 @@
               
               <div class="ml-col-1">
                 <div class="ml-col-4">
-                  <button class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="applyFilterPeriod()">Filtrar</button>
+                    <button style ="width: auto;" class="ap-form__buttons-button ap-form__buttons-button--no-margin button-black" (click)="applyFilterPeriod()">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
                 </div>
                 <div class="ml-col-4">
-                    <button class="ap-form__buttons-button ap-form__buttons-button--align-left button-black button-icon button-icon--refresh-white" (click)="resetForm()">Reiniciar</button>
+                    <button style ="width: auto;" class="ap-form__buttons-button ap-form__buttons-button--align-left button-black" (click)="resetForm()">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
                 </div>
                 <div class="ml-col-4">
-                    <button class="ap-form__buttons-button ap-form__buttons-button--align-left button-black button-icon button-icon--export-file" (click)="exporter.exportTable('xlsx', {fileName:'Reservaciones', sheet: 'hoja 1', Props: {Author: 'Wander'}})">Exportar</button>
+                    <button style ="width: auto;" class="ap-form__buttons-button ap-form__buttons-button--align-left button-black button-icon button-icon--export-file" (click)="exporter.exportTable('xlsx', {fileName:'Reservaciones', sheet: 'hoja 1', Props: {Author: 'Wander'}})">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exportar&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
                 </div>
               </div>
 
             </form>
             <mat-form-field class="ap-form__input">
-                <mat-label>Buscar</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+                <mat-label>Buscar por texto en cualquier columna</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ej. José Perez">
             </mat-form-field>
             <mat-table mat-table matSort matTableExporter  [dataSource]="tenantList" class="mat-elevation-z8 table--no-shadow" #exporter="matTableExporter">
                 <ng-container matColumnDef="name">

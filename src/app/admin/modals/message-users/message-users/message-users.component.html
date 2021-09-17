@@ -1,14 +1,14 @@
 <button (click)="onNoClick()"  class="ap-form__rButton button-red button-icon button-icon--cancel-white" >Cerrar</button>
 <h1 mat-dialog-title>Mensajes</h1>
 <div mat-dialog-content class="heigh-users">
-    <h5>Invitar</h5>
+    <h5>Enviar mensaje</h5>
     <!-- <fieldset class="form-group"> -->
-    <ng-select placeholder="Invitar gente" [multiple]="true" [items]="usersBuildingArray" usersBuildingArray
+    <ng-select placeholder="Seleccionar Inquilinos" [multiple]="true" [items]="usersBuildingArray" usersBuildingArray
         [(ngModel)]="selectedUsers" bindLabel="name" bindValue="id">
 
         <ng-template ng-header-tmp>
-            <button (click)="selectAll()" class="btn btn-sm btn-secondary">Select all</button>
-            <button (click)="unselectAll()" class="btn btn-sm btn-secondary">Unselect all</button>
+            <button (click)="selectAll()" class="btn btn-sm btn-secondary">Todos</button>
+            <button (click)="unselectAll()" class="btn btn-sm btn-secondary">Ninguno</button>
         </ng-template>
 
         <ng-template ng-label-tmp let-item="item" let-clear="clear">

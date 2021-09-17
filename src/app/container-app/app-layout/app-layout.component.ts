@@ -71,7 +71,6 @@ export class AppLayoutComponent {
     let obj = { userId: id };
     this.services.service_general_get_with_params('UsersAdmin/GetAlerts', obj).subscribe((value) => {
       //console.log('ACTIONS', value);
-      
       this.actions = value.actions;
       this.actionsCount = value.actions.length;
 
@@ -168,9 +167,27 @@ export class AppLayoutComponent {
 
   ngOnInit() {
 
-    this.addPaddingWidthJS();
-    
+    this.addPaddingWidthJS();  
   }
+
+  ngAfterViewInit()
+  {
+    
+    var obj_min: any = document.getElementsByClassName('sidebar-minimizer');
+    obj_min[0].click();
+    debugger;
+    var obj_hambur: any = document.getElementsByClassName('navbar-toggler-icon');
+    //
+    for(var i =0 ; i < obj_hambur.length ; i++ )
+    {
+    //  obj_min[i].classList.remove('navbar-toggler-icon');
+    }
+    
+    //obj_min[1].classList.remove('navbar-toggler-icon');
+    //obj_min[0].setAttribute("display", "none");
+
+  }
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

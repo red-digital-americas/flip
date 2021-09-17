@@ -751,8 +751,8 @@ export class AlertsComponent implements OnInit {
                             kind: 'ok',
                             time: 4777,
                             message: {
-                                header: 'Alert updated',
-                                text: 'Alert has been updated successfully.'
+                                header: 'Cambio realizado',
+                                text: 'Alerta actualizada correctamnete.'
                             }
                         });
 

@@ -25,7 +25,8 @@ import { resolve } from 'dns';
     public system_message: SystemMessage = new SystemMessage();
     public table_colums: any[] = ['service','type','sdate','edate','xcost'];
     public table_colums_pending: any[] = ['icon','service','type','lapse','sdate','edate','xcost'];
-    public table_colums_paid_services: any[] = ['icon','service','type','lapse','sdate','edate','cclue','xcost'];
+    //public table_colums_paid_services: any[] = ['icon','service','type','lapse','sdate','edate','cclue','xcost'];
+    public table_colums_paid_services: any[] = ['service','type','lapse','sdate','edate','cclue','xcost'];
     public table_history_colums: any[] = [
         'build',
         'room',
@@ -73,7 +74,7 @@ import { resolve } from 'dns';
         this.section = 'tenantList';
         this.getReservationData();
         this.name_build = sessionStorage.getItem('name_build');
-
+        this.showSection("history_section");
     }
 
     public beds_section: boolean = false;

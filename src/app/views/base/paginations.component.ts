@@ -13,7 +13,7 @@ export class PaginationsComponent {
   currentPage: number   = 4;
   smallnumPages: number = 0;
 
-  maxSize: number = 5;
+  maxSize: number = 10;
   bigTotalItems: number = 675;
   bigCurrentPage: number = 1;
   numPages: number = 0;
@@ -26,6 +26,6 @@ export class PaginationsComponent {
 
   pageChanged(event: any): void {
     console.log('Page changed to: ' + event.page);
-    console.log('Number items per page: ' + event.itemsPerPage);
+    console.log('Registros por página: ' + event.itemsPerPage);
   }
 }

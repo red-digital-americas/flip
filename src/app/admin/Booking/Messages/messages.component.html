@@ -4,16 +4,12 @@
         <div class="ml-col-1 margin-bottom-x">
             <h4 class="ap-form__titulo ap-form__titulo--header ap-form__titulo--auto-width">
                Mensajes
+            
             </h4>
-            <button 
-                class="ap-form__rButton button-red padding-lateral-m button-big button-icon button-icon--eye-white"
-                (click)="showArchive()">
-                Ver Arhivadas
-            </button>
             <button 
                 class="ap-form__rButton button-yellow button-icon button-icon--add padding-lateral-m button-big"
                 (click)="openModal()">
-                Nueva conversación
+                Nuevo chat
             </button>
         </div>
         <div class="ml-col-1 position-relative">
@@ -30,16 +26,21 @@
                     <p class="ap-chat__people-person-name ap-chat__people-person--contacts-subtitle padding-left-min">
                         Conversaciones
                     </p>
-                    <!-- button class="ap-chat__people-person--contacts-button button-yellow button-icon button-icon--edit">
-                        New Message
-                    </button -->
+                    <button 
+                        class="ap-form__rButton button-red padding-lateral-m button-big button-icon button-icon--eye-white"
+                        (click)="showArchive()" style="font-weight: lighter; padding:0%;" >
+                        &nbsp; &nbsp; &nbsp;&nbsp;
+                        <span *ngIf="this.viendo_archive" >No archivadas</span>
+                        <span *ngIf="!this.viendo_archive" >Archivadas</span>
+                        &nbsp; &nbsp;
+                    </button>
                 </div>
-                <div class="ap-chat__people">
+                <div class="ap-chat__people" >
                     <div class="ml-col-1" >
                         <div class="ml-col-1"
                             *ngFor="let friend of posts;"
                             (click)="showConversation(friend, friend.iduser, $event)" 
-                            class="ap-chat__people-person ap-chat__people-person--friend">
+                            class="ap-chat__people-person ap-chat__people-person--friend" style="border-radius: 10px;">
                             <span class="ap-chat__people-person--mask"></span>
                             <figure class="ap-chat__people-person-photo ap-chat__people-person-photo--friend">
                                 <img *ngIf="friend.photo != ''" src="{{ friend.photo }}" />
@@ -48,6 +49,7 @@
                             <p class="ap-chat__people-person-name ap-chat__people-person-name--friend">
                                 {{ friend.name }} {{ friend.lastname }}
                             </p>
+                            <!-- === {{this.posts.length}} -->
                             <span class="ap-chat__people-person-on"></span>
                         </div>
                     </div>
@@ -59,23 +61,24 @@
                         </button>
                     </div>
                     <div class="chatm card-style margin-top-x" *ngIf="showChat">
-                        <h4 style="cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" class="chatm__datos">
+                        <h4 style="padding: 9px 0 0px 9px; cursor:pointer; color:inherit; text-decoration: underline; text-decoration-color: blue;" class="chatm__datos">
                             <span (click)="viewDetail(userConversation.id, userConversation.idBooking)">
                                 {{ userSendMessage.info.name + ' ' + userSendMessage.info.lastname }}
                             </span>
-                            <br><input 
+                            <br><input *ngIf="!this.viendo_archive"
                             type="checkbox"
                             id="archive"
                             name="archive"
                             class="ap-form__rRadioButton "
                             (change)="archive()" />
-                        <label for="archive"> Archivar</label>
+                        <span *ngIf="!this.viendo_archive" for="archive" style="font-size: small;"> Archivar</span>
                             <!-- img class="chatm__datos-photo" 
                                  src="{{ userSendMessage.info.photo }}" / -->
-                            <img *ngIf="userSendMessage.info.photo != ''" class="chatm__datos-photo" src="{{ userSendMessage.info.photo }}" />
+                           <!-- <img class="book-host__avatar" [src]="userSendMessage.info.photo == '' ? '../../../../assets/avatar-def.png' : userSendMessage.info.photo" />  -->  
+                             <img *ngIf="userSendMessage.info.photo != ''" class="chatm__datos-photo" src="{{ userSendMessage.info.photo }}" /> 
                             <img *ngIf="userSendMessage.info.photo == ''" class="chatm__datos-photo" src="../../../../assets/avatar-def.png" />
                         </h4>
-                        <div class="chatm__chat" id="chat_messages">
+                        <div class="chatm__chat" id="chat_messages" style="overflow: auto;">
                             <div *ngFor="let message of messages"
                                  class="chatm__chat-message">
                                 <!-- span class="chatm__chat-message-msg"

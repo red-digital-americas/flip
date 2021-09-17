@@ -7,6 +7,7 @@ export const environment = {
   //URL: 'http://23.253.173.64:8088',
   // URLPROD:'http://23.253.173.64:8088',
   URL: 'http://34.237.214.147/back/api_flip',
+  //Este es el chido  URL: 'https://localhost:44354',
   // URL: 'http://34.237.214.147/back/api_flip',
   // URL: 'http://localhost:5000',
   //URLPROD: 'http://localhost:49314',

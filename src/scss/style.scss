@@ -2988,7 +2988,7 @@ select:active,
     &-img {
       top: 50%;
       left: 50%;
-      width: 75%;
+      
       height: 75%;
       position: absolute;
       transform: translate(-50%, -50%);
@@ -3244,6 +3244,10 @@ select:active,
 
   &--add-white {
     background-image: url('../assets/icon/plus-white.png');
+  }
+
+  &--send-white {
+    background-image: url('../assets/icon/send_white.png');
   }
 
   &--cancel-white {
@@ -4017,6 +4021,7 @@ select:active,
     font-size: 10px;
     padding-left: 10px !important;
     padding-right: 10px !important;
+    text-align: center;
     
     &-center {
       text-align: center !important;

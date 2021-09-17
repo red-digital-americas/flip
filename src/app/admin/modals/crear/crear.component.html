@@ -181,7 +181,7 @@
 
 <!-- ----------------------------------------------------------- -->
 <div class="modal-header">
-    <h4 class="modal-title pull-left">Nueva Reservación</h4>
+    <h4 class="modal-title pull-left">Nuevo Evento</h4>
     <!-- button type="button" class="close pull-right" aria-label="Cerrar" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button -->
@@ -337,7 +337,8 @@
                     (click)="AddActivity()"
                     type="submit"
                     [disabled]="formGroup.invalid">
-                    Agregar Actividad
+                    <span *ngIf="formGroup.invalid">Completa la info.</span>
+                    <span *ngIf="!formGroup.invalid">Guardar</span>
                 </button>
             </div>                    
         </div>  

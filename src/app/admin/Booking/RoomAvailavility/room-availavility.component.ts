@@ -115,6 +115,11 @@ export class RoomAvailavilityComponent implements OnInit {
 
     ngOnInit() {
         this.todayDate = new Date();
+        var dd = String(this.todayDate.getDate()). padStart(2, '0');
+        var mm = String(this.todayDate.getMonth() + 1). padStart(2, '0'); //January is 0!
+        var yyyy = this.todayDate.getFullYear();
+        this.todayDate = mm + '/' + dd + '/' + yyyy;
+
         console.info('DATE TODAY', this.todayDate, this.latest_date);
         this.section = 'roomAvailavility';
         this.buildingId = this.route.snapshot.paramMap.get('id');
@@ -201,9 +206,9 @@ export class RoomAvailavilityComponent implements OnInit {
     }
 
     public applyFilterPeriod() {
-        console.log('Active', this.active);
-        console.log('Smoking', this.smoking);
-        console.log('Pending', this.pending);
+       // console.log('Active', this.active);
+       // console.log('Smoking', this.smoking);
+       // console.log('Pending', this.pending);
         const params = {
             buildongId: this.buildingId,
             active: this.active === null ? '' : this.active.value,
